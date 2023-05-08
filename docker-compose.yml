@@ -1,0 +1,34 @@
+version: "3"
+
+# ! サービスコンテナ
+services:
+  # * DBコンテナ (postgresql)
+  db:
+    image: postgres:14.5
+    env_file:
+      - .env
+    environment:
+      TZ: Asia/Tokyo
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  # * WEBコンテナ (Rails)
+  web:
+    build: .
+    command: sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      RAILS_ENV: development
+      NODE_ENV: development
+    volumes:
+      - .:/my_closet
+      - bundle_volume:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+volumes:
+  db_volume:
+  bundle_volume:
