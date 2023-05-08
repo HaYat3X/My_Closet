@@ -1,24 +1,11 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- 環境構築方法
+  - Docker デスクトップのインストール
+  - このリポジトリを Git_clone する
+  - ターミナルを開きクローンしたフォルダに移動
+  - $docker compose run --no-deps web sh
+  - $apk update && apk add --no-cache --virtual .build-dependencies build-base postgresql-dev && bundle install && rails webpacker:install && apk del .build-dependencies
+  - $exit
+  - $docker compose build --no-cache
+  - $docker compose up（コンテナ起動）
+  - $docker compose exec web rails db:create（コンテナ起動時にコマンドを打たないとダメ）
+  - http://localhost:3000 にアクセス
