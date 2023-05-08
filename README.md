@@ -2,6 +2,7 @@
   - Docker デスクトップのインストール
   - このリポジトリを Git_clone する
   - ターミナルを開きクローンしたフォルダに移動
+  - .envファイルを作成（とげを呼ぶ）
   - $docker compose run --no-deps web sh
   - $apk update && apk add --no-cache --virtual .build-dependencies build-base postgresql-dev && bundle install && rails webpacker:install && apk del .build-dependencies
   - $exit
