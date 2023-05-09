@@ -1,35 +1,27 @@
-<div id="registar" class="col-lg-4 mx-auto text-center">
-<h2>Sign up</h2>
+<div id="register" class="col-lg-4 mx-auto">
+  <h2 class="text-center mb-4">サインイン</h2>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="mb-3">
+      <%= f.text_field :user_name, class: "form-control", autofocus: true, autocomplete: "user_name", placeholder: "ユーザ名" %>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <div class="field">
-    <%= f.label :user_name, class: "form-label" %><br />
-    <%= f.text_field :user_name, class: "form-control", autofocus: true, autocomplete: "user_name" %>
-  </div>
+    <div class="mb-3">
+      <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", placeholder: "メールアドレス" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email, class: "form-label" %><br />
-    <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="mb-3">
+      <%= f.password_field :password, class: "form-control", autocomplete: "new-password", placeholder: "パスワード" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password, class: "form-label" %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
-  </div>
+    <div class="mb-3">
+      <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", placeholder: "パスワードの確認" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, class: "form-label" %><br />
-    <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
-  </div>
+    <div class="mb-4">
+      <%= f.submit "サインインする", class: "btn btn-primary col-lg-12" %>
+    </div>
+  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Sign up", class: "btn btn-primary" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
 </div>
