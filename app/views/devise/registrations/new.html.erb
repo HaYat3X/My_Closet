@@ -1,5 +1,5 @@
 <div id="register" class="col-lg-4 mx-auto">
-  <h2 class="text-center mb-4 fw-bold">登録する</h2>
+  <h2 class="text-center mb-4">サインイン</h2>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
     <div class="mb-3">
@@ -19,7 +19,7 @@
     </div>
 
     <div class="mb-4">
-      <%= f.submit "登録する", class: "btn btn-primary col-lg-12" %>
+      <%= f.submit "サインインする", class: "btn btn-primary col-lg-12" %>
     </div>
   <% end %>
 
