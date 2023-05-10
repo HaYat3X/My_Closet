@@ -9,6 +9,9 @@ gem 'rails', '~> 6.1.7', '>= 6.1.7.3'
 gem "net-smtp"
 # * 認証関連のGem
 gem 'devise'
+# * 日本語化するためのGem
+gem 'rails-i18n', '~> 6.0'
+gem 'devise-i18n'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
