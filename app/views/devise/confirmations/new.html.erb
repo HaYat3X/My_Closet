@@ -1,11 +1,14 @@
 <div id="confirmations" class="col-lg-4 mx-auto">
   <h2 class="text-center mb-4">認証メールの再送</h2>
 
-  <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+  <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), :html => {class:"needs-validation", :novalidate => true}) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="mb-3">
-      <%= f.email_field :email, autofocus: true, placeholder: "メールアドレス", class: "form-control", autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+      <%= f.email_field :email, autofocus: true, placeholder: "メールアドレス", class: "form-control", autocomplete: "email" ,required: true , value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)%>
+      <div class="invalid-feedback">
+        メールアドレスを入力して下さい
+      </div>
     </div>
 
     <div class="mb-4">
