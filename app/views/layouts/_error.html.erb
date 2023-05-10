@@ -1,0 +1,12 @@
+<div class="col-lg-6 mx-auto">
+    <% if notice %>
+        <div class="alert alert-success my-5" role="alert">
+          <strong>成功！</strong> - <%= notice %><br>
+        </div>
+    <% end %>
+    <% if alert %>
+        <div class="alert alert-danger my-5" role="alert">
+          <strong>エラー！</strong> - <%= alert %><br>
+        </div>
+    <% end %>
+</div>

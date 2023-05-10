@@ -1,12 +1,18 @@
 <div id="login" class="col-lg-4 mx-auto">
   <h2 class="text-center mb-4">ログイン</h2>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {class:"needs-validation", :novalidate => true}) do |f|%>
     <div class="mb-3">
-      <%= f.email_field :email, placeholder: "メールアドレス", class: "form-control", autofocus: true, autocomplete: "email" %>
+      <%= f.email_field :email, placeholder: "メールアドレス", class: "form-control", autofocus: true, autocomplete: "email", required: true %>
+        <div class="invalid-feedback">
+        メールアドレスを入力して下さい
+      </div>
     </div>
 
     <div class="mb-3">
-      <%= f.password_field :password, placeholder: "パスワード", class: "form-control", autocomplete: "current-password" %>
+      <%= f.password_field :password, placeholder: "パスワード", class: "form-control", autocomplete: "current-password", required: true %>
+        <div class="invalid-feedback">
+        パスワードを入力して下さい
+      </div>
     </div>
 
     <% if devise_mapping.rememberable? %>
