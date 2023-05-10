@@ -2,34 +2,40 @@
   <h2 class="text-center mb-4">サインイン</h2>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class:"needs-validation", :novalidate => true}) do |f| %>
 
-    <%= render "devise/shared/error_messages", resource: resource %>
+    
     
     <div class="mb-3">
-      <%= f.text_field :user_name, class: "form-control", autofocus: true, autocomplete: "user_name", placeholder: "ユーザ名" %>
+      <%= f.text_field :user_name, class: "form-control", autofocus: true, autocomplete: "user_name", placeholder: "ユーザ名", required: true %>
+      <div class="invalid-feedback">
+        ユーザ名を入力して下さい
+      </div>
     </div>
 
-     <div class="col-md-3">
-    <label for="validationCustom04" class="form-label">都道府県</label>
-    <select class="form-select" id="validationCustom04" required>
-      <option selected disabled value="">選択...</option>
-      <option>...</option>
-    </select>
-    <div class="invalid-feedback">
-      有効な都道府県を選択して下さい
-    </div>
-  </div>
+    
+  
 
     <div class="mb-3">
-      <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", placeholder: "メールアドレス" %>
+      <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", placeholder: "メールアドレス", required: true %>
+      <div class="invalid-feedback">
+        メールアドレスを入力して下さい
+      </div>
     </div>
 
     <div class="mb-3">
-      <%= f.password_field :password, class: "form-control", autocomplete: "new-password", placeholder: "パスワード" %>
+      <%= f.password_field :password, class: "form-control", autocomplete: "new-password", placeholder: "パスワード", required: true %>
+      <div class="invalid-feedback">
+        パスワードを入力して下さい
+      </div>
     </div>
 
     <div class="mb-3">
-      <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", placeholder: "パスワードの確認" %>
+      <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", placeholder: "パスワードの確認", required: true %>
+      <div class="invalid-feedback">
+        パスワードを再入力して下さい
+      </div>
     </div>
+
+    <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="mb-4">
       <%= f.submit "サインインする", class: "btn btn-primary col-lg-12" %>
