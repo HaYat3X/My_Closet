@@ -15,9 +15,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <div class="container">
+    <%= render "layouts/error" %>
+    <div class="container my-5">
         <%= yield %>
     </div>
     <%# ! フォームのリアルタイムバリデーション導入 （全フォームに対応） %>
