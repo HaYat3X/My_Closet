@@ -1,3 +1,11 @@
-<% @closets.each do |c| %>
-    <%= c.price %>
-<% end %>
+<div class="bg-light p-5">
+    <ul class="nav nav-pills">
+    <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">アクティブ</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">リンク1</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">リンク2</a></li>
+    <li class="nav-item"><a class="nav-link disabled">無効</a></li>
+    </ul>
+    <% @closets.each do |c| %>
+        <%= c.photograph %>
+    <% end %>
+</div>

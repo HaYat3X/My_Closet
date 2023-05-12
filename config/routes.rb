@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  # クローゼット関連
-  get "closet/new", to: "coordinates/posts#new"
-  post "closet/create", to: "coordinates/posts#create"
+
+  # ! クローゼット関連
+  # * 投稿一覧取得
   get "closet/list", to: "coordinates/posts#list"
+  # * 投稿フォーム
+  get "closet/new", to: "coordinates/posts#new"
+  # * 投稿処理
+  post "closet/create", to: "coordinates/posts#create"
 end
