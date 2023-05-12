@@ -1,0 +1,2 @@
+module Coordinates::PostsHelper
+end
