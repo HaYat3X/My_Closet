@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   # クローゼット関連
   get "closet/new", to: "coordinates/posts#new"
   post "closet/create", to: "coordinates/posts#create"
+  get "closet/list", to: "coordinates/posts#list"
 end

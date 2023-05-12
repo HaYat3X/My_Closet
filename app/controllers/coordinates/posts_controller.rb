@@ -7,11 +7,25 @@ class Coordinates::PostsController < ApplicationController
 
      # 登録処理用メソッド
     def create
-        closet = Closet.new(create_params)
+        @closet = Closet.new(create_params)
         # user_idを保存
-        closet.user_id = current_user.id
+        @closet.user_id = current_user.id
 
-        closet.save
+        # @closet.save
+        if @closet.save
+
+        else
+            render :new        
+        end
+    end
+    
+    #一覧表示メソッド
+    def list
+        # DBからでーたをしゅとく
+        # 取得したでーたをhtmlにわたす
+        @closets = Closet.all
+        
+        
     end
 
     private
