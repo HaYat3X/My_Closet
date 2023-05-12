@@ -1,0 +1,25 @@
+<h1>ちんちんぶらんぶらん♪</h1>
+<%= form_with(model: @closet, url: "/closet/create", local: true) do |f| %>
+  <div class="mb-3">
+    <%= f.text_field :photograph, class: "form-control", placeholder: "ゴミ拾いした場所　例）神戸市中央区" %>
+  </div>
+  <div class="mb-3">
+    <%= f.text_field :big_Category, class: "form-control", placeholder: "ゴミ拾いした場所　例）神戸市中央区" %>
+  </div>
+    <div class="mb-3">
+    <%= f.text_field :small_Category, class: "form-control", placeholder: "ゴミ拾いした場所　例）神戸市中央区" %>
+  </div>
+  <div class="mb-3">
+    <%= f.text_field :price, class: "form-control", placeholder: "ゴミ拾いした場所　例）神戸市中央区" %>
+  </div>
+  <div class="mb-3">
+    <%= f.text_field :color, class: "form-control", placeholder: "ゴミ拾いした場所　例）神戸市中央区" %>
+  </div>
+  <div class="mb-3">
+    <%= f.text_field :size, class: "form-control", placeholder: "ゴミ拾いした場所　例）神戸市中央区" %>
+  </div>
+  <div class="mb-3">
+    <%= f.text_field :brand, class: "form-control", placeholder: "ゴミ拾いした場所　例）神戸市中央区" %>
+  </div>
+  <%= f.submit "Submit", disable_with: 'Submiting...' %>
+<% end %>
