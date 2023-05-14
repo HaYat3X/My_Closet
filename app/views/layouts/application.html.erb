@@ -16,15 +16,8 @@
   </head>
   <body>
     <%= render "layouts/error" %>
-    <div class="container my-5">
-      <div class="row">
-        <div class="col-lg-3 p-5 bg-dark">
-          <h1 class="text-light">サイドバー部分</h1>
-        </div>
-        <div class="col-lg-9">
-          <%= yield %>
-        </div>
-      </div>
+    <div class="container-fluid">
+      <%= yield %>
     </div>
     <%# ! フォームのリアルタイムバリデーション導入 （全フォームに対応） %>
     <script>
