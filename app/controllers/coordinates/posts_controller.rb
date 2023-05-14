@@ -1,37 +1,63 @@
 class Coordinates::PostsController < ApplicationController
-    # 登録フォーム用メソッド
+    # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
+    before_action :move_to_signed_in, except: [:list]
+
+    # ! 一覧表示メソッド
+    def list
+        # * Closetモデルを介して、全データを取得する
+        @closets_all = Closet.all
+
+        # * Closetモデルを介して、アウターアイテムのみ取得する
+        @closets_outer = Closet.where(big_Category: "アウター")
+
+        # * Closetモデルを介して、トップスアイテムのみ取得する
+        @closets_tops = Closet.where(big_Category: "トップス")
+
+        # * Closetモデルを介して、パンツアイテムのみ取得する
+        @closets_pants = Closet.where(big_Category: "パンツ")
+
+        # * Closetモデルを介して、シューズアイテムのみ取得する
+        @closets_shoes = Closet.where(big_Category: "シューズ")
+
+        # * Closetモデルを介して、その他のアイテムのみ取得する
+        @closets_other = Closet.where(big_Category: "その他")
+    end
+    
+    # ! 登録フォーム用メソッド
     def new
-        # * 使用するモデルの定義
+        # * 使用するモデルを定義する
         @closet = Closet.new
     end
 
-     # 登録処理用メソッド
+    # ! 登録処理用メソッド
     def create
-        @closet = Closet.new(create_params)
-        # user_idを保存
+        # * 投稿時にバインドするパラメータを付与する
+        @closet = Closet.new(posts_params)
+
+        # * ログインしているユーザの情報を取得し、user_idのカラムにバインドする
         @closet.user_id = current_user.id
 
-        # @closet.save
+        # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @closet.save
-
+            redirect_to "/"
         else
             render :new        
         end
     end
-    
-    #一覧表示メソッド
-    def list
-        # DBからでーたをしゅとく
-        # 取得したでーたをhtmlにわたす
-        @closets = Closet.all
-        
-        
-    end
 
+    # ! (privateは外部クラスから参照できない)
     private
 
-    # 投稿時にバインドするパラメータ
-    def create_params
+    # ! 投稿時にバインドするパラメータ
+    def posts_params
+        # * Closetモデルにバインドする
         params.require(:closet).permit(:photograph, :big_Category, :small_Category, :price, :color, :size, :brand)
+    end
+
+    # ! ログインがしているのか判定する
+    def move_to_signed_in
+        unless user_signed_in?
+            redirect_to new_user_session_path
+        end
     end
 end
