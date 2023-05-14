@@ -1,8 +1,37 @@
 // ! クローゼット一覧ページのレイアウト
 #closet_list {
+    // * sidebar関連
+    .sidebar {
+        // ? アイコン関連
+        svg {
+            margin-right: 10px;
+        }
+        // ? リスト関連
+        li {
+            box-shadow: var(--box-shadow);
+            border-radius: 10px;
+            margin-top: 5px;
+        }
+        li:hover {
+            background-color: var(--primary);
+            border-radius: 10px;
+        }
+        // ? リンク関連
+        a {
+            color: var(--dark);
+        }
+        a:hover {
+            color: #FFFFFF;
+        }
+    }
+    // * 一覧コンテンツ 
+    .list_content {
+        border-radius: 10px;
+    }
+    // * 画像関連
     .closet_image {
-        width: 200px;
-        height: 300px;
+        width: 220px;
+        height: 330px;
         object-fit: cover;
         border-radius: 5px;
         box-shadow: var(--box-shadow);
