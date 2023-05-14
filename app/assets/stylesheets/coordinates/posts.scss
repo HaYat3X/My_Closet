@@ -1,3 +1,10 @@
-// Place all the styles related to the coordinates/posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+// ! クローゼット一覧ページのレイアウト
+#closet_list {
+    .closet_image {
+        width: 200px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 5px;
+        box-shadow: var(--box-shadow);
+    }
+}

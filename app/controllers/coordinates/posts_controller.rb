@@ -5,7 +5,22 @@ class Coordinates::PostsController < ApplicationController
     # ! 一覧表示メソッド
     def list
         # * Closetモデルを介して、全データを取得する
-        @closets = Closet.all
+        @closets_all = Closet.all
+
+        # * Closetモデルを介して、アウターアイテムのみ取得する
+        @closets_outer = Closet.where(big_Category: "アウター")
+
+        # * Closetモデルを介して、トップスアイテムのみ取得する
+        @closets_tops = Closet.where(big_Category: "トップス")
+
+        # * Closetモデルを介して、パンツアイテムのみ取得する
+        @closets_pants = Closet.where(big_Category: "パンツ")
+
+        # * Closetモデルを介して、シューズアイテムのみ取得する
+        @closets_shoes = Closet.where(big_Category: "シューズ")
+
+        # * Closetモデルを介して、その他のアイテムのみ取得する
+        @closets_other = Closet.where(big_Category: "その他")
     end
     
     # ! 登録フォーム用メソッド
@@ -17,7 +32,7 @@ class Coordinates::PostsController < ApplicationController
     # ! 登録処理用メソッド
     def create
         # * 投稿時にバインドするパラメータを付与する
-        @closet = Closet.new(create_params)
+        @closet = Closet.new(posts_params)
 
         # * ログインしているユーザの情報を取得し、user_idのカラムにバインドする
         @closet.user_id = current_user.id
@@ -34,7 +49,7 @@ class Coordinates::PostsController < ApplicationController
     private
 
     # ! 投稿時にバインドするパラメータ
-    def create_params
+    def posts_params
         # * Closetモデルにバインドする
         params.require(:closet).permit(:photograph, :big_Category, :small_Category, :price, :color, :size, :brand)
     end
