@@ -1,8 +1,11 @@
 class Closet < ApplicationRecord
-    # ユーザーテーブルとのアソシエーション
+    # ! ユーザーテーブルとのアソシエーション
     belongs_to :user
 
-    #バリデーション
+    # ! バリデーション
     validates :photograph, presence: true
     validates :big_Category, presence: true
+
+    # ! photgraphカラムとアップローダを関連付ける
+    mount_uploader :photograph, ClosetImageUploader
 end

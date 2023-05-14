@@ -12,6 +12,8 @@ gem 'devise'
 # * 日本語化するためのGem
 gem 'rails-i18n', '~> 6.0'
 gem 'devise-i18n'
+# * 画像投稿をするためのGem
+gem 'carrierwave', '~> 2.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server

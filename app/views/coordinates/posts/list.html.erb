@@ -6,6 +6,6 @@
     <li class="nav-item"><a class="nav-link disabled">無効</a></li>
     </ul>
     <% @closets.each do |c| %>
-        <%= c.photograph %>
+        <%= image_tag c.photograph.url %>
     <% end %>
 </div>
