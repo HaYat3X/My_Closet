@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   get "closet/new", to: "coordinates/posts#new"
   # * 投稿処理
   post "closet/create", to: "coordinates/posts#create"
+  # * 詳細画面
+  get  "closet/show/:id", to: "coordinates/posts#show"
 end
