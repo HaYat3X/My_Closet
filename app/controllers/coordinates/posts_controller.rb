@@ -22,7 +22,7 @@ class Coordinates::PostsController < ApplicationController
         # * Closetモデルを介して、その他のアイテムのみ取得する
         @closets_other = Closet.where(big_Category: "その他")
     end
-    
+
     # ! 登録フォーム用メソッド
     def new
         # * 使用するモデルを定義する
@@ -41,8 +41,17 @@ class Coordinates::PostsController < ApplicationController
         if @closet.save
             redirect_to "/"
         else
-            render :new        
+            render :new
         end
+    end
+
+    # !　アイテム詳細メソッド
+    def show
+        # * urlから投稿id取得
+        post_id = params[:id]
+
+        # * 投稿idの詳細データ
+        @closet = Closet.find(post_id)
     end
 
     # ! (privateは外部クラスから参照できない)
