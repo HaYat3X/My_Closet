@@ -7,13 +7,15 @@ ruby '3.1.2'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.3'
 # * 電子メールを送信するためのGem
 gem "net-smtp"
-# * 認証関連のGem
+# * 認証関連の機能を実装するをためのGem
 gem 'devise'
 # * 日本語化するためのGem
 gem 'rails-i18n', '~> 6.0'
 gem 'devise-i18n'
-# * 画像投稿をするためのGem
+# * 画像投稿するためのGem
 gem 'carrierwave', '~> 2.0'
+# * ページネーション機能を実装するためのGem
+gem 'kaminari'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
