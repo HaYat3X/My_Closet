@@ -8,19 +8,19 @@ class Coordinates::PostsController < ApplicationController
         @closets_all = Closet.where(user_id: current_user.id)
 
         # * Closetモデルを介して、アウターアイテムのみ取得する
-        @closets_outer = Closet.where(big_Category: "アウター")
+        @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
 
         # * Closetモデルを介して、トップスアイテムのみ取得する
-        @closets_tops = Closet.where(big_Category: "トップス")
+        @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
 
         # * Closetモデルを介して、パンツアイテムのみ取得する
-        @closets_pants = Closet.where(big_Category: "パンツ")
+        @closets_pants = Closet.where(big_Category: "パンツ", user_id: current_user.id)
 
         # * Closetモデルを介して、シューズアイテムのみ取得する
-        @closets_shoes = Closet.where(big_Category: "シューズ")
+        @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
 
         # * Closetモデルを介して、その他のアイテムのみ取得する
-        @closets_other = Closet.where(big_Category: "その他")
+        @closets_other = Closet.where(big_Category: "その他", user_id: current_user.id)
     end
 
     # ! 登録フォーム用メソッド
@@ -54,7 +54,7 @@ class Coordinates::PostsController < ApplicationController
            # * urlから投稿id取得
         post_id = params[:id]
         @closet = Closet.find(post_id)
-               #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
+        #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
         if @closet.user_id != current_user.id
             redirect_to "/"
         end
