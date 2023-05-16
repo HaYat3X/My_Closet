@@ -44,8 +44,34 @@ class Coordinates::PostsController < ApplicationController
             render :new
         end
     end
+    # ! アイテム更新フォームメソッド
+    def edit
+           # * urlから投稿id取得
+        post_id = params[:id]
+        @closet = Closet.find(post_id)
+               #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
+        if @closet.user_id != current_user.id
+            redirect_to "/"
+        end
+    end
+    # ! アイテム更新メソッド
+    def update
+        post_id = params[:id]
+        @closet = Closet.find(post_id)
+        if @closet.user_id != current_user.id
+            redirect_to "/"
+        end
+        
+        #投稿の削除後、listのページに戻るコード
+         if  Closet.update(posts_params)
+            redirect_to "/closet/list", notice: "投稿を編集しました"
 
-    # !　アイテム詳細メソッド
+        else
+            redirect_to"/closet/list", alert: "投稿の編集に失敗しました"
+         end
+    end
+
+    # ! アイテム詳細メソッド
     def show
         # * urlから投稿id取得
         post_id = params[:id]
@@ -78,7 +104,7 @@ class Coordinates::PostsController < ApplicationController
     # ! (privateは外部クラスから参照できない)
     private
 
-    # ! 投稿時にバインドするパラメータ
+    # ! 投稿時、編集時にバインドするパラメータ
     def posts_params
         # * Closetモデルにバインドする
         params.require(:closet).permit(:photograph, :big_Category, :small_Category, :price, :color, :size, :brand)
