@@ -5,7 +5,8 @@ class Coordinates::PostsController < ApplicationController
     # ! 一覧表示メソッド
     def list
         # * Closetモデルを介して、全データを取得する
-        @closets_all = Closet.where(user_id: current_user.id)
+        # ? ページネーションを導入し、1ページに40件のデータを表示する
+        @closets_all = Closet.where(user_id: current_user.id).page(params[:page]).per(40)
 
         # * Closetモデルを介して、アウターアイテムのみ取得する
         @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
