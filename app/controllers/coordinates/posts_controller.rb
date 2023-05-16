@@ -63,22 +63,24 @@ class Coordinates::PostsController < ApplicationController
     def update
         post_id = params[:id]
         @closet = Closet.find(post_id)
+
         if @closet.user_id != current_user.id
             redirect_to "/"
         end
 
         # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
         case1 = params[:closet][:big_Category] + params[:closet][:small_Category] + params[:closet][:color] 
-        case2 = params[:closet][:size] + params[:closet][:brand] + params[:closet][:price] 
-        @closet.search = case1 + case2
-        
-        #投稿の削除後、listのページに戻るコード
-         if  Closet.update(posts_params)
-            redirect_to "/closet/list", notice: "投稿を編集しました"
+        case2 = params[:closet][:size] + params[:closet][:brand] + params[:closet][:price]
 
+        # * searchカラムを更新する
+        @closet.update(search: case1 + case2)
+
+        # * 投稿の削除後、listのページに戻るコード
+        if @closet.update(posts_params)
+            redirect_to "/closet/list", notice: "投稿を編集しました"
         else
             redirect_to"/closet/list", alert: "投稿の編集に失敗しました"
-         end
+        end
     end
 
     # ! アイテム詳細メソッド
