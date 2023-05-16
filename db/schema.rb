@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_12_030406) do
+ActiveRecord::Schema.define(version: 2023_05_16_112311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,28 @@ ActiveRecord::Schema.define(version: 2023_05_12_030406) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_closets_on_user_id"
+  end
+
+  create_table "socials", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "tag"
+    t.string "message"
+    t.string "photograph", null: false
+    t.integer "item1"
+    t.integer "item2"
+    t.integer "item3"
+    t.integer "item4"
+    t.integer "item5"
+    t.integer "item6"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item1"], name: "index_socials_on_item1"
+    t.index ["item2"], name: "index_socials_on_item2"
+    t.index ["item3"], name: "index_socials_on_item3"
+    t.index ["item4"], name: "index_socials_on_item4"
+    t.index ["item5"], name: "index_socials_on_item5"
+    t.index ["item6"], name: "index_socials_on_item6"
+    t.index ["user_id"], name: "index_socials_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
