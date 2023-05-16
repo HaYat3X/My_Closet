@@ -3,4 +3,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :timeoutable, :trackable
   # クローゼットテーブルのアソシエーション
   has_many :closets
+
+  # ソーシャルテーブルのアソシエーション
+  has_many :socials
 end

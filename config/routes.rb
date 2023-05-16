@@ -18,4 +18,10 @@ Rails.application.routes.draw do
   patch "closet/update/:id", to: "coordinates/posts#update"
   # 検索画面
   get "closet/search", to: "coordinates/searchs#search"
+
+  # ! SNS関連
+  # * 一覧ページ
+  root to: "sns/posts#list"
+  # * 詳細ページ
+  get "/sns/show", to: "sns/posts#show"
 end
