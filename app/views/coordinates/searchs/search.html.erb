@@ -1,0 +1,53 @@
+<div id="closet_list">
+    <%# ! header %>
+    <%= render "coordinates/layouts/header" %>
+    <div class="d-flex">
+        <%# ! sidebar %>
+        <div class="col-lg-3">
+            <%= render "coordinates/layouts/sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="list_content col-lg-9">
+            <div class="m-3 bg-light">
+                <%# * タブメニューエリア %>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a href="#all" class="nav-link active" data-bs-toggle="tab">すべて</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#outer" class="nav-link" data-bs-toggle="tab">アウター</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#tops" class="nav-link" data-bs-toggle="tab">トップス</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#pants" class="nav-link" data-bs-toggle="tab">パンツ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#shoes" class="nav-link" data-bs-toggle="tab">シューズ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#other" class="nav-link" data-bs-toggle="tab">その他</a>
+                    </li>
+                </ul>
+
+                <%# * タブエリア %>
+                <div class="tab-content">
+                    <%# ? allタブエリア %>
+                    <div id="all" class="tab-pane active">
+                        <div class="row">
+                            <% @search_result.each do |c| %>
+                                <div class="col-lg-3 m-0 mt-3">
+                                    <%= link_to "/closet/show/#{c.id}" do %>
+                                        <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

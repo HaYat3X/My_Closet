@@ -34,6 +34,11 @@ class Coordinates::PostsController < ApplicationController
         # * 投稿時にバインドするパラメータを付与する
         @closet = Closet.new(posts_params)
 
+        # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
+        case1 = params[:closet][:big_Category] + params[:closet][:small_Category] + params[:closet][:color] 
+        case2 = params[:closet][:size] + params[:closet][:brand] + params[:closet][:price] 
+        @closet.search = case1 + case2
+
         # * ログインしているユーザの情報を取得し、user_idのカラムにバインドする
         @closet.user_id = current_user.id
 
@@ -61,6 +66,11 @@ class Coordinates::PostsController < ApplicationController
         if @closet.user_id != current_user.id
             redirect_to "/"
         end
+
+        # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
+        case1 = params[:closet][:big_Category] + params[:closet][:small_Category] + params[:closet][:color] 
+        case2 = params[:closet][:size] + params[:closet][:brand] + params[:closet][:price] 
+        @closet.search = case1 + case2
         
         #投稿の削除後、listのページに戻るコード
          if  Closet.update(posts_params)
