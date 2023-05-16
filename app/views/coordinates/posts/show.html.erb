@@ -41,6 +41,9 @@
                                 <td>ブランド</td>
                                 <td><%= @closet.brand %></td>
                             </tr>
+                            <tr>
+                                <td><%= link_to "削除" , "/closet/delete/#{@closet.id}" , method: :delete %><td>
+                            </tr>
                         </tbody>
                     </table>
                     </div>
