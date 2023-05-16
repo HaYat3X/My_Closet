@@ -9,6 +9,7 @@ class CreateClosets < ActiveRecord::Migration[6.1]
       t.string :color
       t.string :size
       t.string :brand
+      t.string :search
       t.timestamps
     end
     # ! 外部キー規約

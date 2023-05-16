@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2023_05_12_030406) do
     t.string "color"
     t.string "size"
     t.string "brand"
+    t.string "search"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_closets_on_user_id"

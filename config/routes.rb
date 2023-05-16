@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   get "closet/edit/:id", to: "coordinates/posts#edit"
   # * 編集処理
   patch "closet/update/:id", to: "coordinates/posts#update"
+  # 検索画面
+  get "closet/search", to: "coordinates/searchs#search"
 end
