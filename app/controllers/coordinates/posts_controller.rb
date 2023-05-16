@@ -8,19 +8,19 @@ class Coordinates::PostsController < ApplicationController
         @closets_all = Closet.where(user_id: current_user.id)
 
         # * Closetモデルを介して、アウターアイテムのみ取得する
-        @closets_outer = Closet.where(big_Category: "アウター")
+        @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
 
         # * Closetモデルを介して、トップスアイテムのみ取得する
-        @closets_tops = Closet.where(big_Category: "トップス")
+        @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
 
         # * Closetモデルを介して、パンツアイテムのみ取得する
-        @closets_pants = Closet.where(big_Category: "パンツ")
+        @closets_pants = Closet.where(big_Category: "パンツ", user_id: current_user.id)
 
         # * Closetモデルを介して、シューズアイテムのみ取得する
-        @closets_shoes = Closet.where(big_Category: "シューズ")
+        @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
 
         # * Closetモデルを介して、その他のアイテムのみ取得する
-        @closets_other = Closet.where(big_Category: "その他")
+        @closets_other = Closet.where(big_Category: "その他", user_id: current_user.id)
     end
 
     # ! 登録フォーム用メソッド
@@ -54,7 +54,7 @@ class Coordinates::PostsController < ApplicationController
            # * urlから投稿id取得
         post_id = params[:id]
         @closet = Closet.find(post_id)
-               #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
+        #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
         if @closet.user_id != current_user.id
             redirect_to "/"
         end
@@ -63,22 +63,24 @@ class Coordinates::PostsController < ApplicationController
     def update
         post_id = params[:id]
         @closet = Closet.find(post_id)
+
         if @closet.user_id != current_user.id
             redirect_to "/"
         end
 
         # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
         case1 = params[:closet][:big_Category] + params[:closet][:small_Category] + params[:closet][:color] 
-        case2 = params[:closet][:size] + params[:closet][:brand] + params[:closet][:price] 
-        @closet.search = case1 + case2
-        
-        #投稿の削除後、listのページに戻るコード
-         if  Closet.update(posts_params)
-            redirect_to "/closet/list", notice: "投稿を編集しました"
+        case2 = params[:closet][:size] + params[:closet][:brand] + params[:closet][:price]
 
+        # * searchカラムを更新する
+        @closet.update(search: case1 + case2)
+
+        # * 投稿の削除後、listのページに戻るコード
+        if @closet.update(posts_params)
+            redirect_to "/closet/list", notice: "投稿を編集しました"
         else
             redirect_to"/closet/list", alert: "投稿の編集に失敗しました"
-         end
+        end
     end
 
     # ! アイテム詳細メソッド
