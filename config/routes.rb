@@ -12,4 +12,8 @@ Rails.application.routes.draw do
   get  "closet/show/:id", to: "coordinates/posts#show"
   # 削除処理
   delete "closet/delete/:id", to: "coordinates/posts#delete"
+  # * 編集フォーム
+  get "closet/edit/:id", to: "coordinates/posts#edit"
+  # * 編集処理
+  patch "closet/update/:id", to: "coordinates/posts#update"
 end
