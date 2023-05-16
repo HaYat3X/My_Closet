@@ -1,11 +1,11 @@
 class Coordinates::PostsController < ApplicationController
     # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
-    before_action :move_to_signed_in, except: [:list]
+    before_action :move_to_signed_in, except: []
 
     # ! 一覧表示メソッド
     def list
         # * Closetモデルを介して、全データを取得する
-        @closets_all = Closet.all
+        @closets_all = Closet.where(user_id: current_user.id)
 
         # * Closetモデルを介して、アウターアイテムのみ取得する
         @closets_outer = Closet.where(big_Category: "アウター")
