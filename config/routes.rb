@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   post "closet/create", to: "coordinates/posts#create"
   # * 詳細画面
   get  "closet/show/:id", to: "coordinates/posts#show"
+  # 削除処理
+  delete "closet/delete/:id", to: "coordinates/posts#delete"
 end
