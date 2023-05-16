@@ -69,6 +69,7 @@ class Coordinates::PostsController < ApplicationController
         end
 
         # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
+        # !! refactoring時にヘルパーに移行する
         case1 = params[:closet][:big_Category] + params[:closet][:small_Category] + params[:closet][:color] 
         case2 = params[:closet][:size] + params[:closet][:brand] + params[:closet][:price]
 
