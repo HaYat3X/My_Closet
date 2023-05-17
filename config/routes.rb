@@ -26,4 +26,6 @@ Rails.application.routes.draw do
   get "sns/show", to: "sns/posts#show"
   # * 投稿ページ
   get "sns/new", to: "sns/posts#new"
+  # * 投稿処理
+  post "sns/create", to: "sns/posts#create"
 end

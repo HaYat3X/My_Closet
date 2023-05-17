@@ -16,8 +16,8 @@ class Sns::PostsController < ApplicationController
         @item4 = Closet.find_by(id: @sns.item4)
         @item5 = Closet.find_by(id: @sns.item5)
         @item6 = Closet.find_by(id: @sns.item6)
-    end 
-    
+    end
+
     # ! 投稿フォームメソッド
     def new
         @social = Social.new
@@ -25,5 +25,27 @@ class Sns::PostsController < ApplicationController
 
     # ! 登録処理メソッド
     def create
+         # * 投稿時にバインドするパラメータを付与する
+        @social = Social.new(posts_params)
+
+          # * ログインしているユーザの情報を取得し、user_idのカラムにバインドする
+        @social.user_id = current_user.id
+
+         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
+        if @social.save
+            redirect_to "/"
+        else
+            render :new
+        end
     end
+
+    # ! (privateは外部クラスから参照できない)
+    private
+
+    # ! 投稿時、編集時にバインドするパラメータ
+    def posts_params
+        # * socialモデルにバインドする
+        params.require(:social).permit(:tag, :message, :photograph, :item1, :item2, :item3, :item4, :item5, :item6)
+    end
+
 end
