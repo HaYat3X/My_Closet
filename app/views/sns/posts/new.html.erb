@@ -1,4 +1,18 @@
-<% if @social.errors.any? %>
+
+<div id="sns_form">
+    <%# ! header %>
+    <%= render "sns/layouts/header" %>
+    <div class="d-flex">
+        <%# ! sidebar %>
+        <div class="col-lg-3">
+            <%= render "sns/layouts/sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="list_content col-lg-9">
+            <div class="m-3 bg-light">
+                
+                <% if @social.errors.any? %>
                     <div class="alert alert-danger" role="alert">
                         <% @social.errors.each do |error| %>
                         <strong>エラー！</strong> - <%= error.full_message %><br>
@@ -19,16 +33,42 @@
                     <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
                   </div>
                  
-                  <% @closets.each do |image| %>
-                    <div style="display: flex; margin:5px 5px 5px 0;">
+                 <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        アイテム1
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+      <div class="row">
+         <% @closets.each do |image| %>
+  
+                     <div class="col-lg-3 m-0 mt-3">
                       <%= f.radio_button :item1, image.id %>
                       <label for="user_image_ids_<%= image.id %>" >
-                        <%= image_tag image.photograph.url, size: '300x200' %>
-                      </label>
-                    </div>
+                        <%= image_tag image.photograph.url, size: '200x300' %>
+                      </label> 
+                      </div>
+
+               
                   <% end %>
-  <hr>
-                  <% @closets.each do |image| %>
+                  </div>
+                  
+                 
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+       アイテム2
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+                          <% @closets.each do |image| %>
                     <div style="display: flex; margin:5px 5px 5px 0;">
                       <%= f.radio_button :item2, image.id %>
                       <label for="user_image_ids_<%= image.id %>" >
@@ -36,8 +76,19 @@
                       </label>
                     </div>
                   <% end %>
-<hr>
-                  <% @closets.each do |image| %>
+
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        アイテム3
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+                          <% @closets.each do |image| %>
                     <div style="display: flex; margin:5px 5px 5px 0;">
                       <%= f.radio_button :item3, image.id %>
                       <label for="user_image_ids_<%= image.id %>" >
@@ -45,34 +96,77 @@
                       </label>
                     </div>
                   <% end %>
-<hr>
-                  <% @closets.each do |image| %>
-                    <div style="display: flex; margin:5px 5px 5px 0;">
-                      <%= f.radio_button :item4, image.id %>
-                      <label for="user_image_ids_<%= image.id %>" >
-                        <%= image_tag image.photograph.url, size: '300x200' %>
-                      </label>
-                    </div>
-                  <% end %>
-<hr>
-                  <% @closets.each do |image| %>
-                    <div style="display: flex; margin:5px 5px 5px 0;">
-                      <%= f.radio_button :item5, image.id %>
-                      <label for="user_image_ids_<%= image.id %>" >
-                        <%= image_tag image.photograph.url, size: '300x200' %>
-                      </label>
-                    </div>
-                  <% end %>
-<hr>
 
-                  <% @closets.each do |image| %>
+      </div>
+    </div>
+  </div>
+    <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        アイテム4
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+                          <% @closets.each do |image| %>
                     <div style="display: flex; margin:5px 5px 5px 0;">
-                      <%= f.radio_button :item6, image.id %>
+                      <%= f.radio_button :item3, image.id %>
                       <label for="user_image_ids_<%= image.id %>" >
                         <%= image_tag image.photograph.url, size: '300x200' %>
                       </label>
                     </div>
                   <% end %>
+
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        アイテム5
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+                          <% @closets.each do |image| %>
+                    <div style="display: flex; margin:5px 5px 5px 0;">
+                      <%= f.radio_button :item3, image.id %>
+                      <label for="user_image_ids_<%= image.id %>" >
+                        <%= image_tag image.photograph.url, size: '300x200' %>
+                      </label>
+                    </div>
+                  <% end %>
+
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        アイテム6
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+                          <% @closets.each do |image| %>
+                    <div style="display: flex; margin:5px 5px 5px 0;">
+                      <%= f.radio_button :item3, image.id %>
+                      <label for="user_image_ids_<%= image.id %>" >
+                        <%= image_tag image.photograph.url, size: '300x200' %>
+                      </label>
+                    </div>
+                  <% end %>
+
+      </div>
+    </div>
+  </div>
+
+</div>
                   
                   <%= f.submit "登録する", class: "btn btn-primary" %>
                 <% end %>
+                
+            </div>
+        </div>
+    </div>
+</div>
