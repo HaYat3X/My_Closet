@@ -4,7 +4,7 @@ class Coordinates::SearchsController < ApplicationController
         # * フォームの値を受け取る (upcaseで大文字、小文字を区別せず検索できるように)
         key_word = params[:search].upcase
         # 検索用SQL
-        @search_result = Closet.where('search LIKE (?)', "%#{key_word}%")
+        @search_result = Closet.where('search LIKE (?)', "%#{key_word}%").where(user_id: current_user.id)
     end
 
 end
