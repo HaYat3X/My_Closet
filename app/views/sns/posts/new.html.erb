@@ -19,8 +19,9 @@
                     <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
                   </div>
                   <div class="mb-3">
-                    <%= f.text_field :item1, class: "form-control", placeholder: "身につけているアイテム1" %>
+                    <%= f.collection_select :item1, Closet.all, :id, :id %> 
                   </div>
+
                   <div class="mb-3">
                     <%= f.text_field :item2, class: "form-control", placeholder: "身につけているアイテム2" %>
                   </div>

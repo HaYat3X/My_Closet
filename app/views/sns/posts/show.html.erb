@@ -12,7 +12,7 @@
             <div class="m-3 bg-light">
                 <div class="row">
                     <div class="col-lg-6">
-                        <%= image_tag "/assets/img_1.png", class: "closet_image" %>
+                        <%= image_tag @sns.photograph.url, class: "closet_image" %>
                     </div>
                     <div class="col-lg-6">
                         <div class="bg-white m-2 row">
@@ -27,13 +27,13 @@
                             </div>
                         </div>
                         <div class="bg-white m-2 row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 fw-bold">
                                 <%= @sns.message %>
                             </div>
                         </div>
                         <div class="bg-white m-2 row">
                             <div class="col-lg-12">
-                                <%= @sns.tag %>
+                               #<%= @sns.tag %>
                             </div>
                         </div>
                         <div class="bg-white m-2 row">
@@ -42,19 +42,19 @@
                                 <%= image_tag @item1.photograph.url, style: "width: 150px; height: 200px; " %>
                             </div>
                             <div class="col-lg-4">
-                                <%= image_tag @item1.photograph.url, style: "width: 150px; height: 200px; " %>
+                                <%# <%= image_tag @item1.photograph.url, style: "width: 150px; height: 200px; " %> %>
                             </div>
                             <div class="col-lg-4">
-                                <%= image_tag @item1.photograph.url, style: "width: 150px; height: 200px; " %>
+                                <%# <%= image_tag @item1.photograph.url, style: "width: 150px; height: 200px; " %> %>
                             </div>
                             <div class="col-lg-4 mt-1">
-                                <%= image_tag @item1.photograph.url, style: "width: 150px; height: 200px; " %>
+                                <%# <%= image_tag @item1.photograph.url, style: "width: 150px; height: 200px; " %> %>
                             </div>
                             <div class="col-lg-4 mt-1">
-                                <%= image_tag @item1.photograph.url, style: "width: 150px; height: 200px; " %>
+                                <%# <%= image_tag @item1.photograph.url, style: "width: 150px; height: 200px; " %> %>
                             </div>
                             <div class="col-lg-4 mt-1">
-                                <%= image_tag @item1.photograph.url, style: "width: 150px; height: 200px; " %>
+                                <%# <%= image_tag @item1.photograph.url, style: "width: 150px; height: 200px; " %> %>
                             </div>
                         </div>
                         <div class="bg-white m-2 row mt-2">

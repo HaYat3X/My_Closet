@@ -7,7 +7,7 @@ class Sns::PostsController < ApplicationController
     # ! 詳細取得メソッド
     def show
         # * 詳細情報を一件取得する
-        @sns = Social.find(5)
+        @sns = Social.find(params[:id])
 
         # * item1〜6のアイテム情報をクローゼットテーブルから取得する
         @item1 = Closet.find_by(id: @sns.item1)
@@ -21,6 +21,9 @@ class Sns::PostsController < ApplicationController
     # ! 投稿フォームメソッド
     def new
         @social = Social.new
+
+        # * ログインしているユーザが登録したアイテムのデータを取得
+        @closets = Closet.where(user_id: current_user.id)
     end
 
     # ! 登録処理メソッド
