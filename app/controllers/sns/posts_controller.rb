@@ -23,12 +23,43 @@ class Sns::PostsController < ApplicationController
         @social = Social.new
 
         # * ログインしているユーザが登録したアイテムのデータを取得
-        @closets = Closet.where(user_id: current_user.id)
+        @closets_all = Closet.where(user_id: current_user.id)
+
+        # * Closetモデルを介して、アウターアイテムのみ取得する
+        @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
+
+        # * Closetモデルを介して、トップスアイテムのみ取得する
+        @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
+
+        # * Closetモデルを介して、パンツアイテムのみ取得する
+        @closets_pants = Closet.where(big_Category: "パンツ", user_id: current_user.id)
+
+        # * Closetモデルを介して、シューズアイテムのみ取得する
+        @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
+
+        # * Closetモデルを介して、その他のアイテムのみ取得する
+        @closets_other = Closet.where(big_Category: "その他", user_id: current_user.id)
     end
 
     # ! 登録処理メソッド
     def create
-        @closets = Closet.where(user_id: current_user.id)
+         # * ログインしているユーザが登録したアイテムのデータを取得
+         @closets_all = Closet.where(user_id: current_user.id)
+
+         # * Closetモデルを介して、アウターアイテムのみ取得する
+         @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
+ 
+         # * Closetモデルを介して、トップスアイテムのみ取得する
+         @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
+ 
+         # * Closetモデルを介して、パンツアイテムのみ取得する
+         @closets_pants = Closet.where(big_Category: "パンツ", user_id: current_user.id)
+ 
+         # * Closetモデルを介して、シューズアイテムのみ取得する
+         @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
+ 
+         # * Closetモデルを介して、その他のアイテムのみ取得する
+         @closets_other = Closet.where(big_Category: "その他", user_id: current_user.id)
 
          # * 投稿時にバインドするパラメータを付与する
         @social = Social.new(posts_params)

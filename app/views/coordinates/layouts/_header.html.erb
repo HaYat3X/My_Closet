@@ -12,10 +12,6 @@
                 アイテム追加
             </a>
         </div>
-        <%# <form action="/closet/search" class="d-flex mx-5" role="search">
-            <input type="text" name="search" class="form-control me-2" placeholder="検索..." aria-label="検索..." style="width: 400px;">
-            <button type="submit" class="btn btn-outline-success flex-shrink-0">検索</button>
-        </form> %>
         <%= form_with(url: "/closet/search", local: true, method: :get, class: "d-flex mx-5") do |f| %>
             <%= f.text_field :search, class: "form-control me-2", style: "width: 400px;" %>
             <%= f.submit "検索",  class: "btn btn-outline-success flex-shrink-0" %>
