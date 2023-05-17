@@ -17,7 +17,7 @@
                             <% @snss.each do |s| %>
                                 <div class="col-lg-3 m-0 mt-3">
                                     <%= link_to "/sns/show" do %>
-                                        <%= image_tag "/assets/img_1.png", class: "closet_image" %>
+                                        <%= image_tag s.photograph.url, class: "closet_image" %>
                                     <% end %>
                                     <div class="p-2 row">
                                         <div class="col-lg-3">
