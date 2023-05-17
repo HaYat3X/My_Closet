@@ -57,7 +57,7 @@ class Coordinates::PostsController < ApplicationController
         @closet = Closet.find(post_id)
         #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
         if @closet.user_id != current_user.id
-            redirect_to "/"
+            redirect_to "/", alert: "不正なアクセスが行われました。"
         end
     end
     # ! アイテム更新メソッド
@@ -66,7 +66,7 @@ class Coordinates::PostsController < ApplicationController
         @closet = Closet.find(post_id)
 
         if @closet.user_id != current_user.id
-            redirect_to "/"
+            redirect_to "/", alert: "不正なアクセスが行われました。"
         end
 
         # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
@@ -97,22 +97,21 @@ class Coordinates::PostsController < ApplicationController
     #投稿削除
 
     def delete
-         # * urlから投稿id取得
-         post_id = params[:id]
-         closet = Closet.find(post_id)
+        # * urlから投稿id取得
+        post_id = params[:id]
+        closet = Closet.find(post_id)
 
         #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
-         if closet.user_id != current_user.id
-            redirect_to "/"
-         end
-
-        #投稿の削除後、listのページに戻るコード
-         if closet.destroy
-            redirect_to "/closet/list", notice: "投稿を削除しました"
-
+        if closet.user_id != current_user.id
+            redirect_to "/", alert: "不正なアクセスが行われました。"
         else
-            redirect_to"/closet/list", alert: "投稿の削除に失敗しました"
-         end
+            # 投稿の削除後、listのページに戻るコード
+            if closet.destroy
+                redirect_to "/closet/list", notice: "投稿を削除しました"
+            else
+                redirect_to "/closet/list", alert: "投稿の削除に失敗しました"
+            end
+        end
     end
 
     # ! (privateは外部クラスから参照できない)
