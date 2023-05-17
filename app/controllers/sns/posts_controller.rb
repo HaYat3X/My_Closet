@@ -16,5 +16,14 @@ class Sns::PostsController < ApplicationController
         @item4 = Closet.find_by(id: @sns.item4)
         @item5 = Closet.find_by(id: @sns.item5)
         @item6 = Closet.find_by(id: @sns.item6)
-    end    
+    end 
+    
+    # ! 投稿フォームメソッド
+    def new
+        @social = Social.new
+    end
+
+    # ! 登録処理メソッド
+    def create
+    end
 end
