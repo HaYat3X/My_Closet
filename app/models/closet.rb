@@ -2,9 +2,6 @@ class Closet < ApplicationRecord
     # ! ユーザーテーブルとのアソシエーション
     belongs_to :user
 
-    # ソーシャルテーブルのアソシエーション
-    belongs_to :social
-
     # ! バリデーション
     validates :photograph, presence: true
     validates :big_Category, presence: true

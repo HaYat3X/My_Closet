@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2023_05_16_112311) do
     t.integer "weight"
     t.string "user_name", default: "", null: false
     t.integer "age"
+    t.string "avatar"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
