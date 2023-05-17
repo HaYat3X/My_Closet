@@ -6,7 +6,7 @@ ruby '3.1.2'
 # ! Railsバージョン
 gem 'rails', '~> 6.1.7', '>= 6.1.7.3'
 # * 電子メールを送信するためのGem
-gem "net-smtp"
+# gem "net-smtp"
 # * 認証関連の機能を実装するをためのGem
 gem 'devise'
 # * 日本語化するためのGem

@@ -72,18 +72,25 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  # ! サービス日デフォルトURL
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
-
-  # ! メール認証用の設定
+  # Default url for mailer
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # メール送信失敗時のエラーを発生させる
   config.action_mailer.raise_delivery_errors = true
+  # メール送信にSMTPを使用する
   config.action_mailer.delivery_method = :smtp
+  # SMPTの詳細設定
   config.action_mailer.smtp_settings = {
-    :address => "smtp.gmail.com",
-    :port => 587,
-    :user_name => ENV.fetch('MAIL_USERNAME') { '' },
-    :password => ENV.fetch('MAIL_PASSWORD') { '' },
-    :authentication => :plain,
-    :enable_starttls_auto => true,
+    address: 'smtp.gmail.com',
+    port: 587,
+    # HELOコマンドで使用するドメイン、たぶん無くてもok
+    domain: 'smtp.gmail.com',
+    # Gmailのメールアドレス
+    user_name: ENV.fetch('MAIL_USERNAME') { '' },
+    # Googleのアプリパスワード
+    password: ENV.fetch('MAIL_PASSWORD') { '' },
+    # メールサーバーの認証の種類
+    authentication: 'plain',
+    # STARTTLSを自動検出して有効化
+    enable_starttls_auto: true
   }
 end
