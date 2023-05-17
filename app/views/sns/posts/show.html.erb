@@ -1,10 +1,10 @@
 <div id="closet_show">
     <%# ! header %>
-    <%= render "coordinates/layouts/header" %>
+    <%= render "sns/layouts/header" %>
     <div class="d-flex">
         <%# ! sidebar %>
         <div class="col-lg-3">
-            <%= render "coordinates/layouts/sidebar" %>
+            <%= render "sns/layouts/sidebar" %>
         </div>
 
         <%# ! contents %>
@@ -26,35 +26,59 @@
                                 <button class="btn btn-primary">フォロー</button>
                             </div>
                         </div>
-                        <div class="bg-white m-2 row">
+                        <div class="bg-white m-2 row mt-3">
                             <div class="col-lg-12 fw-bold">
                                 <%= @sns.message %>
                             </div>
                         </div>
-                        <div class="bg-white m-2 row">
+                        <div class="bg-white m-2 row mt-3">
                             <div class="col-lg-12">
                                #<%= @sns.tag %>
                             </div>
                         </div>
-                        <div class="bg-white m-2 row">
-                            <h4>着用アイテム</h4>
+                        <div class="bg-white m-2 row mt-3">
+                            <p class="fw-bold">着用アイテム</p>
                             <div class="col-lg-4">
-                                <%= image_tag @item1.photograph.url, style: "width: 150px; height: 200px; " %>
+                                <% if @item1 %>
+                                    <%= link_to "/closet/show/#{@item1.id}" do %>
+                                        <%= image_tag @item1.photograph.url, style: "width: 150px; height: 200px; " %>
+                                    <% end %>
+                                <% end %>
                             </div>
                             <div class="col-lg-4">
-                                <%= image_tag @item2.photograph.url, style: "width: 150px; height: 200px; " %>
+                                <% if @item2 %>
+                                    <%= link_to "/closet/show/#{@item2.id}" do %>
+                                        <%= image_tag @item2.photograph.url, style: "width: 150px; height: 200px; " %>
+                                    <% end %>
+                                <% end %>
                             </div>
                             <div class="col-lg-4">
-                                <%= image_tag @item3.photograph.url, style: "width: 150px; height: 200px; " %>
+                                <% if @item3 %>
+                                    <%= link_to "/closet/show/#{@item3.id}" do %>
+                                        <%= image_tag @item3.photograph.url, style: "width: 150px; height: 200px; " %>
+                                    <% end %>
+                                <% end %>
                             </div>
                             <div class="col-lg-4 mt-1">
-                                <%= image_tag @item4.photograph.url, style: "width: 150px; height: 200px; " %>
+                                <% if @item4 %>
+                                    <%= link_to "/closet/show/#{@item4.id}" do %>
+                                        <%= image_tag @item4.photograph.url, style: "width: 150px; height: 200px; " %>
+                                    <% end %>
+                                <% end %>
                             </div>
                             <div class="col-lg-4 mt-1">
-                                <%= image_tag @item5.photograph.url, style: "width: 150px; height: 200px; " %>
+                                <% if @item5 %>
+                                    <%= link_to "/closet/show/#{@item5.id}" do %>
+                                        <%= image_tag @item5.photograph.url, style: "width: 150px; height: 200px; " %>
+                                    <% end %>
+                                <% end %>
                             </div>
                             <div class="col-lg-4 mt-1">
-                                <%= image_tag @item6.photograph.url, style: "width: 150px; height: 200px; " %>
+                                <% if @item6 %>
+                                    <%= link_to "/closet/show/#{@item6.id}" do %>
+                                        <%= image_tag @item6.photograph.url, style: "width: 150px; height: 200px; " %>
+                                    <% end %>
+                                <% end %>
                             </div>
                         </div>
                         <div class="bg-white m-2 row mt-2">
