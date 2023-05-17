@@ -1,0 +1,31 @@
+<%= form_with(model: @social, url: "#", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+
+                  <div class="mb-3">
+                    <%= f.text_field :tag, class: "form-control", placeholder: "タグ" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_field :message, class: "form-control", placeholder: "投稿文" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_field :photograph, class: "form-control", placeholder: "写真" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_field :item1, class: "form-control", placeholder: "身につけているアイテム1" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_field :item2, class: "form-control", placeholder: "身につけているアイテム2" %>
+                  </div>
+                  <div class="mb-3"><div class="mb-3">
+                    <%= f.text_field :item3, class: "form-control", placeholder: "身につけているアイテム3" %>
+                  </div>
+                  <div class="mb-3"><div class="mb-3">
+                    <%= f.text_field :item4, class: "form-control", placeholder: "身につけているアイテム4" %>
+                  </div>
+                  <div class="mb-3"><div class="mb-3">
+                    <%= f.text_field :item5, class: "form-control", placeholder: "身につけているアイテム5" %>
+                  </div>
+                  <div class="mb-3"><div class="mb-3">
+                    <%= f.text_field :item6, class: "form-control", placeholder: "身につけているアイテム6" %>
+                  </div><div class="mb-3">
+                  <%= f.submit "登録する", class: "btn btn-primary" %>
+                <% end %>

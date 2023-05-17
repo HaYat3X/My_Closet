@@ -23,5 +23,7 @@ Rails.application.routes.draw do
   # * 一覧ページ
   root to: "sns/posts#list"
   # * 詳細ページ
-  get "/sns/show", to: "sns/posts#show"
+  get "sns/show", to: "sns/posts#show"
+  # * 投稿ページ
+  get "sns/new", to: "sns/posts#new"
 end
