@@ -28,6 +28,8 @@ class Sns::PostsController < ApplicationController
 
     # ! 登録処理メソッド
     def create
+        @closets = Closet.where(user_id: current_user.id)
+
          # * 投稿時にバインドするパラメータを付与する
         @social = Social.new(posts_params)
 

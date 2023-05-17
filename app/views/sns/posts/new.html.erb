@@ -18,24 +18,61 @@
                   <div class="mb-3">
                     <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
                   </div>
-                  <div class="mb-3">
-                    <%= f.collection_select :item1, Closet.all, :id, :id %> 
-                  </div>
+                 
+                  <% @closets.each do |image| %>
+                    <div style="display: flex; margin:5px 5px 5px 0;">
+                      <%= f.radio_button :item1, image.id %>
+                      <label for="user_image_ids_<%= image.id %>" >
+                        <%= image_tag image.photograph.url, size: '300x200' %>
+                      </label>
+                    </div>
+                  <% end %>
+  <hr>
+                  <% @closets.each do |image| %>
+                    <div style="display: flex; margin:5px 5px 5px 0;">
+                      <%= f.radio_button :item2, image.id %>
+                      <label for="user_image_ids_<%= image.id %>" >
+                        <%= image_tag image.photograph.url, size: '300x200' %>
+                      </label>
+                    </div>
+                  <% end %>
+<hr>
+                  <% @closets.each do |image| %>
+                    <div style="display: flex; margin:5px 5px 5px 0;">
+                      <%= f.radio_button :item3, image.id %>
+                      <label for="user_image_ids_<%= image.id %>" >
+                        <%= image_tag image.photograph.url, size: '300x200' %>
+                      </label>
+                    </div>
+                  <% end %>
+<hr>
+                  <% @closets.each do |image| %>
+                    <div style="display: flex; margin:5px 5px 5px 0;">
+                      <%= f.radio_button :item4, image.id %>
+                      <label for="user_image_ids_<%= image.id %>" >
+                        <%= image_tag image.photograph.url, size: '300x200' %>
+                      </label>
+                    </div>
+                  <% end %>
+<hr>
+                  <% @closets.each do |image| %>
+                    <div style="display: flex; margin:5px 5px 5px 0;">
+                      <%= f.radio_button :item5, image.id %>
+                      <label for="user_image_ids_<%= image.id %>" >
+                        <%= image_tag image.photograph.url, size: '300x200' %>
+                      </label>
+                    </div>
+                  <% end %>
+<hr>
 
-                  <div class="mb-3">
-                    <%= f.text_field :item2, class: "form-control", placeholder: "身につけているアイテム2" %>
-                  </div>
-                  <div class="mb-3"><div class="mb-3">
-                    <%= f.text_field :item3, class: "form-control", placeholder: "身につけているアイテム3" %>
-                  </div>
-                  <div class="mb-3"><div class="mb-3">
-                    <%= f.text_field :item4, class: "form-control", placeholder: "身につけているアイテム4" %>
-                  </div>
-                  <div class="mb-3"><div class="mb-3">
-                    <%= f.text_field :item5, class: "form-control", placeholder: "身につけているアイテム5" %>
-                  </div>
-                  <div class="mb-3"><div class="mb-3">
-                    <%= f.text_field :item6, class: "form-control", placeholder: "身につけているアイテム6" %>
-                  </div><div class="mb-3">
+                  <% @closets.each do |image| %>
+                    <div style="display: flex; margin:5px 5px 5px 0;">
+                      <%= f.radio_button :item6, image.id %>
+                      <label for="user_image_ids_<%= image.id %>" >
+                        <%= image_tag image.photograph.url, size: '300x200' %>
+                      </label>
+                    </div>
+                  <% end %>
+                  
                   <%= f.submit "登録する", class: "btn btn-primary" %>
                 <% end %>
