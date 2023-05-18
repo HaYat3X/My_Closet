@@ -1,0 +1,38 @@
+<div id="sns_list">
+    <%# ! header %>
+    <%= render "sns/layouts/header" %>
+    <div class="d-flex">
+        <%# ! sidebar %>
+        <div class="col-lg-3">
+            <%= render "sns/layouts/sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="list_content col-lg-9">
+            <div class="m-3 bg-light">
+                <div class="tab-content">
+                    <%# ? allタブエリア %>
+                    <div id="all" class="tab-pane active">
+                        <div class="row">
+                            <% @search_result.each do |s| %>
+                                <div class="col-lg-3 m-0 mt-3">
+                                    <%= link_to "/sns/show/#{s.id}" do %>
+                                        <%= image_tag s.photograph.url, class: "closet_image" %>
+                                    <% end %>
+                                    <div class="p-2 row">
+                                        <div class="col-lg-3">
+                                            <%= image_tag "/assets/img_1.png", class: "closet_image", style: "width: 35px; height: 35px; border-radius: 50px;" %>
+                                        </div>
+                                        <div class="col-lg-9 d-flex align-items-center">
+                                            <%= s.user.user_name %><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   get "sns/new", to: "sns/posts#new"
   # * 投稿処理
   post "sns/create", to: "sns/posts#create"
+  # * 検索処理
+  get "/sns/search", to: "sns/searchs#search"
 end

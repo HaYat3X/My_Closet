@@ -12,7 +12,7 @@
                 コーディネート投稿
             </a>
         </div>
-        <%= form_with(url: "#", local: true, method: :get, class: "d-flex mx-5") do |f| %>
+        <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex mx-5") do |f| %>
             <%= f.text_field :search, class: "form-control me-2", style: "width: 400px;" %>
             <%= f.submit "検索",  class: "btn btn-outline-success flex-shrink-0" %>
         <% end %>

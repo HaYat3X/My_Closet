@@ -25,15 +25,15 @@
                 <%# * 投稿フォーム %>
                 <%= form_with(model: @social, url: "/sns/create", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
                     <div class="mb-3">
-                      <%= f.text_field :tag, class: "form-control", placeholder: "タグ" %>
+                        <%= f.text_field :tag, class: "form-control", placeholder: "タグ" %>
                     </div>
 
                     <div class="mb-3">
-                      <%= f.text_field :message, class: "form-control", placeholder: "投稿文" %>
+                        <%= f.text_field :message, class: "form-control", placeholder: "投稿文" %>
                     </div>
 
                     <div class="mb-3">
-                      <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
+                        <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
                     </div>
 
                     <div class="accordion" id="accordionExample">
