@@ -1,0 +1,868 @@
+<div id="sns_form">
+
+    <%# ! header %>
+    <%= render "sns/layouts/header" %>
+
+    <div class="d-flex">
+        <%# ! sidebar %>
+        <div class="col-lg-3">
+            <%= render "sns/layouts/sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="list_content col-lg-9">
+            <div class="m-3 bg-light p-3">
+                
+                <%# * バリデーションチェク %>
+                <% if @social.errors.any? %>
+                    <div class="alert alert-danger" role="alert">
+                        <% @social.errors.each do |error| %>
+                            <strong>エラー！</strong> - <%= error.full_message %><br>
+                        <% end %>
+                    </div>
+                <% end %>
+
+                <%# * 投稿フォーム %>
+                <%= form_with(model: @social, url: "/sns/update/#{@social.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                    <div class="mb-3">
+                        <%= f.text_field :tag, class: "form-control", placeholder: "タグ" %>
+                    </div>
+
+                    <div class="mb-3">
+                        <%= f.text_field :message, class: "form-control", placeholder: "投稿文" %>
+                    </div>
+
+                    <div class="mb-3">
+                        <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
+                    </div>
+
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                            <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                アイテム1
+                            </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+                                    <%# * タブメニューエリア %>
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a href="#all" class="nav-link active" data-bs-toggle="tab">すべて</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#outer" class="nav-link" data-bs-toggle="tab">アウター</a>
+                                        </li>
+                                                
+                                        <li class="nav-item">
+                                            <a href="#tops" class="nav-link" data-bs-toggle="tab">トップス</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#pants" class="nav-link" data-bs-toggle="tab">パンツ</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#shoes" class="nav-link" data-bs-toggle="tab">シューズ</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#other" class="nav-link" data-bs-toggle="tab">その他</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <%# ? allタブエリア %>
+                                        <div id="all" class="tab-pane active">
+                                            <div class="row">
+                                                <% @closets_all.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item1, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? outerタブエリア %>
+                                        <div id="outer" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_outer.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item1, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? topsタブエリア %>
+                                        <div id="tops" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_tops.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item1, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? pantsタブエリア %>
+                                        <div id="pants" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_pants.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item1, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? shoesタブエリア %>
+                                        <div id="shoes" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_shoes.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item1, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? otherタブエリア %>
+                                        <div id="other" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_other.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item1, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    アイテム2
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+                                    <%# * タブメニューエリア %>
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a href="#all2" class="nav-link active" data-bs-toggle="tab">すべて</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#outer2" class="nav-link" data-bs-toggle="tab">アウター</a>
+                                        </li>
+                                                
+                                        <li class="nav-item">
+                                            <a href="#tops2" class="nav-link" data-bs-toggle="tab">トップス</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#pants2" class="nav-link" data-bs-toggle="tab">パンツ</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#shoes2" class="nav-link" data-bs-toggle="tab">シューズ</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#other2" class="nav-link" data-bs-toggle="tab">その他</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <%# ? allタブエリア %>
+                                        <div id="all2" class="tab-pane active">
+                                            <div class="row">
+                                                <% @closets_all.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item2, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? outerタブエリア %>
+                                        <div id="outer2" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_outer.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item2, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? topsタブエリア %>
+                                        <div id="tops2" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_tops.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item2, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? pantsタブエリア %>
+                                        <div id="pants2" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_pants.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item2, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? shoesタブエリア %>
+                                        <div id="shoes2" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_shoes.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item2, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? otherタブエリア %>
+                                        <div id="other2" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_other.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item2, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    アイテム3
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+                                    <%# * タブメニューエリア %>
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a href="#all3" class="nav-link active" data-bs-toggle="tab">すべて</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#outer3" class="nav-link" data-bs-toggle="tab">アウター</a>
+                                        </li>
+                                                
+                                        <li class="nav-item">
+                                            <a href="#tops3" class="nav-link" data-bs-toggle="tab">トップス</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#pants3" class="nav-link" data-bs-toggle="tab">パンツ</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#shoes3" class="nav-link" data-bs-toggle="tab">シューズ</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#other3" class="nav-link" data-bs-toggle="tab">その他</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <%# ? allタブエリア %>
+                                        <div id="all3" class="tab-pane active">
+                                            <div class="row">
+                                                <% @closets_all.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item3, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? outerタブエリア %>
+                                        <div id="outer3" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_outer.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item3, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? topsタブエリア %>
+                                        <div id="tops3" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_tops.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item3, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? pantsタブエリア %>
+                                        <div id="pants3" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_pants.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item3, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? shoesタブエリア %>
+                                        <div id="shoes3" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_shoes.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item3, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? otherタブエリア %>
+                                        <div id="other3" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_other.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item3, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    アイテム4
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+                                    <%# * タブメニューエリア %>
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a href="#all4" class="nav-link active" data-bs-toggle="tab">すべて</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#outer4" class="nav-link" data-bs-toggle="tab">アウター</a>
+                                        </li>
+                                                
+                                        <li class="nav-item">
+                                            <a href="#tops4" class="nav-link" data-bs-toggle="tab">トップス</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#pants4" class="nav-link" data-bs-toggle="tab">パンツ</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#shoes4" class="nav-link" data-bs-toggle="tab">シューズ</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#other4" class="nav-link" data-bs-toggle="tab">その他</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <%# ? allタブエリア %>
+                                        <div id="all4" class="tab-pane active">
+                                            <div class="row">
+                                                <% @closets_all.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item4, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? outerタブエリア %>
+                                        <div id="outer4" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_outer.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item4, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? topsタブエリア %>
+                                        <div id="tops4" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_tops.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item4, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? pantsタブエリア %>
+                                        <div id="pants4" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_pants.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item4, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? shoesタブエリア %>
+                                        <div id="shoes4" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_shoes.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item4, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? otherタブエリア %>
+                                        <div id="other4" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_other.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item4, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    アイテム5
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+                                    <%# * タブメニューエリア %>
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a href="#all5" class="nav-link active" data-bs-toggle="tab">すべて</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#outer5" class="nav-link" data-bs-toggle="tab">アウター</a>
+                                        </li>
+                                                
+                                        <li class="nav-item">
+                                            <a href="#tops5" class="nav-link" data-bs-toggle="tab">トップス</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#pants5" class="nav-link" data-bs-toggle="tab">パンツ</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#shoes5" class="nav-link" data-bs-toggle="tab">シューズ</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#other5" class="nav-link" data-bs-toggle="tab">その他</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <%# ? allタブエリア %>
+                                        <div id="all5" class="tab-pane active">
+                                            <div class="row">
+                                                <% @closets_all.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item5, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? outerタブエリア %>
+                                        <div id="outer5" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_outer.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item5, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? topsタブエリア %>
+                                        <div id="tops5" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_tops.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item5, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? pantsタブエリア %>
+                                        <div id="pants5" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_pants.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item5, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? shoesタブエリア %>
+                                        <div id="shoes5" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_shoes.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item5, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? otherタブエリア %>
+                                        <div id="other5" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_other.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item5, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                    アイテム6
+                                </button>
+                            </h2>
+                            <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+                                    <%# * タブメニューエリア %>
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a href="#all6" class="nav-link active" data-bs-toggle="tab">すべて</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#outer6" class="nav-link" data-bs-toggle="tab">アウター</a>
+                                        </li>
+                                                
+                                        <li class="nav-item">
+                                            <a href="#tops6" class="nav-link" data-bs-toggle="tab">トップス</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#pants6" class="nav-link" data-bs-toggle="tab">パンツ</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#shoes6" class="nav-link" data-bs-toggle="tab">シューズ</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#other6" class="nav-link" data-bs-toggle="tab">その他</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <%# ? allタブエリア %>
+                                        <div id="all6" class="tab-pane active">
+                                            <div class="row">
+                                                <% @closets_all.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item6, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? outerタブエリア %>
+                                        <div id="outer6" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_outer.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item6, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? topsタブエリア %>
+                                        <div id="tops6" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_tops.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item6, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? pantsタブエリア %>
+                                        <div id="pants6" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_pants.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item6, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? shoesタブエリア %>
+                                        <div id="shoes6" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_shoes.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item6, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+
+                                        <%# ? otherタブエリア %>
+                                        <div id="other6" class="tab-pane">
+                                            <div class="row">
+                                                <% @closets_other.each do |c| %>
+                                                    <div class="col-lg-2 m-0 mt-3 row input-container">
+                                                        <%= f.radio_button :item6, c.id, class: "radio-button" %>
+                                                        <div class="radio-tile">
+                                                            <div class="icon walk-icon">
+                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <%= f.submit "更新する", class: "btn btn-primary" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
