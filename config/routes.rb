@@ -30,4 +30,8 @@ Rails.application.routes.draw do
   post "sns/create", to: "sns/posts#create"
   # * 検索処理
   get "/sns/search", to: "sns/searchs#search"
+  # * 編集フォーム
+  get "sns/edit/:id", to: "sns/posts#edit"
+  # * 投稿編集
+  patch "sns/update/:id", to: "sns/posts#update"
 end
