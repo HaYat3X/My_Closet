@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2023_05_16_112311) do
     t.integer "item4"
     t.integer "item5"
     t.integer "item6"
+    t.string "search"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item1"], name: "index_socials_on_item1"

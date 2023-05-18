@@ -11,6 +11,7 @@ class CreateSocials < ActiveRecord::Migration[6.1]
       t.integer :item4
       t.integer :item5
       t.integer :item6
+      t.string :search
       t.timestamps
     end
     # ! 外部キー規約
