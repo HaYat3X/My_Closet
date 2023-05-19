@@ -236,7 +236,25 @@ class Sns::PostsController < ApplicationController
             redirect_to"/closet/list", alert: "投稿の編集に失敗しました"
         end
     end
-    
+
+    # ! 削除処理メソッド
+    def delete
+          # * urlから投稿id取得
+        post_id = params[:id]
+        social = Social.find(post_id)
+
+        #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
+        if social.user_id != current_user.id
+            redirect_to "/", alert: "不正なアクセスが行われました。"
+        else
+            # 投稿の削除後、listのページに戻るコード
+            if social.destroy
+                redirect_to "/", notice: "投稿を削除しました"
+            else
+                redirect_to "/", alert: "投稿の削除に失敗しました"
+            end
+        end
+    end
 
     # ! (privateは外部クラスから参照できない)
     private
