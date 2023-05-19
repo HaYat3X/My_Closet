@@ -1,0 +1,2 @@
+module Sns::LikesHelper
+end
