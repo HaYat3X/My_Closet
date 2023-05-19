@@ -34,4 +34,6 @@ Rails.application.routes.draw do
   get "sns/edit/:id", to: "sns/posts#edit"
   # * 投稿編集
   patch "sns/update/:id", to: "sns/posts#update"
+  # * 削除処理
+  delete "sns/delete/:id", to: "sns/posts#delete"
 end

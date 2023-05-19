@@ -92,6 +92,9 @@
                         <div class="bg-white m-2 row mt-2">
                            <%= link_to "編集", "/sns/edit/#{@sns.id}" %>
                         </div>
+                        <div class="bg-white m-2 row mt-2">
+                           <%= link_to "削除", "/sns/delete/#{@sns.id}",method: :delete %>
+                        </div>
                     </div>
                 </div>
             </div>
