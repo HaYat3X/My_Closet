@@ -3,7 +3,7 @@ class Social < ApplicationRecord
     belongs_to :user
 
     # ! SNSいいねテーブルとのアソシエーション
-    # has_many :socialLikes
+    has_many :social_likes
 
     # ! バリデーション
     validates :photograph, presence: true
