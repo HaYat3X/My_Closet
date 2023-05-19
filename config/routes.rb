@@ -36,4 +36,9 @@ Rails.application.routes.draw do
   patch "sns/update/:id", to: "sns/posts#update"
   # * 削除処理
   delete "sns/delete/:id", to: "sns/posts#delete"
+  # いいねする機能
+  post "sns/create_like/:id", to:"sns/likes#create_like"
+  # いいねを解除する機能
+  delete "sns/delete_like/:id", to:"sns/likes#delete_like"
+
 end

@@ -5,5 +5,8 @@ class User < ApplicationRecord
   has_many :closets
 
   # ソーシャルテーブルのアソシエーション
-  has_many :socials
+  # has_many :socials
+
+  #ソーシャルライクテーブルのアソシエーション
+  # has_many :socialLikes
 end

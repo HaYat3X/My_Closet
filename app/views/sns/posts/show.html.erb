@@ -86,7 +86,16 @@
                                 <%= time_ago_in_words(@sns.created_at) %>前
                             </div>
                             <div class="col-lg-6 text-end">
-                                ❤️
+                                <% if SocialLike.where(post_id: @sns.id, user_id: current_user.id).exists? %>
+                                    <%= button_to "/sns/delete_like/#{@sns.id}", method: :delete, class: "btn btn-primary" do %>
+                                        いいね解除
+                                    <% end %>
+                                 <% else %>
+                                    <%= button_to "/sns/create_like/#{@sns.id}", method: :post, class: "btn btn-primary" do %>
+                                        いいね
+                                    <% end %>
+                                <% end %>
+                                <%= SocialLike.where(post_id: @sns.id).count %>
                             </div>
                         </div>
                         <div class="bg-white m-2 row mt-2">
