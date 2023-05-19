@@ -1,7 +1,7 @@
 class CreateSocials < ActiveRecord::Migration[6.1]
   def change
     create_table :socials do |t|
-      t.integer :user_id, null: false
+      t.references :user, foreign_key: true, null: false
       t.string :tag
       t.string :message
       t.string :photograph, null: false
@@ -14,13 +14,5 @@ class CreateSocials < ActiveRecord::Migration[6.1]
       t.string :search
       t.timestamps
     end
-    # ! 外部キー規約
-    add_index :socials, :user_id
-    add_index :socials, :item1
-    add_index :socials, :item2
-    add_index :socials, :item3
-    add_index :socials, :item4
-    add_index :socials, :item5
-    add_index :socials, :item6
   end
 end
