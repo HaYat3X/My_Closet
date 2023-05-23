@@ -1,0 +1,2 @@
+module Faq::AnswersHelper
+end

@@ -12,4 +12,7 @@ class User < ApplicationRecord
 
   #questionテーブルのアソシエーション
   has_many :questions
+
+# answerテーブルのアソシエーション
+  has_many :answers
 end
