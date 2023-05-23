@@ -58,5 +58,7 @@ Rails.application.routes.draw do
   delete "question/delete/:id", to: "faq/questions#delete"
   # *検索画面
   get "question/search", to: "faq/searchs#search"
+  
+  post "faq/answer/create/:id", to: "faq/answers#create"
 end
 

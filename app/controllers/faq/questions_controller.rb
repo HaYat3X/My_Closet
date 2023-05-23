@@ -29,6 +29,9 @@ class Faq::QuestionsController < ApplicationController
     #詳細表示
     def show
         @question = Question.find(params[:id])
+
+        # * アンサーフォームの設置
+        @answer = Answer.new
     end
 
     # ! 編集画面

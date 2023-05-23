@@ -28,7 +28,29 @@
                     </div>
                 </div>
                 <div class="m-5">
-                        <h1>ここからが回答画面</h1>
+                     <div class="list_content col-lg-9">
+                <% if @answer.errors.any? %>
+                    <div class="alert alert-danger" role="alert">
+                        <% @answer.errors.each do |error| %>
+                        <strong>エラー！</strong> - <%= error.full_message %><br>
+                        <% end %>
+                    </div>
+    <% end %>
+    
+    <%= form_with(model: @answer, url: "/faq/answer/create/#{@question.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                  <div class="mb-3">
+                    <%= f.file_field :photograph, required: true, class: "form-control", placeholder: "写真" %>
+                    <div class="invalid-feedback">
+                      写真を入力して下さい
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_area :answer, class: "form-control", placeholder: "回答内容" %>
+                  </div>
+                  <div class="mb-3">
+                  </div>
+                  <%= f.submit "登録する", class: "btn btn-primary" %>
+                <% end %>
                 </div>
         </div>
     </div>

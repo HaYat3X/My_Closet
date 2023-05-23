@@ -10,4 +10,7 @@ class Question < ApplicationRecord
     validates :photograph, presence: true
     validates :question, presence: true, length: { maximum: 100 }
     validates :category, presence: true
+
+    #answerテーブルのアソシエーション
+    has_many :answers
 end
