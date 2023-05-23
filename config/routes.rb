@@ -48,6 +48,8 @@ Rails.application.routes.draw do
   post "question/create", to: "faq/questions#create"
   #　投稿一覧画面
   get "question/list", to: "faq/questions#list"
+  # 詳細設定
+  get "question/show/:id", to: "faq/questions#show"
 
 end
 
