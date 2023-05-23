@@ -46,5 +46,8 @@ Rails.application.routes.draw do
   get "question/new", to: "faq/questions#new"
   # * 投稿処理
   post "question/create", to: "faq/questions#create"
+  #　投稿一覧画面
+  get "question/list", to: "faq/questions#list"
+
 end
 

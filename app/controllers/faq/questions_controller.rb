@@ -20,6 +20,11 @@ class Faq::QuestionsController < ApplicationController
             render :new
         end
     end
+
+    #質問の一覧を取得する
+    def list
+        @questions = Question.all
+    end
     
     # ! (privateは外部クラスから参照できない)
     private
