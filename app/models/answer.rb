@@ -8,6 +8,5 @@ class Answer < ApplicationRecord
     mount_uploader :photograph, AnswersImageUploader
 
     # ! バリデーション
-    validates :photograph, presence: true
     validates :answer, presence: true
 end
