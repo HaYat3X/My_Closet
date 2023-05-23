@@ -32,6 +32,12 @@ class Faq::QuestionsController < ApplicationController
 
         # * アンサーフォームの設置
         @answer = Answer.new
+
+
+        question_id = params[:id]
+        @answers = Answer.where(question_id: question_id)
+
+
     end
 
     # ! 編集画面
