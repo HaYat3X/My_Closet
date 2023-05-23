@@ -25,6 +25,11 @@ class Faq::QuestionsController < ApplicationController
     def list
         @questions = Question.all
     end
+
+    #詳細表示
+    def show
+        @question = Question.find(params[:id])
+    end
     
     # ! (privateは外部クラスから参照できない)
     private

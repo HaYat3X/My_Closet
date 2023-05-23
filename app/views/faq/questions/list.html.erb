@@ -1,5 +1,6 @@
 <% @questions.each do |q| %>
     <div class="col-lg-3 m-0 mt-3">
+        <%= link_to "回答をする","/question/show/#{q.id}" %>
         <%= q.user.user_name %>
         <p><%= q.question %></p>
         <p><%= image_tag q.photograph.url, class: "closet_image" %></p>
