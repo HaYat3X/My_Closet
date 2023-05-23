@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_19_133540) do
+ActiveRecord::Schema.define(version: 2023_05_23_004504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "closets", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.integer "user_id"
     t.string "photograph", null: false
     t.string "big_Category", null: false
     t.string "small_Category"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 2023_05_19_133540) do
     t.index ["user_id"], name: "index_closets_on_user_id"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "photograph", null: false
+    t.string "question", limit: 100, null: false
+    t.string "category", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
   create_table "social_likes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "social_id", null: false
@@ -40,7 +50,7 @@ ActiveRecord::Schema.define(version: 2023_05_19_133540) do
   end
 
   create_table "socials", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.string "tag"
     t.string "message"
     t.string "photograph", null: false
@@ -53,6 +63,12 @@ ActiveRecord::Schema.define(version: 2023_05_19_133540) do
     t.string "search"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["item1"], name: "index_socials_on_item1"
+    t.index ["item2"], name: "index_socials_on_item2"
+    t.index ["item3"], name: "index_socials_on_item3"
+    t.index ["item4"], name: "index_socials_on_item4"
+    t.index ["item5"], name: "index_socials_on_item5"
+    t.index ["item6"], name: "index_socials_on_item6"
     t.index ["user_id"], name: "index_socials_on_user_id"
   end
 
@@ -89,8 +105,7 @@ ActiveRecord::Schema.define(version: 2023_05_19_133540) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "closets", "users"
+  add_foreign_key "questions", "users"
   add_foreign_key "social_likes", "socials"
   add_foreign_key "social_likes", "users"
-  add_foreign_key "socials", "users"
 end

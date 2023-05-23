@@ -9,4 +9,7 @@ class User < ApplicationRecord
 
   #ソーシャルライクテーブルのアソシエーション
   has_many :social_likes
+
+  #questionテーブルのアソシエーション
+  has_many :questions
 end
