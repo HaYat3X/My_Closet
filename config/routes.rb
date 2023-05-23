@@ -50,6 +50,13 @@ Rails.application.routes.draw do
   get "question/list", to: "faq/questions#list"
   # 詳細設定
   get "question/show/:id", to: "faq/questions#show"
-
+  # * 投稿編集画面
+  get "question/edit/:id", to: "faq/questions#edit"
+  # * 投稿更新
+  patch "question/update/:id", to: "faq/questions#update"
+  # * 投稿削除
+  delete "question/delete/:id", to: "faq/questions#delete"
+  # *検索画面
+  get "question/search", to: "faq/searchs#search"
 end
 

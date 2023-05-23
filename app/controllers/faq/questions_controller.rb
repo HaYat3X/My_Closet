@@ -30,6 +30,53 @@ class Faq::QuestionsController < ApplicationController
     def show
         @question = Question.find(params[:id])
     end
+
+    # ! 編集画面
+    def edit
+        # * urlから投稿id取得
+        @question = Question.find(params[:id])
+
+        #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
+        if @question.user_id != current_user.id
+            redirect_to "/", alert: "不正なアクセスが行われました。"
+        end
+    end
+
+    # ! 更新処理
+    def update
+        # * urlから投稿id取得
+        @question = Question.find(params[:id])
+
+        #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
+        if @question.user_id != current_user.id
+            redirect_to "/", alert: "不正なアクセスが行われました。"
+        end
+
+        # 更新
+        if @question.update(posts_params)
+            redirect_to "/question/list", notice: "投稿を編集しました"
+        else
+            redirect_to"/question/list", alert: "投稿の編集に失敗しました"
+        end
+    end
+
+    # ! 削除処理
+    def delete
+        # * urlから投稿id取得
+        @question = Question.find(params[:id])
+
+        #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
+        if @question.user_id != current_user.id
+            redirect_to "/", alert: "不正なアクセスが行われました。"
+        end
+    
+        # 削除
+        if @question.destroy
+            redirect_to "/question/list", notice: "投稿を削除しました"
+        else
+            redirect_to"/question/list", alert: "投稿の編集に削除しました"
+        end
+    end
     
     # ! (privateは外部クラスから参照できない)
     private
@@ -37,6 +84,6 @@ class Faq::QuestionsController < ApplicationController
     # ! 投稿時、編集時にバインドするパラメータ
     def posts_params
         # * Closetモデルにバインドする
-        params.require(:question).permit(:photograph, :question, :category,)
+        params.require(:question).permit(:photograph, :question, :category)
     end
 end

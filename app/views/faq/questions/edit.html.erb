@@ -1,15 +1,4 @@
-<div id="question_list">
-    <%# ! header %>
-    <%= render "faq/layouts/header" %>
-    <div class="d-flex">
-        <%# ! sidebar %>
-        <div class="col-lg-3">
-            <%= render "faq/layouts/sidebar" %>
-        </div>
-
-        <%# ! contents %>
-        <div class="list_content col-lg-9">
-                <% if @question.errors.any? %>
+    <% if @question.errors.any? %>
                     <div class="alert alert-danger" role="alert">
                         <% @question.errors.each do |error| %>
                         <strong>エラー！</strong> - <%= error.full_message %><br>
@@ -17,7 +6,7 @@
                     </div>
     <% end %>
     
-    <%= form_with(model: @question, url: "/question/create", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+    <%= form_with(model: @question, url: "/question/update/#{@question.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
                   <div class="mb-3">
                     <%= f.file_field :photograph, required: true, class: "form-control", placeholder: "写真" %>
                     <div class="invalid-feedback">
@@ -35,6 +24,3 @@
                   </div>
                   <%= f.submit "登録する", class: "btn btn-primary" %>
                 <% end %>
-        </div>
-    </div>
-</div>
