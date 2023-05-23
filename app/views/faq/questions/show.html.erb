@@ -1,7 +1,35 @@
-<div class="col-lg-3 m-0 mt-3">
-        <%= @question.user.user_name %>
-        <p><%= @question.question %></p>
-        <p><%= image_tag @question.photograph.url, class: "closet_image" %></p>
-        <h1>＝＝＝＝＝＝この下から回答を書く＝＝＝＝＝＝</h1>
-</div>
+<div id="question_list">
+    <%# ! header %>
+    <%= render "faq/layouts/header" %>
+    <div class="d-flex">
+        <%# ! sidebar %>
+        <div class="col-lg-3">
+            <%= render "faq/layouts/sidebar" %>
+        </div>
 
+        <%# ! contents %>
+        <div class="list_content col-lg-9">
+                <div class="bg-white p-3 m-5">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <%= image_tag @question.photograph.url, class: "question_image" %>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="d-flex m-3">
+                                <%= image_tag @question.photograph.url, size: "40x40" %>
+                                <p class="fw-bold"><%= @question.user.user_name %></p>
+                            </div>
+                            <p class="m-3">
+                                <%= @question.question %>
+                            </p>
+                            <%= link_to "編集", "/question/edit/#{@question.id}" %>
+                        <%= button_to "削除", "/question/delete/#{@question.id}", method: :delete %>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-5">
+                        <h1>ここからが回答画面</h1>
+                </div>
+        </div>
+    </div>
+</div>

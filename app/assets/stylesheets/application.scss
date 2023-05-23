@@ -1,23 +1,24 @@
 @import "./auth";
 @import "./coordinates/posts";
 @import "./sns/posts";
+@import "./faq/questions";
 :root {
-  --primary: #0d6efd;
-  --dark: #21252f;
-  --body: #888;
-  --box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
-  --bg: #e0e0e0;
+    --primary: #0d6efd;
+    --dark: #21252f;
+    --body: #888;
+    --box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+    --bg: #e0e0e0;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  // cursor: url(assets/img_2.png), auto;
+    margin: 0;
+    padding: 0;
+    // cursor: url(assets/img_2.png), auto;
 }
 
 body {
-  font-family: Sora, "sans-serif";
-  line-height: 1.7;
-  color: #575757;
-  background-color: var(--bg);
+    font-family: Sora, "sans-serif";
+    line-height: 1.7;
+    color: #575757;
+    background-color: var(--bg);
 }

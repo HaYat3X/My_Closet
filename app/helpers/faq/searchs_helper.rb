@@ -1,0 +1,2 @@
+module Faq::SearchsHelper
+end
