@@ -40,4 +40,11 @@ Rails.application.routes.draw do
   post "sns/create_like/:id", to:"sns/likes#create_like"
   # いいねを解除する機能
   delete "sns/delete_like/:id", to:"sns/likes#delete_like"
+
+  # ! Q&A関連
+  # * 投稿フォーム
+  get "question/new", to: "faq/questions#new"
+  # * 投稿処理
+  post "question/create", to: "faq/questions#create"
 end
+
