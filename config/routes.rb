@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   delete "question/delete/:id", to: "faq/questions#delete"
   # * 検索画面
   get "question/search", to: "faq/searchs#search"
-  
+
   post "faq/answer/create/:id", to: "faq/answers#create"
   # * 回答削除
   delete "faq/answer/delete/:id", to: "faq/answers#delete"
@@ -66,5 +66,11 @@ Rails.application.routes.draw do
   get "faq/answer/edit/:id", to: "faq/answers#edit"
   # * 回答更新
   patch "faq/answer/update/:id", to: "faq/answers#update"
+
+  # * いいね機能
+  post "faq/create_like/:id", to: "faq/likes#create_like"
+  # * いいねを解除する機能
+  delete "faq/create_delete/:id", to: "faq/likes#delete_like"
+
 end
 

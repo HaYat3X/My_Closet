@@ -13,6 +13,9 @@ class User < ApplicationRecord
   #questionテーブルのアソシエーション
   has_many :questions
 
-# answerテーブルのアソシエーション
+  # answerテーブルのアソシエーション
   has_many :answers
+
+  # answer_likeテーブルのアソシエーション
+  has_many :answer_likes
 end
