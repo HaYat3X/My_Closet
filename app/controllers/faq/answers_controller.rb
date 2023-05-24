@@ -19,12 +19,16 @@ class Faq::AnswersController < ApplicationController
         else
             render template: 'faq/questions/show'
         end
-    end    
+    end
+
+    # ! 編集
+
+    # ! 関数
+    private
 
         # ! 回答時にバインドするパラメータ
     def posts_params
         # * Closetモデルにバインドする
         params.require(:answer).permit(:photograph, :answer)
     end
-
 end
