@@ -56,9 +56,11 @@ Rails.application.routes.draw do
   patch "question/update/:id", to: "faq/questions#update"
   # * 投稿削除
   delete "question/delete/:id", to: "faq/questions#delete"
-  # *検索画面
+  # * 検索画面
   get "question/search", to: "faq/searchs#search"
   
   post "faq/answer/create/:id", to: "faq/answers#create"
+  # * 回答削除
+  delete "faq/answer/delete/:id", to: "faq/answers#delete"
 end
 

@@ -65,6 +65,7 @@
                             </div>
                             <p class="m-3">
                                 <%= a.answer %>
+                                <%= button_to "削除", "/faq/answer/delete/#{a.id}", method: :delete %>
                             </p>
                         </div>
                     </div>
