@@ -39,6 +39,35 @@ class Faq::AnswersController < ApplicationController
         end
     end
 
+    # ! 編集
+    def edit
+        # * urlから投稿id取得
+        @answer = Answer.find(params[:id])
+
+        #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
+        if @answer.user_id != current_user.id
+            redirect_to "/", alert: "不正なアクセスが行われました。"
+        end
+    end
+
+    # ! 更新処理
+    def update
+        # * urlから投稿id取得
+        @answer = Answer.find(params[:id])
+
+        #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
+        if @answer.user_id != current_user.id
+            redirect_to "/", alert: "不正なアクセスが行われました。"
+        end
+
+        # 更新
+        if @answer.update(posts_params)
+            redirect_to "/question/list", notice: "投稿を編集しました"
+        else
+            redirect_to"/question/list", alert: "投稿の編集に失敗しました"
+        end
+    end
+
     # ! 関数
     private
 

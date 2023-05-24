@@ -46,9 +46,9 @@ Rails.application.routes.draw do
   get "question/new", to: "faq/questions#new"
   # * 投稿処理
   post "question/create", to: "faq/questions#create"
-  #　投稿一覧画面
+  # * 投稿一覧画面
   get "question/list", to: "faq/questions#list"
-  # 詳細設定
+  # * 詳細設定
   get "question/show/:id", to: "faq/questions#show"
   # * 投稿編集画面
   get "question/edit/:id", to: "faq/questions#edit"
@@ -62,5 +62,9 @@ Rails.application.routes.draw do
   post "faq/answer/create/:id", to: "faq/answers#create"
   # * 回答削除
   delete "faq/answer/delete/:id", to: "faq/answers#delete"
+  # * 回答編集画面
+  get "faq/answer/edit/:id", to: "faq/answers#edit"
+  # * 回答更新
+  patch "faq/answer/update/:id", to: "faq/answers#update"
 end
 
