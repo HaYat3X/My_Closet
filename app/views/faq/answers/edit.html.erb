@@ -1,0 +1,22 @@
+<div id="question_list">
+    <%# ! header %>
+    <%= render "faq/layouts/header" %>
+    <div class="d-flex">
+        <%# ! sidebar %>
+        <div class="col-lg-3">
+            <%= render "faq/layouts/sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <%= form_with(model: @answer, url: "/faq/answer/update/#{@answer.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                  <div class="mb-3">
+                    <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_area :answer, class: "form-control", placeholder: "回答内容" %>
+                  </div>
+                  <div class="mb-3">
+                  </div>
+                  <%= f.submit "登録する", class: "btn btn-primary" %>
+                <% end %>
+                </div>
