@@ -68,6 +68,19 @@
                                 <%= link_to "編集", "/faq/answer/edit/#{a.id}" %>
                                 <%= button_to "削除", "/faq/answer/delete/#{a.id}", method: :delete %>
                             </p>
+
+
+
+
+
+                            <% if AnswerLike.where(user_id: current_user.id, answer_id: a.id).exists? %>
+                                <%= button_to "いいねかいじょ", "/faq/create_delete/#{a.id}", method: :delete %>
+
+                            <% else %>
+                                <%= button_to "いいね", "/faq/create_like/#{a.id}", method: :post %>
+                            <% end %>
+                            <%= AnswerLike.where(user_id: current_user.id, answer_id: a.id).count %>
+
                         </div>
                     </div>
                 <% end %>
