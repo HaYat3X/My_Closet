@@ -40,9 +40,6 @@
     <%= form_with(model: @answer, url: "/faq/answer/create/#{@question.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
                   <div class="mb-3">
                     <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
-                    <%# <div class="invalid-feedback">
-                      写真を入力して下さい
-                    </div> %>
                   </div>
                   <div class="mb-3">
                     <%= f.text_area :answer, class: "form-control", placeholder: "回答内容" %>
@@ -53,9 +50,9 @@
                 <% end %>
                 </div>
 
-                <div class="bg-white p-3 m-5">
+                <div class="p-3 m-5">
                 <% @answers.each do |a| %>
-                    <div class="row">
+                    <div class="bg-white row m-3">
                         <div class="col-lg-2">
                             <% if a.photograph.url %>
                                 <%= image_tag a.photograph.url, class: "question_image" %>
