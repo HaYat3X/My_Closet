@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_24_030727) do
+ActiveRecord::Schema.define(version: 2023_05_24_061452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,14 @@ ActiveRecord::Schema.define(version: 2023_05_24_030727) do
     t.index ["user_id"], name: "index_socials_on_user_id"
   end
 
+  create_table "suggests", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_suggests_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "gender", default: ""
     t.string "profile", default: ""
@@ -128,4 +136,5 @@ ActiveRecord::Schema.define(version: 2023_05_24_030727) do
   add_foreign_key "social_likes", "socials"
   add_foreign_key "social_likes", "users"
   add_foreign_key "socials", "users"
+  add_foreign_key "suggests", "users"
 end
