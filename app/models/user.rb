@@ -18,4 +18,7 @@ class User < ApplicationRecord
 
   # answer_likeテーブルのアソシエーション
   has_many :answer_likes
+
+  # 1対1の関係を定義するユーザは一つの提案を持っていることになる
+  has_one :suggest
 end
