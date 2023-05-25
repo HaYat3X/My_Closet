@@ -1,15 +1,15 @@
 <div id="sns_list">
     <%# ! header %>
     <%= render "suggestion/layouts/header" %>
-    <div class="d-flex">
+    <div class="row">
         <%# ! sidebar %>
         <div class="col-lg-3">
             <%= render "suggestion/layouts/sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="sns_list col-lg-9">
-            <div class="m-3 bg-light">
+        <div class="sns_list col-lg-9 bg-white">
+            <div class="m-3">
                 <%# * タブメニューエリア %>
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
@@ -29,19 +29,22 @@
                             <% if Suggest.exists?(user_id: current_user.id) %>
                                 <%= button_to "コーデ提案をする", "/call_gpt_update", method: :post %>
                                 <% @suggestions.each do |s| %>
-                                    <div class="col-lg-3 m-0 mt-3">
-                                        <%= link_to "/sns/show/#{s.id}" do %>
-                                            <%= image_tag s.photograph.url, class: "closet_image" %>
-                                        <% end %>
-                                        <div class="p-2 row">
-                                            <div class="col-lg-3">
-                                                <%= image_tag "/assets/img_1.png", class: "closet_image", style: "width: 35px; height: 35px; border-radius: 50px;" %>
-                                            </div>
-                                            <div class="col-lg-9 d-flex align-items-center">
-                                                <%= s.user.user_name %><br>
+                                    <%# * ログインしている性別のみ出す %>
+                                    <% if s.user.gender === current_user.gender %>
+                                        <div class="col-lg-3 m-0 mt-3">
+                                            <%= link_to "/sns/show/#{s.id}" do %>
+                                                <%= image_tag s.photograph.url, class: "closet_image" %>
+                                            <% end %>
+                                            <div class="p-2 row">
+                                                <div class="col-lg-3">
+                                                    <%= image_tag "/assets/img_1.png", class: "closet_image", style: "width: 35px; height: 35px; border-radius: 50px;" %>
+                                                </div>
+                                                <div class="col-lg-9 d-flex align-items-center">
+                                                    <%= s.user.user_name %><br>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <% end %>
                                 <% end %>
                             <% elsif @user.height and @user.weight and @user.gender %>
                                 <%= button_to "コーデ提案をする", "/call_gpt", method: :post %>
@@ -58,8 +61,10 @@
                                 <%= button_to "おすすめフォロワー", "/call_user", method: :post %>
                                 <% if Suggest.exists?(user_id: current_user.id) %>
                                     <% @users.each do |u| %>
-                                        <h2><%= u.user_name%></h2>
-                                        <p><%= u.age %>際</p>
+                                        <% if u.gender === current_user.gender %>
+                                            <h2><%= u.user_name%></h2>
+                                            <p><%= u.age %>際</p>
+                                        <% end %>
                                     <% end %>
                                 <% else %>
                                     プロフィールを入力してください。
