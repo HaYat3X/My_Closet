@@ -77,7 +77,9 @@ Rails.application.routes.draw do
   get "suggestion", to: "suggestion/suggestions#suggestion"
   # * apiのコール
   post "call_gpt", to: "suggestion/apis#call_gpt"
-  # * 各ユーザの投稿頻度の高いタグをDBに保存する
-  post "test1", to: "suggestion/suggestions#user_suggestion"
+  # * 各ユーザーのファッションの投稿の傾向を保存する
+  post "call_user", to: "suggestion/apis#call_user"
+  # * call_gptによる提案を更新する
+  post "call_gpt_update", to: "suggestion/apis#call_gpt_update"
 end
 
