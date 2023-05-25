@@ -8,14 +8,28 @@
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-9">
+        <div class="sns_list col-lg-9">
             <div class="m-3 bg-light">
+                <%# * タブメニューエリア %>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a href="#code_suggest" class="nav-link active" data-bs-toggle="tab">おすすめコーデ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#user_suggest" class="nav-link" data-bs-toggle="tab">おすすめユーザ</a>
+                    </li>
+                </ul>
+
+                <%# * タブエリア %>
                 <div class="tab-content">
-                    <%# ? allタブエリア %>
-                    <div id="all" class="tab-pane active">
+                    <%# ? AIによるコーデ提案エリア %>
+                    <div id="code_suggest" class="tab-pane active">
                         <div class="row">
                             <%# ! 提案データがあるか判定 %>
                             <% if Suggest.exists?(user_id: current_user.id) %>
+                                <% if @user.height and @user.weight and @user.gender %>
+                                    <%= button_to "コーデ提案をする", "/call_gpt", method: :post %>
+                                <% end %>
                                 <% @suggestions.each do |s| %>
                                     <div class="col-lg-3 m-0 mt-3">
                                         <%= link_to "/sns/show/#{s.id}" do %>
@@ -31,11 +45,26 @@
                                         </div>
                                     </div>
                                 <% end %>
-                            <% elsif @user.height and @user.weight and @user.gender %>
-                                <%= button_to "コーデ提案をする", "/call_api", method: :post %>
                             <% else %>
                                 プロフィールを入力してください。
                             <% end %>
+                        </div>
+                    </div>
+
+                    <%# ? Aiによるフォロワー提案タブエリア %>
+                    <div id="user_suggest" class="tab-pane">
+                        <div class="row">
+                            <p>
+                                <%= button_to "おすすめフォロワー", "/test1", method: :post %>
+                                <% if Suggest.exists?(user_id: current_user.id) %>
+                                    <% @users.each do |u| %>
+                                        <h2><%= u.user_name %>さん</h2>
+                                        <p><%= u.age %>歳</p>
+                                    <% end %>
+                                <% else %>
+                                    プロフィールを入力してください。
+                                <% end %>
+                            </p>
                         </div>
                     </div>
                 </div>
