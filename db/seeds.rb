@@ -6,4 +6,4 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # * カラム更新用SQL
-User.update(id: 1, gender: "男", height: nil, weight: 58, age: 19)
+User.update(id: 6, gender: "男", height: 180, weight: 58, age: 19)

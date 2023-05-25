@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2023_05_24_061452) do
     t.string "user_name", default: "", null: false
     t.integer "age"
     t.string "avatar"
+    t.string "tendency"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
