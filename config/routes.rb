@@ -81,5 +81,9 @@ Rails.application.routes.draw do
   post "call_user", to: "suggestion/apis#call_user"
   # * call_gptによる提案を更新する
   post "call_gpt_update", to: "suggestion/apis#call_gpt_update"
+
+  # ! プロフィール関連
+  # * プロフィールページ
+  get "profile/show", to: "profile/profiles#show"
 end
 
