@@ -1,8 +1,8 @@
 class Profile::ProfilesController < ApplicationController
     # ! ログイン中のユーザを取得
     def show
-        # ログイン中のユーザ情報
-        @user = current_user
+        # * パラメータからユーザIDを取得
+        @user = User.find(params[:id])
 
         # ログイン中のユーザが投稿したSNS投稿
         @snss = Social.where(user_id: @user.id)
@@ -16,20 +16,29 @@ class Profile::ProfilesController < ApplicationController
 
     # ! ユーザーのプロフィール更新メソッド
     def edit
-        #　ログイン中のユーザ情報
-        @user = current_user
         #　DBに保存されているユーザの登録情報抜き出す
-        @user_data = User.find(@user.id)
+        @user_data = User.find(params[:id])
+        
+        # * 編集権限がない場合はリダイレクト
+        if @user_data.id != current_user.id
+            redirect_to "/", alert: "不正なアクセスが行われました。"
+        end
     end
 
     # ! データを更新
     def update
-        @user = User.find(current_user.id)
+        @user_data = User.find(params[:id])
+
+        # * 編集権限がない場合はリダイレクト
+        if @user_data.id != current_user.id
+            redirect_to "/", alert: "不正なアクセスが行われました。"
+        end
+
         # * 投稿の削除後、listのページに戻るコード
-        if @user.update(posts_params)
-            redirect_to "/profile/show", notice: "プロフィールを編集しました"
+        if @user_data.update(posts_params)
+            redirect_to "/profile/show/#{@user_data.id}", notice: "プロフィールを編集しました"
         else
-            redirect_to"/profile/show", alert: "プロフィールの編集に失敗しました"
+            redirect_to"/", alert: "プロフィールの編集に失敗しました"
         end
     end
 

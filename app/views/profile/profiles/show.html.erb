@@ -27,20 +27,25 @@
                             style="width: 200px; z-index: 1">
                         <% end %>
                         
-                        <button type="button" onclick="location.href='/profile/edit'" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                            style="z-index: 1;">
-                            プロフィール更新
-                        </button>
-                        
-                        <% if  %>
-                        <% else %>
-                        <% end %>
-
                         </div>
-                        <div class="ms-3" style="margin-top: 130px;">
-                        <h5><%= @user.user_name %></h5>
-                        <p>年齢：<%= @user.age %> 歳　性別：<%= @user.gender %></p>
-                        
+                        <div class="ms-3" style="margin-top: 100px;">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h5><%= @user.user_name %></h5>
+                                <p>年齢：<%= @user.age %> 歳　性別：<%= @user.gender %></p>
+                            </div>
+                            <div class="col-lg-6 text-end">
+                                <% if @user.id == current_user.id %>
+                                    <%= button_to "プロフィール更新", "/profile/edit/#{@user.id}", method: :get, class: "btn btn-primary" %>
+                                <% else %>
+                                    <button type="button" onclick="location.href='/profile/edit'" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
+                                        style="">
+                                        フォローする
+                                    </button>
+                                <% end %>
+                            </div>
+                        </div>
+                    
                         </div>
                     </div>
                     <div class="p-4 text-black" style="background-color: #F8F9FA;">

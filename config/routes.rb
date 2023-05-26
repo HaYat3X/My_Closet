@@ -84,10 +84,10 @@ Rails.application.routes.draw do
 
   # ! プロフィール関連
   # * プロフィールページ
-  get "profile/show", to: "profile/profiles#show"
+  get "profile/show/:id", to: "profile/profiles#show"
   # * プロフィール更新ページ
-  get "profile/edit", to: "profile/profiles#edit"
+  get "profile/edit/:id", to: "profile/profiles#edit"
   # * プロフィール更新
-  patch "profile/update", to: "profile/profiles#update"
+  patch "profile/update/:id", to: "profile/profiles#update"
 end
 
