@@ -89,5 +89,13 @@ Rails.application.routes.draw do
   get "profile/edit/:id", to: "profile/profiles#edit"
   # * プロフィール更新
   patch "profile/update/:id", to: "profile/profiles#update"
+  # * フォローする
+  post "profile/follow/:id", to: "profile/follows#create_follow"
+  # * フォロー解除する
+  delete "profile/follow/:id", to: "profile/follows#delete_follow"
+  # * フォロー一覧
+  get "profile/follow_list/:id", to: "profile/follows#follow_follower_list"
+  # *
+
 end
 

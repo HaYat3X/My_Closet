@@ -1,0 +1,23 @@
+
+<h2>フォローしている人いちらん</h2>
+
+<%# ! １、@follw_list配列をループする %>
+<% @follow_list.each do |f| %>
+    <%# * そのユーザIDをもとにユーザテーブルからデータを取る %>
+    <% @users.each do |u| %>
+        <% if u.id == f.follower_id %>
+            <%= u.user_name %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<h2>フォロワーいちらん</h2>
+<%# ! １、@follw_list配列をループする %>
+<% @follower_list.each do |f| %>
+    <%# * そのユーザIDをもとにユーザテーブルからデータを取る %>
+    <% @users.each do |u| %>
+        <% if u.id == f.follow_id %>
+            <%= u.user_name %>
+        <% end %>
+    <% end %>
+<% end %>
