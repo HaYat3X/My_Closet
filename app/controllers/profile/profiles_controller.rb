@@ -9,8 +9,7 @@ class Profile::ProfilesController < ApplicationController
 
         #ログイン中のユーザーがいいねしたSNS投稿
         @sns_likes = SocialLike.where(user_id: @user.id)
-     
-
+        
         #ログイン中のユーザーが投稿したクローゼット
         @closets = Closet.where(user_id:@user.id)
     end    
