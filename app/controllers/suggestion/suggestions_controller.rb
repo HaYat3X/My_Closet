@@ -6,7 +6,7 @@ class Suggestion::SuggestionsController < ApplicationController
 
         # * 提案情報があるかないか判定
         if Suggest.exists?(user_id: current_user.id)
-            suggestion = Suggest.find_by(user_id: current_user.id)
+            @suggest = Suggest.find_by(user_id: current_user.id)
 
             # pp suggestion
             key_word1 = '%' + suggestion.style1 + '%'
