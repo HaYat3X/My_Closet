@@ -11,9 +11,112 @@
 
         <%# ! contents %>
         <div class="list_content col-lg-9">
-            <div class="bg-white py-3 mb-3">
-                
+
+            <section class="h-100 gradient-custom-2">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-lg-12 col-xl-12">
+                    <div class="card">
+                    <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+                        <div class="ms-4 mt-5 d-flex flex-column" style="width: 180px;">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                            alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                            style="width: 200px; z-index: 1">
+                        <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
+                            style="z-index: 1;">
+                            プロフィール更新
+                        </button>
+                        </div>
+                        <div class="ms-3" style="margin-top: 130px;">
+                        <h5><%= @user.user_name %></h5>
+                        <p>年齢：<%= @user.age %> 歳　性別：<%= @user.gender %></p>
+                        
+                        </div>
+                    </div>
+                    <div class="p-4 text-black" style="background-color: #F8F9FA;">
+                        <div class="d-flex justify-content-end text-center py-1">
+                        <div>
+                            <p class="mb-1 h5">2020</p>
+                            <p class="small text-muted mb-0">投稿</p>
+                        </div>
+                        <div class="px-3">
+                            <p class="mb-1 h5">2222</p>
+                            <p class="small text-muted mb-0">フォロー</p>
+                        </div>
+                        <div>
+                            <p class="mb-1 h5">3333</p>
+                            <p class="small text-muted mb-0">フォロワー</p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-4 text-black">
+                        <div class="mb-5">
+                        <p class="lead fw-normal mb-1">プロフィール</p>
+                        <div class="p-4" style="background-color: #F8F9FA;">
+                            <p class="font-italic mb-1"><%= @user.profile %></p>
+                        </div>
+                        </div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a href="#sns" class="nav-link active" data-bs-toggle="tab">投稿</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#sns_like" class="nav-link" data-bs-toggle="tab">いいね</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#closet" class="nav-link" data-bs-toggle="tab">クローゼット</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <%# ? snsタブエリア %>
+                            <div id="sns" class="tab-pane active">
+                                <div class="row">
+                                <% @snss.each do |s| %>
+                                    <div class="col-lg-3 m-0 mt-3">
+                                        <%= link_to "/sns/show/#{s.id}" do %>
+                                            <%= image_tag s.photograph.url, class: "closet_image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+                                </div>
+                            </div>
+
+                            <%# ? sns_likeタブエリア %>
+                            <div id="sns_like" class="tab-pane">
+                                <div class="row">
+                                    test2
+                                </div>
+                            </div>
+                            
+                            <%# ? closetタブエリア %>
+                            <div id="closet" class="tab-pane">
+                                <div class="row">
+                                <div class="tab-content">
+                                <%# ? allタブエリア %>
+                                <div id="all" class="tab-pane active">
+                                    <div class="row">
+                                        <% @closets.each do |c| %>
+                                            <div class="col-lg-3 m-0 mt-3">
+                                                <%= link_to "/closet/show/#{c.id}" do %>
+                                                    <%= image_tag c.photograph.url, class: "closet_image" %>
+                                                <% end %>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
             </div>
+            </section>
         </div>
     </div>
 </div>
