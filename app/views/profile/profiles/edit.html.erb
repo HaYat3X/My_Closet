@@ -1,4 +1,4 @@
-                <%= form_with(model: @user_data, url: "/profile/update/#{@user.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                <%= form_with(model: @user_data, url: "/profile/update", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
                   <div class="mb-3">
                     <%= f.file_field :avatar, required: true, class: "form-control", placeholder: "アイコン" %>
                     <div class="invalid-feedback">

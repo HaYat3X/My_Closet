@@ -22,7 +22,15 @@ class Profile::ProfilesController < ApplicationController
         @user_data = User.find(@user.id)
     end
 
+    # ! データを更新
     def update
+        @user = User.find(current_user.id)
+        # * 投稿の削除後、listのページに戻るコード
+        if @user.update(posts_params)
+            redirect_to "/profile/show", notice: "プロフィールを編集しました"
+        else
+            redirect_to"/profile/show", alert: "プロフィールの編集に失敗しました"
+        end
     end
 
     private
@@ -30,7 +38,7 @@ class Profile::ProfilesController < ApplicationController
     # ! 編集時にバインドするパラメータ
     def posts_params
         # * Userモデルにバインドする
-        params.require(:User).permit(:avatar, :user_name, :height, :weight, :age, :gender, :profile)
+        params.require(:user).permit(:avatar, :user_name, :height, :weight, :age, :gender, :profile)
     end
 
 end

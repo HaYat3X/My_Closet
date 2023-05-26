@@ -20,7 +20,7 @@
                     <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                         <div class="ms-4 mt-5 d-flex flex-column" style="width: 180px;">
                         <% if @user.avatar %>
-                            <%= image_tag "", style: "width: 200px; z-index: 1", class: "avatar img-fluid img-thumbnail mt-4 mb-2", size: "100x100" %>
+                            <%= image_tag @user.avatar.url, style: "width: 200px; height: 200px; object-fit: cover; z-index: 1", class: "avatar img-fluid img-thumbnail mt-4 mb-2", size: "100x100" %>
                         <% else %>
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
                             alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
