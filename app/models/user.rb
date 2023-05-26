@@ -21,4 +21,8 @@ class User < ApplicationRecord
 
   # 1対1の関係を定義するユーザは一つの提案を持っていることになる
   has_one :suggest
+
+  # ! photgraphカラムとアップローダを関連付ける
+  mount_uploader :avatar, UserImageUploader
+
 end
