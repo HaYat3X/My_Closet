@@ -2,7 +2,7 @@ class Sns::PostsController < ApplicationController
     # ! 一覧取得メソッド
     def list
         @snss = Social.all.page(params[:page]).per(40)
-    end    
+    end
 
     # ! 詳細取得メソッド
     def show
@@ -44,20 +44,20 @@ class Sns::PostsController < ApplicationController
     # ! 登録処理メソッド
     def create
          # * ログインしているユーザが登録したアイテムのデータを取得
-         @closets_all = Closet.where(user_id: current_user.id)
+        @closets_all = Closet.where(user_id: current_user.id)
 
          # * Closetモデルを介して、アウターアイテムのみ取得する
-         @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
- 
+        @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
+
          # * Closetモデルを介して、トップスアイテムのみ取得する
-         @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
- 
+        @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
+
          # * Closetモデルを介して、パンツアイテムのみ取得する
-         @closets_pants = Closet.where(big_Category: "パンツ", user_id: current_user.id)
- 
+        @closets_pants = Closet.where(big_Category: "パンツ", user_id: current_user.id)
+
          # * Closetモデルを介して、シューズアイテムのみ取得する
-         @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
- 
+        @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
+
          # * Closetモデルを介して、その他のアイテムのみ取得する
         @closets_other = Closet.where(big_Category: "その他", user_id: current_user.id)
 
@@ -68,7 +68,7 @@ class Sns::PostsController < ApplicationController
         @social.user_id = current_user.id
 
         # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
-        case0 = params[:social][:tag].to_s + params[:social][:message].to_s 
+        case0 = params[:social][:tag].to_s + params[:social][:message].to_s
 
         # ? アイテム1の検索カラムを取得する
         if params[:social][:item1]

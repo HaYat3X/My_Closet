@@ -85,5 +85,7 @@ Rails.application.routes.draw do
   # ! プロフィール関連
   # * プロフィールページ
   get "profile/show", to: "profile/profiles#show"
+  # * プロフィール更新ページ
+  get "profile/edit", to: "profile/profiles#edit"
 end
 
