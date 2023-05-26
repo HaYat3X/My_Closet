@@ -1,0 +1,28 @@
+                <%= form_with(model: @user_data, url: "/profile/update/#{@user.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                  <div class="mb-3">
+                    <%= f.file_field :avatar, required: true, class: "form-control", placeholder: "アイコン" %>
+                    <div class="invalid-feedback">
+                      写真を入力して下さい
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_field :user_name, required: true, class: "form-control", placeholder: "名前" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_field :height, class: "form-control", placeholder: "身長" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_field :weight, class: "form-control", placeholder: "体重" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_field :age, class: "form-control", placeholder: "年齢" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_field :gender, class: "form-control", placeholder: "性別" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_field :profile, class: "form-control", placeholder: "プロフィール" %>
+                  </div>
+                  <%= f.submit "登録する", class: "btn btn-primary" %>
+                <% end %>
+                </div>

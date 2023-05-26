@@ -9,8 +9,28 @@ class Profile::ProfilesController < ApplicationController
 
         #ログイン中のユーザーがいいねしたSNS投稿
         @sns_likes = SocialLike.where(user_id: @user.id)
-        
+
         #ログイン中のユーザーが投稿したクローゼット
         @closets = Closet.where(user_id:@user.id)
-    end    
+    end
+
+    # ! ユーザーのプロフィール更新メソッド
+    def edit
+        #　ログイン中のユーザ情報
+        @user = current_user
+        #　DBに保存されているユーザの登録情報抜き出す
+        @user_data = User.find(@user.id)
+    end
+
+    def update
+    end
+
+    private
+
+    # ! 編集時にバインドするパラメータ
+    def posts_params
+        # * Userモデルにバインドする
+        params.require(:User).permit(:avatar, :user_name, :height, :weight, :age, :gender, :profile)
+    end
+
 end
