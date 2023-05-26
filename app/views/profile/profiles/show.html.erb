@@ -19,9 +19,14 @@
                     <div class="card">
                     <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                         <div class="ms-4 mt-5 d-flex flex-column" style="width: 180px;">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                        <% if @user.avatar %>
+                            <%= image_tag "", style: "width: 200px; z-index: 1", class: "avatar img-fluid img-thumbnail mt-4 mb-2", size: "100x100" %>
+                        <% else %>
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
                             alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                             style="width: 200px; z-index: 1">
+                        <% end %>
+                        
                         <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
                             style="z-index: 1;">
                             プロフィール更新
@@ -85,7 +90,17 @@
                             <%# ? sns_likeタブエリア %>
                             <div id="sns_like" class="tab-pane">
                                 <div class="row">
-                                    test2
+                                    <% Social.all.each do |s| %>
+                                        <% @sns_likes.each do |sl| %>
+                                            <% if sl.social_id == s.id %>
+                                                <div class="col-lg-3 m-0 mt-3">
+                                                    <%= link_to "/sns/show/#{s.id}" do %>
+                                                        <%= image_tag s.photograph.url, class: "closet_image" %>
+                                                    <% end %>
+                                                </div>
+                                            <% end %>
+                                        <% end %>
+                                <% end %>
                                 </div>
                             </div>
                             
