@@ -38,10 +38,12 @@
                                 <% if @user.id == current_user.id %>
                                     <%= button_to "プロフィール更新", "/profile/edit/#{@user.id}", method: :get, class: "btn btn-primary" %>
                                 <% else %>
-                                    <button type="button" onclick="location.href='/profile/edit'" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                                        style="">
-                                        フォローする
-                                    </button>
+                                    <%# ! フォローしているかしていないか判断する %>
+                                    <% if UserRelation.where(follow_id: current_user.id, follower_id: @user.id).exists? %>
+                                        <%= button_to "ふぉろー解除する", "/profile/follow/#{@user.id}", method: :delete, class: "btn btn-primary" %> 
+                                    <% else %>
+                                        <%= button_to "ふぉろーする", "/profile/follow/#{@user.id}", method: :post, class: "btn btn-primary" %> 
+                                    <% end %>
                                 <% end %>
                             </div>
                         </div>
