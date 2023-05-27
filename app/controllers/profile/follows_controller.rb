@@ -31,12 +31,19 @@ class Profile::FollowsController < ApplicationController
             redirect_to "/"
         end
     end
+
     # ! フォロー一覧を取得するメソッド
-    def follow_follower_list
+    def follow_list
         # ユーザ全員のデータ
         @users = User.all()
         # * あるユーザーがフォローしているユーザー一覧を取得
         @follow_list = UserRelation.where(follow_id: params[:id])
+    end
+
+    # ! フォローわー一覧を取得するメソッド
+    def follower_list
+        # ユーザ全員のデータ
+        @users = User.all()
 
         # * あるユーザーがフォローされているユーザー一覧を取得
         @follower_list = UserRelation.where(follower_id: params[:id])

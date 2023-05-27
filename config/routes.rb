@@ -94,8 +94,8 @@ Rails.application.routes.draw do
   # * フォロー解除する
   delete "profile/follow/:id", to: "profile/follows#delete_follow"
   # * フォロー一覧
-  get "profile/follow_list/:id", to: "profile/follows#follow_follower_list"
-  # *
-
+  get "profile/follow_list/:id", to: "profile/follows#follow_list"
+  # * フォロワー一覧
+  get "profile/follower_list/:id", to: "profile/follows#follower_list"
 end
 

@@ -12,8 +12,8 @@
         <%# ! contents %>
         <div class="list_content col-lg-9">
 
-            <section class="h-100 gradient-custom-2">
-            <div class="container py-5 h-100">
+            <section class="gradient-custom-2">
+            <div class="container py-5">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-12 col-xl-12">
                     <div class="card">
@@ -40,9 +40,9 @@
                                 <% else %>
                                     <%# ! フォローしているかしていないか判断する %>
                                     <% if UserRelation.where(follow_id: current_user.id, follower_id: @user.id).exists? %>
-                                        <%= button_to "ふぉろー解除する", "/profile/follow/#{@user.id}", method: :delete, class: "btn btn-primary" %> 
+                                        <%= button_to "フォロー解除", "/profile/follow/#{@user.id}", method: :delete, class: "btn btn-outline-primary" %> 
                                     <% else %>
-                                        <%= button_to "ふぉろーする", "/profile/follow/#{@user.id}", method: :post, class: "btn btn-primary" %> 
+                                        <%= button_to "フォロー", "/profile/follow/#{@user.id}", method: :post, class: "btn btn-primary" %> 
                                     <% end %>
                                 <% end %>
                             </div>
@@ -53,16 +53,20 @@
                     <div class="p-4 text-black" style="background-color: #F8F9FA;">
                         <div class="d-flex justify-content-end text-center py-1">
                         <div>
-                            <p class="mb-1 h5">2020</p>
+                            <p class="mb-1 h5"><%= @snss.count %></p>
                             <p class="small text-muted mb-0">投稿</p>
                         </div>
                         <div class="px-3">
-                            <p class="mb-1 h5">2222</p>
-                            <p class="small text-muted mb-0">フォロー</p>
+                            <%= link_to "/profile/follow_list/#{@user.id}", class: "text-dark" do %>
+                                <p class="mb-1 h5"><%= @follow_list %></p>
+                                <p class="small text-muted mb-0">フォロー</p>
+                            <% end %>
                         </div>
                         <div>
-                            <p class="mb-1 h5">3333</p>
-                            <p class="small text-muted mb-0">フォロワー</p>
+                            <%= link_to "/profile/follower_list/#{@user.id}", class: "text-dark" do %>
+                                <p class="mb-1 h5"><%= @follower_list %></p>
+                                <p class="small text-muted mb-0">フォロワー</p>
+                            <% end %>
                         </div>
                         </div>
                     </div>
