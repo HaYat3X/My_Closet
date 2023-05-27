@@ -10,6 +10,16 @@
         <%# ! contents %>
         <div class="list_content col-lg-9">
             <div class="m-3 bg-light">
+            <%# * タブメニューエリア %>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a href="#all" class="nav-link active" data-bs-toggle="tab">すべての投稿</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#follow" class="nav-link" data-bs-toggle="tab">フォロー中</a>
+                    </li>
+                </ul>
+
                 <div class="tab-content">
                     <%# ? allタブエリア %>
                     <div id="all" class="tab-pane active">
@@ -31,6 +41,31 @@
                             <% end %>
 
                             <%= paginate @snss %>
+                        </div>
+                    </div>
+
+                    <div id="follow" class="tab-pane">
+                        <div class="row">
+                        <% @follow_list.each do |f| %>
+                            <% @snss.each do |s| %>
+                            <% if s.user_id == f.follower_id %>
+                            <%# * フォロー中のユーザの投稿のみを表示 %>
+                                <div class="col-lg-3 m-0 mt-3">
+                                    <%= link_to "/sns/show/#{s.id}" do %>
+                                        <%= image_tag s.photograph.url, class: "closet_image" %>
+                                    <% end %>
+                                    <div class="p-2 row">
+                                        <div class="col-lg-3">
+                                            <%= image_tag "/assets/img_1.png", class: "closet_image", style: "width: 35px; height: 35px; border-radius: 50px;" %>
+                                        </div>
+                                        <div class="col-lg-9 d-flex align-items-center">
+                                            <%= s.user.user_name %><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% end %>
+                            <% end %>
+                        <% end %>
                         </div>
                     </div>
                 </div>
