@@ -12,6 +12,12 @@ class Profile::ProfilesController < ApplicationController
 
         #ログイン中のユーザーが投稿したクローゼット
         @closets = Closet.where(user_id:@user.id)
+
+        # フォロー数
+        @follow_list = UserRelation.where(follow_id: params[:id]).count
+
+        # ファロワー数
+        @follower_list = UserRelation.where(follower_id: params[:id]).count
     end
 
     # ! ユーザーのプロフィール更新メソッド
