@@ -27,7 +27,6 @@
                         <div class="row">
                             <%# ! 提案データがあるか判定 %>
                             <% if Suggest.exists?(user_id: current_user.id) %>
-                                <%= button_to "コーデ提案をする", "/call_gpt_update", method: :post %>
                                 <% @suggestions.each do |s| %>
                                     <%# * ログインしている性別のみ出す %>
                                     <% if s.user.gender === current_user.gender %>
@@ -58,7 +57,6 @@
                     <div id="user_suggest" class="tab-pane">
                         <div class="row">
                             <p>
-                                <%= button_to "おすすめフォロワー", "/call_user", method: :post %>
                                 <% if Suggest.exists?(user_id: current_user.id) %>
                                     <% @users.each do |u| %>
                                         <% if u.gender === current_user.gender %>
