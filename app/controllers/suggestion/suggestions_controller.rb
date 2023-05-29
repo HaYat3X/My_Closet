@@ -6,11 +6,11 @@ class Suggestion::SuggestionsController < ApplicationController
 
         # * 提案情報があるかないか判定
         if Suggest.exists?(user_id: current_user.id)
-            @suggest = Suggest.find_by(user_id: current_user.id)
+            suggest = Suggest.find_by(user_id: current_user.id)
 
             # pp suggestion
-            key_word1 = '%' + suggestion.style1 + '%'
-            key_word2 = '%' + suggestion.style2 + '%'
+            key_word1 = '%' + suggest.style1 + '%'
+            key_word2 = '%' + suggest.style2 + '%'
 
             # * SNSの投稿データを返す（大文字と小文字を区別しない）
             @suggestions = Social.where("search LIKE ? OR search LIKE ?", key_word1, key_word2).order("RANDOM()").limit(20)
