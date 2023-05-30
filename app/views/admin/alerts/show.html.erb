@@ -3,4 +3,7 @@
                     <%= @alert.title %>
                     <%= @alert.content %>
                 </div>
+                <%= link_to "編集", "/admin/alert/edit/#{@alert.id}" %>
+                <%= link_to "削除", "/admin/alert/delete/#{@alert.id}",method: :delete %>
+                </div>
         </div>
