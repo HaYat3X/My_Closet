@@ -1,8 +1,9 @@
 <div id="auth" class="col-lg-4 col-md-6 col-12 mx-auto mt-5">
     <h2 class="text-center mb-5 fw-bold text-primary">My Closet</h2>
 
-    <%# * サインインフォーム %>
+    <%# * サインアップフォーム %>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+    
         <%# ? バックエンド側でのバリデーションチェック %>
         <%= render "devise/shared/error_messages", resource: resource %>
         
@@ -12,9 +13,9 @@
                 <i class="bi bi-person"></i>
             </span>
             <%= f.text_field :user_name, class: "form-control", autofocus: true, autocomplete: "user_name", placeholder: "ユーザ名", required: true, "aria-label": "ユーザー名", "aria-describedby": "addon-wrapping"  %>
-          <div class="invalid-feedback">
-              ユーザ名を入力して下さい。
-          </div>
+            <div class="invalid-feedback">
+                ユーザ名を入力して下さい。
+            </div>
         </div>
 
         <%# ? メールアドレス入力エリア %>
@@ -51,7 +52,7 @@
         </div>
 
         <div class="my-3">
-          <%= f.submit "サインアップ", class: "btn btn-outline-primary col-12" %>
+            <%= f.submit "サインアップ", class: "btn btn-outline-primary col-12" %>
         </div>
     <% end %>
 
