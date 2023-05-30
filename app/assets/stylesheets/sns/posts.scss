@@ -1,18 +1,23 @@
+// ! postsフォルダのレイアウト （edit, list, new, show）
 #posts {
     // * スマートフォン （小）
     @media (max-width: 575.98px) {
+        // ? PC用のヘッダーは表示しない
         .pc-header {
             display: none;
         }
+        // ? コーディネート投稿ボタンのレイアウト
         .mobile-post-btn {
             position: fixed;
             bottom: 60px;
-            right: 20px;
+            right: 15px;
             z-index: 9999;
         }
+        // ? PCのサイドバーは表示しない
         .pc-sidebar {
             display: none;
         }
+        // ? モバイルのサイドバーのレイアウト
         .mobile-sidebar {
             position: fixed;
             bottom: 0px;
@@ -20,7 +25,7 @@
             z-index: 9999;
         }
         .closet_image {
-            width: 140px;
+            width: 130px;
             height: 260px;
             object-fit: cover;
             border-radius: 5px;
@@ -29,37 +34,62 @@
     }
     // * スマートフォン （中）
     @media (min-width: 576px) and (max-width: 767.98px) {
+        // ? PC用のヘッダーは表示しない
         .pc-header {
             display: none;
         }
+        // ? コーディネート投稿ボタンのレイアウト
+        .mobile-post-btn {
+            position: fixed;
+            bottom: 60px;
+            right: 15px;
+            z-index: 9999;
+        }
+        // ? PCのサイドバーは表示しない
         .pc-sidebar {
             display: none;
         }
+        // ? モバイルのサイドバーのレイアウト
         .mobile-sidebar {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 0px;
+            right: 0px;
             z-index: 9999;
         }
     }
-    // * タブレット
+    // ! タブレット
     @media (min-width: 768px) and (max-width: 991.98px) {
-        // ? モバイル用のボタンは非表示
-        .mobile_post_btn {
+        // ? PC用のヘッダーは表示しない
+        .pc-header {
             display: none;
         }
+        // ? コーディネート投稿ボタンのレイアウト
+        .mobile-post-btn {
+            position: fixed;
+            bottom: 60px;
+            right: 50px;
+            z-index: 9999;
+        }
+        // ? PCのサイドバーは表示しない
+        .pc-sidebar {
+            display: none;
+        }
+        // ? モバイルのサイドバーのレイアウト
+        .mobile-sidebar {
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+            z-index: 9999;
+        }
     }
-    // * デスクトップ
+    // ! デスクトップ
     @media (min-width: 992px) and (max-width: 1199.98px) {
-        // ? モバイル用のボタンは非表示
-        .mobile_post_btn {
+        // ? モバイルのヘッダーは表示しない
+        .mobile_header {
             display: none;
         }
-    }
-    // * ラージデスクトップ
-    @media (min-width: 1200px) {
-        // ? モバイル用のボタンは非表示
-        .mobile_header {
+        // ? モバイル用のコーディネート投稿ボタンのため表示しない
+        .mobile-post-btn {
             display: none;
         }
         // * sidebar関連
@@ -87,20 +117,61 @@
                 color: #ffffff;
             }
         }
+        // ? モバイルのサイドバーは表示しない
         .mobile-sidebar {
             display: none;
         }
-        // * 一覧コンテンツ
-        .list_content {
+    }
+    // ! ラージデスクトップ
+    @media (min-width: 1200px) {
+        // ? モバイルのヘッダーは表示しない
+        .mobile_header {
+            display: none;
+        }
+        // ? モバイル用のコーディネート投稿ボタンのため表示しない
+        .mobile-post-btn {
+            display: none;
+        }
+        // ? PCのサイドバーのレイアウト
+        .pc-sidebar {
             border-radius: 10px;
+            // ? アイコン関連
+            svg {
+                margin-right: 10px;
+            }
+            // ? リスト関連
+            li {
+                box-shadow: var(--box-shadow);
+                border-radius: 5px;
+                margin-top: 5px;
+            }
+            li:hover {
+                background-color: var(--primary);
+                border-radius: 5px;
+            }
+            // ? リンク関連
+            a {
+                color: var(--dark);
+            }
+            a:hover {
+                color: #ffffff;
+            }
         }
-        // * 画像関連
-        .closet_image {
-            width: 140px;
-            height: 260px;
-            object-fit: cover;
-            border-radius: 5px;
-            box-shadow: var(--box-shadow);
+        // ? モバイルのサイドバーは表示しない
+        .mobile-sidebar {
+            display: none;
         }
+        // // * 一覧コンテンツ
+        // .list_content {
+        //     border-radius: 10px;
+        // }
+        // // * 画像関連
+        // .closet_image {
+        //     width: 230px;
+        //     height: 360px;
+        //     object-fit: cover;
+        //     border-radius: 5px;
+        //     box-shadow: var(--box-shadow);
+        // }
     }
 }
