@@ -113,5 +113,8 @@ Rails.application.routes.draw do
   post "admin/alert/create", to: "admin/alerts#create"
   get "admin/alert/list", to: "admin/alerts#list"
   get "admin/alert/show/:id", to: "admin/alerts#show"
+  get "admin/alert/edit/:id", to: "admin/alerts#edit"
+  patch "admin/alert/update/:id", to: "admin/alerts#update"
+  delete "admin/alert/delete/:id", to: "admin/alerts#delete"
 end
 
