@@ -1,0 +1,33 @@
+<div id="closet_form">
+    <%# ! header %>
+    <%= render "coordinates/layouts/header" %>
+    <div class="d-flex">
+        <%# ! sidebar %>
+        <div class="col-lg-3">
+            <%= render "coordinates/layouts/sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="list_content col-lg-9">
+            <div class="m-3 bg-light p-5">
+                <%# * エラーメッセージの表示 %>
+                <div class="col-lg-9 mx-auto">
+               
+
+                <%= form_with(model: @contact, url: "#", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                    <div class="mb-3">
+                    <%= f.text_field :email, class: "form-control", placeholder: "メールアドレス" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_field :name, class: "form-control", placeholder: "名前" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_area :content, class: "form-control", placeholder: "お問い合わせ内容" %>
+                  </div>
+                  <%= f.submit "登録する", class: "btn btn-primary" %>
+                <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

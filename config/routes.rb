@@ -97,5 +97,8 @@ Rails.application.routes.draw do
   get "profile/follow_list/:id", to: "profile/follows#follow_list"
   # * フォロワー一覧
   get "profile/follower_list/:id", to: "profile/follows#follower_list"
+  
+  #お問い合わせフォーム
+  get "contact/new" , to: "contact/contacts#new"
 end
 
