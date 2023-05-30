@@ -16,8 +16,10 @@ gem 'devise-i18n'
 gem 'carrierwave', '~> 2.0'
 # * ページネーション機能を実装するためのGem
 gem 'kaminari'
-# ! openAIの導入
+# * ChatGPTを使用するためのGem
 gem "ruby-openai"
+# * 画面のUIを調整するためのGem
+gem 'font-awesome-rails'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  # ! 管理者関連の認証
   devise_for :admins
+
+  # ! ユーザ関連の認証
   devise_for :users
 
   # ! クローゼット関連
