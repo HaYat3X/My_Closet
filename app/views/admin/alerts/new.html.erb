@@ -1,0 +1,17 @@
+                <% if @alert.errors.any? %>
+                    <div class="alert alert-danger" role="alert">
+                        <% @alert.errors.each do |error| %>
+                            <strong>エラー！</strong> - <%= error.full_message %><br>
+                        <% end %>
+                    </div>
+                <% end %>
+                <%= form_with(model: @alert, url: "/admin/alert/create", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                  <div class="mb-3">
+                    <%= f.text_field :title, class: "form-control", placeholder: "お知らせタイトル" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_area :content, class: "form-control", placeholder: "お知らせ内容" %>
+                  </div>
+                  <%= f.submit "登録する", class: "btn btn-primary" %>
+                <% end %>
+                </div>
