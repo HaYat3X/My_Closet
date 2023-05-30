@@ -116,5 +116,10 @@ Rails.application.routes.draw do
   get "admin/alert/edit/:id", to: "admin/alerts#edit"
   patch "admin/alert/update/:id", to: "admin/alerts#update"
   delete "admin/alert/delete/:id", to: "admin/alerts#delete"
+
+  # ! お問い合わせ関連（管理者）
+  get "admin/contact/list", to: "admin/contacts#list"
+  post "admin/contact/create_handle/:id", to: "admin/contacts#create_handle"
+  post "admin/contact/delete_handle/:id", to: "admin/contacts#delete_handle"
 end
 

@@ -1,0 +1,14 @@
+<% @contacts.each do |c| %>
+    <%= c.email %><br>
+    <%= c.name %><br>
+    <%= c.content %><br>
+    <% if c.status == 0 %>
+        <p class="fw-bold text-danger">未対応</p>
+        <%= button_to "対応完了", "/admin/contact/create_handle/#{c.id}", method: :post, class: "btn btn-outline-primary" %> 
+    <% end %>
+    <% if c.status == 1 %>
+        <p class="fw-bold text-success">対応完了</p>
+        <%= button_to "未対応", "/admin/contact/delete_handle/#{c.id}", method: :post, class: "btn btn-danger" %> 
+    <% end %>
+    <hr>
+<% end %>
