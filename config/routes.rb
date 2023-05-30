@@ -111,5 +111,7 @@ Rails.application.routes.draw do
   # * お知らせ登録フォーム
   get "admin/alert/new", to: "admin/alerts#new"
   post "admin/alert/create", to: "admin/alerts#create"
+  get "admin/alert/list", to: "admin/alerts#list"
+  get "admin/alert/show/:id", to: "admin/alerts#show"
 end
 

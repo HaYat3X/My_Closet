@@ -1,0 +1,9 @@
+        <div class="list_content col-lg-9">
+            <% @alert_list.each do |a| %>
+                <div class="bg-white p-3 m-5">
+                <%= link_to "/admin/alert/show/#{a.id}" do %>
+                    <%= a.title %>
+                <% end %>
+                </div>
+            <% end %>
+        </div>
