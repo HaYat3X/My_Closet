@@ -98,10 +98,18 @@ Rails.application.routes.draw do
   get "profile/follow_list/:id", to: "profile/follows#follow_list"
   # * フォロワー一覧
   get "profile/follower_list/:id", to: "profile/follows#follower_list"
+  # * お知らせ一覧画面
+  get "profile/alert/list", to: "profile/alerts#list"
+  # * お知らせ一覧画面
+  get "profile/alert/show/:id", to: "profile/alerts#show"
   
   #お問い合わせフォーム
   get "contact/new" , to: "contact/contacts#new"
-
   post "contact/create" , to: "contact/contacts#create"
+
+  # ! 管理者関連
+  # * お知らせ登録フォーム
+  get "admin/alert/new", to: "admin/alerts#new"
+  post "admin/alert/create", to: "admin/alerts#create"
 end
 
