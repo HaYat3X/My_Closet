@@ -1,46 +1,59 @@
-<div id="register" class="col-lg-4 mx-auto">
-  <h2 class="text-center mb-4">サインイン</h2>
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+<div id="auth" class="col-lg-4 col-md-6 col-12 mx-auto mt-5">
+    <h2 class="text-center mb-5 fw-bold text-primary">My Closet</h2>
 
-    
-    
-    <div class="mb-3">
-      <%= f.text_field :user_name, class: "form-control", autofocus: true, autocomplete: "user_name", placeholder: "ユーザ名", required: true %>
-      <div class="invalid-feedback">
-        ユーザ名を入力して下さい
-      </div>
-    </div>
+    <%# * サインインフォーム %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+        <%# ? バックエンド側でのバリデーションチェック %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        
+        <%# ? ユーザ名入力エリア %>
+        <div class="mt-3 input-group">
+            <span class="input-group-text" id="addon-wrapping">
+                <i class="bi bi-person"></i>
+            </span>
+            <%= f.text_field :user_name, class: "form-control", autofocus: true, autocomplete: "user_name", placeholder: "ユーザ名", required: true, "aria-label": "ユーザー名", "aria-describedby": "addon-wrapping"  %>
+          <div class="invalid-feedback">
+              ユーザ名を入力して下さい。
+          </div>
+        </div>
 
-    
-  
+        <%# ? メールアドレス入力エリア %>
+        <div class="mt-3 input-group">
+            <span class="input-group-text" id="addon-wrapping">
+                <i class="bi bi-envelope"></i>
+            </span>
+            <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", placeholder: "メールアドレス", required: true, "aria-describedby": "addon-wrapping" %>
+            <div class="invalid-feedback">
+                メールアドレスを入力して下さい。
+            </div>
+        </div>
 
-    <div class="mb-3">
-      <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", placeholder: "メールアドレス", required: true %>
-      <div class="invalid-feedback">
-        メールアドレスを入力して下さい
-      </div>
-    </div>
+        <%# ? パスワード入力エリア %>
+        <div class="mt-3 input-group">
+            <span class="input-group-text" id="addon-wrapping">
+                <i class="bi bi-key"></i>
+            </span>
+            <%= f.password_field :password, class: "form-control", autocomplete: "new-password", placeholder: "パスワード", required: true %>
+            <div class="invalid-feedback">
+                パスワードを入力して下さい。
+            </div>
+        </div>
 
-    <div class="mb-3">
-      <%= f.password_field :password, class: "form-control", autocomplete: "new-password", placeholder: "パスワード", required: true %>
-      <div class="invalid-feedback">
-        パスワードを入力して下さい
-      </div>
-    </div>
+        <%# ? パスワード確認エリア %>
+        <div class="mt-3 input-group">
+            <span class="input-group-text" id="addon-wrapping">
+                <i class="bi bi-key"></i>
+            </span>
+            <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", placeholder: "パスワードの確認", required: true %>
+            <div class="invalid-feedback">
+                パスワードを再入力して下さい。
+            </div>
+        </div>
 
-    <div class="mb-3">
-      <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", placeholder: "パスワードの確認", required: true %>
-      <div class="invalid-feedback">
-        パスワードを再入力して下さい
-      </div>
-    </div>
+        <div class="my-3">
+          <%= f.submit "サインアップ", class: "btn btn-outline-primary col-12" %>
+        </div>
+    <% end %>
 
-    <%= render "devise/shared/error_messages", resource: resource %>
-
-    <div class="mb-4">
-      <%= f.submit "サインインする", class: "btn btn-primary col-lg-12" %>
-    </div>
-  <% end %>
-
-  <%= render "devise/shared/links" %>
+    <%= render "devise/shared/links" %>
 </div>
