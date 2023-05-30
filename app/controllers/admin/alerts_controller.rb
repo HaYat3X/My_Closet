@@ -15,6 +15,17 @@ class Admin::AlertsController < ApplicationController
         end
     end
 
+    # * お知らせ一覧取得
+    def list
+        @alert_list = Alert.all()
+    end
+
+    # * お知らせ詳細表示
+    def show
+        @alert = Alert.find(params[:id])
+
+    end
+
     private
 
     # ! 投稿時にバインドするパラメータ
