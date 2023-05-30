@@ -1,14 +1,25 @@
 <div id="posts">
     <%# ! header %>
-    <%= render "sns/layouts/header" %>
-    <div class="d-flex">
+    <div class="mobile-header">
+        <%= render "sns/layouts/mobile_header" %>
+    </div>
+
+    <div class="pc-header">
+        <%= render "sns/layouts/pc_header" %>
+    </div>
+
+    <div class="row">
         <%# ! sidebar %>
-        <div class="col-lg-3">
-            <%= render "sns/layouts/sidebar" %>
+        <div class="col-lg-3 pc-sidebar">
+            <%= render "sns/layouts/pc_sidebar" %>
+        </div>
+
+        <div class="col-12 mobile-sidebar">
+            <%= render "sns/layouts/mobile_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-9">
+        <div class="list_content col-lg-9 col-12">
             <div class="m-3 bg-light">
             <%# * タブメニューエリア %>
                 <ul class="nav nav-tabs" role="tablist">
