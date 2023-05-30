@@ -100,5 +100,7 @@ Rails.application.routes.draw do
   
   #お問い合わせフォーム
   get "contact/new" , to: "contact/contacts#new"
+
+  post "contact/create" , to: "contact/contacts#create"
 end
 
