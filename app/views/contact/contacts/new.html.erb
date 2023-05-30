@@ -12,9 +12,16 @@
             <div class="m-3 bg-light p-5">
                 <%# * エラーメッセージの表示 %>
                 <div class="col-lg-9 mx-auto">
-               
+                           <%# * バリデーションチェク %>
+                <% if @contact.errors.any? %>
+                    <div class="alert alert-danger" role="alert">
+                        <% @contact.errors.each do |error| %>
+                            <strong>エラー！</strong> - <%= error.full_message %><br>
+                        <% end %>
+                    </div>
+                <% end %>
 
-                <%= form_with(model: @contact, url: "#", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                <%= form_with(model: @contact, url: "/contact/create", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
                     <div class="mb-3">
                     <%= f.text_field :email, class: "form-control", placeholder: "メールアドレス" %>
                   </div>

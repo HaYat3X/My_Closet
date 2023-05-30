@@ -6,7 +6,14 @@ class Contact::ContactsController < ApplicationController
 
     # * お問い合わせ処理
     def create
-        
+        @contact = UserContact.new(posts_params)
+
+        if @contact.save
+            ContactMailer.contact_mail(@contact).deliver
+            redirect_to "/"
+        else
+            render :new
+        end
     end
 
     private
