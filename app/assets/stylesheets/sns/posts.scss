@@ -1,16 +1,61 @@
 // ! クローゼット一覧ページのレイアウト
-#sns_list {
-    // * header関連
+#posts {
+    // * 共通
+    // ? header関連
     .header {
-        border-radius: 10px;
-        .align-items-center {
-            padding-right: 20px;
-            border-radius: 50px;
+        border-radius: 5px;
+    }
+    // * スマートフォン （小）
+    @media (max-width: 575.98px) {
+        .header {
+            // ? PC用のボタンは非表示
+            .pc_post_btn {
+                display: none;
+            }
         }
-        img {
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
+        // ? モバイル用のボタンのレイアウト
+        .mobile_post_btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+    }
+    // * スマートフォン （中）
+    @media (min-width: 576px) and (max-width: 767.98px) {
+        .header {
+            // ? PC用のボタンは非表示
+            .pc_post_btn {
+                display: none;
+            }
+        }
+        // ? モバイル用のボタンのレイアウト
+        .mobile_post_btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+    }
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        // ? モバイル用のボタンは非表示
+        .mobile_post_btn {
+            display: none;
+        }
+    }
+    // * デスクトップ
+    @media (min-width: 992px) and (max-width: 1199.98px) {
+        // ? モバイル用のボタンは非表示
+        .mobile_post_btn {
+            display: none;
+        }
+    }
+    // * ラージデスクトップ
+    @media (min-width: 1200px) {
+        // ? モバイル用のボタンは非表示
+        .mobile_post_btn {
+            display: none;
         }
     }
     // * sidebar関連
