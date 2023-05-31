@@ -94,12 +94,12 @@
         }
         // * sidebar関連
         .pc-sidebar {
-            border-radius: 10px;
-            // ? アイコン関連
-            svg {
+            border-radius: 5px;
+            // アイコンの表示設定
+            i {
                 margin-right: 10px;
             }
-            // ? リスト関連
+            // リストの表示設定
             li {
                 box-shadow: var(--box-shadow);
                 border-radius: 5px;
@@ -109,7 +109,7 @@
                 background-color: var(--primary);
                 border-radius: 5px;
             }
-            // ? リンク関連
+            // リンクの表示設定
             a {
                 color: var(--dark);
             }
@@ -134,12 +134,13 @@
         }
         // ? PCのサイドバーのレイアウト
         .pc-sidebar {
-            border-radius: 10px;
-            // ? アイコン関連
-            svg {
+            // 角を少し丸く
+            border-radius: 5px;
+            // アイコンの表示設定
+            i {
                 margin-right: 10px;
             }
-            // ? リスト関連
+            // リストの表示設定
             li {
                 box-shadow: var(--box-shadow);
                 border-radius: 5px;
@@ -149,7 +150,7 @@
                 background-color: var(--primary);
                 border-radius: 5px;
             }
-            // ? リンク関連
+            // リンクの表示設定
             a {
                 color: var(--dark);
             }
@@ -161,17 +162,5 @@
         .mobile-sidebar {
             display: none;
         }
-        // // * 一覧コンテンツ
-        // .list_content {
-        //     border-radius: 10px;
-        // }
-        // // * 画像関連
-        // .closet_image {
-        //     width: 230px;
-        //     height: 360px;
-        //     object-fit: cover;
-        //     border-radius: 5px;
-        //     box-shadow: var(--box-shadow);
-        // }
     }
 }

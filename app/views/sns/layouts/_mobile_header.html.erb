@@ -1,6 +1,7 @@
 <nav class="mobile_header navbar navbar-expand-lg bg-body-tertiary mb-2 py-3">
     <div class="container-fluid col-lg-11">
         <a class="navbar-brand fw-bold text-primary fs-4" href="/">My Closet</a>
+
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
             <span><i class="bi bi-search"></i></span>
         </button>
@@ -12,6 +13,14 @@
                         <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex collapse navbar-collapse") do |f| %>
                             <%= f.text_field :search, class: "form-control me-2", placeholder: "コーディネートを検索" %>
                             <%= f.submit "検索", class: "btn btn-outline-success flex-shrink-0" %>
+                        <% end %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%# ? サインインしている場合はサインアウトボタン、サインアウトしている場合はサインインボタンが表示される %>
+                        <% if user_signed_in? %>
+                            <%= link_to "サインアウト", destroy_user_session_path, method: :delete, class: "btn btn-primary col-12" %>    
+                        <% else %>
+                            <%= link_to "サインイン", new_user_session_path, method: :delete, class: "btn btn-primary col-12" %>
                         <% end %>
                     </li>  
                 </ul>
