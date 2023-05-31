@@ -50,23 +50,15 @@
                     </div>
 
                     <div id="follow" class="tab-pane">
-                        <div class="row">
+                        <div class="row g-1">
                         <% @follow_list.each do |f| %>
                             <% @snss.each do |s| %>
                             <% if s.user_id == f.follower_id %>
                             <%# * フォロー中のユーザの投稿のみを表示 %>
                                 <div class="col-lg-3 m-0 mt-3">
                                     <%= link_to "/sns/show/#{s.id}" do %>
-                                        <%= image_tag s.photograph.url, class: "closet_image" %>
+                                        <%= image_tag s.photograph.url, class: "sns_image" %>
                                     <% end %>
-                                    <div class="p-2 row">
-                                        <div class="col-lg-3">
-                                            <%= image_tag "/assets/img_1.png", class: "closet_image", style: "width: 35px; height: 35px; border-radius: 50px;" %>
-                                        </div>
-                                        <div class="col-lg-9 d-flex align-items-center">
-                                            <%= s.user.user_name %><br>
-                                        </div>
-                                    </div>
                                 </div>
                             <% end %>
                             <% end %>
