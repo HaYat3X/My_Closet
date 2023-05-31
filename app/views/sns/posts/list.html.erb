@@ -8,7 +8,7 @@
         <%= render "sns/layouts/pc_header" %>
     </div>
 
-    <div class="row">
+    <div class="row g-0">
         <%# ! sidebar %>
         <div class="col-lg-3 pc-sidebar">
             <%= render "sns/layouts/pc_sidebar" %>
@@ -19,15 +19,17 @@
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-9 col-12">
-            <div class="m-3 bg-light">
+        <div class="list_content col-lg-9 col-12 bg-white">
+
+
+            <div class="">
             <%# * タブメニューエリア %>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a href="#all" class="nav-link active" data-bs-toggle="tab">すべての投稿</a>
+                <ul class="nav nav-pills" role="tablist">
+                    <li class="nav-item flex-fill">
+                        <a href="#all" class="fw-bold nav-link active text-center" data-bs-toggle="tab">すべての投稿</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#follow" class="nav-link" data-bs-toggle="tab">フォロー中</a>
+                    <li class="nav-item flex-fill">
+                        <a href="#follow" class="fw-bold nav-link text-center" data-bs-toggle="tab">フォロー中</a>
                     </li>
                 </ul>
 
@@ -38,16 +40,8 @@
                             <% @snss.each do |s| %>
                                 <div class="col-lg-3 m-0 mt-3">
                                     <%= link_to "/sns/show/#{s.id}" do %>
-                                        <%= image_tag s.photograph.url, class: "closet_image" %>
+                                        <%= image_tag s.photograph.url, class: "sns_image" %>
                                     <% end %>
-                                    <div class="p-2 row">
-                                        <div class="col-lg-3">
-                                            <%= image_tag "/assets/img_1.png", class: "closet_image", style: "width: 35px; height: 35px; border-radius: 50px;" %>
-                                        </div>
-                                        <div class="col-lg-9 d-flex align-items-center">
-                                            <%= s.user.user_name %><br>
-                                        </div>
-                                    </div>
                                 </div>
                             <% end %>
 
