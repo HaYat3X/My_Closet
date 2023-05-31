@@ -45,14 +45,16 @@
                                 </div>
                             <% end %>
 
-                            <%= paginate @snss %>
+                            <div class="mt-3">
+                                <%= paginate @snss %>
+                            </div>
                         </div>
                     </div>
 
                     <div id="follow" class="tab-pane">
                     <% if user_signed_in? %>
                         <div class="row g-1">
-                            <% UserRelation.where(follow_id: current_user.id).each do |f| %>
+                            <% @follow.each do |f| %>
                                 <% @snss.each do |s| %>
                                     <% if s.user_id == f.follower_id %>
                                     <%# * フォロー中のユーザの投稿のみを表示 %>
@@ -63,6 +65,10 @@
                                         </div>
                                     <% end %>
                                 <% end %>
+                                
+                                <div class="mt-3">
+                                    <%= paginate @snss %>
+                                </div>
                             <% end %>
                         </div>
                     </div>  
