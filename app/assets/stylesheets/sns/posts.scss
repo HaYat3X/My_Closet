@@ -81,6 +81,12 @@
             right: 0px;
             z-index: 9999;
         }
+        // ? SNS画像のサイズ設定
+        .sns_image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
     }
     // * PC（小）
     @media (min-width: 992px) and (max-width: 1199.98px) {
@@ -120,6 +126,12 @@
         // ? モバイルのサイドバーは表示しない
         .mobile-sidebar {
             display: none;
+        }
+        // ? SNS画像のサイズ設定
+        .sns_image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
         }
     }
     // * PC（大）

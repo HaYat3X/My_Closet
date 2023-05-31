@@ -38,7 +38,7 @@
                     <div id="all" class="tab-pane active">
                         <div class="row g-1">
                             <% @snss.each do |s| %>
-                                <div class="col-lg-3 mt-1">
+                                <div class="col-lg-3 col-md-4 mt-1">
                                     <%= link_to "/sns/show/#{s.id}" do %>
                                         <%= image_tag s.photograph.url, class: "sns_image" %>
                                     <% end %>
