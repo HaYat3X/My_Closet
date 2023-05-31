@@ -2,8 +2,8 @@ class Sns::PostsController < ApplicationController
     # ! 一覧取得メソッド
     def list
         @snss = Social.all.page(params[:page]).per(40)
-        # * ログイン中のユーザーがフォローしているユーザー一覧を取得
-        @follow_list = UserRelation.where(follow_id: current_user.id)
+        # # * ログイン中のユーザーがフォローしているユーザー一覧を取得
+        # @follow_list = UserRelation.where(follow_id: current_user.id)
     end
 
     # ! 詳細取得メソッド
