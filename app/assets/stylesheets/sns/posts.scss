@@ -24,12 +24,10 @@
             right: 0px;
             z-index: 9999;
         }
-        .closet_image {
-            width: 130px;
-            height: 260px;
+        .sns_image {
+            width: 100%;
+            height: 180px;
             object-fit: cover;
-            border-radius: 5px;
-            box-shadow: var(--box-shadow);
         }
     }
     // * スマートフォン （中）
@@ -56,8 +54,13 @@
             right: 0px;
             z-index: 9999;
         }
+        .sns_image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
     }
-    // ! タブレット
+    // * タブレット
     @media (min-width: 768px) and (max-width: 991.98px) {
         // ? PC用のヘッダーは表示しない
         .pc-header {
@@ -81,8 +84,14 @@
             right: 0px;
             z-index: 9999;
         }
+        // ? SNS画像のサイズ設定
+        .sns_image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
     }
-    // ! デスクトップ
+    // * PC（小）
     @media (min-width: 992px) and (max-width: 1199.98px) {
         // ? モバイルのヘッダーは表示しない
         .mobile_header {
@@ -121,8 +130,14 @@
         .mobile-sidebar {
             display: none;
         }
+        // ? SNS画像のサイズ設定
+        .sns_image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
     }
-    // ! ラージデスクトップ
+    // * PC（大）
     @media (min-width: 1200px) {
         // ? モバイルのヘッダーは表示しない
         .mobile_header {
@@ -161,6 +176,12 @@
         // ? モバイルのサイドバーは表示しない
         .mobile-sidebar {
             display: none;
+        }
+        // ? SNS画像のサイズ設定
+        .sns_image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
         }
     }
 }
