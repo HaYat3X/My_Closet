@@ -28,8 +28,8 @@
         </li>
         <li class="nav-item">
             <a href="/suggestion" class="nav-link fw-bold d-flex align-items-center">
-                <i class="bi bi bi-grid fs-5"></i>
-                コーディネート提案
+                <i class="bi bi-robot fs-5"></i>
+                AI提案
             </a>
         </li>
         <li class="nav-item">
@@ -68,12 +68,12 @@
             <% end %>
         <% end %>
         <ul class="dropdown-menu text-small shadow">
-            <li>
+            <li class="action-link">
                 <%# ? サインインしている場合はサインアウトボタン、サインアウトしている場合はサインインボタンが表示される %>
                 <% if user_signed_in? %>
                     <%= link_to "サインアウト", destroy_user_session_path, method: :delete, class: "dropdown-item col-12" %>    
                 <% else %>
-                    <%= link_to "サインイン", new_user_session_path, method: :delete, class: "dropdown-item col-12" %>
+                    <%= link_to "サインイン", new_user_session_path, method: :get, class: "dropdown-item col-12" %>
                 <% end %>
             </li>
         </ul>
