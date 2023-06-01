@@ -134,6 +134,19 @@ class Sns::PostsController < ApplicationController
         # * urlから投稿id取得
         post_id = params[:id]
         @social = Social.find(post_id)
+
+        # ** 一度選択したアイテムは削除できないため、一旦nullに
+        @social.item1 = nil 
+        @social.item2 = nil 
+        @social.item3 = nil 
+        @social.item4 = nil 
+        @social.item5 = nil 
+        @social.item6 = nil 
+
+        # * 変更を保存、且つ再読み込み
+        @social.save
+        @social.reload
+
         # * ログインしているユーザが登録したアイテムのデータを取得
         @closets_all = Closet.where(user_id: current_user.id)
 
