@@ -1,3 +1,58 @@
-// Place all the styles related to the sns/searchs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+// ! searchsフォルダのレイアウト （search）
+#sns_searchs {
+  // ! 全サイズ共通
+
+  // * スマートフォン （小）
+  @media (max-width: 575.98px) {
+  }
+  // * スマートフォン （中）
+  @media (min-width: 576px) and (max-width: 767.98px) {
+  }
+  // * タブレット
+  @media (min-width: 768px) and (max-width: 991.98px) {
+  }
+
+  // * PC（小）
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+    // ? モバイルのヘッダーは表示しない
+    .mobile_header {
+      display: none;
+    }
+    // ? モバイル用のコーディネート投稿ボタンのため表示しない
+    .mobile-post-btn {
+      display: none;
+    }
+    // ? モバイルのサイドバーは表示しない
+    .mobile-sidebar {
+      display: none;
+    }
+    // ? SNS検索画面の画像サイズ
+    .sns_search_image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+  }
+
+  // * PC（大）
+  @media (min-width: 1200px) {
+    // ? モバイルのヘッダーは表示しない
+    .mobile_header {
+      display: none;
+    }
+    // ? モバイル用のコーディネート投稿ボタンのため表示しない
+    .mobile-post-btn {
+      display: none;
+    }
+    // ? モバイルのサイドバーは表示しない
+    .mobile-sidebar {
+      display: none;
+    }
+    // ? SNS一覧画面の画像サイズ
+    .sns_search_image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+  }
+}
