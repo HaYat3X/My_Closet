@@ -1,187 +1,198 @@
 // ! postsフォルダのレイアウト （edit, list, new, show）
 #posts {
-    // * スマートフォン （小）
-    @media (max-width: 575.98px) {
-        // ? PC用のヘッダーは表示しない
-        .pc-header {
-            display: none;
-        }
-        // ? コーディネート投稿ボタンのレイアウト
-        .mobile-post-btn {
-            position: fixed;
-            bottom: 60px;
-            right: 15px;
-            z-index: 9999;
-        }
-        // ? PCのサイドバーは表示しない
-        .pc-sidebar {
-            display: none;
-        }
-        // ? モバイルのサイドバーのレイアウト
-        .mobile-sidebar {
-            position: fixed;
-            bottom: 0px;
-            right: 0px;
-            z-index: 9999;
-        }
-        .sns_image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
+    // ! 全サイズ共通
+  // ?　タブのアクションカラー変更
+  .sns-tab {
+    .active {
+      color: var(--primary);
     }
-    // * スマートフォン （中）
-    @media (min-width: 576px) and (max-width: 767.98px) {
-        // ? PC用のヘッダーは表示しない
-        .pc-header {
-            display: none;
-        }
-        // ? コーディネート投稿ボタンのレイアウト
-        .mobile-post-btn {
-            position: fixed;
-            bottom: 60px;
-            right: 15px;
-            z-index: 9999;
-        }
-        // ? PCのサイドバーは表示しない
-        .pc-sidebar {
-            display: none;
-        }
-        // ? モバイルのサイドバーのレイアウト
-        .mobile-sidebar {
-            position: fixed;
-            bottom: 0px;
-            right: 0px;
-            z-index: 9999;
-        }
-        .sns_image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
+    a {
+      color: var(--dark);
     }
-    // * タブレット
-    @media (min-width: 768px) and (max-width: 991.98px) {
-        // ? PC用のヘッダーは表示しない
-        .pc-header {
-            display: none;
-        }
-        // ? コーディネート投稿ボタンのレイアウト
-        .mobile-post-btn {
-            position: fixed;
-            bottom: 60px;
-            right: 50px;
-            z-index: 9999;
-        }
-        // ? PCのサイドバーは表示しない
-        .pc-sidebar {
-            display: none;
-        }
-        // ? モバイルのサイドバーのレイアウト
-        .mobile-sidebar {
-            position: fixed;
-            bottom: 0px;
-            right: 0px;
-            z-index: 9999;
-        }
-        // ? SNS画像のサイズ設定
-        .sns_image {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-        }
+  }
+
+  // * スマートフォン （小）
+  @media (max-width: 575.98px) {
+    // ? PC用のヘッダーは表示しない
+    .pc-header {
+      display: none;
     }
-    // * PC（小）
-    @media (min-width: 992px) and (max-width: 1199.98px) {
-        // ? モバイルのヘッダーは表示しない
-        .mobile_header {
-            display: none;
-        }
-        // ? モバイル用のコーディネート投稿ボタンのため表示しない
-        .mobile-post-btn {
-            display: none;
-        }
-        // * sidebar関連
-        .pc-sidebar {
-            border-radius: 5px;
-            // アイコンの表示設定
-            i {
-                margin-right: 10px;
-            }
-            // リストの表示設定
-            li {
-                box-shadow: var(--box-shadow);
-                border-radius: 5px;
-                margin-top: 5px;
-            }
-            li:hover {
-                background-color: var(--primary);
-                border-radius: 5px;
-            }
-            // リンクの表示設定
-            a {
-                color: var(--dark);
-            }
-            a:hover {
-                color: #ffffff;
-            }
-        }
-        // ? モバイルのサイドバーは表示しない
-        .mobile-sidebar {
-            display: none;
-        }
-        // ? SNS画像のサイズ設定
-        .sns_image {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-        }
+    // ? コーディネート投稿ボタンのレイアウト
+    .mobile-post-btn {
+      position: fixed;
+      bottom: 60px;
+      right: 15px;
+      z-index: 9999;
     }
-    // * PC（大）
-    @media (min-width: 1200px) {
-        // ? モバイルのヘッダーは表示しない
-        .mobile_header {
-            display: none;
-        }
-        // ? モバイル用のコーディネート投稿ボタンのため表示しない
-        .mobile-post-btn {
-            display: none;
-        }
-        // ? PCのサイドバーのレイアウト
-        .pc-sidebar {
-            // 角を少し丸く
-            border-radius: 5px;
-            // アイコンの表示設定
-            i {
-                margin-right: 10px;
-            }
-            // リストの表示設定
-            li {
-                box-shadow: var(--box-shadow);
-                border-radius: 5px;
-                margin-top: 5px;
-            }
-            li:hover {
-                background-color: var(--primary);
-                border-radius: 5px;
-            }
-            // リンクの表示設定
-            a {
-                color: var(--dark);
-            }
-            a:hover {
-                color: #ffffff;
-            }
-        }
-        // ? モバイルのサイドバーは表示しない
-        .mobile-sidebar {
-            display: none;
-        }
-        // ? SNS画像のサイズ設定
-        .sns_image {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-        }
+    // ? PCのサイドバーは表示しない
+    .pc-sidebar {
+      display: none;
     }
+    // ? モバイルのサイドバーのレイアウト
+    .mobile-sidebar {
+      position: fixed;
+      bottom: 0px;
+      right: 0px;
+      z-index: 9999;
+    }
+    .sns_image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+  }
+  // * スマートフォン （中）
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    // ? PC用のヘッダーは表示しない
+    .pc-header {
+      display: none;
+    }
+    // ? コーディネート投稿ボタンのレイアウト
+    .mobile-post-btn {
+      position: fixed;
+      bottom: 60px;
+      right: 15px;
+      z-index: 9999;
+    }
+    // ? PCのサイドバーは表示しない
+    .pc-sidebar {
+      display: none;
+    }
+    // ? モバイルのサイドバーのレイアウト
+    .mobile-sidebar {
+      position: fixed;
+      bottom: 0px;
+      right: 0px;
+      z-index: 9999;
+    }
+    .sns_image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+  }
+  // * タブレット
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    // ? PC用のヘッダーは表示しない
+    .pc-header {
+      display: none;
+    }
+    // ? コーディネート投稿ボタンのレイアウト
+    .mobile-post-btn {
+      position: fixed;
+      bottom: 60px;
+      right: 50px;
+      z-index: 9999;
+    }
+    // ? PCのサイドバーは表示しない
+    .pc-sidebar {
+      display: none;
+    }
+    // ? モバイルのサイドバーのレイアウト
+    .mobile-sidebar {
+      position: fixed;
+      bottom: 0px;
+      right: 0px;
+      z-index: 9999;
+    }
+    // ? SNS画像のサイズ設定
+    .sns_image {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+    }
+  }
+  // * PC（小）
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+    // ? モバイルのヘッダーは表示しない
+    .mobile_header {
+      display: none;
+    }
+    // ? モバイル用のコーディネート投稿ボタンのため表示しない
+    .mobile-post-btn {
+      display: none;
+    }
+    // * sidebar関連
+    .pc-sidebar {
+      border-radius: 5px;
+      // アイコンの表示設定
+      i {
+        margin-right: 10px;
+      }
+      // リストの表示設定
+      li {
+        box-shadow: var(--box-shadow);
+        border-radius: 5px;
+        margin-top: 5px;
+      }
+      li:hover {
+        background-color: var(--primary);
+        border-radius: 5px;
+      }
+      // リンクの表示設定
+      a {
+        color: var(--dark);
+      }
+      a:hover {
+        color: #ffffff;
+      }
+    }
+    // ? モバイルのサイドバーは表示しない
+    .mobile-sidebar {
+      display: none;
+    }
+    // ? SNS画像のサイズ設定
+    .sns_image {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+    }
+  }
+  // * PC（大）
+  @media (min-width: 1200px) {
+    // ? モバイルのヘッダーは表示しない
+    .mobile_header {
+      display: none;
+    }
+    // ? モバイル用のコーディネート投稿ボタンのため表示しない
+    .mobile-post-btn {
+      display: none;
+    }
+    // ? PCのサイドバーのレイアウト
+    .pc-sidebar {
+      // 角を少し丸く
+      border-radius: 5px;
+      // アイコンの表示設定
+      i {
+        margin-right: 10px;
+      }
+      // リストの表示設定
+      li {
+        box-shadow: var(--box-shadow);
+        border-radius: 5px;
+        margin-top: 5px;
+      }
+      li:hover {
+        background-color: var(--primary);
+        border-radius: 5px;
+      }
+      // リンクの表示設定
+      a {
+        color: var(--dark);
+      }
+      a:hover {
+        color: #ffffff;
+      }
+    }
+    // ? モバイルのサイドバーは表示しない
+    .mobile-sidebar {
+      display: none;
+    }
+    // ? SNS画像のサイズ設定
+    .sns_image {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+    }
+  }
 }
