@@ -1,6 +1,6 @@
 // ! postsフォルダのレイアウト （edit, list, new, show）
 #posts {
-    // ! 全サイズ共通
+  // ! 全サイズ共通
   // ?　タブのアクションカラー変更
   .sns-tab {
     .active {
@@ -8,6 +8,33 @@
     }
     a {
       color: var(--dark);
+    }
+  }
+  // * sidebar関連
+  .pc-sidebar {
+    border-radius: 5px;
+    // アイコンの表示設定
+    i {
+      margin-right: 10px;
+    }
+    // リストの表示設定
+    li:hover {
+      background-color: var(--primary);
+      border-radius: 5px;
+    }
+    // リンクの表示設定
+    a {
+      color: var(--dark);
+    }
+    a:hover {
+      color: #ffffff;
+    }
+    // ? サインイン、サインアウトのレイアウト
+    .action-link {
+      a:hover {
+        color: var(--dark);
+        background-color: var(--bg);
+      }
     }
   }
 
@@ -112,31 +139,6 @@
     .mobile-post-btn {
       display: none;
     }
-    // * sidebar関連
-    .pc-sidebar {
-      border-radius: 5px;
-      // アイコンの表示設定
-      i {
-        margin-right: 10px;
-      }
-      // リストの表示設定
-      li {
-        box-shadow: var(--box-shadow);
-        border-radius: 5px;
-        margin-top: 5px;
-      }
-      li:hover {
-        background-color: var(--primary);
-        border-radius: 5px;
-      }
-      // リンクの表示設定
-      a {
-        color: var(--dark);
-      }
-      a:hover {
-        color: #ffffff;
-      }
-    }
     // ? モバイルのサイドバーは表示しない
     .mobile-sidebar {
       display: none;
@@ -157,32 +159,6 @@
     // ? モバイル用のコーディネート投稿ボタンのため表示しない
     .mobile-post-btn {
       display: none;
-    }
-    // ? PCのサイドバーのレイアウト
-    .pc-sidebar {
-      // 角を少し丸く
-      border-radius: 5px;
-      // アイコンの表示設定
-      i {
-        margin-right: 10px;
-      }
-      // リストの表示設定
-      li {
-        box-shadow: var(--box-shadow);
-        border-radius: 5px;
-        margin-top: 5px;
-      }
-      li:hover {
-        background-color: var(--primary);
-        border-radius: 5px;
-      }
-      // リンクの表示設定
-      a {
-        color: var(--dark);
-      }
-      a:hover {
-        color: #ffffff;
-      }
     }
     // ? モバイルのサイドバーは表示しない
     .mobile-sidebar {

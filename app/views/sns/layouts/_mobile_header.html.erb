@@ -20,7 +20,7 @@
                         <% if user_signed_in? %>
                             <%= link_to "サインアウト", destroy_user_session_path, method: :delete, class: "btn btn-primary col-12" %>    
                         <% else %>
-                            <%= link_to "サインイン", new_user_session_path, method: :delete, class: "btn btn-primary col-12" %>
+                            <%= link_to "サインイン", new_user_session_path, method: :get, class: "btn btn-primary col-12" %>
                         <% end %>
                     </li>  
                 </ul>
