@@ -1,42 +1,53 @@
-<div id="closet_show">
+<div id="posts">
     <%# ! header %>
-    <%# <%= render "sns/layouts/header" %> %>
-    <div class="d-flex">
+    <div class="mobile-header">
+        <%= render "sns/layouts/mobile_header" %>
+    </div>
+
+    <div class="pc-header">
+        <%= render "sns/layouts/pc_header" %>
+    </div>
+
+    <div class="row g-0">
         <%# ! sidebar %>
-        <div class="col-lg-3">
-            <%# <%= render "sns/layouts/sidebar" %> %>
+        <div class="col-lg-2 pc-sidebar">
+            <%= render "sns/layouts/pc_sidebar" %>
+        </div>
+
+        <div class="col-12 mobile-sidebar">
+            <%= render "sns/layouts/mobile_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-9">
-            <div class="m-3 bg-light">
+        <div class="list_content col-lg-10 col-12">
+            <div class="mx-3">
                 <div class="row">
                     <div class="col-lg-6">
-                        <%= image_tag @sns.photograph.url, class: "closet_image" %>
+                        <%= image_tag @sns.photograph.url, class: "sns_show_image" %>
                     </div>
                     <div class="col-lg-6">
-                        <div class="bg-white m-2 row">
+                        <div class="bg-white row m-1">
                             <div class="col-lg-2">
-                                <%= image_tag "/assets/img_1.png", class: "closet_image", style: "width: 60px; height: 60px; border-radius: 50px;" %>
+                                <%= image_tag "/assets/img_1.png", class: "sns_image", style: "width: 60px; height: 60px; border-radius: 50px;" %>
                             </div>
-                            <div class="col-lg-7 d-flex align-items-center">
+                            <div class="fw-bold col-lg-7 d-flex align-items-center">
                                 <%= @sns.user.user_name %>
                             </div>
                             <div class="col-lg-3 d-flex align-items-center">
                                 <button class="btn btn-primary">フォロー</button>
                             </div>
                         </div>
-                        <div class="bg-white m-2 row mt-3">
+                        <div class="bg-white m-1 row mt-3">
                             <div class="col-lg-12 fw-bold">
                                 <%= @sns.message %>
                             </div>
                         </div>
-                        <div class="bg-white m-2 row mt-3">
+                        <div class="bg-white m-1 row mt-3">
                             <div class="col-lg-12">
                                #<%= @sns.tag %>
                             </div>
                         </div>
-                        <div class="bg-white m-2 row mt-3">
+                        <div class="bg-white m-1 row mt-3">
                             <p class="fw-bold">着用アイテム</p>
                             <div class="col-lg-4">
                                 <% if @item1 %>
@@ -106,6 +117,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
