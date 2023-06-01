@@ -1,3 +1,20 @@
-// Place all the styles related to the sns/searchs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+// ! searchsフォルダのレイアウト （search）
+#posts {
+  // ! 全サイズ共通
+
+  // * PC（大）
+  @media (min-width: 1200px) {
+    // ? モバイルのヘッダーは表示しない
+    .mobile_header {
+      display: none;
+    }
+    // ? モバイル用のコーディネート投稿ボタンのため表示しない
+    .mobile-post-btn {
+      display: none;
+    }
+    // ? モバイルのサイドバーは表示しない
+    .mobile-sidebar {
+      display: none;
+    }
+  }
+}
