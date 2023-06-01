@@ -112,6 +112,7 @@
       .icon img {
         width: 100%;
         height: 130px;
+        object-fit: cover;
       }
     }
   }
@@ -149,6 +150,7 @@
       .icon img {
         width: 100%;
         height: 140px;
+        object-fit: cover;
       }
     }
   }
@@ -187,6 +189,7 @@
       .icon img {
         width: 100%;
         height: 200px;
+        object-fit: cover;
       }
     }
   }
@@ -214,6 +217,7 @@
       .icon img {
         width: 100%;
         height: 200px;
+        object-fit: cover;
       }
     }
   }
@@ -236,6 +240,13 @@
       width: 100%;
       height: 400px;
       object-fit: cover;
+    }
+    .input-container {
+      .icon img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
     }
   }
 }
