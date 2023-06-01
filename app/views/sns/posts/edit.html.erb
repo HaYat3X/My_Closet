@@ -50,6 +50,10 @@
                         </div>
                     </div>
 
+                    <div class="mb-3">
+                        <%= button_tag "選択したすべてのアイテムを解除", type: "button", class: "col-12 btn btn-outline-primary", id: "clear-radio" %>
+                    </div>
+
                     <div class="accordion" id="accordionExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
@@ -112,7 +116,7 @@
                                                         <%= f.radio_button :item1, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -128,7 +132,7 @@
                                                         <%= f.radio_button :item1, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -144,7 +148,7 @@
                                                         <%= f.radio_button :item1, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -160,7 +164,7 @@
                                                         <%= f.radio_button :item1, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -176,7 +180,7 @@
                                                         <%= f.radio_button :item1, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -233,7 +237,7 @@
                                                         <%= f.radio_button :item2, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -249,7 +253,7 @@
                                                         <%= f.radio_button :item2, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -265,7 +269,7 @@
                                                         <%= f.radio_button :item2, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -281,7 +285,7 @@
                                                         <%= f.radio_button :item2, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -297,7 +301,7 @@
                                                         <%= f.radio_button :item2, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -313,7 +317,7 @@
                                                         <%= f.radio_button :item2, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -370,7 +374,7 @@
                                                         <%= f.radio_button :item3, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -386,7 +390,7 @@
                                                         <%= f.radio_button :item3, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -402,7 +406,7 @@
                                                         <%= f.radio_button :item3, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -418,7 +422,7 @@
                                                         <%= f.radio_button :item3, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -434,7 +438,7 @@
                                                         <%= f.radio_button :item3, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -450,7 +454,7 @@
                                                         <%= f.radio_button :item3, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -507,7 +511,7 @@
                                                         <%= f.radio_button :item4, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -523,7 +527,7 @@
                                                         <%= f.radio_button :item4, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -539,7 +543,7 @@
                                                         <%= f.radio_button :item4, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -555,7 +559,7 @@
                                                         <%= f.radio_button :item4, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -571,7 +575,7 @@
                                                         <%= f.radio_button :item4, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -587,7 +591,7 @@
                                                         <%= f.radio_button :item4, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -644,7 +648,7 @@
                                                         <%= f.radio_button :item5, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -660,7 +664,7 @@
                                                         <%= f.radio_button :item5, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -676,7 +680,7 @@
                                                         <%= f.radio_button :item5, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -692,7 +696,7 @@
                                                         <%= f.radio_button :item5, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -708,7 +712,7 @@
                                                         <%= f.radio_button :item5, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -724,7 +728,7 @@
                                                         <%= f.radio_button :item5, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -778,10 +782,10 @@
                                             <div class="row">
                                                 <% @closets_all.each do |c| %>
                                                     <div class="col-lg-3 mt-1 col-md-3 col-4 row g-1 input-container">
-                                                        <%= f.radio_button :item6, c.id, class: "radio-button" %>
+                                                        <%= f.radio_button :item1, c.id, class: "radio-button", onclick: "toggleRadioButton(event, this)" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -797,7 +801,7 @@
                                                         <%= f.radio_button :item6, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -813,7 +817,7 @@
                                                         <%= f.radio_button :item6, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -829,7 +833,7 @@
                                                         <%= f.radio_button :item6, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -845,7 +849,7 @@
                                                         <%= f.radio_button :item6, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -861,7 +865,7 @@
                                                         <%= f.radio_button :item6, c.id, class: "radio-button" %>
                                                         <div class="radio-tile">
                                                             <div class="icon walk-icon">
-                                                                <%= image_tag c.photograph.url, size: '120x180' %>
+                                                                <%= image_tag c.photograph.url, class: "sns-post-image" %>
                                                             </div>
                                                         </div>
                                                     </div>
