@@ -1,4 +1,4 @@
-<div id="sns_posts">
+<div id="sns_searchs">
     <%# ! header %>
     <div class="mobile-header">
         <%= render "sns/layouts/mobile_header" %>
@@ -32,7 +32,7 @@
                                 <% @search_result.each do |s| %>
                                     <div class="col-lg-3 col-md-4 col-4 mt-1">
                                         <%= link_to "/sns/show/#{s.id}" do %>
-                                            <%= image_tag s.photograph.url, class: "sns_image" %>
+                                            <%= image_tag s.photograph.url, class: "sns_search_image" %>
                                         <% end %>
                                     </div>
                                 <% end %>
