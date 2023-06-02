@@ -1,4 +1,7 @@
 class Sns::PostsController < ApplicationController
+    # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
+    before_action :move_to_signed_in, except: [:list, :show]
+
     # ! 一覧取得メソッド
     def list
         # * SNS投稿一覧取得 SNSに48件取得
@@ -124,6 +127,9 @@ class Sns::PostsController < ApplicationController
 
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @social.save
+            # ? ユーザの投稿頻度の高いタグを保存するプログラムを実行
+            suggestions_controller = Suggestion::ApisController.new()
+            suggestions_controller.call_user(current_user.id)
             redirect_to "/"
         else
             render :new
@@ -284,4 +290,10 @@ class Sns::PostsController < ApplicationController
         params.require(:social).permit(:tag, :message, :photograph, :item1, :item2, :item3, :item4, :item5, :item6)
     end
 
+     # ! ログインがしているのか判定する
+     def move_to_signed_in
+        unless user_signed_in?
+            redirect_to new_user_session_path, alert: "この操作は、サインインが必要です。"
+        end
+    end
 end
