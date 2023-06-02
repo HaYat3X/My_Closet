@@ -1,4 +1,4 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary sticky-top vh-100">
+<div class="sidebar-content d-flex flex-column flex-shrink-0 p-3 bg-white sticky-top vh-100">
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
             <a href="/" class="nav-link active text-white fw-bold d-flex align-items-center" aria-current="page">
@@ -47,24 +47,24 @@
         
     </ul>
     <hr>
-    <div class="dropdown mx-1" style="margin-bottom: 90px;">
+    <div class="dropdown" style="margin-bottom: 90px;">
         <%# ? サインインしている場合はユーザ情報、サインアウトしている場合はデフォルト情報が表示される %>
         <% if user_signed_in? %>
             <% if current_user.avatar.url == nil %>
                 <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center text-white text-decoration-none dropdown-toggle", "data-bs-toggle": "dropdown", "aria-expanded": "false" do %>
                     <%= image_tag "/assets/default-avatar.png", size: "30x30", class: "rounded-circle me-2" %>
-                    <strong class="text-dark"><%= current_user.user_name %></strong> 
+                    <label class="text-dark"><%= current_user.user_name %></label> 
                 <% end %>
             <% else %>
                 <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center text-white text-decoration-none dropdown-toggle", "data-bs-toggle": "dropdown", "aria-expanded": "false" do %>
                     <%= image_tag current_user.avatar.url, size: "30x30", class: "rounded-circle me-2" %>
-                    <strong class="text-dark"><%= current_user.user_name %></strong> 
+                    <label class="text-dark"><%= current_user.user_name %></label> 
                 <% end %>
             <% end %>
         <% else %>
             <%= link_to "/", class: "d-flex align-items-center text-white text-decoration-none dropdown-toggle", "data-bs-toggle": "dropdown", "aria-expanded": "false" do %>
                 <%= image_tag "/assets/default-avatar.png", size: "30x30", class: "rounded-circle me-2" %>
-                <strong class="text-dark">ゲスト</strong> 
+                <label class="text-dark">ゲスト</label> 
             <% end %>
         <% end %>
         <ul class="dropdown-menu text-small shadow">

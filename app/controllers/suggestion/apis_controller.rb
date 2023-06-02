@@ -88,14 +88,10 @@ class Suggestion::ApisController < ApplicationController
     end
 
     # ! 各ユーザーのファッションの投稿の傾向を保存する
-    def call_user
+    def call_user(user_id)
         # * 提案結果に基づいておすすめユーザを取得
-        # ? 1、全ユーザを取得
-        users = User.all()
-
-        users.each do |u|
             # ? 各ユーザが投稿した投稿のタグを取得する
-            snss = Social.all.where(user_id: u.id)
+            snss = Social.all.where(user_id: user_id)
 
             # ? からの配列を用意する
             my_array = []
@@ -122,11 +118,6 @@ class Suggestion::ApisController < ApplicationController
             most_common_elements = counts.select { |_, count| count == max_count }.keys
 
             # * ユーザの投稿頻度が高いタグを保存
-            if u.update(tendency: most_common_elements[0])
-                redirect_to "/suggestion"
-            else
-                redirect_to "/"
-            end
-        end
+            User.find(user_id).update(tendency: most_common_elements[0])
     end
 end
