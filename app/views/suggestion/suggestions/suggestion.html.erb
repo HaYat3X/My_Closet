@@ -18,6 +18,9 @@
                     <li class="nav-item">
                         <a href="#user_suggest" class="nav-link" data-bs-toggle="tab">おすすめユーザ</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="#closet_suggest" class="nav-link" data-bs-toggle="tab">クローゼットからの提案</a>
+                    </li>
                 </ul>
 
                 <%# * タブエリア %>
@@ -69,6 +72,24 @@
                                 <% end %>
                             </p>
                         </div>
+                    </div>
+
+                    <div id="closet_suggest" class="tab-pane">                
+                        <% if @outfit == nil %>
+                            <h5><%= @message %></h5>
+                        <% end %>
+                        
+                        <% if @outfit %>
+                            <%= link_to "/sns/show/#{@outfit[0].id}" do %>
+                                <%= image_tag @outfit[0].photograph.url, size: "100x150" %>
+                            <% end %>
+                            <%= link_to "/sns/show/#{@outfit[1].id}" do %>
+                                <%= image_tag @outfit[1].photograph.url, size: "100x150" %>
+                            <% end %>
+                            <%= link_to "/sns/show/#{@outfit[2].id}" do %>
+                                <%= image_tag @outfit[2].photograph.url, size: "100x150" %>
+                            <% end %>
+                        <% end %>
                     </div>
                 </div>
             </div>
