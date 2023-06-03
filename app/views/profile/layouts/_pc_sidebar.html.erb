@@ -1,14 +1,14 @@
 <div class="sidebar-content d-flex flex-column flex-shrink-0 p-3 bg-white sticky-top vh-100">
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="/" class="nav-link active text-white fw-bold d-flex align-items-center" aria-current="page">
+            <a href="/" class="nav-link fw-bold d-flex align-items-center" aria-current="page">
                 <i class="bi bi-chat fs-5"></i>
                 SNS
             </a>
         </li>
         <li class="nav-item">
             <% if user_signed_in? %>
-                <%= link_to "/profile/show/#{current_user.id}", class: "nav-link fw-bold d-flex align-items-center" do %>
+                <%= link_to "/profile/show/#{current_user.id}", class: "nav-link active text-white fw-bold d-flex align-items-center" do %>
                 <i class="bi bi-person fs-5"></i>
                 マイページ
                 <% end %>

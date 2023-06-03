@@ -1,4 +1,26 @@
-                <%= form_with(model: @user_data, url: "/profile/update/#{@user_data.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+<div id="profile_profiles">
+    <%# ! header %>
+    <div class="pc-header">
+        <%= render "profile/layouts/pc_header" %>
+    </div>
+
+    <div class="row g-0">
+        <%# ! sidebar %>
+        <div class="col-lg-2 pc-sidebar">
+            <%= render "profile/layouts/pc_sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="list_content col-lg-10 col-12">
+            <div class="bg-white py-5 h-100">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
+              <%= form_with(model: @user_data, url: "/profile/update/#{@user_data.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
                   <div class="mb-3">
                     <%= f.file_field :avatar, required: true, class: "form-control", placeholder: "アイコン" %>
                     <div class="invalid-feedback">
