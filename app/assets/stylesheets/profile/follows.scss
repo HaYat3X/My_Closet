@@ -1,6 +1,16 @@
 // ! profilesフォルダのレイアウト （follower_list, follows_list）
 #profile_follows {
     // ! 全サイズ共通
+    // ?　タブのアクションカラー変更
+    .nav-ul {
+        .active {
+            color: var(--primary);
+        }
+        a {
+            color: var(--dark);
+        }
+    }
+
     // * sidebar関連
     .pc-sidebar {
         border-radius: 5px;
