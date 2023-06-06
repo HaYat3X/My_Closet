@@ -1,6 +1,16 @@
 // ! profilesフォルダのレイアウト （edit, show）
 #profile_profiles {
     // ! 全サイズ共通
+    // ?　タブのアクションカラー変更
+    .tab-ul {
+        .active {
+            color: var(--primary);
+        }
+        a {
+            color: var(--dark);
+        }
+    }
+
     // * sidebar関連
     .pc-sidebar {
         border-radius: 5px;
@@ -46,6 +56,11 @@
         .avatar{
             height: 200px;
             object-fit: cover;
+        }
+        // ? マイページ投稿画像のサイズ
+        .sns_image{
+            height: 180px;
+            width: auto;
         }
     }
 }

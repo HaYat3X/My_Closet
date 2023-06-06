@@ -11,21 +11,11 @@
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10 col-12">
+        <div class="list_content col-lg-10">
             <div class="bg-white py-5 h-100">
-
-            </div>
-        </div>
-    </div>
-</div>
-
- 
-              <%= form_with(model: @user_data, url: "/profile/update/#{@user_data.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                <%= form_with(model: @user_data, url: "/profile/update/#{@user_data.id}", local: true, :html => {class:"needs-validation mx-auto col-lg-8", :novalidate => true}) do |f| %>
                   <div class="mb-3">
-                    <%= f.file_field :avatar, required: true, class: "form-control", placeholder: "アイコン" %>
-                    <div class="invalid-feedback">
-                      写真を入力して下さい
-                    </div>
+                    <%= f.file_field :avatar,  class: "form-control", placeholder: "アイコン" %>
                   </div>
                   <div class="mb-3">
                     <%= f.text_field :user_name, required: true, class: "form-control", placeholder: "名前" %>
@@ -48,3 +38,8 @@
                   <%= f.submit "登録する", class: "btn btn-primary" %>
                 <% end %>
                 </div>
+
+            </div>
+        </div>
+    </div>
+</div>
