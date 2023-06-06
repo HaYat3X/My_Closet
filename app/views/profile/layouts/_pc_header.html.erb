@@ -1,28 +1,5 @@
 <nav class="pc_header navbar navbar-expand-lg bg-body-tertiary mb-2 py-3">
     <div class="container-fluid col-lg-11">
         <a class="navbar-brand fw-bold text-primary fs-4" href="/">My Closet</a>
-        
-        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="Navber">
-            <div class="mx-2 d-flex ms-auto" role="search">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item pc_post_btn">
-                        <a href="/sns/new" class="btn btn-outline-primary rounded-pill d-flex mx-3 align-items-center">
-                            <i class="bi bi-plus-lg"></i>
-                            コーディネート投稿
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex collapse navbar-collapse") do |f| %>
-                            <%= f.text_field :search, class: "form-control me-2", placeholder: "コーディネートを検索" %>
-                            <%= f.submit "検索", class: "btn btn-outline-success flex-shrink-0" %>
-                        <% end %>
-                    </li>  
-                </ul>
-            </div>
-        </div>
     </div>
 </nav>

@@ -5,13 +5,13 @@ class Profile::ProfilesController < ApplicationController
         @user = User.find(params[:id])
 
         # ログイン中のユーザが投稿したSNS投稿
-        @snss = Social.where(user_id: @user.id)
+        @snss = Social.where(user_id: @user.id).page(params[:page]).per(16)
 
         #ログイン中のユーザーがいいねしたSNS投稿
-        @sns_likes = SocialLike.where(user_id: @user.id)
+        @sns_likes = SocialLike.where(user_id: @user.id).page(params[:page]).per(16)
 
         #ログイン中のユーザーが投稿したクローゼット
-        @closets = Closet.where(user_id:@user.id)
+        @closets = Closet.where(user_id:@user.id).page(params[:page]).per(16)
 
         # フォロー数
         @follow_list = UserRelation.where(follow_id: params[:id]).count
