@@ -10,7 +10,6 @@
             color: var(--dark);
         }
     }
-
     // * sidebar関連
     .pc-sidebar {
         border-radius: 5px;
@@ -52,15 +51,23 @@
     @media (min-width: 992px) and (max-width: 1199.98px) {}
     // * PC（大）
     @media (min-width: 1200px) {
-        // ? プロフィールアバターサイズ
-        .avatar{
-            height: 200px;
+        // ? プロフィール画面のアイコンサイズ
+        .avatar {
+            width: 150px;
+            height: 150px;
             object-fit: cover;
+            border-radius: 50%;
         }
         // ? マイページ投稿画像のサイズ
-        .sns_image{
+        .sns_image {
             height: 180px;
             width: auto;
+        }
+        // ? プロフィール画面のフォロー、フォロワーリンクの調整
+        .follows_area {
+            a {
+                text-decoration: none;
+            }
         }
     }
 }
