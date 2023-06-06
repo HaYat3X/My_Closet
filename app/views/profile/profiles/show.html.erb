@@ -12,55 +12,63 @@
 
         <%# ! contents %>
         <div class="list_content col-lg-10 col-12">
-            <div class="bg-white py-5 h-100">
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <div class="bg-white h-100">
 
             <section class="">
-            <div class="py-5">
+            <div class="">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-12 col-xl-12">
                     <div class="card">
-                    <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+                    <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:230px;">
                         <div class="ms-4 mt-5 d-flex flex-column" style="width: 180px;">
                         <% if @user.avatar.url%>
-                            <%= image_tag @user.avatar.url, style: "width: 200px; height: 200px; object-fit: cover; z-index: 1", class: "avatar img-fluid img-thumbnail mt-4 mb-2", size: "100x100" %>
+                            <%= image_tag @user.avatar.url, class: "avatar img-thumbnail mb-2" %>
                         <% else %>
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                            <img src="/assets/default-avatar.png"
                             alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                             style="width: 200px; z-index: 1">
                         <% end %>
+
+
                         
                         </div>
-                        <div class="ms-3" style="margin-top: 100px;">
+
+                        <div class="ms-3" style="margin-top: 140px;">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <h5><%= @user.user_name %></h5>
-                                <p>年齢：<%= @user.age %> 歳　性別：<%= @user.gender %></p>
+                            <div class="col-lg-12">
+                                <% if @user.age or @user.gender  == nil %>
+                                    <h5><%= @user.user_name %></h5>
+                                    <p>年齢：<%= @user.age %> 歳　性別：<%= @user.gender %></p>
+                                <% end %>
                             </div>
-                            <div class="col-lg-6 text-end">
-                                <% if @user.id == current_user.id %>
+                           
+                        </div>
+                    
+                        </div>
+                    </div>
+
+                    <div class="p-4 text-black" style="background-color: #F8F9FA;">
+                    <div class="row">
+                        <div class="d-flex text-center py-1 col-lg-6">
+                            <div>
+                                <p class="mb-1 h5"><%= @snss.count %></p>
+                                <p class="small text-muted mb-0">投稿</p>
+                            </div>
+                            <div class="px-3">
+                                <%= link_to "/profile/follow_list/#{@user.id}", class: "text-dark" do %>
+                                    <p class="mb-1 h5"><%= @follow_list %></p>
+                                    <p class="small text-muted mb-0">フォロー</p>
+                                <% end %>
+                            </div>
+                            <div>
+                                <%= link_to "/profile/follower_list/#{@user.id}", class: "text-dark" do %>
+                                    <p class="mb-1 h5"><%= @follower_list %></p>
+                                    <p class="small text-muted mb-0">フォロワー</p>
+                                <% end %>
+                            </div>
+                        </div>
+                        <div class="py-1 col-lg-6 text-end">
+                            <% if @user.id == current_user.id %>
                                     <%= button_to "プロフィール更新", "/profile/edit/#{@user.id}", method: :get, class: "btn btn-primary" %>
                                 <% else %>
                                     <%# ! フォローしているかしていないか判断する %>
@@ -70,30 +78,8 @@
                                         <%= button_to "フォロー", "/profile/follow/#{@user.id}", method: :post, class: "btn btn-primary" %> 
                                     <% end %>
                                 <% end %>
-                            </div>
-                        </div>
-                    
                         </div>
                     </div>
-                    <div class="p-4 text-black" style="background-color: #F8F9FA;">
-                        <div class="d-flex justify-content-end text-center py-1">
-                        <div>
-                            <p class="mb-1 h5"><%= @snss.count %></p>
-                            <p class="small text-muted mb-0">投稿</p>
-                        </div>
-                        <div class="px-3">
-                            <%= link_to "/profile/follow_list/#{@user.id}", class: "text-dark" do %>
-                                <p class="mb-1 h5"><%= @follow_list %></p>
-                                <p class="small text-muted mb-0">フォロー</p>
-                            <% end %>
-                        </div>
-                        <div>
-                            <%= link_to "/profile/follower_list/#{@user.id}", class: "text-dark" do %>
-                                <p class="mb-1 h5"><%= @follower_list %></p>
-                                <p class="small text-muted mb-0">フォロワー</p>
-                            <% end %>
-                        </div>
-                        </div>
                     </div>
                     <div class="card-body p-4 text-black">
                         <div class="mb-5">
@@ -102,15 +88,26 @@
                             <p class="font-italic mb-1"><%= @user.profile %></p>
                         </div>
                         </div>
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a href="#sns" class="nav-link active" data-bs-toggle="tab">投稿</a>
+
+
+                    <%# <ul class="nav nav-underline tab-ul col-lg-8 mx-auto" role="tablist">
+                        <li class="nav-item flex-fill">
+                            <a href="#all" class="fw-bold nav-link active text-center" data-bs-toggle="tab">すべての投稿</a>
+                        </li>
+                        <li class="nav-item flex-fill">
+                            <a href="#follow" class="fw-bold nav-link text-center" data-bs-toggle="tab">フォロー中</a>
+                        </li>
+                    </ul> %>
+
+                        <ul class="nav nav-underline mx-auto" role="tablist">
+                            <li class="nav-item flex-fill">
+                                <a href="#sns" class="fw-bold nav-link active text-center" data-bs-toggle="tab">投稿</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#sns_like" class="nav-link" data-bs-toggle="tab">いいね</a>
+                            <li class="nav-item flex-fill">
+                                <a href="#sns_like" class="fw-bold nav-link text-center" data-bs-toggle="tab">いいね</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#closet" class="nav-link" data-bs-toggle="tab">クローゼット</a>
+                            <li class="nav-item flex-fill">
+                                <a href="#closet" class="fw-bold nav-link text-center" data-bs-toggle="tab">クローゼット</a>
                             </li>
                         </ul>
 
@@ -173,4 +170,8 @@
                 </div>
             </div>
             </section>
-       
+
+            </div>
+        </div>
+    </div>
+</div>

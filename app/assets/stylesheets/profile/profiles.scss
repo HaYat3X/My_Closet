@@ -41,5 +41,11 @@
     // * PC（小）
     @media (min-width: 992px) and (max-width: 1199.98px) {}
     // * PC（大）
-    @media (min-width: 1200px) {}
+    @media (min-width: 1200px) {
+        // ? プロフィールアバターサイズ
+        .avatar{
+            height: 200px;
+            object-fit: cover;
+        }
+    }
 }
