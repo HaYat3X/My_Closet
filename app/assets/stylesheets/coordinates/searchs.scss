@@ -1,3 +1,54 @@
-// Place all the styles related to the coordinates/searchs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+// ! searchsフォルダのレイアウト （search）
+#closet_searchs {
+    // ! 全サイズ共通
+    // ?　タブのアクションカラー変更
+    .tab-ul {
+        .active {
+            color: var(--primary);
+        }
+        a {
+            color: var(--dark);
+        }
+    }
+    // * sidebar関連
+    .pc-sidebar {
+        border-radius: 5px;
+        // ? アイコンの表示設定
+        i {
+            margin-right: 10px;
+        }
+        // ? リストの表示設定
+        li:hover {
+            background-color: var(--primary);
+            border-radius: 5px;
+        }
+        // ? リンクの表示設定
+        a {
+            color: var(--dark);
+        }
+        a:hover {
+            color: #ffffff;
+        }
+        // ? サインイン、サインアウトのレイアウト
+        .action-link {
+            a:hover {
+                color: var(--dark);
+                background-color: var(--bg);
+            }
+        }
+        // ? コンテンツエリアと少し幅を空ける
+        .sidebar-content {
+            margin-right: 5px;
+        }
+    }
+    // * スマートフォン （小）
+    @media (max-width: 575.98px) {}
+    // * スマートフォン （中）
+    @media (min-width: 576px) and (max-width: 767.98px) {}
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 991.98px) {}
+    // * PC（小）
+    @media (min-width: 992px) and (max-width: 1199.98px) {}
+    // * PC（大）
+    @media (min-width: 1200px) {}
+}
