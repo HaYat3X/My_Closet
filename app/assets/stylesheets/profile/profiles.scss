@@ -2,7 +2,7 @@
 #profile_profiles {
     // ! 全サイズ共通
     // ?　タブのアクションカラー変更
-    .nav-link {
+    .tab-ul {
         .active {
             color: var(--primary);
         }
@@ -59,9 +59,10 @@
             border-radius: 50%;
         }
         // ? マイページ投稿画像のサイズ
-        .sns_image {
-            height: 180px;
-            width: auto;
+        .profiles_image {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
         }
         // ? プロフィール画面のフォロー、フォロワーリンクの調整
         .follows_area {
