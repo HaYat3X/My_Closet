@@ -12,27 +12,9 @@
 
         <%# ! contents %>
         <div class="list_content col-lg-10 col-12">
-            <div class="bg-white h-100">
-            移植しろ
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="closet_form">
-    <%# ! header %>
-   
-    <div class="d-flex">
-        <%# ! sidebar %>
-        <div class="col-lg-3">
-           
-        </div>
-
-        <%# ! contents %>
-        <div class="list_content col-lg-9">
-            <div class="m-3 bg-light p-5">
-                <%# * エラーメッセージの表示 %>
-                <div class="col-lg-9 mx-auto">
+            <div class="bg-white h-100 py-5">
+               <%# * エラーメッセージの表示 %>
+                <div class="col-lg-8 mx-auto">
                 <% if @closet.errors.any? %>
                     <div class="alert alert-danger" role="alert">
                         <% @closet.errors.each do |error| %>
@@ -45,17 +27,17 @@
                   <div class="mb-3">
                     <%= f.file_field :photograph, required: true, class: "form-control", placeholder: "写真" %>
                     <div class="invalid-feedback">
-                      写真を入力して下さい
+                      写真を入力して下さい。
                     </div>
                   </div>
                   <div class="mb-3">
-                    <%= f.select :big_Category, ['アウター', 'トップス', 'パンツ', 'シューズ', 'その他'], {include_blank: '選択してください'}, class: 'form-control', required: true %>
+                    <%= f.select :big_Category, ['アウター', 'トップス', 'ボトムス', 'シューズ', 'その他'], {include_blank: '大カテゴリーを選択してください'}, class: 'form-control', required: true, id: 'big-category-select' %>
                     <div class="invalid-feedback">
-                      大カテゴリーを入力して下さい
+                      大カテゴリーを入力して下さい。
                     </div>
                   </div>
-                    <div class="mb-3">
-                    <%= f.text_field :small_Category, class: "form-control", placeholder: "小カテゴリー" %>
+                  <div class="mb-3">
+                    <%= f.select :small_Category, [], {include_blank: '小カテゴリーを選択してください'}, class: 'form-control', id: "small-category-select" %>
                   </div>
                   <div class="mb-3">
                     <%= f.number_field :price, class: "form-control", placeholder: "金額" %>
@@ -71,7 +53,7 @@
                   </div>
                   <%= f.submit "登録する", class: "btn btn-primary" %>
                 <% end %>
-                </div>
+
             </div>
         </div>
     </div>

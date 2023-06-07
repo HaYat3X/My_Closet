@@ -125,7 +125,7 @@ class Coordinates::PostsController < ApplicationController
             elsif selected_value == "トップス"
                 @small_Category = ["Tシャツ","シャツ","ブラウス","ポロシャツ","ニットセーター","パーカー","ジャケット","スカート"]
 
-            elsif selected_value == "パンツ"
+            elsif selected_value == "ボトムス"
                 @small_Category = ["ジーンズ","パンツ","ショートパンツ","スカート","レギンス","ショーツ"]
 
             elsif selected_value == "シューズ"
