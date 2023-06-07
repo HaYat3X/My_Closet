@@ -38,9 +38,9 @@
                 <div class="tab-content">
                     <%# ? allタブエリア %>
                     <div id="all" class="tab-pane active">
-                        <div class="row">
+                        <div class="row g-1">
                             <% @closets_all.each do |c| %>
-                                <div class="col-lg-3 m-0 mt-3">
+                                <div class="col-lg-3 mt-1">
                                     <%= link_to "/closet/show/#{c.id}" do %>
                                         <%= image_tag c.photograph.url, class: "closet_image" %>
                                     <% end %>
