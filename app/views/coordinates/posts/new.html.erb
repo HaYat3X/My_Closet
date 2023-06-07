@@ -27,13 +27,13 @@
                   <div class="mb-3">
                     <%= f.file_field :photograph, required: true, class: "form-control", placeholder: "写真" %>
                     <div class="invalid-feedback">
-                      写真を入力して下さい
+                      写真を入力して下さい。
                     </div>
                   </div>
                   <div class="mb-3">
-                    <%= f.select :big_Category, ['アウター', 'トップス', 'パンツ', 'シューズ', 'その他'], {include_blank: '大カテゴリーを選択してください'}, class: 'form-control', required: true, id: 'big-category-select' %>
+                    <%= f.select :big_Category, ['アウター', 'トップス', 'ボトムス', 'シューズ', 'その他'], {include_blank: '大カテゴリーを選択してください'}, class: 'form-control', required: true, id: 'big-category-select' %>
                     <div class="invalid-feedback">
-                      大カテゴリーを入力して下さい
+                      大カテゴリーを入力して下さい。
                     </div>
                   </div>
                   <div class="mb-3">
