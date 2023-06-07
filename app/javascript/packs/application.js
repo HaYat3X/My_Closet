@@ -1,6 +1,8 @@
 import Rails from '@rails/ujs';
 import Turbolinks from 'turbolinks';
 import { ClearRadio } from './sns/posts';
+import $ from 'jquery';
+global.$ = global.jQuery = $;
 
 document.addEventListener('turbolinks:load', () => {
     // ! フォームのバリデーションチェック
@@ -23,6 +25,31 @@ document.addEventListener('turbolinks:load', () => {
 
     // ! 選択しているラジオボタンを解除
     ClearRadio();
+});
+
+// クローゼットのセレクトボックスをリアルタイムにかんし
+$(document).ready(function() {
+    $('#big-category-select').change(function() {
+        var selectedValue = $(this).val();
+        console.log(selectedValue); // 選択された値をコンソールに表示
+
+        // ここに選択内容に応じた処理を追加
+
+        // // 例: Ajaxリクエストを送信してサーバーサイドに選択内容を送信
+        // $.ajax({
+        //     url: '/update_selected_value', // 適切なエンドポイントのURLを設定
+        //     method: 'POST',
+        //     data: { selected_value: selectedValue },
+        //     success: function(response) {
+        //         // サーバーサイドからのレスポンスを処理
+        //         console.log(response);
+        //     },
+        //     error: function(error) {
+        //         // エラーハンドリング
+        //         console.log(error);
+        //     }
+        // });
+    });
 });
 
 Rails.start();
