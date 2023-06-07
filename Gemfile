@@ -20,6 +20,7 @@ gem 'kaminari'
 gem "ruby-openai"
 # * 画面のUIを調整するためのGem
 gem 'font-awesome-rails'
+gem 'fog-aws'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
