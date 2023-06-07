@@ -13,7 +13,99 @@
         <%# ! contents %>
         <div class="list_content col-lg-10 col-12">
             <div class="bg-white h-100">
-            移植しろ
+                <%# * タブ切り替え %>
+                <ul class="nav nav-underline tab-ul" role="tablist">
+                    <li class="nav-item flex-fill">
+                        <a href="#all" class="nav-link active text-center" data-bs-toggle="tab">すべて</a>
+                    </li>
+                    <li class="nav-item flex-fill">
+                        <a href="#outer" class="nav-link text-center" data-bs-toggle="tab">アウター</a>
+                    </li>
+                    <li class="nav-item flex-fill">
+                        <a href="#tops" class="nav-link text-center" data-bs-toggle="tab">トップス</a>
+                    </li>
+                    <li class="nav-item flex-fill">
+                        <a href="#pants" class="nav-link text-center" data-bs-toggle="tab">パンツ</a>
+                    </li>
+                    <li class="nav-item flex-fill">
+                        <a href="#shoes" class="nav-link text-center" data-bs-toggle="tab">シューズ</a>
+                    </li>
+                    <li class="nav-item flex-fill">
+                        <a href="#other" class="nav-link text-center" data-bs-toggle="tab">その他</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <%# ? allタブエリア %>
+                    <div id="all" class="tab-pane active">
+                        <div class="row">
+                            <% @closets_all.each do |c| %>
+                                <div class="col-lg-3 m-0 mt-3">
+                                    <%= link_to "/closet/show/#{c.id}" do %>
+                                        <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <% end %>
+                                </div>
+                            <% end %>
+
+                            <%= paginate @closets_all %>
+                        </div>
+                    </div>
+
+                    <%# ? outerタブエリア %>
+                    <div id="outer" class="tab-pane">
+                        <div class="row">
+                            <% @closets_outer.each do |c| %>
+                                <div class="col-lg-3 mt-3">
+                                    <%= image_tag c.photograph.url, class: "closet_image" %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+
+                    <%# ? topsタブエリア %>
+                    <div id="tops" class="tab-pane">
+                        <div class="row">
+                            <% @closets_tops.each do |c| %>
+                                <div class="col-lg-3 mt-3">
+                                    <%= image_tag c.photograph.url, class: "closet_image" %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+
+                    <%# ? pantsタブエリア %>
+                    <div id="pants" class="tab-pane">
+                        <div class="row">
+                            <% @closets_pants.each do |c| %>
+                                <div class="col-lg-3 mt-3">
+                                    <%= image_tag c.photograph.url, class: "closet_image" %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+
+                    <%# ? shoesタブエリア %>
+                    <div id="shoes" class="tab-pane">
+                        <div class="row">
+                            <% @closets_shoes.each do |c| %>
+                                <div class="col-lg-3 mt-3">
+                                    <%= image_tag c.photograph.url, class: "closet_image" %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+
+                    <%# ? otherタブエリア %>
+                    <div id="other" class="tab-pane">
+                        <div class="row">
+                            <% @closets_other.each do |c| %>
+                                <div class="col-lg-3 mt-3">
+                                    <%= image_tag c.photograph.url, class: "closet_image" %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
