@@ -35,7 +35,7 @@
                         <div class="ms-3" style="margin-top: 140px;">
                         <div class="row">
                             <div class="col-lg-12">
-                                <% if @user.age or @user.gender  == nil %>
+                                <% if @user.age or @user.gender  =x= nil %>
                                     <h5><%= @user.user_name %></h5>
                                     <p>年齢：<%= @user.age %> 歳　性別：<%= @user.gender %></p>
                                 <% end %>
