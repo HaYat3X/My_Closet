@@ -42,11 +42,21 @@ $(document).ready(function() {
             data: { selected_value: selectedValue },
             success: function(response) {
                 // サーバーサイドからのレスポンスを処理
-                console.log("いけまんこ");
+                var smallCategorySelect = $('#small-category-select');
+                    smallCategorySelect.empty(); // 小カテゴリーセレクトボックスをクリア
+                    var options = response.options;
+                    for (var i = 0; i < options.length; i++) {
+                        var option = $('<option>').text(options[i]);
+                            smallCategorySelect.append(option); // 選択肢を追加
+                            console.log(smallCategorySelect)
+                    }
+
+                    console.log("サーバーに成功")
+                    
             },
             error: function(error) {
                 // エラーハンドリング
-                console.log("ダチョウ");
+                console.log(error);
             }
         });
     });
