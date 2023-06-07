@@ -37,9 +37,7 @@
                     </div>
                   </div>
                   <div class="mb-3">
-
-
-                    <%# <%= f.select :small_Category, ['アウター', 'トップス', 'パンツ', 'シューズ', 'その他'], {include_blank: '小カテゴリーを選択してください'}, class: 'form-control' %> %>
+                    <%= f.select :small_Category, [], {include_blank: '小カテゴリーを選択してください'}, class: 'form-control', id: "small-category-select" %>
                   </div>
                   <div class="mb-3">
                     <%= f.number_field :price, class: "form-control", placeholder: "金額" %>
