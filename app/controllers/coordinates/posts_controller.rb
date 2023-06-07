@@ -114,6 +114,32 @@ class Coordinates::PostsController < ApplicationController
         end
     end
 
+    #closetページの大カテゴリーをリアルタイムで取得する
+    def realtime_selected_value
+        selected_value = params[:selected_value]
+
+            # 投稿の削除後、listのページに戻るコード
+            if selected_value == "アウター"
+                @small_Category = ["ジャケット","コート","ピーコート","ダウンジャケット","レザージャケット","ウインドブレーカー","カーディガン"]
+
+            elsif selected_value == "トップス"
+                @small_Category = ["Tシャツ","シャツ","ブラウス","ポロシャツ","ニットセーター","パーカー","ジャケット","スカート"]
+
+            elsif selected_value == "パンツ"
+                @small_Category = ["ジーンズ","パンツ","ショートパンツ","スカート","レギンス","ショーツ"]
+
+            elsif selected_value == "シューズ"
+                @small_Category = ["スニーカー","パンプス","サンダル","ブーツ","フラットシューズ","革靴"]
+
+            elsif selected_value == "その他"
+                @small_Category = ["ネックレス","ブレスレット","ピアス","リング","ヘアアクセサリー","その他"]
+            end
+
+            render json: { options: @small_Category }
+    end
+
+
+
     # ! (privateは外部クラスから参照できない)
     private
 
