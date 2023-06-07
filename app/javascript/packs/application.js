@@ -31,24 +31,24 @@ document.addEventListener('turbolinks:load', () => {
 $(document).ready(function() {
     $('#big-category-select').change(function() {
         var selectedValue = $(this).val();
-        console.log(selectedValue); // 選択された値をコンソールに表示
+        // console.log(selectedValue); // 選択された値をコンソールに表示
 
         // ここに選択内容に応じた処理を追加
 
         // // 例: Ajaxリクエストを送信してサーバーサイドに選択内容を送信
-        // $.ajax({
-        //     url: '/update_selected_value', // 適切なエンドポイントのURLを設定
-        //     method: 'POST',
-        //     data: { selected_value: selectedValue },
-        //     success: function(response) {
-        //         // サーバーサイドからのレスポンスを処理
-        //         console.log(response);
-        //     },
-        //     error: function(error) {
-        //         // エラーハンドリング
-        //         console.log(error);
-        //     }
-        // });
+        $.ajax({
+            url: '/realtime_selected_value', // 適切なエンドポイントのURLを設定
+            method: 'POST',
+            data: { selected_value: selectedValue },
+            success: function(response) {
+                // サーバーサイドからのレスポンスを処理
+                console.log("いけまんこ");
+            },
+            error: function(error) {
+                // エラーハンドリング
+                console.log("ダチョウ");
+            }
+        });
     });
 });
 

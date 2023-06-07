@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   patch "closet/update/:id", to: "coordinates/posts#update"
   # 検索画面
   get "closet/search", to: "coordinates/searchs#search"
+  # * 親要素から子要素を選択する。セレクトボックス
+  post "/realtime_selected_value", to: "coordinates/posts#realtime_selected_value"
 
   # ! SNS関連
   # * 一覧ページ
