@@ -40,5 +40,19 @@
     // * PC（小）
     @media (min-width: 992px) and (max-width: 1199.98px) {}
     // * PC（大）
-    @media (min-width: 1200px) {}
+    @media (min-width: 1200px) {
+        // ? Q&Aの画像サイズ
+        .question_image {
+            object-fit: cover;
+            width: 100%;
+            height: 330px;
+        }
+        // ? Q&Aのアバターアイコンサイズ
+        .question-user-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
 }
