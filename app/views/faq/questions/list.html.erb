@@ -15,7 +15,7 @@
             <div class="h-100">
             <div class="list_content">
             <% @questions.each do |q| %>
-                <div class="bg-white m-3">
+                <div class="bg-white mt-2">
                     <div class="row">
                         <div class="col-lg-3">
                             <%= image_tag q.photograph.url, class: "question_image" %>
@@ -40,7 +40,7 @@
                             </p>
 
                             <%# * コメントみたいなアイコンに、質問に対しての回答数を表示 %>
-                            <%= link_to "/question/show/#{q.id}" do %>
+                            <%= link_to "/question/show/#{q.id}", style: "text-decoration: none;", class: "text-dark" do %>
                                 <i class="bi bi-chat-square-text fs-5"></i>
                             <% end %>
 
