@@ -58,6 +58,7 @@
         .answer-image {
             width: 100%;
             height: 330px;
+            object-fit: cover;
         }
         // ? Q&A回答一覧画面のユーザーアイコンサイズ
         .answer-user-image {

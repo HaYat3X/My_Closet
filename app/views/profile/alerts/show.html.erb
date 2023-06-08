@@ -91,9 +91,15 @@
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10 col-12">
-            <div class="bg-white py-5 h-100">
+        <div class="bg-white list_content col-lg-10 col-12">
+            <div class="list_content col-lg-8 col-12 mx-auto">
 
+                <div class="bg-white py-5 h-100">
+                    <div class="list_content col-lg-9">
+                        <h1><%= @alert.title %></h1>
+                        <p><%= @alert.content %></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -113,9 +119,5 @@
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-9 bg-light">
-            <h1><%= @alert.title %></h1>
-            <p><%= @alert.content %></p>
-        </div>
     </div>
 </div>
