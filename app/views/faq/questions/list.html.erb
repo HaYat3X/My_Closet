@@ -39,13 +39,18 @@
                                 <%= q.question %>
                             </p>
 
-                            <%# * コメントみたいなアイコンに、質問に対しての回答数を表示 %>
                             <%= link_to "/question/show/#{q.id}", style: "text-decoration: none;", class: "text-dark" do %>
                                 <i class="bi bi-chat-square-text fs-5"></i>
                             <% end %>
 
                             <%# 回答数 %>
-                            <%= Answer.where(question_id: q.id).count %>
+                            <%= Answer.where(question_id: q.id).count %><br>
+                            <br>
+
+                            <% if current_user.id == q.user.id %>
+                                <%= link_to "編集", "/question/edit//#{q.id}", class: "btn btn-outline-primary px-5" %>
+                                <%= link_to "削除", "/question/delete/#{q.id}", method: :delete, class: "btn btn-outline-danger px-5" %>
+                            <% end %>
                         </div>
                     </div>
                 </div>
