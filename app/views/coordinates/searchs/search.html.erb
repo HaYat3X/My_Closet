@@ -13,7 +13,19 @@
         <%# ! contents %>
         <div class="list_content col-lg-10 col-12">
             <div class="bg-white h-100">
-            移植しろ
+            <h4 class="pt-3">「<%= params[:search] %>」の検索結果</h4>
+                <%# ? allタブエリア %>
+                    <div id="all" class="tab-pane active">
+                        <div class="row g-1">
+                            <% @search_result.each do |c| %>
+                                <div class="col-lg-3 mt-1">
+                                    <%= link_to "/closet/show/#{c.id}" do %>
+                                        <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
