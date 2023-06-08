@@ -1,53 +1,44 @@
-// ! 質問一覧ページのレイアウト
-#question_list {
-    // * header関連
-    .header {
-        border-radius: 10px;
-        .align-items-center {
-            padding-right: 20px;
-            border-radius: 50px;
-        }
-        img {
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-        }
-    }
+#faq_questions {
+    // ! 全サイズ共通
     // * sidebar関連
-    .sidebar {
-        border-radius: 10px;
-        // ? アイコン関連
-        svg {
+    .pc-sidebar {
+        border-radius: 5px;
+        // ? アイコンの表示設定
+        i {
             margin-right: 10px;
         }
-        // ? リスト関連
-        li {
-            box-shadow: var(--box-shadow);
-            border-radius: 5px;
-            margin-top: 5px;
-        }
+        // ? リストの表示設定
         li:hover {
             background-color: var(--primary);
             border-radius: 5px;
         }
-        // ? リンク関連
+        // ? リンクの表示設定
         a {
             color: var(--dark);
         }
         a:hover {
             color: #ffffff;
         }
+        // ? サインイン、サインアウトのレイアウト
+        .action-link {
+            a:hover {
+                color: var(--dark);
+                background-color: var(--bg);
+            }
+        }
+        // ? コンテンツエリアと少し幅を空ける
+        .sidebar-content {
+            margin-right: 5px;
+        }
     }
-    // // * 一覧コンテンツ
-    // .list_content {
-    //     border-radius: 10px;
-    // }
-    // // * 画像関連
-    .question_image {
-        width: 150px;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 5px;
-        // box-shadow: var(--box-shadow);
-    }
+    // * スマートフォン （小）
+    @media (max-width: 575.98px) {}
+    // * スマートフォン （中）
+    @media (min-width: 576px) and (max-width: 767.98px) {}
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 991.98px) {}
+    // * PC（小）
+    @media (min-width: 992px) and (max-width: 1199.98px) {}
+    // * PC（大）
+    @media (min-width: 1200px) {}
 }
