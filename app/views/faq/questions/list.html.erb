@@ -11,48 +11,48 @@
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10 col-12">
-            <div class="bg-white h-100">
-                移植
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<%# * 以下を修正 %>
-<div id="question_list">
-    <%# ! header %>
-    <%= render "faq/layouts/header" %>
-    <div class="d-flex">
-        <%# ! sidebar %>
-        <div class="col-lg-3">
-            <%= render "faq/layouts/sidebar" %>
-        </div>
-
-        <%# ! contents %>
-        <div class="list_content col-lg-9">
+        <div class="list_content col-lg-10">
+            <div class="h-100">
+            <div class="list_content">
             <% @questions.each do |q| %>
-                <div class="bg-white p-3 m-5">
+                <div class="bg-white m-3">
                     <div class="row">
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <%= image_tag q.photograph.url, class: "question_image" %>
                         </div>
-                        <div class="col-lg-10">
-                            <div class="d-flex m-3">
-                                <%= image_tag q.photograph.url, size: "40x40" %>
-                                <p class="fw-bold"><%= q.user.user_name %></p>
+
+                        <div class="col-lg-9 py-3">
+                            <div class="d-flex">
+                                <% if q.user.avatar.url %>
+                                    <%= image_tag q.user.avatar.url, class: "question-user-image" %>
+                                <% else %>
+                                    <img src="/assets/default-avatar.png" alt="Generic placeholder image" class="question-user-image">
+                                <% end %>
+
+                                <div class="fw-bold d-flex align-items-center mx-3">
+                                    <%= q.user.user_name %>
+                                    <%= q.user.gender %>
+                                </div>
                             </div>
-                            <p class="m-3">
+
+                            <p class="fw-bold my-4">
                                 <%= q.question %>
                             </p>
-                            <p class="m-3">
-                                <%= link_to "回答する", "/question/show/#{q.id}" %>
-                            </p>
+
+                            <%# * コメントみたいなアイコンに、質問に対しての回答数を表示 %>
+                            <%= link_to "/question/show/#{q.id}" do %>
+                                <i class="bi bi-chat-square-text fs-5"></i>
+                            <% end %>
+
+                            <%# 回答数 %>
+                            <%= Answer.where(question_id: q.id).count %>
                         </div>
                     </div>
                 </div>
             <% end %>
+        </div>
+
+            </div>
         </div>
     </div>
 </div>
