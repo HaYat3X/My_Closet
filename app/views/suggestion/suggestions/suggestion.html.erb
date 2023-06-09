@@ -12,44 +12,19 @@
 
         <%# ! contents %>
         <div class="list_content col-lg-10">
-            <div class="h-100 bg-white py-5">
-                ま・N・こ
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-    
-      
-
-
-<div id="sns_list">
-    <%# ! header %>
-    <%= render "suggestion/layouts/header" %>
-    <div class="row">
-        <%# ! sidebar %>
-        <div class="col-lg-3">
-            <%= render "suggestion/layouts/sidebar" %>
-        </div>
-
-        <%# ! contents %>
-        <div class="sns_list col-lg-9 bg-white">
-            <div class="m-3">
+            <div class="h-100 bg-white">
+            <div class="">
                 <%# * タブメニューエリア %>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a href="#code_suggest" class="nav-link active" data-bs-toggle="tab">おすすめコーデ</a>
+                <ul class="nav nav-underline tab-ul col-lg-8 mx-auto" role="tablist">
+                    <li class="nav-item flex-fill">
+                        <a href="#code_suggest" class="fw-bold nav-link active text-center" data-bs-toggle="tab">おすすめコーデ</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#user_suggest" class="nav-link" data-bs-toggle="tab">おすすめユーザ</a>
+                    <li class="nav-item flex-fill">
+                        <a href="#user_suggest" class="fw-bold nav-link text-center" data-bs-toggle="tab">おすすめユーザ</a>
                     </li>
                 </ul>
+
+
 
                 <%# * タブエリア %>
                 <div class="tab-content">
@@ -103,6 +78,30 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+    
+      
+
+
+<div id="sns_list">
+    <%# ! header %>
+    <%= render "suggestion/layouts/header" %>
+    <div class="row">
+        <%# ! sidebar %>
+        <div class="col-lg-3">
+            <%= render "suggestion/layouts/sidebar" %>
+        </div>
+
+        <%# ! contents %>
     </div>
 </div>
