@@ -13,64 +13,51 @@
         <%# ! contents %>
         <div class="list_content col-lg-10">
             <div class="bg-white py-5 h-100">
-                
-            
+                    <div class="d-flex">
+                        <div class="list_content col-lg-10">
+                            <div class="m-3 p-5">
+                                <%# * エラーメッセージの表示 %>
+                                <div class="col-lg-8 mx-auto">
+                                <%# * バリデーションチェク %>
+                                <% if @contact.errors.any? %>
+                                    <div class="alert alert-danger" role="alert">
+                                        <% @contact.errors.each do |error| %>
+                                            <strong>エラー！</strong> - <%= error.full_message %><br>
+                                        <% end %>
+                                    </div>
+                                <% end %>
 
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="closet_form">
-    <%# ! header %>
-  
-    <div class="d-flex">
-        <%# ! sidebar %>
-        <div class="col-lg-3">
-           
-        </div>
-
-        <%# ! contents %>
-        <div class="list_content col-lg-9">
-            <div class="m-3 bg-light p-5">
-                <%# * エラーメッセージの表示 %>
-                <div class="col-lg-9 mx-auto">
-                           <%# * バリデーションチェク %>
-                <% if @contact.errors.any? %>
-                    <div class="alert alert-danger" role="alert">
-                        <% @contact.errors.each do |error| %>
-                            <strong>エラー！</strong> - <%= error.full_message %><br>
-                        <% end %>
+                                <%= form_with(model: @contact, url: "/contact/create", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                                    <div class="mb-3">
+                                    <%= f.text_field :email, class: "form-control", placeholder: "メールアドレス" %>
+                                </div>
+                                <div class="mb-3">
+                                    <%= f.text_field :name, class: "form-control", placeholder: "名前" %>
+                                </div>
+                                <div class="mb-3">
+                                    <%= f.text_area :content, class: "form-control", placeholder: "お問い合わせ内容" %>
+                                </div>
+                                <%= f.submit "登録する", class: "btn btn-primary" %>
+                                <% end %>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                <% end %>
-
-                <%= form_with(model: @contact, url: "/contact/create", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
-                    <div class="mb-3">
-                    <%= f.text_field :email, class: "form-control", placeholder: "メールアドレス" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.text_field :name, class: "form-control", placeholder: "名前" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.text_area :content, class: "form-control", placeholder: "お問い合わせ内容" %>
-                  </div>
-                  <%= f.submit "登録する", class: "btn btn-primary" %>
-                <% end %>
                 </div>
-            </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
