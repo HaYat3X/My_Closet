@@ -17,7 +17,7 @@
                     </li>
                     <li class="nav-item">
                         <%= form_with(url: "/question/search", local: true, method: :get, class: "d-flex mx-5") do |f| %>
-                            <%= f.select :search, ['アウター', 'トップス', 'パンツ', 'シューズ', 'その他'], {include_blank: '選択してください'}, class: 'form-control', required: true %>
+                            <%= f.select :search, ['アウター', 'トップス', 'ボトムス', 'シューズ', 'その他'], {include_blank: '選択してください'}, class: 'form-control', required: true %>
                             <%= f.submit "検索",  class: "btn btn-outline-success flex-shrink-0" %>
                         <% end %>
                     </li>  
