@@ -1,4 +1,7 @@
 class Coordinates::SearchsController < ApplicationController
+    # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
+    before_action :move_to_signed_in, except: []
+
     # 検索用メソッド
     def search
         # * フォームの値を受け取る
@@ -8,4 +11,15 @@ class Coordinates::SearchsController < ApplicationController
         # * 検索
         @search_result = Closet.where(closet_table[:search].matches(key_word))
     end
+
+    # ! (privateは外部クラスから参照できない)
+    private
+
+    # ! ログインがしているのか判定する
+    def move_to_signed_in
+        unless user_signed_in?
+            redirect_to new_user_session_path
+        end
+    end
+
 end
