@@ -1,90 +1,94 @@
 class Suggestion::ApisController < ApplicationController
     # ! API提案
-    def call_gpt
+    def call_gpt(user_id)
         # * ユーザ情報
-        @user = User.find(current_user.id)
+        @user = User.find(user_id.to_i)
     
-        # * GPT日クエストする文章
-        request = "カジュアルスタイル、ストリートスタイル、アメカジスタイル、ルードスタイル、アウトドアスタイル、デザイナースタイル、ベーシックスタイル、モードスタイル、ラグジュアリースタイル、ガーリースタイル、ナチュラルスタイル、この中でどれか2つ身長#{@user.height}cm、体重#{@user.weight}kgの#{@user.gender}性におすすめのファッションスタイルを教えてください。"
+    
+        # # * GPT日クエストする文章
+        # request = "カジュアルスタイル、ストリートスタイル、アメカジスタイル、ルードスタイル、アウトドアスタイル、デザイナースタイル、ベーシックスタイル、モードスタイル、ラグジュアリースタイル、ガーリースタイル、ナチュラルスタイル、この中でどれか2つ身長#{@user.height}cm、体重#{@user.weight}kgの#{@user.gender}性におすすめのファッションスタイルを教えてください。"
     
         # * APIキーセット
-        client = OpenAI::Client.new(access_token: ENV.fetch('API_KEY') { '' })
+        # client = OpenAI::Client.new(access_token: ENV.fetch('API_KEY') { '' })
     
-        # * GPTのレスポンス 
-        response = client.chat(
-            parameters: {
-                # ? 使用するGPTのエンジンを指定
-                model: "gpt-3.5-turbo",
+        # # * GPTのレスポンス 
+        # response = client.chat(
+        #     parameters: {
+        #         # ? 使用するGPTのエンジンを指定
+        #         model: "gpt-3.5-turbo",
         
-                # ? レスポンスの形式を指定
-                messages: [{ role: "system", content: "You are a helpful assistant. response to japanese" }, { role: "user", content: request }],
+        #         # ? レスポンスの形式を指定
+        #         messages: [{ role: "system", content: "You are a helpful assistant. response to japanese" }, { role: "user", content: request }],
             
-                # ? 応答のランダム性と最大文字数を指定
-                temperature: 0,
-                max_tokens: 200,
-            },
-        )
+        #         # ? 応答のランダム性と最大文字数を指定
+        #         temperature: 0,
+        #         max_tokens: 200,
+        #     },
+        # )
     
         # * GPTのレスポンスから返答メッセージのみを抽出
         # content = response.dig("choices", 0, "message", "content")
         content = "身長180cm、体重60kgの男性におすすめのファッションスタイルは、カジュアルスタイルとモードスタイルです。"
 
-        # * GPTの提案から提案されたスタイルを抜き出す
+        # # * GPTの提案から提案されたスタイルを抜き出す
         pull_out = content.scan(/カジュアルスタイル|ストリートスタイル|アメカジスタイル|ルードスタイル|アウトドアスタイル|デザイナースタイル|ベーシックスタイル|モードスタイル|ラグジュアリースタイル|ガーリースタイル|ナチュラルスタイル/)
 
         # # * とうろく
-        @suggestion = Suggest.new(user_id: current_user.id, style1: pull_out[0], style2: pull_out[1])
+        @suggestion = Suggest.new(user_id: @user.id, style1: pull_out[0], style2: pull_out[1])
+        @suggestion.save()
     
         # * レスポンスを保存
-        if @suggestion.save
-            redirect_to "/suggestion"
-        else
-            redirect_to "/suggestion"
-        end
+        # if @suggestion.save
+        #     redirect_to "/suggestion"
+        # else
+        #     redirect_to "/suggestion"
+        # end
     end
 
     # ! call_gptによる提案を更新する
-    def call_gpt_update
+    def call_gpt_update(user_id)
         # * ユーザ情報
-        @user = User.find(current_user.id)
+        # @user = User.find(user_id.to_i)
+
 
         # * 更新するデータの取得
-        @suggestion = Suggest.find_by(user_id: current_user.id)
+        @suggestion = Suggest.find_by(user_id: user_id.to_i)
 
         # * GPT日クエストする文章
-        request = "カジュアルスタイル、ストリートスタイル、アメカジスタイル、ルードスタイル、アウトドアスタイル、デザイナースタイル、ベーシックスタイル、モードスタイル、ラグジュアリースタイル、ガーリースタイル、ナチュラルスタイル、この中でどれか2つ身長#{@user.height}cm、体重#{@user.weight}kgの#{@user.gender}性におすすめのファッションスタイルを教えてください。"
+        # request = "カジュアルスタイル、ストリートスタイル、アメカジスタイル、ルードスタイル、アウトドアスタイル、デザイナースタイル、ベーシックスタイル、モードスタイル、ラグジュアリースタイル、ガーリースタイル、ナチュラルスタイル、この中でどれか2つ身長#{@user.height}cm、体重#{@user.weight}kgの#{@user.gender}性におすすめのファッションスタイルを教えてください。"
     
         # * APIキーセット
-        client = OpenAI::Client.new(access_token: ENV.fetch('API_KEY') { '' })
+        # client = OpenAI::Client.new(access_token: ENV.fetch('API_KEY') { '' })
     
-        # * GPTのレスポンス 
-        response = client.chat(
-            parameters: {
-                # ? 使用するGPTのエンジンを指定
-                model: "gpt-3.5-turbo",
+        # # * GPTのレスポンス 
+        # response = client.chat(
+        #     parameters: {
+        #         # ? 使用するGPTのエンジンを指定
+        #         model: "gpt-3.5-turbo",
         
-                # ? レスポンスの形式を指定
-                messages: [{ role: "system", content: "You are a helpful assistant. response to japanese" }, { role: "user", content: request }],
+        #         # ? レスポンスの形式を指定
+        #         messages: [{ role: "system", content: "You are a helpful assistant. response to japanese" }, { role: "user", content: request }],
             
-                # ? 応答のランダム性と最大文字数を指定
-                temperature: 0,
-                max_tokens: 200,
-            },
-        )
+        #         # ? 応答のランダム性と最大文字数を指定
+        #         temperature: 0,
+        #         max_tokens: 200,
+        #     },
+        # )
 
         # * GPTのレスポンスから返答メッセージのみを抽出
         # content = response.dig("choices", 0, "message", "content")
-        content = "身長180cm、体重60kgの男性におすすめのファッションスタイルは、ストリートスタイルとモードスタイルです。"
+        content = "身長180cm、体重60kgの男性におすすめのファッションスタイルは、ルードスタイルとモードスタイルです。"
 
-        # * GPTの提案から提案されたスタイルを抜き出す
+        # # * GPTの提案から提案されたスタイルを抜き出す
         pull_out = content.scan(/カジュアルスタイル|ストリートスタイル|アメカジスタイル|ルードスタイル|アウトドアスタイル|デザイナースタイル|ベーシックスタイル|モードスタイル|ラグジュアリースタイル|ガーリースタイル|ナチュラルスタイル/)
     
         # * レスポンスを保存
-        if @suggestion.update(user_id: current_user.id, style1: pull_out[0], style2: pull_out[1])
-            redirect_to "/suggestion"
-        else
-            redirect_to "/suggestion"
-        end        
+        # if @suggestion.update(user_id: current_user.id, style1: pull_out[0], style2: pull_out[1])
+        #     redirect_to "/suggestion"
+        # else
+        #     redirect_to "/suggestion"
+        # end        
+        @suggestion.update(user_id: user_id.to_i, style1: pull_out[0], style2: pull_out[1])
     end
 
     # ! 各ユーザーのファッションの投稿の傾向を保存する

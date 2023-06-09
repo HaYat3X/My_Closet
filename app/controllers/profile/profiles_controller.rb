@@ -40,9 +40,22 @@ class Profile::ProfilesController < ApplicationController
             redirect_to "/", alert: "不正なアクセスが行われました。"
         end
 
-        # * 投稿の削除後、listのページに戻るコード
+        # ? 外部クラスをインスタンス化
+        suggestions_controller = Suggestion::ApisController.new()
+
         if @user_data.update(posts_params)
-            redirect_to "/profile/show/#{@user_data.id}", notice: "プロフィールを編集しました"
+            # * 初めての提案なのかそうでないのかを判定
+            if Suggest.exists?(user_id: @user_data.id)
+                
+                # * 外部関数の呼び出し
+                suggestions_controller.call_gpt_update(@user_data.id)
+                redirect_to "/profile/show/#{@user_data.id}", notice: "プロフィールを編集しました"
+            else
+                # * 外部関数の呼び出し
+                suggestions_controller.call_gpt(@user_data.id)
+                redirect_to "/profile/show/#{@user_data.id}", notice: "プロフィールを編集しました"
+            end
+
         else
             redirect_to"/", alert: "プロフィールの編集に失敗しました"
         end
