@@ -1,35 +1,66 @@
-<div id="question_list">
+<div id="faq_questions">
     <%# ! header %>
-    <%= render "faq/layouts/header" %>
-    <div class="d-flex">
+    <div class="pc-header">
+        <%= render "faq/layouts/pc_header" %>
+    </div>
+
+    <div class="row g-0">
         <%# ! sidebar %>
-        <div class="col-lg-3">
-            <%= render "faq/layouts/sidebar" %>
+        <div class="col-lg-2 pc-sidebar">
+            <%= render "faq/layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-9">
+        <div class="list_content col-lg-10">
+            <div class="h-100">
+            <h4 class="pt-3">「<%= params[:search] %>」の検索結果</h4>
+            <div class="list_content">
             <% @search_result.each do |q| %>
-                <div class="bg-white p-3 m-5">
+                <div class="bg-white mt-2">
                     <div class="row">
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <%= image_tag q.photograph.url, class: "question_image" %>
                         </div>
-                        <div class="col-lg-10">
-                            <div class="d-flex m-3">
-                                <%= image_tag q.photograph.url, size: "40x40" %>
-                                <p class="fw-bold"><%= q.user.user_name %></p>
+
+                        <div class="col-lg-9 py-3">
+                            <div class="d-flex">
+                                <% if q.user.avatar.url %>
+                                    <%= image_tag q.user.avatar.url, class: "question-user-image" %>
+                                <% else %>
+                                    <img src="/assets/default-avatar.png" alt="Generic placeholder image" class="question-user-image">
+                                <% end %>
+
+                                <div class="fw-bold d-flex align-items-center mx-3">
+                                    <%= q.user.user_name %>
+                                    <%= q.user.gender %>
+                                </div>
                             </div>
-                            <p class="m-3">
+
+                            <p class="fw-bold my-4">
                                 <%= q.question %>
                             </p>
-                            <p class="m-3">
-                                <%= link_to "回答する", "/question/show/#{q.id}" %>
-                            </p>
+
+                            <%= link_to "/question/show/#{q.id}", style: "text-decoration: none;", class: "text-dark" do %>
+                                <i class="bi bi-chat-square-text fs-5"></i>
+                            <% end %>
+
+                            <%# 回答数 %>
+                            <%= Answer.where(question_id: q.id).count %><br>
+                            <br>
+
+                            <% if current_user.id == q.user.id %>
+                                <%= link_to "編集", "/question/edit//#{q.id}", class: "btn btn-outline-primary px-5" %>
+                                <%= link_to "削除", "/question/delete/#{q.id}", method: :delete, class: "btn btn-outline-danger px-5" %>
+                            <% end %>
                         </div>
                     </div>
                 </div>
             <% end %>
         </div>
+
+            </div>
+        </div>
     </div>
 </div>
+
+
