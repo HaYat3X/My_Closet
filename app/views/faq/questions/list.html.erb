@@ -23,12 +23,13 @@
 
                         <div class="col-lg-9 py-3">
                             <div class="d-flex">
+                            <%= link_to "/profile/show/#{q.user.id}" do %>
                                 <% if q.user.avatar.url %>
                                     <%= image_tag q.user.avatar.url, class: "question-user-image" %>
                                 <% else %>
                                     <img src="/assets/default-avatar.png" alt="Generic placeholder image" class="question-user-image">
                                 <% end %>
-
+                            <% end %>
                                 <div class="fw-bold d-flex align-items-center mx-3">
                                     <%= q.user.user_name %>
                                     <%= q.user.gender %>

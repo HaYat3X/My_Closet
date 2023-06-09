@@ -66,6 +66,20 @@
             height: 60px;
             border-radius: 50%;
             object-fit: cover;
+            transition: transform 0.3s;
+
+        }
+        // ? Q&A回答一覧画面のアイコン拡大調整
+        .answer-user-image:hover{
+            transform: scale(1.2);
+        }
+
+        .question-user-image{
+            transition: transform 0.3s;
+        }
+        // ? Q&A回答一覧画面のアイコン拡大調整
+        .question-user-image:hover{
+            transform: scale(1.2);
         }
     }
 }
