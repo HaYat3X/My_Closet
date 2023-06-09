@@ -1,22 +1,48 @@
-<div id="question_list">
+<div id="faq_questions">
     <%# ! header %>
-    <%= render "faq/layouts/header" %>
-    <div class="d-flex">
+    <div class="pc-header">
+        <%= render "faq/layouts/pc_header" %>
+    </div>
+
+    <div class="row g-0">
         <%# ! sidebar %>
-        <div class="col-lg-3">
-            <%= render "faq/layouts/sidebar" %>
+        <div class="col-lg-2 pc-sidebar">
+            <%= render "faq/layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <%= form_with(model: @answer, url: "/faq/answer/update/#{@answer.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+        <div class="list_content col-lg-10">
+            <div class="h-100 bg-white py-5">
+                <% if @answer.errors.any? %>
+                    <div class="alert alert-danger col-lg-8 mx-auto" role="alert">
+                        <% @answer.errors.each do |error| %>
+                        <strong>エラー！</strong> - <%= error.full_message %><br>
+                        <% end %>
+                    </div>
+    <% end %>
+    
+    <%= form_with(model: @answer, url: "/faq/answer/update/#{@answer.id}", local: true, :html => {class:"needs-validation col-lg-8 mx-auto", :novalidate => true}) do |f| %>
                   <div class="mb-3">
-                    <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
+                    <%= f.file_field :photograph, required: true, class: "form-control", placeholder: "写真" %>
+                    <div class="invalid-feedback">
+                      写真を入力して下さい
+                    </div>
                   </div>
                   <div class="mb-3">
-                    <%= f.text_area :answer, class: "form-control", placeholder: "回答内容" %>
-                  </div>
-                  <div class="mb-3">
+                    <%= f.text_area :answer, class: "form-control", placeholder: "編集内容" %>
                   </div>
                   <%= f.submit "登録する", class: "btn btn-primary" %>
                 <% end %>
-                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+    
+      
