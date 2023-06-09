@@ -53,47 +53,50 @@
 
                     <%# ? Aiによるフォロワー提案タブエリア %>
                     <div id="user_suggest" class="tab-pane">
-                        <div class="row">
-                            <p>
+                        <div class="row col-lg-8 mx-auto bg-light mt-3">
+                        <table class="table align-middle mb-0 bg-white">
+                        <tbody>
+                            <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
                                 <% if Suggest.exists?(user_id: current_user.id) %>
                                     <% @users.each do |u| %>
                                         <% if u.gender === current_user.gender %>
-                                            <h2><%= u.user_name%></h2>
-                                            <p><%= u.age %>際</p>
+                                        <% if u.avatar.url %>
+                                        <%= image_tag u.avatar.url, style: "width: 50px; height: 50px; object-fit: cover; z-index: 1; border-radius: 50%; ", class: "avatar img-fluid", size: "100x100" %>
+                                        <% else %>
+                                        <img src="/assets/default-avatar.png"
+                                        alt="Generic placeholder image" class="avatar">
                                         <% end %>
+                                        <% end %>
+
+                                        <div class="ms-3">
+                                            <p class="fw-bold mb-1"><%= u.user_name %></p>
+                                        </div>
+                                    <td class="text-end">
+                                        <% if u.id == current_user.id %>
+                                        <% if UserRelation.where(follow_id: current_user.id, follower_id: u.id).exists? %>
+                                        <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "btn btn-outline-primary" %> 
+                                        <% else %>
+                                        <%= button_to "フォロー", "/profile/follow/#{u.id}", method: :post, class: "btn btn-primary" %> 
+                                        <% end %>
+                                        <% end %>
+                                    </td>
+
                                     <% end %>
                                 <% else %>
                                     プロフィールを入力してください。
                                 <% end %>
-                            </p>
+                                </div>
+                            </td>
+                            </tr>
+                        </tbody>
+                        </table>
                         </div>
                     </div>
                 </div>
             </div>
             </div>
         </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-    
-      
-
-
-<div id="sns_list">
-    <%# ! header %>
-    <%= render "suggestion/layouts/header" %>
-    <div class="row">
-        <%# ! sidebar %>
-        <div class="col-lg-3">
-            <%= render "suggestion/layouts/sidebar" %>
-        </div>
-
-        <%# ! contents %>
     </div>
 </div>
