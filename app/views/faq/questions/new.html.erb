@@ -1,23 +1,27 @@
-<div id="question_list">
+<div id="faq_questions">
     <%# ! header %>
-    <%= render "faq/layouts/header" %>
-    <div class="d-flex">
+    <div class="pc-header">
+        <%= render "faq/layouts/pc_header" %>
+    </div>
+
+    <div class="row g-0">
         <%# ! sidebar %>
-        <div class="col-lg-3">
-            <%= render "faq/layouts/sidebar" %>
+        <div class="col-lg-2 pc-sidebar">
+            <%= render "faq/layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-9">
+        <div class="list_content col-lg-10">
+            <div class="h-100 bg-white py-5">
                 <% if @question.errors.any? %>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger col-lg-8 mx-auto" role="alert">
                         <% @question.errors.each do |error| %>
                         <strong>エラー！</strong> - <%= error.full_message %><br>
                         <% end %>
                     </div>
     <% end %>
     
-    <%= form_with(model: @question, url: "/question/create", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+    <%= form_with(model: @question, url: "/question/create/", local: true, :html => {class:"needs-validation col-lg-8 mx-auto", :novalidate => true}) do |f| %>
                   <div class="mb-3">
                     <%= f.file_field :photograph, required: true, class: "form-control", placeholder: "写真" %>
                     <div class="invalid-feedback">
@@ -35,6 +39,16 @@
                   </div>
                   <%= f.submit "登録する", class: "btn btn-primary" %>
                 <% end %>
+            </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+    
+      
