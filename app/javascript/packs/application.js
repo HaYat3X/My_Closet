@@ -1,29 +1,21 @@
-import Rails from "@rails/ujs";
-import Turbolinks from "turbolinks";
+import Rails from '@rails/ujs';
+import Turbolinks from 'turbolinks';
+import $ from 'jquery';
+global.$ = global.jQuery = $;
+import { ClearRadio } from './sns/posts';
+import { FormValidation } from './layouts/validation';
+import { ClosetSelectValue } from './closet/posts';
 
-// 無効なフィールドがある場合にフォーム送信を無効にするスターターJavaScriptの例
-(() => {
-  "use strict";
+document.addEventListener('turbolinks:load', () => {
+    // ! フォームのバリデーションチェックをする関数
+    FormValidation();
 
-  // Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
-  const forms = document.querySelectorAll(".needs-validation");
+    // ! SNS投稿画面、SNS編集画面で選択したラジオボタンを解除する関数
+    ClearRadio();
 
-  // ループして帰順を防ぐ
-  Array.from(forms).forEach((form) => {
-    form.addEventListener(
-      "submit",
-      (event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-
-        form.classList.add("was-validated");
-      },
-      false
-    );
-  });
-})();
+    // ! closet投稿画面、編集画面で大カテゴリーに基づいて小カテゴリーを表示する関数
+    ClosetSelectValue();
+});
 
 Rails.start();
 Turbolinks.start();

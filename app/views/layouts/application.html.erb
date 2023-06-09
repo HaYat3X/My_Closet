@@ -15,34 +15,10 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%= render "layouts/error" %>
-    <div class="container-fluid">
+    <div class="container">
+      <%= render "layouts/error" %>
       <%= yield %>
     </div>
-    <%# ! フォームのリアルタイムバリデーション導入 （全フォームに対応） %>
-    <script>
-      (() => {
-        'use strict';
-
-        // Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
-        const forms = document.querySelectorAll('.needs-validation');
-
-        // ループして帰順を防ぐ
-        Array.from(forms).forEach((form) => {
-            form.addEventListener(
-                'submit',
-                (event) => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                },
-                false
-            );
-        });
-      })();
-    </script>
     <%# ! bootstrap導入 %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
   </body>

@@ -1,10 +1,43 @@
+<div id="closet_searchs">
+    <%# ! header %>
+    <div class="pc-header">
+        <%= render "coordinates/layouts/pc_header" %>
+    </div>
+
+    <div class="row g-0">
+        <%# ! sidebar %>
+        <div class="col-lg-2 pc-sidebar">
+            <%= render "coordinates/layouts/pc_sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="list_content col-lg-10 col-12">
+            <div class="bg-white h-100">
+            <h4 class="pt-3">「<%= params[:search] %>」の検索結果</h4>
+                <%# ? allタブエリア %>
+                    <div id="all" class="tab-pane active">
+                        <div class="row g-1">
+                            <% @search_result.each do |c| %>
+                                <div class="col-lg-3 mt-1">
+                                    <%= link_to "/closet/show/#{c.id}" do %>
+                                        <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="closet_list">
     <%# ! header %>
-    <%= render "coordinates/layouts/header" %>
+    <%# <%= render "coordinates/layouts/header" %> %>
     <div class="d-flex">
         <%# ! sidebar %>
         <div class="col-lg-3">
-            <%= render "coordinates/layouts/sidebar" %>
+            <%# <%= render "coordinates/layouts/sidebar" %> %>
         </div>
 
         <%# ! contents %>

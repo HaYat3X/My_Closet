@@ -1,0 +1,54 @@
+<div id="faq_questions">
+    <%# ! header %>
+    <div class="pc-header">
+        <%= render "faq/layouts/pc_header" %>
+    </div>
+
+    <div class="row g-0">
+        <%# ! sidebar %>
+        <div class="col-lg-2 pc-sidebar">
+            <%= render "faq/layouts/pc_sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="list_content col-lg-10">
+            <div class="h-100 bg-white py-5">
+                <% if @question.errors.any? %>
+                    <div class="alert alert-danger col-lg-8 mx-auto" role="alert">
+                        <% @question.errors.each do |error| %>
+                        <strong>エラー！</strong> - <%= error.full_message %><br>
+                        <% end %>
+                    </div>
+    <% end %>
+    
+    <%= form_with(model: @question, url: "/question/update/#{@question.id}", local: true, :html => {class:"needs-validation col-lg-8 mx-auto", :novalidate => true}) do |f| %>
+                  <div class="mb-3">
+                    <%= f.file_field :photograph, required: true, class: "form-control", placeholder: "写真" %>
+                    <div class="invalid-feedback">
+                      写真を入力して下さい
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.text_area :question, class: "form-control", placeholder: "質問内容" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.select :category, ['アウター', 'トップス', 'ボトムス', 'シューズ', 'その他'], {include_blank: '選択してください'}, class: 'form-control', required: true %>
+                    <div class="invalid-feedback">
+                      大カテゴリーを入力して下さい
+                    </div>
+                  </div>
+                  <%= f.submit "登録する", class: "btn btn-primary" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+    
+      

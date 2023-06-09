@@ -1,30 +1,42 @@
-<div id="login" class="col-lg-4 mx-auto">
-  <h2 class="text-center mb-4">ログイン</h2>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {class:"needs-validation", :novalidate => true}) do |f|%>
-    <div class="mb-3">
-      <%= f.email_field :email, placeholder: "メールアドレス", class: "form-control", autofocus: true, autocomplete: "email", required: true %>
-        <div class="invalid-feedback">
-        メールアドレスを入力して下さい
-      </div>
-    </div>
+<div id="auth" class="col-lg-4 col-md-6 col-12 mx-auto mt-5">
+    <h2 class="text-center mb-5 fw-bold text-primary">My Closet</h2>
 
-    <div class="mb-3">
-      <%= f.password_field :password, placeholder: "パスワード", class: "form-control", autocomplete: "current-password", required: true %>
-        <div class="invalid-feedback">
-        パスワードを入力して下さい
-      </div>
-    </div>
+    <%# * サインインフォーム %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {class:"needs-validation", :novalidate => true}) do |f|%>
 
-    <% if devise_mapping.rememberable? %>
-      <div class="mb-3">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me, "ログイン状態を保持する" %>
-      </div>
-    <% end %>
+        <%# ? メールアドレス入力エリア %>
+        <div class="mt-3 input-group">
+            <span class="input-group-text" id="addon-wrapping">
+                <i class="bi bi-envelope"></i>
+            </span>
+            <%= f.email_field :email, placeholder: "メールアドレス", class: "form-control", autofocus: true, autocomplete: "email", required: true %>
+            <div class="invalid-feedback">
+                メールアドレスを入力して下さい。
+            </div>
+        </div>
 
-    <div class="mb-4">
-      <%= f.submit "ログインする", class: "btn btn-primary col-lg-12"%>
-    </div>
+        <%# ? パスワード入力エリア %>
+        <div class="mt-3 input-group">
+            <span class="input-group-text" id="addon-wrapping">
+                <i class="bi bi-key"></i>
+            </span>
+            <%= f.password_field :password, placeholder: "パスワード", class: "form-control", autocomplete: "current-password", required: true %>
+            <div class="invalid-feedback">
+                パスワードを入力して下さい。
+            </div>
+        </div>
+
+        <%# ? 自動ログイン設定エリア %>
+        <% if devise_mapping.rememberable? %>
+          <div class="mt-3">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me, "自動ログイン" %>
+          </div>
+        <% end %>
+
+      <div class="my-3">
+        <%= f.submit "サインイン", class: "btn btn-outline-primary col-12"%>
+      </div>
   <% end %>
 
   <%= render "devise/shared/links" %>

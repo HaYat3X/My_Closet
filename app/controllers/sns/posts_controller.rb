@@ -1,8 +1,17 @@
 class Sns::PostsController < ApplicationController
+    # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
+    before_action :move_to_signed_in, except: [:list, :show]
+
     # ! 一覧取得メソッド
     def list
-        @snss = Social.all.page(params[:page]).per(40)
-    end    
+        # * SNS投稿一覧取得 SNSに48件取得
+        @snss = Social.order(created_at: :desc).page(params[:page]).per(48)
+        
+        # * ログインしているユーザーがフォローしているユーザーの投稿を取得
+        if user_signed_in?
+           @follow = UserRelation.where(follow_id: current_user.id) 
+        end
+    end
 
     # ! 詳細取得メソッド
     def show
@@ -44,20 +53,20 @@ class Sns::PostsController < ApplicationController
     # ! 登録処理メソッド
     def create
          # * ログインしているユーザが登録したアイテムのデータを取得
-         @closets_all = Closet.where(user_id: current_user.id)
+        @closets_all = Closet.where(user_id: current_user.id)
 
          # * Closetモデルを介して、アウターアイテムのみ取得する
-         @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
- 
+        @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
+
          # * Closetモデルを介して、トップスアイテムのみ取得する
-         @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
- 
+        @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
+
          # * Closetモデルを介して、パンツアイテムのみ取得する
-         @closets_pants = Closet.where(big_Category: "パンツ", user_id: current_user.id)
- 
+        @closets_pants = Closet.where(big_Category: "パンツ", user_id: current_user.id)
+
          # * Closetモデルを介して、シューズアイテムのみ取得する
-         @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
- 
+        @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
+
          # * Closetモデルを介して、その他のアイテムのみ取得する
         @closets_other = Closet.where(big_Category: "その他", user_id: current_user.id)
 
@@ -68,7 +77,7 @@ class Sns::PostsController < ApplicationController
         @social.user_id = current_user.id
 
         # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
-        case0 = params[:social][:tag].to_s + params[:social][:message].to_s 
+        case0 = params[:social][:tag].to_s + params[:social][:message].to_s
 
         # ? アイテム1の検索カラムを取得する
         if params[:social][:item1]
@@ -118,6 +127,9 @@ class Sns::PostsController < ApplicationController
 
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @social.save
+            # ? ユーザの投稿頻度の高いタグを保存するプログラムを実行
+            suggestions_controller = Suggestion::ApisController.new()
+            suggestions_controller.call_user(current_user.id)
             redirect_to "/"
         else
             render :new
@@ -128,6 +140,9 @@ class Sns::PostsController < ApplicationController
         # * urlから投稿id取得
         post_id = params[:id]
         @social = Social.find(post_id)
+
+    
+
         # * ログインしているユーザが登録したアイテムのデータを取得
         @closets_all = Closet.where(user_id: current_user.id)
 
@@ -156,6 +171,18 @@ class Sns::PostsController < ApplicationController
     def update
         post_id = params[:id]
         @social = Social.find(post_id)
+
+         # ** 一度選択したアイテムは削除できないため、一旦nullに
+        @social.item1 = nil 
+        @social.item2 = nil 
+        @social.item3 = nil 
+        @social.item4 = nil 
+        @social.item5 = nil 
+        @social.item6 = nil 
+
+        # * 変更を保存、且つ再読み込み
+        @social.save
+        @social.reload
         # 投稿者の編集者の相違時のエラー
         if @social.user_id != current_user.id
             redirect_to "/", alert: "不正なアクセスが行われました。"
@@ -231,9 +258,9 @@ class Sns::PostsController < ApplicationController
 
         # * でーたべーすにほぞん
         if @social.update(posts_params)
-            redirect_to "/closet/list", notice: "投稿を編集しました"
+            redirect_to "/sns/show/#{post_id}", notice: "投稿を編集しました"
         else
-            redirect_to"/closet/list", alert: "投稿の編集に失敗しました"
+            redirect_to"/", alert: "投稿の編集に失敗しました"
         end
     end
 
@@ -265,4 +292,10 @@ class Sns::PostsController < ApplicationController
         params.require(:social).permit(:tag, :message, :photograph, :item1, :item2, :item3, :item4, :item5, :item6)
     end
 
+     # ! ログインがしているのか判定する
+     def move_to_signed_in
+        unless user_signed_in?
+            redirect_to new_user_session_path, alert: "この操作は、サインインが必要です。"
+        end
+    end
 end

@@ -1,44 +1,46 @@
-<div id="closet_list">
+<div id="closet_posts">
     <%# ! header %>
-    <%= render "coordinates/layouts/header" %>
-    <div class="d-flex">
+    <div class="pc-header">
+        <%= render "coordinates/layouts/pc_header" %>
+    </div>
+
+    <div class="row g-0">
         <%# ! sidebar %>
-        <div class="col-lg-3">
-            <%= render "coordinates/layouts/sidebar" %>
+        <div class="col-lg-2 pc-sidebar">
+            <%= render "coordinates/layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-9">
-            <div class="m-3 bg-light">
-                <%# * タブメニューエリア %>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a href="#all" class="nav-link active" data-bs-toggle="tab">すべて</a>
+        <div class="list_content col-lg-10 col-12">
+            <div class="bg-white h-100">
+                <%# * タブ切り替え %>
+                <ul class="nav nav-underline tab-ul" role="tablist">
+                    <li class="nav-item flex-fill">
+                        <a href="#all" class="nav-link active text-center" data-bs-toggle="tab">すべて</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#outer" class="nav-link" data-bs-toggle="tab">アウター</a>
+                    <li class="nav-item flex-fill">
+                        <a href="#outer" class="nav-link text-center" data-bs-toggle="tab">アウター</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#tops" class="nav-link" data-bs-toggle="tab">トップス</a>
+                    <li class="nav-item flex-fill">
+                        <a href="#tops" class="nav-link text-center" data-bs-toggle="tab">トップス</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#pants" class="nav-link" data-bs-toggle="tab">パンツ</a>
+                    <li class="nav-item flex-fill">
+                        <a href="#bottoms" class="nav-link text-center" data-bs-toggle="tab">ボトムス</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#shoes" class="nav-link" data-bs-toggle="tab">シューズ</a>
+                    <li class="nav-item flex-fill">
+                        <a href="#shoes" class="nav-link text-center" data-bs-toggle="tab">シューズ</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#other" class="nav-link" data-bs-toggle="tab">その他</a>
+                    <li class="nav-item flex-fill">
+                        <a href="#other" class="nav-link text-center" data-bs-toggle="tab">その他</a>
                     </li>
                 </ul>
 
-                <%# * タブエリア %>
-                <div class="tab-content">
+                <div class="tab-content mt-2">
                     <%# ? allタブエリア %>
                     <div id="all" class="tab-pane active">
-                        <div class="row">
+                        <div class="row g-1">
                             <% @closets_all.each do |c| %>
-                                <div class="col-lg-3 m-0 mt-3">
+                                <div class="col-lg-3 mt-1">
                                     <%= link_to "/closet/show/#{c.id}" do %>
                                         <%= image_tag c.photograph.url, class: "closet_image" %>
                                     <% end %>
@@ -51,9 +53,9 @@
 
                     <%# ? outerタブエリア %>
                     <div id="outer" class="tab-pane">
-                        <div class="row">
+                        <div class="row g-1">
                             <% @closets_outer.each do |c| %>
-                                <div class="col-lg-3 mt-3">
+                                <div class="col-lg-3 mt-1">
                                     <%= image_tag c.photograph.url, class: "closet_image" %>
                                 </div>
                             <% end %>
@@ -62,20 +64,20 @@
 
                     <%# ? topsタブエリア %>
                     <div id="tops" class="tab-pane">
-                        <div class="row">
+                        <div class="row g-1">
                             <% @closets_tops.each do |c| %>
-                                <div class="col-lg-3 mt-3">
+                                <div class="col-lg-3 mt-1">
                                     <%= image_tag c.photograph.url, class: "closet_image" %>
                                 </div>
                             <% end %>
                         </div>
                     </div>
 
-                    <%# ? pantsタブエリア %>
-                    <div id="pants" class="tab-pane">
-                        <div class="row">
+                    <%# ? ボトムスタブエリア %>
+                    <div id="bottoms" class="tab-pane">
+                        <div class="row g-1">
                             <% @closets_pants.each do |c| %>
-                                <div class="col-lg-3 mt-3">
+                                <div class="col-lg-3 mt-1">
                                     <%= image_tag c.photograph.url, class: "closet_image" %>
                                 </div>
                             <% end %>
@@ -84,9 +86,9 @@
 
                     <%# ? shoesタブエリア %>
                     <div id="shoes" class="tab-pane">
-                        <div class="row">
+                        <div class="row g-1">
                             <% @closets_shoes.each do |c| %>
-                                <div class="col-lg-3 mt-3">
+                                <div class="col-lg-3 mt-1">
                                     <%= image_tag c.photograph.url, class: "closet_image" %>
                                 </div>
                             <% end %>
@@ -95,9 +97,9 @@
 
                     <%# ? otherタブエリア %>
                     <div id="other" class="tab-pane">
-                        <div class="row">
+                        <div class="row g-1">
                             <% @closets_other.each do |c| %>
-                                <div class="col-lg-3 mt-3">
+                                <div class="col-lg-3 mt-1">
                                     <%= image_tag c.photograph.url, class: "closet_image" %>
                                 </div>
                             <% end %>

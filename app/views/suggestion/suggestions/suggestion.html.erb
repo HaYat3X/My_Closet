@@ -1,0 +1,102 @@
+<div id="suggestion_suggestions">
+    <%# ! header %>
+    <div class="pc-header">
+        <%= render "suggestion/layouts/pc_header" %>
+    </div>
+
+    <div class="row g-0">
+        <%# ! sidebar %>
+        <div class="col-lg-2 pc-sidebar">
+            <%= render "suggestion/layouts/pc_sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="list_content col-lg-10">
+            <div class="h-100 bg-white">
+            <div class="">
+                <%# * タブメニューエリア %>
+                <ul class="nav nav-underline tab-ul col-lg-8 mx-auto" role="tablist">
+                    <li class="nav-item flex-fill">
+                        <a href="#code_suggest" class="fw-bold nav-link active text-center" data-bs-toggle="tab">おすすめコーデ</a>
+                    </li>
+                    <li class="nav-item flex-fill">
+                        <a href="#user_suggest" class="fw-bold nav-link text-center" data-bs-toggle="tab">おすすめユーザ</a>
+                    </li>
+                </ul>
+
+
+
+                <%# * タブエリア %>
+                <div class="tab-content mt-3">
+                    <%# ? AIによるコーデ提案エリア %>
+                    <div id="code_suggest" class="tab-pane active">
+                        <div class="row g-1">
+                            <%# ! 提案データがあるか判定 %>
+                            <% if Suggest.exists?(user_id: current_user.id) %>
+                                <% @suggestions.each do |s| %>
+                                    <%# * ログインしている性別のみ出す %>
+                                    <% if s.user.gender === current_user.gender %>
+                                        <div class="col-lg-3 col-md-4 col-4 mt-1">
+                                            <%= link_to "/sns/show/#{s.id}" do %>
+                                                <%= image_tag s.photograph.url, class: "suggestion_image" %>
+                                            <% end %>
+                                        </div>
+                                    <% end %>
+                                <% end %>
+                            <% else %>
+                            <%= link_to "/sns/show/#{s.id}" do %>
+                                プロフィールを入力してください。
+                            <% end %>
+                            <% end %>
+                        </div>
+                    </div>
+
+                    <%# ? Aiによるフォロワー提案タブエリア %>
+                    <div id="user_suggest" class="tab-pane">
+                        <div class="row col-lg-8 mx-auto bg-light mt-3">
+                        <table class="table align-middle mb-0 bg-white">
+                        <tbody>
+                            <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                <% if Suggest.exists?(user_id: current_user.id) %>
+                                    <% @users.each do |u| %>
+                                        <% if u.gender === current_user.gender %>
+                                        <% if u.avatar.url %>
+                                        <%= image_tag u.avatar.url, style: "width: 50px; height: 50px; object-fit: cover; z-index: 1; border-radius: 50%; ", class: "avatar img-fluid", size: "100x100" %>
+                                        <% else %>
+                                        <img src="/assets/default-avatar.png"
+                                        alt="Generic placeholder image" class="avatar">
+                                        <% end %>
+                                        <% end %>
+
+                                        <div class="ms-3">
+                                            <p class="fw-bold mb-1"><%= u.user_name %></p>
+                                        </div>
+                                    <td class="text-end">
+                                        <% if u.id == current_user.id %>
+                                        <% if UserRelation.where(follow_id: current_user.id, follower_id: u.id).exists? %>
+                                        <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "btn btn-outline-primary" %> 
+                                        <% else %>
+                                        <%= button_to "フォロー", "/profile/follow/#{u.id}", method: :post, class: "btn btn-primary" %> 
+                                        <% end %>
+                                        <% end %>
+                                    </td>
+
+                                    <% end %>
+                                <% else %>
+                                    プロフィールを入力してください。
+                                <% end %>
+                                </div>
+                            </td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

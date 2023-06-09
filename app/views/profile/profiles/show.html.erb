@@ -1,0 +1,123 @@
+<div id="profile_profiles">
+    <%# ! header %>
+    <div class="pc-header">
+        <%= render "profile/layouts/pc_header" %>
+    </div>
+
+    <div class="row g-0">
+        <%# ! sidebar %>
+        <div class="col-lg-2 pc-sidebar">
+            <%= render "profile/layouts/pc_sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="list_content col-lg-10 col-12">
+            <div class="h-100 bg-white">
+                        <div class="row g-1">
+                        <div class="col-lg-4">
+                            <div class="my-4">
+                            <div class="text-center">
+                                <% if @user.avatar.url%>
+                                    <%= image_tag @user.avatar.url, class: "avatar" %>
+                                <% else %>
+                                    <img src="/assets/default-avatar.png" alt="Generic placeholder image" class="avatar">
+                                <% end %>
+                                <h5 class="my-3"><%= @user.user_name %></h5>
+                                <p class="text-muted mb-3"><%= @user.profile %></p>
+                                <p class="text-muted small follows_area mb-3">
+                                    <%= link_to "/profile/follow_list/#{@user.id}", class: "text-dark" do %>
+                                        <label class="fw-bold"><%= @follow_list %></label>フォロー中
+                                    <% end %>
+                                    <%= link_to "/profile/follower_list/#{@user.id}", class: "text-dark" do %>
+                                    　  <label class="fw-bold"><%= @follower_list %></label>フォロワー
+                                    <% end %>
+                                </p>
+
+                                <% if @user.id == current_user.id %>
+                                    <%= button_to "プロフィール更新", "/profile/edit/#{@user.id}", method: :get, class: "btn btn-primary col-10" %>
+                                <% else %>
+                                    <%# ! フォローしているかしていないか判断する %>
+                                    <% if UserRelation.where(follow_id: current_user.id, follower_id: @user.id).exists? %>
+                                        <%= button_to "フォロー解除", "/profile/follow/#{@user.id}", method: :delete, class: "btn btn-outline-primary col-10" %> 
+                                    <% else %>
+                                        <%= button_to "フォロー", "/profile/follow/#{@user.id}", method: :post, class: "btn btn-primary col-10" %> 
+                                    <% end %>
+                                <% end %>
+                            </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-8">
+                            <div class="mb-4">
+                            <div class="">
+
+                            <ul class="nav nav-underline tab-ul mx-auto" role="tablist">
+                            <li class="nav-item flex-fill">
+                                <a href="#sns" class="fw-bold nav-link active text-center" data-bs-toggle="tab">投稿</a>
+                            </li>
+                            <li class="nav-item flex-fill">
+                                <a href="#sns_like" class="fw-bold nav-link text-center" data-bs-toggle="tab">いいね</a>
+                            </li>
+                            <li class="nav-item flex-fill">
+                                <a href="#closet" class="fw-bold nav-link text-center" data-bs-toggle="tab">クローゼット</a>
+                            </li>
+                            </ul>
+
+                            <div class="tab-content mt-3">
+                                 <div id="sns" class="tab-pane active mt-1">
+                                <div class="row g-1">
+                                <% @snss.each do |s| %>
+                                    <div class="col-lg-3">
+                                        <%= link_to "/sns/show/#{s.id}" do %>
+                                            <%= image_tag s.photograph.url, class: "profiles_image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+                                <%= paginate @snss %>
+                                </div>
+                            </div>
+
+                            <%# ? sns_likeタブエリア %>
+                            <div id="sns_like" class="tab-pane">
+                                <div class="row g-1">
+                                    <% Social.all.each do |s| %>
+                                        <% @sns_likes.each do |sl| %>
+                                            <% if sl.social_id == s.id %>
+                                                <div class="col-lg-3">
+                                                    <%= link_to "/sns/show/#{s.id}" do %>
+                                                        <%= image_tag s.photograph.url, class: "profiles_image" %>
+                                                    <% end %>
+                                                </div>
+                                            <% end %>
+                                        <% end %>
+                                    <% end %>
+                                    <%= paginate @sns_likes %>
+                                </div>
+                            </div>
+                            
+                            <%# ? closetタブエリア %>
+                            <div id="closet" class="tab-pane">
+                                    <div class="row g-1">
+                                        <% @closets.each do |c| %>
+                                            <div class="col-lg-3">
+                                                <%= link_to "/closet/show/#{c.id}" do %>
+                                                    <%= image_tag c.photograph.url, class: "profiles_image" %>
+                                                <% end %>
+                                            </div>
+                                        <% end %>
+                                        <%= paginate @closets %>
+                                    </div>
+                            </div>
+
+                            </div>
+                            
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    
+            </div>
+        </div>
+    </div>
+</div>
+

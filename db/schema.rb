@@ -10,10 +10,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_19_133540) do
+ActiveRecord::Schema.define(version: 2023_05_30_025051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "alerts", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "content", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "answer_likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "answer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_id"], name: "index_answer_likes_on_answer_id"
+    t.index ["user_id"], name: "index_answer_likes_on_user_id"
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.bigint "user_id", null: false
+    t.string "photograph"
+    t.string "answer", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["user_id"], name: "index_answers_on_user_id"
+  end
 
   create_table "closets", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -28,6 +79,16 @@ ActiveRecord::Schema.define(version: 2023_05_19_133540) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_closets_on_user_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "photograph", null: false
+    t.string "question", limit: 100, null: false
+    t.string "category", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
   create_table "social_likes", force: :cascade do |t|
@@ -56,6 +117,31 @@ ActiveRecord::Schema.define(version: 2023_05_19_133540) do
     t.index ["user_id"], name: "index_socials_on_user_id"
   end
 
+  create_table "suggests", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "style1", null: false
+    t.string "style2", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_suggests_on_user_id"
+  end
+
+  create_table "user_contacts", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "name", null: false
+    t.string "content", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_relations", force: :cascade do |t|
+    t.integer "follow_id", null: false
+    t.integer "follower_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "gender", default: ""
     t.string "profile", default: ""
@@ -64,6 +150,7 @@ ActiveRecord::Schema.define(version: 2023_05_19_133540) do
     t.string "user_name", default: "", null: false
     t.integer "age"
     t.string "avatar"
+    t.string "tendency"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -89,8 +176,14 @@ ActiveRecord::Schema.define(version: 2023_05_19_133540) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "answer_likes", "answers"
+  add_foreign_key "answer_likes", "users"
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
   add_foreign_key "closets", "users"
+  add_foreign_key "questions", "users"
   add_foreign_key "social_likes", "socials"
   add_foreign_key "social_likes", "users"
   add_foreign_key "socials", "users"
+  add_foreign_key "suggests", "users"
 end

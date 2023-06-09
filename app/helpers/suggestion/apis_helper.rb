@@ -1,0 +1,2 @@
+module Suggestion::ApisHelper
+end

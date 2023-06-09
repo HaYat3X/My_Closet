@@ -1,0 +1,9 @@
+        <div class="list_content col-lg-9">
+                <div class="bg-white p-3 m-5">
+                    <%= @alert.title %>
+                    <%= @alert.content %>
+                </div>
+                <%= link_to "編集", "/admin/alert/edit/#{@alert.id}" %>
+                <%= link_to "削除", "/admin/alert/delete/#{@alert.id}",method: :delete %>
+                </div>
+        </div>

@@ -1,7 +1,0 @@
-<p><%= @email %>様</p>
-<p>いつもMy Closet（マイクローゼット）をご利用いただきありがとうございます。本メールは、メールアドレスの変更内容を確認するメールです。</p>
-<% if @resource.try(:unconfirmed_email?) %>
-  <p>あなたのメールアドレスは<%= @resource.unconfirmed_email %>に変更されました。</p>
-<% else %>
-  <p>あなたのメールアドレスは<%= @resource.unconfirmed_email %>に変更されました。</p>
-<% end %>

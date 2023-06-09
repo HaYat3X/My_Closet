@@ -5,15 +5,15 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="mx-5">
-            <a href="/sns/new" class="btn btn-primary d-flex align-items-center">
+            <a href="/question/new" class="btn btn-primary d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                 </svg>
-                コーディネート投稿
+                Q&A投稿
             </a>
         </div>
-        <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex mx-5") do |f| %>
-            <%= f.text_field :search, class: "form-control me-2", style: "width: 400px;" %>
+        <%= form_with(url: "/question/search", local: true, method: :get, class: "d-flex mx-5") do |f| %>
+            <%= f.select :search, ['アウター', 'トップス', 'パンツ', 'シューズ', 'その他'], {include_blank: '選択してください'}, class: 'form-control', required: true %>
             <%= f.submit "検索",  class: "btn btn-outline-success flex-shrink-0" %>
         <% end %>
         <div class="collapse navbar-collapse" id="navbarForm">
