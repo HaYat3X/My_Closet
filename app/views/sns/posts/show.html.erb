@@ -28,11 +28,13 @@
                     <div class="col-lg-6">
                         <div class="row" style="padding-right: 25px;">
                             <div class="col-lg-2 pt-3">
+                            <%= link_to "/profile/show/#{@sns.user.id}" do %>
                                 <% if @sns.user.avatar.url%>
                                     <%= image_tag @sns.user.avatar.url, class: "sns-post-user-avatar" %>
                                 <% else %>
                                     <%= image_tag "/assets/default-avatar.png", class: "sns-post-user-avatar" %>
                                 <% end %>
+                            <% end %>
                             </div>
                             <div class="fw-bold col-lg-6 d-flex align-items-center">
                                 <%= @sns.user.user_name %>

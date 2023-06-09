@@ -266,6 +266,11 @@
             height: 65px;
             object-fit: cover;
             border-radius: 50px;
+            transition: transform 0.3s;
+        }
+        // ? SNS詳細画像の拡大
+        .sns-post-user-avatar:hover{
+            transform: scale(1.2);
         }
         // ? SNS詳細画面の
         .sns-show-item-image {
