@@ -1,4 +1,7 @@
 class Admin::AlertsController < ApplicationController
+        # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
+        before_action :move_to_signed_in, except: []
+
     # * お知らせ投稿フォーム
     def new
         @alert = Alert.new() 
@@ -59,4 +62,11 @@ class Admin::AlertsController < ApplicationController
     def posts_params
         params.require(:alert).permit(:title, :content)
     end
+
+     # ! ログインがしているのか判定する
+     def move_to_signed_in
+         unless admin_signed_in?
+             redirect_to new_admin_session_path, alert: "この操作は、サインインが必要です。"
+         end
+     end
 end
