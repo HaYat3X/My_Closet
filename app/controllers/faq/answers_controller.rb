@@ -1,4 +1,7 @@
 class Faq::AnswersController < ApplicationController
+
+            # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
+            before_action :move_to_signed_in, except: []
     # ! FAQ回答処理用メソッド
     def create
         # * 投稿時にバインドするパラメータを付与する
@@ -76,4 +79,12 @@ class Faq::AnswersController < ApplicationController
         # * Closetモデルにバインドする
         params.require(:answer).permit(:photograph, :answer)
     end
+
+
+        # ! ログインがしているのか判定する
+        def move_to_signed_in
+            unless user_signed_in?
+                redirect_to new_user_session_path, alert: "この操作は、サインインが必要です。"
+            end
+        end
 end
