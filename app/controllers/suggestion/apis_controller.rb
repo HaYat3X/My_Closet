@@ -1,4 +1,7 @@
 class Suggestion::ApisController < ApplicationController
+    # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
+    before_action :move_to_signed_in, except: []
+
     # ! API提案
     def call_gpt(user_id)
         # * ユーザ情報
@@ -123,5 +126,15 @@ class Suggestion::ApisController < ApplicationController
 
             # * ユーザの投稿頻度が高いタグを保存
             User.find(user_id).update(tendency: most_common_elements[0])
+    end
+
+
+    # ! (privateは外部クラスから参照できない)
+    private
+    # ! ログインがしているのか判定する
+    def move_to_signed_in
+        unless user_signed_in?
+            redirect_to new_user_session_path, alert: "この操作は、サインインが必要です。"
+        end
     end
 end
