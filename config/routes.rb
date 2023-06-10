@@ -14,13 +14,13 @@ Rails.application.routes.draw do
   post "closet/create", to: "coordinates/posts#create"
   # * 詳細画面
   get  "closet/show/:id", to: "coordinates/posts#show"
-  # 削除処理
+  # * 削除処理
   delete "closet/delete/:id", to: "coordinates/posts#delete"
   # * 編集フォーム
   get "closet/edit/:id", to: "coordinates/posts#edit"
   # * 編集処理
   patch "closet/update/:id", to: "coordinates/posts#update"
-  # 検索画面
+  # * 検索画面
   get "closet/search", to: "coordinates/searchs#search"
   # * 親要素から子要素を選択する。セレクトボックス
   post "/realtime_selected_value", to: "coordinates/posts#realtime_selected_value"
