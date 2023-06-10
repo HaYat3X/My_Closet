@@ -1,4 +1,7 @@
 class Suggestion::SuggestionsController < ApplicationController
+    # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
+    before_action :move_to_signed_in, except: []
+
     # ! GPTによる提案
     def suggestion
         # * ユーザ情報
@@ -17,6 +20,15 @@ class Suggestion::SuggestionsController < ApplicationController
 
             # * おすすめのユーザを出力
             @users = User.where("tendency LIKE ? OR tendency LIKE ?", key_word1, key_word2).order("RANDOM()").limit(10)
+        end
+    end
+
+    # ! (privateは外部クラスから参照できない)
+    private
+    # ! ログインがしているのか判定する
+    def move_to_signed_in
+        unless user_signed_in?
+            redirect_to new_user_session_path, alert: "この操作は、サインインが必要です。"
         end
     end
 end
