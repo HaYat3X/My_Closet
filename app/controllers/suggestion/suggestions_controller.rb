@@ -16,10 +16,10 @@ class Suggestion::SuggestionsController < ApplicationController
             key_word2 = '%' + suggest.style2 + '%'
 
             # * SNSの投稿データを返す（大文字と小文字を区別しない）
-            @suggestions = Social.where("search LIKE ? OR search LIKE ?", key_word1, key_word2).order("RANDOM()").limit(20)
+            @suggestions = Social.where("search LIKE ? OR search LIKE ?", key_word1, key_word2).where.not(user_id: current_user.id).order("RANDOM()").limit(20)
 
             # * おすすめのユーザを出力
-            @users = User.where("tendency LIKE ? OR tendency LIKE ?", key_word1, key_word2).order("RANDOM()").limit(10)
+            @users = User.where("tendency LIKE ? OR tendency LIKE ?", key_word1, key_word2).where.not(id: current_user.id).order("RANDOM()").limit(10)
         end
     end
 
