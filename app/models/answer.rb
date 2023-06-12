@@ -4,7 +4,7 @@ class Answer < ApplicationRecord
     # ! questionテーブルとのアソシエーション
     belongs_to :question
     # ! answerテーブルからのanswers_likesテーブルとのアソシエーション
-    has_many :answer_likes
+    has_many :answer_likes, dependent: :destroy
 
     # ! photgraphカラムとアップローダを関連付ける
     mount_uploader :photograph, AnswersImageUploader
