@@ -41,7 +41,7 @@ class Sns::PostsController < ApplicationController
         @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
 
         # * Closetモデルを介して、パンツアイテムのみ取得する
-        @closets_pants = Closet.where(big_Category: "パンツ", user_id: current_user.id)
+        @closets_pants = Closet.where(big_Category: "ボトムス", user_id: current_user.id)
 
         # * Closetモデルを介して、シューズアイテムのみ取得する
         @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
@@ -62,7 +62,7 @@ class Sns::PostsController < ApplicationController
         @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
 
          # * Closetモデルを介して、パンツアイテムのみ取得する
-        @closets_pants = Closet.where(big_Category: "パンツ", user_id: current_user.id)
+        @closets_pants = Closet.where(big_Category: "ボトムス", user_id: current_user.id)
 
          # * Closetモデルを介して、シューズアイテムのみ取得する
         @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
@@ -153,7 +153,7 @@ class Sns::PostsController < ApplicationController
         @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
 
         # * Closetモデルを介して、パンツアイテムのみ取得する
-        @closets_pants = Closet.where(big_Category: "パンツ", user_id: current_user.id)
+        @closets_pants = Closet.where(big_Category: "ボトムス", user_id: current_user.id)
 
         # * Closetモデルを介して、シューズアイテムのみ取得する
         @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
@@ -198,7 +198,7 @@ class Sns::PostsController < ApplicationController
          @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
  
          # * Closetモデルを介して、パンツアイテムのみ取得する
-         @closets_pants = Closet.where(big_Category: "パンツ", user_id: current_user.id)
+         @closets_pants = Closet.where(big_Category: "ボトムス", user_id: current_user.id)
  
          # * Closetモデルを介して、シューズアイテムのみ取得する
          @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
