@@ -52,10 +52,19 @@
     // * PC（大）
     @media (min-width: 1200px) {
         // * AIによる提案画像UIを調整
-        .suggestion_image{
+        .suggestion-image{
             object-fit: cover;
             width: 100%;
             height: 400px;
         }
+        // AIから提案されたuser一覧アイコンUI調整
+        .suggestion-user-image{
+            transition: transform 0.3s;
+        }
+        .suggestion-user-image:hover{
+            transform: scale(1.2);
+        }
+
+
     }
 }
