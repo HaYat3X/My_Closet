@@ -1,17 +1,24 @@
-// ! SNS投稿画面、SNS編集画面で選択したラジオボタンを解除する関数
-export function ClearRadio() {
-    // * clear-radioというIDがついたボタンを取得する
-    const clearButton = document.getElementById('clear-radio');
+// ! SNS投稿画面、SNS編集画面でアイテムを選択数や選択上限を制御
+export function ItemSelect() {
+    // $(document).ready(function() {
+    var maxSelection = 6; // 最大選択数
+    var checkboxes = $('.checkbox-image');
 
-    // * radio-buttonというクラス名がついラジオボタンを未選択状態に変える
-    if (clearButton) {
-        clearButton.addEventListener('click', function() {
-            const radioButtons = document.getElementsByClassName('radio-button');
-            for (let i = 0; i < radioButtons.length; i++) {
-                if (radioButtons[i].checked) {
-                    radioButtons[i].checked = false;
-                }
-            }
-        });
-    }
+    checkboxes.change(function() {
+        var selectedCount = checkboxes.filter(':checked').length;
+        var image = $(this).prev('.checkbox-image-label').find('img');
+
+        if ($(this).is(':checked')) {
+            image.addClass('selected-image');
+        } else {
+            image.removeClass('selected-image');
+        }
+
+        if (selectedCount > maxSelection) {
+            $(this).prop('checked', false);
+            image.removeClass('selected-image');
+            alert('アイテムの最大選択数は6件までです。');
+        }
+    });
+    // });
 }
