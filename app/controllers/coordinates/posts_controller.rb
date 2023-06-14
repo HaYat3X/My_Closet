@@ -123,10 +123,10 @@ class Coordinates::PostsController < ApplicationController
                 @small_Category = ["ジャケット","コート","ピーコート","ダウンジャケット","レザージャケット","ウインドブレーカー","カーディガン"]
 
             elsif selected_value == "トップス"
-                @small_Category = ["Tシャツ","シャツ","ブラウス","ポロシャツ","ニットセーター","パーカー","ジャケット","スカート"]
+                @small_Category = ["Tシャツ","シャツ","ブラウス","ポロシャツ","ニットセーター","パーカー","ジャケット"]
 
             elsif selected_value == "ボトムス"
-                @small_Category = ["ジーンズ","パンツ","ショートパンツ","スカート","レギンス","ショーツ"]
+                @small_Category = ["ジーンズ","パンツ","ショートパンツ","スカート","レギンス","ショーツ", "スカート"]
 
             elsif selected_value == "シューズ"
                 @small_Category = ["スニーカー","パンプス","サンダル","ブーツ","フラットシューズ","革靴"]
