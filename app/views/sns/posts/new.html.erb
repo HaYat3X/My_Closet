@@ -50,121 +50,18 @@
                         </div>
                     </div>
 
-                    <div class="accordion" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                            <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                着用したアイテム
-                            </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
+                    <div class="mb-3">
+                    <label for="" class="mb-3">着用アイテム（6件まで追加できます）</label>
 
-                                    <%# * タブメニューエリア %>
-                                    <ul class="nav tab-ul nav-underline col-lg-12 col-md-12 col-12" role="tablist">
-                                        <li class="nav-item flex-lg-fill flex-md-fill">
-                                            <a href="#all" class="nav-link active text-center" data-bs-toggle="tab">すべて</a>
-                                        </li>
-
-                                        <li class="nav-item flex-lg-fill flex-md-fill">
-                                            <a href="#outer" class="nav-link text-center" data-bs-toggle="tab">アウター</a>
-                                        </li>
-                                                
-                                        <li class="nav-item flex-lg-fill flex-md-fill">
-                                            <a href="#tops" class="nav-link text-center" data-bs-toggle="tab">トップス</a>
-                                        </li>
-
-                                        <li class="nav-item flex-lg-fill flex-md-fill">
-                                            <a href="#pants" class="nav-link text-center" data-bs-toggle="tab">ボトムス</a>
-                                        </li>
-
-                                        <li class="nav-item flex-lg-fill flex-md-fill">
-                                            <a href="#shoes" class="nav-link text-center" data-bs-toggle="tab">シューズ</a>
-                                        </li>
-
-                                        <li class="nav-item flex-lg-fill flex-md-fill">
-                                            <a href="#other" class="nav-link text-center" data-bs-toggle="tab">その他</a>
-                                        </li>
-                                    </ul>
-
-                                    <div class="tab-content">
-                                        <%# ? allタブエリア %>
-                                        <div id="all" class="tab-pane active">
-                                            <div class="row g-1">
-                                                <% @closets_all.each do |c| %>
-                                                <div class="col-lg-3">
-                                                    <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
-                                                    <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
-                                                </div>
-                                                <% end %>
-                                            </div>
-                                        </div>
-
-
-                                        <%# ? outerタブエリア %>
-                                        <div id="outer" class="tab-pane">
-                                            <div class="row g-1">
-                                                <% @closets_outer.each do |c| %>
-                                                <div class="col-lg-3">
-                                                    <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
-                                                    <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
-                                                </div>
-                                                <% end %>
-                                            </div>
-                                        </div>
-
-                                        <%# ? topsタブエリア %>
-                                        <div id="tops" class="tab-pane">
-                                            <div class="row g-1">
-                                                <% @closets_tops.each do |c| %>
-                                                    <div class="col-lg-3">
-                                                    <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
-                                                    <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
-                                                </div>
-                                                <% end %>
-                                            </div>
-                                        </div>
-
-                                        <%# ? pantsタブエリア %>
-                                        <div id="pants" class="tab-pane">
-                                            <div class="row g-1">
-                                                <% @closets_pants.each do |c| %>
-                                                    <div class="col-lg-3">
-                                                    <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
-                                                    <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
-                                                </div>
-                                                <% end %>
-                                            </div>
-                                        </div>
-
-                                        <%# ? shoesタブエリア %>
-                                        <div id="shoes" class="tab-pane">
-                                            <div class="row g-1">
-                                                <% @closets_shoes.each do |c| %>
-                                                    <div class="col-lg-3">
-                                                    <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
-                                                    <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
-                                                </div>
-                                                <% end %>
-                                            </div>
-                                        </div>
-
-                                        <%# ? otherタブエリア %>
-                                        <div id="other" class="tab-pane">
-                                            <div class="row g-1">
-                                                <% @closets_other.each do |c| %>
-                                                <div class="col-lg-3">
-                                                    <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
-                                                    <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
-                                                </div>
-                                                <% end %>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div id="scrollContainer" class="row g-1">
+                        <% @closets_all.each do |c| %>
+                            <div class="col-lg-2">
+                            <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
+                            <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
                             </div>
-                        </div>
+                        <% end %>
                     </div>
+
 
                     <%= f.submit "登録する", class: "btn mt-3 btn-primary" %>
                 <% end %>
@@ -172,3 +69,6 @@
         </div>
     </div>
 </div>
+
+
+

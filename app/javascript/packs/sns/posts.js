@@ -1,6 +1,5 @@
 // ! SNS投稿画面、SNS編集画面でアイテムを選択数や選択上限を制御
 export function ItemSelect() {
-    // $(document).ready(function() {
     var maxSelection = 6; // 最大選択数
     var checkboxes = $('.checkbox-image');
 
@@ -20,5 +19,4 @@ export function ItemSelect() {
             alert('アイテムの最大選択数は6件までです。');
         }
     });
-    // });
 }
