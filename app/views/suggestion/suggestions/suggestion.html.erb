@@ -38,7 +38,7 @@
                                     <% if s.user.gender === current_user.gender %>
                                         <div class="col-lg-3 col-md-4 col-4 mt-1">
                                             <%= link_to "/sns/show/#{s.id}" do %>
-                                                <%= image_tag s.photograph.url, class: "suggestion-image" %>
+                                                <%= image_tag s.photograph.url, class: "suggestion_image" %>
                                             <% end %>
                                         </div>
                                     <% end %>
@@ -61,14 +61,10 @@
                                     <% @users.each do |u| %>
                                         <% if u.gender === current_user.gender %>
                                         <% if u.avatar.url %>
-                                        <%= link_to "/profile/show/#{u.id}" do %>
-                                        <%= image_tag u.avatar.url, style: "width: 50px; height: 50px; object-fit: cover; z-index: 1; border-radius: 50%; ", class: "suggestion-user-image img-fluid", size: "100x100" %>
-                                        <% end %>
+                                        <%= image_tag u.avatar.url, style: "width: 50px; height: 50px; object-fit: cover; z-index: 1; border-radius: 50%; ", class: "avatar img-fluid", size: "100x100" %>
                                         <% else %>
-                                        <%= link_to "/profile/show/#{u.id}" do %>
                                         <img src="/assets/default-avatar.png"
-                                        alt="Generic placeholder image" class="suggestion-user-image">
-                                        <% end %>
+                                        alt="Generic placeholder image" class="avatar">
                                         <% end %>
                                         <% end %>
 
@@ -77,15 +73,14 @@
                                         </div>
                                     <td class="text-end">
                                         <% if u.id == current_user.id %>
-                                            <%= button_to "プロフィール編集", "/profile/show/#{u.id}", class: "btn btn-outline-primary" %> 
+                                        <% if UserRelation.where(follow_id: current_user.id, follower_id: u.id).exists? %>
+                                        <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "btn btn-outline-primary" %> 
                                         <% else %>
-                                            <% if UserRelation.where(follow_id: current_user.id, follower_id: u.id).exists? %>
-                                            <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "btn btn-outline-primary" %> 
-                                            <% else %>
-                                            <%= button_to "フォロー", "/profile/follow/#{u.id}", method: :post, class: "btn btn-primary" %> 
-                                            <% end %>
+                                        <%= button_to "フォロー", "/profile/follow/#{u.id}", method: :post, class: "btn btn-primary" %> 
+                                        <% end %>
                                         <% end %>
                                     </td>
+
                                     <% end %>
                                 <% else %>
                                     プロフィールを入力してください。

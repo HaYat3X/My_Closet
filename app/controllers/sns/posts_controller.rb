@@ -79,24 +79,51 @@ class Sns::PostsController < ApplicationController
         # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
         case0 = params[:social][:tag].to_s + params[:social][:message].to_s
 
-        # * 選択したアイテムを取得
-        selected_elements = params[:elements] # チェックボックスの値が配列として取得されます
-
-        # * 選択した値を処理し、選択したアイテムの情報を取得
-        if selected_elements
-            selected_elements.each_with_index do |element_id, index|
-                break if index >= 6  # 最大6件の制限を設定する
-            
-                column_name = "item#{index + 1}"
-                @social[column_name] = element_id
-    
-                search_params = selected_elements.take(6).map { |element_id| Closet.find(element_id).search.to_s }
-                @social.search = search_params.join("") + case0
-            end
+        # ? アイテム1の検索カラムを取得する
+        if params[:social][:item1]
+            case1 = Closet.find(params[:social][:item1]).search.to_s
         else
-            @social.search = case0
+            case1 = "".to_s
         end
 
+        # ? アイテム2の検索カラムを取得する
+        if params[:social][:item2]
+            case2 = Closet.find(params[:social][:item2]).search.to_s
+        else
+            case2 = "".to_s
+        end
+
+        # ? アイテム1の検索カラムを取得する
+        if params[:social][:item3]
+            case3 = Closet.find(params[:social][:item3]).search.to_s
+        else
+            case3 = "".to_s
+        end
+
+        # ? アイテム1の検索カラムを取得する
+        if params[:social][:item4]
+            case4 = Closet.find(params[:social][:item4]).search.to_s
+        else
+            case4 = "".to_s
+        end
+
+        # ? アイテム5の検索カラムを取得する
+        if params[:social][:item5]
+            case5 = Closet.find(params[:social][:item5]).search.to_s
+        else
+            case5 = "".to_s
+        end
+
+        # ? アイテム6の検索カラムを取得する
+        if params[:social][:item6]
+            case6 = Closet.find(params[:social][:item5]).search.to_s
+        else
+            case6 = "".to_s
+        end
+
+        search_bind = case0 + case1 + case2 + case3 + case4 + case5 + case6
+
+        @social.search = search_bind
 
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @social.save
@@ -114,6 +141,7 @@ class Sns::PostsController < ApplicationController
         post_id = params[:id]
         @social = Social.find(post_id)
 
+    
 
         # * ログインしているユーザが登録したアイテムのデータを取得
         @closets_all = Closet.where(user_id: current_user.id)
@@ -181,30 +209,55 @@ class Sns::PostsController < ApplicationController
         # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
         case0 = params[:social][:tag].to_s + params[:social][:message].to_s 
 
-         # * 選択したアイテムを取得
-        selected_elements = params[:elements] # チェックボックスの値が配列として取得されます
-
-         # * 選択した値を処理し、選択したアイテムの情報を取得
-        if selected_elements
-            selected_elements.each_with_index do |element_id, index|
-                break if index >= 6  # 最大6件の制限を設定する
-            
-                column_name = "item#{index + 1}"
-                @social[column_name] = element_id
-    
-                search_params = selected_elements.take(6).map { |element_id| Closet.find(element_id).search.to_s }
-                @social.search = search_params.join("") + case0
-            end
+        # ? アイテム1の検索カラムを取得する
+        if params[:social][:item1]
+            case1 = Closet.find(params[:social][:item1]).search.to_s
         else
-            @social.search = case0
+            case1 = "".to_s
         end
- 
+
+        # ? アイテム2の検索カラムを取得する
+        if params[:social][:item2]
+            case2 = Closet.find(params[:social][:item2]).search.to_s
+        else
+            case2 = "".to_s
+        end
+
+        # ? アイテム1の検索カラムを取得する
+        if params[:social][:item3]
+            case3 = Closet.find(params[:social][:item3]).search.to_s
+        else
+            case3 = "".to_s
+        end
+
+        # ? アイテム1の検索カラムを取得する
+        if params[:social][:item4]
+            case4 = Closet.find(params[:social][:item4]).search.to_s
+        else
+            case4 = "".to_s
+        end
+
+        # ? アイテム5の検索カラムを取得する
+        if params[:social][:item5]
+            case5 = Closet.find(params[:social][:item5]).search.to_s
+        else
+            case5 = "".to_s
+        end
+
+        # ? アイテム6の検索カラムを取得する
+        if params[:social][:item6]
+            case6 = Closet.find(params[:social][:item5]).search.to_s
+        else
+            case6 = "".to_s
+        end
+
+        search_bind = case0 + case1 + case2 + case3 + case4 + case5 + case6
+
+        @social.update(search: search_bind)
+
 
         # * でーたべーすにほぞん
         if @social.update(posts_params)
-            # ? ユーザの投稿頻度の高いタグを保存するプログラムを実行
-            suggestions_controller = Suggestion::ApisController.new()
-            suggestions_controller.call_user(current_user.id)
             redirect_to "/sns/show/#{post_id}", notice: "投稿を編集しました"
         else
             redirect_to"/", alert: "投稿の編集に失敗しました"
@@ -236,7 +289,7 @@ class Sns::PostsController < ApplicationController
     # ! 投稿時、編集時にバインドするパラメータ
     def posts_params
         # * socialモデルにバインドする
-        params.require(:social).permit(:tag, :message, :photograph)
+        params.require(:social).permit(:tag, :message, :photograph, :item1, :item2, :item3, :item4, :item5, :item6)
     end
 
      # ! ログインがしているのか判定する

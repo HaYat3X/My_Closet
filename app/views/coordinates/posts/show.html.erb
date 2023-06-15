@@ -46,10 +46,8 @@
                                         <td><%= @closet.brand %></td>
                                     </tr>
                                     <tr>
-                                        <% if @closet.user.id == current_user.id %>
-                                            <td><%= button_to "削除", "/closet/delete/#{@closet.id}", method: :delete, class: "btn btn-outline-danger px-5" %><td>
-                                            <td><%= link_to "編集" , "/closet/edit/#{@closet.id}", class: "btn btn-outline-primary px-5" %><td>
-                                        <% end %>
+                                        <td><%= button_to "削除", "/closet/delete/#{@closet.id}", method: :delete, class: "btn btn-outline-danger px-5" %><td>
+                                        <td><%= link_to "編集" , "/closet/edit/#{@closet.id}", class: "btn btn-outline-primary px-5" %><td>
                                     </tr>
                                 </tbody>
                             </table>
