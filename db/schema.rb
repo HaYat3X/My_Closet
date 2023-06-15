@@ -12,12 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2023_05_24_061452) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "answer_likes", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "answer_id", null: false
+    t.integer "user_id", null: false
+    t.integer "answer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["answer_id"], name: "index_answer_likes_on_answer_id"
@@ -25,8 +22,8 @@ ActiveRecord::Schema.define(version: 2023_05_24_061452) do
   end
 
   create_table "answers", force: :cascade do |t|
-    t.bigint "question_id", null: false
-    t.bigint "user_id", null: false
+    t.integer "question_id", null: false
+    t.integer "user_id", null: false
     t.string "photograph"
     t.string "answer", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -36,7 +33,7 @@ ActiveRecord::Schema.define(version: 2023_05_24_061452) do
   end
 
   create_table "closets", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.string "photograph", null: false
     t.string "big_Category", null: false
     t.string "small_Category"
@@ -51,7 +48,7 @@ ActiveRecord::Schema.define(version: 2023_05_24_061452) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.string "photograph", null: false
     t.string "question", limit: 100, null: false
     t.string "category", null: false
@@ -61,8 +58,8 @@ ActiveRecord::Schema.define(version: 2023_05_24_061452) do
   end
 
   create_table "social_likes", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "social_id", null: false
+    t.integer "user_id", null: false
+    t.integer "social_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["social_id"], name: "index_social_likes_on_social_id"
@@ -70,7 +67,7 @@ ActiveRecord::Schema.define(version: 2023_05_24_061452) do
   end
 
   create_table "socials", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.string "tag"
     t.string "message"
     t.string "photograph", null: false
@@ -87,7 +84,7 @@ ActiveRecord::Schema.define(version: 2023_05_24_061452) do
   end
 
   create_table "suggests", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.string "style1", null: false
     t.string "style2", null: false
     t.datetime "created_at", precision: 6, null: false
