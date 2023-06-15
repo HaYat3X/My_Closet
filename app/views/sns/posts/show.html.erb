@@ -42,7 +42,7 @@
                             <div class="col-lg-4 text-end" style="margin-top: 20px;">
                                 <% if user_signed_in? %>
                                     <% if @sns.user.id == current_user.id %>
-                                        <%= button_to "プロフィール更新", "/profile/edit/#{@sns.user.id}", method: :get, class: "btn btn-primary" %>
+                                        
                                     <% else %>
                                         <%# ! フォローしているかしていないか判断する %>
                                         <% if UserRelation.where(follow_id: current_user.id, follower_id: @sns.user.id).exists? %>
