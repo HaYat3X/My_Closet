@@ -100,7 +100,6 @@ class Sns::PostsController < ApplicationController
         post_id = params[:id]
         @social = Social.find(post_id)
 
-
         # * ログインしているユーザが登録したアイテムのデータを取得
         @closets_all = Closet.where(user_id: current_user.id)
 
@@ -130,17 +129,17 @@ class Sns::PostsController < ApplicationController
         post_id = params[:id]
         @social = Social.find(post_id)
 
-         # ** 一度選択したアイテムは削除できないため、一旦nullに
-        @social.item1 = nil 
-        @social.item2 = nil 
-        @social.item3 = nil 
-        @social.item4 = nil 
-        @social.item5 = nil 
-        @social.item6 = nil 
+        #  # ** 一度選択したアイテムは削除できないため、一旦nullに
+        # @social.item1 = nil 
+        # @social.item2 = nil 
+        # @social.item3 = nil 
+        # @social.item4 = nil 
+        # @social.item5 = nil 
+        # @social.item6 = nil 
 
-        # * 変更を保存、且つ再読み込み
-        @social.save
-        @social.reload
+        # # * 変更を保存、且つ再読み込み
+        # @social.save
+        # @social.reload
         # 投稿者の編集者の相違時のエラー
         if @social.user_id != current_user.id
             redirect_to "/", alert: "不正なアクセスが行われました。"
