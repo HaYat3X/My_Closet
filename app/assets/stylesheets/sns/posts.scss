@@ -17,6 +17,7 @@
     .selected-image {
         border: 3px solid var(--primary);
         border-radius: 5px;
+        position: relative;
     }
     .checkbox-image-label:hover {
         cursor: pointer;
@@ -259,7 +260,29 @@
         #scrollContainer {
             width: 724px;
             height: 368px;
-            overflow: scroll;
+            overflow-y: scroll;
+            background-color: var(--bg);
+        }
+        #scrollContainer::-webkit-scrollbar {
+            width: 10px;
+        }
+        #scrollContainer::-webkit-scrollbar-track {
+            background-color: #ccc;
+        }
+        #scrollContainer::-webkit-scrollbar-thumb {
+            background-color: #17585d;
+        }
+        // ? 画像の上に選択した順に番号を表示
+        .image-mark {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 3px 12px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
         }
     }
 }
