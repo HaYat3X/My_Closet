@@ -9,7 +9,7 @@ class Sns::PostsController < ApplicationController
 
         # * ログインしているユーザーがフォローしているユーザーの投稿を取得
         if user_signed_in?
-           @follow = UserRelation.where(follow_id: current_user.id) 
+            @follow = UserRelation.where(follow_id: current_user.id) 
         end
     end
 
@@ -29,41 +29,12 @@ class Sns::PostsController < ApplicationController
 
     # ! 投稿フォームメソッド
     def new
-        @social = Social.new
+        @social = Social.new()
 
         # * ログインしているユーザが登録したアイテムのデータを取得
-        @closets_all = Closet.where(user_id: current_user.id).limit(12)
-        @c = Closet.where(user_id: current_user.id)
-
-        # if @c >= 12
-        #     existing_ids = @closets_all.pluck(:id)
-        #     additional_closets = Closet.where(user_id: current_user.id).where.not(id: existing_ids).limit(12)
-        #     @closets_all += additional_closets
-        
-        # end
-
-        @count = @c.length
-
-        # * realtime_reload_itemsリンクから値を取得
-        # @reload_items = params[:items]
-        # * Closetからアイテムを追加したい場合
-
-
-        # * Closetモデルを介して、アウターアイテムのみ取得する
-        @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
-
-        # * Closetモデルを介して、トップスアイテムのみ取得する
-        @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
-
-        # * Closetモデルを介して、パンツアイテムのみ取得する
-        @closets_pants = Closet.where(big_Category: "ボトムス", user_id: current_user.id)
-
-        # * Closetモデルを介して、シューズアイテムのみ取得する
-        @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
-
-        # * Closetモデルを介して、その他のアイテムのみ取得する
-        @closets_other = Closet.where(big_Category: "その他", user_id: current_user.id)
+        @closets_all = Closet.where(user_id: current_user.id)
     end
+    
 
     # ! 登録処理メソッド
     def create
