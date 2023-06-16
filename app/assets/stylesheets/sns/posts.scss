@@ -255,5 +255,11 @@
             height: 250px;
             object-fit: cover;
         }
+        // ? SNSでClosetアイテムを追加する際のスクロール制約
+        #scrollContainer{
+            width: 724px;
+            height: 368px;
+            overflow: scroll;
+        }
     }
 }

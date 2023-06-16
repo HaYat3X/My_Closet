@@ -6,7 +6,7 @@ class Sns::PostsController < ApplicationController
     def list
         # * SNS投稿一覧取得 SNSに48件取得
         @snss = Social.order(created_at: :desc).page(params[:page]).per(48)
-        
+
         # * ログインしているユーザーがフォローしているユーザーの投稿を取得
         if user_signed_in?
            @follow = UserRelation.where(follow_id: current_user.id) 
@@ -32,7 +32,22 @@ class Sns::PostsController < ApplicationController
         @social = Social.new
 
         # * ログインしているユーザが登録したアイテムのデータを取得
-        @closets_all = Closet.where(user_id: current_user.id)
+        @closets_all = Closet.where(user_id: current_user.id).limit(12)
+        @c = Closet.where(user_id: current_user.id)
+
+        # if @c >= 12
+        #     existing_ids = @closets_all.pluck(:id)
+        #     additional_closets = Closet.where(user_id: current_user.id).where.not(id: existing_ids).limit(12)
+        #     @closets_all += additional_closets
+        
+        # end
+
+        @count = @c.length
+
+        # * realtime_reload_itemsリンクから値を取得
+        # @reload_items = params[:items]
+        # * Closetからアイテムを追加したい場合
+
 
         # * Closetモデルを介して、アウターアイテムのみ取得する
         @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
