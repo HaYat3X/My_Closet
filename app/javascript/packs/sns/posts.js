@@ -21,32 +21,49 @@ export function ItemSelect() {
     });
 }
 
+// export function ItemReload() {
+//   // ボタンのクリックイベントを監視
+//   document.getElementById("myButton").addEventListener("click", function() {
+//     var items = "コメント";
 
-
-
-// // ! SNS機能でAjaxサーバーを使って使って取得したいアイテム数を増やす
-// export function SnsSelect() {
-//     $('#big-category-select').change(function() {
-//         var selectedValue = $(this).val();
-
-//         $.ajax({
-//             url: '/realtime_selected_value', // 適切なエンドポイントのURLを設定
-//             method: 'POST',
-//             data: { selected_value: selectedValue },
-//             success: function(response) {
-//                 // // ーバーサイドからのレスポンスを処理
-//                 var smallCategorySelect = $('#small-category-select');
-//                 smallCategorySelect.empty(); // 小カテゴリーセレクトボックスをクリア
-//                 var options = response.options;
-//                 for (var i = 0; i < options.length; i++) {
-//                     var option = $('<option>').text(options[i]);
-//                     smallCategorySelect.append(option); // 選択肢を追加
-//                 }
-//             },
-//             error: function(error) {
-//                 // エラーハンドリング
-//                 console.log(error);
-//             },
+//     $.ajax({
+//         url: "/realtime_reload_items", // コントローラーのアクションのURLを指定
+//         method: "POST", // リクエストメソッドを指定
+//         data: { reload_items: items },
+//         dataType: "text", // 必要な場合はデータ型を指定
+//         success: function(items) {
+//             // レスポンスを受け取った後の処理
+//             console.log(items);
+//         },
+//         error: function(xhr, status, error) {
+//             // エラーハンドリング
+//             console.log(error);
+//             console.log("ミスってます");
+//         }
 //         });
 //     });
 // }
+
+export function ItemReload(){
+    var items = "コメント";
+    // ボタンのクリックイベントを監視
+    document.getElementById("myButton").addEventListener("click", function() {
+    $.ajax({
+        url: "/realtime_reload_items/:items", // コントローラーのアクションのURLを指定
+        method: "POST", // リクエストメソッドを指定
+        data: { reload_items: items },
+        dataType: "text", // 必要な場合はデータを指定
+        success: function() {
+        // レスポンスを受け取った後の処理
+        console.log(items);
+
+        },
+        error: function(error) {
+        // エラーハンドリング
+        console.log(error);
+        // isLoading = false; // リクエストが完了したことをフラグで示す
+        console.log("ミスってます");
+        }
+    });
+    });
+}

@@ -55,19 +55,16 @@
 
                     <div id="scroll">
                         <div id="scrollContainer" class="row g-1">
-                        <% initial_output_count = 12 %>
-                        <% additional_output_count = 5 %>
-                        <% new_definition_count = initial_output_count + additional_output_count %>
-                            <% @closets_all.take(new_definition_count).each do |c| %>
+                            <% @closets_all.each do |c| %>
                                 <div class="col-lg-2">
                                 <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
                                 <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
                                 </div>
                             <% end %>
                         </div>
+
+                        <%= p @count %>
                     </div>
-
-
                     <%= f.submit "登録する", class: "btn mt-3 btn-primary" %>
                 <% end %>
             </div>
