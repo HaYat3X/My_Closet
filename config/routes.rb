@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   # いいねを解除する機能
   delete "sns/delete_like/:id", to:"sns/likes#delete_like"
   # Closetアイテムを追加検索するルーティングの設定
-  post "/realtime_reload_items/:items", to: "sns/posts#new"
+  post "realtime_reload_items/:items", to: "sns/posts#new"
 
   # ! Q&A関連
   # * 投稿フォーム
