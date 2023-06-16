@@ -14,7 +14,7 @@ class Profile::FollowsController < ApplicationController
         create_follow = UserRelation.new(follow_id: follow, follower_id: follower)
 
         if create_follow.save
-            redirect_to "/"
+            redirect_to request.referer, notice: "フォローしました"
         else
             redirect_to "/"
         end
@@ -29,7 +29,7 @@ class Profile::FollowsController < ApplicationController
         delete_follow = UserRelation.find_by(follow_id: follow_delete, follower_id: follower_delete)
         
         if delete_follow.destroy
-            redirect_to "/"
+            redirect_to request.referer, notice: "フォロー解除しました"
         else
             redirect_to "/"
         end
