@@ -100,7 +100,7 @@ class Sns::PostsController < ApplicationController
         post_id = params[:id]
         @social = Social.find(post_id)
 
-        # * 投稿時に選択したアイテムを取得し、配列に格納しておく
+        # * 投稿時に選択したアイテムを取得
         @item1 = @social.item1 
         @item2 = @social.item2 
         @item3 = @social.item3 
