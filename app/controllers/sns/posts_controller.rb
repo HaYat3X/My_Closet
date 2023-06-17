@@ -100,23 +100,18 @@ class Sns::PostsController < ApplicationController
         post_id = params[:id]
         @social = Social.find(post_id)
 
+        # * 投稿時に選択したアイテムを取得し、配列に格納しておく
+        @item1 = @social.item1 
+        @item2 = @social.item2 
+        @item3 = @social.item3 
+        @item4 = @social.item4 
+        @item5 = @social.item5
+        @item6 = @social.item6
+
         # * ログインしているユーザが登録したアイテムのデータを取得
         @closets_all = Closet.where(user_id: current_user.id)
 
-        # * Closetモデルを介して、アウターアイテムのみ取得する
-        @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
-
-        # * Closetモデルを介して、トップスアイテムのみ取得する
-        @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
-
-        # * Closetモデルを介して、パンツアイテムのみ取得する
-        @closets_pants = Closet.where(big_Category: "ボトムス", user_id: current_user.id)
-
-        # * Closetモデルを介して、シューズアイテムのみ取得する
-        @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
-
-        # * Closetモデルを介して、その他のアイテムのみ取得する
-        @closets_other = Closet.where(big_Category: "その他", user_id: current_user.id)
+    
         #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
         if @social.user_id != current_user.id
             redirect_to "/", alert: "不正なアクセスが行われました。"
@@ -145,23 +140,9 @@ class Sns::PostsController < ApplicationController
             redirect_to "/", alert: "不正なアクセスが行われました。"
         end
 
-          # * ログインしているユーザが登録したアイテムのデータを取得
-         @closets_all = Closet.where(user_id: current_user.id)
+        # * ログインしているユーザが登録したアイテムのデータを取得
+        @closets_all = Closet.where(user_id: current_user.id)
 
-         # * Closetモデルを介して、アウターアイテムのみ取得する
-         @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
- 
-         # * Closetモデルを介して、トップスアイテムのみ取得する
-         @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
- 
-         # * Closetモデルを介して、パンツアイテムのみ取得する
-         @closets_pants = Closet.where(big_Category: "ボトムス", user_id: current_user.id)
- 
-         # * Closetモデルを介して、シューズアイテムのみ取得する
-         @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
- 
-         # * Closetモデルを介して、その他のアイテムのみ取得する
-        @closets_other = Closet.where(big_Category: "その他", user_id: current_user.id)
 
         # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
         case0 = params[:social][:tag].to_s + params[:social][:message].to_s 
@@ -170,7 +151,7 @@ class Sns::PostsController < ApplicationController
         selected_elements = params[:elements] # チェックボックスの値が配列として取得されます
 
          # * 選択した値を処理し、選択したアイテムの情報を取得
-        if selected_elements
+        if selected_elements.present? 
             selected_elements.each_with_index do |element_id, index|
                 break if index >= 6  # 最大6件の制限を設定する
             
@@ -181,6 +162,9 @@ class Sns::PostsController < ApplicationController
                 @social.search = search_params.join("") + case0
             end
         else
+            # ? 何も選択されなかったらitem1~6のカラムを初期化する
+            (1..6).each { |index| @social["item#{index}"] = nil }
+
             @social.search = case0
         end
  
