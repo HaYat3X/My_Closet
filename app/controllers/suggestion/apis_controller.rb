@@ -6,7 +6,11 @@ class Suggestion::ApisController < ApplicationController
     def call_gpt(user_id)
         # * ユーザ情報
         @user = User.find(user_id.to_i)
-    
+
+        # * ユーザの身長、体重、性別が存在しない場合は、提案をしない
+        if @user.weight and @user.height and @user.gender == nil
+            redirect_to "/profile/show/#{@user.id}", notice: "プロフィールを編集しました"
+        end
     
         # * GPT日クエストする文章
         request = "カジュアルスタイル、ストリートスタイル、アメカジスタイル、ルードスタイル、アウトドアスタイル、デザイナースタイル、ベーシックスタイル、モードスタイル、ラグジュアリースタイル、ガーリースタイル、ナチュラルスタイル、この中でどれか2つ身長#{@user.height}cm、体重#{@user.weight}kgの#{@user.gender}性におすすめのファッションスタイルを教えてください。"
@@ -47,6 +51,10 @@ class Suggestion::ApisController < ApplicationController
         # * ユーザ情報
         @user = User.find(user_id.to_i)
 
+        # * ユーザの身長、体重、性別が存在しない場合は、提案をしない
+        if @user.weight and @user.height and @user.gender == nil
+            redirect_to "/profile/show/#{@user.id}", notice: "プロフィールを編集しました"
+        end
 
         # * 更新するデータの取得
         @suggestion = Suggest.find_by(user_id: user_id.to_i)
