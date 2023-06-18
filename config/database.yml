@@ -15,20 +15,20 @@
 # gem 'pg'
 #
 # ! ローカル環境
-# default: &default
-#   adapter: postgresql
-#   encoding: unicode
-#   # For details on connection pooling, see Rails configuration guide
-#   # https://guides.rubyonrails.org/configuring.html#database-pooling
-#   host: <%= ENV.fetch('DATABASE_HOST') { 'db' } %>
-#   username: postgres
-#   password: <%= ENV.fetch('POSTGRES_PASSWORD') { '' } %>
-#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-# ! Dockerを使用しないローカル環境
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  host: <%= ENV.fetch('DATABASE_HOST') { 'db' } %>
+  username: postgres
+  password: <%= ENV.fetch('POSTGRES_PASSWORD') { '' } %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+# ! Dockerを使用しないローカル環境
+# default: &default
+#   adapter: sqlite3
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   timeout: 5000
 
 development:
   <<: *default
