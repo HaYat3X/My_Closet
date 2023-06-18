@@ -17,7 +17,7 @@ gem 'carrierwave', '~> 2.0'
 # * ページネーション機能を実装するためのGem
 gem 'kaminari'
 # * 竹田 ローカルテスト用
-gem 'sqlite3'
+# gem 'sqlite3'
 # * ChatGPTを使用するためのGem
 gem "ruby-openai"
 # * 画面のUIを調整するためのGem
