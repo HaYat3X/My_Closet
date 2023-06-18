@@ -37,33 +37,35 @@ class Profile::ProfilesController < ApplicationController
     # ! データを更新
     def update
         @user_data = User.find(params[:id])
-
+      
         # * 編集権限がない場合はリダイレクト
         if @user_data.id != current_user.id
-            redirect_to "/", alert: "不正なアクセスが行われました。"
+          redirect_to "/", alert: "不正なアクセスが行われました。"
         end
-
+      
         # ? 外部クラスをインスタンス化
         suggestions_controller = Suggestion::ApisController.new()
-
+      
         if @user_data.update(posts_params)
-            # * 初めての提案なのかそうでないのかを判定
-            if Suggest.exists?(user_id: @user_data.id)
-                
-                # * 外部関数の呼び出し
-                suggestions_controller.call_gpt_update(@user_data.id)
-                redirect_to "/profile/show/#{@user_data.id}", notice: "プロフィールを編集しました"
-            else
-                # * 外部関数の呼び出し
-                suggestions_controller.call_gpt(@user_data.id)
-                redirect_to "/profile/show/#{@user_data.id}", notice: "プロフィールを編集しました"
+          # * 初めての提案なのかそうでないのかを判定
+          if Suggest.exists?(user_id: @user_data.id)
+            # * 初めての提案でなく、身長、体重、性別が更新された場合のみ外部関数を呼び出す
+            if @user_data.saved_change_to_height? || @user_data.saved_change_to_weight? || @user_data.saved_change_to_gender?
+              suggestions_controller.call_gpt_update(@user_data.id)
             end
-
+          else
+            # * 初めての提案で、身長、体重、性別が更新された場合のみ外部関数を呼び出す
+            if @user_data.saved_change_to_height? || @user_data.saved_change_to_weight? || @user_data.saved_change_to_gender?
+              suggestions_controller.call_gpt(@user_data.id)
+            end
+          end
+      
+          redirect_to "/profile/show/#{@user_data.id}", notice: "プロフィールを編集しました"
         else
-            redirect_to"/", alert: "プロフィールの編集に失敗しました"
+          redirect_to "/", alert: "プロフィールの編集に失敗しました"
         end
     end
-
+    
     private
 
     # ! 編集時にバインドするパラメータ
