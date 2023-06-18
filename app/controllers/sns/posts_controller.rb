@@ -150,8 +150,11 @@ class Sns::PostsController < ApplicationController
          # * 選択したアイテムを取得
         selected_elements = params[:elements] # チェックボックスの値が配列として取得されます
 
-         # * 選択した値を処理し、選択したアイテムの情報を取得
-        if selected_elements.present? 
+        # * 選択した値を処理し、選択したアイテムの情報を取得
+        if selected_elements
+            @social.update(item1: nil, item2: nil, item3: nil, item4: nil, item5: nil, item6: nil)
+            @social.reload
+
             selected_elements.each_with_index do |element_id, index|
                 break if index >= 6  # 最大6件の制限を設定する
             
