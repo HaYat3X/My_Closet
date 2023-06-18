@@ -1,9 +1,10 @@
+<%# ! エラーがあるか判定 %>
 <% if resource.errors.any? %>
-  <div id="error_explanation" data-turbo-cache="false">
-    
-      <% resource.errors.full_messages.each do |message| %>
-        <p class="text-danger"><%= message %></p>
-      <% end %>
-    
-  </div>
+    <div id="error_explanation" data-turbo-cache="false">
+        <%# * エラーが発生した場合表示 %>
+        <% resource.errors.full_messages.each do |message| %>
+            <label class="text-danger"><%= message %><br></label>
+        <% end %>
+    </div>
 <% end %>
+

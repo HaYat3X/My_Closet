@@ -1,55 +1,64 @@
-<div id="closet_show">
+<div id="closet_posts">
     <%# ! header %>
-    <%= render "coordinates/layouts/header" %>
-    <div class="d-flex">
+    <div class="pc-header">
+        <%= render "coordinates/layouts/pc_header" %>
+    </div>
+
+    <div class="row g-0">
         <%# ! sidebar %>
-        <div class="col-lg-3">
-            <%= render "coordinates/layouts/sidebar" %>
+        <div class="col-lg-2 pc-sidebar">
+            <%= render "coordinates/layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-9">
-            <div class="m-3 bg-light">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <%= image_tag @closet.photograph.url, class: "closet_image" %>
+        <div class="list_content col-lg-10 col-12">
+            <div class="bg-white h-100">
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <%= image_tag @closet.photograph.url, class: "closet_show_image" %>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center">
+                        <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>大カテゴリー</td>
+                                        <td><%= @closet.big_Category %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>小カテゴリー</td>
+                                        <td><%= @closet.small_Category %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>金額</td>
+                                        <td><%= @closet.price %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>カラー</td>
+                                        <td><%= @closet.color %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>サイズ</td>
+                                        <td><%= @closet.size %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ブランド</td>
+                                        <td><%= @closet.brand %></td>
+                                    </tr>
+                                    <tr>
+                                        <% if @closet.user.id == current_user.id %>
+                                            <td><%= button_to "削除", "/closet/delete/#{@closet.id}", method: :delete, class: "btn btn-outline-danger px-5" %><td>
+                                            <td><%= link_to "編集" , "/closet/edit/#{@closet.id}", class: "btn btn-outline-primary px-5" %><td>
+                                        <% end %>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-6 d-flex align-items-center">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>大カテゴリー</td>
-                                <td><%= @closet.big_Category %></td>
-                            </tr>
-                            <tr>
-                                <td>小カテゴリー</td>
-                                <td><%= @closet.small_Category %></td>
-                            </tr>
-                            <tr>
-                                <td>金額</td>
-                                <td><%= @closet.price %></td>
-                            </tr>
-                            <tr>
-                                <td>カラー</td>
-                                <td><%= @closet.color %></td>
-                            </tr>
-                            <tr>
-                                <td>サイズ</td>
-                                <td><%= @closet.size %></td>
-                            </tr>
-                            <tr>
-                                <td>ブランド</td>
-                                <td><%= @closet.brand %></td>
-                            </tr>
-                            <tr>
-                                <td><%= button_to "削除", "/closet/delete/#{@closet.id}", method: :delete %><td>
-                                <td><%= link_to "編集" , "/closet/edit/#{@closet.id}"%><td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
+
+

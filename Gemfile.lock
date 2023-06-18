@@ -108,6 +108,8 @@ GEM
       multipart-post (~> 2)
     faraday-net_http (3.0.2)
     ffi (1.15.5)
+    font-awesome-rails (4.7.0.8)
+      railties (>= 3.2, < 8.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.13.0)
@@ -294,6 +296,7 @@ DEPENDENCIES
   devise
   devise-i18n
   dotenv-rails
+  font-awesome-rails
   jbuilder (~> 2.7)
   kaminari
   listen (~> 3.3)

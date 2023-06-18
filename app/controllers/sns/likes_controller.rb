@@ -1,4 +1,7 @@
 class Sns::LikesController < ApplicationController
+    # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
+    before_action :move_to_signed_in, except: []
+
 
     #いいねする機能
     def create_like
@@ -27,5 +30,16 @@ class Sns::LikesController < ApplicationController
             redirect_to request.referer, alert: "いいね解除に失敗しました"
         end
     end    
+
+
+    # ! (privateは外部クラスから参照できない)
+    private
+    # ! ログインがしているのか判定する
+    def move_to_signed_in
+        unless user_signed_in?
+            redirect_to new_user_session_path, alert: "この操作は、サインインが必要です。"
+        end
+    end
+
 
 end

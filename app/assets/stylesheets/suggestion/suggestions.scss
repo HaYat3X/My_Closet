@@ -1,3 +1,70 @@
-// Place all the styles related to the suggestion/suggestions controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+// ! suggestionフォルダのレイアウト （suggestions）
+#suggestion_suggestions {
+    // ! 全サイズ共通
+    // ?　タブのアクションカラー変更
+    .tab-ul {
+        .active {
+            color: var(--primary);
+        }
+        a {
+            color: var(--dark);
+        }
+    }
+    // * sidebar関連
+    .pc-sidebar {
+        border-radius: 5px;
+        // ? アイコンの表示設定
+        i {
+            margin-right: 10px;
+        }
+        // ? リストの表示設定
+        li:hover {
+            background-color: var(--primary);
+            border-radius: 5px;
+        }
+        // ? リンクの表示設定
+        a {
+            color: var(--dark);
+        }
+        a:hover {
+            color: #ffffff;
+        }
+        // ? サインイン、サインアウトのレイアウト
+        .action-link {
+            a:hover {
+                color: var(--dark);
+                background-color: var(--bg);
+            }
+        }
+        // ? コンテンツエリアと少し幅を空ける
+        .sidebar-content {
+            margin-right: 5px;
+        }
+    }
+    // * スマートフォン （小）
+    @media (max-width: 575.98px) {}
+    // * スマートフォン （中）
+    @media (min-width: 576px) and (max-width: 767.98px) {}
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 991.98px) {}
+    // * PC（小）
+    @media (min-width: 992px) and (max-width: 1199.98px) {}
+    // * PC（大）
+    @media (min-width: 1200px) {
+        // * AIによる提案画像UIを調整
+        .suggestion-image{
+            object-fit: cover;
+            width: 100%;
+            height: 400px;
+        }
+        // AIから提案されたuser一覧アイコンUI調整
+        .suggestion-user-image{
+            transition: transform 0.3s;
+        }
+        .suggestion-user-image:hover{
+            transform: scale(1.2);
+        }
+
+
+    }
+}

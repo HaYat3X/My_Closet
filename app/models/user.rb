@@ -2,23 +2,27 @@ class User < ApplicationRecord
   # ! メール認証ができるように設定変更
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :timeoutable, :trackable
   # クローゼットテーブルのアソシエーション
-  has_many :closets
+  has_many :closets, dependent: :destroy
 
   # ソーシャルテーブルのアソシエーション
-  has_many :socials
+  has_many :socials, dependent: :destroy
 
   #ソーシャルライクテーブルのアソシエーション
-  has_many :social_likes
+  has_many :social_likes, dependent: :destroy
 
   #questionテーブルのアソシエーション
-  has_many :questions
+  has_many :questions, dependent: :destroy
 
   # answerテーブルのアソシエーション
-  has_many :answers
+  has_many :answers, dependent: :destroy
 
   # answer_likeテーブルのアソシエーション
-  has_many :answer_likes
+  has_many :answer_likes, dependent: :destroy
 
   # 1対1の関係を定義するユーザは一つの提案を持っていることになる
   has_one :suggest
+
+  # ! photgraphカラムとアップローダを関連付ける
+  mount_uploader :avatar, UserImageUploader
+
 end

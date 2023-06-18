@@ -1,14 +1,23 @@
 class Suggestion::ApisController < ApplicationController
+    # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
+    before_action :move_to_signed_in, except: []
+
     # ! API提案
-    def call_gpt
+    def call_gpt(user_id)
         # * ユーザ情報
-        @user = User.find(current_user.id)
+        @user = User.find(user_id.to_i)
+
+        # * ユーザの身長、体重、性別が存在しない場合は、提案をしない
+        if @user.weight and @user.height and @user.gender == nil
+            redirect_to "/profile/show/#{@user.id}", notice: "プロフィールを編集しました"
+        end
     
         # * GPT日クエストする文章
         request = "カジュアルスタイル、ストリートスタイル、アメカジスタイル、ルードスタイル、アウトドアスタイル、デザイナースタイル、ベーシックスタイル、モードスタイル、ラグジュアリースタイル、ガーリースタイル、ナチュラルスタイル、この中でどれか2つ身長#{@user.height}cm、体重#{@user.weight}kgの#{@user.gender}性におすすめのファッションスタイルを教えてください。"
     
         # * APIキーセット
-        client = OpenAI::Client.new(access_token: ENV.fetch('API_KEY') { '' })
+        client = OpenAI::Client.new(access_token: ENV['GPT_ACCESS_KEY'])
+
     
         # * GPTのレスポンス 
         response = client.chat(
@@ -26,36 +35,36 @@ class Suggestion::ApisController < ApplicationController
         )
     
         # * GPTのレスポンスから返答メッセージのみを抽出
-        # content = response.dig("choices", 0, "message", "content")
-        content = "身長180cm、体重60kgの男性におすすめのファッションスタイルは、カジュアルスタイルとモードスタイルです。"
+        content = response.dig("choices", 0, "message", "content")
 
         # * GPTの提案から提案されたスタイルを抜き出す
         pull_out = content.scan(/カジュアルスタイル|ストリートスタイル|アメカジスタイル|ルードスタイル|アウトドアスタイル|デザイナースタイル|ベーシックスタイル|モードスタイル|ラグジュアリースタイル|ガーリースタイル|ナチュラルスタイル/)
 
-        # # * とうろく
-        @suggestion = Suggest.new(user_id: current_user.id, style1: pull_out[0], style2: pull_out[1])
+        # * とうろく
+        @suggestion = Suggest.new(user_id: @user.id, style1: pull_out[0], style2: pull_out[1])
+        @suggestion.save()
     
-        # * レスポンスを保存
-        if @suggestion.save
-            redirect_to "/suggestion"
-        else
-            redirect_to "/suggestion"
-        end
     end
 
     # ! call_gptによる提案を更新する
-    def call_gpt_update
+    def call_gpt_update(user_id)
         # * ユーザ情報
-        @user = User.find(current_user.id)
+        @user = User.find(user_id.to_i)
+
+        # * ユーザの身長、体重、性別が存在しない場合は、提案をしない
+        if @user.weight and @user.height and @user.gender == nil
+            redirect_to "/profile/show/#{@user.id}", notice: "プロフィールを編集しました"
+        end
 
         # * 更新するデータの取得
-        @suggestion = Suggest.find_by(user_id: current_user.id)
+        @suggestion = Suggest.find_by(user_id: user_id.to_i)
 
         # * GPT日クエストする文章
         request = "カジュアルスタイル、ストリートスタイル、アメカジスタイル、ルードスタイル、アウトドアスタイル、デザイナースタイル、ベーシックスタイル、モードスタイル、ラグジュアリースタイル、ガーリースタイル、ナチュラルスタイル、この中でどれか2つ身長#{@user.height}cm、体重#{@user.weight}kgの#{@user.gender}性におすすめのファッションスタイルを教えてください。"
     
         # * APIキーセット
-        client = OpenAI::Client.new(access_token: ENV.fetch('API_KEY') { '' })
+        client = OpenAI::Client.new(access_token: ENV['GPT_ACCESS_KEY'])
+
     
         # * GPTのレスポンス 
         response = client.chat(
@@ -73,29 +82,21 @@ class Suggestion::ApisController < ApplicationController
         )
 
         # * GPTのレスポンスから返答メッセージのみを抽出
-        # content = response.dig("choices", 0, "message", "content")
-        content = "身長180cm、体重60kgの男性におすすめのファッションスタイルは、ストリートスタイルとモードスタイルです。"
+        content = response.dig("choices", 0, "message", "content")
+
 
         # * GPTの提案から提案されたスタイルを抜き出す
         pull_out = content.scan(/カジュアルスタイル|ストリートスタイル|アメカジスタイル|ルードスタイル|アウトドアスタイル|デザイナースタイル|ベーシックスタイル|モードスタイル|ラグジュアリースタイル|ガーリースタイル|ナチュラルスタイル/)
     
-        # * レスポンスを保存
-        if @suggestion.update(user_id: current_user.id, style1: pull_out[0], style2: pull_out[1])
-            redirect_to "/suggestion"
-        else
-            redirect_to "/suggestion"
-        end        
+        # * レスポンスを保存   
+        @suggestion.update(user_id: user_id.to_i, style1: pull_out[0], style2: pull_out[1])
     end
 
     # ! 各ユーザーのファッションの投稿の傾向を保存する
-    def call_user
+    def call_user(user_id)
         # * 提案結果に基づいておすすめユーザを取得
-        # ? 1、全ユーザを取得
-        users = User.all()
-
-        users.each do |u|
             # ? 各ユーザが投稿した投稿のタグを取得する
-            snss = Social.all.where(user_id: u.id)
+            snss = Social.all.where(user_id: user_id)
 
             # ? からの配列を用意する
             my_array = []
@@ -122,11 +123,16 @@ class Suggestion::ApisController < ApplicationController
             most_common_elements = counts.select { |_, count| count == max_count }.keys
 
             # * ユーザの投稿頻度が高いタグを保存
-            if u.update(tendency: most_common_elements[0])
-                redirect_to "/suggestion"
-            else
-                redirect_to "/"
-            end
+            User.find(user_id).update(tendency: most_common_elements[0])
+    end
+
+
+    # ! (privateは外部クラスから参照できない)
+    private
+    # ! ログインがしているのか判定する
+    def move_to_signed_in
+        unless user_signed_in?
+            redirect_to new_user_session_path, alert: "この操作は、サインインが必要です。"
         end
     end
 end

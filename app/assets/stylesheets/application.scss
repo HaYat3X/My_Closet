@@ -1,7 +1,14 @@
 @import "./auth";
 @import "./coordinates/posts";
 @import "./sns/posts";
+@import "./sns/searchs";
 @import "./faq/questions";
+@import "./profile/profiles";
+@import "./profile/follows";
+@import "./profile/alerts";
+@import "./coordinates/searchs";
+@import "./contact/contacts";
+@import "./suggestion/suggestions";
 :root {
     --primary: #0d6efd;
     --dark: #21252f;

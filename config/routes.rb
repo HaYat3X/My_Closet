@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # ! 管理者関連の認証
+  devise_for :admins
+
+  # ! ユーザ関連の認証
   devise_for :users
 
   # ! クローゼット関連
@@ -10,14 +14,16 @@ Rails.application.routes.draw do
   post "closet/create", to: "coordinates/posts#create"
   # * 詳細画面
   get  "closet/show/:id", to: "coordinates/posts#show"
-  # 削除処理
+  # * 削除処理
   delete "closet/delete/:id", to: "coordinates/posts#delete"
   # * 編集フォーム
   get "closet/edit/:id", to: "coordinates/posts#edit"
   # * 編集処理
   patch "closet/update/:id", to: "coordinates/posts#update"
-  # 検索画面
+  # * 検索画面
   get "closet/search", to: "coordinates/searchs#search"
+  # * 親要素から子要素を選択する。セレクトボックス
+  post "/realtime_selected_value", to: "coordinates/posts#realtime_selected_value"
 
   # ! SNS関連
   # * 一覧ページ
@@ -40,6 +46,8 @@ Rails.application.routes.draw do
   post "sns/create_like/:id", to:"sns/likes#create_like"
   # いいねを解除する機能
   delete "sns/delete_like/:id", to:"sns/likes#delete_like"
+  # Closetアイテムを追加検索するルーティングの設定
+  post "realtime_reload_items/:items", to: "sns/posts#new"
 
   # ! Q&A関連
   # * 投稿フォーム
@@ -81,5 +89,44 @@ Rails.application.routes.draw do
   post "call_user", to: "suggestion/apis#call_user"
   # * call_gptによる提案を更新する
   post "call_gpt_update", to: "suggestion/apis#call_gpt_update"
+
+  # ! プロフィール関連
+  # * プロフィールページ
+  get "profile/show/:id", to: "profile/profiles#show"
+  # * プロフィール更新ページ
+  get "profile/edit/:id", to: "profile/profiles#edit"
+  # * プロフィール更新
+  patch "profile/update/:id", to: "profile/profiles#update"
+  # * フォローする
+  post "profile/follow/:id", to: "profile/follows#create_follow"
+  # * フォロー解除する
+  delete "profile/follow/:id", to: "profile/follows#delete_follow"
+  # * フォロー一覧
+  get "profile/follow_list/:id", to: "profile/follows#follow_list"
+  # * フォロワー一覧
+  get "profile/follower_list/:id", to: "profile/follows#follower_list"
+  # * お知らせ一覧画面
+  get "profile/alert/list", to: "profile/alerts#list"
+  # * お知らせ一覧画面
+  get "profile/alert/show/:id", to: "profile/alerts#show"
+  
+  #お問い合わせフォーム
+  get "contact/new" , to: "contact/contacts#new"
+  post "contact/create" , to: "contact/contacts#create"
+
+  # ! 管理者関連
+  # * お知らせ登録フォーム
+  get "admin/alert/new", to: "admin/alerts#new"
+  post "admin/alert/create", to: "admin/alerts#create"
+  get "admin/alert/list", to: "admin/alerts#list"
+  get "admin/alert/show/:id", to: "admin/alerts#show"
+  get "admin/alert/edit/:id", to: "admin/alerts#edit"
+  patch "admin/alert/update/:id", to: "admin/alerts#update"
+  delete "admin/alert/delete/:id", to: "admin/alerts#delete"
+
+  # ! お問い合わせ関連（管理者）
+  get "admin/contact/list", to: "admin/contacts#list"
+  post "admin/contact/create_handle/:id", to: "admin/contacts#create_handle"
+  post "admin/contact/delete_handle/:id", to: "admin/contacts#delete_handle"
 end
 
