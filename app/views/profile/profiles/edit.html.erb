@@ -30,10 +30,10 @@
                     <%= f.number_field :age, class: "form-control", placeholder: "年齢" %>
                   </div>
                   <div class="mb-3">
-                    <%= f.text_field :gender, class: "form-control", placeholder: "性別" %>
+                    <%= f.select :gender, ['男', '女', 'その他'], {include_blank: '性別を選択してください'}, class: 'form-control', required: true %>
                   </div>
                   <div class="mb-3">
-                    <%= f.text_field :profile, class: "form-control", placeholder: "プロフィール" %>
+                    <%= f.text_area :profile, class: "form-control", placeholder: "プロフィール" %>
                   </div>
                   <%= f.submit "登録する", class: "btn btn-primary" %>
                 <% end %>
