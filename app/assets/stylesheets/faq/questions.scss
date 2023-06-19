@@ -1,5 +1,15 @@
 #faq_questions {
     // ! 全サイズ共通
+    // ?　タブのアクションカラー変更
+    .tab-ul {
+        .active {
+            color: var(--primary);
+        }
+        a {
+            color: var(--dark);
+        }
+    }
+
     // * sidebar関連
     .pc-sidebar {
         border-radius: 5px;

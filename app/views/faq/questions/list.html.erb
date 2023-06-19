@@ -13,50 +13,103 @@
         <%# ! contents %>
         <div class="list_content col-lg-10">
             <div class="h-100">
-            <div class="list_content">
-            <% @questions.each do |q| %>
-                <div class="bg-white mt-2">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <%= image_tag q.photograph.url, class: "question_image" %>
+                <div class="">
+                    <ul class="nav nav-underline tab-ul col-lg-8 mx-auto" role="tablist">
+                        <li class="nav-item flex-fill">
+                            <a href="#mens" class="fw-bold nav-link active text-center" data-bs-toggle="tab">MEN'S</a>
+                        </li>
+                        <li class="nav-item flex-fill">
+                            <a href="#womens" class="fw-bold nav-link text-center" data-bs-toggle="tab">WOMEN'S</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content mt-3">
+                        <%# ? mensエリア %>
+                        <div id="mens" class="tab-pane active">
+                            <div class="row mt-3">
+                                <% @questions_mens.each do |q| %>
+                                    <div class="col-lg-3">
+                                        <%= image_tag q.photograph.url, class: "question_image" %>
+                                    </div>
+
+                                    <div class="col-lg-9 py-3">
+                                        <div class="d-flex">
+                                            <%= link_to "/profile/show/#{q.user.id}" do %>
+                                                <% if q.user.avatar.url %>
+                                                    <%= image_tag q.user.avatar.url, class: "question-user-image" %>
+                                                <% else %>
+                                                    <img src="/assets/default-avatar.png" alt="Generic placeholder image" class="question-user-image">
+                                                <% end %>
+                                            <% end %>
+                                        <div class="fw-bold d-flex align-items-center mx-3">
+                                            <%= q.user.user_name %>
+                                        </div>
+                                    </div>
+
+                                    <p class="fw-bold my-4">
+                                        <%= q.question %>
+                                    </p>
+
+                                    <%= link_to "/question/show/#{q.id}", style: "text-decoration: none;", class: "text-dark" do %>
+                                        <i class="bi bi-chat-square-text fs-5"></i>
+                                    <% end %>
+
+                                    <%# 回答数 %>
+                                    <%= Answer.where(question_id: q.id).count %><br>
+                                    <br>
+
+                                    <% if current_user.id == q.user.id %>
+                                        <%= link_to "編集", "/question/edit//#{q.id}", class: "btn btn-outline-primary px-5" %>
+                                        <%= link_to "削除", "/question/delete/#{q.id}", method: :delete, class: "btn btn-outline-danger px-5" %>
+                                    <% end %>
+                            </div>
+                                <% end %>
+                            </div>
                         </div>
 
-                        <div class="col-lg-9 py-3">
-                            <div class="d-flex">
-                            <%= link_to "/profile/show/#{q.user.id}" do %>
-                                <% if q.user.avatar.url %>
-                                    <%= image_tag q.user.avatar.url, class: "question-user-image" %>
-                                <% else %>
-                                    <img src="/assets/default-avatar.png" alt="Generic placeholder image" class="question-user-image">
-                                <% end %>
-                            <% end %>
-                                <div class="fw-bold d-flex align-items-center mx-3">
-                                    <%= q.user.user_name %>
+                        <div id="womens" class="tab-pane">
+                        <% @questions_womens.each do |q| %>
+                            <div class="row mt-3">
+                                <div class="col-lg-3">
+                                    <%= image_tag q.photograph.url, class: "question_image" %>
+                                </div>
+
+                                <div class="col-lg-9 py-3">
+                                    <div class="d-flex">
+                                    <%= link_to "/profile/show/#{q.user.id}" do %>
+                                        <% if q.user.avatar.url %>
+                                        <%= image_tag q.user.avatar.url, class: "question-user-image" %>
+                                        <% else %>
+                                        <img src="/assets/default-avatar.png" alt="Generic placeholder image" class="question-user-image">
+                                        <% end %>
+                                    <% end %>
+                                        <div class="fw-bold d-flex align-items-center mx-3">
+                                            <%= q.user.user_name %>
+                                        </div>
+                                    </div>
+
+                                    <p class="fw-bold my-4">
+                                        <%= q.question %>
+                                    </p>
+
+                                    <%= link_to "/question/show/#{q.id}", style: "text-decoration: none;", class: "text-dark" do %>
+                                        <i class="bi bi-chat-square-text fs-5"></i>
+                                    <% end %>
+
+                                    <%# 回答数 %>
+                                    <%= Answer.where(question_id: q.id).count %><br>
+                                    <br>
+
+                                    <% if current_user.id == q.user.id %>
+                                        <%= link_to "編集", "/question/edit//#{q.id}", class: "btn btn-outline-primary px-5" %>
+                                        <%= link_to "削除", "/question/delete/#{q.id}", method: :delete, class: "btn btn-outline-danger px-5" %>
+                                    <% end %>
                                 </div>
                             </div>
-
-                            <p class="fw-bold my-4">
-                                <%= q.question %>
-                            </p>
-
-                            <%= link_to "/question/show/#{q.id}", style: "text-decoration: none;", class: "text-dark" do %>
-                                <i class="bi bi-chat-square-text fs-5"></i>
-                            <% end %>
-
-                            <%# 回答数 %>
-                            <%= Answer.where(question_id: q.id).count %><br>
-                            <br>
-
-                            <% if current_user.id == q.user.id %>
-                                <%= link_to "編集", "/question/edit//#{q.id}", class: "btn btn-outline-primary px-5" %>
-                                <%= link_to "削除", "/question/delete/#{q.id}", method: :delete, class: "btn btn-outline-danger px-5" %>
-                            <% end %>
+                        <% end %>
                         </div>
                     </div>
                 </div>
-            <% end %>
-        </div>
-
             </div>
         </div>
     </div>

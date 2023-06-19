@@ -7,9 +7,10 @@ class Faq::QuestionsController < ApplicationController
         @question = Question.new
 
         # * 性別がnull値だった場合"/question/list"に戻る
-        if current_user.gender != "男" || @user_gender != "女"|| @user_gender != "その他"
-            redirect_to "/question/list", alert: "性別を入力してください。"
+        if current_user.gender.blank? || !["男", "女"].include?(current_user.gender)
+            redirect_to "/question/list", alert: "性別を選択してください。"
         end
+
     end
 
     # ! 登録処理用メソッド
@@ -31,6 +32,9 @@ class Faq::QuestionsController < ApplicationController
     #質問の一覧を取得する
     def list
         @questions = Question.all
+
+        @questions_mens = Question.joins(:user).where(users: { gender: "男" })
+        @questions_womens = Question.joins(:user).where(users: { gender: "女" })
 
     end
 
