@@ -24,14 +24,14 @@
                                 <% end %>
                                 <h5 class="my-3"><%= @user.user_name %></h5>
                                 <p class="text-muted mb-3"><%= @user.profile %></p>
-                                <p class="text-muted small follows_area mb-3">
-                                    <%= link_to "/profile/follow_list/#{@user.id}", class: "text-dark" do %>
-                                        <label class="fw-bold"><%= @follow_list %></label>フォロー中
+                                <div class="text-muted small follows_area mb-3">
+                                    <%= link_to "/profile/follow_list/#{@user.id}", class: "text-dark"  do %>
+                                        <span class="fw-bold"><%= @follow_list %></span>フォロー中
                                     <% end %>
-                                    <%= link_to "/profile/follower_list/#{@user.id}", class: "text-dark" do %>
-                                    　  <label class="fw-bold"><%= @follower_list %></label>フォロワー
+                                    <%= link_to "/profile/follower_list/#{@user.id}", class: "text-dark mx-3" do %>
+                                        <span class="fw-bold"><%= @follower_list %>フォロワー</span>
                                     <% end %>
-                                </p>
+                                </div>
 
                                 <% if @user.id == current_user.id %>
                                     <%= button_to "プロフィール更新", "/profile/edit/#{@user.id}", method: :get, class: "btn btn-primary col-10" %>
