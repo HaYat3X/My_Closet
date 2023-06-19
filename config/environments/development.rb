@@ -73,8 +73,7 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # ! サービス日デフォルトURL
-  # config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
-  config.action_mailer.default_url_options = { host: "https://desolate-dusk-06840-e48eebd43f6f.herokuapp.com/" }
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
   # ! メール認証用の設定
   config.action_mailer.raise_delivery_errors = true
