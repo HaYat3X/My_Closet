@@ -5,6 +5,12 @@ class Faq::QuestionsController < ApplicationController
     def new
         # * 使用するモデルを定義する
         @question = Question.new
+
+        # * 性別がnull値だった場合"/question/list"に戻る
+        if current_user.gender.blank? || !["男", "女"].include?(current_user.gender)
+            redirect_to "/question/list", alert: "性別を選択してください。"
+        end
+
     end
 
     # ! 登録処理用メソッド
@@ -26,6 +32,10 @@ class Faq::QuestionsController < ApplicationController
     #質問の一覧を取得する
     def list
         @questions = Question.all
+
+        @questions_mens = Question.joins(:user).where(users: { gender: "男" })
+        @questions_womens = Question.joins(:user).where(users: { gender: "女" })
+
     end
 
     #詳細表示
