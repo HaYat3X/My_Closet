@@ -1,7 +1,7 @@
 <p class="fw-bold"><%= @email %>様</p>
 <p>「My Closet（マイクローゼット）」にご登録して頂き、ありがとうございます。本メールは、ご登録頂いたメールアドレスが正しいかどうか確認するための認証用メールです。</p>
 <p>メール認証を完了するために、下記の「認証する」ボタンをクリックしてメールアドレスを認証してください。</p>
-<p><%= link_to '認証をする', confirmation_url(@resource, confirmation_token: @token, host: 'example.com') %>
+<p><%= link_to '認証をする', confirmation_url(@resource, confirmation_token: @token, host: 'https://desolate-dusk-06840-e48eebd43f6f.herokuapp.com') %>
 </p>
 <p>このメールに身に覚えがない場合は、このメールを削除してください。</p>
 <p>
