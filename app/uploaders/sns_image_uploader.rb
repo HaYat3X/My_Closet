@@ -5,15 +5,15 @@ class SnsImageUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   # * 本番環境とローカル環境でアップロードする環境を分ける
-  # if Rails.env.production?
-  #   # ? S3
-  #   storage :fog
-  # else
-  #   # ? LOCAL
-  #   storage :file
-  # end
+  if Rails.env.production?
+    # ? S3
+    storage :fog
+  else
+    # ? LOCAL
+    storage :file
+  end
 
-  storage :fog
+  # storage :fog
   
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
