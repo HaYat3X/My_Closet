@@ -16,14 +16,11 @@ gem 'devise-i18n'
 gem 'carrierwave', '~> 2.0'
 # * ページネーション機能を実装するためのGem
 gem 'kaminari'
-# * 竹田 ローカルテスト用
-# gem 'sqlite3'
 # * ChatGPTを使用するためのGem
 gem "ruby-openai"
 # * 画面のUIを調整するためのGem
 gem 'font-awesome-rails'
-# * awsの導入
-gem "fog-aws"
+gem 'fog-aws'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
@@ -38,6 +35,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
