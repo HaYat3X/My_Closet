@@ -10,10 +10,10 @@ CarrierWave.configure do |config|
     aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
 
     # ? 謎 （すみません）
-    use_iam_profile:       false,
+    use_iam_profile: false,
 
     # ? バケットのリージョン設定
-    region:                'ap-northeast-1',
+    region: 'ap-northeast-1',
   }
 
   # * バケット名
