@@ -32,23 +32,31 @@ class Suggestion::ApisController < ApplicationController
                 max_tokens: 200,
             },
         )
+
+        # # * GPTのレスポンスがnullだった場合アラートを出力する
+        if response == nil
+            return { redirect_url: "/profile/show/#{@user.id}", flash_message: "AI提案が失敗しました。" }
+        end
+
     
         # * GPTのレスポンスから返答メッセージのみを抽出
         content = response.dig("choices", 0, "message", "content")
+
+        
 
         # * GPTの提案から提案されたスタイルを抜き出す
         pull_out = content.scan(/カジュアルスタイル|ストリートスタイル|アメカジスタイル|ルードスタイル|アウトドアスタイル|デザイナースタイル|ベーシックスタイル|モードスタイル|ラグジュアリースタイル|ガーリースタイル|ナチュラルスタイル/)
 
         # * とうろく
         @suggestion = Suggest.new(user_id: @user.id, style1: pull_out[0], style2: pull_out[1])
-        # @suggestion.save()
 
-        # 保存ができなかった場合の処理を記述する
-        # if @suggestion.save
-        #     notice: "AIがコーディネートを提案しました。"
-        # else
-        #     redirect_to "/profile/show/#{@user.id}", alert: "AI提案が失敗しました。"
-        # end
+        # * 提案の成功、失敗によって設定したURLにフラッシュメッセージを変更し出力する
+        if @suggestion.save()
+            return { redirect_url: "/profile/show/#{@user.id}", flash_message: "AI提案が実行されました。",
+            flash: "notice" }
+        else
+            return { redirect_url: "/profile/show/#{@user.id}", flash_message: "AI提案が失敗しました。", flash: "alert" }
+        end
     end
 
     # ! call_gptによる提案を更新する
@@ -66,7 +74,7 @@ class Suggestion::ApisController < ApplicationController
 
         # * GPT日クエストする文章
         request = "カジュアルスタイル、ストリートスタイル、アメカジスタイル、ルードスタイル、アウトドアスタイル、デザイナースタイル、ベーシックスタイル、モードスタイル、ラグジュアリースタイル、ガーリースタイル、ナチュラルスタイル、この中でどれか2つ身長#{@user.height}cm、体重#{@user.weight}kgの性別：#{@user.gender}におすすめのファッションスタイルを教えてください。"
-    
+
         # * APIキーセット
         client = OpenAI::Client.new(access_token: ENV['GPT_ACCESS_KEY'] )
 
@@ -85,6 +93,11 @@ class Suggestion::ApisController < ApplicationController
             },
         )
 
+        # # * GPTのレスポンスがnullだった場合アラートを出力する
+        if response == nil
+            return { redirect_url: "/profile/show/#{@user.id}", flash_message: "AI提案が失敗しました。", flash: "alert" }
+        end
+
 
         # * GPTのレスポンスから返答メッセージのみを抽出
         content = response.dig("choices", 0, "message", "content")
@@ -93,10 +106,11 @@ class Suggestion::ApisController < ApplicationController
         # * GPTの提案から提案されたスタイルを抜き出す
         pull_out = content.scan(/カジュアルスタイル|ストリートスタイル|アメカジスタイル|ルードスタイル|アウトドアスタイル|デザイナースタイル|ベーシックスタイル|モードスタイル|ラグジュアリースタイル|ガーリースタイル|ナチュラルスタイル/)
     
+        # * 更新処理の成功、失敗によって設定したURLにフラッシュメッセージを変更し出力する
         if @suggestion.update(user_id: user_id.to_i, style1: pull_out[0], style2: pull_out[1])
-            return { redirect_url: "/profile/show/#{@user.id}", flash_message: "AI提案が実行されました。" }
+            return { redirect_url: "/profile/show/#{@user.id}", flash_message: "AI提案が実行されました。", flash: "notice" }
         else
-            return { redirect_url: "/", flash_message: "リダイレクトしました" }
+            return { redirect_url: "/profile/show/#{@user.id}", flash_message: "AI提案が失敗しました。", flash: "alert" }
         end
         
     end
