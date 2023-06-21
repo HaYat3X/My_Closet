@@ -8,16 +8,15 @@ class Suggestion::ApisController < ApplicationController
         @user = User.find(user_id.to_i)
 
         # * ユーザの身長、体重、性別が存在しない場合は、提案をしない
-        if @user.weight and @user.height and @user.gender == nil
+        if @user.weight and @user.height and @user.gender == ""
             redirect_to "/profile/show/#{@user.id}", notice: "プロフィールを編集しました"
         end
     
         # * GPT日クエストする文章
-        request = "カジュアルスタイル、ストリートスタイル、アメカジスタイル、ルードスタイル、アウトドアスタイル、デザイナースタイル、ベーシックスタイル、モードスタイル、ラグジュアリースタイル、ガーリースタイル、ナチュラルスタイル、この中でどれか2つ身長#{@user.height}cm、体重#{@user.weight}kgの#{@user.gender}性におすすめのファッションスタイルを教えてください。"
+        request = "カジュアルスタイル、ストリートスタイル、アメカジスタイル、ルードスタイル、アウトドアスタイル、デザイナースタイル、ベーシックスタイル、モードスタイル、ラグジュアリースタイル、ガーリースタイル、ナチュラルスタイル、この中でどれか2つ身長#{@user.height}cm、体重#{@user.weight}kgの性別：#{@user.gender}におすすめのファッションスタイルを教えてください。"
     
         # * APIキーセット
         client = OpenAI::Client.new(access_token: ENV['GPT_ACCESS_KEY'])
-
     
         # * GPTのレスポンス 
         response = client.chat(
@@ -42,8 +41,14 @@ class Suggestion::ApisController < ApplicationController
 
         # * とうろく
         @suggestion = Suggest.new(user_id: @user.id, style1: pull_out[0], style2: pull_out[1])
-        @suggestion.save()
-    
+        # @suggestion.save()
+
+        # 保存ができなかった場合の処理を記述する
+        # if @suggestion.save
+        #     notice: "AIがコーディネートを提案しました。"
+        # else
+        #     redirect_to "/profile/show/#{@user.id}", alert: "AI提案が失敗しました。"
+        # end
     end
 
     # ! call_gptによる提案を更新する
@@ -60,12 +65,11 @@ class Suggestion::ApisController < ApplicationController
         @suggestion = Suggest.find_by(user_id: user_id.to_i)
 
         # * GPT日クエストする文章
-        request = "カジュアルスタイル、ストリートスタイル、アメカジスタイル、ルードスタイル、アウトドアスタイル、デザイナースタイル、ベーシックスタイル、モードスタイル、ラグジュアリースタイル、ガーリースタイル、ナチュラルスタイル、この中でどれか2つ身長#{@user.height}cm、体重#{@user.weight}kgの#{@user.gender}性におすすめのファッションスタイルを教えてください。"
+        request = "カジュアルスタイル、ストリートスタイル、アメカジスタイル、ルードスタイル、アウトドアスタイル、デザイナースタイル、ベーシックスタイル、モードスタイル、ラグジュアリースタイル、ガーリースタイル、ナチュラルスタイル、この中でどれか2つ身長#{@user.height}cm、体重#{@user.weight}kgの性別：#{@user.gender}におすすめのファッションスタイルを教えてください。"
     
         # * APIキーセット
-        client = OpenAI::Client.new(access_token: ENV['GPT_ACCESS_KEY'])
+        client = OpenAI::Client.new(access_token: ENV['GPT_ACCESS_KEY'] )
 
-    
         # * GPTのレスポンス 
         response = client.chat(
             parameters: {
@@ -81,6 +85,7 @@ class Suggestion::ApisController < ApplicationController
             },
         )
 
+
         # * GPTのレスポンスから返答メッセージのみを抽出
         content = response.dig("choices", 0, "message", "content")
 
@@ -88,8 +93,12 @@ class Suggestion::ApisController < ApplicationController
         # * GPTの提案から提案されたスタイルを抜き出す
         pull_out = content.scan(/カジュアルスタイル|ストリートスタイル|アメカジスタイル|ルードスタイル|アウトドアスタイル|デザイナースタイル|ベーシックスタイル|モードスタイル|ラグジュアリースタイル|ガーリースタイル|ナチュラルスタイル/)
     
-        # * レスポンスを保存   
-        @suggestion.update(user_id: user_id.to_i, style1: pull_out[0], style2: pull_out[1])
+        if @suggestion.update(user_id: user_id.to_i, style1: pull_out[0], style2: pull_out[1])
+            return { redirect_url: "/profile/show/#{@user.id}", flash_message: "AI提案が実行されました。" }
+        else
+            return { redirect_url: "/", flash_message: "リダイレクトしました" }
+        end
+        
     end
 
     # ! 各ユーザーのファッションの投稿の傾向を保存する
