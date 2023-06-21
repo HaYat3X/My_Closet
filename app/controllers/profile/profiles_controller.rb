@@ -47,20 +47,16 @@ class Profile::ProfilesController < ApplicationController
         suggestions_controller = Suggestion::ApisController.new()
       
         if @user_data.update(posts_params)
-          # * 初めての提案なのかそうでないのかを判定
-          if Suggest.exists?(user_id: @user_data.id)
-            # * 初めての提案でなく、身長、体重、性別が更新された場合のみ外部関数を呼び出す
-            if @user_data.saved_change_to_height? || @user_data.saved_change_to_weight? || @user_data.saved_change_to_gender?
-              suggestions_controller.call_gpt_update(@user_data.id)
-            end
-          else
-            # * 初めての提案で、身長、体重、性別が更新された場合のみ外部関数を呼び出す
-            if @user_data.saved_change_to_height? || @user_data.saved_change_to_weight? || @user_data.saved_change_to_gender?
+          if @user_data.saved_change_to_height? || @user_data.saved_change_to_weight? || @user_data.saved_change_to_gender?
+            if Suggest.exists?(user_id: @user_data.id)
+              result = suggestions_controller.call_gpt_update(@user_data.id)
+              redirect_to result[:redirect_url], notice: result[:flash_message]
+            else
               suggestions_controller.call_gpt(@user_data.id)
             end
-          end
-      
-          redirect_to "/profile/show/#{@user_data.id}", notice: "プロフィールを編集しました"
+          else
+            redirect_to "/profile/show/#{@user_data.id}", notice: "プロフィールを編集しました"
+          end    
         else
           redirect_to "/", alert: "プロフィールの編集に失敗しました"
         end

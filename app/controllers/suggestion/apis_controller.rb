@@ -93,15 +93,12 @@ class Suggestion::ApisController < ApplicationController
         # * GPTの提案から提案されたスタイルを抜き出す
         pull_out = content.scan(/カジュアルスタイル|ストリートスタイル|アメカジスタイル|ルードスタイル|アウトドアスタイル|デザイナースタイル|ベーシックスタイル|モードスタイル|ラグジュアリースタイル|ガーリースタイル|ナチュラルスタイル/)
     
-
-        # 更新ができなかった場合の処理を記述する
         if @suggestion.update(user_id: user_id.to_i, style1: pull_out[0], style2: pull_out[1])
-            # flash[:notice] =  "AIがコーディネートを提案しました。"
-            redirect_to "/profile/show/#{@user.id}", alert: "AI提案が失敗しました。"
+            return { redirect_url: "/profile/show/#{@user.id}", flash_message: "AI提案が実行されました。" }
         else
-            redirect_to "/profile/show/#{@user.id}", alert: "AI提案が失敗しました。"
+            return { redirect_url: "/", flash_message: "リダイレクトしました" }
         end
-
+        
     end
 
     # ! 各ユーザーのファッションの投稿の傾向を保存する
