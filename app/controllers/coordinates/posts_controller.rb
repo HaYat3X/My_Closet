@@ -45,7 +45,7 @@ class Coordinates::PostsController < ApplicationController
 
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @closet.save
-            redirect_to "/closet/list/"
+            redirect_to "/closet/list"
         else
             render :new
         end
@@ -57,7 +57,7 @@ class Coordinates::PostsController < ApplicationController
         @closet = Closet.find(post_id)
         #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
         if @closet.user_id != current_user.id
-            redirect_to "/closet/edit/#{post_id}", alert: "不正なアクセスが行われました。"
+            redirect_to "/", alert: "不正なアクセスが行われました。"
         end
     end
     # ! アイテム更新メソッド
@@ -66,7 +66,7 @@ class Coordinates::PostsController < ApplicationController
         @closet = Closet.find(post_id)
 
         if @closet.user_id != current_user.id
-            redirect_to "/closet/edit/#{post_id}", alert: "不正なアクセスが行われました。"
+            redirect_to "/", alert: "不正なアクセスが行われました。"
         end
 
         # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
@@ -152,7 +152,7 @@ class Coordinates::PostsController < ApplicationController
     # ! ログインがしているのか判定する
     def move_to_signed_in
         unless user_signed_in?
-            redirect_to new_user_session_path
+            redirect_to new_user_session_path, alert: "この操作は、サインインが必要です。"
         end
     end
 end
