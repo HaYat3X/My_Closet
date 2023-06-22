@@ -109,7 +109,7 @@ class Coordinates::PostsController < ApplicationController
             if closet.destroy
                 redirect_to "/closet/list", notice: "投稿を削除しました"
             else
-                redirect_to "/closet/list", alert: "投稿の削除に失敗しました"
+                redirect_to "/", alert: "投稿の削除に失敗しました"
             end
         end
     end
