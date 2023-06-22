@@ -45,7 +45,7 @@ class Coordinates::PostsController < ApplicationController
 
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @closet.save
-            redirect_to "/closet/list"
+            redirect_to "/closet/list", notice: "アイテムを登録しました。"
         else
             render :new
         end

@@ -146,7 +146,12 @@ class Suggestion::ApisController < ApplicationController
             most_common_elements = counts.select { |_, count| count == max_count }.keys
 
             # * ユーザの投稿頻度が高いタグを保存
-            User.find(user_id).update(tendency: most_common_elements[0])
+            if User.find(user_id).update(tendency: most_common_elements[0])
+                return { redirect_url: "/", flash_message: "コーディネートを投稿しました。", flash: "notice" }
+            else
+                return { redirect_url: "/", flash_message: "コーディネートの投稿に失敗しました。", flash: "alert" }
+            end
+            
     end
 
 
