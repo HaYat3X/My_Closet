@@ -38,7 +38,7 @@ class Faq::AnswersController < ApplicationController
         if @answer.destroy
             redirect_to "/question/list", notice: "投稿を削除しました"
         else
-            redirect_to"/question/list", alert: "投稿の編集に削除しました"
+            redirect_to"/", alert: "投稿の編集に削除しました"
         end
     end
 
@@ -67,7 +67,7 @@ class Faq::AnswersController < ApplicationController
         if @answer.update(posts_params)
             redirect_to "/question/list", notice: "投稿を編集しました"
         else
-            redirect_to"/question/list", alert: "投稿の編集に失敗しました"
+            redirect_to"/", alert: "投稿の編集に失敗しました"
         end
     end
 
