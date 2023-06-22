@@ -74,7 +74,7 @@ class Coordinates::PostsController < ApplicationController
         case1 = params[:closet][:big_Category] + params[:closet][:small_Category] + params[:closet][:color] 
         case2 = params[:closet][:size] + params[:closet][:brand] + params[:closet][:price]
 
-        # * searchカラムを更新する
+        # * searchカラムを更新する。
         @closet.update(search: case1 + case2)
 
         # * 投稿の削除後、listのページに戻るコード
@@ -84,7 +84,7 @@ class Coordinates::PostsController < ApplicationController
             redirect_to"/", alert: "投稿の編集に失敗しました"
         end
     end
-
+ 
     # ! アイテム詳細メソッド
     def show
         # * urlから投稿id取得
@@ -109,7 +109,7 @@ class Coordinates::PostsController < ApplicationController
             if closet.destroy
                 redirect_to "/closet/list", notice: "投稿を削除しました"
             else
-                redirect_to "/closet/list", alert: "投稿の削除に失敗しました"
+                redirect_to "/", alert: "投稿の削除に失敗しました"
             end
         end
     end
