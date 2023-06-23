@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get "closet/search", to: "coordinates/searchs#search"
   # * 親要素から子要素を選択する。セレクトボックス
   post "/realtime_selected_value", to: "coordinates/posts#realtime_selected_value"
+  # * ブランドを非同期で検索する
+  get "/brand_search", to: "coordinates/posts#brand_search"
 
   # ! SNS関連
   # * 一覧ページ
