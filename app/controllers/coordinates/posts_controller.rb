@@ -36,12 +36,13 @@ class Coordinates::PostsController < ApplicationController
         @closet = Closet.new(posts_params)
 
         # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
-        case1 = params[:closet][:big_Category] + params[:closet][:small_Category] + params[:closet][:color] 
+        case1 = params[:closet][:big_Category] + params[:closet][:small_Category] + params[:color] 
         case2 = params[:closet][:size] + params[:closet][:brand] + params[:closet][:price] 
         @closet.search = case1 + case2
 
         # * ログインしているユーザの情報を取得し、user_idのカラムにバインドする
         @closet.user_id = current_user.id
+        @closet.color = params[:color]
 
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @closet.save

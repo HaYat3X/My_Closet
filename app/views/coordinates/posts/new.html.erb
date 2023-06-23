@@ -53,9 +53,21 @@
                         </div>
                         <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                           <div class="accordion-body">
+                          <ul class="radio-a">
+                            <li>
+                              <input name="color" id="radio-a01" type="radio" value="ホワイト">
+                              <label class="radio-a-label" for="radio-a01">ホワイト</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a02" type="radio" value="ブラック">
+                              <label class="radio-a-label" for="radio-a02">ブラック</label>
+                            </li>
+
+                          </ul>
+
                             <div class="radio-vertical">
                               <label for="" class="button">
-                              <%= f.radio_button :color, 'ホワイト' %>
+                              
                               ホワイト</label>
 
                               <%= f.radio_button :color, 'ブラック' %>
