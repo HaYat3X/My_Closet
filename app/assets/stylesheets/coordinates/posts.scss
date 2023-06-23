@@ -63,5 +63,19 @@
             width: 100%;
             height: 800px;
         }
+        // ? クローゼットアイテム投稿のカラー選択UIを調整する
+         /* ラジオボタンを非表示にする */
+        // input[type="radio"] {
+        //     display: none;
+        // }
+        // ?  色のパネルのスタイル
+        .white{
+            border: 1px solid #000000;/* ラベルの境界線を実線で指定する */
+            background-color: #ffffff;
+        }
+        .custom-radio input[type="radio"]:checked + label{
+            color: #000;
+            border: 1px solid #000;
+        }
     }
 }
