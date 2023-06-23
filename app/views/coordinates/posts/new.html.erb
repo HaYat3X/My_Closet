@@ -56,67 +56,81 @@
                           <ul class="radio-a">
                             <li>
                               <input name="color" id="radio-a01" type="radio" value="ホワイト">
-                              <label class="radio-a-label" for="radio-a01">ホワイト</label>
+                              <label style="background-color: #ffffff; color: black;" class="radio-a-label" for="radio-a01">ホワイト</label>
                             </li>
                             <li>
                               <input name="color" id="radio-a02" type="radio" value="ブラック">
-                              <label class="radio-a-label" for="radio-a02">ブラック</label>
+                              <label style="background-color: #000000; color: #FFFFFF;" class="radio-a-label" for="radio-a02">ブラック</label>
+                            </li>
+
+                            <li>
+                              <input name="color" id="radio-a03" type="radio" value="グレー">
+                              <label style="background-color: #9A9A9A; color: #FFFFFF;" class="radio-a-label" for="radio-a03">グレー</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a04" type="radio" value="ブラウン">
+                              <label style="background-color: #74331F; color: #FFFFFF;" class="radio-a-label" for="radio-a04">ブラウン</label>
+                            </li>
+                            <%# ? ---------------------- %>
+
+                            <li>
+                              <input name="color" id="radio-a05" type="radio" value="ベージュ">
+                              <label style="background-color: #E6D9AE;" class="radio-a-label beju" for="radio-a05">ベージュ</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a06" type="radio" value="グリーン">
+                              <label style="background-color: #2C9C4C; color: #FFFFFF;" class="radio-a-label" for="radio-a06">グリーン</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a07" type="radio" value="ブルー">
+                              <label style="background-color: #0E64E1; color: #FFFFFF;" class="radio-a-label" for="radio-a07">ブルー</label>
+                            </li><li>
+                              <input name="color" id="radio-a08" type="radio" value="パープル">
+                              <label style="background-color: #630C8A; color: #FFFFFF;" class="radio-a-label" for="radio-a08">パープル</label>
+                            </li>
+                          </ul>
+                          <ul class="radio-a">
+                            <li>
+                              <input name="color" id="radio-a09" type="radio" value="イエロー">
+                              <label style="background-color: #EDD13F; color: ;" class="radio-a-label" for="radio-a09">イエロー</label>
+                            </li>
+                            <%# ? ---------------------- %>
+                            <li>
+                              <input name="color" id="radio-a10" type="radio" value="ピンク">
+                              <label style="background-color: #F7B0DA; color: black;" class="radio-a-label" for="radio-a10">ピンク</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a11" type="radio" value="レッド">
+                              <label style="background-color: #DC0B32; color: #FFFFFF;" class="radio-a-label" for="radio-a11">レッド</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a12" type="radio" value="オレンジ">
+                              <label style="background-color: #FF8D28; color: black;" class="radio-a-label" for="radio-a12">オレンジ</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a13" type="radio" value="シルバー">
+                              <label style="background-color: #DADADA; color: black;" class="radio-a-label" for="radio-a13">シルバー</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a14" type="radio" value="ゴールド">
+                              <label style="background-color: #E3B837; color: #FFFFFF;" class="radio-a-label" for="radio-a14">ゴールド</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a15" type="radio" value="その他">
+                              <label style="background:    radial-gradient(circle at 50% 0,
+                                  rgba(255,0,0,.5),
+                                  rgba(255,0,0,0) 70.71%),
+                                radial-gradient(circle at 6.7% 75%,
+                                  rgba(0,0,255,.5),
+                                  rgba(0,0,255,0) 70.71%),
+                                radial-gradient(circle at 93.3% 75%,
+                                  rgba(0,255,0,.5),
+                                  rgba(0,255,0,0) 70.71%) beige; color: #FFFFFF;"
+                                  class="radio-a-label" for="radio-a15">その他</label>
                             </li>
 
                           </ul>
 
-                            <div class="radio-vertical">
-                              <label for="" class="button">
-                              
-                              ホワイト</label>
-
-                              <%= f.radio_button :color, 'ブラック' %>
-                              <%= f.label :color, 'ブラック' %>
-                              
-                              <%= f.radio_button :color, 'グレー' %>
-                              <%= f.label :color, 'グレー' %>
-
-                              <%= f.radio_button :color, 'ブラウン' %>
-                              <%= f.label :color, 'ブラウン' %>
-
-                              <%= f.radio_button :color, 'ベージュ' %>
-                              <%= f.label :color, 'ベージュ' %>
-                              
-
-                              <br>
-                              <%# !--------%>
-                              <%= f.radio_button :color, 'グリーン' %>
-                              <%= f.label :color, 'グリーン' %>
-                              
-                              <%= f.radio_button :color, 'ブルー' %>
-                              <%= f.label :color, 'ブルー' %>
-                              <%= f.radio_button :color, 'パープル' %>
-                              <%= f.label :color, 'パープル' %>
-
-                              <%= f.radio_button :color, 'イエロー' %>
-                              <%= f.label :color, 'イエロー' %>
-                              
-                              <%= f.radio_button :color, 'ピンク' %>
-                              <%= f.label :color, 'ピンク' %>
-
-                              <br>
-                              <%# !--------%>
-                              
-                              <%= f.radio_button :color, 'レッド' %>
-                              <%= f.label :color, 'レッド' %>
-                              <%= f.radio_button :color, 'オレンジ' %>
-                              <%= f.label :color, 'オレンジ' %>
-
-                              <%= f.radio_button :color, 'シルバー' %>
-                              <%= f.label :color, 'シルバー' %>
-                              
-                              <%= f.radio_button :color, 'ゴールド' %>
-                              <%= f.label :color, 'ゴールド' %>
-                              
-                              <%= f.radio_button :color, 'その他' %>
-                              <%= f.label :color, 'その他' %>
-                              <%# !--------%>
-                            </div>
                           </div>
                         </div>
                       </div>

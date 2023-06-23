@@ -12,7 +12,7 @@
     }
     .radio-a {
         display: flex;
-        gap: 10px;
+        gap: 5px;
         li {
             list-style: none;
         }
@@ -35,15 +35,17 @@
         align-items: center;
         justify-content: center;
         text-align: center;
+        border: 1px solid black;
         // background-color: #ddd;
         // color: #fff;
         aspect-ratio: 1 / 1;
         width: 80px;
         cursor: pointer;
         font-size: 15px;
+        border-radius: 5px;
     }
     .radio-a input[type="radio"]:checked+.radio-a-label {
-        border: 2px solid var(--primary);
+        border: 6px solid var(--primary);
     }
     // * sidebar関連
     .pc-sidebar {
@@ -98,20 +100,9 @@
             width: 100%;
             height: 800px;
         }
-        // ? クローゼットアイテム投稿のカラー選択UIを調整する
-        /* ラジオボタンを非表示にする */
-        // input[type="radio"] {
-        //     display: none;
-        // }
-        // ?  色のパネルのスタイル
-        .white {
-            border: 1px solid #000000;
-            /* ラベルの境界線を実線で指定する */
-            background-color: #ffffff;
-        }
-        .custom-radio input[type="radio"]:checked+label {
-            color: #000;
-            border: 1px solid #000;
+        // ? カラー選択のフォントサイズ
+        .radio-a-label{
+            font-weight: bold;
         }
     }
 }

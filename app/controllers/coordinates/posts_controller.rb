@@ -53,7 +53,7 @@ class Coordinates::PostsController < ApplicationController
     end
     # ! アイテム更新フォームメソッド
     def edit
-           # * urlから投稿id取得
+        # * urlから投稿id取得
         post_id = params[:id]
         @closet = Closet.find(post_id)
         #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
