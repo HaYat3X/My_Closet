@@ -66,3 +66,37 @@ export function ClosetSelectValue() {
         });
     });
 }
+
+export function ClosetBrandValue() {
+    $(document).ready(function() {
+        $('input[name="brand_search"]').on('input', function() {
+            var searchQuery = $(this).val(); // 検索クエリを取得
+
+            // 検索結果を表示する領域
+            var brand_select = $('#brand-select');
+
+            // Ajaxリクエストを送信
+            $.ajax({
+                url: '/brand_search',
+                method: 'GET',
+                data: { search: searchQuery },
+                success: function(response) {
+                    brand_select.empty();
+                    var options = response.options;
+
+                    if (!options.includes(searchQuery)) {
+                        options.push(searchQuery);
+                    }
+
+                    for (var i = 0; i < options.length; i++) {
+                        var option = $('<option>').text(options[i]);
+                        brand_select.append(option);
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                },
+            });
+        });
+    });
+}

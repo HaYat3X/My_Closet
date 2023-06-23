@@ -48,12 +48,24 @@
                   <div class="mb-3">
                     <%= f.text_field :size, class: "form-control", placeholder: "サイズ" %>
                   </div>
-                  <div class="mb-3">
-                    <%= f.text_field :brand, class: "form-control", placeholder: "ブランド" %>
-                  </div>
-                  <%= f.submit "登録する", class: "btn btn-primary" %>
+                    <div class="accordion" id="accordionExample">
+                      <div class="accordion-item">
+                        <div class="accordion-header">
+                          <button type="button" class="col-12 btn text-start" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            ブランド
+                          </button>
+                        </div>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                          <div class="d-flex mb-3">
+                            <%= text_field_tag :brand_search, nil, class: "form-control me-2", placeholder: "ブランドを検索" %>
+                          </div>
+                          <%= f.select :brand, [], {include_blank: 'ブランドを検索し、選択してください'}, class: 'form-control', id: "brand-select" %>
+                        </div>
+                      </div>
+                    </div>
+                  <%= f.submit "登録する", class: "btn btn-primary mt-3" %>
                 <% end %>
-
             </div>
         </div>
     </div>

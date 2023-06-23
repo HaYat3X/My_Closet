@@ -138,6 +138,17 @@ class Coordinates::PostsController < ApplicationController
             render json: { options: @small_Category }
     end
 
+    # ! ブランドを検索する
+    def brand_search
+        # * Ajaxの値を受け取る
+        key_word = '%' + params[:search] + '%'
+        # * 大文字、小文字を区別せずに検索
+        closet_table = Closet.arel_table
+        # * 検索
+        @search_result = Closet.where(closet_table[:brand].matches(key_word)).distinct.pluck(:brand)
+
+        render json: { options: @search_result }
+    end
 
 
     # ! (privateは外部クラスから参照できない)
