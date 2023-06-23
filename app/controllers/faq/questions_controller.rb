@@ -8,7 +8,7 @@ class Faq::QuestionsController < ApplicationController
 
         # * 性別がnull値だった場合"/question/list"に戻る
         if current_user.gender.blank? || !["男", "女"].include?(current_user.gender)
-            redirect_to "/question/list", alert: "性別を選択してください。"
+            redirect_to "/question/list", alert: "性別を選択することでQ&Aを投稿することができます。"
         end
 
     end
@@ -23,7 +23,7 @@ class Faq::QuestionsController < ApplicationController
 
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @question.save
-            redirect_to "/"
+            redirect_to "/question/list", notice: "投稿が成功しました。"
         else
             render :new
         end
@@ -31,10 +31,8 @@ class Faq::QuestionsController < ApplicationController
 
     #質問の一覧を取得する
     def list
-        @questions = Question.all
-
-        @questions_mens = Question.joins(:user).where(users: { gender: "男" })
-        @questions_womens = Question.joins(:user).where(users: { gender: "女" })
+        @questions_mens = Question.order(created_at: :desc).joins(:user).where(users: { gender: "男" })
+        @questions_womens = Question.order(created_at: :desc).joins(:user).where(users: { gender: "女" })
 
     end
 
@@ -47,7 +45,7 @@ class Faq::QuestionsController < ApplicationController
 
 
         question_id = params[:id]
-        @answers = Answer.where(question_id: question_id)
+        @answers = Answer.order(created_at: :desc).where(question_id: question_id)
 
 
     end
@@ -77,7 +75,7 @@ class Faq::QuestionsController < ApplicationController
         if @question.update(posts_params)
             redirect_to "/question/list", notice: "投稿を編集しました"
         else
-            redirect_to"/question/list", alert: "投稿の編集に失敗しました"
+            redirect_to "/", alert: "投稿の編集に失敗しました"
         end
     end
 
@@ -95,7 +93,7 @@ class Faq::QuestionsController < ApplicationController
         if @question.destroy
             redirect_to "/question/list", notice: "投稿を削除しました"
         else
-            redirect_to"/question/list", alert: "投稿の編集に削除しました"
+            redirect_to "/", alert: "投稿の編集に削除しました"
         end
     end
     

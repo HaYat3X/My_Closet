@@ -18,7 +18,7 @@ class Faq::AnswersController < ApplicationController
 
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @answer.save
-            redirect_to "/"
+            redirect_to "/question/show/#{params[:id]}", notice: "質問に回答しました。"
         else
             render template: 'faq/questions/show'
         end
@@ -38,7 +38,7 @@ class Faq::AnswersController < ApplicationController
         if @answer.destroy
             redirect_to "/question/list", notice: "投稿を削除しました"
         else
-            redirect_to"/question/list", alert: "投稿の編集に削除しました"
+            redirect_to"/", alert: "投稿の編集に削除しました"
         end
     end
 
@@ -65,9 +65,9 @@ class Faq::AnswersController < ApplicationController
 
         # 更新
         if @answer.update(posts_params)
-            redirect_to "/question/list", notice: "投稿を編集しました"
+            redirect_to "/question/list", notice: "回答を編集しました"
         else
-            redirect_to"/question/list", alert: "投稿の編集に失敗しました"
+            redirect_to "/", alert: "投稿の編集に失敗しました。"
         end
     end
 

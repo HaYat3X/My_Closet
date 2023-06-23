@@ -25,10 +25,7 @@
 
                 <%= form_with(model: @closet, url: "/closet/update/#{@closet.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
                   <div class="mb-3">
-                    <%= f.file_field :photograph, required: true, class: "form-control", placeholder: "写真" %>
-                    <div class="invalid-feedback">
-                      写真を入力して下さい。
-                    </div>
+                    <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
                   </div>
                   <div class="mb-3">
                     <%= f.select :big_Category, ['アウター', 'トップス', 'ボトムス', 'シューズ', 'その他'], {include_blank: '大カテゴリーを選択してください'}, class: 'form-control', required: true, id: 'big-category-select' %>
@@ -37,21 +34,126 @@
                     </div>
                   </div>
                   <div class="mb-3">
-                    <%= f.select :small_Category, [], {include_blank: '小カテゴリーを選択してください'}, class: 'form-control', id: "small-category-select" %>
+                    <%= f.select :small_Category, ['ジャケット','コート','ピーコート','ダウンジャケット','レザージャケット','ウインドブレーカー','カーディガン','Tシャツ','シャツ','ブラウス','ポロシャツ','ニットセーター','パーカー','ジーンズ','パンツ','ショートパンツ','スカート','レギンス','ショーツ','スカート','スニーカー','パンプス','サンダル','ブーツ','フラットシューズ','革靴','ネックレス','ブレスレット','ピアス','リング','ヘアアクセサリー','その他'], {include_blank: '小カテゴリーを選択してください'}, class: 'form-control', id: "small-category-select" %>
                   </div>
                   <div class="mb-3">
                     <%= f.number_field :price, class: "form-control", placeholder: "金額" %>
                   </div>
                   <div class="mb-3">
-                    <%= f.text_field :color, class: "form-control", placeholder: "カラー" %>
+                  <%# ? ---------------------------------------------------------------------------- %>
+                    <div class="accordion" id="accordionExample">
+                      <div class="accordion-item">
+                        <div class="accordion-header">
+                          <button type="button" class="col-12 btn text-start" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            カラー
+                          </button>
+                        </div>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                          <ul class="radio-a">
+                            <li>
+                              <input name="color" id="radio-a01" type="radio" value="ホワイト">
+                              <label style="background-color: #ffffff; color: black;" class="radio-a-label" for="radio-a01">ホワイト</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a02" type="radio" value="ブラック">
+                              <label style="background-color: #000000; color: #FFFFFF;" class="radio-a-label" for="radio-a02">ブラック</label>
+                            </li>
+
+                            <li>
+                              <input name="color" id="radio-a03" type="radio" value="グレー">
+                              <label style="background-color: #9A9A9A; color: #FFFFFF;" class="radio-a-label" for="radio-a03">グレー</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a04" type="radio" value="ブラウン">
+                              <label style="background-color: #74331F; color: #FFFFFF;" class="radio-a-label" for="radio-a04">ブラウン</label>
+                            </li>
+                            <%# ? ---------------------- %>
+
+                            <li>
+                              <input name="color" id="radio-a05" type="radio" value="ベージュ">
+                              <label style="background-color: #E6D9AE;" class="radio-a-label beju" for="radio-a05">ベージュ</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a06" type="radio" value="グリーン">
+                              <label style="background-color: #2C9C4C; color: #FFFFFF;" class="radio-a-label" for="radio-a06">グリーン</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a07" type="radio" value="ブルー">
+                              <label style="background-color: #0E64E1; color: #FFFFFF;" class="radio-a-label" for="radio-a07">ブルー</label>
+                            </li><li>
+                              <input name="color" id="radio-a08" type="radio" value="パープル">
+                              <label style="background-color: #630C8A; color: #FFFFFF;" class="radio-a-label" for="radio-a08">パープル</label>
+                            </li>
+                          </ul>
+                          <ul class="radio-a">
+                            <li>
+                              <input name="color" id="radio-a09" type="radio" value="イエロー">
+                              <label style="background-color: #EDD13F; color: ;" class="radio-a-label" for="radio-a09">イエロー</label>
+                            </li>
+                            <%# ? ---------------------- %>
+                            <li>
+                              <input name="color" id="radio-a10" type="radio" value="ピンク">
+                              <label style="background-color: #F7B0DA; color: black;" class="radio-a-label" for="radio-a10">ピンク</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a11" type="radio" value="レッド">
+                              <label style="background-color: #DC0B32; color: #FFFFFF;" class="radio-a-label" for="radio-a11">レッド</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a12" type="radio" value="オレンジ">
+                              <label style="background-color: #FF8D28; color: black;" class="radio-a-label" for="radio-a12">オレンジ</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a13" type="radio" value="シルバー">
+                              <label style="background-color: #DADADA; color: black;" class="radio-a-label" for="radio-a13">シルバー</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a14" type="radio" value="ゴールド">
+                              <label style="background-color: #E3B837; color: #FFFFFF;" class="radio-a-label" for="radio-a14">ゴールド</label>
+                            </li>
+                            <li>
+                              <input name="color" id="radio-a15" type="radio" value="その他">
+                              <label style="background:    radial-gradient(circle at 50% 0,
+                                  rgba(255,0,0,.5),
+                                  rgba(255,0,0,0) 70.71%),
+                                radial-gradient(circle at 6.7% 75%,
+                                  rgba(0,0,255,.5),
+                                  rgba(0,0,255,0) 70.71%),
+                                radial-gradient(circle at 93.3% 75%,
+                                  rgba(0,255,0,.5),
+                                  rgba(0,255,0,0) 70.71%) beige; color: #FFFFFF;"
+                                  class="radio-a-label" for="radio-a15">その他</label>
+                            </li>
+
+                          </ul>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                  <%# </div> %>
+                  <%# ?----------------------------------------------------------------------- %>
                   <div class="mb-3">
                     <%= f.text_field :size, class: "form-control", placeholder: "サイズ" %>
                   </div>
-                  <div class="mb-3">
-                    <%= f.text_field :brand, class: "form-control", placeholder: "ブランド" %>
-                  </div>
-                  <%= f.submit "登録する", class: "btn btn-primary" %>
+                  <div class="accordion" id="accordionExample">
+                      <div class="accordion-item">
+                        <div class="accordion-header">
+                          <button type="button" class="col-12 btn text-start" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <%= @closet.brand %>
+                          </button>
+                        </div>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                          <%= text_field_tag :brand_search, nil, class: "form-control mb-2", placeholder: "ブランドを検索" %>
+                          <%= f.select :brand, [], {include_blank: 'ブランドを検索し、選択してください'}, class: 'form-control', id: "brand-select" %>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  <%= f.submit "登録する", class: "btn btn-primary mt-3" %>
                 <% end %>
 
             </div>

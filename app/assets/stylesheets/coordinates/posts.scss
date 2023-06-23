@@ -10,6 +10,43 @@
             color: var(--dark);
         }
     }
+    .radio-a {
+        display: flex;
+        gap: 5px;
+        li {
+            list-style: none;
+        }
+        padding: 0;
+    }
+    .radio-a input[type="radio"] {
+        position: absolute;
+        white-space: nowrap;
+        border: 0;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        overflow: hidden;
+        height: 1px;
+        width: 1px;
+        margin: -1px;
+        padding: 0;
+    }
+    .radio-a-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border: 1px solid black;
+        // background-color: #ddd;
+        // color: #fff;
+        aspect-ratio: 1 / 1;
+        width: 80px;
+        cursor: pointer;
+        font-size: 15px;
+        border-radius: 5px;
+    }
+    .radio-a input[type="radio"]:checked+.radio-a-label {
+        border: 6px solid var(--primary);
+    }
     // * sidebar関連
     .pc-sidebar {
         border-radius: 5px;
@@ -62,6 +99,10 @@
             object-fit: cover;
             width: 100%;
             height: 800px;
+        }
+        // ? カラー選択のフォントサイズ
+        .radio-a-label{
+            font-weight: bold;
         }
     }
 }

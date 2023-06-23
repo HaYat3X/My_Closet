@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get "closet/search", to: "coordinates/searchs#search"
   # * 親要素から子要素を選択する。セレクトボックス
   post "/realtime_selected_value", to: "coordinates/posts#realtime_selected_value"
+  # * ブランドを非同期で検索する
+  get "/brand_search", to: "coordinates/posts#brand_search"
 
   # ! SNS関連
   # * 一覧ページ
@@ -88,7 +90,7 @@ Rails.application.routes.draw do
   # * 各ユーザーのファッションの投稿の傾向を保存する
   post "call_user", to: "suggestion/apis#call_user"
   # * call_gptによる提案を更新する
-  post "call_gpt_update", to: "suggestion/apis#call_gpt_update"
+  patch "call_gpt_update", to: "suggestion/apis#call_gpt_update"
 
   # ! プロフィール関連
   # * プロフィールページ

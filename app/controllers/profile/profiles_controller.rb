@@ -8,19 +8,19 @@ class Profile::ProfilesController < ApplicationController
         @user = User.find(params[:id])
 
         # ログイン中のユーザが投稿したSNS投稿
-        @snss = Social.where(user_id: @user.id).page(params[:page]).per(16)
+        @snss = Social.order(created_at: :desc).where(user_id: @user.id).page(params[:page]).per(16)
 
         #ログイン中のユーザーがいいねしたSNS投稿
-        @sns_likes = SocialLike.where(user_id: @user.id).page(params[:page]).per(16)
+        @sns_likes = SocialLike.order(created_at: :desc).where(user_id: @user.id).page(params[:page]).per(16)
 
         #ログイン中のユーザーが投稿したクローゼット
-        @closets = Closet.where(user_id:@user.id).page(params[:page]).per(16)
+        @closets = Closet.order(created_at: :desc).where(user_id:@user.id).page(params[:page]).per(16)
 
         # フォロー数
-        @follow_list = UserRelation.where(follow_id: params[:id]).count
+        @follow_list = UserRelation.order(created_at: :desc).where(follow_id: params[:id]).count
 
         # ファロワー数
-        @follower_list = UserRelation.where(follower_id: params[:id]).count
+        @follower_list = UserRelation.order(created_at: :desc).where(follower_id: params[:id]).count
     end
 
     # ! ユーザーのプロフィール更新メソッド
@@ -45,25 +45,23 @@ class Profile::ProfilesController < ApplicationController
       
         # ? 外部クラスをインスタンス化
         suggestions_controller = Suggestion::ApisController.new()
-      
-        if @user_data.update(posts_params)
-          # * 初めての提案なのかそうでないのかを判定
-          if Suggest.exists?(user_id: @user_data.id)
-            # * 初めての提案でなく、身長、体重、性別が更新された場合のみ外部関数を呼び出す
-            if @user_data.saved_change_to_height? || @user_data.saved_change_to_weight? || @user_data.saved_change_to_gender?
-              suggestions_controller.call_gpt_update(@user_data.id)
-            end
-          else
-            # * 初めての提案で、身長、体重、性別が更新された場合のみ外部関数を呼び出す
-            if @user_data.saved_change_to_height? || @user_data.saved_change_to_weight? || @user_data.saved_change_to_gender?
-              suggestions_controller.call_gpt(@user_data.id)
-            end
-          end
-      
-          redirect_to "/profile/show/#{@user_data.id}", notice: "プロフィールを編集しました"
+
+        # * プロフィールの更新処理が成功しているか判定する
+      if @user_data.update(posts_params)
+        # * 身長・体重・性別が更新されているのか判定する
+        if @user_data.saved_change_to_height? || @user_data.saved_change_to_weight? || @user_data.saved_change_to_gender?
+        # * Suggestレコードが存在する場合は、call_gpt_updateを呼び出し、存在しない場合は call_gptを呼び出す
+          result = Suggest.exists?(user_id: @user_data.id) ? suggestions_controller.call_gpt_update(@user_data.id) : suggestions_controller.call_gpt(@user_data.id)
+          # * 結果の flash メッセージの種類に応じて、フラッシュのキーを設定する
+          flash_key = result[:flash] == 'notice' ? :notice : :alert
+          # * 結果のリダイレクト先URLと flash メッセージを含むフラッシュハッシュを指定してリダイレクトする
+          redirect_to result[:redirect_url], flash: { flash_key => result[:flash_message] }
         else
-          redirect_to "/", alert: "プロフィールの編集に失敗しました"
+          redirect_to "/profile/show/#{@user_data.id}", notice: "プロフィールを編集しました"
         end
+      else
+        redirect_to "/profile/show/#{@user_data.id}", alert: "プロフィールの編集に失敗しました"
+      end
     end
     
     private

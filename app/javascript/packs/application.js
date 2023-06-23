@@ -4,7 +4,7 @@ import $ from 'jquery';
 global.$ = global.jQuery = $;
 import { SnsNewItemSelect } from './sns/posts';
 import { FormValidation } from './layouts/validation';
-import { ClosetSelectValue } from './closet/posts';
+import { ClosetSelectValue, ClosetBrandValue } from './closet/posts';
 
 document.addEventListener('turbolinks:load', () => {
     // ! フォームのバリデーションチェックをする関数
@@ -15,6 +15,8 @@ document.addEventListener('turbolinks:load', () => {
 
     // ! closet投稿画面、編集画面で大カテゴリーに基づいて小カテゴリーを表示する関数
     ClosetSelectValue();
+
+    ClosetBrandValue();
 });
 
 Rails.start();

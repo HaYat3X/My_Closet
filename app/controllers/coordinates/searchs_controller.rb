@@ -18,7 +18,7 @@ class Coordinates::SearchsController < ApplicationController
     # ! ログインがしているのか判定する
     def move_to_signed_in
         unless user_signed_in?
-            redirect_to new_user_session_path
+            redirect_to new_user_session_path, alert: "この操作は、サインインが必要です。"
         end
     end
 

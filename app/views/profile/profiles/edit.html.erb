@@ -14,6 +14,11 @@
         <div class="list_content col-lg-10">
             <div class="bg-white py-5 h-100">
                 <%= form_with(model: @user_data, url: "/profile/update/#{@user_data.id}", local: true, :html => {class:"needs-validation mx-auto col-lg-8", :novalidate => true}) do |f| %>
+                  <!-- プロフィール画面のビューファイル -->
+                  <% if @suggestion_result %>
+                  ローディング中
+                  <% end %>
+
                   <div class="mb-3">
                     <%= f.file_field :avatar,  class: "form-control", placeholder: "アイコン" %>
                   </div>
@@ -30,7 +35,7 @@
                     <%= f.number_field :age, class: "form-control", placeholder: "年齢" %>
                   </div>
                   <div class="mb-3">
-                    <%= f.select :gender, ['男', '女', 'その他'], {include_blank: '性別を選択してください'}, class: 'form-control', required: true %>
+                    <%= f.select :gender, ['男', '女'], {include_blank: '性別を選択してください'}, class: 'form-control' %>
                   </div>
                   <div class="mb-3">
                     <%= f.text_area :profile, class: "form-control", placeholder: "プロフィール" %>

@@ -119,8 +119,8 @@ ActiveRecord::Schema.define(version: 2023_05_30_025051) do
 
   create_table "suggests", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "style1", null: false
-    t.string "style2", null: false
+    t.string "style1"
+    t.string "style2"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_suggests_on_user_id"
