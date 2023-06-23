@@ -45,7 +45,7 @@ class Coordinates::PostsController < ApplicationController
 
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @closet.save
-            redirect_to "/closet/list/"
+            redirect_to "/closet/list", notice: "アイテムを登録しました。"
         else
             render :new
         end
@@ -57,7 +57,7 @@ class Coordinates::PostsController < ApplicationController
         @closet = Closet.find(post_id)
         #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
         if @closet.user_id != current_user.id
-            redirect_to "/closet/edit/#{post_id}", alert: "不正なアクセスが行われました。"
+            redirect_to "/", alert: "不正なアクセスが行われました。"
         end
     end
     # ! アイテム更新メソッド
@@ -66,7 +66,7 @@ class Coordinates::PostsController < ApplicationController
         @closet = Closet.find(post_id)
 
         if @closet.user_id != current_user.id
-            redirect_to "/closet/edit/#{post_id}", alert: "不正なアクセスが行われました。"
+            redirect_to "/", alert: "不正なアクセスが行われました。"
         end
 
         # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
@@ -74,7 +74,7 @@ class Coordinates::PostsController < ApplicationController
         case1 = params[:closet][:big_Category] + params[:closet][:small_Category] + params[:closet][:color] 
         case2 = params[:closet][:size] + params[:closet][:brand] + params[:closet][:price]
 
-        # * searchカラムを更新する
+        # * searchカラムを更新する。
         @closet.update(search: case1 + case2)
 
         # * 投稿の削除後、listのページに戻るコード
@@ -84,7 +84,7 @@ class Coordinates::PostsController < ApplicationController
             redirect_to"/", alert: "投稿の編集に失敗しました"
         end
     end
-
+ 
     # ! アイテム詳細メソッド
     def show
         # * urlから投稿id取得
@@ -109,7 +109,7 @@ class Coordinates::PostsController < ApplicationController
             if closet.destroy
                 redirect_to "/closet/list", notice: "投稿を削除しました"
             else
-                redirect_to "/closet/list", alert: "投稿の削除に失敗しました"
+                redirect_to "/", alert: "投稿の削除に失敗しました"
             end
         end
     end
@@ -138,6 +138,17 @@ class Coordinates::PostsController < ApplicationController
             render json: { options: @small_Category }
     end
 
+    # ! ブランドを検索する
+    def brand_search
+        # * Ajaxの値を受け取る
+        key_word = '%' + params[:search] + '%'
+        # * 大文字、小文字を区別せずに検索
+        closet_table = Closet.arel_table
+        # * 検索
+        @search_result = Closet.where(closet_table[:brand].matches(key_word)).distinct.pluck(:brand)
+
+        render json: { options: @search_result }
+    end
 
 
     # ! (privateは外部クラスから参照できない)
@@ -152,7 +163,7 @@ class Coordinates::PostsController < ApplicationController
     # ! ログインがしているのか判定する
     def move_to_signed_in
         unless user_signed_in?
-            redirect_to new_user_session_path
+            redirect_to new_user_session_path, alert: "この操作は、サインインが必要です。"
         end
     end
 end

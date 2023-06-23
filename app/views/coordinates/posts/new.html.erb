@@ -37,7 +37,7 @@
                     </div>
                   </div>
                   <div class="mb-3">
-                    <%= f.select :small_Category, [], {include_blank: '小カテゴリーを選択してください'}, class: 'form-control', id: "small-category-select" %>
+                    <%= f.select :small_Category, ['ジャケット','コート','ピーコート','ダウンジャケット','レザージャケット','ウインドブレーカー','カーディガン','Tシャツ','シャツ','ブラウス','ポロシャツ','ニットセーター','パーカー','ジーンズ','パンツ','ショートパンツ','スカート','レギンス','ショーツ','スカート','スニーカー','パンプス','サンダル','ブーツ','フラットシューズ','革靴','ネックレス','ブレスレット','ピアス','リング','ヘアアクセサリー','その他'], {include_blank: '小カテゴリーを選択してください'}, class: 'form-control', id: "small-category-select" %>
                   </div>
                   <div class="mb-3">
                     <%= f.number_field :price, class: "form-control", placeholder: "金額" %>
@@ -48,12 +48,24 @@
                   <div class="mb-3">
                     <%= f.text_field :size, class: "form-control", placeholder: "サイズ" %>
                   </div>
-                  <div class="mb-3">
-                    <%= f.text_field :brand, class: "form-control", placeholder: "ブランド" %>
-                  </div>
-                  <%= f.submit "登録する", class: "btn btn-primary" %>
+                    <div class="accordion" id="accordionExample">
+                      <div class="accordion-item">
+                        <div class="accordion-header">
+                          <button type="button" class="col-12 btn text-start" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            ブランド
+                          </button>
+                        </div>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                          <div class="d-flex mb-3">
+                            <%= text_field_tag :brand_search, nil, class: "form-control me-2", placeholder: "ブランドを検索" %>
+                          </div>
+                          <%= f.select :brand, [], {include_blank: 'ブランドを検索し、選択してください'}, class: 'form-control', id: "brand-select" %>
+                        </div>
+                      </div>
+                    </div>
+                  <%= f.submit "登録する", class: "btn btn-primary mt-3" %>
                 <% end %>
-
             </div>
         </div>
     </div>

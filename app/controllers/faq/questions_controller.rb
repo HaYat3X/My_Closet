@@ -23,8 +23,8 @@ class Faq::QuestionsController < ApplicationController
 
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @question.save
-            redirect_to "/"
-        else
+            redirect_to "/question/list", notice: "投稿が成功しました。"
+        elsec
             render :new
         end
     end
@@ -77,7 +77,7 @@ class Faq::QuestionsController < ApplicationController
         if @question.update(posts_params)
             redirect_to "/question/list", notice: "投稿を編集しました"
         else
-            redirect_to"/question/list", alert: "投稿の編集に失敗しました"
+            redirect_to "/", alert: "投稿の編集に失敗しました"
         end
     end
 
@@ -95,7 +95,7 @@ class Faq::QuestionsController < ApplicationController
         if @question.destroy
             redirect_to "/question/list", notice: "投稿を削除しました"
         else
-            redirect_to"/question/list", alert: "投稿の編集に削除しました"
+            redirect_to "/", alert: "投稿の編集に削除しました"
         end
     end
     
