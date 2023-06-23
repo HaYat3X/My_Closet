@@ -40,7 +40,10 @@
                   <div class="mb-3">
                     <%= f.text_area :profile, class: "form-control", placeholder: "プロフィール" %>
                   </div>
-                  <%= f.submit "登録する", class: "btn btn-primary" %>
+                  <%= f.submit "登録する", data: { disable_with: "プロフィールを更新中..." }, class: "btn btn-primary" %>
+                  <div class="loading">
+                    <%= image_tag '/assets/Now-Loading.gif', size: "200x200" %>
+                  </div>
                 <% end %>
                 </div>
 
