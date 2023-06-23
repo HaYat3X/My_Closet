@@ -9,7 +9,7 @@ class Suggestion::ApisController < ApplicationController
 
         # * ユーザの身長、体重、性別が存在しない場合は、提案をしない
         if @user.weight and @user.height and @user.gender == ""
-            redirect_to "/profile/show/#{@user.id}", notice: "プロフィールを編集しました"
+            return { redirect_url: "/profile/show/#{@user.id}", flash_message: "AI提案が失敗しました。", flash: "alert" }
         end
     
         # * GPT日クエストする文章
@@ -66,7 +66,7 @@ class Suggestion::ApisController < ApplicationController
 
         # * ユーザの身長、体重、性別が存在しない場合は、提案をしない
         if @user.weight and @user.height and @user.gender == nil
-            redirect_to "/profile/show/#{@user.id}", notice: "プロフィールを編集しました"
+            return { redirect_url: "/profile/show/#{@user.id}", flash_message: "AI提案が失敗しました。", flash: "alert" }
         end
 
         # * 更新するデータの取得
