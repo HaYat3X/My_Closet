@@ -17,6 +17,13 @@ document.addEventListener('turbolinks:load', () => {
     ClosetSelectValue();
 
     ClosetBrandValue();
+
+    $(function() {
+        $('form').on('submit', function() {
+            $('.loading_btn').hide();
+            $('.loading').show();
+        });
+    });
 });
 
 Rails.start();
