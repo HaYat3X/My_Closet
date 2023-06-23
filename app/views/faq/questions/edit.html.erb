@@ -23,10 +23,7 @@
     
     <%= form_with(model: @question, url: "/question/update/#{@question.id}", local: true, :html => {class:"needs-validation col-lg-8 mx-auto", :novalidate => true}) do |f| %>
                   <div class="mb-3">
-                    <%= f.file_field :photograph, required: true, class: "form-control", placeholder: "写真" %>
-                    <div class="invalid-feedback">
-                      写真を入力して下さい
-                    </div>
+                    <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
                   </div>
                   <div class="mb-3">
                     <%= f.text_area :question, class: "form-control", placeholder: "質問内容" %>
