@@ -6,22 +6,22 @@ class Coordinates::PostsController < ApplicationController
     def list
         # * Closetモデルを介して、全データを取得する
         # ? ページネーションを導入し、1ページに40件のデータを表示する
-        @closets_all = Closet.where(user_id: current_user.id).page(params[:page]).per(40)
+        @closets_all = Closet.order(created_at: :desc).where(user_id: current_user.id).page(params[:page]).per(40)
 
         # * Closetモデルを介して、アウターアイテムのみ取得する
-        @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
+        @closets_outer = Closet.order(created_at: :desc).where(big_Category: "アウター", user_id: current_user.id)
 
         # * Closetモデルを介して、トップスアイテムのみ取得する
-        @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
+        @closets_tops = Closet.order(created_at: :desc).where(big_Category: "トップス", user_id: current_user.id)
 
         # * Closetモデルを介して、パンツアイテムのみ取得する
-        @closets_pants = Closet.where(big_Category: "ボトムス", user_id: current_user.id)
+        @closets_pants = Closet.order(created_at: :desc).where(big_Category: "ボトムス", user_id: current_user.id)
 
         # * Closetモデルを介して、シューズアイテムのみ取得する
-        @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
+        @closets_shoes = Closet.order(created_at: :desc).where(big_Category: "シューズ", user_id: current_user.id)
 
         # * Closetモデルを介して、その他のアイテムのみ取得する
-        @closets_other = Closet.where(big_Category: "その他", user_id: current_user.id)
+        @closets_other = Closet.order(created_at: :desc).where(big_Category: "その他", user_id: current_user.id)
     end
 
     # ! 登録フォーム用メソッド
@@ -72,8 +72,9 @@ class Coordinates::PostsController < ApplicationController
 
         # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
         # !! refactoring時にヘルパーに移行する
-        case1 = params[:closet][:big_Category] + params[:closet][:small_Category] + params[:closet][:color] 
+        case1 = params[:closet][:big_Category] + params[:closet][:small_Category] + params[:color]
         case2 = params[:closet][:size] + params[:closet][:brand] + params[:closet][:price]
+        @closet.color = params[:color]
 
         # * searchカラムを更新する。
         @closet.update(search: case1 + case2)
@@ -124,7 +125,7 @@ class Coordinates::PostsController < ApplicationController
                 @small_Category = ["ジャケット","コート","ピーコート","ダウンジャケット","レザージャケット","ウインドブレーカー","カーディガン"]
 
             elsif selected_value == "トップス"
-                @small_Category = ["Tシャツ","シャツ","ブラウス","ポロシャツ","ニットセーター","パーカー","ジャケット"]
+                @small_Category = ["Tシャツ","シャツ","ブラウス","ポロシャツ","ニットセーター","パーカー","ジャケット", "スウェット"]
 
             elsif selected_value == "ボトムス"
                 @small_Category = ["ジーンズ","パンツ","ショートパンツ","スカート","レギンス","ショーツ", "スカート"]
@@ -133,7 +134,7 @@ class Coordinates::PostsController < ApplicationController
                 @small_Category = ["スニーカー","パンプス","サンダル","ブーツ","フラットシューズ","革靴"]
 
             elsif selected_value == "その他"
-                @small_Category = ["ネックレス","ブレスレット","ピアス","リング","ヘアアクセサリー","その他"]
+                @small_Category = ["ネックレス","ブレスレット","ピアス","キャップ","リング","ヘアアクセサリー","その他"]
             end
 
             render json: { options: @small_Category }
