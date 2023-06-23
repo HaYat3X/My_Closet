@@ -56,7 +56,9 @@
                         <div class="row g-1">
                             <% @closets_outer.each do |c| %>
                                 <div class="col-lg-3 mt-1">
-                                    <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <%= link_to "/closet/show/#{c.id}" do %>
+                                        <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <% end %>
                                 </div>
                             <% end %>
                         </div>
@@ -67,7 +69,9 @@
                         <div class="row g-1">
                             <% @closets_tops.each do |c| %>
                                 <div class="col-lg-3 mt-1">
-                                    <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <%= link_to "/closet/show/#{c.id}" do %>
+                                        <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <% end %>
                                 </div>
                             <% end %>
                         </div>
@@ -78,7 +82,9 @@
                         <div class="row g-1">
                             <% @closets_pants.each do |c| %>
                                 <div class="col-lg-3 mt-1">
-                                    <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <%= link_to "/closet/show/#{c.id}" do %>
+                                        <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <% end %>
                                 </div>
                             <% end %>
                         </div>
@@ -89,7 +95,9 @@
                         <div class="row g-1">
                             <% @closets_shoes.each do |c| %>
                                 <div class="col-lg-3 mt-1">
-                                    <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <%= link_to "/closet/show/#{c.id}" do %>
+                                        <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <% end %>
                                 </div>
                             <% end %>
                         </div>
@@ -100,7 +108,9 @@
                         <div class="row g-1">
                             <% @closets_other.each do |c| %>
                                 <div class="col-lg-3 mt-1">
-                                    <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <%= link_to "/closet/show/#{c.id}" do %>
+                                        <%= image_tag c.photograph.url, class: "closet_image" %>
+                                    <% end %>
                                 </div>
                             <% end %>
                         </div>
