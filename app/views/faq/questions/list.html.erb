@@ -47,6 +47,10 @@
                                         <div class="fw-bold mx-3">
                                             <%= q.user.user_name %>
                                         </div>
+
+                                        <div class="text-end mx-5">
+                                            <%= time_ago_in_words(q.created_at) %>前
+                                        </div>
                                     </div>
 
                                     <p class="fw-bold my-4">

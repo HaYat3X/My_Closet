@@ -25,10 +25,7 @@
 
                 <%= form_with(model: @closet, url: "/closet/update/#{@closet.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
                   <div class="mb-3">
-                    <%= f.file_field :photograph, required: true, class: "form-control", placeholder: "写真" %>
-                    <div class="invalid-feedback">
-                      写真を入力して下さい。
-                    </div>
+                    <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
                   </div>
                   <div class="mb-3">
                     <%= f.select :big_Category, ['アウター', 'トップス', 'ボトムス', 'シューズ', 'その他'], {include_blank: '大カテゴリーを選択してください'}, class: 'form-control', required: true, id: 'big-category-select' %>
