@@ -125,7 +125,7 @@ class Coordinates::PostsController < ApplicationController
                 @small_Category = ["ジャケット","コート","ピーコート","ダウンジャケット","レザージャケット","ウインドブレーカー","カーディガン"]
 
             elsif selected_value == "トップス"
-                @small_Category = ["Tシャツ","シャツ","ブラウス","ポロシャツ","ニットセーター","パーカー","ジャケット"]
+                @small_Category = ["Tシャツ","シャツ","ブラウス","ポロシャツ","ニットセーター","パーカー","ジャケット", "スウェット"]
 
             elsif selected_value == "ボトムス"
                 @small_Category = ["ジーンズ","パンツ","ショートパンツ","スカート","レギンス","ショーツ", "スカート"]
@@ -134,7 +134,7 @@ class Coordinates::PostsController < ApplicationController
                 @small_Category = ["スニーカー","パンプス","サンダル","ブーツ","フラットシューズ","革靴"]
 
             elsif selected_value == "その他"
-                @small_Category = ["ネックレス","ブレスレット","ピアス","リング","ヘアアクセサリー","その他"]
+                @small_Category = ["ネックレス","ブレスレット","ピアス","キャップ","リング","ヘアアクセサリー","その他"]
             end
 
             render json: { options: @small_Category }
