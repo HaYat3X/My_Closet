@@ -15,6 +15,7 @@ class Suggestion::SuggestionsController < ApplicationController
             key_word1 = '%' + suggest.style1 + '%'
             key_word2 = '%' + suggest.style2 + '%'
 
+            # * 謎に動かない
             # * SNSの投稿データを返す（大文字と小文字を区別しない）
             @suggestions = Social.where("search LIKE ? OR search LIKE ?", key_word1, key_word2).where.not(user_id: current_user.id).order("RANDOM()").limit(20)
 
