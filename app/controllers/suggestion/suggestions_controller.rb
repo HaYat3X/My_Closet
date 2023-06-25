@@ -21,6 +21,7 @@ class Suggestion::SuggestionsController < ApplicationController
 
             # * おすすめのユーザを出力
             @users = User.where("tendency LIKE ? OR tendency LIKE ?", key_word1, key_word2).where.not(id: current_user.id).order("RANDOM()").limit(10)
+            pp @suggestions
         end
     end
 
