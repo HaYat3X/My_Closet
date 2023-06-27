@@ -75,7 +75,6 @@ class Sns::PostsController < ApplicationController
 
                 # 取得したクローゼットアイテムのcloset_search_valueとsns_search_valueの文字列を連結する
                 @social.search = (closet_search_value || []).join("") + sns_search_value
-
             end
         else
             # ? クローゼットアイテムが選択されなかったら、sns_search_valueを保存する
