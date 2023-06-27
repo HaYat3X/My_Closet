@@ -9,9 +9,9 @@ class Sns::LikesController < ApplicationController
         @likenew = SocialLike.new(social_id: post_id, user_id: user_id)
 
         if @likenew.save
-            redirect_to request.referer, notice: "いいねをしました"
+            redirect_to request.referer, notice: "いいねをしました。"
         else
-            redirect_to request.referer, alert: "いいねに失敗しました"
+            redirect_to request.referer, alert: "いいねに失敗しました。"
         end
     end
 
@@ -24,9 +24,9 @@ class Sns::LikesController < ApplicationController
         @likedelete = SocialLike.find_by(social_id: post_id, user_id: user_id)
 
         if @likedelete.destroy
-            redirect_to request.referer, notice: "いいねを解除しました"
+            redirect_to request.referer, notice: "いいねを解除しました。"
         else
-            redirect_to request.referer, alert: "いいね解除に失敗しました"
+            redirect_to request.referer, alert: "いいね解除に失敗しました。"
         end
     end
 
