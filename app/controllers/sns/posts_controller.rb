@@ -2,23 +2,26 @@ class Sns::PostsController < ApplicationController
     # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
     before_action :move_to_signed_in, except: [:list, :show]
 
-    # ! 一覧取得メソッド
+    # ! SNSテーブルの中から全データを取得するメソッド
     def list
-        # * SNS投稿一覧取得 SNSに48件取得
+        # * SNSデータを投稿日時が古い順に表示し１ページ毎に48件表示する
         @snss = Social.order(created_at: :desc).page(params[:page]).per(48)
 
-        # * ログインしているユーザーがフォローしているユーザーの投稿を取得
+        # * サインインしているユーザーがフォローしているユーザーの投稿を取得
         if user_signed_in?
-            @follow = UserRelation.where(follow_id: current_user.id) 
+            @follow = UserRelation.where(follow_id: current_user.id)
         end
     end
 
-    # ! 詳細取得メソッド
+    # ! 特定の投稿１件を取得するメソッド
     def show
-        # * 詳細情報を一件取得する
-        @sns = Social.find(params[:id])
+        # * URLから投稿IDを取得する
+        post_id = params[:id]
 
-        # * item1〜6のアイテム情報をクローゼットテーブルから取得する
+        # * post_idと一致するSNSテーブルのidを一件取得する
+        @sns = Social.find(post_id)
+
+        # * 着用したアイテム情報をクローゼットテーブルから取得する
         @item1 = Closet.find_by(id: @sns.item1)
         @item2 = Closet.find_by(id: @sns.item2)
         @item3 = Closet.find_by(id: @sns.item3)
@@ -27,188 +30,175 @@ class Sns::PostsController < ApplicationController
         @item6 = Closet.find_by(id: @sns.item6)
     end
 
-    # ! 投稿フォームメソッド
+    # ! アイテムを投稿するフォームのメソッド
     def new
         @social = Social.new()
 
-        # * ログインしているユーザが登録したアイテムのデータを取得
+        # * ログインしているユーザーのクローゼットアイテムを取得する
         @closets_all = Closet.where(user_id: current_user.id)
     end
-    
 
-    # ! 登録処理メソッド
+    # ! 投稿フォームに入力された情報をテーブルに保存するメソッド
     def create
-         # * ログインしているユーザが登録したアイテムのデータを取得
+        # * ログインしているユーザーのクローゼットアイテムを取得する
         @closets_all = Closet.where(user_id: current_user.id)
 
-         # * Closetモデルを介して、アウターアイテムのみ取得する
-        @closets_outer = Closet.where(big_Category: "アウター", user_id: current_user.id)
-
-         # * Closetモデルを介して、トップスアイテムのみ取得する
-        @closets_tops = Closet.where(big_Category: "トップス", user_id: current_user.id)
-
-         # * Closetモデルを介して、パンツアイテムのみ取得する
-        @closets_pants = Closet.where(big_Category: "ボトムス", user_id: current_user.id)
-
-         # * Closetモデルを介して、シューズアイテムのみ取得する
-        @closets_shoes = Closet.where(big_Category: "シューズ", user_id: current_user.id)
-
-         # * Closetモデルを介して、その他のアイテムのみ取得する
-        @closets_other = Closet.where(big_Category: "その他", user_id: current_user.id)
-
-         # * 投稿時にバインドするパラメータを付与する
+        # * フォームに入力されたデータをセットする
         @social = Social.new(posts_params)
 
-          # * ログインしているユーザの情報を取得し、user_idのカラムにバインドする
+        # * 投稿者の情報を保存する
         @social.user_id = current_user.id
 
-        # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
-        case0 = params[:social][:tag].to_s + params[:social][:message].to_s
+        # * フォームに入力された投稿文と、スタイルを連結する
+        sns_search_value = params[:social][:tag].to_s + params[:social][:message].to_s
 
-        # * 選択したアイテムを取得
-        selected_elements = params[:elements] # チェックボックスの値が配列として取得されます
+        # * クローゼットアイテムの選択された情報を取得
+        selected_elements = params[:elements]
 
         # * 選択した値を処理し、選択したアイテムの情報を取得
         if selected_elements
+
+            # ? 投稿時に何件のクローゼットのアイテムを選択したのか、どのアイテムを選択したのか判定する
             selected_elements.each_with_index do |element_id, index|
-                break if index >= 6  # 最大6件の制限を設定する
-            
+
+                # もし、選択されたアイテム数が６件を超えた場合は、処理を中断する
+                break if index >= 6
+
+                # 選択されたクローゼットアイテムの情報を保存する
                 column_name = "item#{index + 1}"
                 @social[column_name] = element_id
-    
-                search_params = selected_elements.take(6).map { |element_id| Closet.find(element_id).search.to_s }
-                @social.search = search_params.join("") + case0
+
+                # 選択されたクローゼットアイテムのsearchカラムの情報を取得する
+                closet_search_value = selected_elements.take(6).map do |element_id|
+                    Closet.find_by(id: element_id)&.search.to_s
+                end.compact
+
+                # 取得したクローゼットアイテムのcloset_search_valueとsns_search_valueの文字列を連結する
+                @social.search = (closet_search_value || []).join("") + sns_search_value
             end
         else
-            @social.search = case0
+            # ? クローゼットアイテムが選択されなかったら、sns_search_valueを保存する
+            @social.search = sns_search_value
         end
 
-
-        # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
+        # * SNS投稿の成功、失敗を判定する
         if @social.save
             # ? ユーザの投稿頻度の高いタグを保存するプログラムを実行
             suggestions_controller = Suggestion::ApisController.new()
             result = suggestions_controller.call_user(current_user.id)
-            # * 結果の flash メッセージの種類に応じて、フラッシュのキーを設定する
+            # ? 結果の flash メッセージの種類に応じて、フラッシュのキーを設定する
             flash_key = result[:flash] == 'notice' ? :notice : :alert
-            # * 結果のリダイレクト先URLと flash メッセージを含むフラッシュハッシュを指定してリダイレクトする
+            # ? 結果のリダイレクト先URLと flash メッセージを含むフラッシュハッシュを指定してリダイレクトする
             redirect_to result[:redirect_url], flash: { flash_key => result[:flash_message] }
         else
             render :new
         end
     end
 
+    # ! 特定の一件の編集情報を取得するメソッド
     def edit
         # * urlから投稿id取得
         post_id = params[:id]
+
+        # * post_idと一致するSNSテーブルのidを一件取得する
         @social = Social.find(post_id)
 
-        # * 投稿時に選択したアイテムを取得
-        @item1 = @social.item1 
-        @item2 = @social.item2 
-        @item3 = @social.item3 
-        @item4 = @social.item4 
-        @item5 = @social.item5
-        @item6 = @social.item6
-
-        # * ログインしているユーザが登録したアイテムのデータを取得
+        # * ログインしているユーザーのクローゼットアイテムを取得する
         @closets_all = Closet.where(user_id: current_user.id)
 
-    
-        #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
+        # * 編集権限がない場合、リダイレクトする
         if @social.user_id != current_user.id
             redirect_to "/", alert: "不正なアクセスが行われました。"
         end
-
     end
 
-    # ! 編集処理メソッド
+    # ! 特定のデータを更新するメソッド
     def update
+        # * urlから投稿id取得
         post_id = params[:id]
+
+        # * post_idと一致するSNSテーブルのidを一件取得する
         @social = Social.find(post_id)
 
-        #  # ** 一度選択したアイテムは削除できないため、一旦nullに
-        # @social.item1 = nil 
-        # @social.item2 = nil 
-        # @social.item3 = nil 
-        # @social.item4 = nil 
-        # @social.item5 = nil 
-        # @social.item6 = nil 
-
-        # # * 変更を保存、且つ再読み込み
-        # @social.save
-        # @social.reload
-        # 投稿者の編集者の相違時のエラー
+        # * 編集権限がない場合は、リダイレクトする
         if @social.user_id != current_user.id
             redirect_to "/", alert: "不正なアクセスが行われました。"
         end
 
-        # * ログインしているユーザが登録したアイテムのデータを取得
+        # * ログインしているユーザーのクローゼットアイテムを取得する
         @closets_all = Closet.where(user_id: current_user.id)
 
+        # * フォームに入力された投稿文と、スタイルを連結する
+        sns_search_value = params[:social][:tag].to_s + params[:social][:message].to_s
 
-        # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
-        case0 = params[:social][:tag].to_s + params[:social][:message].to_s 
+        # * 選択したアイテムを取得
+        selected_elements = params[:elements]
 
-         # * 選択したアイテムを取得
-        selected_elements = params[:elements] # チェックボックスの値が配列として取得されます
-
-        # * 選択した値を処理し、選択したアイテムの情報を取得
+        # * クローゼットアイテムを選択されているか判定する
         if selected_elements
+            # ? 一件も選択されていない場合、全てのクローゼットアイテムをnilに更新する
             @social.update(item1: nil, item2: nil, item3: nil, item4: nil, item5: nil, item6: nil)
             @social.reload
 
+            # ? 投稿時に何件のクローゼットのアイテムを選択したのか、どのアイテムを選択したのか判定する
             selected_elements.each_with_index do |element_id, index|
-                break if index >= 6  # 最大6件の制限を設定する
-            
+
+                # もし、選択されたアイテム数が６件を超えた場合は、処理を中断する
+                break if index >= 6
+
+                # 選択されたクローゼットアイテムの情報を保存する
                 column_name = "item#{index + 1}"
                 @social[column_name] = element_id
-    
-                search_params = selected_elements.take(6).map { |element_id| Closet.find(element_id).search.to_s }
-                @social.search = search_params.join("") + case0
+
+                # 選択されたクローゼットアイテムのsearchカラムの情報を取得する
+                closet_search_value = selected_elements.take(6).map do |element_id|
+                    Closet.find_by(id: element_id)&.search.to_s
+                end.compact
+
+                # 取得したクローゼットアイテムのcloset_search_valueとsns_search_valueの文字列を連結する
+                @social.search = (closet_search_value || []).join("") + sns_search_value
             end
         else
             # ? 何も選択されなかったらitem1~6のカラムを初期化する
             (1..6).each { |index| @social["item#{index}"] = nil }
-
-            @social.search = case0
+            @social.search = sns_search_value
         end
- 
 
-        # * でーたべーすにほぞん
+        # * SNS更新の成功、失敗を判定する
         if @social.update(posts_params)
             # ? ユーザの投稿頻度の高いタグを保存するプログラムを実行
             suggestions_controller = Suggestion::ApisController.new()
             result = suggestions_controller.call_user(current_user.id)
-            # * 結果の flash メッセージの種類に応じて、フラッシュのキーを設定する
+            # ? 結果の flash メッセージの種類に応じて、フラッシュのキーを設定する
             flash_key = result[:flash] == 'notice' ? :notice : :alert
-            # * 結果のリダイレクト先URLと flash メッセージを含むフラッシュハッシュを指定してリダイレクトする
+            # ? 結果のリダイレクト先URLと flash メッセージを含むフラッシュハッシュを指定してリダイレクトする
             redirect_to result[:redirect_url], flash: { flash_key => result[:flash_message] }
         else
-            redirect_to"/", alert: "投稿の編集に失敗しました"
+            redirect_to "/", alert: "投稿の編集に失敗しました"
         end
     end
 
-    # ! 削除処理メソッド
+    # ! 特定の情報を削除するメソッド
     def delete
-          # * urlから投稿id取得
+        # * urlから投稿id取得
         post_id = params[:id]
+
+        # * post_idと一致するSNSテーブルのidを一件取得する
         social = Social.find(post_id)
 
-        #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
+        # * 削除権限がない場合は、リダイレクトする
         if social.user_id != current_user.id
             redirect_to "/", alert: "不正なアクセスが行われました。"
+        end
+
+        # * SNS削除の成功、失敗を判定する
+        if social.destroy
+            redirect_to "/", notice: "投稿を削除しました。"
         else
-            # 投稿の削除後、listのページに戻るコード
-            if social.destroy
-                redirect_to "/", notice: "投稿を削除しました"
-            else
-                redirect_to "/", alert: "投稿の削除に失敗しました"
-            end
+            redirect_to "/", alert: "投稿の削除に失敗しました。"
         end
     end
 
-    # ! (privateは外部クラスから参照できない)
     private
 
     # ! 投稿時、編集時にバインドするパラメータ
@@ -217,8 +207,8 @@ class Sns::PostsController < ApplicationController
         params.require(:social).permit(:tag, :message, :photograph)
     end
 
-     # ! ログインがしているのか判定する
-     def move_to_signed_in
+    # ! サインインしているのか判定する
+    def move_to_signed_in
         unless user_signed_in?
             redirect_to new_user_session_path, alert: "この操作は、サインインが必要です。"
         end
