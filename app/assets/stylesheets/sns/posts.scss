@@ -1,6 +1,10 @@
 // ! postsフォルダのレイアウト （edit, list, new, show）
 #sns_posts {
     // ! 全サイズ共通
+    // ? headerのカラー設定
+    .header {
+        background-color: #222222;
+    }
     // ?　タブのアクションカラー変更
     .tab-ul {
         .active {
@@ -206,6 +210,27 @@
     }
     // * PC（大）
     @media (min-width: 1200px) {
+        // ? ロゴサイズの設定
+        .logo-area {
+            img {
+                width: 20%;
+            }
+        }
+        // ? 通知アイコンのホバー時の設定
+        .search-area {
+            i:hover {
+                color: black;
+            }
+        }
+        // ? アイコンサイズの設定
+        .icon-area {
+            img {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
         // ? モバイルのヘッダーは表示しない
         .mobile_header {
             display: none;
