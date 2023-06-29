@@ -2,11 +2,14 @@ import Rails from '@rails/ujs';
 import Turbolinks from 'turbolinks';
 import $ from 'jquery';
 global.$ = global.jQuery = $;
-import { SnsNewItemSelect } from './sns/posts';
+import { SnsNewItemSelect, SnsListSwitching } from './sns/posts';
 import { FormValidation } from './layouts/validation';
 import { ClosetSelectValue, ClosetBrandValue } from './closet/posts';
 
 document.addEventListener('turbolinks:load', () => {
+    // ! SNS一覧画面でフォロー中と全ての投稿を切り替える
+    SnsListSwitching();
+
     // ! フォームのバリデーションチェックをする関数
     FormValidation();
 
