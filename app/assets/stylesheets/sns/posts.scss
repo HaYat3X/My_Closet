@@ -32,36 +32,36 @@
         object-fit: cover;
     }
     // * sidebar関連
-    .pc-sidebar {
-        border-radius: 5px;
-        // ? アイコンの表示設定
-        i {
-            margin-right: 10px;
-        }
-        // ? リストの表示設定
-        li:hover {
-            background-color: var(--primary);
-            border-radius: 5px;
-        }
-        // ? リンクの表示設定
-        a {
-            color: var(--dark);
-        }
-        a:hover {
-            color: #ffffff;
-        }
-        // ? サインイン、サインアウトのレイアウト
-        .action-link {
-            a:hover {
-                color: var(--dark);
-                background-color: var(--bg);
-            }
-        }
-        // ? コンテンツエリアと少し幅を空ける
-        .sidebar-content {
-            margin-right: 5px;
-        }
-    }
+    // .pc-sidebar {
+    //     border-radius: 5px;
+    //     // ? アイコンの表示設定
+    //     i {
+    //         margin-right: 10px;
+    //     }
+    //     // ? リストの表示設定
+    //     li:hover {
+    //         background-color: var(--primary);
+    //         border-radius: 5px;
+    //     }
+    //     // ? リンクの表示設定
+    //     a {
+    //         color: var(--dark);
+    //     }
+    //     a:hover {
+    //         color: #ffffff;
+    //     }
+    //     // ? サインイン、サインアウトのレイアウト
+    //     .action-link {
+    //         a:hover {
+    //             color: var(--dark);
+    //             background-color: var(--bg);
+    //         }
+    //     }
+    //     // ? コンテンツエリアと少し幅を空ける
+    //     .sidebar-content {
+    //         margin-right: 5px;
+    //     }
+    // }
     // * スマートフォン （小）
     @media (max-width: 575.98px) {
         // ? PC用のヘッダーは表示しない
@@ -231,6 +231,55 @@
                 object-fit: cover;
             }
         }
+        // ? サイドバーの幅の設定
+        .col-lg-2-5 {
+            flex: 0 0 20%;
+            max-width: 20%;
+        }
+        // ? コンテンツの幅の設定
+        .col-lg-9-5 {
+            flex: 0 0 80%;
+            max-width: 80%;
+        }
+        // ? サイドバーの設定
+        .sidebar {
+            // 背景色の設定
+            background-color: #CBC5C1;
+            box-shadow: var(--box-shadow);
+            // リンクの設定
+            a {
+                color: #333333;
+                text-decoration: none;
+            }
+            // ホバー時のリンクの設定
+            a:hover {
+                background-color: #4B709A;
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+            // アクティブ状態のリンクの設定
+            .active {
+                background-color: #4B709A;
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+            // アイコンの設定
+            i {
+                margin-right: 15px;
+                font-size: 1.1rem;
+            }
+            // 下線の設定
+            hr {
+                border-top: 2px solid #333333;
+            }
+            // 投稿ボタンの設定
+            .post-btn {
+                background-color: #4B709A;
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+        }
+        // ! --------------------------------------------------------------------------------
         // ? モバイルのヘッダーは表示しない
         .mobile_header {
             display: none;
