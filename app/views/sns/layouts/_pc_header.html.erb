@@ -17,33 +17,6 @@
                             </div>
                         <% end %>
                     </li>
-
-                    <li class="nav-item d-flex align-items-center mx-3">
-                        <a href="/profile/alert/list" class="text-light">
-                            <i class="bi bi-bell fs-4 fw-bold"></i>
-                        </a>
-                    </li>
-
-                    <%# * ユーザーアイコンを表示する %>
-                    <li class="nav-item d-flex align-items-center icon-area">
-                        <%# ? ログインしているのか判定 %>
-                        <% if user_signed_in? %>
-                            <%# ? ユーザーがプロフィール画像を設定しているか判定 %>
-                            <% if current_user.avatar.url == nil %>
-                                <%= link_to "/profile/show/#{current_user.id}" do %>
-                                    <%= image_tag "/assets/default-avatar.png" %>
-                                <% end %>
-                            <% else %>
-                                <%= link_to "/profile/show/#{current_user.id}" do %>
-                                    <%= image_tag current_user.avatar.url %>
-                                <% end %>
-                            <% end %>
-                        <% else %>
-                            <%= link_to "/profile/show/1" do %>
-                                <%= image_tag "/assets/default-avatar.png" %>
-                            <% end %>
-                        <% end %>
-                    </li>
                 </ul>
             </div>
         </div>
