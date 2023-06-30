@@ -18,13 +18,16 @@
         <%# * コンテンツエリア %>
         <div class="col-lg-9-5 col-12">
             <div class="list-content">
-                <form id="myForm" class="d-flex justify-content-end" action="/" method="get">
-                    <div class="form-check">
-                        <%# ? フォロー中のみに切り替える %>
-                        <input type="checkbox" class="form-check-input" value="true" id="formSwitchCheckDefault" name="followed_only" <%= params[:followed_only] == 'true' ? 'checked' : '' %>>
-                        <label for="formSwitchCheckDefault" class="form-check-label fw-bold">フォロー中のみにする</label>
-                    </div>
-                </form>
+            
+                <% if user_signed_in? %>
+                    <form id="myForm" class="d-flex justify-content-end" action="/" method="get">
+                        <div class="form-check">
+                            <%# ? フォロー中のみに切り替える %>
+                            <input type="checkbox" class="form-check-input" value="true" id="formSwitchCheckDefault" name="followed_only" <%= params[:followed_only] == 'true' ? 'checked' : '' %>>
+                            <label for="formSwitchCheckDefault" class="form-check-label fw-bold">フォロー中のみにする</label>
+                        </div>
+                    </form>
+                <% end %>
 
                 <ul class="tab-menu nav nav-pills nav-fill col-lg-5">
                     <li class="nav-item">
