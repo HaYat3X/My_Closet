@@ -4,12 +4,16 @@ class Sns::PostsController < ApplicationController
 
     # ! SNSテーブルの中から全データを取得するメソッド
     def list
-        # * SNSデータを投稿日時が古い順に表示し１ページ毎に48件表示する
-        @snss = Social.order(created_at: :desc).page(params[:page]).per(48)
-
-        # * サインインしているユーザーがフォローしているユーザーの投稿を取得
-        if user_signed_in?
+        # * 全ての投稿か、フォロー中のみのリクエストか判定
+        if params[:followed_only] == 'true'
+            # ? フォローしているユーザーを取得する
             @follow = UserRelation.where(follow_id: current_user.id)
+
+            # ? フォロー中のユーザーのみのSNSデータを投稿日時が古い順に表示し１ページ毎に48件表示する
+            @snss = Social.where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page]).per(48)
+        else
+            # ? SNSデータを投稿日時が古い順に表示し１ページ毎に48件表示する
+            @snss = Social.order(created_at: :desc).page(params[:page]).per(48)
         end
     end
 
