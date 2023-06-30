@@ -115,6 +115,16 @@
         .pc-header {
             display: none;
         }
+        .mobile_header{
+            img{
+                width: 20%;
+            }
+        }
+        // ? ヘッダーのハンバーガーメニューの背景色を変更
+        .navbar-toggler{
+            background-color: #ffffff;
+        }
+        // !-------------------------------------------------
         // ? コーディネート投稿ボタンのレイアウト
         .mobile-post-btn {
             position: fixed;
@@ -142,9 +152,7 @@
         // ? コーディネート提案のアイテム選択画像サイズ
         .input-container {
             .icon img {
-                width: 100%;
-                height: 220px;
-                object-fit: cover;
+                width: 13%;
             }
         }
     }
