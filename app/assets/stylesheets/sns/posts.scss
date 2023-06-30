@@ -8,7 +8,7 @@
     // ? サイドバーの設定
     .sidebar {
         background-color: #CBC5C1;
-        box-shadow: var(--box-shadow);
+        box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
         a {
             color: #333333;
             text-decoration: none;
@@ -102,37 +102,38 @@
         .pc-sidebar {
             display: none;
         }
-        // ? headerの検索ボックスを表示しない
-        .tablet-search-form {
-            display: none;
-        }
-        // ? headerの検索ボックスの背景を表示
-        .icon{
-            background-color: #fff;
-        }
-        // ! -----------------------------------
         // ?モバイルサイドバーのレイアウト設定
         .mobile_header {
+            .tablet-search-form {
+                display: none;
+            }
             img {
                 width: 40%;
             }
             .navbar-toggler {
                 background-color: #ffffff;
             }
-            .sidebar{
+            .icon {
+                background-color: #fff;
+            }
+            .sidebar {
                 width: 80%;
+                transition: opacity 1.0s ease;
             }
         }
         // ? SNS一覧ページの設定
         .list-content {
-            margin: 30px 5px;
+            margin: 100px 1px;
             .sns-image {
                 width: 100%;
                 height: 190px;
                 object-fit: cover;
             }
-            .user-area{
+            .user-area {
                 display: none;
+            }
+            .form-check-label {
+                margin-bottom: 10px;
             }
         }
     }
@@ -185,10 +186,6 @@
         .pc-sidebar {
             display: none;
         }
-        // ? headerの検索ボックスを表示しない
-        .search_icon{
-            display: none;
-        }
         // ?モバイルサイドバーのレイアウト設定
         .mobile_header {
             img {
@@ -196,11 +193,15 @@
             }
             .navbar-toggler {
                 background-color: #ffffff;
+                transition: opacity 0.5s ease;
+            }
+            .search_icon {
+                display: none;
             }
         }
         // ? SNS一覧ページの設定
         .list-content {
-            margin: 30px 5px;
+            margin: 100px 1px;
             .sns-image {
                 width: 100%;
                 height: 275px;
@@ -224,12 +225,12 @@
                 }
                 .like {
                     i {
-                        color: #FFFFFF;
                         font-size: 18px;
                     }
                 }
                 .number-of-likes {
-                    font-size: 10px;
+                    font-size: 15px;
+                    margin-left: 5px;
                     color: #FFFFFF;
                 }
             }
@@ -315,12 +316,12 @@
                 }
                 .like {
                     i {
-                        color: #FFFFFF;
                         font-size: 18px;
                     }
                 }
                 .number-of-likes {
-                    font-size: 10px;
+                    font-size: 15px;
+                    margin-left: 5px;
                     color: #FFFFFF;
                 }
             }

@@ -24,7 +24,7 @@
                         <div class="form-check">
                             <%# ? フォロー中のみに切り替える %>
                             <input type="checkbox" class="form-check-input" value="true" id="formSwitchCheckDefault" name="followed_only" <%= params[:followed_only] == 'true' ? 'checked' : '' %>>
-                            <label for="formSwitchCheckDefault" class="form-check-label fw-bold">フォロー中のみにする</label>
+                            <label for="formSwitchCheckDefault" class="form-check-label fw-bold">フォロー中</label>
                         </div>
                     </form>
                 <% end %>
@@ -43,7 +43,7 @@
                     </li>
                 </ul>
 
-                <div class="tab-content mt-2">
+                <div class="tab-content mt-1">
                     <%# ? 全ての投稿を表示する %>
                     <div id="all" class="tab-pane active">
                         <div class="row g-1">
@@ -79,7 +79,8 @@
                                             </div>
 
                                             <div class="mx-2">
-                                                <div class="like m-0">
+                                                <div class="like m-0 d-flex align-items-center">
+                                                    <%# ?  いいねできるかどうか判定 %>
                                                     <% if user_signed_in? %>
                                                         <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
                                                             <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
@@ -92,13 +93,13 @@
                                                         <% end %>
                                                     <% else %>
                                                         <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                            <i class="bi bi-heart fs-5"></i>
+                                                            <i style="color: #FFFFFF;" class="bi bi-heart fs-5"></i>
                                                         <% end %>
                                                     <% end %>
-                                                </div>
 
-                                                <div class="number-of-likes text-center m-0">
-                                                    <%= SocialLike.where(social_id: sns.id).count %>
+                                                    <span class="number-of-likes align-self-center">
+                                                        <%= SocialLike.where(social_id: sns.id).count %>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -148,7 +149,8 @@
                                                 </div>
 
                                                 <div class="mx-2">
-                                                    <div class="like m-0">
+                                                    <div class="like m-0 d-flex align-items-center">
+                                                        <%# ?  いいねできるかどうか判定 %>
                                                         <% if user_signed_in? %>
                                                             <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
                                                                 <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
@@ -161,13 +163,13 @@
                                                             <% end %>
                                                         <% else %>
                                                             <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                                <i class="bi bi-heart fs-5"></i>
+                                                                <i style="color: #FFFFFF;" class="bi bi-heart fs-5"></i>
                                                             <% end %>
                                                         <% end %>
-                                                    </div>
 
-                                                    <div class="number-of-likes text-center m-0">
-                                                        <%= SocialLike.where(social_id: sns.id).count %>
+                                                        <span class="number-of-likes align-self-center">
+                                                            <%= SocialLike.where(social_id: sns.id).count %>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -218,7 +220,8 @@
                                                 </div>
 
                                                 <div class="mx-2">
-                                                    <div class="like m-0">
+                                                    <div class="like m-0 d-flex align-items-center">
+                                                        <%# ?  いいねできるかどうか判定 %>
                                                         <% if user_signed_in? %>
                                                             <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
                                                                 <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
@@ -231,13 +234,13 @@
                                                             <% end %>
                                                         <% else %>
                                                             <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                                <i class="bi bi-heart fs-5"></i>
+                                                                <i style="color: #FFFFFF;" class="bi bi-heart fs-5"></i>
                                                             <% end %>
                                                         <% end %>
-                                                    </div>
 
-                                                    <div class="number-of-likes text-center m-0">
-                                                        <%= SocialLike.where(social_id: sns.id).count %>
+                                                        <span class="number-of-likes align-self-center">
+                                                            <%= SocialLike.where(social_id: sns.id).count %>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
