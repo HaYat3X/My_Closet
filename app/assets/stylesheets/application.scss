@@ -22,8 +22,9 @@
     padding: 0;
 }
 
+// ! フォント、背景色の定義
 body {
-    font-family: Sora, "sans-serif";
+    font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
     line-height: 1.7;
     color: #575757;
     background-color: var(--bg);
@@ -33,9 +34,9 @@ body {
     display: none;
 }
 
-// * 画面の最大サイズを定義する
+// ! 画面の最大サイズを定義する
 .max-width {
     max-width: 1440px;
     margin: auto;
-    box-shadow: var(--box-shadow);
+    box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2), -10px 0px 10px -10px rgba(0, 0, 0, 0.2);
 }
