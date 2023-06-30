@@ -32,3 +32,10 @@ body {
 .loading {
     display: none;
 }
+
+// * 画面の最大サイズを定義する
+.max-width{
+    max-width: 1440px;
+    margin: auto;
+    box-shadow: var(--box-shadow);
+}

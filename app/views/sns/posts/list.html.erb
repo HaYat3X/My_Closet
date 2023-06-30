@@ -57,7 +57,7 @@
                                     <div class="user-area py-2">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <% if sns.user.avatar %>
+                                                <% if sns.user.avatar.present? %>
                                                     <%= link_to "/profile/show/#{sns.user_id}" do %>
                                                         <%= image_tag sns.user.avatar.url %>
                                                     <% end %>
@@ -126,7 +126,7 @@
                                         <div class="user-area py-2">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="d-flex align-items-center">
-                                                    <% if sns.user.avatar %>
+                                                    <% if sns.user.avatar.present? %>
                                                         <%= link_to "/profile/show/#{sns.user_id}" do %>
                                                             <%= image_tag sns.user.avatar.url %>
                                                         <% end %>
@@ -196,7 +196,7 @@
                                         <div class="user-area py-2">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="d-flex align-items-center">
-                                                    <% if sns.user.avatar %>
+                                                    <% if sns.user.avatar.present? %>
                                                         <%= link_to "/profile/show/#{sns.user_id}" do %>
                                                             <%= image_tag sns.user.avatar.url %>
                                                         <% end %>
@@ -250,7 +250,7 @@
                                 <%= paginate @snss %>
                             </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
         </div>
