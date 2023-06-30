@@ -98,36 +98,41 @@
         .pc-header {
             display: none;
         }
-        // ? コーディネート投稿ボタンのレイアウト
-        .mobile-post-btn {
-            position: fixed;
-            bottom: 60px;
-            right: 15px;
-            z-index: 9999;
-        }
         // ? PCのサイドバーは表示しない
         .pc-sidebar {
             display: none;
         }
-        // ? モバイルのサイドバーのレイアウト
-        .mobile-sidebar {
-            position: fixed;
-            bottom: 0px;
-            right: 0px;
-            z-index: 9999;
+        // ? headerの検索ボックスを表示しない
+        .tablet-search-form {
+            display: none;
         }
-        // ? SNS一覧画面の画像サイズ
-        .sns_image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
+        // ? headerの検索ボックスの背景を表示
+        .icon{
+            background-color: #fff;
         }
-        // ? コーディネート提案のアイテム選択画像サイズ
-        .input-container {
-            .icon img {
+        // ! -----------------------------------
+        // ?モバイルサイドバーのレイアウト設定
+        .mobile_header {
+            img {
+                width: 40%;
+            }
+            .navbar-toggler {
+                background-color: #ffffff;
+            }
+            .sidebar{
+                width: 80%;
+            }
+        }
+        // ? SNS一覧ページの設定
+        .list-content {
+            margin: 30px 5px;
+            .sns-image {
                 width: 100%;
-                height: 130px;
+                height: 190px;
                 object-fit: cover;
+            }
+            .user-area{
+                display: none;
             }
         }
     }
@@ -178,6 +183,10 @@
         }
         // ? PCのサイドバーは表示しない
         .pc-sidebar {
+            display: none;
+        }
+        // ? headerの検索ボックスを表示しない
+        .search_icon{
             display: none;
         }
         // ?モバイルサイドバーのレイアウト設定

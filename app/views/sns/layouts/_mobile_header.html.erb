@@ -2,7 +2,7 @@
     <div class="container-fluid d-flex align-items-center">
         <%= image_tag "/assets/my_closet_logo/logo1.png" %>
     
-        <div class="ms-auto">
+        <div class="ms-auto tablet-search-form">
             <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex mx-2") do |f| %>
                 <div class="input-group">
                     <%= f.text_field :search, class: "form-control", placeholder: "search" %>
@@ -14,9 +14,32 @@
             <% end %>
         </div>
 
+
+        <div class="search_icon ms-auto mx-2">
+            <button type="button" class="icon btn" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+
         <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-expanded="false" aria-controls="offcanvasNavbar" aria-label="ナビゲーションの切替">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <div class="background">
+        </div>
+
+        <div class="collapse col-12 mt-3" id="collapseExample">
+            <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex") do |f| %>
+                <div class="input-group">
+                    <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+                    <%= f.button class: "btn bg-white", type: :submit do %>
+                        <i class="bi bi-search"></i>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+
+
 
         <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 
