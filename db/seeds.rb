@@ -5,5 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# * カラム更新用SQL
-User.update(id: 1, gender: "男", height: 180, weight: 58, age: 19, profile: "神戸電子専門学校 AI2", avatar: nil)
+# * 管理者アカウント登録テスト
+admin = Admin.new(email: "root", encrypted_password: "$2a$12$IvgqRY7n49BTSklW/Ro4GOtl6OnntXRBdTndTQbA.Klw6T9qn57Wa")
+admin.save
