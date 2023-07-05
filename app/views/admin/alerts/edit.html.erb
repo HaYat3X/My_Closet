@@ -1,21 +1,3 @@
-                <% if @alert.errors.any? %>
-                    <div class="alert alert-danger" role="alert">
-                        <% @alert.errors.each do |error| %>
-                            <strong>エラー！</strong> - <%= error.full_message %><br>
-                        <% end %>
-                    </div>
-                <% end %>
-                <%= form_with(model: @alert, url: "/admin/alert/update/#{@alert.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
-                  <div class="mb-3">
-                    <%= f.text_field :title, class: "form-control", placeholder: "お知らせタイトル" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.text_area :content, class: "form-control", placeholder: "お知らせ内容" %>
-                  </div>
-                  <%= f.submit "登録する", class: "btn btn-primary" %>
-                <% end %>
-                </div>
-
 <div class="container">
 	<%= render "admin/layouts/header" %>
 
@@ -25,12 +7,31 @@
         </div>
 
         <div class="col-lg-9">
-            <div class="bg-white h-100">
-
-
+            <div class="bg-white h-100 pt-5">
+                <h2 class="text-center">運営からのお知らせ：編集フォーム</h2>
+                <div class="col-lg-8 mt-5" style="margin: 0 auto; border-radius: 8px;">
+                    <div class="mx-5 my-5">
+                        <% if @alert.errors.any? %>
+                            <div class="alert alert-danger" role="alert">
+                                <% @alert.errors.each do |error| %>
+                                    <strong>エラー！</strong> - <%= error.full_message %><br>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        <%= form_with(model: @alert, url: "/admin/alert/create", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                        <div class="mb-3">
+                            <%= f.label :title, "お知らせタイトル", class: "form-label" %>
+                            <%= f.text_field :title, class: "form-control" %>
+                        </div>
+                        <div class="mb-3">
+                            <%= f.label :content, "お知らせ内容", class: "form-label" %>
+                            <%= f.text_area :content, class: "form-control", style: "height: 150px;" %>
+                        </div>
+                        <%= f.submit "編集する", class: "btn btn-primary" %>
+                        <% end %>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-        
-
