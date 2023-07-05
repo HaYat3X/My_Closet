@@ -128,6 +128,7 @@ Rails.application.routes.draw do
 
   # ! お問い合わせ関連（管理者）
   get "admin/contact/list", to: "admin/contacts#list"
+  get "admin/contact/show/:id", to: "admin/contacts#show"
   post "admin/contact/create_handle/:id", to: "admin/contacts#create_handle"
   post "admin/contact/delete_handle/:id", to: "admin/contacts#delete_handle"
 end
