@@ -10,7 +10,7 @@ class Admin::ContactsController < ApplicationController
 
     # * お問い合わせ詳細取得
     def show
-        @show = UserContact.find(params[:id])
+        @contact = UserContact.find(params[:id])
     end
 
     # * お問い合わせ対応完了処理
