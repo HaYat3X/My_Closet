@@ -22,8 +22,8 @@
 
       <%# ? 自動ログイン設定エリア %>
       <% if devise_mapping.rememberable? %>
-        <div class="form-check mt-3">
-          <%= f.check_box :remember_me, class: "form-check-label" %>
+        <div class="mx-1 mt-3">
+          <%= f.check_box :remember_me, class: "form-check-label", style: "transform: scale(1);" %>
           <%= f.label :remember_me, "次回から自動でログインする", class: "form-check-label" %>
         </div>
       <% end %>
