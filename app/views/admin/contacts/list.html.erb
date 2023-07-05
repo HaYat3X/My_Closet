@@ -1,14 +1,60 @@
-<% @contacts.each do |c| %>
-    <%= c.email %><br>
-    <%= c.name %><br>
-    <%= c.content %><br>
-    <% if c.status == 0 %>
-        <p class="fw-bold text-danger">未対応</p>
-        <%= button_to "対応完了", "/admin/contact/create_handle/#{c.id}", method: :post, class: "btn btn-outline-primary" %> 
-    <% end %>
-    <% if c.status == 1 %>
-        <p class="fw-bold text-success">対応完了</p>
-        <%= button_to "未対応", "/admin/contact/delete_handle/#{c.id}", method: :post, class: "btn btn-danger" %> 
-    <% end %>
-    <hr>
-<% end %>
+<div class="container">
+	<%= render "admin/layouts/header" %>
+
+    <div class="row g-1">
+        <div class="col-lg-3">
+            <%= render "admin/layouts/sidebar" %>
+        </div>
+
+        <div class="col-lg-9">
+            <div class="bg-white">
+                <% @contacts.each do |c| %>
+                    <%= c.email %><br>
+                    <%= c.name %><br>
+                    <%= c.content %><br>
+                    <% if c.status == 0 %>
+                        <p class="fw-bold text-danger">未対応</p>
+                        <%= button_to "対応完了", "/admin/contact/create_handle/#{c.id}", method: :post, class: "btn btn-outline-primary" %> 
+                    <% end %>
+                    <% if c.status == 1 %>
+                        <p class="fw-bold text-success">対応完了</p>
+                        <%= button_to "未対応", "/admin/contact/delete_handle/#{c.id}", method: :post, class: "btn btn-danger" %> 
+                    <% end %>
+                    <hr>
+                <% end %>
+                <table class="table">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th scope="col">メールアドレス</th>
+                            <th scope="col">名前</th>
+                            <th scope="col">対応状況</th>
+                        </tr>
+                    </thead>
+
+                    <% @contacts.each do |c| %>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <%= link_to "/admin/alert/show/#{c.id}", class: "fw-bold" do %>
+                                        <%= c.email %>
+                                    <% end %>
+                                </td>
+                                <td>
+                                    <%= c.name %>
+                                </td>
+                                <td>
+                                    <% if c.status == 0 %>
+                                        <label class="text-danger fw-bold">未対応</label>
+                                    <% end %>
+                                    <% if c.status == 1 %>
+                                        <label class="text-primary fw-bold">対応済み</label>
+                                    <% end %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    <% end %>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
