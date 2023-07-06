@@ -115,6 +115,7 @@ Rails.application.routes.draw do
   #お問い合わせフォーム
   get "contact/new" , to: "contact/contacts#new"
   post "contact/create" , to: "contact/contacts#create"
+  get "contact/complete" , to: "contact/contacts#complete"
 
   # ! 管理者関連
   # * お知らせ登録フォーム

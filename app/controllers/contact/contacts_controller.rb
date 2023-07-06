@@ -10,11 +10,15 @@ class Contact::ContactsController < ApplicationController
 
         if @contact.save
             ContactMailer.contact_mail(@contact).deliver
-            redirect_to "/"
+            redirect_to "/contact/complete"
         else
             render :new
         end
     end
+
+    # * お問い合わせ完了画面
+    def complete        
+    end    
 
     private
 

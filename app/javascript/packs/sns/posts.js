@@ -1,12 +1,15 @@
 // ! SNS一覧画面でフォロー中と全ての投稿を切り替える
 export function SnsListSwitching() {
-    const checkbox = document.getElementById('formSwitchCheckDefault');
-    const form = document.getElementById('myForm');
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkbox = document.getElementById('formSwitchCheckDefault');
+        const form = document.getElementById('myForm');
 
-    checkbox.addEventListener('change', () => {
-        form.submit();
+        checkbox.addEventListener('change', () => {
+            form.submit();
+        });
     });
 }
+
 
 // ! SNS投稿画面で着用アイテムの選択数や選択上限、選択した場合のUIを制御
 export function SnsNewItemSelect() {

@@ -1,0 +1,33 @@
+<div id="contact_contacts">
+    <%# ! header %>
+    <div class="mobile-header">
+        <%= render "contact/layouts/mobile_header" %>
+    </div>
+
+    <div class="pc-header">
+        <%= render "contact/layouts/pc_header" %>
+    </div>
+
+    <div class="row g-0">
+        <%# ! sidebar %>
+        <div class="col-lg-2-5 pc-sidebar">
+            <%= render "contact/layouts/pc_sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="complete-content col-lg-9-5">
+            <h2 class="text-center mt-5 pt-5 fw-bold text-dark">お問い合わせ</h2>
+
+            <div class="col-lg-5 mx-auto mt-5">
+                <p class="text-center">
+                    お問い合わせありがとうございます。メッセージを送信しました。<br>
+                    近日中に改めてご連絡いたします。
+                </p>
+                
+                <div class="mt-4 mb-5 mx-auto col-10 submit-btn">
+                    <%= link_to "戻る", "/contact/new", class: "btn col-12 fw-bold"  %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
