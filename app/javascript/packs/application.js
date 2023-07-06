@@ -27,6 +27,11 @@ document.addEventListener('turbolinks:load', () => {
             $('.loading').show();
         });
     });
+
+    // ! 一定期間でフラッシュメッセージを非表示にする
+    $(function() {
+        $('.alerts').fadeOut(3000); //４秒かけて消えていく
+    });
 });
 
 Rails.start();

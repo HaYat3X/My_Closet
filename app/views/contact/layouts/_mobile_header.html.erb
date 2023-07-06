@@ -1,40 +1,10 @@
 <nav class="header mobile_header navbar fixed-top py-3">
     <div class="container-fluid d-flex align-items-center">
         <%= image_tag "/assets/my_closet_logo/logo1.png" %>
-    
-        <div class="ms-auto tablet-search-form">
-            <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex mx-2") do |f| %>
-                <div class="input-group">
-                    <%= f.text_field :search, class: "form-control", placeholder: "search" %>
-
-                    <%= f.button class: "btn bg-white", type: :submit do %>
-                        <i class="bi bi-search"></i>
-                    <% end %>
-                </div>
-            <% end %>
-        </div>
-
-        <div class="search_icon ms-auto mx-2">
-            <button type="button" class="icon btn" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                <i class="bi bi-search"></i>
-            </button>
-        </div>
 
         <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-expanded="false" aria-controls="offcanvasNavbar" aria-label="ナビゲーションの切替">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="collapse col-12 mt-3" id="collapseExample">
-            <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex") do |f| %>
-                <div class="input-group">
-                    <%= f.text_field :search, class: "form-control", placeholder: "search" %>
-                    
-                    <%= f.button class: "btn bg-white", type: :submit do %>
-                        <i class="bi bi-search"></i>
-                    <% end %>
-                </div>
-            <% end %>
-        </div>
 
         <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 
@@ -50,7 +20,7 @@
                         <span class="fs-4 pt-3 px-5">メニュー</span>
 
                         <li class="nav-item pt-2">
-                            <a href="/" class="d-flex align-items-center px-5 py-1 active" aria-current="page">
+                            <a href="/" class="d-flex align-items-center px-5 py-1" aria-current="page">
                                 <i class="bi bi-chat"></i>
                                 SNS
                             </a>
@@ -99,21 +69,12 @@
                             </a>
                         </li>
 
-                        <li class="nav-item px-4 pt-2">
-                            <a href="/sns/new" class="post-btn btn rounded-pill col-12 d-flex align-items-center justify-content-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                </svg>
-                                コーディネート投稿
-                            </a>
-                        </li>
-
                         <hr class="mx-4">
 
                         <span class="fs-4 pt-3 px-5">その他</span>
 
                         <li class="nav-item pt-2">
-                            <a href="/contact/new" class="d-flex align-items-center px-5 py-1">
+                            <a href="/contact/new" class="active d-flex align-items-center px-5 py-1">
                                 <i class="bi bi-box-arrow-up-right"></i>
                                 お問い合わせ
                             </a>

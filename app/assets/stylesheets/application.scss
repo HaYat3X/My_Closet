@@ -40,3 +40,24 @@ body {
     margin: auto;
     box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2), -10px 0px 10px -10px rgba(0, 0, 0, 0.2);
 }
+
+
+/* CSSアニメーションの指定 */
+
+.alerts {
+    animation: SlideIn 3.0s infinite;
+    .alert {
+        border-radius: none;
+    }
+}
+
+@keyframes SlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(64px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
