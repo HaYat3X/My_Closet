@@ -2,158 +2,160 @@ class Coordinates::PostsController < ApplicationController
     # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
     before_action :move_to_signed_in, except: []
 
-    # ! 一覧表示メソッド
+    # ! クローゼットテーブルからログインしているユーザーの登録したアイテム情報のみを取得するメソッド
     def list
-        # * Closetモデルを介して、全データを取得する
-        # ? ページネーションを導入し、1ページに40件のデータを表示する
-        @closets_all = Closet.order(created_at: :desc).where(user_id: current_user.id).page(params[:page]).per(40)
+        # * 全てのカテゴリー
+        @closets_all = get_closets_by_category(nil)
 
-        # * Closetモデルを介して、アウターアイテムのみ取得する
-        @closets_outer = Closet.order(created_at: :desc).where(big_Category: "アウター", user_id: current_user.id)
+        # * アウターカテゴリー
+        @closets_outer = get_closets_by_category("アウター")
 
-        # * Closetモデルを介して、トップスアイテムのみ取得する
-        @closets_tops = Closet.order(created_at: :desc).where(big_Category: "トップス", user_id: current_user.id)
+        # * トップスカテゴリー
+        @closets_tops = get_closets_by_category("トップス")
 
-        # * Closetモデルを介して、パンツアイテムのみ取得する
-        @closets_pants = Closet.order(created_at: :desc).where(big_Category: "ボトムス", user_id: current_user.id)
+        # * ボトムスカテゴリー
+        @closets_pants = get_closets_by_category("ボトムス")
 
-        # * Closetモデルを介して、シューズアイテムのみ取得する
-        @closets_shoes = Closet.order(created_at: :desc).where(big_Category: "シューズ", user_id: current_user.id)
+        # * シューズカテゴリー
+        @closets_shoes = get_closets_by_category("シューズ")
 
-        # * Closetモデルを介して、その他のアイテムのみ取得する
-        @closets_other = Closet.order(created_at: :desc).where(big_Category: "その他", user_id: current_user.id)
+        # * その他カテゴリー
+        @closets_other = get_closets_by_category("その他")
     end
 
-    # ! 登録フォーム用メソッド
+    # ! アイテムを登録するフォームのメソッド
     def new
-        # * 使用するモデルを定義する
-        @closet = Closet.new
+        @closet = Closet.new()
     end
 
-    # ! 登録処理用メソッド
+    # ! フォームの内容を取得し、データを保存するメソッド
     def create
-        # * 投稿時にバインドするパラメータを付与する
+        # * フォームに入力された値をセットする
         @closet = Closet.new(posts_params)
 
-        # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
-        case1 = params[:closet][:big_Category] + params[:closet][:small_Category] + params[:color] 
-        case2 = params[:closet][:size] + params[:closet][:brand] + params[:closet][:price] 
-        @closet.search = case1 + case2
+        # * フォームに入力された大カテゴリーと小カテゴリーとカラーとサイズと値段とブランドを連結する
+        search_value = [params[:closet][:big_Category], params[:closet][:small_Category], params[:color], params[:closet][:size], params[:closet][:brand], params[:closet][:price]].join
 
-        # * ログインしているユーザの情報を取得し、user_idのカラムにバインドする
+        # * searchカラムにsearch_valueを保存する
+        @closet.search = search_value
+
+        # * 投稿者の情報を保存する
         @closet.user_id = current_user.id
-        @closet.color = params[:color]
 
-        # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
+        # * クローゼット登録の成功、失敗を判定
         if @closet.save
             redirect_to "/closet/list", notice: "アイテムを登録しました。"
         else
             render :new
         end
     end
-    # ! アイテム更新フォームメソッド
+
+    # ! アイテムを編集するフォームのメソッド
     def edit
-        # * urlから投稿id取得
+        # * urlから投稿IDを取得
         post_id = params[:id]
+
+        # * post_idと一致するクローゼットテーブルのデータを一件取得する
         @closet = Closet.find(post_id)
-        #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
+
+        # * 編集権限がない場合、リダイレクトする
         if @closet.user_id != current_user.id
             redirect_to "/", alert: "不正なアクセスが行われました。"
         end
     end
-    # ! アイテム更新メソッド
+
+    # ! フォームの内容を取得し、更新するメソッド
     def update
+        # * urlから投稿IDを取得
         post_id = params[:id]
+
+        # * post_idと一致するクローゼットテーブルのデータを一件取得する
         @closet = Closet.find(post_id)
 
+        # * 編集権限がない場合、リダイレクトする
         if @closet.user_id != current_user.id
             redirect_to "/", alert: "不正なアクセスが行われました。"
         end
 
-        # * 検索カラムに値を挿入する。（謎に、三個以上連結するとエラー）
-        # !! refactoring時にヘルパーに移行する
-        case1 = params[:closet][:big_Category] + params[:closet][:small_Category] + params[:color]
-        case2 = params[:closet][:size] + params[:closet][:brand] + params[:closet][:price]
-        @closet.color = params[:color]
+        # * フォームに入力された大カテゴリーと小カテゴリーとカラーとサイズと値段とブランドを連結する
+        search_value = [params[:closet][:big_Category], params[:closet][:small_Category], params[:color], params[:closet][:size], params[:closet][:brand], params[:closet][:price]].join
 
-        # * searchカラムを更新する。
-        @closet.update(search: case1 + case2)
-
-        # * 投稿の削除後、listのページに戻るコード
+        # * クローゼット更新の成功、失敗を判定する
         if @closet.update(posts_params)
             redirect_to "/closet/show/#{post_id}", notice: "投稿を編集しました"
         else
-            redirect_to"/", alert: "投稿の編集に失敗しました"
+            redirect_to "/", alert: "投稿の編集に失敗しました"
         end
     end
- 
-    # ! アイテム詳細メソッド
+
+    # ! 特定のアイテムを一件取得するメソッド
     def show
-        # * urlから投稿id取得
+        # * URLから投稿ID取得
         post_id = params[:id]
 
-        # * 投稿idの詳細データ
+        # * post_idと一致するクローゼットテーブルのデータを一件取得する
         @closet = Closet.find(post_id)
     end
 
-    #投稿削除
-
+    # ! 特定のアイテムを削除するメソッド
     def delete
         # * urlから投稿id取得
         post_id = params[:id]
+
+        # * post_idと一致するクローゼットテーブルのデータを一件取得する
         closet = Closet.find(post_id)
 
-        #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
+        # * 削除権限がない場合、リダイレクトする
         if closet.user_id != current_user.id
             redirect_to "/", alert: "不正なアクセスが行われました。"
+        end
+
+        # * クローゼット削除の成功、失敗を判定する
+        if closet.destroy
+            redirect_to "/closet/list", notice: "投稿を削除しました"
         else
-            # 投稿の削除後、listのページに戻るコード
-            if closet.destroy
-                redirect_to "/closet/list", notice: "投稿を削除しました"
-            else
-                redirect_to "/", alert: "投稿の削除に失敗しました"
-            end
+            redirect_to "/", alert: "投稿の削除に失敗しました"
         end
     end
 
-    #closetページの大カテゴリーをリアルタイムで取得する
+    # ! 大カテゴリーに基づいて小カテゴリーを返すメソッド
     def realtime_selected_value
-        selected_value = params[:selected_value]
+        # * ユーザが入力した大カテゴリーを取得
+        big_category = params[:selected_value]
 
-            # 投稿の削除後、listのページに戻るコード
-            if selected_value == "アウター"
-                @small_Category = ["ジャケット","コート","ピーコート","ダウンジャケット","レザージャケット","ウインドブレーカー","カーディガン"]
+        # * 大カテゴリーの値に基づいて、返す小カテゴリーの情報を変数にセット
+        categories = {
+            "アウター" => ["ベスト", "ジャケット", "トラックジャケット", "MA-1", "マウンテンパーカー", "レザージャケット", "ウインドブレーカー", "ダウンジャケット", "コート", "ピーコート"],
 
-            elsif selected_value == "トップス"
-                @small_Category = ["Tシャツ","シャツ","ブラウス","ポロシャツ","ニットセーター","パーカー","ジャケット", "スウェット"]
+            "トップス" => ["タンクトップ", "Tシャツ", "ブラウス", "ポロシャツ", "シャツ", "スウェット", "パーカー", "カーディガン", "ニットセーター", "ワンピース"
+            ],
 
-            elsif selected_value == "ボトムス"
-                @small_Category = ["ジーンズ","パンツ","ショートパンツ","スカート","レギンス","ショーツ", "スカート"]
+            "ボトムス" => ["ショーツ", "パンツ", "ジーンズ", "レギンス", "スカート", "オーバーオール"],
 
-            elsif selected_value == "シューズ"
-                @small_Category = ["スニーカー","パンプス","サンダル","ブーツ","フラットシューズ","革靴"]
+            "シューズ" => ["スニーカー", "サンダル", "ブーツ", "パンプス", "フラットシューズ", "ローファー", "革靴"],
 
-            elsif selected_value == "その他"
-                @small_Category = ["ネックレス","ブレスレット","ピアス","キャップ","リング","ヘアアクセサリー","その他"]
-            end
+            "その他" => ["ネックレス", "ブレスレット", "ピアス", "キャップ", "リング", "ヘアアクセサリー", "ネクタイ", "ベルト", "バック", "その他"]
+        }
 
-            render json: { options: @small_Category }
+        # * 大カテゴリーの値に基づいて、小カテゴリーに返す
+        small_Category = categories[big_category] || []
+
+        # * JSON形式でレスポンスを返す
+        render json: { options: small_Category }
     end
 
-    # ! ブランドを検索する
+    # ! ブランドを検索するメソッド
     def brand_search
-        # * Ajaxの値を受け取る
+        # * ユーザーが検索したブランドの情報を取得する
         key_word = '%' + params[:search] + '%'
-        # * 大文字、小文字を区別せずに検索
-        closet_table = Closet.arel_table
-        # * 検索
-        @search_result = Closet.where(closet_table[:brand].matches(key_word)).distinct.pluck(:brand)
 
-        render json: { options: @search_result }
+        # * 大文字、小文字を区別せずに検索
+        search_result = Closet.where("LOWER(brand) LIKE ?", "%#{key_word.downcase}%").distinct.pluck(:brand)
+
+        # * JSON形式でレスポンスを返す
+        render json: { options: search_result }
     end
 
-
-    # ! (privateは外部クラスから参照できない)
     private
 
     # ! 投稿時、編集時にバインドするパラメータ
@@ -162,10 +164,20 @@ class Coordinates::PostsController < ApplicationController
         params.require(:closet).permit(:photograph, :big_Category, :small_Category, :price, :color, :size, :brand)
     end
 
-    # ! ログインがしているのか判定する
+    # ! サインインしているのか判定する
     def move_to_signed_in
         unless user_signed_in?
             redirect_to new_user_session_path, alert: "この操作は、サインインが必要です。"
         end
+    end
+
+    # ! クローゼットを各カテゴリー毎に取得する
+    def get_closets_by_category(category)
+        # * ログインしているユーザーが登録したアイテムを取得する
+        query = Closet.order(created_at: :desc).where(user_id: current_user.id)
+
+        # * カテゴリーがある場合とない場合を判定する
+        query = query.where(big_Category: category) if category.present?
+        query.page(params[:page]).per(40)
     end
 end

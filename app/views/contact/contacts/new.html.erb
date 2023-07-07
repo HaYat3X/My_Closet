@@ -1,64 +1,65 @@
 <div id="contact_contacts">
     <%# ! header %>
+    <div class="mobile-header">
+        <%= render "contact/layouts/mobile_header" %>
+    </div>
+
     <div class="pc-header">
         <%= render "contact/layouts/pc_header" %>
     </div>
 
     <div class="row g-0">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
+        <div class="col-lg-2-5 pc-sidebar">
             <%= render "contact/layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10">
-            <div class="bg-white py-5 h-100">
-                    <div class="d-flex">
-                        <div class="list_content col-lg-10">
-                            <div class="m-3 p-5">
-                                <%# * エラーメッセージの表示 %>
-                                <div class="col-lg-8 mx-auto">
-                                <%# * バリデーションチェク %>
-                                <% if @contact.errors.any? %>
-                                    <div class="alert alert-danger" role="alert">
-                                        <% @contact.errors.each do |error| %>
-                                            <strong>エラー！</strong> - <%= error.full_message %><br>
-                                        <% end %>
-                                    </div>
-                                <% end %>
+        <div class="new-content col-lg-9-5">
+            <h2 class="text-center mt-5 pt-5 fw-bold text-dark">お問い合わせ</h2>
 
-                                <%= form_with(model: @contact, url: "/contact/create", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
-                                    <div class="mb-3">
-                                    <%= f.text_field :email, class: "form-control", placeholder: "メールアドレス" %>
-                                </div>
-                                <div class="mb-3">
-                                    <%= f.text_field :name, class: "form-control", placeholder: "名前" %>
-                                </div>
-                                <div class="mb-3">
-                                    <%= f.text_area :content, class: "form-control", placeholder: "お問い合わせ内容" %>
-                                </div>
-                                <%= f.submit "登録する", class: "btn btn-primary" %>
-                                <% end %>
-                                </div>
-                            </div>
+            <div class="col-lg-5 mx-auto mt-5">
+                <p class="text-center">
+                    弊社へのお問い合わせはこちらからお願いいたします。<br>
+                    下記に必要事項をご記入の上、お問い合わせください。
+                </p>
+
+                <% if @contact.errors.any? %>
+                    <% @contact.errors.each do |error| %>
+                        <label class="text-danger"><%= error.full_message %></label><br>
+                    <% end %>
+                <% end %>
+
+                <%= form_with(model: @contact, url: "/contact/create", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                    <div class="mb-3">
+                        <%= f.text_field :name, class: "form-control", placeholder: "お名前", required: true %>
+
+                        <div class="invalid-feedback">
+                            お名前を入力して下さい。
                         </div>
                     </div>
-                </div>
+
+                    <div class="mb-3">
+                        <%= f.text_field :email, class: "form-control", placeholder: "メールアドレス", required: true %>
+
+                        <div class="invalid-feedback">
+                            メールアドレスを入力して下さい。
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <%= f.text_area :content, class: "form-control", placeholder: "お問い合わせ内容", required: true, style: "height: 150px;" %>
+
+                        <div class="invalid-feedback">
+                            お問い合わせ内容を入力して下さい。
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 mb-5 mx-auto col-10 submit-btn">
+                        <%= f.submit "送信", class: "btn col-12 fw-bold" %>
+                    </div>
+                <% end %>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
