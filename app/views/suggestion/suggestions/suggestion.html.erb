@@ -17,10 +17,10 @@
                 <%# * タブメニューエリア %>
                 <ul class="nav nav-underline tab-ul col-lg-8 mx-auto" role="tablist">
                     <li class="nav-item flex-fill">
-                        <a href="#code_suggest" class="fw-bold nav-link active text-center" data-bs-toggle="tab">おすすめコーデ</a>
+                        <a href="#code_suggest" class="fw-bold nav-link active text-center" data-bs-toggle="tab">GPT提案</a>
                     </li>
                     <li class="nav-item flex-fill">
-                        <a href="#user_suggest" class="fw-bold nav-link text-center" data-bs-toggle="tab">おすすめユーザ</a>
+                        <a href="#user_suggest" class="fw-bold nav-link text-center" data-bs-toggle="tab">ユーザー提案</a>
                     </li>
                 </ul>
 
@@ -51,51 +51,40 @@
 
                     <%# ? Aiによるフォロワー提案タブエリア %>
                     <div id="user_suggest" class="tab-pane">
-                        <div class="row col-lg-8 mx-auto bg-light mt-3">
-                        <table class="table align-middle mb-0 bg-white">
-                        <tbody>
-                            <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                <% if Suggest.exists?(user_id: current_user.id) %>
-                                    <% @users.each do |u| %>
-                                        <% if u.gender === current_user.gender %>
-                                        <% if u.avatar.url %>
-                                        <%= link_to "/profile/show/#{u.id}" do %>
-                                        <%= image_tag u.avatar.url, style: "width: 50px; height: 50px; object-fit: cover; z-index: 1; border-radius: 50%; ", class: "suggestion-user-image img-fluid", size: "100x100" %>
-                                        <% end %>
-                                        <% else %>
-                                        <%= link_to "/profile/show/#{u.id}" do %>
-                                        <img src="/assets/default-avatar.png"
-                                        alt="Generic placeholder image" class="suggestion-user-image">
-                                        <% end %>
-                                        <% end %>
-                                        <% end %>
+                        <% if current_user.size.blank? || current_user.color.blank? || current_user.total_price.blank? %>
+                        <%= form_with(url: "#", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                        <div class="mb-3">
+                        <p>あなたはオーバーサイズかジャストサイズ、どちらが好きですか？</p>
+                            <input name="size" id="radio-a01" type="radio" value="0">
+                            <label class="radio-a-label" for="radio-a01">オーバーサーイズ</label>
 
-                                        <div class="ms-3">
-                                            <p class="fw-bold mb-1"><%= u.user_name %></p>
-                                        </div>
-                                    <td class="text-end">
-                                        <% if u.id == current_user.id %>
-                                            <%= button_to "プロフィール編集", "/profile/show/#{u.id}", class: "btn btn-outline-primary" %> 
-                                        <% else %>
-                                            <% if UserRelation.where(follow_id: current_user.id, follower_id: u.id).exists? %>
-                                            <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "btn btn-outline-primary" %> 
-                                            <% else %>
-                                            <%= button_to "フォロー", "/profile/follow/#{u.id}", method: :post, class: "btn btn-primary" %> 
-                                            <% end %>
-                                        <% end %>
-                                    </td>
-                                    <% end %>
-                                <% else %>
-                                    プロフィールを入力してください。
-                                <% end %>
-                                </div>
-                            </td>
-                            </tr>
-                        </tbody>
-                        </table>
+                            <input name="size" id="radio-a02" type="radio" value="1">
+                            <label class="radio-a-label" for="radio-a02">ジャストサイズ</label>
                         </div>
+                        <hr>
+                        <div class="mb-3">
+                        <p>あなたはモノトールかカラフル、どちらが好きですか？</p>
+                            <input name="color" id="radio-a01" type="radio" value="0">
+                            <label class="radio-a-label" for="radio-a01">モノトーン</label>
+
+                            <input name="color" id="radio-a02" type="radio" value="1">
+                            <label class="radio-a-label" for="radio-a02">カラフル</label>
+                        </div>
+                        <hr>
+                        <div class="mb-3">
+                        <p>あなたが、服に宛てられる予算はいくらですか？</p>
+                            <input name="total_price" id="radio-a01" type="radio" value="1">
+                            <label class="radio-a-label" for="radio-a01">総額1万以上</label>
+
+                            <input name="total_price" id="radio-a02" type="radio" value="0">
+                            <label class="radio-a-label" for="radio-a02">総額1万以下</label>
+                        </div>
+                        <% end %>
+                  </div>
+
+                        <% else %>
+                            キョウスケはダチョウ
+                        <% end %>
                     </div>
                 </div>
             </div>
