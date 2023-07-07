@@ -91,6 +91,8 @@ Rails.application.routes.draw do
   post "call_user", to: "suggestion/apis#call_user"
   # * call_gptによる提案を更新する
   patch "call_gpt_update", to: "suggestion/apis#call_gpt_update"
+  # * ユーザーの好みを判定する
+  post "user_like_create", to: "suggestion/apis#user_like_create"
 
   # ! プロフィール関連
   # * プロフィールページ

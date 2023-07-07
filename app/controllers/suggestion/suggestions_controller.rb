@@ -25,6 +25,7 @@ class Suggestion::SuggestionsController < ApplicationController
 
     # ! (privateは外部クラスから参照できない)
     private
+    
     # ! ログインがしているのか判定する
     def move_to_signed_in
         unless user_signed_in?
