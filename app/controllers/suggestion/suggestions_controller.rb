@@ -21,6 +21,18 @@ class Suggestion::SuggestionsController < ApplicationController
             # * おすすめのユーザを出力
             @users = User.where("tendency LIKE ? OR tendency LIKE ?", key_word1, key_word2).where.not(id: current_user.id).order("RANDOM()").limit(10)
         end
+
+        # ! レコメンドする
+        # * ログインしているユーザ以外のユーザ情報の特徴量を取得
+        @other_user = User.where.not(id: current_user.id).piuck(:gender, :size, :color, :total_price)
+
+        @other_user.each do |data|
+            puts date.gender
+            puts date.size
+            puts date.color
+            puts date.total_price
+        end
+        
     end
 
     # ! (privateは外部クラスから参照できない)
