@@ -115,45 +115,19 @@ class Suggestion::ApisController < ApplicationController
         
     end
 
-    # ! 各ユーザーのファッションの投稿の傾向を保存する
-    def call_user(user_id)
-        # * 提案結果に基づいておすすめユーザを取得
-            # ? 各ユーザが投稿した投稿のタグを取得する
-            snss = Social.all.where(user_id: user_id)
-
-            # ? からの配列を用意する
-            my_array = []
-                
-            snss.each do |s|
-                # ? 配列の要素数を取得
-                total_elements = s.tag
-
-                # ? 各ユーザが投稿したタグを配列に格納    
-                my_array.push(s.tag)
-            end
-                
-            # ? 配列の要素数を取得
-            total_elements = my_array.length
-            
-            # ? 各要素の出現回数を数えるためのハッシュを作成
-            counts = Hash.new(0)
-            
-            # ? 各要素の出現回数を数える
-            my_array.each { |element| counts[element] += 1 }
-
-            # ? 1番％が高い要素を抽出する
-            max_count = counts.values.max
-            most_common_elements = counts.select { |_, count| count == max_count }.keys
-
-            # * ユーザの投稿頻度が高いタグを保存
-            if User.find(user_id).update(tendency: most_common_elements[0])
-                return { redirect_url: "/", flash_message: "コーディネートを投稿しました。", flash: "notice" }
-            else
-                return { redirect_url: "/", flash_message: "コーディネートの投稿に失敗しました。", flash: "alert" }
-            end
-            
+    # ! ユーザーの特徴量を取得して、保存する
+    def user_like_create
+        # * 送信された値を受け取る
+        size = params[:size]
+        color = params[:color]
+        total_price = params[:total_price]
+        
+        if User.update(size: size, color: color, total_price: total_price)
+            redirect_to request.referer, notice: "好みを設定しました。"
+        else
+            redirect_to request.referer, alert: "好みを設定に失敗しました。"
+        end
     end
-
 
     # ! (privateは外部クラスから参照できない)
     private

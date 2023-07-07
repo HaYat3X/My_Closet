@@ -87,13 +87,7 @@ class Sns::PostsController < ApplicationController
 
         # * SNS投稿の成功、失敗を判定する
         if @social.save
-            # ? ユーザの投稿頻度の高いタグを保存するプログラムを実行
-            suggestions_controller = Suggestion::ApisController.new()
-            result = suggestions_controller.call_user(current_user.id)
-            # ? 結果の flash メッセージの種類に応じて、フラッシュのキーを設定する
-            flash_key = result[:flash] == 'notice' ? :notice : :alert
-            # ? 結果のリダイレクト先URLと flash メッセージを含むフラッシュハッシュを指定してリダイレクトする
-            redirect_to result[:redirect_url], flash: { flash_key => result[:flash_message] }
+            redirect_to "/", notice: "コーディネートを投稿しました。"
         else
             render :new
         end
@@ -170,13 +164,7 @@ class Sns::PostsController < ApplicationController
 
         # * SNS更新の成功、失敗を判定する
         if @social.update(posts_params)
-            # ? ユーザの投稿頻度の高いタグを保存するプログラムを実行
-            suggestions_controller = Suggestion::ApisController.new()
-            result = suggestions_controller.call_user(current_user.id)
-            # ? 結果の flash メッセージの種類に応じて、フラッシュのキーを設定する
-            flash_key = result[:flash] == 'notice' ? :notice : :alert
-            # ? 結果のリダイレクト先URLと flash メッセージを含むフラッシュハッシュを指定してリダイレクトする
-            redirect_to result[:redirect_url], flash: { flash_key => result[:flash_message] }
+            redirect_to "/", notice: "コーディネートを更新しました。"
         else
             redirect_to "/", alert: "投稿の編集に失敗しました"
         end
