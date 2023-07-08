@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 2023_05_30_025051) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "gender", default: ""
+    t.integer "gender"
     t.string "profile", default: ""
     t.integer "height"
     t.integer "weight"

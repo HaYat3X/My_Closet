@@ -121,8 +121,10 @@ class Suggestion::ApisController < ApplicationController
         size = params[:size]
         color = params[:color]
         total_price = params[:total_price]
+
+        user = User.find(current_user.id)
         
-        if User.update(size: size, color: color, total_price: total_price)
+        if user.update(size: size, color: color, total_price: total_price)
             redirect_to request.referer, notice: "好みを設定しました。"
         else
             redirect_to request.referer, alert: "好みを設定に失敗しました。"

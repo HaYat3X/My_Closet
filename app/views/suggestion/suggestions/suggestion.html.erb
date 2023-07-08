@@ -55,10 +55,10 @@
                             <%= form_with(url: "/user_like_create", local: true, html: { class: "needs-validation", novalidate: true }) do |f| %>
                             <div class="mb-3">
                                 <p>あなたはオーバーサイズかジャストサイズ、どちらが好きですか？</p>
-                                <%= f.radio_button :size, "0", id: "radio-a01", required: true %>
+                                <%= f.radio_button :size, -1, id: "radio-a01", required: true %>
                                 <%= f.label :size, "オーバーサイズ", class: "radio-a-label", for: "radio-a01" %>
 
-                                <%= f.radio_button :size, "1", id: "radio-a02", required: true  %>
+                                <%= f.radio_button :size, 1, id: "radio-a02", required: true  %>
                                 <%= f.label :size, "ジャストサイズ", class: "radio-a-label", for: "radio-a02" %>
                                 <div class="invalid-feedback">
                                     好みを設定して下さい。
@@ -67,10 +67,10 @@
                             <hr>
                             <div class="mb-3">
                                 <p>あなたはモノトールかカラフル、どちらが好きですか？</p>
-                                <%= f.radio_button :color, "0", id: "radio-a03", required: true %>
+                                <%= f.radio_button :color, -1, id: "radio-a03", required: true %>
                                 <%= f.label :color, "モノトーン", class: "radio-a-label", for: "radio-a03" %>
 
-                                <%= f.radio_button :color, "1", id: "radio-a04", required: true %>
+                                <%= f.radio_button :color, 1, id: "radio-a04", required: true %>
                                 <%= f.label :color, "カラフル", class: "radio-a-label", for: "radio-a04" %>
                                 <div class="invalid-feedback">
                                     好みを設定して下さい。
@@ -79,10 +79,10 @@
                             <hr>
                             <div class="mb-3">
                                 <p>あなたが、服に宛てられる予算はいくらですか？</p>
-                                <%= f.radio_button :total_price, "0", id: "radio-a06", required: true %>
+                                <%= f.radio_button :total_price, -1, id: "radio-a06", required: true %>
                                 <%= f.label :total_price, "総額1万以下", class: "radio-a-label", for: "radio-a06" %>
                                 
-                                <%= f.radio_button :total_price, "1", id: "radio-a05", required: true %>
+                                <%= f.radio_button :total_price, 1, id: "radio-a05", required: true %>
                                 <%= f.label :total_price, "総額1万以上", class: "radio-a-label", for: "radio-a05" %>
                                 <div class="invalid-feedback">
                                     好みを設定して下さい。
@@ -92,7 +92,11 @@
                             <% end %>
 
                         <% else %>
-                            キョウスケはダチョウ
+                            <% @posts.each do |item| %>
+                            <h2>提案の中身</h2>
+                                <%= image_tag item.photograph.url, size: "130x180" %>
+                                <p>ユーザ名：<%= item.user.user_name %></p>
+                            <% end %>
                         <% end %>
                     </div>
                 </div>
