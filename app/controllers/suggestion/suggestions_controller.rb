@@ -72,15 +72,17 @@ class Suggestion::SuggestionsController < ApplicationController
 
         # * 類似度の高いユーザ順にコーディネートを取得する
         @similar_users.each do |user|
+            # ? 性別が同じユーザーから投稿を取得
+            if user.gender == @user.gender
+                # ? 一人のユーザーから最大5件の投稿をランダムに取得する
+                user_posts = Social.where(user_id: user.id).order("RANDOM()").limit(5)
 
-            # ? 一人のユーザーから最大5件の投稿をランダムに取得する
-            user_posts = Social.where(user_id: user.id).order("RANDOM()").limit(5)
+                # ? 配列に格納
+                @posts.concat(user_posts)
 
-            # ? 配列に格納
-            @posts.concat(user_posts)
-            
-            # ? 20件取得したら終了
-            break if @posts.size >= 20
+                # ? 20件取得したら終了
+                break if @posts.size >= 20
+            end
         end
     end
 
