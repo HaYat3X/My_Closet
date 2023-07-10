@@ -34,39 +34,11 @@
                     </li>
                 </ul>
 
-                <p>
-                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        絞り込み検索
-                    </a>
-                </p>
-                <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                        <%= form_with(url: "/sns/search", local: true,  method: :get, html: { class: "needs-validation col-lg-8 mx-auto", novalidate: true }) do |f| %>
-                            <div class="mb-3">
-                                <p>季節</p>
-                                <%= f.radio_button :season, "春", id: "radio-a01" %>
-                                <%= f.label :season, "春", class: "radio-a-label", for: "radio-a01" %>
-
-                                <%= f.radio_button :season, "夏", id: "radio-a02"  %>
-                                <%= f.label :season, "夏", class: "radio-a-label", for: "radio-a02" %>
-                                <p>身長</p>
-                                <%= f.radio_button :height, "150~160", id: "radio-a03" %>
-                                <%= f.label :height, "150~160", class: "radio-a-label", for: "radio-a03" %>
-
-                                <%= f.radio_button :height, "160~170", id: "radio-a04" %>
-                                <%= f.label :height, "160~170", class: "radio-a-label", for: "radio-a04" %>
-                                
-                                <%= f.submit "検索", class: "btn btn-primary" %>
-                            </div>
-                        <% end %>
-                    </div>
-                </div>
-
                 <div class="tab-content mt-1">
                     <%# ? 全ての投稿を表示する %>
                     <div id="all" class="tab-pane active">
                         <div class="row g-1">
-                            <% @sns_ranking.each do |sns| %>
+                            <% @sns_ranking_all.each do |sns| %>
                                 <div class="col-lg-3 col-md-3 col-4 mt-1">
 
                                     <%= link_to "/sns/show/#{sns.id}" do %>
@@ -125,18 +97,13 @@
                                     </div>
                                 </div>
                             <% end %>
-
-                            <div class="mt-3">
-                                <%= paginate @sns_ranking %>
-                            </div>
                         </div>
                     </div>
 
                     <%# ? 男性の投稿のみを表示する %>
                     <div id="men" class="tab-pane">
                         <div class="row g-1">
-                            <% @sns_ranking.each do |sns| %>
-                                <% if sns.user.gender === "男" %>
+                            <% @sns_ranking_men.each do |sns| %>
                                     <div class="col-lg-3 col-md-3 col-4 mt-1">
 
                                         <%= link_to "/sns/show/#{sns.id}" do %>
@@ -194,20 +161,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                <% end %>
                             <% end %>
-
-                            <div class="mt-3">
-                                <%= paginate @sns_ranking %>
-                            </div>
                         </div>
                     </div>
 
                     <%# ? 女性の投稿のみを表示する %>
                     <div id="women" class="tab-pane">
                         <div class="row g-1">
-                            <% @sns_ranking.each do |sns| %>
-                                <% if sns.user.gender === "女" %>
+                            <% @sns_ranking_women .each do |sns| %>
                                     <div class="col-lg-3 col-md-3 col-4 mt-1">
 
                                         <%= link_to "/sns/show/#{sns.id}" do %>
@@ -265,12 +226,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                <% end %>
                             <% end %>
-
-                            <div class="mt-3">
-                                <%= paginate @sns_ranking %>
-                            </div>
                         </div>
                     </div>
                 </div>
