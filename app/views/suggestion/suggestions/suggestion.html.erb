@@ -52,7 +52,7 @@
                     <%# ? Aiによるフォロワー提案タブエリア %>
                     <div id="user_suggest" class="tab-pane">
                         <% if current_user.size.blank? || current_user.color.blank? || current_user.total_price.blank? %>
-                            <%= form_with(url: "/user_like_create", local: true, html: { class: "needs-validation", novalidate: true }) do |f| %>
+                            <%= form_with(url: "/user_like_create", local: true, html: { class: "needs-validation col-lg-8 mx-auto", novalidate: true }) do |f| %>
                             <div class="mb-3">
                                 <p>あなたはオーバーサイズかジャストサイズ、どちらが好きですか？</p>
                                 <%= f.radio_button :size, -1, id: "radio-a01", required: true %>
@@ -66,24 +66,53 @@
                             </div>
                             <hr>
                             <div class="mb-3">
-                                <p>あなたはモノトールかカラフル、どちらが好きですか？</p>
-                                <%= f.radio_button :color, -1, id: "radio-a03", required: true %>
-                                <%= f.label :color, "モノトーン", class: "radio-a-label", for: "radio-a03" %>
+                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
+                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
+                                <%= f.select :favorite_color1, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
 
-                                <%= f.radio_button :color, 1, id: "radio-a04", required: true %>
-                                <%= f.label :color, "カラフル", class: "radio-a-label", for: "radio-a04" %>
-                                <div class="invalid-feedback">
-                                    好みを設定して下さい。
-                                </div>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
+                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
+                                <%= f.select :favorite_color2, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
+
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
+                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
+                                <%= f.select :favorite_color3, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
+                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
+                                <%= f.select :favorite_color4, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
+                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
+                                <%= f.select :favorite_color5, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
                             </div>
                             <hr>
                             <div class="mb-3">
                                 <p>あなたが、服に宛てられる予算はいくらですか？</p>
-                                <%= f.radio_button :total_price, -1, id: "radio-a06", required: true %>
-                                <%= f.label :total_price, "総額1万以下", class: "radio-a-label", for: "radio-a06" %>
+                                <%= f.radio_button :total_price, 1, id: "radio-a03", required: true %>
+                                <%= f.label :total_price, "総額10000円以下", class: "radio-a-label", for: "radio-a03" %>
                                 
-                                <%= f.radio_button :total_price, 1, id: "radio-a05", required: true %>
-                                <%= f.label :total_price, "総額1万以上", class: "radio-a-label", for: "radio-a05" %>
+                                <%= f.radio_button :total_price, 2, id: "radio-a04", required: true %>
+                                <%= f.label :total_price, "総額10000円以上〜15000円以下", class: "radio-a-label", for: "radio-a04" %>
+
+                                <%= f.radio_button :total_price, 3, id: "radio-a05", required: true %>
+                                <%= f.label :total_price, "総額15000円以上〜20000円以下", class: "radio-a-label", for: "radio-a05" %>
+
+                                <%= f.radio_button :total_price, 4, id: "radio-a06", required: true %>
+                                <%= f.label :total_price, "総額20000円以上〜25000円以下", class: "radio-a-label", for: "radio-a06" %>
+
+                                <%= f.radio_button :total_price, 5, id: "radio-a07", required: true %>
+                                <%= f.label :total_price, "総額25000円以上", class: "radio-a-label", for: "radio-a07" %>
                                 <div class="invalid-feedback">
                                     好みを設定して下さい。
                                 </div>
