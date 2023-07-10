@@ -137,7 +137,11 @@ ActiveRecord::Schema.define(version: 2023_05_30_025051) do
     t.integer "age"
     t.string "avatar"
     t.integer "size"
-    t.integer "color"
+    t.integer "favorite_color1"
+    t.integer "favorite_color2"
+    t.integer "favorite_color3"
+    t.integer "favorite_color4"
+    t.integer "favorite_color5"
     t.integer "total_price"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
