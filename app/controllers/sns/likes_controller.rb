@@ -65,14 +65,8 @@ class Sns::LikesController < ApplicationController
 
         puts "選択されたID: #{social_ids}"
 
-        @social = Social.where(id: social_ids)
+@social_ranking_all = Social.where(id: social_ids).sort_by { |s| social_ids.index(s.id) }
 
-        
-        @social.each do |s|
-            pp "----"
-            pp s.id
-        end
-        
 
 
 # likes_count = SocialLike.where(created_at: start_date..end_date)
