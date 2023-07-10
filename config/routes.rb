@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   delete "sns/delete_like/:id", to:"sns/likes#delete_like"
   # Closetアイテムを追加検索するルーティングの設定
   post "realtime_reload_items/:items", to: "sns/posts#new"
+  # * いいねランキングページのルーティング設定
+  get "sns/like_ranking", to: "sns/likes#like_ranking"
 
   # ! Q&A関連
   # * 投稿フォーム

@@ -40,6 +40,12 @@ class Sns::LikesController < ApplicationController
         end
     end
 
+    # ! いいねランキングメソッド
+    def like_ranking
+        
+    end
+    
+
     private
 
     # ! サインインしているのか判定する
