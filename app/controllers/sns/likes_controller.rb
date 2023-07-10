@@ -42,9 +42,61 @@ class Sns::LikesController < ApplicationController
 
     # ! いいねランキングメソッド
     def like_ranking
-        
+        start_date = Time.current.beginning_of_month
+        end_date = Time.current.end_of_month
+
+        likes_count = SocialLike.where(created_at: start_date..end_date)
+                            .group(:social_id)
+                            .select('social_id, COUNT(*) AS likes_count')
+                            .order('likes_count DESC')
+                            .limit(12)
+
+        social_ids = likes_count.map(&:social_id)
+
+        # 足りない分だけいいねが0の投稿を取得
+        if social_ids.length < 12
+        remaining_limit = 12 - social_ids.length
+        zero_likes_social_ids = Social.where.not(id: social_ids)
+                                        .order(id: :asc)
+                                        .limit(remaining_limit)
+                                        .pluck(:id)
+        social_ids += zero_likes_social_ids
+        end
+
+        puts "選択されたID: #{social_ids}"
+
+@social_ranking_all = Social.where(id: social_ids).sort_by { |s| social_ids.index(s.id) }
+
+
+
+# likes_count = SocialLike.where(created_at: start_date..end_date)
+#                        .joins(social: :user)
+#                        .where(users: { gender: 1 })
+#                        .group(:social_id)
+#                        .select('social_id, COUNT(*) AS likes_count')
+#                        .order('likes_count DESC')
+#                        .limit(12)
+
+# social_ids = likes_count.map(&:social_id)
+
+# # 足りない分だけいいねが0の男性投稿を取得
+# if social_ids.length < 12
+#   remaining_limit = 12 - social_ids.length
+#   zero_likes_social_ids = Social.joins(:user)
+#                                 .where(users: { gender: 1 })
+#                                 .where.not(id: social_ids)
+#                                 .order(id: :asc)
+#                                 .limit(remaining_limit)
+#                                 .pluck(:id)
+#   social_ids += zero_likes_social_ids
+# end
+
+# puts "選択されたID: #{social_ids}"
+
+
+
+
     end
-    
 
     private
 
