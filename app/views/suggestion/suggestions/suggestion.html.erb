@@ -141,12 +141,11 @@
                             <% end %>
 
                         <% else %>
-                            <%# <% @posts.each do |item| %> %>
-                            <%# <h2>提案の中身</h2> %>
-                                <%# <%= image_tag item.photograph.url, size: "130x180" %> %>
-                                <%# <p>ユーザ名：<%= item.user.user_name %></p> %>
-                            <%# <% end %> %>
-                            <p>提案している場合、表示されます</p>
+                            <% @posts.each do |item| %>
+                            <h2>提案の中身</h2>
+                                <%= image_tag item.photograph.url, size: "130x180" %>
+                                <p>ユーザ名：<%= item.user.user_name %></p>
+                            <% end %>
                         <% end %>
                     </div>
                 </div>
