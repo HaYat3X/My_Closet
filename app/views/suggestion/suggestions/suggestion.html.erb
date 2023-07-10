@@ -51,7 +51,7 @@
 
                     <%# ? Aiによるフォロワー提案タブエリア %>
                     <div id="user_suggest" class="tab-pane">
-                        <% if current_user.size.blank? || current_user.color.blank? || current_user.total_price.blank? %>
+                        <% if current_user.size.blank? || current_user.favorite_color1.blank? || current_user.favorite_color2.blank? || current_user.favorite_color3.blank? || current_user.favorite_color4.blank? || current_user.favorite_color5.blank? || current_user.total_price.blank? %>
                             <%= form_with(url: "/user_like_create", local: true, html: { class: "needs-validation col-lg-8 mx-auto", novalidate: true }) do |f| %>
                             <div class="mb-3">
                                 <p>あなたはオーバーサイズかジャストサイズ、どちらが好きですか？</p>
@@ -68,33 +68,53 @@
                             <div class="mb-3">
                                 <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
                                 <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
-                                <%= f.select :favorite_color1, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
+                                <%= f.select :favorite_color1, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control', required: true %>
+                                <div class="invalid-feedback">
+                                    好みを設定して下さい。
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
+                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
+                                <%= f.select :favorite_color2, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control', required: true %>
+                                <div class="invalid-feedback">
+                                    好みを設定して下さい。
+                                </div>
 
                             </div>
                             <hr>
                             <div class="mb-3">
                                 <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
                                 <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
-                                <%= f.select :favorite_color2, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
+                                <%= f.select :favorite_color3, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control', required: true %>
+
+                                <div class="invalid-feedback">
+                                    好みを設定して下さい。
+                                </div>
 
                             </div>
                             <hr>
                             <div class="mb-3">
                                 <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
                                 <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
-                                <%= f.select :favorite_color3, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
+                                <%= f.select :favorite_color4, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control', required: true %>
+
+                                <div class="invalid-feedback">
+                                    好みを設定して下さい。
+                                </div>
+
                             </div>
                             <hr>
                             <div class="mb-3">
                                 <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
                                 <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
-                                <%= f.select :favorite_color4, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
-                            </div>
-                            <hr>
-                            <div class="mb-3">
-                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
-                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
-                                <%= f.select :favorite_color5, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
+                                <%= f.select :favorite_color5, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control', required: true %>
+
+                                <div class="invalid-feedback">
+                                    好みを設定して下さい。
+                                </div>
+
                             </div>
                             <hr>
                             <div class="mb-3">
@@ -121,11 +141,12 @@
                             <% end %>
 
                         <% else %>
-                            <% @posts.each do |item| %>
-                            <h2>提案の中身</h2>
-                                <%= image_tag item.photograph.url, size: "130x180" %>
-                                <p>ユーザ名：<%= item.user.user_name %></p>
-                            <% end %>
+                            <%# <% @posts.each do |item| %> %>
+                            <%# <h2>提案の中身</h2> %>
+                                <%# <%= image_tag item.photograph.url, size: "130x180" %> %>
+                                <%# <p>ユーザ名：<%= item.user.user_name %></p> %>
+                            <%# <% end %> %>
+                            <p>提案している場合、表示されます</p>
                         <% end %>
                     </div>
                 </div>

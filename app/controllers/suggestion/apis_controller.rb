@@ -119,12 +119,16 @@ class Suggestion::ApisController < ApplicationController
     def user_like_create
         # * 送信された値を受け取る
         size = params[:size]
-        color = params[:color]
+        favorite_color1 = params[:favorite_color1]
+        favorite_color2 = params[:favorite_color2]
+        favorite_color3 = params[:favorite_color3]
+        favorite_color4 = params[:favorite_color4]
+        favorite_color5 = params[:favorite_color5]
         total_price = params[:total_price]
 
         user = User.find(current_user.id)
         
-        if user.update(size: size, color: color, total_price: total_price)
+        if user.update(size: size, favorite_color1: favorite_color1,favorite_color2: favorite_color2, favorite_color3: favorite_color3, favorite_color4: favorite_color4, favorite_color5: favorite_color5, total_price: total_price)
             redirect_to request.referer, notice: "好みを設定しました。"
         else
             redirect_to request.referer, alert: "好みを設定に失敗しました。"
