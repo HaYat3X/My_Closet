@@ -5,7 +5,7 @@ class Sns::SearchsController < ApplicationController
     # ! 検索フォームに入力されているキーワードを元に、SNSテーブルの情報を検索するメソッド
     def search
         # * 入力フォームの値を受け取る
-        key_word = params[:search]
+
         
         @search_result = search_social('%' + key_word + '%').page(params[:page]).per(48)
     end
