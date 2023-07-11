@@ -18,6 +18,10 @@ class Sns::SearchsController < ApplicationController
         if params[:height].present?
             key_word += params[:height]
         end
+
+        if params[:value].present?
+            key_word += params[:value]
+        end
         
         pp key_word
         
