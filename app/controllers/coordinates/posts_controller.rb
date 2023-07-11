@@ -39,6 +39,8 @@ class Coordinates::PostsController < ApplicationController
         # * searchカラムにsearch_valueを保存する
         @closet.search = search_value
 
+        @closet.color = params[:color]
+
         # * 投稿者の情報を保存する
         @closet.user_id = current_user.id
 
@@ -95,6 +97,22 @@ class Coordinates::PostsController < ApplicationController
 
         # * post_idと一致するクローゼットテーブルのデータを一件取得する
         @closet = Closet.find(post_id)
+
+        # * 小カテゴリーと色の情報を取得する
+        small_Category = @closet.small_Category
+        color = @closet.color
+
+        # * 小カテゴリーと色情報に一致するアイテムIDを取得する
+        @test = Closet.where.not(user_id: current_user.id)
+              .where(small_Category: small_Category, color: color)
+              .limit(4) # 最大4件まで取得する
+              .pluck(:id)
+
+        @test.each do |item|
+            puts item
+            # 繰り返し処理を行うコード
+        end
+
     end
 
     # ! 特定のアイテムを削除するメソッド
