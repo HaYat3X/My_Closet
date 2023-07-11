@@ -103,16 +103,23 @@ class Coordinates::PostsController < ApplicationController
         color = @closet.color
 
         # * 小カテゴリーと色情報に一致するアイテムIDを取得する
-        @test = Closet.where.not(user_id: current_user.id)
+        @item_id = Closet.where.not(user_id: current_user.id)
               .where(small_Category: small_Category, color: color)
               .limit(4) # 最大4件まで取得する
               .pluck(:id)
 
-        @test.each do |item|
-            puts item
+        @item_id.each do |item|
+            pp "---------------"
+            pp item
+            # 繰り返し処理を行うコード
+            @coordinate = Social.where(item1: item, item2: item, item3: item, item4: item, item5: item, item6: item)
+
+        @coordinate.each do |c|
+            pp "---------------"
+            pp c
             # 繰り返し処理を行うコード
         end
-
+        end
     end
 
     # ! 特定のアイテムを削除するメソッド
