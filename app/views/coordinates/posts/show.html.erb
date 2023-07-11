@@ -56,7 +56,18 @@
                             </div>
                         </div>
                     </div>
+
+                    <div>
+                        <% @coordinate_items.flatten.each do |sns| %>
+                            <div>
+                                <%= link_to "/sns/show/#{sns.id}" do %>
+                                    <%= image_tag sns.photograph.url, class: "sns-image" %>
+                                <% end %>
+                            </div>
+                        <% end %>
+                    </div>
             </div>
+            
         </div>
     </div>
 </div>
