@@ -92,33 +92,30 @@ class Coordinates::PostsController < ApplicationController
 
     # ! 特定のアイテムを一件取得するメソッド
     def show
-        # * URLから投稿ID取得
+        # URLから投稿ID取得
         post_id = params[:id]
 
-        # * post_idと一致するクローゼットテーブルのデータを一件取得する
+        # post_idと一致するクローゼットテーブルのデータを一件取得する
         @closet = Closet.find(post_id)
 
-        # * 小カテゴリーと色の情報を取得する
+        # 小カテゴリーと色の情報を取得する
         small_Category = @closet.small_Category
         color = @closet.color
 
-        # * 小カテゴリーと色情報に一致するアイテムIDを取得する
-        @item_id = Closet.where.not(user_id: current_user.id)
-              .where(small_Category: small_Category, color: color)
-              .limit(4) # 最大4件まで取得する
-              .pluck(:id)
+        # 小カテゴリーと色情報に一致するアイテムIDを取得する
+        item_id = Closet.where.not(user_id: current_user.id)
+                        .joins(:user)
+                        .where(users: { gender: current_user.gender })
+                        .where(small_Category: small_Category, color: color)
+                        .limit(4)
+                        .pluck(:id)
 
-        @item_id.each do |item|
-            pp "---------------"
-            pp item
-            # 繰り返し処理を行うコード
-            @coordinate = Social.where(item1: item, item2: item, item3: item, item4: item, item5: item, item6: item)
+        # 類似しているアイテムを表示
+        @coordinate_items = []
 
-        @coordinate.each do |c|
-            pp "---------------"
-            pp c
-            # 繰り返し処理を行うコード
-        end
+        item_id.each do |item|
+            coordinate = Social.where("item1 = :item OR item2 = :item OR item3 = :item OR item4 = :item OR item5 = :item OR item6 = :item", item: item)
+            @coordinate_items << coordinate
         end
     end
 
