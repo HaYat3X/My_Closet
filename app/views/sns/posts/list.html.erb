@@ -27,8 +27,11 @@
                             <label for="formSwitchCheckDefault" class="form-check-label fw-bold">フォロー中</label>
                         </div>
                     </form>
-
                 <% end %>
+
+                <div class="text-end">
+                    <%= link_to "いいねランキング", "/sns/like_ranking", class: "text-end" %>
+                </div>
 
                 <ul class="tab-menu nav nav-pills nav-fill col-lg-5 col-md-5">
                     <li class="nav-item">
@@ -43,10 +46,6 @@
                         <a href="#women" class="nav-link fw-bold" data-bs-toggle="tab">女性</a>
                     </li>
                 </ul>
-
-                <div class="text-end">
-                    <%= link_to "月間いいねランキングを見る", "/sns/like_ranking", class: "text-end" %>
-                </div>
 
 
                 <div class="tab-content mt-1">
