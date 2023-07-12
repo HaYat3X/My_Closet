@@ -1,7 +1,7 @@
 <div id="sns_posts">
     <%# ! header %>
     <div class="mobile-header">
-   
+        <%= render "sns/layouts/mobile_header" %>
     </div>
 
     <div class="pc-header">
@@ -10,16 +10,13 @@
 
     <div class="row g-0">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
+        <div class="col-lg-2-5 pc-sidebar">
             <%= render "sns/layouts/pc_sidebar" %>
         </div>
 
-        <div class="col-12 mobile-sidebar">
-        </div>
-
         <%# ! contents %>
-        <div class="list_content col-lg-10 col-12">
-            <div class="bg-white py-5 h-100">
+        <div class="col-lg-9-5 col-12">
+            <div class="new-content py-5">
                 <%# * バリデーションチェク %>
                 <% if @social.errors.any? %>
                     <div class="alert alert-danger col-lg-8 mx-auto" role="alert">
@@ -53,24 +50,28 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="" class="mb-2">
+                        <label class="mb-2">
                             着用アイテム（6件まで追加できます）
                         </label>
-                    <p id="messageContainer" class="text-danger small"></p>
 
-                    <div id="scroll">
-                        <div id="scrollContainer" class="row g-1">
-                            <%# * @closets_allをforeachして一件ずつ表示する %>
-                            <% @closets_all.each do |c| %>
-                                <div class="col-lg-2">
-                                    <%# * クローゼットアイテムの画像の表示 %>
-                                    <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
-                                    <%# * クローゼットアイテムをチェックボックス化して選択させる %>
-                                    <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
-                                </div>
-                            <% end %>
+                        <p id="messageContainer" class="text-danger small"></p>
+
+                        <div id="scroll">
+                            <div id="scrollContainer" class="row g-1">
+                                <%# * @closets_allをforeachして一件ずつ表示する %>
+                                <% @closets_all.each do |c| %>
+                                    <div class="col-lg-2">
+                                        <%# * クローゼットアイテムの画像の表示 %>
+                                        <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
+
+                                        <%# * クローゼットアイテムをチェックボックス化して選択させる %>
+                                        <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
+                                    </div>
+                                <% end %>
+                            </div>
                         </div>
                     </div>
+
                     <%# * 入力されたデータを登録する処理 %>
                     <%= f.submit "登録する", class: "btn mt-3 btn-primary" %>
                 <% end %>
