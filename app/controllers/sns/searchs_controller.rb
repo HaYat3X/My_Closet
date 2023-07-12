@@ -6,6 +6,8 @@ class Sns::SearchsController < ApplicationController
     def search
         # * 入力フォームの値を受け取る
         key_word = params[:search]
+
+        # * 現在の月を取得
         current_year = Time.current.year
 
         # キーワードと期間の対応関係を定義
@@ -14,6 +16,14 @@ class Sns::SearchsController < ApplicationController
             "夏" => [6, 8],
             "秋" => [9, 11],
             "冬" => [12, 2]
+        }
+
+        # キーワードと身長の関係を定義
+        height = {
+            "~149" => [0, 149],
+            "150~159" => [150, 159],
+            "160~170" => [160, 170],
+            "175~" => [175, 300]
         }
 
         # キーワードに基づいて期間を設定
@@ -31,44 +41,10 @@ class Sns::SearchsController < ApplicationController
             end
 
             @search_result = Social.where(created_at: start_date..end_date).page(params[:page]).per(48)
-        else
-        # キーワードが不正な場合の処理
-        # 例えばエラーメッセージの表示などを行う
-        end
-        current_year = Time.current.year
+        elsif height.key?(key_word)
+            min_height, max_height = height[key_word]
 
-        if key_word === "春"
-            # start_dateを設定
-            start_date = Time.new(current_year, 3, 1, 0, 0, 0, '+00:00')
-
-            # end_dateを設定
-            end_date = Time.new(current_year, 5, 31, 23, 59, 59, '+00:00')
-
-            @search_result = Social.where(created_at: start_date..end_date).page(params[:page]).per(48)
-        elsif key_word === "夏"
-            # start_dateを設定
-            start_date = Time.new(current_year, 6, 1, 0, 0, 0, '+00:00')
-
-            # end_dateを設定
-            end_date = Time.new(current_year, 8, 31, 23, 59, 59, '+00:00')
-
-            @search_result = Social.where(created_at: start_date..end_date).page(params[:page]).per(48)
-        elsif key_word === "秋"
-            # start_dateを設定
-            start_date = Time.new(current_year, 9, 1, 0, 0, 0, '+00:00')
-
-            # end_dateを設定
-            end_date = Time.new(current_year, 11, 31, 23, 59, 59, '+00:00')
-
-            @search_result = Social.where(created_at: start_date..end_date).page(params[:page]).per(48)
-        elsif key_word === "冬"
-            # start_dateを設定
-            start_date = Time.new(current_year, 12, 1, 0, 0, 0, '+00:00')
-
-            # end_dateを設定
-            end_date = Time.new(current_year, 2, 31, 23, 59, 59, '+00:00')
-
-            @search_result = Social.where(created_at: start_date..end_date).page(params[:page]).per(48)
+            @search_result = Social.joins(:user).where(users: { height: min_height..max_height }).page(params[:page]).per(48)
         else
             @search_result = search_social('%' + key_word + '%').page(params[:page]).per(48)
         end
