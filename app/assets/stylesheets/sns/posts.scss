@@ -37,6 +37,12 @@
             color: #FFFFFF;
             text-decoration: none;
         }
+        // * ブランド、季節、身長タグをホバーした際のcss
+        .search-identification a:hover {
+            text-decoration: underline;
+            color: #333333;
+            background-color: #CBC5C1;
+        }
     }
     .list-content {
         input[type="checkbox"] {
