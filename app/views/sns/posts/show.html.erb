@@ -15,8 +15,8 @@
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-9-5 col-12">
-            <div class="bg-white h-100">
+        <div class="col-lg-9-5 col-12">
+            <div class="show-content">
                 <div class="row">
                     <div class="col-lg-6">
                         <%= image_tag @sns.photograph.url, class: "sns-show-image" %>
@@ -38,7 +38,7 @@
                             <div class="col-lg-4 text-end" style="margin-top: 20px;">
                                 <% if user_signed_in? %>
                                     <% if @sns.user.id == current_user.id %>
-                                        
+
                                     <% else %>
                                         <%# ! フォローしているかしていないか判断する %>
                                         <% if UserRelation.where(follow_id: current_user.id, follower_id: @sns.user.id).exists? %>
@@ -110,13 +110,13 @@
                         <div class="mt-3" style="padding-right: 25px;">
                             <% if user_signed_in? %>
                                 <% if SocialLike.where(social_id: @sns.id, user_id: current_user.id).exists? %>
-                                        <%= link_to "/sns/delete_like/#{@sns.id}", method: :delete, class: "btn" do %>
-                                            <i class="bi bi-heart-fill fs-4"></i>
-                                        <% end %>
+                                    <%= link_to "/sns/delete_like/#{@sns.id}", method: :delete, class: "btn" do %>
+                                        <i class="bi bi-heart-fill fs-4"></i>
+                                    <% end %>
                                 <% else %>
-                                        <%= link_to "/sns/create_like/#{@sns.id}", method: :post, class: "btn" do %>
-                                            <i class="bi bi-heart fs-5"></i>
-                                        <% end %>
+                                    <%= link_to "/sns/create_like/#{@sns.id}", method: :post, class: "btn" do %>
+                                        <i class="bi bi-heart fs-5"></i>
+                                    <% end %>
                                 <% end %>
                             <% else %>
                                 <%= link_to "/sns/create_like/#{@sns.id}", method: :post, class: "btn" do %>
@@ -135,7 +135,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
