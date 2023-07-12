@@ -7,6 +7,8 @@
     }
     // ? サイドバーの設定
     .sidebar {
+        /* 縦方向のスクロールバーを表示 */
+        overflow-y: scroll;
         background-color: #CBC5C1;
         box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
         a {
