@@ -93,7 +93,7 @@
                                                     <% end %>
                                                 <% else %>
                                                     <%= link_to "/profile/show/#{sns.user_id}" do %>
-                                                        <%= image_tag "/assets/default-avatar.png" %>
+                                                        <%= image_tag "/assets/user/avatar.png" %>
                                                     <% end %>
                                                 <% end %>
 
@@ -103,7 +103,11 @@
                                                     </div>
 
                                                     <div class="user-height m-0">
-                                                        <%= sns.user.height %>cm
+                                                        <% if sns.user.height %>
+                                                            <%= sns.user.height %>cm
+                                                        <% else %>
+                                                            未設定
+                                                        <% end %>
                                                     </div>
                                                 </div>
                                             </div>
@@ -147,7 +151,7 @@
                     <div id="men" class="tab-pane">
                         <div class="row g-1">
                             <% @snss.each do |sns| %>
-                                <% if sns.user.gender === "男" %>
+                                <% if sns.user.gender == 1 %>
                                     <div class="col-lg-3 col-md-3 col-4 mt-1">
 
                                         <%= link_to "/sns/show/#{sns.id}" do %>
@@ -163,7 +167,7 @@
                                                         <% end %>
                                                     <% else %>
                                                         <%= link_to "/profile/show/#{sns.user_id}" do %>
-                                                            <%= image_tag "/assets/default-avatar.png" %>
+                                                            <%= image_tag "/assets/user/avatar.png" %>
                                                         <% end %>
                                                     <% end %>
 
@@ -173,7 +177,11 @@
                                                         </div>
 
                                                         <div class="user-height m-0">
-                                                            <%= sns.user.height %>cm
+                                                            <% if sns.user.height %>
+                                                                <%= sns.user.height %>cm
+                                                            <% else %>
+                                                                未設定
+                                                            <% end %>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -218,7 +226,7 @@
                     <div id="women" class="tab-pane">
                         <div class="row g-1">
                             <% @snss.each do |sns| %>
-                                <% if sns.user.gender === "女" %>
+                                <% if sns.user.gender == -1 %>
                                     <div class="col-lg-3 col-md-3 col-4 mt-1">
 
                                         <%= link_to "/sns/show/#{sns.id}" do %>
@@ -234,7 +242,7 @@
                                                         <% end %>
                                                     <% else %>
                                                         <%= link_to "/profile/show/#{sns.user_id}" do %>
-                                                            <%= image_tag "/assets/default-avatar.png" %>
+                                                            <%= image_tag "/assets/user/avatar.png" %>
                                                         <% end %>
                                                     <% end %>
 
@@ -244,7 +252,11 @@
                                                         </div>
 
                                                         <div class="user-height m-0">
-                                                            <%= sns.user.height %>cm
+                                                            <% if sns.user.height %>
+                                                                <%= sns.user.height %>cm
+                                                            <% else %>
+                                                                未設定
+                                                            <% end %>
                                                         </div>
                                                     </div>
                                                 </div>
