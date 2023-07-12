@@ -7,8 +7,6 @@
     }
     // ? サイドバーの設定
     .sidebar {
-        /* 縦方向のスクロールバーを表示 */
-        // overflow-y: scroll;
         background-color: #CBC5C1;
         box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
         a {
@@ -37,7 +35,6 @@
             color: #FFFFFF;
             text-decoration: none;
         }
-        // * ブランド、季節、身長タグをホバーした際のcss
         .search-identification a:hover {
             text-decoration: underline;
             color: #333333;
@@ -46,6 +43,7 @@
 
         
     }
+    // ? 一覧ページのUI設定
     .list-content {
         input[type="checkbox"] {
             display: none;
@@ -110,6 +108,10 @@
         }
         // ? PCのサイドバーは表示しない
         .pc-sidebar {
+            display: none;
+        }
+        // ? PCのエラーメッセージは表示しない
+        .pc_error_msg {
             display: none;
         }
         // ?モバイルサイドバーのレイアウト設定
@@ -281,6 +283,10 @@
     @media (min-width: 1200px) {
         // ? モバイルのヘッダーは表示しない
         .mobile_header {
+            display: none;
+        }
+        // ? モバイルのエラーメッセージは表示しない
+        .mobile_error_msg {
             display: none;
         }
         // ? サイドバーの幅の設定
