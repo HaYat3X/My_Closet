@@ -87,7 +87,6 @@ class Sns::LikesController < ApplicationController
 
             # ? 追加で取得したIDを配列に追加する
             social_ids += zero_likes_social_ids
-            puts social_ids
         end
 
         # * 取得したIDの投稿を取得する
