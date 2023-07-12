@@ -8,7 +8,7 @@
     // ? サイドバーの設定
     .sidebar {
         /* 縦方向のスクロールバーを表示 */
-        overflow-y: scroll;
+        // overflow-y: scroll;
         background-color: #CBC5C1;
         box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
         a {
@@ -43,6 +43,8 @@
             color: #333333;
             background-color: #CBC5C1;
         }
+
+        
     }
     .list-content {
         input[type="checkbox"] {
@@ -127,6 +129,8 @@
             .sidebar {
                 width: 80%;
                 transition: opacity 1.0s ease;
+                overflow-y: auto;
+                height: 100vh;
             }
         }
         // ? SNS一覧ページの設定
