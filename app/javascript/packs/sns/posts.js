@@ -1,14 +1,20 @@
 // ! SNS一覧画面でフォロー中と全ての投稿を切り替える
-export function SnsListSwitching() {
-    document.addEventListener('DOMContentLoaded', () => {
-        const checkbox = document.getElementById('formSwitchCheckDefault');
-        const form = document.getElementById('myForm');
 
-        checkbox.addEventListener('change', () => {
-            form.submit();
-        });
-    });
+export function SnsListSwitching() {
+  const checkbox = document.getElementById('formSwitchCheckDefault');
+  const form = document.getElementById('myForm');
+
+  checkbox.addEventListener('change', () => {
+    if (checkbox.checked) {
+      console.log('トグルボタンが変更されました：オン');
+      form.submit();
+    } else {
+      console.log('トグルボタンが変更されました：オフ');
+      form.submit();
+    }
+  });
 }
+
 
 
 // ! SNS投稿画面で着用アイテムの選択数や選択上限、選択した場合のUIを制御
