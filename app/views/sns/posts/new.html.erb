@@ -16,10 +16,10 @@
 
         <%# ! contents %>
         <div class="col-lg-9-5 col-12">
-            <div class="new-content py-5">
+            <div class="new-content">
                 <%# * バリデーションチェク %>
                 <% if @social.errors.any? %>
-                    <div class="alert alert-danger col-lg-8 mx-auto" role="alert">
+                    <div class="alert alert-danger" role="alert">
                         <% @social.errors.each do |error| %>
                             <strong>エラー！</strong> - <%= error.full_message %><br>
                         <% end %>
@@ -27,7 +27,7 @@
                 <% end %>
 
                 <%# * 投稿フォーム %>
-                <%= form_with(model: @social, url: "/sns/create", local: true, :html => {class:"needs-validation col-lg-8 mx-auto", :novalidate => true}) do |f| %>
+                <%= form_with(model: @social, url: "/sns/create", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
                     <div class="mb-3">
                         <%# * アイテムのカテゴリーを選択 %>
                         <%= f.select :tag, ['カジュアルスタイル', 'ストリートスタイル', 'アメカジスタイル', 'ルードスタイル', 'アウトドアスタイル', 'デザイナースタイル', 'ベーシックスタイル', 'モードスタイル', 'ラグジュアリースタイル', 'ガーリースタイル', 'ナチュラルスタイル'], {include_blank: 'スタイルを選択してください'}, class: 'form-control', required: true %>

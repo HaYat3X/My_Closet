@@ -99,8 +99,10 @@
             }
         }
     }
+    // ? SNS投稿ページの設定
+    .new-content {}
     // * スマートフォン （小）
-    @media (max-width: 575.98px) {
+    @media (max-width: 768px) {
         // ? PC用のヘッダーは表示しない
         .pc-header {
             display: none;
@@ -148,47 +150,8 @@
             }
         }
     }
-    // * スマートフォン （中）
-    @media (min-width: 576px) and (max-width: 767.98px) {
-        // ? PC用のヘッダーは表示しない
-        .pc-header {
-            display: none;
-        }
-        // ? コーディネート投稿ボタンのレイアウト
-        .mobile-post-btn {
-            position: fixed;
-            bottom: 60px;
-            right: 15px;
-            z-index: 9999;
-        }
-        // ? PCのサイドバーは表示しない
-        .pc-sidebar {
-            display: none;
-        }
-        // ? モバイルのサイドバーのレイアウト
-        .mobile-sidebar {
-            position: fixed;
-            bottom: 0px;
-            right: 0px;
-            z-index: 9999;
-        }
-        // ? SNS一覧画面の画像サイズ
-        .sns_image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        // ? コーディネート提案のアイテム選択画像サイズ
-        .input-container {
-            .icon img {
-                width: 100%;
-                height: 140px;
-                object-fit: cover;
-            }
-        }
-    }
     // * タブレット
-    @media (min-width: 768px) and (max-width: 991.98px) {
+    @media (min-width: 768px) and (max-width: 1280px) {
         // ? PC用のヘッダーは表示しない
         .pc-header {
             display: none;
@@ -247,37 +210,8 @@
             }
         }
     }
-    // * PC（小）
-    @media (min-width: 992px) and (max-width: 1199.98px) {
-        // ? モバイルのヘッダーは表示しない
-        .mobile_header {
-            display: none;
-        }
-        // ? モバイル用のコーディネート投稿ボタンのため表示しない
-        .mobile-post-btn {
-            display: none;
-        }
-        // ? モバイルのサイドバーは表示しない
-        .mobile-sidebar {
-            display: none;
-        }
-        // ? SNS一覧画面の画像サイズ
-        .sns_image {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-        }
-        // ? コーディネート提案のアイテム選択画像サイズ
-        .input-container {
-            .icon img {
-                width: 100%;
-                height: 200px;
-                object-fit: cover;
-            }
-        }
-    }
     // * PC（大）
-    @media (min-width: 1200px) {
+    @media (min-width: 1280px) {
         // ? モバイルのヘッダーは表示しない
         .mobile_header {
             display: none;
@@ -298,7 +232,6 @@
         }
         // ? PCヘッダーの設定
         .pc-header {
-            // ? ロゴサイズの設定
             .logo-area {
                 img {
                     width: 20%;
@@ -307,7 +240,7 @@
         }
         // ? SNS一覧ページの設定
         .list-content {
-            margin: 30px 80px;
+            margin: 20px 50px;
             .sns-image {
                 width: 100%;
                 height: 340px;
@@ -343,7 +276,7 @@
         }
         // ? SNS投稿ページの設定
         .new-content {
-            // ? チェックボックスのレイアウト
+            margin: 30px 80px;
             .checkbox-image {
                 display: none;
             }
@@ -375,7 +308,6 @@
             #scrollContainer::-webkit-scrollbar-thumb {
                 background-color: #17585d;
             }
-            // ? 画像の上に選択した順に番号を表示
             .image-mark {
                 position: absolute;
                 top: 5px;
@@ -388,47 +320,47 @@
                 font-weight: bold;
             }
         }
-        // ! --------------------------------------------------------------------------------
-        // ? モバイル用のコーディネート投稿ボタンのため表示しない
-        .mobile-post-btn {
-            display: none;
-        }
-        // ? モバイルのサイドバーは表示しない
-        .mobile-sidebar {
-            display: none;
-        }
-        // ? コーディネート提案のアイテム選択画像サイズ
-        .input-container {
-            .icon img {
-                width: 100%;
-                height: 220px;
-                object-fit: cover;
-            }
-        }
-        // ? SNS詳細画面の画像サイズ
-        .sns-show-image {
-            width: 100%;
-            height: 800px;
-            object-fit: cover;
-        }
-        // ? SNS詳細画面のユーザアイコン画像サイズ
-        .sns-post-user-avatar {
-            width: 100%;
-            height: 65px;
-            object-fit: cover;
-            border-radius: 50px;
-            transition: transform 0.3s;
-        }
-        // ? SNS詳細画像の拡大
-        .sns-post-user-avatar:hover {
-            transform: scale(1.2);
-        }
-        // ? SNS詳細画面の
-        .sns-show-item-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-        // ? SNSでClosetアイテムを追加する際のスクロール制約
+        // // ! --------------------------------------------------------------------------------
+        // // ? モバイル用のコーディネート投稿ボタンのため表示しない
+        // .mobile-post-btn {
+        //     display: none;
+        // }
+        // // ? モバイルのサイドバーは表示しない
+        // .mobile-sidebar {
+        //     display: none;
+        // }
+        // // ? コーディネート提案のアイテム選択画像サイズ
+        // .input-container {
+        //     .icon img {
+        //         width: 100%;
+        //         height: 220px;
+        //         object-fit: cover;
+        //     }
+        // }
+        // // ? SNS詳細画面の画像サイズ
+        // .sns-show-image {
+        //     width: 100%;
+        //     height: 800px;
+        //     object-fit: cover;
+        // }
+        // // ? SNS詳細画面のユーザアイコン画像サイズ
+        // .sns-post-user-avatar {
+        //     width: 100%;
+        //     height: 65px;
+        //     object-fit: cover;
+        //     border-radius: 50px;
+        //     transition: transform 0.3s;
+        // }
+        // // ? SNS詳細画像の拡大
+        // .sns-post-user-avatar:hover {
+        //     transform: scale(1.2);
+        // }
+        // // ? SNS詳細画面の
+        // .sns-show-item-image {
+        //     width: 100%;
+        //     height: 250px;
+        //     object-fit: cover;
+        // }
+        // // ? SNSでClosetアイテムを追加する際のスクロール制約
     }
 }
