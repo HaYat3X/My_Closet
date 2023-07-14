@@ -6,112 +6,34 @@
 
     <div class="row g-0">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
-            <div class="sidebar-content d-flex flex-column flex-shrink-0 p-3 bg-white sticky-top vh-100">
-                <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link fw-bold d-flex align-items-center" aria-current="page">
-                            <i class="bi bi-chat fs-5"></i>
-                            SNS
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <% if user_signed_in? %>
-                            <%= link_to "/profile/show/#{current_user.id}", class: "nav-link fw-bold d-flex align-items-center" do %>
-                            <i class="bi bi-person fs-5"></i>
-                            マイページ
-                            <% end %>
-                        <% end %>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/closet/list" class="nav-link fw-bold d-flex align-items-center">
-                            <i class="bi bi bi-grid fs-5"></i>
-                            クローゼット
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/question/list" class="nav-link fw-bold d-flex align-items-center">
-                            <i class="bi bi-question-circle fs-5"></i>
-                            Q&A
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/suggestion" class="nav-link fw-bold d-flex align-items-center">
-                            <i class="bi bi-robot fs-5"></i>
-                            AI提案
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/profile/alert/list" class="nav-link active text-white fw-bold d-flex align-items-center">
-                            <i class="bi bi-bell fs-5"></i>
-                            通知
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/contact/new" class="nav-link fw-bold d-flex align-items-center">
-                            <i class="bi bi-box-arrow-up-right fs-5"></i>
-                            お問い合わせ
-                        </a>
-                    </li>
-
-                </ul>
-                <hr>
-                <div class="dropdown" style="margin-bottom: 90px;">
-                    <%# ? サインインしている場合はユーザ情報、サインアウトしている場合はデフォルト情報が表示される %>
-                    <% if user_signed_in? %>
-                        <% if current_user.avatar.url == nil %>
-                            <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center text-white text-decoration-none dropdown-toggle", "data-bs-toggle": "dropdown", "aria-expanded": "false" do %>
-                                <%= image_tag "/assets/default-avatar.png", size: "30x30", class: "rounded-circle me-2" %>
-                                <label class="text-dark"><%= current_user.user_name %></label> 
-                            <% end %>
-                        <% else %>
-                            <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center text-white text-decoration-none dropdown-toggle", "data-bs-toggle": "dropdown", "aria-expanded": "false" do %>
-                                <%= image_tag current_user.avatar.url, size: "30x30", class: "rounded-circle me-2" %>
-                                <label class="text-dark"><%= current_user.user_name %></label> 
-                            <% end %>
-                        <% end %>
-                    <% else %>
-                        <%= link_to "/", class: "d-flex align-items-center text-white text-decoration-none dropdown-toggle", "data-bs-toggle": "dropdown", "aria-expanded": "false" do %>
-                            <%= image_tag "/assets/default-avatar.png", size: "30x30", class: "rounded-circle me-2" %>
-                            <label class="text-dark">ゲスト</label> 
-                        <% end %>
-                    <% end %>
-                    <ul class="dropdown-menu text-small shadow">
-                        <li class="action-link">
-                            <%# ? サインインしている場合はサインアウトボタン、サインアウトしている場合はサインインボタンが表示される %>
-                            <% if user_signed_in? %>
-                                <%= link_to "サインアウト", destroy_user_session_path, method: :delete, class: "dropdown-item col-12" %>    
-                            <% else %>
-                                <%= link_to "サインイン", new_user_session_path, method: :get, class: "dropdown-item col-12" %>
-                            <% end %>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <div class="col-lg-2-5 pc-sidebar">
+            <%= render "profile/layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10 col-12">
-            <div class="bg-white py-5 h-100">
-                <div class="list_content col-lg-8 col-12 mx-auto">
+        <div class="col-lg-9-5 col-12">
+            <div class="list-content">
+                <div class="list_content col-lg-8 mx-auto">
+                    <h3 class="pt-3 pb-5 fw-bold text-center">お知らせ</h3>
 
-                        <ul class="nav nav-underline tab-ul" role="tablist">
-                            <li class="nav-item flex-fill">
-                                <a href="#all" class="nav-link active text-center" data-bs-toggle="tab">運営からのお知らせ</a>
-                            </li>
-                        </ul>
-                            <% @alerts.each do |a| %>
-                            <%= link_to "/profile/alert/show/#{a.id}", style: "text-decoration: none;" do %>
-                                <table class="table align-middle mb-0 my-4">
-                                    <tbody>
-                                        <tr>
-                                            <td><%= a.title %></td>
-                                            <td class="text-end"><%= time_ago_in_words(a.created_at) %>前</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            <% end %>
-                            <% end %>
+                    <% @alerts.each do |a| %>
+                        <%= link_to "/profile/alert/show/#{a.id}", style: "text-decoration: none;" do %>
+                            <div class="py-3 px-4 mb-3 alert-body">
+                                <div class="d-flex align-items-center">
+                                    <%= image_tag "/assets/img_1.png", class: "alert-image" %>
+
+                                    <div class="align-items-center alart-title">
+                                        <h6 class="fw-bold mb-0 mt-1">MY CLOSET運営</h6>
+                                        <%= a.title %>
+                                    </div>
+
+                                    <div class="d-flex align-items-center ms-auto">
+                                        <%= time_ago_in_words(a.created_at) %>前
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    <% end %>
                 </div>
             </div>
         </div>

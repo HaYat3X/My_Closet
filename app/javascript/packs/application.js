@@ -30,7 +30,7 @@ document.addEventListener('turbolinks:load', () => {
 
     // ! 一定期間でフラッシュメッセージを非表示にする
     $(function() {
-        $('.alerts').fadeOut(3000); //４秒かけて消えていく
+        $('.alerts').fadeOut(5000); //４秒かけて消えていく
     });
 });
 

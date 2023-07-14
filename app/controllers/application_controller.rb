@@ -9,5 +9,8 @@ class ApplicationController < ActionController::Base
         devise_parameter_sanitizer.permit(:sign_up, keys: [:user_name])
     end
 
-    # ! 正規表現の実装
+    # ! ログインした後に遷移する画面
+    def after_sign_in_path_for(resource)
+        closet_list_path
+    end
 end
