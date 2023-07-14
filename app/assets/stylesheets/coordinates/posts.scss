@@ -1,108 +1,381 @@
 // ! postsフォルダのレイアウト （edit, list, new, show）
 #closet_posts {
     // ! 全サイズ共通
-    // ?　タブのアクションカラー変更
-    .tab-ul {
-        .active {
-            color: var(--primary);
-        }
+    // ? headerの設定
+    .header {
+        background-color: #222222;
+    }
+    // ? サイドバーの設定
+    .sidebar {
+        overflow-y: scroll;
+        background-color: #CBC5C1;
+        box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
         a {
-            color: var(--dark);
-        }
-    }
-    .radio-a {
-        display: flex;
-        gap: 5px;
-        li {
-            list-style: none;
-        }
-        padding: 0;
-    }
-    .radio-a input[type="radio"] {
-        position: absolute;
-        white-space: nowrap;
-        border: 0;
-        clip: rect(0 0 0 0);
-        clip-path: inset(50%);
-        overflow: hidden;
-        height: 1px;
-        width: 1px;
-        margin: -1px;
-        padding: 0;
-    }
-    .radio-a-label {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        border: 1px solid black;
-        // background-color: #ddd;
-        // color: #fff;
-        aspect-ratio: 1 / 1;
-        width: 80px;
-        cursor: pointer;
-        font-size: 15px;
-        border-radius: 5px;
-    }
-    .radio-a input[type="radio"]:checked+.radio-a-label {
-        border: 6px solid var(--primary);
-    }
-    // * sidebar関連
-    .pc-sidebar {
-        border-radius: 5px;
-        // ? アイコンの表示設定
-        i {
-            margin-right: 10px;
-        }
-        // ? リストの表示設定
-        li:hover {
-            background-color: var(--primary);
-            border-radius: 5px;
-        }
-        // ? リンクの表示設定
-        a {
-            color: var(--dark);
+            color: #333333;
+            text-decoration: none;
         }
         a:hover {
-            color: #ffffff;
+            background-color: #4B709A;
+            color: #FFFFFF;
+            text-decoration: none;
         }
-        // ? サインイン、サインアウトのレイアウト
-        .action-link {
-            a:hover {
-                color: var(--dark);
-                background-color: var(--bg);
+        .active {
+            background-color: #4B709A;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+        i {
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+        hr {
+            border-top: 2px solid #333333;
+        }
+        .post-btn {
+            background-color: #4B709A;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+        .search-identification a:hover {
+            text-decoration: underline;
+            color: #333333;
+            background-color: #CBC5C1;
+        }
+    }
+    // ? 一覧ページのUI設定
+    .list-content {
+        // input[type="checkbox"] {
+        //     display: none;
+        // }
+        // label {
+        //     position: relative;
+        //     padding-left: 50px;
+        //     cursor: pointer;
+        // }
+        // label::before,
+        // label::after {
+        //     content: "";
+        //     display: block;
+        //     position: absolute;
+        //     top: 50%;
+        //     left: 0px;
+        //     transform: translateY(-50%);
+        //     border: 1.4px solid rgba(0, 0, 0, .3);
+        //     border-radius: 50%;
+        //     transition: .2s;
+        // }
+        // label::before {
+        //     background-color: rgba(0, 106, 182, .2);
+        //     border: 1.4px solid rgba(0, 0, 0, .3);
+        //     border-radius: 12px;
+        //     height: 20px;
+        //     width: 40px;
+        //     top: 50%;
+        //     left: 5px;
+        // }
+        // label::after {
+        //     background-color: #fff;
+        //     border-radius: 50%;
+        //     height: 23px;
+        //     width: 23px;
+        //     top: 50%;
+        //     left: 0px;
+        // }
+        // input:checked+label::before {
+        //     background-color: rgb(0, 106, 182);
+        // }
+        // input:checked+label::after {
+        //     left: 26px;
+        // }
+        .tab-menu {
+            .active {
+                background-color: #4B709A;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 5px;
             }
-        }
-        // ? コンテンツエリアと少し幅を空ける
-        .sidebar-content {
-            margin-right: 5px;
+            a {
+                border-bottom: 3px solid #333333;
+                color: #333333;
+            }
         }
     }
     // * スマートフォン （小）
-    @media (max-width: 575.98px) {}
-    // * スマートフォン （中）
-    @media (min-width: 576px) and (max-width: 767.98px) {}
+    @media (max-width: 768px) {
+        // ? PC用のヘッダーは表示しない
+        .pc-header {
+            display: none;
+        }
+        // ? PCのサイドバーは表示しない
+        .pc-sidebar {
+            display: none;
+        }
+        // ? PCのエラーメッセージは表示しない
+        .pc_error_msg {
+            display: none;
+        }
+        // ?モバイルサイドバーのレイアウト設定
+        .mobile_header {
+            .tablet-search-form {
+                display: none;
+            }
+            img {
+                width: 40%;
+            }
+            .navbar-toggler {
+                background-color: #ffffff;
+            }
+            .icon {
+                background-color: #fff;
+            }
+            .sidebar {
+                width: 80%;
+                transition: opacity 1.0s ease;
+            }
+        }
+        // ? SNS一覧ページの設定
+        .list-content {
+            margin: 100px 1px;
+            .sns-image {
+                width: 100%;
+                height: 190px;
+                object-fit: cover;
+            }
+            .user-area {
+                display: none;
+            }
+            .form-check-label {
+                margin-bottom: 10px;
+            }
+        }
+    }
     // * タブレット
-    @media (min-width: 768px) and (max-width: 991.98px) {}
-    // * PC（小）
-    @media (min-width: 992px) and (max-width: 1199.98px) {}
+    @media (min-width: 768px) and (max-width: 1280px) {
+        // ? PC用のヘッダーは表示しない
+        .pc-header {
+            display: none;
+        }
+        // ? PCのサイドバーは表示しない
+        .pc-sidebar {
+            display: none;
+        }
+        // ?モバイルサイドバーのレイアウト設定
+        .mobile_header {
+            img {
+                width: 20%;
+            }
+            .navbar-toggler {
+                background-color: #ffffff;
+                transition: opacity 0.5s ease;
+            }
+            .search_icon {
+                display: none;
+            }
+        }
+        // ? SNS一覧ページの設定
+        .list-content {
+            margin: 100px 1px;
+            .sns-image {
+                width: 100%;
+                height: 275px;
+                object-fit: cover;
+            }
+            .user-area {
+                background-color: #222222;
+                img {
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin-left: 10px;
+                }
+                .user-name {
+                    color: #FFFFFF;
+                }
+                .user-height {
+                    font-size: 10px;
+                    color: #FFFFFF;
+                }
+                .like {
+                    i {
+                        font-size: 18px;
+                    }
+                }
+                .number-of-likes {
+                    font-size: 15px;
+                    margin-left: 5px;
+                    color: #FFFFFF;
+                }
+            }
+        }
+    }
     // * PC（大）
-    @media (min-width: 1200px) {
-        // ?　クローゼットに追加された画像比を調整する
-        .closet_image {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
+    @media (min-width: 1280px) {
+        // ? モバイルのヘッダーは表示しない
+        .mobile_header {
+            display: none;
         }
-        // ? 詳細画像のサイズ調整
-        .closet_show_image {
-            object-fit: cover;
-            width: 100%;
-            height: 800px;
+        // ? モバイルのエラーメッセージは表示しない
+        .mobile_error_msg {
+            display: none;
         }
-        // ? カラー選択のフォントサイズ
-        .radio-a-label{
-            font-weight: bold;
+        // ? サイドバーの幅の設定
+        .col-lg-2-5 {
+            flex: 0 0 19%;
+            max-width: 19%;
+        }
+        // ? コンテンツの幅の設定
+        .col-lg-9-5 {
+            flex: 0 0 81%;
+            max-width: 81%;
+        }
+        // ? PCヘッダーの設定
+        .pc-header {
+            .logo-area {
+                img {
+                    width: 20%;
+                }
+            }
+        }
+        // ? クローゼット一覧ページの設定
+        .list-content {
+            margin: 20px 50px;
+            .closet-image {
+                width: 100%;
+                height: 330px;
+                object-fit: cover;
+            }
+        }
+        // ? クローゼット投稿ページの設定
+        .new-content {
+            margin: 20px 50px;
+            .radio-a {
+                display: flex;
+                gap: 5px;
+                li {
+                    list-style: none;
+                }
+                padding: 0;
+            }
+            .radio-a input[type="radio"] {
+                position: absolute;
+                white-space: nowrap;
+                border: 0;
+                clip: rect(0 0 0 0);
+                clip-path: inset(50%);
+                overflow: hidden;
+                height: 1px;
+                width: 1px;
+                margin: -1px;
+                padding: 0;
+            }
+            .radio-a-label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                border: 1px solid black;
+                aspect-ratio: 1 / 1;
+                width: 80px;
+                cursor: pointer;
+                font-size: 15px;
+                border-radius: 5px;
+            }
+            .radio-a input[type="radio"]:checked+.radio-a-label {
+                border: 6px solid var(--primary);
+            }
+            // .checkbox-image {
+            //     display: none;
+            // }
+            // .selected-image {
+            //     border: 3px solid var(--primary);
+            //     border-radius: 5px;
+            //     position: relative;
+            // }
+            // .checkbox-image-label:hover {
+            //     cursor: pointer;
+            // }
+            // .sns-post-image {
+            //     width: 100%;
+            //     height: 180px;
+            //     object-fit: cover;
+            // }
+            // #scrollContainer {
+            //     width: 724px;
+            //     height: 368px;
+            //     overflow-y: scroll;
+            //     background-color: var(--bg);
+            // }
+            // #scrollContainer::-webkit-scrollbar {
+            //     width: 10px;
+            // }
+            // #scrollContainer::-webkit-scrollbar-track {
+            //     background-color: #ae2e2e;
+            // }
+            // #scrollContainer::-webkit-scrollbar-thumb {
+            //     background-color: #17585d;
+            // }
+            // .image-mark {
+            //     position: absolute;
+            //     top: 5px;
+            //     right: 5px;
+            //     background-color: var(--primary);
+            //     color: #ffffff;
+            //     padding: 3px 12px;
+            //     border-radius: 50%;
+            //     font-size: 18px;
+            //     font-weight: bold;
+            // }
+        }
+        // ? SNS編集ページの設定
+        .edit-content {
+            margin: 20px 50px;
+            .checkbox-image {
+                display: none;
+            }
+            .selected-image {
+                border: 3px solid var(--primary);
+                border-radius: 5px;
+                position: relative;
+            }
+            .checkbox-image-label:hover {
+                cursor: pointer;
+            }
+            .sns-post-image {
+                width: 100%;
+                height: 180px;
+                object-fit: cover;
+            }
+            #scrollContainer {
+                width: 724px;
+                height: 368px;
+                overflow-y: scroll;
+                background-color: var(--bg);
+            }
+            #scrollContainer::-webkit-scrollbar {
+                width: 10px;
+            }
+            #scrollContainer::-webkit-scrollbar-track {
+                background-color: #ae2e2e;
+            }
+            #scrollContainer::-webkit-scrollbar-thumb {
+                background-color: #17585d;
+            }
+            .image-mark {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                background-color: var(--primary);
+                color: #ffffff;
+                padding: 3px 12px;
+                border-radius: 50%;
+                font-size: 18px;
+                font-weight: bold;
+            }
+        }
+        // ? SNS詳細ページの設定
+        .show-content {
+            margin: 20px 50px;
         }
     }
 }
