@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# * 管理者アカウント登録テスト
-# admin = Admin.new(email: "root", encrypted_password: "$2a$12$IvgqRY7n49BTSklW/Ro4GOtl6OnntXRBdTndTQbA.Klw6T9qn57Wa")
+# # * 管理者アカウント登録テスト
+# admin = Admin.new(email: "root@root", encrypted_password: "$2a$12$IvgqRY7n49BTSklW/Ro4GOtl6OnntXRBdTndTQbA.Klw6T9qn57Wa")
 # admin.save
-User.update(id: 2, size: nil, color: nil, total_price: nil, gender: nil)
+# User.update(id: 2, size: nil, color: nil, total_price: nil, gender: nil)

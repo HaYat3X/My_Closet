@@ -4,7 +4,7 @@ class Profile::AlertsController < ApplicationController
 
     # * お知らせを一覧取得
     def list
-        @alerts = Alert.all()
+        @alerts = Alert.all().order(created_at: :desc)
     end
     
     # * お知らせ詳細取得
