@@ -99,8 +99,6 @@
             }
         }
     }
-    // ? SNS投稿ページの設定
-    .new-content {}
     // * スマートフォン （小）
     @media (max-width: 768px) {
         // ? PC用のヘッダーは表示しない
@@ -243,7 +241,7 @@
             margin: 20px 50px;
             .sns-image {
                 width: 100%;
-                height: 340px;
+                height: 320px;
                 object-fit: cover;
             }
             .user-area {
@@ -276,7 +274,7 @@
         }
         // ? SNS投稿ページの設定
         .new-content {
-            margin: 30px 80px;
+            margin: 20px 50px;
             .checkbox-image {
                 display: none;
             }
@@ -320,47 +318,55 @@
                 font-weight: bold;
             }
         }
-        // // ! --------------------------------------------------------------------------------
-        // // ? モバイル用のコーディネート投稿ボタンのため表示しない
-        // .mobile-post-btn {
-        //     display: none;
-        // }
-        // // ? モバイルのサイドバーは表示しない
-        // .mobile-sidebar {
-        //     display: none;
-        // }
-        // // ? コーディネート提案のアイテム選択画像サイズ
-        // .input-container {
-        //     .icon img {
-        //         width: 100%;
-        //         height: 220px;
-        //         object-fit: cover;
-        //     }
-        // }
-        // // ? SNS詳細画面の画像サイズ
-        // .sns-show-image {
-        //     width: 100%;
-        //     height: 800px;
-        //     object-fit: cover;
-        // }
-        // // ? SNS詳細画面のユーザアイコン画像サイズ
-        // .sns-post-user-avatar {
-        //     width: 100%;
-        //     height: 65px;
-        //     object-fit: cover;
-        //     border-radius: 50px;
-        //     transition: transform 0.3s;
-        // }
-        // // ? SNS詳細画像の拡大
-        // .sns-post-user-avatar:hover {
-        //     transform: scale(1.2);
-        // }
-        // // ? SNS詳細画面の
-        // .sns-show-item-image {
-        //     width: 100%;
-        //     height: 250px;
-        //     object-fit: cover;
-        // }
-        // // ? SNSでClosetアイテムを追加する際のスクロール制約
+        // ? SNS編集ページの設定
+        .edit-content {
+            margin: 20px 50px;
+            .checkbox-image {
+                display: none;
+            }
+            .selected-image {
+                border: 3px solid var(--primary);
+                border-radius: 5px;
+                position: relative;
+            }
+            .checkbox-image-label:hover {
+                cursor: pointer;
+            }
+            .sns-post-image {
+                width: 100%;
+                height: 180px;
+                object-fit: cover;
+            }
+            #scrollContainer {
+                width: 724px;
+                height: 368px;
+                overflow-y: scroll;
+                background-color: var(--bg);
+            }
+            #scrollContainer::-webkit-scrollbar {
+                width: 10px;
+            }
+            #scrollContainer::-webkit-scrollbar-track {
+                background-color: #ae2e2e;
+            }
+            #scrollContainer::-webkit-scrollbar-thumb {
+                background-color: #17585d;
+            }
+            .image-mark {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                background-color: var(--primary);
+                color: #ffffff;
+                padding: 3px 12px;
+                border-radius: 50%;
+                font-size: 18px;
+                font-weight: bold;
+            }
+        }
+        // ? SNS詳細ページの設定
+        .show-content {
+            margin: 20px 50px;
+        }
     }
 }

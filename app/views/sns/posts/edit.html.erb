@@ -16,10 +16,10 @@
 
         <%# ! contents %>
         <div class="col-lg-9-5 col-12">
-            <div class="edit-content py-5">
+            <div class="edit-content">
                 <%# * バリデーションチェク %>
                 <% if @social.errors.any? %>
-                    <div class="alert alert-danger col-lg-8 mx-auto" role="alert">
+                    <div class="alert alert-danger" role="alert">
                         <% @social.errors.each do |error| %>
                             <strong>エラー！</strong> - <%= error.full_message %><br>
                         <% end %>
@@ -27,7 +27,7 @@
                 <% end %>
 
                 <%# * 投稿フォーム %>
-                <%= form_with(model: @social, url: "/sns/update/#{@social.id}", local: true, :html => {class:"needs-validation col-lg-8 mx-auto", :novalidate => true}) do |f| %>
+                <%= form_with(model: @social, url: "/sns/update/#{@social.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
                     <div class="mb-3">
                         <%= f.select :tag, ['カジュアルスタイル', 'ストリートスタイル', 'アメカジスタイル', 'ルードスタイル', 'アウトドアスタイル', 'デザイナースタイル', 'ベーシックスタイル', 'モードスタイル', 'ラグジュアリースタイル', 'ガーリースタイル', 'ナチュラルスタイル'], {include_blank: 'スタイルを選択してください'}, class: 'form-control', required: true %>
 
@@ -46,8 +46,9 @@
 
                     <div class="mb-3">
 						<label for="" class="mb-2">着用アイテム（6件まで追加できます）</label>
-						<p id="messageContainer" class="text-danger small"></p>
 
+						<p id="messageContainer" class="text-danger small"></p>
+								
 						<div id="scroll">
 							<div id="scrollContainer" class="row g-1">
 								<% @closets_all.each do |c| %>
@@ -68,79 +69,74 @@
     </div>
 </div>
 <script>
-  // 6/17 エラーメッセージの記述がないがなぜか動く、、、、おそらくposts.jsの関数が同時に動いている関係、クラス名が
-  $(document).ready(function() {
-  var maxSelection = 6; // 最大選択数
-  var checkboxes = $('.checkbox-image');
-  var selectedImages = []; // 選択された画像の配列
-  var messageContainer = $('#messageContainer');
+	// 6/17 エラーメッセージの記述がないがなぜか動く、、、、おそらくposts.jsの関数が同時に動いている関係、クラス名が
+	$(document).ready(function() {
+		var maxSelection = 6; // 最大選択数
+		var checkboxes = $('.checkbox-image');
+		var selectedImages = []; // 選択された画像の配列
+		var messageContainer = $('#messageContainer');
 
-  checkboxes.change(function() {
-    var selectedCount = checkboxes.filter(':checked').length;
-    var image = $(this).prev('.checkbox-image-label').find('img');
-    var label = $(this).prev('.checkbox-image-label');
+		checkboxes.change(function() {
+			var selectedCount = checkboxes.filter(':checked').length;
+			var image = $(this).prev('.checkbox-image-label').find('img');
+			var label = $(this).prev('.checkbox-image-label');
 
-    if ($(this).is(':checked')) {
-      // 画像が選択された場合
-      if (selectedCount <= maxSelection) {
-        if (!image.hasClass('selected-image')) {
-          // 選択数が最大選択数以下の場合で、まだ選択されていない画像の場合に処理を行う
-          var mark = $('<span class="image-mark">' + (selectedImages.length + 1) + '</span>');
-          selectedImages.push({
-            image: image,
-            mark: mark
-          });
-          image.addClass('selected-image');
-          label.append(mark).css('position', 'relative');
-        }
-      } else {
-        // 選択数が最大選択数を超えた場合
-        $(this).prop('checked', false);
-        showMessage('アイテムの最大選択数は6件です。');
-      }
-    } else {
-      // 画像が選択解除された場合
-      var index = selectedImages.findIndex(function(item) {
-        return item.image.is(image);
-      });
-      if (index > -1) {
-        // 選択された画像が配列内に存在する場合
-        var removedItem = selectedImages.splice(index, 1)[0];
-        removedItem.image.removeClass('selected-image');
-        removedItem.mark.remove();
+			if ($(this).is(':checked')) {
+			// 画像が選択された場合
+				if (selectedCount <= maxSelection) {
+					if (!image.hasClass('selected-image')) {
+						// 選択数が最大選択数以下の場合で、まだ選択されていない画像の場合に処理を行う
+						var mark = $('<span class="image-mark">' + (selectedImages.length + 1) + '</span>');
+						selectedImages.push({
+							image: image,
+							mark: mark
+						});
+						image.addClass('selected-image');
+						label.append(mark).css('position', 'relative');
+					}
+				} else {
+					// 選択数が最大選択数を超えた場合
+					$(this).prop('checked', false);
+					showMessage('アイテムの最大選択数は6件です。');
+				}
+			} else {
+			// 画像が選択解除された場合
+			var index = selectedImages.findIndex(function(item) {
+				return item.image.is(image);
+			});
+			if (index > -1) {
+				// 選択された画像が配列内に存在する場合
+				var removedItem = selectedImages.splice(index, 1)[0];
+				removedItem.image.removeClass('selected-image');
+				removedItem.mark.remove();
 
-        // マークの再配置
-        selectedImages.forEach(function(item, index) {
-          item.mark.text(index + 1);
-        });
-      }
-    }
-  });
+				// マークの再配置
+				selectedImages.forEach(function(item, index) {
+				item.mark.text(index + 1);
+				});
+			}
+			}
+		});
 
-  // 特定のIDのチェックボックスを選択状態にする
-  function selectCheckboxById(id) {
-    var checkbox = $('#' + id);
-    checkbox.prop('checked', true).trigger('change');
-  }
+		// 特定のIDのチェックボックスを選択状態にする
+		function selectCheckboxById(id) {
+			var checkbox = $('#' + id);
+			checkbox.prop('checked', true).trigger('change');
+		}
 
-  var itemIds = [
-    '<%= j @item1 %>',
-    '<%= j @item2 %>',
-    '<%= j @item3 %>',
-    '<%= j @item4 %>',
-    '<%= j @item5 %>',
-    '<%= j @item6 %>'
-  ];
+		var itemIds = [
+			'<%= j @item1 %>',
+			'<%= j @item2 %>',
+			'<%= j @item3 %>',
+			'<%= j @item4 %>',
+			'<%= j @item5 %>',
+			'<%= j @item6 %>'
+		];
 
-  itemIds.forEach(function(itemId) {
-    if (itemId !== '') {
-      selectCheckboxById('element_' + itemId);
-    }
-  });
-});
-
+		itemIds.forEach(function(itemId) {
+			if (itemId !== '') {
+			selectCheckboxById('element_' + itemId);
+			}
+		});
+	});
 </script>
-
-
-
-

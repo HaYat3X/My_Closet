@@ -1,83 +1,276 @@
 // ! searchsフォルダのレイアウト （search）
 #sns_searchs {
     // ! 全サイズ共通
-    // * sidebar関連
-    .pc-sidebar {
-        border-radius: 5px;
-        // ? アイコンの表示設定
-        i {
-            margin-right: 10px;
-        }
-        // ? リストの表示設定
-        li:hover {
-            background-color: var(--primary);
-            border-radius: 5px;
-        }
-        // ? リンクの表示設定
+    // ? headerの設定
+    .header {
+        background-color: #222222;
+    }
+    // ? サイドバーの設定
+    .sidebar {
+        overflow-y: scroll;
+        background-color: #CBC5C1;
+        box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
         a {
-            color: var(--dark);
+            color: #333333;
+            text-decoration: none;
         }
         a:hover {
-            color: #ffffff;
+            background-color: #4B709A;
+            color: #FFFFFF;
+            text-decoration: none;
         }
-        // ? サインイン、サインアウトのレイアウト
-        .action-link {
-            a:hover {
-                color: var(--dark);
-                background-color: var(--bg);
+        .active {
+            background-color: #4B709A;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+        i {
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+        hr {
+            border-top: 2px solid #333333;
+        }
+        .post-btn {
+            background-color: #4B709A;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+        .search-identification a:hover {
+            text-decoration: underline;
+            color: #333333;
+            background-color: #CBC5C1;
+        }
+    }
+    // ? 検索結果ページのUI設定
+    .list-content {
+        input[type="checkbox"] {
+            display: none;
+        }
+        label {
+            position: relative;
+            padding-left: 50px;
+            cursor: pointer;
+        }
+        label::before,
+        label::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 0px;
+            transform: translateY(-50%);
+            border: 1.4px solid rgba(0, 0, 0, .3);
+            border-radius: 50%;
+            transition: .2s;
+        }
+        label::before {
+            background-color: rgba(0, 106, 182, .2);
+            border: 1.4px solid rgba(0, 0, 0, .3);
+            border-radius: 12px;
+            height: 20px;
+            width: 40px;
+            top: 50%;
+            left: 5px;
+        }
+        label::after {
+            background-color: #fff;
+            border-radius: 50%;
+            height: 23px;
+            width: 23px;
+            top: 50%;
+            left: 0px;
+        }
+        input:checked+label::before {
+            background-color: rgb(0, 106, 182);
+        }
+        input:checked+label::after {
+            left: 26px;
+        }
+        .tab-menu {
+            .active {
+                background-color: #4B709A;
+                color: #FFFFFF;
+                border: none;
             }
-        }
-        // ? コンテンツエリアと少し幅を空ける
-        .sidebar-content {
-            margin-right: 5px;
+            a {
+                border: 1px solid #333333;
+                color: #333333;
+            }
         }
     }
     // * スマートフォン （小）
-    @media (max-width: 575.98px) {}
-    // * スマートフォン （中）
-    @media (min-width: 576px) and (max-width: 767.98px) {}
-    // * タブレット
-    @media (min-width: 768px) and (max-width: 991.98px) {}
-    // * PC（小）
-    @media (min-width: 992px) and (max-width: 1199.98px) {
-        // ? モバイルのヘッダーは表示しない
+    @media (max-width: 768px) {
+        // ? PC用のヘッダーは表示しない
+        .pc-header {
+            display: none;
+        }
+        // ? PCのサイドバーは表示しない
+        .pc-sidebar {
+            display: none;
+        }
+        // ? PCのエラーメッセージは表示しない
+        .pc_error_msg {
+            display: none;
+        }
+        // ?モバイルサイドバーのレイアウト設定
         .mobile_header {
+            .tablet-search-form {
+                display: none;
+            }
+            img {
+                width: 40%;
+            }
+            .navbar-toggler {
+                background-color: #ffffff;
+            }
+            .icon {
+                background-color: #fff;
+            }
+            .sidebar {
+                width: 80%;
+                transition: opacity 1.0s ease;
+            }
+        }
+        // ? SNS一覧ページの設定
+        .search_content {
+            margin: 100px 1px;
+            .sns-image {
+                width: 100%;
+                height: 190px;
+                object-fit: cover;
+            }
+            .user-area {
+                display: none;
+            }
+            .form-check-label {
+                margin-bottom: 10px;
+            }
+        }
+    }
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 1280px) {
+        // ? PC用のヘッダーは表示しない
+        .pc-header {
             display: none;
         }
-        // ? モバイル用のコーディネート投稿ボタンのため表示しない
-        .mobile-post-btn {
+        // ? PCのサイドバーは表示しない
+        .pc-sidebar {
             display: none;
         }
-        // ? モバイルのサイドバーは表示しない
-        .mobile-sidebar {
-            display: none;
+        // ?モバイルサイドバーのレイアウト設定
+        .mobile_header {
+            img {
+                width: 20%;
+            }
+            .navbar-toggler {
+                background-color: #ffffff;
+                transition: opacity 0.5s ease;
+            }
+            .search_icon {
+                display: none;
+            }
         }
-        // ? SNS検索画面の画像サイズ
-        .sns_search_image {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
+        // ? SNS一覧ページの設定
+        .search_content {
+            margin: 100px 1px;
+            .sns-image {
+                width: 100%;
+                height: 275px;
+                object-fit: cover;
+            }
+            .user-area {
+                background-color: #222222;
+                img {
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin-left: 10px;
+                }
+                .user-name {
+                    color: #FFFFFF;
+                }
+                .user-height {
+                    font-size: 10px;
+                    color: #FFFFFF;
+                }
+                .like {
+                    i {
+                        font-size: 18px;
+                    }
+                }
+                .number-of-likes {
+                    font-size: 15px;
+                    margin-left: 5px;
+                    color: #FFFFFF;
+                }
+            }
         }
     }
     // * PC（大）
-    @media (min-width: 1200px) {
+    @media (min-width: 1280px) {
         // ? モバイルのヘッダーは表示しない
         .mobile_header {
             display: none;
         }
-        // ? モバイル用のコーディネート投稿ボタンのため表示しない
-        .mobile-post-btn {
+        // ? モバイルのエラーメッセージは表示しない
+        .mobile_error_msg {
             display: none;
         }
-        // ? モバイルのサイドバーは表示しない
-        .mobile-sidebar {
-            display: none;
+        // ? サイドバーの幅の設定
+        .col-lg-2-5 {
+            flex: 0 0 19%;
+            max-width: 19%;
         }
-        // ? SNS一覧画面の画像サイズ
-        .sns_search_image {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
+        // ? コンテンツの幅の設定
+        .col-lg-9-5 {
+            flex: 0 0 81%;
+            max-width: 81%;
+        }
+        // ? PCヘッダーの設定
+        .pc-header {
+            .logo-area {
+                img {
+                    width: 20%;
+                }
+            }
+        }
+        // ? SNS一覧ページの設定
+        .search_content {
+            margin: 20px 50px;
+            .sns-image {
+                width: 100%;
+                height: 320px;
+                object-fit: cover;
+            }
+            .user-area {
+                background-color: #222222;
+                img {
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin-left: 10px;
+                }
+                .user-name {
+                    color: #FFFFFF;
+                }
+                .user-height {
+                    font-size: 10px;
+                    color: #FFFFFF;
+                }
+                .like {
+                    i {
+                        font-size: 18px;
+                    }
+                }
+                .number-of-likes {
+                    font-size: 15px;
+                    margin-left: 5px;
+                    color: #FFFFFF;
+                }
+            }
         }
     }
 }
