@@ -5,11 +5,21 @@ class Profile::AlertsController < ApplicationController
     # * お知らせを一覧取得
     def list
         @alerts = Alert.all().order(created_at: :desc)
+        # * 自分に当てられた通知かつ、通知の作成元が自分以外の通知を取得
+        # @notification = Notification.where(user_id: current_user.id).where.not(source_user_id: current_user.id)
+        @notification = Notification.where(user_id: current_user.id)
+        pp @notification
     end
     
     # * お知らせ詳細取得
     def show
-        @alert = Alert.find(params[:id])
+        # @alert = Alert.find(params[:id])
+        @notification = Notification.find(params[:id])
+        # * 通知を発生させたユーザー情報
+        @source_user_id = User.find(@notification.source_user_id)
+
+        # * 通知する投稿（いいね、回答のみ）
+        @source_post_id = Social.find(@notification.source_post_id)
     end    
 
     private

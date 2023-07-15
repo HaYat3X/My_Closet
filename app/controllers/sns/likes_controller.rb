@@ -7,6 +7,10 @@ class Sns::LikesController < ApplicationController
         # * URLから投稿IDを取得する
         post_id = params[:id]
 
+        # * 投稿したユーザーIDを取得
+        post = Social.find(post_id)
+        post_user_id = post.user_id
+
         # * ログイン中のユーザIDを取得する
         user_id = current_user.id
 
@@ -15,6 +19,8 @@ class Sns::LikesController < ApplicationController
 
         # * いいね保存が成功、失敗の判定を行う
         if @likenew.save
+            # ? 通知を作成
+            notice = Notification.create(user_id: user_id, notification_type: "like", source_user_id: post_user_id, source_post_id: post_id)
             redirect_to request.referer, notice: "いいねをしました。"
         else
             redirect_to request.referer, alert: "いいねに失敗しました。"
