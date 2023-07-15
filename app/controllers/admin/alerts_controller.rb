@@ -31,7 +31,6 @@ class Admin::AlertsController < ApplicationController
     # * お知らせ編集フォーム
     def edit
         @alert = Alert.find(params[:id])
-
     end
 
     # * お知らせ更新フォーム
