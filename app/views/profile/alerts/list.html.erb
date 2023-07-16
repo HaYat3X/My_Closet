@@ -16,52 +16,85 @@
                 <div class="list_content col-lg-8 mx-auto">
                     <h3 class="pt-3 pb-5 fw-bold text-center">通知</h3>
 
-                    <% @notification.each do |n| %>
-                        <%= link_to "/profile/alert/show/#{n.id}", style: "text-decoration: none;" do %>
-                            <div class="py-3 px-4 mb-3 alert-body">
-                                <% if n.notification_type === "like" %>
-                                    <div class="d-flex align-items-center">
-                                        <%= image_tag "/assets/img_1.png", class: "alert-image" %>
+                    <ul class="tab-menu nav nav-underline nav-fill">
+                        <li class="nav-item flex-fill">
+                            <a href="#to_you" class="nav-link fw-bold active" data-bs-toggle="tab">あなたへ</a>
+                        </li>
 
-                                        <div class="align-items-center alart-title">    
-                                            <h6 class="fw-bold mb-0 mt-1">いいね！通知</h6>
-                                            <%= User.find(n.source_user_id).user_name %>さんがあなたの投稿にいいね！しました。
-                                        </div>
+                        <li class="nav-item flex-fill">
+                            <a href="#management" class="nav-link fw-bold" data-bs-toggle="tab">運営から</a>
+                        </li>
+                    </ul>
 
-                                        <div class="d-flex align-items-center ms-auto">
-                                            <%= time_ago_in_words(n.created_at) %>前
-                                        </div>
+                    <div class="tab-content mt-2">
+                        <div id="to_you" class="tab-pane active">
+                            <% @notification.each do |n| %>
+                                <%= link_to "/profile/alert/show/#{n.id}", style: "text-decoration: none;" do %>
+                                    <div class="py-3 px-4 mb-3 alert-body">
+                                        <% if n.notification_type === "like" %>
+                                            <div class="d-flex align-items-center">
+                                                <%= image_tag "/assets/img_1.png", class: "alert-image" %>
+
+                                                <div class="align-items-center alart-title">    
+                                                    <h6 class="fw-bold mb-0 mt-1">いいね！通知</h6>
+                                                    <%= User.find(n.source_user_id).user_name %>さんがあなたの投稿にいいね！しました。
+                                                </div>
+
+                                                <div class="d-flex align-items-center ms-auto">
+                                                    <%= time_ago_in_words(n.created_at) %>前
+                                                </div>
+                                            </div>
+                                        <% elsif n.notification_type === "answer" %>
+                                            <div class="d-flex align-items-center">
+                                                <%= image_tag "/assets/img_1.png", class: "alert-image" %>
+
+                                                <div class="align-items-center alart-title">    
+                                                    <h6 class="fw-bold mb-0 mt-1">回答通知</h6>
+                                                    <%= User.find(n.source_user_id).user_name %>さんがあなたの着こなしの質問に回答しました。
+                                                </div>
+
+                                                <div class="d-flex align-items-center ms-auto">
+                                                    <%= time_ago_in_words(n.created_at) %>前
+                                                </div>
+                                            </div>
+                                        <% elsif n.notification_type === "follow" %>
+                                            <div class="d-flex align-items-center">
+                                                <%= image_tag "/assets/img_1.png", class: "alert-image" %>
+
+                                                <div class="align-items-center alart-title">    
+                                                    <h6 class="fw-bold mb-0 mt-1">フォロー通知</h6>
+                                                    <%= User.find(n.source_user_id).user_name %>さんがあなたをフォローしました。
+                                                </div>
+
+                                                <div class="d-flex align-items-center ms-auto">
+                                                    <%= time_ago_in_words(n.created_at) %>前
+                                                </div>
+                                            </div>
+                                        <% end %>
                                     </div>
-                                <% elsif n.notification_type === "answer" %>
-                                    <div class="d-flex align-items-center">
+                                <% end %>
+                            <% end %>
+                        </div>
+
+                        <div id="management" class="tab-pane">
+                            <% @alerts.each do |a| %>
+                                <%= link_to "/profile/alert/show/#{a.id}_management", style: "text-decoration: none;" do %>
+                                    <div class="d-flex align-items-center py-3 px-4 mb-3 alert-body">
                                         <%= image_tag "/assets/img_1.png", class: "alert-image" %>
 
                                         <div class="align-items-center alart-title">    
-                                            <h6 class="fw-bold mb-0 mt-1">回答通知</h6>
-                                            <%= User.find(n.source_user_id).user_name %>さんがあなたの着こなしの質問に回答しました。
+                                            <h6 class="fw-bold mb-0 mt-1">MY CLOSET運営</h6>
+                                            <%= a.title %>
                                         </div>
 
                                         <div class="d-flex align-items-center ms-auto">
-                                            <%= time_ago_in_words(n.created_at) %>前
-                                        </div>
-                                    </div>
-                                <% elsif n.notification_type === "follow" %>
-                                    <div class="d-flex align-items-center">
-                                        <%= image_tag "/assets/img_1.png", class: "alert-image" %>
-
-                                        <div class="align-items-center alart-title">    
-                                            <h6 class="fw-bold mb-0 mt-1">フォロー通知</h6>
-                                            <%= User.find(n.source_user_id).user_name %>さんがあなたをフォローしました。
-                                        </div>
-
-                                        <div class="d-flex align-items-center ms-auto">
-                                            <%= time_ago_in_words(n.created_at) %>前
+                                            <%= time_ago_in_words(a.created_at) %>前
                                         </div>
                                     </div>
                                 <% end %>
-                            </div>
-                        <% end %>
-                    <% end %>
+                            <% end %>
+                        </div>
+                    </DIV>
                 </div>
             </div>
         </div>

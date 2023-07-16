@@ -1,6 +1,6 @@
 class Profile::AlertsController < ApplicationController
     # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
-    before_action :move_to_signed_in, except: [:list, :show]
+    before_action :move_to_signed_in, except: []
 
     # * お知らせを一覧取得
     def list
@@ -13,18 +13,23 @@ class Profile::AlertsController < ApplicationController
     
     # * お知らせ詳細取得
     def show
-        @notification = Notification.find(params[:id])
-        # * 通知を発生させたユーザー情報
-        @source_user_id = User.find(@notification.source_user_id)
+        @id = params[:id]
 
-        # * SNSいいね通知投稿
-        if @notification.source_post_id != 0
-            @source_post_id = Social.find(@notification.source_post_id)
+        if @id.end_with?("_management")
+            @alert = Alert.find(params[:id].chomp("_management"))
+        else
+            @notification = Notification.find(params[:id])
+            # * 通知を発生させたユーザー情報
+            @source_user_id = User.find(@notification.source_user_id)
 
-        # * 回答
-        @source_answer_post_id = Question.find(@notification.source_post_id)
-            
-        end
+            # * SNSいいね通知投稿
+            if @notification.source_post_id != 0
+                @source_post_id = Social.find(@notification.source_post_id)
+
+                # * 回答
+                @source_answer_post_id = Question.find(@notification.source_post_id)
+            end
+        end        
     end    
 
     private
