@@ -13,13 +13,15 @@ class Profile::AlertsController < ApplicationController
     
     # * お知らせ詳細取得
     def show
-        # @alert = Alert.find(params[:id])
         @notification = Notification.find(params[:id])
         # * 通知を発生させたユーザー情報
         @source_user_id = User.find(@notification.source_user_id)
 
-        # * 通知する投稿（いいね、回答のみ）
+        # * SNSいいね通知投稿
         @source_post_id = Social.find(@notification.source_post_id)
+
+        # * 回答
+        @source_answer_post_id = Question.find(@notification.source_post_id)
     end    
 
     private
