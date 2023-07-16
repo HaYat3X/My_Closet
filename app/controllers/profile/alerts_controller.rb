@@ -6,8 +6,8 @@ class Profile::AlertsController < ApplicationController
     def list
         @alerts = Alert.all().order(created_at: :desc)
         # * 自分に当てられた通知かつ、通知の作成元が自分以外の通知を取得
-        # @notification = Notification.where(user_id: current_user.id).where.not(source_user_id: current_user.id)
-        @notification = Notification.where(user_id: current_user.id)
+        @notification = Notification.where(user_id: current_user.id).where.not(source_user_id: current_user.id)
+        # @notification = Notification.where(user_id: current_user.id)
         pp @notification
     end
     
@@ -18,10 +18,13 @@ class Profile::AlertsController < ApplicationController
         @source_user_id = User.find(@notification.source_user_id)
 
         # * SNSいいね通知投稿
-        @source_post_id = Social.find(@notification.source_post_id)
+        if @notification.source_post_id != 0
+            @source_post_id = Social.find(@notification.source_post_id)
 
         # * 回答
         @source_answer_post_id = Question.find(@notification.source_post_id)
+            
+        end
     end    
 
     private

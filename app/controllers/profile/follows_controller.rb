@@ -14,6 +14,8 @@ class Profile::FollowsController < ApplicationController
         create_follow = UserRelation.new(follow_id: follow, follower_id: follower)
 
         if create_follow.save
+            # ? 通知を作成
+            notice = Notification.create(user_id: follower, notification_type: "follow", source_user_id: follow, source_post_id: 0)
             redirect_to request.referer, notice: "フォローしました"
         else
             redirect_to "/"
