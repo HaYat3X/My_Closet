@@ -40,7 +40,13 @@
                                                     <%= User.find(n.source_user_id).user_name %>さんがあなたの投稿にいいね！しました。
                                                 </div>
 
-                                                <div class="d-flex align-items-center ms-auto">
+                                                <div class="align-items-center ms-auto">
+                                                    <% if n.read == 0 %>
+                                                        <div class="text-center">
+                                                            <small class="text-danger">NEW</small>
+                                                        </div>
+                                                    <% end %>
+
                                                     <%= time_ago_in_words(n.created_at) %>前
                                                 </div>
                                             </div>
@@ -53,7 +59,13 @@
                                                     <%= User.find(n.source_user_id).user_name %>さんがあなたの着こなしの質問に回答しました。
                                                 </div>
 
-                                                <div class="d-flex align-items-center ms-auto">
+                                                <div class="align-items-center ms-auto">
+                                                    <% if n.read == 0 %>
+                                                        <div class="text-center">
+                                                            <small class="text-danger">NEW</small>
+                                                        </div>
+                                                    <% end %>
+
                                                     <%= time_ago_in_words(n.created_at) %>前
                                                 </div>
                                             </div>
@@ -66,7 +78,13 @@
                                                     <%= User.find(n.source_user_id).user_name %>さんがあなたをフォローしました。
                                                 </div>
 
-                                                <div class="d-flex align-items-center ms-auto">
+                                                <div class="align-items-center ms-auto">
+                                                    <% if n.read == 0 %>
+                                                        <div class="text-center">
+                                                            <small class="text-danger">NEW</small>
+                                                        </div>
+                                                    <% end %>
+                                                        
                                                     <%= time_ago_in_words(n.created_at) %>前
                                                 </div>
                                             </div>
