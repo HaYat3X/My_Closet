@@ -1,3 +1,9 @@
+// ! SNS投稿画面で画像の選択をキャンセルする
+export function SnsPostFileReset() {
+    var fileField = document.querySelector('#exampleModal input[type="file"]');
+    fileField.value = '';
+}
+
 // ! SNS一覧画面でフォロー中と全ての投稿を切り替える
 export function SnsListSwitching() {
     const checkbox = document.getElementById('formSwitchCheckDefault');

@@ -17,67 +17,236 @@
         <%# ! contents %>
         <div class="col-lg-9-5 col-12">
             <div class="new-content">
-                <%# * バリデーションチェク %>
-                <% if @social.errors.any? %>
-                    <div class="alert alert-danger" role="alert">
-                        <% @social.errors.each do |error| %>
-                            <strong>エラー！</strong> - <%= error.full_message %><br>
-                        <% end %>
-                    </div>
-                <% end %>
+                <h3 class="pt-3 pb-5 fw-bold text-center">コーディネート新規投稿</h3>
 
-                <%# * 投稿フォーム %>
-                <%= form_with(model: @social, url: "/sns/create", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                <%= form_with(model: @social, url: "/sns/create", local: true, class: "col-lg-9 mx-auto") do |f| %>
                     <div class="mb-3">
                         <%# * アイテムのカテゴリーを選択 %>
-                        <%= f.select :tag, ['カジュアルスタイル', 'ストリートスタイル', 'アメカジスタイル', 'ルードスタイル', 'アウトドアスタイル', 'デザイナースタイル', 'ベーシックスタイル', 'モードスタイル', 'ラグジュアリースタイル', 'ガーリースタイル', 'ナチュラルスタイル'], {include_blank: 'スタイルを選択してください'}, class: 'form-control', required: true %>
-                        <div class="invalid-feedback">
-                            スタイルを入力して下さい。
+                        <%= f.select :tag, ['カジュアルスタイル', 'ストリートスタイル', 'アメカジスタイル', 'ルードスタイル', 'アウトドアスタイル', 'デザイナースタイル', 'ベーシックスタイル', 'モードスタイル', 'ラグジュアリースタイル', 'ガーリースタイル', 'ナチュラルスタイル'], {include_blank: 'コーディネートスタイルを選択'}, class: 'form-control' %>
+
+                        <div>
+                            <% @social.errors[:tag].each do |error| %>
+                                <small class="text-danger">コーディネートスタイルを選択してください。</small>
+                            <% end %>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
+                            コーディネート画像
+                        </button>
+
+                        <div class="modal modal-lg fade modal-area modal-dialog-scrollable" id="CoordinateModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">コーディネート画像を設定</h6>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="col-lg-5 mx-auto py-4">
+                                            <%= f.file_field :photograph, class: "form-control", id: "file-input" %>
+                                            <div id="image-preview" class="preview mx-auto"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer post-area text-center">
+                                        <div class="mx-auto">
+                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal" onclick="SnsPostFileReset()">キャンセル</button>
+                                            <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <% @social.errors[:photograph].each do |error| %>
+                                <small class="text-danger">コーディネート画像を設定してください。</small>
+                            <% end %>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <%# * 投稿文の入力 %>
-                        <%= f.text_field :message, class: "form-control", placeholder: "投稿文" %>
+                        <%= f.text_area :message, class: "form-control", placeholder: "投稿文を入力...", style: "height: 120px;" %>
                     </div>
 
                     <div class="mb-3">
-                        <%# * アイテム画像の挿入 %>
-                        <%= f.file_field :photograph, class: "form-control", placeholder: "写真", required: true %>
-                        <div class="invalid-feedback">
-                            写真を入力して下さい。
-                        </div>
-                    </div>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ClosetItemModal">
+                            クローゼットからアイテムを追加
+                        </button>
 
-                    <div class="mb-3">
-                        <label class="mb-2">
-                            着用アイテム（6件まで追加できます）
-                        </label>
-
-                        <p id="messageContainer" class="text-danger small"></p>
-
-                        <div id="scroll">
-                            <div id="scrollContainer" class="row g-1">
-                                <%# * @closets_allをforeachして一件ずつ表示する %>
-                                <% @closets_all.each do |c| %>
-                                    <div class="col-lg-2">
-                                        <%# * クローゼットアイテムの画像の表示 %>
-                                        <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
-
-                                        <%# * クローゼットアイテムをチェックボックス化して選択させる %>
-                                        <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
+                        <div class="modal modal-xl fade modal-area modal-dialog-scrollable" id="ClosetItemModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">クローゼットからアイテムを追加</h6>
                                     </div>
-                                <% end %>
+
+                                    <div class="modal-body">
+                                        <div class="py-4">
+                                            <div id="scroll" class="mx-5">
+                                                <div id="scrollContainer">
+
+                                                <p id="messageContainer" class="text-danger small"></p>
+                                                    <div class="row g-1">
+                                                        <% @closets_all.each do |c| %>
+                                                            <div class="col-lg-2">
+                                                                <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
+
+                                                                <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
+                                                            </div>
+                                                        <% end %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer post-area text-center">
+                                        <div class="mx-auto">
+                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal" onclick="SnsClosetItemReset()">キャンセル</button>
+                                            <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <%# * 入力されたデータを登録する処理 %>
-                    <%= f.submit "登録する", class: "btn mt-3 btn-primary" %>
+                    <div class="post-area py-3 ms-auto">
+                        <a href="/" class="btn px-3 text-white border">キャンセル</a>
+                        <%= f.submit "投稿", class: "btn px-3 submit-btn" %>
+                    </div>
                 <% end %>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    <%# ! 画像選択をキャンセルする %>
+    function SnsPostFileReset() {
+        var fileField = document.querySelector('#CoordinateModal input[type="file"]');
+        fileField.value = '';
+        var preview = document.getElementById('image-preview');
+        preview.innerHTML = ''; // プレビューをクリア
+    }
+
+    <%# ! 画像選択をプレビューする %>
+    document.getElementById('file-input').addEventListener('change', function(event) {
+        var file = event.target.files[0]; // 選択されたファイルを取得
+        var reader = new FileReader(); // FileReaderオブジェクトを作成
+
+        // ファイルの読み込みが完了したらプレビューを表示
+        reader.onload = function(e) {
+            var preview = document.getElementById('image-preview');
+            preview.innerHTML = ''; // プレビューをクリア
+
+            var image = new Image();
+            image.src = e.target.result;
+            image.alt = 'プレビュー画像';
+            image.classList.add('preview'); // 追加するクラス名
+
+            preview.appendChild(image);
+        };
+
+        // ファイルをData URLとして読み込む
+        reader.readAsDataURL(file);
+    });
+
+// ! SNS投稿画面で着用アイテムの選択数や選択上限、選択した場合のUIを制御
+    // * 選択できるアイテムの上限を設定
+    var maxSelection = 6;
+
+    // * チェックボックスの要素を変数に格納
+    var checkboxes = $('.checkbox-image');
+
+    // * 選択された画像が入る配列を定義
+    var selectedImages = [];
+
+    // * 選択順に番号を表示するためにカウンター
+    var markCounter = 1;
+
+    // * 選択数が6件超えた場合に、エラーメッセージを表示する要素を変数に格納
+    var messageContainer = $('#messageContainer');
+
+    // * チェックボックスの状態を取得
+    checkboxes.change(function() {
+        // ? 選択されているチェックボックスの数を取得
+        var selectedCount = checkboxes.filter(':checked').length;
+        var image = $(this).prev('.checkbox-image-label').find('img');
+        var label = $(this).prev('.checkbox-image-label');
+
+        if ($(this).is(':checked')) {
+            // ? 画像が選択された場合
+            if (selectedCount <= maxSelection) {
+                // 選択数が最大選択数以下の場合は、選択された順に画像の上に番号を表示
+                var mark = $('<span class="image-mark">' + markCounter + '</span>');
+                markCounter++;
+                selectedImages.push({
+                    image: image,
+                    mark: mark,
+                });
+                // cssの適用
+                image.addClass('selected-image');
+                label.append(mark).css('position', 'relative');
+            } else {
+                // 選択数が最大選択数を超えた場合は、チェックできないようにする
+                $(this).prop('checked', false);
+                // エラーメッセージの表示
+                showMessage('アイテムの最大選択数は6アイテムまでです。');
+            }
+        } else {
+            // ? 画像が選択解除された場合
+            var index = selectedImages.findIndex(function(item) {
+                return item.image.is(image);
+            });
+            if (index > -1) {
+                // 選択された画像が配列内に存在する場合は、cssの適用を解除
+                var removedItem = selectedImages.splice(index, 1)[0];
+                removedItem.image.removeClass('selected-image');
+                removedItem.mark.remove();
+            }
+            // カウンターを1減らし、番号を再度適用する
+            selectedImages.forEach(function(item, index) {
+                item.mark.text(index + 1);
+            });
+            // カウンターを1減らす
+            markCounter--;
+        }
+
+        // ? 選択されたアイテムが6件以下の場合は、エラーメッセージの表示を解除
+        if (selectedCount <= maxSelection) {
+            hideMessage();
+        }
+    });
+
+    // * エラーメッセージを表示する関数
+    function showMessage(message) {
+        messageContainer.text(message).show();
+    }
+
+    // * エラーメッセージを非表示にする関数
+    function hideMessage() {
+        messageContainer.hide();
+    }
+
+    function SnsClosetItemReset() {
+        // 選択された画像をリセットするため、配列とカウンターを初期化
+        selectedImages = [];
+        markCounter = 1;
+
+        // チェックボックスの状態を初期化
+        checkboxes.prop('checked', false);
+
+        // 画像の表示や番号の削除をリセット
+        $('.checkbox-image-label').find('.selected-image').removeClass('selected-image');
+        $('.image-mark').remove();
+
+        // エラーメッセージを非表示にする
+        hideMessage();
+    }
+</script>
 
