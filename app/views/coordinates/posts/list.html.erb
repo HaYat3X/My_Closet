@@ -44,27 +44,37 @@
                     <%# ? allタブエリア %>
                     <div id="all" class="tab-pane active">
                         <div class="row g-1">
-                            <% @closets_all.each do |c| %>
-                                <div class="col-lg-3 mt-1">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet-image" %>
-                                    <% end %>
-                                </div>
-                            <% end %>
+                            <% if @closets_all.count == 0 %>
+                                <h4 class="fw-bold text-center mt-5">アイテムがまだ登録されていません。</h4>
+                            <% else %>
+                                <% @closets_all.each do |c| %>
+                                    <div class="col-lg-3 mt-1">
+                                        <%= link_to "/closet/show/#{c.id}" do %>
+                                            <%= image_tag c.photograph.url, class: "closet-image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
 
-                            <%= paginate @closets_all %>
+                                <%= paginate @closets_all %>
+                            <% end %>
                         </div>
                     </div>
 
                     <%# ? outerタブエリア %>
                     <div id="outer" class="tab-pane">
                         <div class="row g-1">
-                            <% @closets_outer.each do |c| %>
-                                <div class="col-lg-3 mt-1">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet-image" %>
-                                    <% end %>
-                                </div>
+                            <% if @closets_other.count == 0 %>
+                                <h4 class="fw-bold text-center mt-5">アウターアイテムがまだ登録されていません。</h4>
+                            <% else %>
+                                <% @closets_outer.each do |c| %>
+                                    <div class="col-lg-3 mt-1">
+                                        <%= link_to "/closet/show/#{c.id}" do %>
+                                            <%= image_tag c.photograph.url, class: "closet-image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+
+                                <%= paginate @closets_outer %>
                             <% end %>
                         </div>
                     </div>
@@ -72,12 +82,18 @@
                     <%# ? topsタブエリア %>
                     <div id="tops" class="tab-pane">
                         <div class="row g-1">
-                            <% @closets_tops.each do |c| %>
-                                <div class="col-lg-3 mt-1">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet-image" %>
-                                    <% end %>
-                                </div>
+                            <% if @closets_tops.count == 0 %>
+                                <h4 class="fw-bold text-center mt-5">トップスアイテムがまだ登録されていません。</h4>
+                            <% else %>
+                                <% @closets_tops.each do |c| %>
+                                    <div class="col-lg-3 mt-1">
+                                        <%= link_to "/closet/show/#{c.id}" do %>
+                                            <%= image_tag c.photograph.url, class: "closet-image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+
+                                <%= paginate @closets_tops %>
                             <% end %>
                         </div>
                     </div>
@@ -85,12 +101,18 @@
                     <%# ? ボトムスタブエリア %>
                     <div id="bottoms" class="tab-pane">
                         <div class="row g-1">
-                            <% @closets_pants.each do |c| %>
-                                <div class="col-lg-3 mt-1">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet-image" %>
-                                    <% end %>
-                                </div>
+                            <% if @closets_pants.count == 0 %>
+                                <h4 class="fw-bold text-center mt-5">ボトムスアイテムがまだ登録されていません。</h4>
+                            <% else %>
+                                <% @closets_pants.each do |c| %>
+                                    <div class="col-lg-3 mt-1">
+                                        <%= link_to "/closet/show/#{c.id}" do %>
+                                            <%= image_tag c.photograph.url, class: "closet-image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+
+                                <%= paginate @closets_pants %>
                             <% end %>
                         </div>
                     </div>
@@ -98,12 +120,18 @@
                     <%# ? shoesタブエリア %>
                     <div id="shoes" class="tab-pane">
                         <div class="row g-1">
-                            <% @closets_shoes.each do |c| %>
-                                <div class="col-lg-3 mt-1">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet-image" %>
-                                    <% end %>
-                                </div>
+                            <% if @closets_shoes.count == 0 %>
+                                <h4 class="fw-bold text-center mt-5">シューズアイテムがまだ登録されていません。</h4>
+                            <% else %>
+                                <% @closets_shoes.each do |c| %>
+                                    <div class="col-lg-3 mt-1">
+                                        <%= link_to "/closet/show/#{c.id}" do %>
+                                            <%= image_tag c.photograph.url, class: "closet-image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+
+                                <%= paginate @closets_shoes %>
                             <% end %>
                         </div>
                     </div>
@@ -111,12 +139,18 @@
                     <%# ? otherタブエリア %>
                     <div id="other" class="tab-pane">
                         <div class="row g-1">
-                            <% @closets_other.each do |c| %>
-                                <div class="col-lg-3 mt-1">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet-image" %>
-                                    <% end %>
-                                </div>
+                            <% if @closets_other.count == 0 %>
+                                <h4 class="fw-bold text-center mt-5">その他のアイテムがまだ登録されていません。</h4>
+                            <% else %>
+                                <% @closets_other.each do |c| %>
+                                    <div class="col-lg-3 mt-1">
+                                        <%= link_to "/closet/show/#{c.id}" do %>
+                                            <%= image_tag c.photograph.url, class: "closet-image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+
+                                <%= paginate @closets_other %>
                             <% end %>
                         </div>
                     </div>

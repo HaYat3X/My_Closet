@@ -17,6 +17,7 @@
         <%# ! contents %>
         <div class="col-lg-9-5 col-12">
             <div class="edit-content">
+
 				<h3 class="pt-3 pb-5 fw-bold text-center">投稿したコーディネートを編集</h3>
 
                 <%= form_with(model: @social, url: "/sns/update/#{@social.id}", local: true, :html => {class:"col-lg-9 mx-auto"}) do |f| %>
