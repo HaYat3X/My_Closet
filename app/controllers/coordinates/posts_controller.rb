@@ -34,12 +34,10 @@ class Coordinates::PostsController < ApplicationController
         @closet = Closet.new(posts_params)
 
         # * フォームに入力された大カテゴリーと小カテゴリーとカラーとサイズと値段とブランドを連結する
-        search_value = [params[:closet][:big_Category], params[:closet][:small_Category], params[:color], params[:closet][:size], params[:closet][:brand], params[:closet][:price]].join
+        search_value = [params[:closet][:big_Category], params[:closet][:small_Category], params[:closet][:color], params[:closet][:size], params[:closet][:brand], params[:closet][:price]].join
 
         # * searchカラムにsearch_valueを保存する
         @closet.search = search_value
-
-        @closet.color = params[:color]
 
         # * 投稿者の情報を保存する
         @closet.user_id = current_user.id
