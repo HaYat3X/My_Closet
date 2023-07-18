@@ -16,23 +16,77 @@
                 <h3 class="pt-3 pb-5 fw-bold text-center">お知らせ</h3>
 
                 <div class="alert-body p-5">
-                    <h4 class="fw-bold"><%= @source_user_id.user_name %>さんがあなたの投稿にいいねしました。</h4>
+                    <% if @id.end_with?("_management") %>
+                        <h4 class="fw-bold"><%= @alert.title %></h4>
 
-                    <div class="d-flex align-items-center my-3">
-                        <%= image_tag "/assets/img_1.png", class: "alert-image" %>
+                        <div class="d-flex align-items-center my-3">
+                            <%= image_tag "/assets/img_1.png", class: "alert-image" %>
 
-                        <div class="align-items-center alart-title">
-                            <h6 class="fw-bold mb-0 mt-1">いいね！通知</h6>
-                            <small><%= @notification.created_at.strftime('%m月%d日 %H:%M') %></small>
-                        </div> 
-                    </div>
+                            <div class="align-items-center alart-title">
+                                <h6 class="fw-bold mb-0 mt-1">MY CLOSET運営</h6>
+                                <small><%= @alert.created_at.strftime('%m月%d日 %H:%M') %></small>
+                            </div> 
+                        </div>
 
-                    <div class="pt-3">
-                        <%= link_to "/sns/show/#{@source_post_id.id}" do %>
-                            <%= image_tag @source_post_id.photograph.url, class: "text-center", size: "200x300" %>
+                        <div class="pt-3">
+                            <%= @alert.content %>
+                        </div>            
+                    <% else %>
+                        <% if @notification.notification_type === "like" %>
+                            <h4 class="fw-bold"><%= @source_user_id.user_name %>さんがあなたの投稿にいいねしました。</h4>
+
+                            <div class="d-flex align-items-center my-3">
+                                <%= image_tag "/assets/img_1.png", class: "alert-image" %>
+
+                                <div class="align-items-center alart-title">
+                                    <h6 class="fw-bold mb-0 mt-1">いいね！通知</h6>
+                                    <small><%= @notification.created_at.strftime('%m月%d日 %H:%M') %></small>
+                                </div> 
+                            </div>
+
+                            <div class="pt-3">
+                                <%= link_to "/sns/show/#{@source_post_id.id}" do %>
+                                    <%= image_tag @source_post_id.photograph.url, class: "text-center", size: "200x300" %>
+                                <% end %>
+                            </div>
+                        <% elsif @notification.notification_type === "answer" %>
+                            <h4 class="fw-bold"><%= @source_user_id.user_name %>さんがあなたの着こなしの質問に回答しました。</h4>
+
+                            <div class="d-flex align-items-center my-3">
+                                <%= image_tag "/assets/img_1.png", class: "alert-image" %>
+
+                                <div class="align-items-center alart-title">
+                                    <h6 class="fw-bold mb-0 mt-1">回答通知</h6>
+                                    <small><%= @notification.created_at.strftime('%m月%d日 %H:%M') %></small>
+                                </div> 
+                            </div>
+
+                            <div class="pt-3">
+                                <%= link_to "/question/show/#{@source_answer_post_id.id}" do %>
+                                    <%= image_tag @source_answer_post_id.photograph.url, class: "text-center", size: "200x300" %>
+                                <% end %>
+                            </div>
+                        <% elsif @notification.notification_type === "follow" %>
+                            <h4 class="fw-bold"><%= @source_user_id.user_name %>さんがあなたをフォローしました。</h4>
+
+                            <div class="d-flex align-items-center my-3">
+                                <%= image_tag "/assets/img_1.png", class: "alert-image" %>
+
+                                <div class="align-items-center alart-title">
+                                    <h6 class="fw-bold mb-0 mt-1">フォロー通知</h6>
+                                    <small><%= @notification.created_at.strftime('%m月%d日 %H:%M') %></small>
+                                </div> 
+                            </div>
+
+                            <div class="pt-3">
+                                <%# <%= link_to "/question/show/#{@source_answer_post_id.id}" do %> %>
+                                    <%# <%= image_tag @source_answer_post_id.photograph.url, class: "text-center", size: "200x300" %> %>
+                                    アイコンを表示する
+                                <%# <% end %> %>
+                            </div>                        
                         <% end %>
-                    </div>
-
+                    <% end %>
+                    
                     <div class="pt-3 text-center">
                         <%= link_to "戻る", "/profile/alert/list", class: "btn px-5 rounded-pill" %>
                     </div>

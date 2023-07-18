@@ -20,7 +20,7 @@ class Sns::LikesController < ApplicationController
         # * いいね保存が成功、失敗の判定を行う
         if @likenew.save
             # ? 通知を作成
-            notice = Notification.create(user_id: user_id, notification_type: "like", source_user_id: post_user_id, source_post_id: post_id)
+            notice = Notification.create(user_id: post_user_id, notification_type: "like", source_user_id: user_id, source_post_id: post_id)
             redirect_to request.referer, notice: "いいねをしました。"
         else
             redirect_to request.referer, alert: "いいねに失敗しました。"

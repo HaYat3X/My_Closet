@@ -18,6 +18,8 @@ class Faq::AnswersController < ApplicationController
 
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @answer.save
+            # ? 通知を作成
+            notice = Notification.create(user_id: @question.user_id, notification_type: "answer", source_user_id: current_user.id, source_post_id: @answer.question_id)
             redirect_to "/question/show/#{params[:id]}", notice: "質問に回答しました。"
         else
             render template: 'faq/questions/show'

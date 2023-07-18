@@ -7,7 +7,7 @@ class Faq::QuestionsController < ApplicationController
         @question = Question.new
 
         # * 性別がnull値だった場合"/question/list"に戻る
-        if current_user.gender.blank? || !["男", "女"].include?(current_user.gender)
+        if current_user.gender.blank? || ![1, -1].include?(current_user.gender)
             redirect_to "/question/list", alert: "性別を選択することでQ&Aを投稿することができます。"
         end
 
@@ -31,8 +31,8 @@ class Faq::QuestionsController < ApplicationController
 
     #質問の一覧を取得する
     def list
-        @questions_mens = Question.order(created_at: :desc).joins(:user).where(users: { gender: "男" })
-        @questions_womens = Question.order(created_at: :desc).joins(:user).where(users: { gender: "女" })
+        @questions_mens = Question.order(created_at: :desc).joins(:user).where(users: { gender: 1 })
+        @questions_womens = Question.order(created_at: :desc).joins(:user).where(users: { gender: -1 })
 
     end
 
