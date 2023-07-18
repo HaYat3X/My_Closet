@@ -6,59 +6,35 @@
 
     <div class="row g-0">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
+        <div class="col-lg-2-5 pc-sidebar">
             <%= render "coordinates/layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10 col-12">
-            <div class="bg-white h-100">
-            <h4 class="pt-3">「<%= params[:search] %>」の検索結果</h4>
-                <%# ? allタブエリア %>
-                    <div id="all" class="tab-pane active">
-                        <div class="row g-1">
-                            <% @search_result.each do |c| %>
-                                <div class="col-lg-3 mt-1">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet_image" %>
-                                    <% end %>
-                                </div>
-                            <% end %>
-                        </div>
+        <div class="col-lg-9-5 col-12">
+            <div class="search-content">
+                <% if @search_result.count == 0 %>
+                    <h3 class="pt-3 fw-bold text-center">検索結果:</h3>
+                    <h3 class="fw-bold text-center">「<%= params[:search] %>」</h3>
+                    <p class="text-center pb-5">（0件）</p>
+                    <h4 class="text-center">条件に当てはまるアイテムが見つかりませんでした。<br>検索条件を変えて検索してみてください。</h4>
+                <% else %>
+                    <h3 class="pt-3 fw-bold text-center">検索結果:</h3>
+                    <h3 class="fw-bold text-center">「<%= params[:search] %>」</h3>
+                    <p class="text-center pb-5">（<%= @search_result.count %>件）</p>
+
+                    <div class="row g-1">
+                        <% @search_result.each do |c| %>
+                            <div class="col-lg-3 mt-1">
+                                <%= link_to "/closet/show/#{c.id}" do %>
+                                    <%= image_tag c.photograph.url, class: "closet-search-image" %>
+                                <% end %>
+                            </div>
+                        <% end %>
                     </div>
+                <% end %>
             </div>
         </div>
     </div>
 </div>
 
-<div id="closet_list">
-    <%# ! header %>
-    <%# <%= render "coordinates/layouts/header" %> %>
-    <div class="d-flex">
-        <%# ! sidebar %>
-        <div class="col-lg-3">
-            <%# <%= render "coordinates/layouts/sidebar" %> %>
-        </div>
-
-        <%# ! contents %>
-        <div class="list_content col-lg-9">
-            <div class="m-3 bg-light">
-                <%# * タブエリア %>
-                <div class="tab-content">
-                    <%# ? allタブエリア %>
-                    <div id="all" class="tab-pane active">
-                        <div class="row">
-                            <% @search_result.each do |c| %>
-                                <div class="col-lg-3 m-0 mt-3">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet_image" %>
-                                    <% end %>
-                                </div>
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

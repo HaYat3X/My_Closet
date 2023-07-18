@@ -78,10 +78,10 @@ class Coordinates::PostsController < ApplicationController
         end
 
         # * フォームに入力された大カテゴリーと小カテゴリーとカラーとサイズと値段とブランドを連結する
-        search_value = [params[:closet][:big_Category], params[:closet][:small_Category], params[:color], params[:closet][:size], params[:closet][:brand], params[:closet][:price]].join
+        search_value = [params[:closet][:big_Category], params[:closet][:small_Category], params[:closet][:color], params[:closet][:size], params[:closet][:brand], params[:closet][:price]].join
 
         # * クローゼット更新の成功、失敗を判定する
-        if @closet.update(posts_params)
+        if @closet.update(posts_params.merge(search: search_value))
             redirect_to "/closet/show/#{post_id}", notice: "投稿を編集しました"
         else
             redirect_to "/", alert: "投稿の編集に失敗しました"

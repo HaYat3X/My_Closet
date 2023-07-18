@@ -282,128 +282,30 @@
                     color: #FFFFFF;
                 }
             }
-            // .radio-a {
-            //     display: flex;
-            //     gap: 5px;
-            //     li {
-            //         list-style: none;
-            //     }
-            //     padding: 0;
-            // }
-            // .radio-a input[type="radio"] {
-            //     position: absolute;
-            //     white-space: nowrap;
-            //     border: 0;
-            //     clip: rect(0 0 0 0);
-            //     clip-path: inset(50%);
-            //     overflow: hidden;
-            //     height: 1px;
-            //     width: 1px;
-            //     margin: -1px;
-            //     padding: 0;
-            // }
-            // .radio-a-label {
-            //     display: flex;
-            //     align-items: center;
-            //     justify-content: center;
-            //     text-align: center;
-            //     border: 1px solid black;
-            //     aspect-ratio: 1 / 1;
-            //     width: 80px;
-            //     cursor: pointer;
-            //     font-size: 15px;
-            //     border-radius: 5px;
-            // }
-            // .radio-a input[type="radio"]:checked+.radio-a-label {
-            //     border: 6px solid var(--primary);
-            // }
-            // .checkbox-image {
-            //     display: none;
-            // }
-            // .selected-image {
-            //     border: 3px solid var(--primary);
-            //     border-radius: 5px;
-            //     position: relative;
-            // }
-            // .checkbox-image-label:hover {
-            //     cursor: pointer;
-            // }
-            // .sns-post-image {
-            //     width: 100%;
-            //     height: 180px;
-            //     object-fit: cover;
-            // }
-            // #scrollContainer {
-            //     width: 724px;
-            //     height: 368px;
-            //     overflow-y: scroll;
-            //     background-color: var(--bg);
-            // }
-            // #scrollContainer::-webkit-scrollbar {
-            //     width: 10px;
-            // }
-            // #scrollContainer::-webkit-scrollbar-track {
-            //     background-color: #ae2e2e;
-            // }
-            // #scrollContainer::-webkit-scrollbar-thumb {
-            //     background-color: #17585d;
-            // }
-            // .image-mark {
-            //     position: absolute;
-            //     top: 5px;
-            //     right: 5px;
-            //     background-color: var(--primary);
-            //     color: #ffffff;
-            //     padding: 3px 12px;
-            //     border-radius: 50%;
-            //     font-size: 18px;
-            //     font-weight: bold;
-            // }
         }
         // ? SNS編集ページの設定
         .edit-content {
             margin: 20px 50px;
-            .checkbox-image {
-                display: none;
+            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+                border-radius: 10px;
+                height: 50px;
             }
-            .selected-image {
-                border: 3px solid var(--primary);
-                border-radius: 5px;
-                position: relative;
+            select {
+                border-radius: 10px;
+                height: 50px;
             }
-            .checkbox-image-label:hover {
-                cursor: pointer;
+            .modal-area {
+                .modal-body {
+                    background-color: #333333;
+                    padding: 200px 0;
+                }
             }
-            .sns-post-image {
-                width: 100%;
-                height: 180px;
-                object-fit: cover;
-            }
-            #scrollContainer {
-                width: 724px;
-                height: 368px;
-                overflow-y: scroll;
-                background-color: var(--bg);
-            }
-            #scrollContainer::-webkit-scrollbar {
-                width: 10px;
-            }
-            #scrollContainer::-webkit-scrollbar-track {
-                background-color: #ae2e2e;
-            }
-            #scrollContainer::-webkit-scrollbar-thumb {
-                background-color: #17585d;
-            }
-            .image-mark {
-                position: absolute;
-                top: 5px;
-                right: 5px;
-                background-color: var(--primary);
-                color: #ffffff;
-                padding: 3px 12px;
-                border-radius: 50%;
-                font-size: 18px;
-                font-weight: bold;
+            .post-area {
+                background-color: #333333;
+                .submit-btn {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                }
             }
         }
         // ? SNS詳細ページの設定
