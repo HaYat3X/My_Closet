@@ -63,7 +63,7 @@
                     <%# ? outerタブエリア %>
                     <div id="outer" class="tab-pane">
                         <div class="row g-1">
-                            <% if @closets_other.count == 0 %>
+                            <% if @closets_outer.count == 0 %>
                                 <h4 class="fw-bold text-center mt-5">アウターアイテムがまだ登録されていません。</h4>
                             <% else %>
                                 <% @closets_outer.each do |c| %>
