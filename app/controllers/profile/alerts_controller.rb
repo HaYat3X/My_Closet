@@ -23,7 +23,7 @@ class Profile::AlertsController < ApplicationController
             if @notification.source_post_id != 0
                 if @notification.notification_type === "like"
                     # * SNSいいね通知投稿
-                    @source_post_id = Social.find(@notification.source_post_id)
+                    @source_post_id = Social.where(id: @notification.source_post_id).first
                 else
                     # * 回答
                     @source_answer_post_id = Question.find(@notification.source_post_id)
