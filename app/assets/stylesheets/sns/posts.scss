@@ -276,93 +276,143 @@
         // ? SNS投稿ページの設定
         .new-content {
             margin: 20px 50px;
-            .checkbox-image {
-                display: none;
+            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+                border-radius: 10px;
+                height: 50px;
             }
-            .selected-image {
-                border: 3px solid var(--primary);
-                border-radius: 5px;
-                position: relative;
+            select {
+                border-radius: 10px;
+                height: 50px;
             }
-            .checkbox-image-label:hover {
-                cursor: pointer;
+            .modal-area {
+                .modal-body {
+                    background-color: #333333;
+                    .preview {
+                        margin-top: 10px;
+                        width: 220px;
+                        height: 340px;
+                        object-fit: cover;
+                    }
+                    .sns-post-image {
+                        width: 100%;
+                        height: 260px;
+                        object-fit: cover;
+                    }
+                    #scrollContainer {
+                        width: 1010px;
+                        height: 500px;
+                        overflow-y: scroll;
+                    }
+                    #scrollContainer::-webkit-scrollbar {
+                        width: 5px;
+                    }
+                    #scrollContainer::-webkit-scrollbar-track {
+                        background-color: #ae2e2e;
+                    }
+                    #scrollContainer::-webkit-scrollbar-thumb {
+                        background-color: var(--bg);
+                    }
+                    .image-mark {
+                        position: absolute;
+                        top: 5px;
+                        right: 5px;
+                        background-color: #4B709A;
+                        color: #ffffff;
+                        padding: 3px 12px;
+                        border-radius: 50%;
+                        font-size: 18px;
+                        font-weight: bold;
+                    }
+                    .checkbox-image {
+                        display: none;
+                    }
+                    .selected-image {
+                        border: 5px solid #4B709A;
+                        border-radius: 5px;
+                        position: relative;
+                    }
+                    .checkbox-image-label:hover {
+                        cursor: pointer;
+                    }
+                }
             }
-            .sns-post-image {
-                width: 100%;
-                height: 180px;
-                object-fit: cover;
-            }
-            #scrollContainer {
-                width: 724px;
-                height: 368px;
-                overflow-y: scroll;
-                background-color: var(--bg);
-            }
-            #scrollContainer::-webkit-scrollbar {
-                width: 10px;
-            }
-            #scrollContainer::-webkit-scrollbar-track {
-                background-color: #ae2e2e;
-            }
-            #scrollContainer::-webkit-scrollbar-thumb {
-                background-color: #17585d;
-            }
-            .image-mark {
-                position: absolute;
-                top: 5px;
-                right: 5px;
-                background-color: var(--primary);
-                color: #ffffff;
-                padding: 3px 12px;
-                border-radius: 50%;
-                font-size: 18px;
-                font-weight: bold;
+            .post-area {
+                background-color: #333333;
+                .submit-btn {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                }
             }
         }
         // ? SNS編集ページの設定
         .edit-content {
             margin: 20px 50px;
-            .checkbox-image {
-                display: none;
+            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+                border-radius: 10px;
+                height: 50px;
             }
-            .selected-image {
-                border: 3px solid var(--primary);
-                border-radius: 5px;
-                position: relative;
+            select {
+                border-radius: 10px;
+                height: 50px;
             }
-            .checkbox-image-label:hover {
-                cursor: pointer;
+            .modal-area {
+                .modal-body {
+                    background-color: #333333;
+                    .preview {
+                        margin-top: 10px;
+                        width: 220px;
+                        height: 340px;
+                        object-fit: cover;
+                    }
+                    .sns-post-image {
+                        width: 100%;
+                        height: 260px;
+                        object-fit: cover;
+                    }
+                    #scrollContainer {
+                        width: 1010px;
+                        height: 500px;
+                        overflow-y: scroll;
+                    }
+                    #scrollContainer::-webkit-scrollbar {
+                        width: 5px;
+                    }
+                    #scrollContainer::-webkit-scrollbar-track {
+                        background-color: #ae2e2e;
+                    }
+                    #scrollContainer::-webkit-scrollbar-thumb {
+                        background-color: var(--bg);
+                    }
+                    .image-mark {
+                        position: absolute;
+                        top: 5px;
+                        right: 5px;
+                        background-color: #4B709A;
+                        color: #ffffff;
+                        padding: 3px 12px;
+                        border-radius: 50%;
+                        font-size: 18px;
+                        font-weight: bold;
+                    }
+                    .checkbox-image {
+                        display: none;
+                    }
+                    .selected-image {
+                        border: 5px solid #4B709A;
+                        border-radius: 5px;
+                        position: relative;
+                    }
+                    .checkbox-image-label:hover {
+                        cursor: pointer;
+                    }
+                }
             }
-            .sns-post-image {
-                width: 100%;
-                height: 180px;
-                object-fit: cover;
-            }
-            #scrollContainer {
-                width: 724px;
-                height: 368px;
-                overflow-y: scroll;
-                background-color: var(--bg);
-            }
-            #scrollContainer::-webkit-scrollbar {
-                width: 10px;
-            }
-            #scrollContainer::-webkit-scrollbar-track {
-                background-color: #ae2e2e;
-            }
-            #scrollContainer::-webkit-scrollbar-thumb {
-                background-color: #17585d;
-            }
-            .image-mark {
-                position: absolute;
-                top: 5px;
-                right: 5px;
-                background-color: var(--primary);
-                color: #ffffff;
-                padding: 3px 12px;
-                border-radius: 50%;
-                font-size: 18px;
-                font-weight: bold;
+            .post-area {
+                background-color: #333333;
+                .submit-btn {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                }
             }
         }
         // ? SNS詳細ページの設定

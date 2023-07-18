@@ -40,6 +40,11 @@ class Sns::PostsController < ApplicationController
 
         # * ログインしているユーザーのクローゼットアイテムを取得する
         @closets_all = Closet.where(user_id: current_user.id)
+        @closets_outer = Closet.where(user_id: current_user.id).where(big_Category: "アウター")
+        @closets_all = Closet.where(user_id: current_user.id)
+        @closets_all = Closet.where(user_id: current_user.id)
+        @closets_all = Closet.where(user_id: current_user.id)
+
     end
 
     # ! 投稿フォームに入力された情報をテーブルに保存するメソッド
@@ -103,6 +108,14 @@ class Sns::PostsController < ApplicationController
 
         # * ログインしているユーザーのクローゼットアイテムを取得する
         @closets_all = Closet.where(user_id: current_user.id)
+
+        # * 選択しているアイテムを追加
+        @item1 = @social.item1 
+        @item2 = @social.item2 
+        @item3 = @social.item3 
+        @item4 = @social.item4 
+        @item5 = @social.item5
+        @item6 = @social.item6
 
         # * 編集権限がない場合、リダイレクトする
         if @social.user_id != current_user.id

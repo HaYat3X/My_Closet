@@ -7,6 +7,8 @@ class Social < ApplicationRecord
 
     # ! バリデーション
     validates :photograph, presence: true
+    validates :tag, presence: true
+
     # ! photgraphカラムとアップローダを関連付ける
     mount_uploader :photograph, SnsImageUploader
 end

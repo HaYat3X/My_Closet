@@ -13,250 +13,153 @@
         <%# ! contents %>
         <div class="col-lg-9-5 col-12">
             <div class="new-content">
-               <%# * エラーメッセージの表示 %>
-                <% if @closet.errors.any? %>
-                    <div class="alert alert-danger" role="alert">
-                        <% @closet.errors.each do |error| %>
-							<strong>エラー！</strong> - <%= error.full_message %><br>
-                        <% end %>
-                    </div>
-                <% end %>
+				<h3 class="pt-3 pb-5 fw-bold text-center">アイテム登録</h3>
 
-                <%= form_with(model: @closet, url: "/closet/create", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
+                <%= form_with(model: @closet, url: "/closet/create", local: true, class:"col-lg-9 mx-auto") do |f| %>
+					<small class="fw-bold">画像を追加</small>
 					<div class="mb-3">
-						<%= f.file_field :photograph, required: true, class: "form-control", placeholder: "写真" %>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ItemModal">
+                            アイテム画像
+                        </button>
 
-						<div class="invalid-feedback">
-							写真を入力して下さい。
-						</div>
-					</div>
+                        <div class="modal modal-lg fade modal-area modal-dialog-scrollable" id="ItemModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">アイテム画像を設定</h6>
+                                    </div>
 
-					<div class="mb-3">
-						<%= f.select :big_Category, ['アウター', 'トップス', 'ボトムス', 'シューズ', 'その他'], {include_blank: '大カテゴリーを選択してください'}, class: 'form-control', required: true, id: 'big-category-select' %>
+                                    <div class="modal-body">
+                                        <div class="col-lg-5 mx-auto py-4">
+                                            <%= f.file_field :photograph, class: "form-control" %>
+                                        </div>
+                                    </div>
 
-						<div class="invalid-feedback">
-							大カテゴリーを入力して下さい。
-						</div>
-					</div>
-
-					<div class="mb-3">
-						<%= f.select :small_Category, ['ジャケット','コート','ピーコート','ダウンジャケット','レザージャケット','ウインドブレーカー','カーディガン','Tシャツ','シャツ','ブラウス','ポロシャツ',"スウェット",'ニットセーター','パーカー','ジーンズ','パンツ','ショートパンツ','スカート','レギンス','ショーツ','スカート','スニーカー','パンプス','サンダル','ブーツ','フラットシューズ','革靴','ネックレス','ブレスレット',"キャップ",'ピアス','リング','ヘアアクセサリー','その他'], {include_blank: '小カテゴリーを選択してください'}, class: 'form-control', id: "small-category-select" %>
-					</div>
-
-					<div class="mb-3">
-						<%= f.number_field :price, class: "form-control", placeholder: "金額" %>
-					</div>
-
-					<div class="mb-3">
-						<ul class="radio-a">
-							<%= f.radio_button :color, 'ホワイト', required: true, id: 'radio-a01' %>
-							<label style="background-color: #ffffff; color: black;" class="radio-a-label" for="radio-a01">ホワイト</label>
-
-							<%= f.radio_button :color, 'ブラック', required: true, id: 'radio-a02' %>
-							<label style="background-color: #000000; color: #FFFFFF;" class="radio-a-label" for="radio-a02">ブラック</label>
-							
-							<%= f.radio_button :color, 'グレー', required: true, id: 'radio-a03' %>
-							<label style="background-color: #9A9A9A; color: #FFFFFF;" class="radio-a-label" for="radio-a03">グレー</label>
-
-							<%= f.radio_button :color, 'ブラウン', required: true, id: 'radio-a04' %>
-							<label style="background-color: #74331F; color: #FFFFFF;" class="radio-a-label" for="radio-a04">ブラウン</label>
-    
-							<%= f.radio_button :color, 'ベージュ', required: true, id: 'radio-a05' %>
-							<label style="background-color: #E6D9AE;" class="radio-a-label beju" for="radio-a05">ベージュ</label>
-
-							<%= f.radio_button :color, 'グリーン', required: true, id: 'radio-a06' %>
-							<label style="background-color: #2C9C4C; color: #FFFFFF;" class="radio-a-label" for="radio-a06">グリーン</label>
-
-    <li>
-      <%= f.radio_button :color, 'ブルー', required: true, id: 'radio-a07' %>
-      <label style="background-color: #0E64E1; color: #FFFFFF;" class="radio-a-label" for="radio-a07">ブルー</label>
-    </li>
-
-    <li>
-      <%= f.radio_button :color, 'パープル', required: true, id: 'radio-a08' %>
-      <label style="background-color: #630C8A; color: #FFFFFF;" class="radio-a-label" for="radio-a08">パープル</label>
-    </li>
-  </ul>
-
-  <ul class="radio-a">
-    <li>
-      <%= f.radio_button :color, 'イエロー', required: true, id: 'radio-a09' %>
-      <label style="background-color: #EDD13F; color: ;" class="radio-a-label" for="radio-a09">イエロー</label>
-    </li>
-
-    <li>
-      <%= f.radio_button :color, 'ピンク', required: true, id: 'radio-a10' %>
-      <label style="background-color: #F7B0DA; color: black;" class="radio-a-label" for="radio-a10">ピンク</label>
-    </li>
-
-    <li>
-      <%= f.radio_button :color, 'レッド', required: true, id: 'radio-a11' %>
-      <label style="background-color: #DC0B32; color: #FFFFFF;" class="radio-a-label" for="radio-a11">レッド</label>
-    </li>
-
-    <li>
-      <%= f.radio_button :color, 'オレンジ', required: true, id: 'radio-a12' %>
-      <label style="background-color: #FF8D28; color: black;" class="radio-a-label" for="radio-a12">オレンジ</label>
-    </li>
-
-    <li>
-      <%= f.radio_button :color, 'シルバー', required: true, id: 'radio-a13' %>
-      <label style="background-color: #DADADA; color: black;" class="radio-a-label" for="radio-a13">シルバー</label>
-    </li>
-
-    <li>
-      <%= f.radio_button :color, 'ゴールド', required: true, id: 'radio-a14' %>
-      <label style="background-color: #E3B837; color: #FFFFFF;" class="radio-a-label" for="radio-a14">ゴールド</label>
-    </li>
-
-    <li>
-      <%= f.radio_button :color, 'その他', required: true, id: 'radio-a15' %>
-      <label style="background: radial-gradient(circle at 50% 0, rgba(255,0,0,.5), rgba(255,0,0,0) 70.71%), radial-gradient(circle at 6.7% 75%, rgba(0,0,255,.5), rgba(0,0,255,0) 70.71%), radial-gradient(circle at 93.3% 75%, rgba(0,255,0,.5), rgba(0,255,0,0) 70.71%) beige; color: #FFFFFF;" class="radio-a-label" for="radio-a15">その他</label>
-    </li>
-
-							<%# <div class="invalid-feedback">
-								カラーを選択してください。
-							</div> %>
-						</ul>
-					</div>
-
-					<div class="mb-3">
-						<div class="accordion" id="accordionExample">
-							<div class="accordion-item">
-								<div class="accordion-header">
-									<button type="button" class="col-12 btn text-start" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										カラー
-									</button>
-								</div>
-								
-								<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-									<div class="accordion-body">
-										<ul class="radio-a">
-											<li>
-												<input name="color" id="radio-a01" type="radio" value="ホワイト" required>
-
-												<label style="background-color: #ffffff; color: black;" class="radio-a-label" for="radio-a01">ホワイト</label>
-											</li>
-
-											<li>
-												<input name="color" id="radio-a02" type="radio" value="ブラック">
-
-												<label style="background-color: #000000; color: #FFFFFF;" class="radio-a-label" for="radio-a02">ブラック</label>
-											</li>
-
-											<li>
-												<input name="color" id="radio-a03" type="radio" value="グレー">
-
-												<label style="background-color: #9A9A9A; color: #FFFFFF;" class="radio-a-label" for="radio-a03">グレー</label>
-											</li>
-
-											<li>
-												<input name="color" id="radio-a04" type="radio" value="ブラウン">
-
-												<label style="background-color: #74331F; color: #FFFFFF;" class="radio-a-label" for="radio-a04">ブラウン</label>
-											</li>
-											
-											<li>
-												<input name="color" id="radio-a05" type="radio" value="ベージュ">
-
-												<label style="background-color: #E6D9AE;" class="radio-a-label beju" for="radio-a05">ベージュ</label>
-											</li>
-
-											<li>
-												<input name="color" id="radio-a06" type="radio" value="グリーン">
-
-												<label style="background-color: #2C9C4C; color: #FFFFFF;" class="radio-a-label" for="radio-a06">グリーン</label>
-											</li>
-											
-											<li>
-												<input name="color" id="radio-a07" type="radio" value="ブルー">
-
-												<label style="background-color: #0E64E1; color: #FFFFFF;" class="radio-a-label" for="radio-a07">ブルー</label>
-											</li>
-											
-											<li>
-												<input name="color" id="radio-a08" type="radio" value="パープル">
-
-												<label style="background-color: #630C8A; color: #FFFFFF;" class="radio-a-label" for="radio-a08">パープル</label>
-											</li>
-										</ul>
-
-										<ul class="radio-a">
-											<li>
-												<input name="color" id="radio-a09" type="radio" value="イエロー">
-
-												<label style="background-color: #EDD13F; color: ;" class="radio-a-label" for="radio-a09">イエロー</label>
-											</li>
-											
-											<li>
-												<input name="color" id="radio-a10" type="radio" value="ピンク">
-
-												<label style="background-color: #F7B0DA; color: black;" class="radio-a-label" for="radio-a10">ピンク</label>
-											</li>
-
-											<li>
-												<input name="color" id="radio-a11" type="radio" value="レッド">
-
-												<label style="background-color: #DC0B32; color: #FFFFFF;" class="radio-a-label" for="radio-a11">レッド</label>
-											</li>
-
-											<li>
-												<input name="color" id="radio-a12" type="radio" value="オレンジ">
-
-												<label style="background-color: #FF8D28; color: black;" class="radio-a-label" for="radio-a12">オレンジ</label>
-											</li>
-
-											<li>
-												<input name="color" id="radio-a13" type="radio" value="シルバー">
-
-												<label style="background-color: #DADADA; color: black;" class="radio-a-label" for="radio-a13">シルバー</label>
-											</li>
-
-											<li>
-												<input name="color" id="radio-a14" type="radio" value="ゴールド">
-
-												<label style="background-color: #E3B837; color: #FFFFFF;" class="radio-a-label" for="radio-a14">ゴールド</label>
-											</li>
-
-											<li>
-												<input name="color" id="radio-a15" type="radio" value="その他">
-
-												<label style="background: radial-gradient(circle at 50% 0, rgba(255,0,0,.5), rgba(255,0,0,0) 70.71%), radial-gradient(circle at 6.7% 75%, rgba(0,0,255,.5), rgba(0,0,255,0) 70.71%), radial-gradient(circle at 93.3% 75%, rgba(0,255,0,.5), rgba(0,255,0,0) 70.71%) beige; color: #FFFFFF;" class="radio-a-label" for="radio-a15">その他</label>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="invalid-feedback">
-							大カテゴリーを入力して下さい。
-						</div>
-					</div>
-
-					<div class="mb-3">
-						<%= f.text_field :size, class: "form-control", placeholder: "サイズ" %>
-					</div>
-
-                    <div class="accordion" id="accordionExample">
-                      <div class="accordion-item">
-                        <div class="accordion-header">
-                          <button type="button" class="col-12 btn text-start" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            ブランド
-                          </button>
+                                    <div class="modal-footer post-area text-center">
+                                        <div class="mx-auto">
+                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal">キャンセル</button>
+                                            <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                          <div class="accordion-body">
-                          <div class="d-flex mb-3">
-                            <%= text_field_tag :brand_search, nil, class: "form-control me-2", placeholder: "ブランドを検索" %>
-                          </div>
-                          <%= f.select :brand, [], {include_blank: 'ブランドを検索し、選択してください'}, class: 'form-control', id: "brand-select" %>
+
+                        <div>
+                            <% @closet.errors[:photograph].each do |error| %>
+                                <small class="text-danger">アイテム画像を設定してください。</small>
+                            <% end %>
                         </div>
-                      </div>
-                    </div>
-                  <%= f.submit "登録する", class: "btn btn-primary mt-3" %>
+					</div>
+
+					<small class="fw-bold">アイテム情報</small>
+					<div class="mb-3">
+						<%= f.select :big_Category, ['アウター', 'トップス', 'ボトムス', 'シューズ', 'その他'], {include_blank: 'メインカテゴリーを選択'}, class: 'form-control', id: 'big-category-select' %>
+
+						<div>
+                            <% @closet.errors[:big_Category].each do |error| %>
+                                <small class="text-danger">メインカテゴリー選択してください。</small>
+                            <% end %>
+                        </div>
+					</div>
+
+					<div class="mb-3">
+						<%= f.select :small_Category, ['ジャケット','コート','ピーコート','ダウンジャケット','レザージャケット','ウインドブレーカー','カーディガン','Tシャツ','シャツ','ブラウス','ポロシャツ',"スウェット",'ニットセーター','パーカー','ジーンズ','パンツ','ショートパンツ','スカート','レギンス','ショーツ','スカート','スニーカー','パンプス','サンダル','ブーツ','フラットシューズ','革靴','ネックレス','ブレスレット',"キャップ",'ピアス','リング','ヘアアクセサリー','その他'], {include_blank: 'サブカテゴリーを選択'}, class: 'form-control', id: "small-category-select" %>
+					</div>
+
+					<div class="mb-3">
+						<%= f.number_field :price, class: "form-control", placeholder: "金額を入力" %>
+					</div>
+
+					<div class="mb-3">
+						<%= f.select :color, ['ホワイト系','ブラック系','グレー系','ブラウン系','ベージュ系','グリーン系','ブルー系','パープル系','イエロー系','ピンク系','レッド系',"オレンジ系",'シルバー系','ゴールド系','その他'], {include_blank: 'カラーを選択'}, class: 'form-control' %>
+
+						<div>
+                            <% @closet.errors[:color].each do |error| %>
+                                <small class="text-danger">アイテムのカラーを選択してください。</small>
+                            <% end %>
+                        </div>
+					</div>
+
+					<div class="mb-3">
+						<%= f.select :size, ['M','L'], {include_blank: 'サイズを選択'}, class: 'form-control' %>
+					</div>
+
+					<div class="mb-3">
+						<%= f.text_field :brand, placeholder: "ブランドを入力", class: 'form-control' %>
+					</div>
+
+					<%= f.submit "登録する", class: "btn btn-primary mt-3" %>
                 <% end %>
             </div>
         </div>
     </div>
 </div>
+<script>
+
+    $('#big-category-select').change(function() {
+        var selectedValue = $(this).val();
+        var smallCategorySelect = $('#small-category-select');
+
+        $.ajax({
+            url: '/realtime_selected_value', // 適切なエンドポイントのURLを設定
+            method: 'POST',
+            data: { selected_value: selectedValue },
+            success: function(response) {
+                smallCategorySelect.empty(); // 小カテゴリーセレクトボックスをクリア
+                var options = response.options;
+                if (options) {
+                    for (var i = 0; i < options.length; i++) {
+                        var option = $('<option>').text(options[i]);
+                        smallCategorySelect.append(option); // 選択肢を追加
+                    }
+                } else {
+                    // デフォルトの値を追加する
+                    var default_options = [
+                        'ジャケット',
+                        'コート',
+                        'ピーコート',
+                        'ダウンジャケット',
+                        'レザージャケット',
+                        'ウインドブレーカー',
+                        'カーディガン',
+                        'Tシャツ',
+                        'シャツ',
+                        'ブラウス',
+                        'ポロシャツ',
+                        'ニットセーター',
+                        'パーカー',
+                        'ジーンズ',
+                        'パンツ',
+                        'ショートパンツ',
+                        'スカート',
+                        'レギンス',
+                        'ショーツ',
+                        'スカート',
+                        'スニーカー',
+                        'パンプス',
+                        'サンダル',
+                        'ブーツ',
+                        'フラットシューズ',
+                        '革靴',
+                        'ネックレス',
+                        'ブレスレット',
+                        'ピアス',
+                        'リング',
+                        'ヘアアクセサリー',
+                        'その他',
+                    ];
+                    for (var i = 0; i < default_options.length; i++) {
+                        var option = $('<option>').text(default_options[i]);
+                        smallCategorySelect.append(option); // 選択肢を追加
+                    }
+                }
+            },
+
+            error: function(error) {
+
+            },
+        });
+    });
+
+</script>
