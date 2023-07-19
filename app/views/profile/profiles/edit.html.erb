@@ -6,48 +6,124 @@
 
     <div class="row g-0">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
+        <div class="col-lg-2-5 pc-sidebar">
             <%= render "profile/layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10">
-            <div class="bg-white py-5 h-100">
-                <%= form_with(model: @user_data, url: "/profile/update/#{@user_data.id}", local: true, :html => {class:"needs-validation mx-auto col-lg-8", :novalidate => true}) do |f| %>
-                  <!-- プロフィール画面のビューファイル -->
-                  <% if @suggestion_result %>
-                  ローディング中
-                  <% end %>
+        <div class="col-lg-9-5">
+            <div class="edit-content col-lg-9 mx-auto">
+				<h3 class="pt-3 pb-5 fw-bold text-center">プロフィールを編集</h3>
 
-                  <div class="mb-3">
-                    <%= f.file_field :avatar,  class: "form-control", placeholder: "アイコン" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.text_field :user_name, required: true, class: "form-control", placeholder: "名前" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.number_field :height, class: "form-control", placeholder: "身長" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.number_field :weight, class: "form-control", placeholder: "体重" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.number_field :age, class: "form-control", placeholder: "年齢" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.select :gender, [['男', 1], ['女', -1]], { include_blank: '性別を選択してください' }, class: 'form-control' %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.text_area :profile, class: "form-control", placeholder: "プロフィール" %>
-                  </div>
-                  <%= f.submit "登録する", data: { disable_with: "プロフィールを更新中..." }, class: "btn btn-primary" %>
-                  <div class="loading">
-                    <%= image_tag '/assets/Now-Loading.gif', size: "200x200" %>
-                  </div>
-                <% end %>
-                </div>
+				<%= form_with(model: @user, url: "/profile/update/#{@user.id}", local: true) do |f| %>
+					<div class="row">
+						<div class="col-lg-3">
+							<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditIconModal">
+								<div id="image-preview" class="preview mx-auto"></div>
+							</button>
 
+							<div class="modal fade modal-area modal-dialog-scrollable" id="EditIconModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">プロフィール画像を設定</h6>
+										</div>
+
+										<div class="modal-body">
+											<div class="col-lg-7 mx-auto py-4">
+												<%= f.file_field :avatar, class: "form-control", id: "file-input" %>
+											</div>
+										</div>
+
+										<div class="modal-footer post-area text-center">
+											<div class="mx-auto">
+												<button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal">キャンセル</button>
+												<button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-9">
+							<div class="mb-3">
+								<%= f.file_field :avatar,  class: "form-control", placeholder: "アイコン" %>
+							</div>
+							<div class="mb-3">
+								<%= f.text_field :user_name, required: true, class: "form-control", placeholder: "名前" %>
+							</div>
+
+							<div class="mb-3">
+								<%= f.number_field :height, class: "form-control", placeholder: "身長" %>
+							</div>
+
+							<div class="mb-3">
+								<%= f.number_field :weight, class: "form-control", placeholder: "体重" %>
+							</div>
+
+							<div class="mb-3">
+								<%= f.number_field :age, class: "form-control", placeholder: "年齢" %>
+							</div>
+
+							<div class="mb-3">
+								<%= f.select :gender, [['男', 1], ['女', -1]], { include_blank: '性別を選択してください' }, class: 'form-control' %>
+							</div>
+
+							<div class="mb-3">
+								<%= f.text_area :profile, class: "form-control", placeholder: "プロフィールを入力...", style: "height: 150px;" %>
+							</div>
+
+							<%= f.submit "更新する", data: { disable_with: "プロフィールを更新中..." }, class: "btn btn-primary" %>
+						</div>
+					</div>
+				<% end %>                      
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    <%# ! 画像選択をキャンセルする %>
+	// 画像選択をプレビューする
+	var fileInput = document.getElementById('file-input');
+	var preview = document.getElementById('image-preview');
+	var reader = new FileReader(); // FileReaderオブジェクトを作成
+
+	// デフォルトの画像を表示
+	var defaultImage = new Image();
+	defaultImage.src = "/assets/user/sample.png";
+	defaultImage.alt = 'デフォルト画像';
+	defaultImage.classList.add('preview'); // 追加するクラス名
+	defaultImage.style.width = '150px';
+	defaultImage.style.height = '150px';
+	defaultImage.style.borderRadius = '50%';
+	defaultImage.style.objectFit = 'cover';
+	defaultImage.style.marginRight = '25px';
+	preview.appendChild(defaultImage);
+
+	// input fileのchangeイベントを監視
+	fileInput.addEventListener('change', function(event) {
+		var file = event.target.files[0]; // 選択されたファイルを取得
+
+		// ファイルの読み込みが完了したらプレビューを表示
+		reader.onload = function(e) {
+			preview.innerHTML = ''; // プレビューをクリア
+
+			var image = new Image();
+			image.src = e.target.result;
+			image.alt = 'プレビュー画像';
+			image.classList.add('preview'); // 追加するクラス名
+			image.style.width = '150px';
+			image.style.height = '150px';
+			image.style.borderRadius = '50%';
+			image.style.objectFit = 'cover';
+			image.style.marginRight = '25px';
+
+			preview.appendChild(image);
+		};
+
+		// ファイルをData URLとして読み込む
+		reader.readAsDataURL(file);
+	});
+</script>

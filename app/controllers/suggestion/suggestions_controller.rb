@@ -6,7 +6,22 @@ class Suggestion::SuggestionsController < ApplicationController
     def suggestion
         # * ユーザ情報
         @user = User.find(current_user.id)
-        pp @user.user_name
+
+        # * ユーザーのお気に入りの色の傾向を取得
+        favorite_colors = {
+            favorite_color1: @user.favorite_color1,
+            favorite_color2: @user.favorite_color2,
+            favorite_color3: @user.favorite_color3,
+            favorite_color4: @user.favorite_color4,
+            favorite_color5: @user.favorite_color5
+        }
+
+        # * 最も数値が大きい色を特定
+        max_color_variable = favorite_colors.max_by { |_, color| color.to_i }.first
+        
+        # * 結果を出力
+        puts max_color_variable
+
 
         # * 提案情報があるかないか判定
         if Suggest.exists?(user_id: current_user.id)

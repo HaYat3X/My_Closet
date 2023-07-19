@@ -1,24 +1,23 @@
 <div id="sns_posts">
     <%# ! ヘッダーエリア %>
     <div class="mobile-header">
-        <%= render "sns/layouts/mobile_header" %>
+        <%# <%= render "sns/layouts/mobile_header" %> %>
     </div>
 
     <div class="pc-header">
-        <%= render "sns/layouts/pc_header" %>
+        <%# <%= render "sns/layouts/pc_header" %> %>
     </div>
 
     <%# ! サイドバーエリアとコンテンツエリア %>
     <div class="row g-0">
         <%# * サイドバーエリア %>
         <div class="col-lg-2-5 pc-sidebar">
-            <%= render "sns/layouts/pc_sidebar" %>
+            <%# <%= render "sns/layouts/pc_sidebar" %> %>
         </div>
 
         <%# * コンテンツエリア %>
-        <div class="col-lg-9-5 col-12">
-            <div class="list-content">
-            
+        <div class="col-lg-9-5">
+            <div class="list-content mx-auto">
                 <% if user_signed_in? %>
                     <form id="myForm" class="d-flex justify-content-end" action="/" method="get">
                         <div class="form-check">
