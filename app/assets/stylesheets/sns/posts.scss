@@ -4,6 +4,26 @@
     // ? headerの設定
     .header {
         background-color: #222222;
+        .alert-btn {
+            margin-left: 5px;
+        }
+        .btn {
+            position: relative;
+            display: inline-block;
+        }
+        .alert-btn {
+            position: relative;
+        }
+        .text-bg-danger {
+            position: absolute;
+            top: 0px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+        }
     }
     // ? サイドバーの設定
     .sidebar {
@@ -44,6 +64,7 @@
     }
     // ? 一覧ページのUI設定
     .list-content {
+        max-width: 1014px;
         input[type="checkbox"] {
             display: none;
         }
@@ -221,13 +242,11 @@
         }
         // ? サイドバーの幅の設定
         .col-lg-2-5 {
-            flex: 0 0 19%;
-            max-width: 19%;
+            width: 250px;
         }
         // ? コンテンツの幅の設定
         .col-lg-9-5 {
-            flex: 0 0 81%;
-            max-width: 81%;
+            width: calc(100vw - 250px);
         }
         // ? PCヘッダーの設定
         .pc-header {
@@ -239,10 +258,10 @@
         }
         // ? SNS一覧ページの設定
         .list-content {
-            margin: 20px 50px;
+            margin: 25px 0;
             .sns-image {
                 width: 100%;
-                height: 330px;
+                height: 336px;
                 object-fit: cover;
             }
             .user-area {

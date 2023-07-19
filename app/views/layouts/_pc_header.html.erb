@@ -1,0 +1,35 @@
+<nav class="header pc-header navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand logo-area d-flex align-items-center" href="/">
+            <%= image_tag "/assets/logos/logo1.png" %>
+        </a>
+
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarForm" aria-controls="navbarForm" aria-expanded="false" aria-label="ナビゲーションの切替">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarForm">
+            <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                <div class="input-group">
+                    <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+
+                    <%= f.button class: "btn bg-white", type: :submit do %>
+                        <i class="bi bi-search"></i>
+                    <% end %>
+                </div>
+            <% end %>
+
+            <a href="/profile/alert/list" class="btn">
+                <i class="bi bi-bell fs-4 text-white alert-btn"></i>
+
+                <span class="rounded-pill text-bg-danger">
+                    <small>99+</small>1
+                </span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="pc_error_msg">
+    <%= render "layouts/error" %>
+</div>

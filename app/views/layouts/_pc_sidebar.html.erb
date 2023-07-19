@@ -1,0 +1,172 @@
+<div class="sidebar pc-sidebar d-flex flex-column flex-shrink-0 sticky-top vh-100">
+    <ul class="nav nav-pills flex-column">
+        <label>メニュー</label>
+
+        <li class="nav-item">
+            <a href="/" class="d-flex align-items-center active" aria-current="page">
+                <img src="/assets/icons/icn_home.png" alt="">
+                ホーム
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="/suggestion" class="d-flex align-items-center">
+                <img src="/assets/icons/icn_AI.png" alt="">
+                コーディネート提案
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="/closet/list" class="d-flex align-items-center">
+                <img src="/assets/icons/icn_ranking.png" alt="">
+                ランキング
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <%# * ユーザーがログインしているかの判定をする %>
+            <% if user_signed_in? %>
+                <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center" do %>
+                    <img src="/assets/icons/icn_user.png" alt="">
+                    マイページ
+                <% end %>
+            <% else %>
+                <%= link_to "/profile/show/1", class: "d-flex align-items-center" do %>
+                    <img src="/assets/icons/icn_user.png" alt="">
+                    マイページ
+                <% end %>
+            <% end %>
+        </li>
+
+        <li class="nav-item">
+            <a href="/closet/list" class="d-flex align-items-center">
+                <img src="/assets/icons/icn_closet.png" alt="">
+                クローゼット
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="/question/list" class="d-flex align-items-center">
+                <img src="/assets/icons/icn_faq.png" alt="">
+                コーディネートQ&A
+            </a>
+        </li>
+
+        <li class="post-btn">
+            <a href="/sns/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+                コーディネート投稿
+            </a>
+        </li>
+
+        <hr class="mx-4">
+
+        <div class="search-identification">
+            <label>ブランド</label><br>
+
+            <li class="nav-item">
+                <a href="/sns/search?search=UNIQLO">UNIQLO</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/sns/search?search=GU">GU</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/sns/search?search=H＆M">H＆M</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/sns/search?search=ZARA">ZARA</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/sns/search?search=WEGO">WEGO</a>
+            </li>
+        
+            <li class="nav-item">
+                <a href="/sns/search?search=NIKE">NIKE</a>
+            </li>
+        
+            <li class="nav-item">
+                <a href="/sns/search?search=ADIDAS">ADIDAS</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/sns/search?search=GAP">GAP</a>
+            </li>
+            
+            <li class="nav-item">
+                <a href="/sns/search?search=LOWRYSFARM">LOWRYSFARM</a>
+            </li>
+
+            <label>季節</label><br>
+
+            <li class="nav-item">
+                <a href="/sns/search?search=春">春（3月〜5月）</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/sns/search?search=夏">夏（6月〜8月）</a>
+            </li>
+            
+            <li class="nav-item">
+                <a href="/sns/search?search=秋">秋（9月〜11月）</a>
+            </li>
+            
+            <li class="nav-item">
+                <a href="/sns/search?search=冬">冬（12月〜2月）</a>
+            </li>
+            
+            <label>身長</label><br>
+
+            <li class="nav-item">
+                <a href="/sns/search?search=~149cm">~149cm</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/sns/search?search=150cm~159cm">150cm~159cm</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/sns/search?search=160cm~169cm">160cm~169cm</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/sns/search?search=170cm~179cm">170~179cm</a>
+            </li>    
+
+            <li class="nav-item">
+                <a href="/sns/search?search=180cm~">180cm~</a>
+            </li>       
+        </div>
+
+        <hr class="mx-4">
+
+        <label>その他</label>
+
+        <li class="nav-item">
+            <a href="/contact/new" class="d-flex align-items-center">
+                <i class="bi bi-box-arrow-up-right"></i>
+                お問い合わせ
+            </a>
+        </li>
+        
+        <li class="nav-item pb-5">
+            <%# * ユーザーがログインしているかの判定をする %>
+            <% if user_signed_in? %>
+                <%= link_to destroy_user_session_path, method: :delete, class: "d-flex align-items-center" do %>
+                    <i class="bi bi-person-circle"></i>
+                    ログアウト
+                <% end %>
+            <% else %>
+                <%= link_to new_user_session_path, method: :get, class: "d-flex align-items-centerb" do %>
+                    <i class="bi bi-person-circle"></i>
+                    ログイン
+                <% end %>
+            <% end %>
+        </li>
+    </ul>
+</div>

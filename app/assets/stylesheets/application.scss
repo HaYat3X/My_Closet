@@ -10,7 +10,7 @@
 @import "./coordinates/searchs";
 @import "./contact/contacts";
 @import "./suggestion/suggestions";
-:root {
+ :root {
     --primary: #0d6efd;
     --dark: #21252f;
     --body: #888;
@@ -23,10 +23,164 @@
     padding: 0;
 }
 
+// ! 全サイズ共通
+// ? headerの設定
+.header {
+    background-color: #222222;
+    padding: 14px 40px;
+    .alert-btn {
+        margin-left: 5px;
+    }
+    .btn {
+        position: relative;
+        display: inline-block;
+    }
+    .alert-btn {
+        position: relative;
+    }
+    .text-bg-danger {
+        position: absolute;
+        top: 0px;
+        right: -5px;
+        background-color: red;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 10px;
+        font-size: 10px;
+    }
+}
+
+// ? サイドバーの設定
+.sidebar {
+    overflow-y: scroll;
+    background-color: #CBC5C1;
+    box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
+    a {
+        color: #333333;
+        text-decoration: none;
+    }
+    .active {
+        background-color: #4B709A;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+    hr {
+        border-top: 2px solid #333333;
+    }
+    .search-identification a:hover {
+        text-decoration: underline;
+        color: #333333;
+        background-color: #CBC5C1;
+    }
+}
+
+// * スマートフォン
+@media (max-width: 768px) {
+    // ? PC用のヘッダーは表示しない
+    .pc-header {
+        display: none;
+    }
+    // ? PCのサイドバーは表示しない
+    .pc-sidebar {
+        display: none;
+    }
+    // ? PCのエラーメッセージは表示しない
+    .pc_error_msg {
+        display: none;
+    }
+}
+
+// * タブレット
+@media (min-width: 768px) and (max-width: 1280px) {
+    // ? PC用のヘッダーは表示しない
+    .pc-header {
+        display: none;
+    }
+    // ? PCのサイドバーは表示しない
+    .pc-sidebar {
+        display: none;
+    }
+    // ?モバイルサイドバーのレイアウト設定
+    .mobile_header {
+        img {
+            width: 20%;
+        }
+        .navbar-toggler {
+            background-color: #ffffff;
+            transition: opacity 0.5s ease;
+        }
+        .search_icon {
+            display: none;
+        }
+    }
+}
+
+// * PC（大）
+@media (min-width: 1280px) {
+    // ? モバイルのヘッダーは表示しない
+    .mobile_header {
+        display: none;
+    }
+    // ? モバイルのエラーメッセージは表示しない
+    .mobile_error_msg {
+        display: none;
+    }
+    // ? PCのサイドバーのレイアウト設定
+    .pc-sidebar {
+        ul {
+            .nav-item {
+                a {
+                    font-size: 14px;
+                    padding: 8px 40px;
+                }
+                img {
+                    margin-right: 10px;
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+            label {
+                font-size: 20px;
+                padding: 0 40px;
+                margin: 20px 0 15px;
+            }
+            .post-btn {
+                margin: 0 30px;
+                margin-top: 10px;
+                a {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                    text-decoration: none;
+                    font-size: 14px;
+                }
+            }
+        }
+        i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+    }
+    // ? サイドバーの幅の設定
+    .side-content {
+        width: 267px;
+    }
+    // ? コンテンツの幅の設定
+    .main-content {
+        width: calc(100vw - 267px);
+    }
+    // ? PCヘッダーの設定
+    .pc-header {
+        .logo-area {
+            img {
+                width: 20%;
+            }
+        }
+    }
+}
+
 // ! フォント、背景色の定義
 body {
     font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
-    line-height: 1.7;
     color: #575757;
     background-color: var(--bg);
 }
@@ -36,8 +190,8 @@ body {
 }
 
 // ! 画面の最大サイズを定義する
-.max-width {
-    max-width: 1280px;
-    margin: auto;
-    box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2), -10px 0px 10px -10px rgba(0, 0, 0, 0.2);
-}
+// .max-width {
+//     // max-width: 1280px;
+//     // margin: auto;
+//     // box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2), -10px 0px 10px -10px rgba(0, 0, 0, 0.2);
+// }

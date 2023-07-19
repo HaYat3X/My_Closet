@@ -5,6 +5,20 @@ Rails.application.routes.draw do
   # ! ユーザ関連の認証
   devise_for :users
 
+  # ! SNS画面のルーティング
+  root to: "sns/posts#list"
+  get "sns/show/:id", to: "sns/posts#show"
+  get "sns/new", to: "sns/posts#new"
+  post "sns/create", to: "sns/posts#create"
+  get "sns/edit/:id", to: "sns/posts#edit"
+  patch "sns/update/:id", to: "sns/posts#update"
+  delete "sns/delete/:id", to: "sns/posts#delete"
+  get "/sns/search", to: "sns/searchs#search"
+  post "sns/create_like/:id", to:"sns/likes#create_like"
+  delete "sns/delete_like/:id", to:"sns/likes#delete_like"
+  get "sns/like_ranking", to: "sns/likes#like_ranking"
+
+
   # ! クローゼット関連
   # * 投稿一覧取得 （root_path）
   get "closet/list", to: "coordinates/posts#list"
@@ -27,31 +41,7 @@ Rails.application.routes.draw do
   # * ブランドを非同期で検索する
   get "/brand_search", to: "coordinates/posts#brand_search"
 
-  # ! SNS関連
-  # * 一覧ページ
-  root to: "sns/posts#list"
-  # * 詳細ページ
-  get "sns/show/:id", to: "sns/posts#show"
-  # * 投稿ページ
-  get "sns/new", to: "sns/posts#new"
-  # * 投稿処理
-  post "sns/create", to: "sns/posts#create"
-  # * 検索処理
-  get "/sns/search", to: "sns/searchs#search"
-  # * 編集フォーム
-  get "sns/edit/:id", to: "sns/posts#edit"
-  # * 投稿編集
-  patch "sns/update/:id", to: "sns/posts#update"
-  # * 削除処理
-  delete "sns/delete/:id", to: "sns/posts#delete"
-  # いいねする機能
-  post "sns/create_like/:id", to:"sns/likes#create_like"
-  # いいねを解除する機能
-  delete "sns/delete_like/:id", to:"sns/likes#delete_like"
-  # Closetアイテムを追加検索するルーティングの設定
-  post "realtime_reload_items/:items", to: "sns/posts#new"
-  # * いいねランキングページのルーティング設定
-  get "sns/like_ranking", to: "sns/likes#like_ranking"
+  
 
   # ! Q&A関連
   # * 投稿フォーム
