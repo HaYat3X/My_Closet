@@ -24,6 +24,13 @@
         </li>
 
         <li class="nav-item">
+            <a href="/question/list" class="d-flex align-items-center px-5 py-1">
+                <i class="bi bi bi-grid"></i>
+                着こなしQ&A
+            </a>
+        </li>
+
+        <li class="nav-item">
             <%# * ユーザーがログインしているかの判定をする %>
             <% if user_signed_in? %>
                 <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center px-5 py-1" do %>

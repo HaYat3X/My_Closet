@@ -7,6 +7,9 @@ class Profile::ProfilesController < ApplicationController
         # * パラメータからユーザIDを取得
         @user = User.find(params[:id])
 
+        # * ログイン中のユーザが投稿した着こなしQ&A投稿を取得
+        @faq = Question.order(created_at: :desc).where(user_id: @user.id).page(params[:page]).per(16)
+
         # ログイン中のユーザが投稿したSNS投稿
         @snss = Social.order(created_at: :desc).where(user_id: @user.id).page(params[:page]).per(16)
 
@@ -14,7 +17,7 @@ class Profile::ProfilesController < ApplicationController
         @sns_likes = SocialLike.order(created_at: :desc).where(user_id: @user.id).page(params[:page]).per(16)
 
         #ログイン中のユーザーが投稿したクローゼット
-        @closets = Closet.order(created_at: :desc).where(user_id:@user.id).page(params[:page]).per(16)
+        @closets = Closet.order(created_at: :desc).where(user_id: @user.id).page(params[:page]).per(16)
 
         # フォロー数
         @follow_list = UserRelation.order(created_at: :desc).where(follow_id: params[:id]).count
@@ -26,10 +29,10 @@ class Profile::ProfilesController < ApplicationController
     # ! ユーザーのプロフィール更新メソッド
     def edit
         #　DBに保存されているユーザの登録情報抜き出す
-        @user_data = User.find(params[:id])
+        @user = User.find(params[:id])
         
         # * 編集権限がない場合はリダイレクト
-        if @user_data.id != current_user.id
+        if @user.id != current_user.id
             redirect_to "/", alert: "不正なアクセスが行われました。"
         end
     end

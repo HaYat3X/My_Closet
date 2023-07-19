@@ -1,79 +1,184 @@
 // ! profilesフォルダのレイアウト （edit, show）
 #profile_profiles {
     // ! 全サイズ共通
-    // ?　タブのアクションカラー変更
-    .tab-ul {
-        .active {
-            color: var(--primary);
-        }
-        a {
-            color: var(--dark);
-        }
+    // ? headerの設定
+    .header {
+        background-color: #222222;
     }
-    // * sidebar関連
-    .pc-sidebar {
-        border-radius: 5px;
-        // ? アイコンの表示設定
-        i {
-            margin-right: 10px;
-        }
-        // ? リストの表示設定
-        li:hover {
-            background-color: var(--primary);
-            border-radius: 5px;
-        }
-        // ? リンクの表示設定
+    // ? サイドバーの設定
+    .sidebar {
+        overflow-y: scroll;
+        background-color: #CBC5C1;
+        box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
         a {
-            color: var(--dark);
+            color: #333333;
+            text-decoration: none;
         }
         a:hover {
-            color: #ffffff;
+            background-color: #4B709A;
+            color: #FFFFFF;
+            text-decoration: none;
         }
-        // ? サインイン、サインアウトのレイアウト
-        .action-link {
-            a:hover {
-                color: var(--dark);
-                background-color: var(--bg);
-            }
+        .active {
+            background-color: #4B709A;
+            color: #FFFFFF;
+            text-decoration: none;
         }
-        // ? コンテンツエリアと少し幅を空ける
-        .sidebar-content {
-            margin-right: 5px;
+        i {
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+        hr {
+            border-top: 2px solid #333333;
+        }
+        .post-btn {
+            background-color: #4B709A;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+        .search-identification a:hover {
+            text-decoration: underline;
+            color: #333333;
+            background-color: #CBC5C1;
         }
     }
     // * スマートフォン （小）
-    @media (max-width: 575.98px) {}
-    // * スマートフォン （中）
-    @media (min-width: 576px) and (max-width: 767.98px) {}
-    // * タブレット
-    @media (min-width: 768px) and (max-width: 991.98px) {}
-    // * PC（小）
-    @media (min-width: 992px) and (max-width: 1199.98px) {}
-    // * PC（大）
-    @media (min-width: 1200px) {
-        // ? プロフィール画面のアイコンサイズ
-        .avatar {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        // ? マイページ投稿画像のサイズ
-        .profiles_image {
-            height: 250px;
-            width: 100%;
-            object-fit: cover;
-        }
-        // ? プロフィール画面のフォロー、フォロワーリンクの調整
-        .follows_area {
-            a {
-                text-decoration: none;
+    @media (max-width: 768px) {
+        // ?モバイルサイドバーのレイアウト設定
+        .header {
+            img {
+                width: 40%;
             }
         }
-        .follows_area {
-            a:hover {
-                text-decoration: underline;
-                border-bottom: 1.5px solid;
+    }
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 1280px) {
+        // ?モバイルサイドバーのレイアウト設定
+        .header {
+            img {
+                width: 20%;
+            }
+        }
+    }
+    // * PC（大）
+    @media (min-width: 1280px) {
+        // ? モバイルのヘッダーは表示しない
+        .mobile_header {
+            display: none;
+        }
+        // ? モバイルのエラーメッセージは表示しない
+        .mobile_error_msg {
+            display: none;
+        }
+        // ? サイドバーの幅の設定
+        .col-lg-2-5 {
+            flex: 0 0 19%;
+            max-width: 19%;
+        }
+        // ? コンテンツの幅の設定
+        .col-lg-9-5 {
+            flex: 0 0 81%;
+            max-width: 81%;
+        }
+        // ?ヘッダーアイコンサイズのレイアウト設定
+        .header {
+            img {
+                width: 20%;
+            }
+        }
+        // ? プロフィールページの設定
+        .profile-cover {
+            width: 100%;
+            height: 200px!important;
+        }
+        .show-content {
+            margin: 40px 80px;
+            .profile-cover {
+                width: 100px;
+                height: 50px !important;
+            }
+            .avatar {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-right: 25px;
+            }
+            .edit-btn {
+                background-color: #4B709A;
+                color: #FFFFFF;
+            }
+            .user-post-content {
+                .sns-image {
+                    width: 100%;
+                    height: 330px;
+                    object-fit: cover;
+                }
+                .user-area {
+                    background-color: #222222;
+                    img {
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        margin-left: 10px;
+                    }
+                    .user-name {
+                        color: #FFFFFF;
+                    }
+                    .user-height {
+                        font-size: 10px;
+                        color: #FFFFFF;
+                    }
+                    .like {
+                        i {
+                            font-size: 18px;
+                        }
+                    }
+                    .number-of-likes {
+                        font-size: 15px;
+                        margin-left: 5px;
+                        color: #FFFFFF;
+                    }
+                }
+                .faq-content {
+                    border-radius: 10px;
+                    .faq-image {
+                        border-radius: 10px 0 0 10px;
+                        width: 100%;
+                        object-fit: cover;
+                        height: 250px;
+                    }
+                    .col-lg-7 {
+                        background-color: #FFFFFF;
+                        opacity: .5;
+                    }
+                }
+            }
+        }
+        // ? プロフィール編集ページの設定
+        .edit-content {
+            margin: 20px 0;
+            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+                border-radius: 10px;
+                height: 50px;
+            }
+            select {
+                border-radius: 10px;
+                height: 50px;
+            }
+            .modal-area {
+                .modal-body {
+                    background-color: #333333;
+                    padding: 200px 0;
+                }
+                .post-area {
+                    background-color: #333333;
+                    .submit-btn {
+                        background-color: #4B709A;
+                        color: #FFFFFF;
+                    }
+                }
             }
         }
     }
