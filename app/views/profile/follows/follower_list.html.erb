@@ -6,91 +6,69 @@
 
     <div class="row g-0">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
+        <div class="col-lg-2-5 pc-sidebar">
             <%= render "profile/layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10 col-12">
-            <div class="bg-white py-5 h-100">
-                <div class="list_content col-lg-12">
-                    <ul class="nav nav-underline nav-ul mx-auto" role="tablist">
-                            <li class="nav-item flex-fill text-center">
-                                <%= link_to "フォロー中", "/profile/follow_list/#{params[:id]}", class: "nav-link" %>
-                            </li>
-                            <li class="nav-item flex-fill text-center">
-                                <%= link_to "フォロワー", "/profile/follower_list/#{params[:id]}", class: "nav-link active" %>
-                            </li>
-                        </ul>
+        <div class="col-lg-9-5 col-12">
+            <%= image_tag "/assets/user/cover_img.jpg", class: "profile-cover" %>
 
-                        <%# * タブエリア %>
-                        <div class="tab-content mt-3">
-                            <div id="follower_list" class="tab-pane active">
-                                <div class="row col-lg-8 mx-auto bg-light">
-                                    <% @follower_list.each do |f| %>
-                                        <%# * そのユーザIDをもとにユーザテーブルからデータを取る %>
-                                        <% @users.each do |u| %>
-                                            <% if u.id == f.follow_id %>
-                                                <table class="table align-middle mb-0 bg-white">
-                                                    <tbody>
-                                                        <tr>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                            <% if u.avatar.url%>
-                                                                <%= image_tag u.avatar.url, style: "width: 50px; height: 50px; object-fit: cover; z-index: 1", class: "avatar img-fluid", size: "100x100" %>
-                                                            <% else %>
-                                                                <img src="/assets/default-avatar.png"
-                                                                alt="Generic placeholder image" class="avatar"
-                                                                >
-                                                            <% end %>
-                                                            <div class="ms-3">
-                                                                <p class="fw-bold mb-1"><%= u.user_name %></p>
-                                                                <p class="text-muted mb-0"><%= u.profile %></p>
-                                                            </div>
-                                                            </div>
-                                                        </td>
+            <div class="follow-list-content">
+                <ul class="tab-menu nav nav-underline nav-fill">
+                    <li class="nav-item flex-fill">
+                        <%= link_to "フォロー中", "/profile/follow_list/#{params[:id]}", class: "nav-link text-center" %>
+                    </li>
 
-                                                        <td class="text-end">
-                                                        <% if u.id == current_user.id %>
-                                                            <%= button_to "プロフィール更新", "/profile/edit/#{u.id}", method: :get, class: "btn btn-primary" %>
+                    <li class="nav-item flex-fill">
+                        <%= link_to "フォロワー", "/profile/follower_list/#{params[:id]}", class: "nav-link active  text-center" %>
+                    </li>
+                </ul>
+
+                <div class="row col-lg-11 mx-auto mt-3">
+                    <% @follower_list.each do |f| %>
+                        <%# * そのユーザIDをもとにユーザテーブルからデータを取る %>
+                        <% @users.each do |u| %>
+                            <% if u.id == f.follow_id %>
+                                <table class="table align-middle mb-0">
+                                    <tbody>
+                                        <tr class="user-area">
+                                            <td class="mx-3">
+                                                <div class="d-flex align-items-center">
+                                                    <%= link_to "/profile/show/#{u.id}" do %>
+                                                        <% if u.avatar.url%>
+                                                            <%= image_tag u.avatar.url, class: "avatar" %>
                                                         <% else %>
-                                                            <% if UserRelation.where(follow_id: current_user.id, follower_id: u.id).exists? %>
-                                                                <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "btn btn-outline-primary" %> 
-                                                            <% else %>
-                                                                <%= button_to "フォロー", "/profile/follow/#{u.id}", method: :post, class: "btn btn-primary" %> 
-                                                            <% end %>
+                                                            <img src="/assets/default-avatar.png"
+                                                                alt="Generic placeholder image" class="avatar">
                                                         <% end %>
-                                                            
-                                                        </td>
-                                                        </tr>
-                                                    
-                                                    </tbody>
-                                                    </table>
-                                            <% end %>
-                                        <% end %>
-                                    <% end %>
-                                </div>
-                            </div>
-                        </div>
+                                                    <% end %>
+
+                                                    <div>
+                                                        <label class="fw-bold"><%= u.user_name %></label>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                            <td class="text-end">
+                                                <% if u.id == current_user.id %>
+                                                    <%= button_to "プロフィール更新", "/profile/edit/#{u.id}", method: :get, class: "btn px-4 rounded-pill" %>
+                                                <% else %>
+                                                    <% if UserRelation.where(follow_id: current_user.id, follower_id: u.id).exists? %>
+                                                        <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "btn px-4 unfollow-btn" %> 
+                                                    <% else %>
+                                                        <%= button_to "フォローする", "/profile/follow/#{u.id}", method: :post, class: "btn px-4 follow-btn" %> 
+                                                    <% end %>
+                                                <% end %>
+                                            </td>
+                                        </tr>                    
+                                    </tbody>
+                                </table>
+                            <% end %>
+                        <% end %>
+                    <% end %>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-
-
-<div id="sns_form">
-
-    <%# ! header %>
-    
-
-    <div class="row">
-        <%# ! sidebar %>
-        <div class="col-lg-3">
-           
-        </div>
-
-
     </div>
 </div>
