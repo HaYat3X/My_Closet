@@ -6,11 +6,6 @@ class ApplicationController < ActionController::Base
 
     # ! ユーザ名をサインアップ時に登録させる
     def configure_permitted_parameters
-        devise_parameter_sanitizer.permit(:sign_up, keys: [:user_name])
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:user_name, :gender])
     end
-
-    # # ! ログインした後に遷移する画面
-    # def after_sign_in_path_for(resource)
-    #     closet_list_path
-    # end
 end

@@ -1,51 +1,65 @@
 <div id="auth">
-    <%= render "devise/layouts/pc_header" %>
+    <h2 class="text-center fw-bold" style="margin-top: 92px;">新規会員登録</h2>
 
-    <%= render "layouts/error" %>
-
-    <h2 class="text-center mt-5 pt-5 fw-bold text-dark">新規会員登録</h2>
-
-    <div class="col-lg-3 mx-auto mt-5">
+    <div class="auth-content mx-auto">
         <%# * サインアップフォーム %>
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class:"needs-validation", :novalidate => true}) do |f| %>
-        
-            <%# ? バックエンド側でのバリデーションチェック %>
-            <%= render "devise/shared/error_messages", resource: resource %>
-            
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>    
             <%# ? ユーザ名入力エリア %>
-            <div class="mt-3 input-group">
-                <%= f.text_field :user_name, class: "form-control", autofocus: true, autocomplete: "user_name", placeholder: "ユーザ名", required: true, "aria-label": "ユーザー名", "aria-describedby": "addon-wrapping" %>
-                <div class="invalid-feedback">
-                    ユーザ名を入力して下さい。
+            <div class="mt-3">
+                <%= f.text_field :user_name, class: "form-control", autofocus: true, autocomplete: "user_name", placeholder: "ユーザー名", "aria-label": "ユーザー名", "aria-describedby": "addon-wrapping" %>
+                
+                <div>
+                    <% resource.errors[:user_name].each do |error| %>
+                        <small class="text-danger">ユーザー名を入力してください。</small>
+                    <% end %>
                 </div>
             </div>
 
+            <%# ? 性別入力エリア %>
+            <div class="mt-3">
+                <%= f.select :gender, [['男', 1], ['女', -1]], { include_blank: '性別を選択 ▾' }, class: 'form-control' %>
+
+                <div>
+                    <% resource.errors[:gender].each do |error| %>
+                        <small class="text-danger">性別を入力してください。</small>
+                    <% end %>
+                </div>
+            </div>
+
+
             <%# ? メールアドレス入力エリア %>
-            <div class="mt-3 input-group">
-                <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", placeholder: "メールアドレス", required: true, "aria-describedby": "addon-wrapping" %>
-                <div class="invalid-feedback">
-                    メールアドレスを入力して下さい。
+            <div class="mt-3">
+                <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", placeholder: "メールアドレス", "aria-describedby": "addon-wrapping" %>
+
+                <div>
+                    <% resource.errors[:email].each do |error| %>
+                        <small class="text-danger">メールアドレス<%= error %></small>
+                    <% end %>
                 </div>
             </div>
 
             <%# ? パスワード入力エリア %>
-            <div class="mt-3 input-group">
-                <%= f.password_field :password, class: "form-control", autocomplete: "new-password", placeholder: "パスワード", required: true %>
-                <div class="invalid-feedback">
-                    パスワードを入力して下さい。
+            <div class="mt-3">
+                <%= f.password_field :password, class: "form-control", autocomplete: "new-password", placeholder: "パスワード" %>
+                <div>
+                    <% resource.errors[:password].each do |error| %>
+                        <small class="text-danger">パスワード<%= error %></small>
+                    <% end %>
                 </div>
             </div>
 
             <%# ? パスワード確認エリア %>
-            <div class="mt-3 input-group">
-                <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", placeholder: "パスワード確認", required: true %>
-                <div class="invalid-feedback">
-                    パスワードを再入力して下さい。
+            <div class="mt-3">
+                <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", placeholder: "パスワード確認" %>
+                <div>
+                    <% resource.errors[:password_confirmation].each do |error| %>
+                        <small class="text-danger">パスワード確認<%= error %></small>
+                    <% end %>
                 </div>
             </div>
 
-            <div class="mt-4 mb-5 mx-auto submit-btn">
-                <%= f.submit "新規会員登録", class: "btn col-12 fw-bold" %>
+            <div class="col-10 mx-auto">
+                <%= f.submit "新規会員登録", class: "btn col-12 submit-btn fw-bold" %>
             </div>
         <% end %>
 

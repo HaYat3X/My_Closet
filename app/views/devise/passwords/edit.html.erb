@@ -1,36 +1,27 @@
 <div id="auth">
-    <%= render "devise/layouts/pc_header" %>
+    <h2 class="text-center fw-bold" style="margin-top: 92px;">パスワード再設定</h2>
 
-    <%= render "layouts/error" %>
-
-    <h2 class="text-center mt-5 pt-5 fw-bold text-dark">パスワード再設定</h2>
-
-    <div class="col-lg-3 mx-auto mt-5">
+    <div class="auth-content mx-auto">
         <%# * パスワードリセットフォーム %>
-        <%= form_for(resource, as: resource_name, url: password_path(resource_name), :html => {method: :put, class:"needs-validation", :novalidate => true}) do |f| %>
-
-            <%# ? バックエンド側でのバリデーションチェック %>
-            <%= render "devise/shared/error_messages", resource: resource %>
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), :html => {method: :put, class:"needs-validation", :novalidate => true}) do |f| %>            
             <%= f.hidden_field :reset_password_token %>
             
             <%# ? パスワード入力エリア %>
-            <div class="mt-3 input-group">
+            <div class="mt-3">
                 <%= f.password_field :password, autofocus: true, autocomplete: "new-password", required: true, class: "form-control", placeholder: "パスワード" %>
-                <div class="invalid-feedback">
-                    パスワードを入力して下さい。
-                </div>
             </div>
 
             <%# ? パスワード再入力エリア %>
-            <div class="mt-3 input-group">
+            <div class="mt-3">
                 <%= f.password_field :password_confirmation, autofocus: true, autocomplete: "new-password", required: true, class: "form-control", placeholder: "パスワード確認" %>
-                <div class="invalid-feedback">
-                    パスワードを再入力して下さい。
+
+                <div>
+                    <%= render "devise/shared/error_messages", resource: resource %>
                 </div>
             </div>
 
-            <div class="mt-4 mb-5 mx-auto col-10 submit-btn">
-                <%= f.submit "パスワードリセット", class: "btn fw-bold col-12" %>
+            <div class="mx-auto col-10">
+                <%= f.submit "パスワードリセット", class: "btn fw-bold col-12 submit-btn" %>
             </div>
         <% end %>
 

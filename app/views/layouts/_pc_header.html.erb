@@ -9,23 +9,25 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarForm">
-            <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
-                <div class="input-group">
-                    <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+            <% if current_page?(root_path) %>
+                <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search" %>
 
-                    <%= f.button class: "btn bg-white", type: :submit do %>
-                        <i class="bi bi-search"></i>
-                    <% end %>
-                </div>
+                        <%= f.button class: "btn bg-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+
+                <a href="/profile/alert/list" class="btn">
+                    <i class="bi bi-bell fs-4 text-white alert-btn"></i>
+
+                    <span class="rounded-pill text-bg-danger">
+                        <small>99+</small>1
+                    </span>
+                </a>
             <% end %>
-
-            <a href="/profile/alert/list" class="btn">
-                <i class="bi bi-bell fs-4 text-white alert-btn"></i>
-
-                <span class="rounded-pill text-bg-danger">
-                    <small>99+</small>1
-                </span>
-            </a>
         </div>
     </div>
 </nav>

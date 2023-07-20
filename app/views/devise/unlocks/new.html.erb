@@ -1,26 +1,19 @@
 <div id="auth">
-    <%= render "devise/layouts/pc_header" %>
+    <h2 class="text-center fw-bold" style="margin-top: 92px;">アカウント復旧</h2>
 
-    <%= render "layouts/error" %>
-
-    <h2 class="text-center mt-5 pt-5 fw-bold text-dark">アカウント復旧</h2>
-
-    <div class="col-lg-3 mx-auto mt-5">
-        <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), :html => {class:"needs-validation", :novalidate => true}) do |f|%>
-
-        <%# ? バックエンド側でのバリデーションチェック %>
-        <%= render "devise/shared/error_messages", resource: resource %>
-
+    <div class="auth-content mx-auto">
+        <%= form_for(resource, as: resource_name, url: unlock_path(resource_name)) do |f|%>
         <%# ? メールアドレス入力エリア %>
-        <div class="mt-3 input-group">
-            <%= f.email_field :email, placeholder: "メールアドレス", class: "form-control", autofocus: true, autocomplete: "email" ,required: true%>
-            <div class="invalid-feedback">
-                メールアドレスを入力して下さい。
+        <div class="mt-3">
+            <%= f.email_field :email, placeholder: "メールアドレス", class: "form-control", autofocus: true, autocomplete: "email" %>
+
+            <div>
+                <%= render "devise/shared/error_messages", resource: resource %>
             </div>
         </div>
 
-        <div class="mt-4 mb-5 mx-auto col-10 submit-btn">
-            <%= f.submit "アカウントを復旧", class: "btn col-12 fw-bold" %>
+        <div class="mx-auto col-10">
+            <%= f.submit "アカウントを復旧", class: "btn col-12 fw-bold submit-btn" %>
         </div>
     <% end %>
 

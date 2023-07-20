@@ -18,16 +18,9 @@
     <body class="max-width">
         <%# ! ヘッダー表示 %>
         <%= render "layouts/pc_header" %>
-        
-        <div class="d-flex">
-            <div class="side-content">
-                <%= render "layouts/pc_sidebar" %>
-            </div>
 
-            <div class="main-content">
-                <%= yield %>
-            </div>
-        </div>
+        <%# ! 認証ページでは、サイドバーを表示しない %>
+        <%= yield %>
 
         <script>
             <%# * アラートメッセージを2秒後にスライドアウトする  %>
