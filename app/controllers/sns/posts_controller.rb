@@ -9,11 +9,23 @@ class Sns::PostsController < ApplicationController
             # ? フォローしているユーザーを取得する
             @follow = UserRelation.where(follow_id: current_user.id)
 
-            # ? フォロー中のユーザーのみのSNSデータを投稿日時が古い順に表示し１ページ毎に48件表示する
-            @snss = Social.where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page]).per(48)
+            # ? フォロー中のユーザーの投稿を全て取得する
+            @sns_all = Social.where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page])
+
+            # ? フォロー中の男性ユーザーの投稿を全て取得する
+            @sns_men = Social.joins(:user).where(users: { gender: 1 }).where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page])
+
+            # ? フォロー中の女性ユーザーの投稿を全て取得する
+            @sns_women = Social.joins(:user).where(users: { gender: -1 }).where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page])
         else
-            # ? SNSデータを投稿日時が古い順に表示し１ページ毎に48件表示する
-            @snss = Social.order(created_at: :desc).page(params[:page]).per(48)
+            # ? ALLタブに表示するデータを取得する
+            @sns_all = Social.order(created_at: :desc).page(params[:page_all])
+
+            # ? 男性の投稿のみ取得する
+            @sns_men = Social.joins(:user).where(users: { gender: 1 }).order(created_at: :desc).page(params[:page_men])
+
+            # ? 女性の投稿のみ取得する
+            @sns_women = Social.joins(:user).where(users: { gender: -1 }).order(created_at: :desc).page(params[:page_women])
         end
     end
 

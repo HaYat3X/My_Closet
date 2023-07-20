@@ -23,15 +23,23 @@
                 <a href="/profile/alert/list" class="btn">
                     <i class="bi bi-bell fs-4 text-white alert-btn"></i>
 
-                    <span class="rounded-pill text-bg-danger">
-                        <small>99+</small>1
-                    </span>
+                    <% if @number_of_notifications.count != 0 %>
+                        <span class="rounded-pill text-bg-danger">
+                            <small>
+                                <% if @number_of_notifications.count >= 99 %>
+                                    99+
+                                <% else %>
+                                    <%= @number_of_notifications.count %>
+                                <% end %>
+                            </small>
+                        </span>
+                    <% end %>
                 </a>
             <% end %>
         </div>
     </div>
 </nav>
 
-<div class="pc_error_msg">
+<div class="pc-error-msg">
     <%= render "layouts/error" %>
 </div>
