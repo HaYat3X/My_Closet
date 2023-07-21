@@ -185,7 +185,7 @@
                     <%# ? 女性の投稿のみを表示する %>
                     <div id="women" class="tab-pane">
                         <div class="row g-1">
-                            <% @sns_all.each do |sns| %>
+                            <% @sns_women.each do |sns| %>
                                 <% if sns.user.gender == -1 %>
                                     <div class="col-lg-3 col-md-3 col-4 mt-1">
 
@@ -252,7 +252,7 @@
                             <% end %>
 
                             <div class="page">
-                                <%= paginate @sns_all, param_name: :page_women, params: { tab: "women" } %>
+                                <%= paginate @sns_women, param_name: :page_women, params: { tab: "women" } %>
                             </div>
                         </div>
                     </div>
@@ -314,3 +314,4 @@
         });
     });
 </script>
+

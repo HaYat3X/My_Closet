@@ -2,7 +2,7 @@
     <div class="d-flex">
         <%# ! sidebar %>
         <div class="side-content">
-            <%= render "sns/layouts/pc_sidebar" %>
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
@@ -23,7 +23,13 @@
 
                             <div class="align-items-center">    
                                 <h6 class="mb-0 fw-bold"><%= @sns.user.user_name %></h6>
-                                <small><%= @sns.user.height %>cm</small>
+                                <small>
+                                    <% if @sns.user.height %>
+                                        <%= @sns.user.height %>cm
+                                    <% else %>
+                                        身長未設定    
+                                    <% end %>
+                                </small>
                             </div>
                         </div>
 
@@ -65,7 +71,7 @@
                     </div>
 
                     <div class="col-lg-6 right-content">
-                        <h4 class="title fw-bold mb-0">ホワイトを取り入れた爽やかなコーディネート！</h4>
+                        <h4 class="title fw-bold mb-0"><%= @sns.title %></h4>
 
                         <div class="message">
                             <%= simple_format(@sns.message) %>
@@ -105,7 +111,7 @@
                                 <% end %>
                             </div>
 
-                            <div class="col-lg-4 mt-1">
+                            <div class="col-lg-4 mt-2">
                                 <% if @item4 %>
                                     <%= link_to "/closet/show/#{@item4.id}" do %>
                                         <%= image_tag @item4.photograph.url, class: "item-img" %>
@@ -113,7 +119,7 @@
                                 <% end %>
                             </div>
 
-                            <div class="col-lg-4 mt-1">
+                            <div class="col-lg-4 mt-2">
                                 <% if @item5 %>
                                     <%= link_to "/closet/show/#{@item5.id}" do %>
                                         <%= image_tag @item5.photograph.url, class: "item-img" %>
@@ -121,7 +127,7 @@
                                 <% end %>
                             </div>
 
-                            <div class="col-lg-4 mt-1">
+                            <div class="col-lg-4 mt-2">
                                 <% if @item6 %>
                                     <%= link_to "/closet/show/#{@item6.id}" do %>
                                         <%= image_tag @item6.photograph.url, class: "item-img" %>

@@ -10,13 +10,13 @@ class Sns::PostsController < ApplicationController
             @follow = UserRelation.where(follow_id: current_user.id)
 
             # ? フォロー中のユーザーの投稿を全て取得する
-            @sns_all = Social.where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page])
+            @sns_all = Social.where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page_all])
 
             # ? フォロー中の男性ユーザーの投稿を全て取得する
-            @sns_men = Social.joins(:user).where(users: { gender: 1 }).where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page])
+            @sns_men = Social.joins(:user).where(users: { gender: 1 }).where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page_men])
 
             # ? フォロー中の女性ユーザーの投稿を全て取得する
-            @sns_women = Social.joins(:user).where(users: { gender: -1 }).where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page])
+            @sns_women = Social.joins(:user).where(users: { gender: -1 }).where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page_women])
         else
             # ? ALLタブに表示するデータを取得する
             @sns_all = Social.order(created_at: :desc).page(params[:page_all])
@@ -221,7 +221,7 @@ class Sns::PostsController < ApplicationController
     # ! 投稿時、編集時にバインドするパラメータ
     def posts_params
         # * socialモデルにバインドする
-        params.require(:social).permit(:tag, :message, :photograph)
+        params.require(:social).permit(:title, :tag, :message, :photograph)
     end
 
     # ! サインインしているのか判定する

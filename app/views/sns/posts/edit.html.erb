@@ -1,29 +1,29 @@
 <div id="sns_posts">
-    <%# ! header %>
-    <div class="mobile-header">
-        <%= render "sns/layouts/mobile_header" %>
-    </div>
-
-    <div class="pc-header">
-        <%= render "sns/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2-5 pc-sidebar">
-            <%= render "sns/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="col-lg-9-5 col-12">
-            <div class="edit-content">
+        <div class="main-content">
+            <div class="new-edit-content mx-auto">
+				<h3 class="fw-bold text-center">投稿したコーディネートを編集</h3>
 
-				<h3 class="pt-3 pb-5 fw-bold text-center">投稿したコーディネートを編集</h3>
+                <%= form_with(model: @social, url: "/sns/update/#{@social.id}", local: true) do |f| %>
+                    <div class="mb-3">
+                        <%= f.text_field :title, class: "form-control", placeholder: "投稿タイトルを入力..." %>
 
-                <%= form_with(model: @social, url: "/sns/update/#{@social.id}", local: true, :html => {class:"col-lg-9 mx-auto"}) do |f| %>
+                        <div>
+                            <% @social.errors[:title].each do |error| %>
+                                <small class="text-danger">コーディネートタイトルを入力してください。</small>
+                            <% end %>
+                        </div>
+                    </div>
+
                     <div class="mb-3">
                         <%# * アイテムのカテゴリーを選択 %>
-                        <%= f.select :tag, ['カジュアルスタイル', 'ストリートスタイル', 'アメカジスタイル', 'ルードスタイル', 'アウトドアスタイル', 'デザイナースタイル', 'ベーシックスタイル', 'モードスタイル', 'ラグジュアリースタイル', 'ガーリースタイル', 'ナチュラルスタイル'], {include_blank: 'コーディネートスタイルを選択'}, class: 'form-control' %>
+                        <%= f.select :tag, ['カジュアルスタイル', 'ストリートスタイル', 'アメカジスタイル', 'ルードスタイル', 'アウトドアスタイル', 'デザイナースタイル', 'ベーシックスタイル', 'モードスタイル', 'ラグジュアリースタイル', 'ガーリースタイル', 'ナチュラルスタイル'], {include_blank: 'コーディネートスタイルを選択 ▾'}, class: 'form-control' %>
 
                         <div>
                             <% @social.errors[:tag].each do |error| %>
@@ -33,11 +33,16 @@
                     </div>
 
                     <div class="mb-3">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
-                            コーディネート画像
+                        <%# * 投稿文の入力 %>
+                        <%= f.text_area :message, class: "form-control", placeholder: "投稿文を入力...", style: "height: 120px;" %>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="button" class="coordinate" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
+                            <div id="image-preview" class="preview"></div>
                         </button>
 
-                        <div class="modal modal-lg fade modal-area modal-dialog-scrollable" id="CoordinateModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                        <div class="modal fade modal-area modal-dialog-scrollable" id="CoordinateModal" tabindex="-1" aria-labelledby="exampleModalLabel">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -45,15 +50,14 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <div class="col-lg-5 mx-auto py-4">
+                                        <div class="col-lg-7 mx-auto coordinate-modal">
                                             <%= f.file_field :photograph, class: "form-control", id: "file-input" %>
-                                            <div id="image-preview" class="preview mx-auto"></div>
                                         </div>
                                     </div>
 
                                     <div class="modal-footer post-area text-center">
                                         <div class="mx-auto">
-                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal" onclick="SnsPostFileReset()">キャンセル</button>
+                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal">キャンセル</button>
                                             <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
                                         </div>
                                     </div>
@@ -69,16 +73,11 @@
                     </div>
 
                     <div class="mb-3">
-                        <%# * 投稿文の入力 %>
-                        <%= f.text_area :message, class: "form-control", placeholder: "投稿文を入力...", style: "height: 120px;" %>
-                    </div>
-
-                    <div class="mb-3">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ClosetItemModal">
-                            クローゼットからアイテムを追加
+                        <button type="button" class="text-start btn col-12 item" data-bs-toggle="modal" data-bs-target="#ItemModal">
+                            着用アイテムを選択 ▾
                         </button>
 
-                        <div class="modal modal-xl fade modal-area modal-dialog-scrollable" id="ClosetItemModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                        <div class="modal modal-xl fade modal-area modal-dialog-scrollable" id="ItemModal" tabindex="-1" aria-labelledby="exampleModalLabel">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -86,21 +85,16 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <div class="py-4">
-                                            <div id="scroll" class="mx-5">
-                                                <div id="scrollContainer">
+                                        <div id="scrollContainer">
+                                            <p id="messageContainer" class="text-danger small"></p>
+                                            <div class="row g-1">
+                                                <% @closets_all.each do |c| %>
+                                                    <div class="col-lg-2">
+                                                        <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
 
-                                                <p id="messageContainer" class="text-danger small"></p>
-                                                    <div class="row g-1">
-                                                        <% @closets_all.each do |c| %>
-                                                            <div class="col-lg-2">
-                                                                <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
-
-                                                                <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
-                                                            </div>
-                                                        <% end %>
+                                                        <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
                                                     </div>
-                                                </div>
+                                                <% end %>
                                             </div>
                                         </div>
                                     </div>
@@ -125,30 +119,12 @@
         </div>
     </div>
 </div>
+
 <script>
 	var defaultImageURL = '<%= j @social.photograph.url %>'; // 既存の画像URLを取得する
 var selectedImageURL = ''; // 選択された画像のURLを格納する変数
 
-function SnsPostFileReset() {
-  var fileField = document.querySelector('#CoordinateModal input[type="file"]');
-  fileField.value = '';
 
-  var preview = document.getElementById('image-preview');
-  preview.innerHTML = ''; // プレビューをクリア
-
-  // 既存の画像URLが存在する場合に、既存の画像を表示
-  if (defaultImageURL) {
-    var image = new Image();
-    image.src = defaultImageURL;
-    image.alt = '既存の画像';
-    image.classList.add('preview'); // 追加するクラス名
-
-    preview.appendChild(image);
-  }
-
-  // 選択された画像のURLをリセット
-  selectedImageURL = '';
-}
 
 document.getElementById('file-input').addEventListener('change', function(event) {
   var file = event.target.files[0]; // 選択されたファイルを取得
@@ -161,6 +137,10 @@ document.getElementById('file-input').addEventListener('change', function(event)
 
     var image = new Image();
     image.src = e.target.result;
+    image.style.width = '189px';
+    image.style.height = '262px';
+    image.style.objectFit = 'cover';
+    image.style.borderRadius = '10px';
     image.alt = 'プレビュー画像';
     image.classList.add('preview'); // 追加するクラス名
 
@@ -174,37 +154,22 @@ document.getElementById('file-input').addEventListener('change', function(event)
   reader.readAsDataURL(file);
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+
   var preview = document.getElementById('image-preview');
 
   // 既存の画像URLが存在する場合に、既存の画像を表示
   if (defaultImageURL) {
     var image = new Image();
     image.src = defaultImageURL;
+    image.style.width = '189px';
+    image.style.height = '262px';
+    image.style.objectFit = 'cover';
+    image.style.borderRadius = '10px';
     image.alt = '既存の画像';
     image.classList.add('preview'); // 追加するクラス名
 
     preview.appendChild(image);
   }
-});
-
-// キャンセルボタンがクリックされたときに実行される処理
-function cancelImage() {
-  if (selectedImageURL) {
-    var preview = document.getElementById('image-preview');
-    preview.innerHTML = ''; // プレビューをクリア
-
-    var image = new Image();
-    image.src = defaultImageURL;
-    image.alt = '既存の画像';
-    image.classList.add('preview'); // 追加するクラス名
-
-    preview.appendChild(image);
-
-    // 選択された画像のURLをリセット
-    selectedImageURL = '';
-  }
-}
 
 
 

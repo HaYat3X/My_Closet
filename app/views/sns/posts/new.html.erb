@@ -1,28 +1,28 @@
 <div id="sns_posts">
-    <%# ! header %>
-    <div class="mobile-header">
-        <%= render "sns/layouts/mobile_header" %>
-    </div>
-
-    <div class="pc-header">
-        <%= render "sns/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2-5 pc-sidebar">
-            <%= render "sns/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="col-lg-9-5 col-12">
-            <div class="new-content">
-                <h3 class="pt-3 pb-5 fw-bold text-center">コーディネート新規投稿</h3>
+        <div class="main-content">
+            <div class="new-edit-content mx-auto">
+                <h3 class="fw-bold text-center">コーディネート新規投稿</h3>
 
-                <%= form_with(model: @social, url: "/sns/create", local: true, class: "col-lg-9 mx-auto") do |f| %>
+                <%= form_with(model: @social, url: "/sns/create", local: true) do |f| %>
                     <div class="mb-3">
-                        <%# * アイテムのカテゴリーを選択 %>
-                        <%= f.select :tag, ['カジュアルスタイル', 'ストリートスタイル', 'アメカジスタイル', 'ルードスタイル', 'アウトドアスタイル', 'デザイナースタイル', 'ベーシックスタイル', 'モードスタイル', 'ラグジュアリースタイル', 'ガーリースタイル', 'ナチュラルスタイル'], {include_blank: 'コーディネートスタイルを選択'}, class: 'form-control' %>
+                        <%= f.text_field :title, class: "form-control", placeholder: "投稿タイトルを入力..." %>
+
+                        <div>
+                            <% @social.errors[:title].each do |error| %>
+                                <small class="text-danger">コーディネートタイトルを入力してください。</small>
+                            <% end %>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <%= f.select :tag, ['カジュアルスタイル', 'ストリートスタイル', 'アメカジスタイル', 'ルードスタイル', 'アウトドアスタイル', 'デザイナースタイル', 'ベーシックスタイル', 'モードスタイル', 'ラグジュアリースタイル', 'ガーリースタイル', 'ナチュラルスタイル'], {include_blank: 'コーディネートスタイルを選択 ▾'}, class: 'form-control' %>
 
                         <div>
                             <% @social.errors[:tag].each do |error| %>
@@ -32,11 +32,17 @@
                     </div>
 
                     <div class="mb-3">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
-                            コーディネート画像
+                        <%# * 投稿文の入力 %>
+                        <%= f.text_area :message, class: "form-control", placeholder: "投稿文を入力...", style: "height: 120px;" %>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="fw-bold">コーディネート画像を追加</label><br>
+                        <button type="button" class="coordinate" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
+                            <div id="image-preview" class="preview"></div>
                         </button>
 
-                        <div class="modal modal-lg fade modal-area modal-dialog-scrollable" id="CoordinateModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                        <div class="modal fade modal-area modal-dialog-scrollable" id="CoordinateModal" tabindex="-1" aria-labelledby="exampleModalLabel">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -44,9 +50,8 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <div class="col-lg-5 mx-auto py-4">
+                                        <div class="col-lg-7 mx-auto coordinate-modal">
                                             <%= f.file_field :photograph, class: "form-control", id: "file-input" %>
-                                            <div id="image-preview" class="preview mx-auto"></div>
                                         </div>
                                     </div>
 
@@ -68,16 +73,12 @@
                     </div>
 
                     <div class="mb-3">
-                        <%# * 投稿文の入力 %>
-                        <%= f.text_area :message, class: "form-control", placeholder: "投稿文を入力...", style: "height: 120px;" %>
-                    </div>
-
-                    <div class="mb-3">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ClosetItemModal">
-                            クローゼットからアイテムを追加
+                        <label class="fw-bold">着用アイテムを追加</label><br>
+                        <button type="button" class="text-start btn col-12 item" data-bs-toggle="modal" data-bs-target="#Item1Modal">
+                            着用アイテムを選択 ▾
                         </button>
 
-                        <div class="modal modal-xl fade modal-area modal-dialog-scrollable" id="ClosetItemModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                        <div class="modal modal-xl fade modal-area modal-dialog-scrollable" id="Item1Modal" tabindex="-1" aria-labelledby="exampleModalLabel">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -85,21 +86,17 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <div class="py-4">
-                                            <div id="scroll" class="mx-5">
-                                                <div id="scrollContainer">
+                                        <div id="scrollContainer" class="mx-auto">
+                                            <p id="messageContainer" class="text-danger small"></p>
 
-                                                <p id="messageContainer" class="text-danger small"></p>
-                                                    <div class="row g-1">
-                                                        <% @closets_all.each do |c| %>
-                                                            <div class="col-lg-2">
-                                                                <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
+                                            <div class="row g-1">
+                                                <% @closets_all.each do |c| %>
+                                                    <div class="col-lg-2">
+                                                        <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
 
-                                                                <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
-                                                            </div>
-                                                        <% end %>
+                                                        <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
                                                     </div>
-                                                </div>
+                                                <% end %>
                                             </div>
                                         </div>
                                     </div>
@@ -126,37 +123,42 @@
 </div>
 
 <script>
-    <%# ! 画像選択をキャンセルする %>
-    function SnsPostFileReset() {
-        var fileField = document.querySelector('#CoordinateModal input[type="file"]');
-        fileField.value = '';
-        var preview = document.getElementById('image-preview');
-        preview.innerHTML = ''; // プレビューをクリア
-    }
+    <%# ! 選択した画像をプレビューする %>
+    var fileInput = document.getElementById('file-input');
+    var preview = document.getElementById('image-preview');
+    var reader = new FileReader();
 
-    <%# ! 画像選択をプレビューする %>
-    document.getElementById('file-input').addEventListener('change', function(event) {
-        var file = event.target.files[0]; // 選択されたファイルを取得
-        var reader = new FileReader(); // FileReaderオブジェクトを作成
+    <%# * 画像を選択していない場合はデフォルト画像を表示する %>
+    var defaultImage = new Image();
+    defaultImage.src = "/assets/adds/img_add.png";
+    defaultImage.alt = 'デフォルト画像';
+    defaultImage.classList.add('preview');
+    defaultImage.style.objectFit = 'cover';
+    defaultImage.style.width = '189px';
+    defaultImage.style.height = '262px';
+    defaultImage.style.borderRadius = '10px';
+    preview.appendChild(defaultImage);
 
-        // ファイルの読み込みが完了したらプレビューを表示
+    <%# * 画像が選択されたら、その画像をプレビューする %>
+    fileInput.addEventListener('change', function(event) {
+        var file = event.target.files[0];
+
         reader.onload = function(e) {
-            var preview = document.getElementById('image-preview');
-            preview.innerHTML = ''; // プレビューをクリア
-
+            preview.innerHTML = '';
             var image = new Image();
             image.src = e.target.result;
             image.alt = 'プレビュー画像';
-            image.classList.add('preview'); // 追加するクラス名
-
+            image.classList.add('preview');
+            image.style.width = '189px';
+            image.style.height = '262px';
+            image.style.objectFit = 'cover';
+            image.style.borderRadius = '10px';
             preview.appendChild(image);
         };
 
-        // ファイルをData URLとして読み込む
         reader.readAsDataURL(file);
     });
 
-// ! SNS投稿画面で着用アイテムの選択数や選択上限、選択した場合のUIを制御
     // * 選択できるアイテムの上限を設定
     var maxSelection = 6;
 
@@ -249,4 +251,3 @@
         hideMessage();
     }
 </script>
-
