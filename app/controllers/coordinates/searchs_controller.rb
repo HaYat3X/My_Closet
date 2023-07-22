@@ -8,7 +8,7 @@ class Coordinates::SearchsController < ApplicationController
         key_word = '%' + params[:search] + '%'
 
         # * 大文字、小文字を区別せずに検索
-        @search_result = Closet.where("LOWER(search) LIKE ?", key_word.downcase).where(user_id: current_user.id)
+        @search_result = Closet.where("LOWER(search) LIKE ?", key_word.downcase).where(user_id: current_user.id).page(params[:page])
     end
 
     private
