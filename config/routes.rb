@@ -19,27 +19,17 @@ Rails.application.routes.draw do
   get "sns/like_ranking", to: "sns/likes#like_ranking"
 
 
-  # ! クローゼット関連
-  # * 投稿一覧取得 （root_path）
+  # ! クローゼット画面のルーティング
   get "closet/list", to: "coordinates/posts#list"
-  # * 投稿フォーム
   get "closet/new", to: "coordinates/posts#new"
-  # * 投稿処理
   post "closet/create", to: "coordinates/posts#create"
-  # * 詳細画面
   get  "closet/show/:id", to: "coordinates/posts#show"
-  # * 削除処理
   delete "closet/delete/:id", to: "coordinates/posts#delete"
-  # * 編集フォーム
   get "closet/edit/:id", to: "coordinates/posts#edit"
-  # * 編集処理
   patch "closet/update/:id", to: "coordinates/posts#update"
-  # * 検索画面
   get "closet/search", to: "coordinates/searchs#search"
-  # * 親要素から子要素を選択する。セレクトボックス
   post "/realtime_selected_value", to: "coordinates/posts#realtime_selected_value"
-  # * ブランドを非同期で検索する
-  get "/brand_search", to: "coordinates/posts#brand_search"
+
 
   
 

@@ -102,7 +102,7 @@
                             <% end %>
                         </div>
 
-                        <div class="page">
+                        <div class="page d-flex justify-content-center">
                             <%= paginate @sns_all, param_name: :page_all, params: { tab: "all" } %>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                                 <% end %>
                             <% end %>
 
-                            <div class="page">
+                            <div class="page d-flex justify-content-center">
                                 <%= paginate @sns_men, param_name: :page_men, params: { tab: "men" } %>
                             </div>
                         </div>
@@ -252,7 +252,7 @@
                                 <% end %>
                             <% end %>
 
-                            <div class="page">
+                            <div class="page d-flex justify-content-center">
                                 <%= paginate @sns_women, param_name: :page_women, params: { tab: "women" } %>
                             </div>
                         </div>
@@ -315,4 +315,3 @@
         });
     });
 </script>
-
