@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   delete "sns/delete_like/:id", to:"sns/likes#delete_like"
   get "sns/like_ranking", to: "sns/likes#like_ranking"
 
-
   # ! クローゼット画面のルーティング
   get "closet/list", to: "coordinates/posts#list"
   get "closet/new", to: "coordinates/posts#new"
@@ -76,13 +75,11 @@ Rails.application.routes.draw do
   # * ユーザーの好みを判定する
   post "user_like_create", to: "suggestion/apis#user_like_create"
 
-  # ! プロフィール関連
-  # * プロフィールページ
+  # ! プロフィール画面のルーティング
   get "profile/show/:id", to: "profile/profiles#show"
-  # * プロフィール更新ページ
   get "profile/edit/:id", to: "profile/profiles#edit"
-  # * プロフィール更新
   patch "profile/update/:id", to: "profile/profiles#update"
+  
   # * フォローする
   post "profile/follow/:id", to: "profile/follows#create_follow"
   # * フォロー解除する
