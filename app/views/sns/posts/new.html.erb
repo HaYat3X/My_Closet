@@ -90,11 +90,11 @@
                                             <p id="messageContainer" class="text-danger small"></p>
 
                                             <div class="row g-1">
-                                                <% @closets_all.each do |c| %>
+                                                <% @closets_all.each do |closet| %>
                                                     <div class="col-lg-2">
-                                                        <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
+                                                        <%= label_tag "element_#{closet.id}", image_tag(closet.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
 
-                                                        <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
+                                                        <%= check_box_tag 'elements[]', closet.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
                                                     </div>
                                                 <% end %>
                                             </div>
