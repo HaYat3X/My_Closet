@@ -1,47 +1,6 @@
 // ! profilesフォルダのレイアウト （show, list）
 #profile_alerts {
     // ! 全サイズ共通
-    // ? headerの設定
-    .header {
-        background-color: #222222;
-    }
-    // ? サイドバーの設定
-    .sidebar {
-        overflow-y: scroll;
-        background-color: #CBC5C1;
-        box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
-        a {
-            color: #333333;
-            text-decoration: none;
-        }
-        a:hover {
-            background-color: #4B709A;
-            color: #FFFFFF;
-            text-decoration: none;
-        }
-        .active {
-            background-color: #4B709A;
-            color: #FFFFFF;
-            text-decoration: none;
-        }
-        i {
-            margin-right: 15px;
-            font-size: 1.1rem;
-        }
-        hr {
-            border-top: 2px solid #333333;
-        }
-        .post-btn {
-            background-color: #4B709A;
-            color: #FFFFFF;
-            text-decoration: none;
-        }
-        .search-identification a:hover {
-            text-decoration: underline;
-            color: #333333;
-            background-color: #CBC5C1;
-        }
-    }
     // * スマートフォン （小）
     @media (max-width: 768px) {
         // ?モバイルサイドバーのレイアウト設定
@@ -62,37 +21,32 @@
     }
     // * PC（大）
     @media (min-width: 1280px) {
-        // ? モバイルのヘッダーは表示しない
-        .mobile_header {
-            display: none;
-        }
-        // ? モバイルのエラーメッセージは表示しない
-        .mobile_error_msg {
-            display: none;
-        }
-        // ? サイドバーの幅の設定
-        .col-lg-2-5 {
-            flex: 0 0 19%;
-            max-width: 19%;
-        }
-        // ? コンテンツの幅の設定
-        .col-lg-9-5 {
-            flex: 0 0 81%;
-            max-width: 81%;
-        }
-        // ?モバイルサイドバーのレイアウト設定
-        .header {
-            img {
-                width: 20%;
-            }
-        }
         // ? お知らせ一覧ページの設定
         .list-content {
-            margin: 20px 50px;
+            margin-top: 45px;
+            h4 {
+                font-size: 28px;
+                margin-bottom: 60px;
+            }
+            width: 640px;
+            .tab-menu {
+                .active {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                    border: none;
+                    border-radius: 5px;
+                }
+                a {
+                    border-bottom: 3px solid #333333;
+                    color: #333333;
+                }
+            }
             .alert-body {
                 border-radius: 5px;
                 background-color: rgba(255, 255, 255, 0.5);
                 color: #333333;
+                padding: 15px 30px;
+                margin-bottom: 15px;
             }
             .alert-image {
                 width: 60px;
@@ -105,11 +59,27 @@
         }
         // ? お知らせ詳細ページの設定
         .show-content {
-            margin: 20px 50px;
+            margin-top: 45px;
+            width: 973px;
+            h4 {
+                font-size: 28px;
+                margin-bottom: 60px;
+            }
+            h5 {
+                font-size: 28px;
+                margin-bottom: 30px;
+            }
             .alert-body {
                 border-radius: 5px;
                 background-color: rgba(255, 255, 255, 0.5);
                 color: #333333;
+                .alert-text {
+                    padding: 50px 0;
+                }
+                .alert-post {
+                    margin: 50px 0;
+                    background-color: #D9D9D9;
+                }
             }
             .alert-image {
                 width: 50px;
@@ -118,6 +88,11 @@
                 border: 2px solid black;
                 object-fit: cover;
                 margin-right: 15px;
+            }
+            .post-img {
+                width: 300px;
+                height: 400px;
+                object-fit: cover;
             }
             a {
                 background-color: #4B709A;

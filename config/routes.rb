@@ -83,10 +83,8 @@ Rails.application.routes.draw do
   delete "profile/follow/:id", to: "profile/follows#delete_follow"
   get "follow_list/:id", to: "profile/follows#follow_list"
   get "follower_list/:id", to: "profile/follows#follower_list"
-  # * お知らせ一覧画面
-  get "profile/alert/list", to: "profile/alerts#list"
-  # * お知らせ一覧画面
-  get "profile/alert/show/:id", to: "profile/alerts#show"
+  get "alert/list", to: "profile/alerts#list"
+  get "alert/show/:id", to: "profile/alerts#show"
   
   #お問い合わせフォーム
   get "contact/new" , to: "contact/contacts#new"
