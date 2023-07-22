@@ -153,15 +153,16 @@
                                                             <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
                                                                 <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
                                                                     <i style="color: #E63758;" class="bi bi-heart-fill"></i>
+                                                                <img src="/assets/icons/icn_heart.png" alt="">
                                                                 <% end %>
                                                             <% else %>
                                                                 <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                                    <i style="color: #FFFFFF;" class="bi bi-heart"></i>
+                                                                    <img src="/assets/icons/icn_not_heart.png" alt="">
                                                                 <% end %>
                                                             <% end %>
                                                         <% else %>
                                                             <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                                <i style="color: #FFFFFF;" class="bi bi-heart fs-5"></i>
+                                                                <img src="/assets/icons/icn_not_heart.png" alt="">
                                                             <% end %>
                                                         <% end %>
 
@@ -227,16 +228,16 @@
                                                         <% if user_signed_in? %>
                                                             <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
                                                                 <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
-                                                                    <i style="color: #E63758;" class="bi bi-heart-fill"></i>
+                                                                    <img src="/assets/icons/icn_heart.png" alt="">
                                                                 <% end %>
                                                             <% else %>
                                                                 <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                                    <i style="color: #FFFFFF;" class="bi bi-heart"></i>
+                                                                    <img src="/assets/icons/icn_not_heart.png" alt="">
                                                                 <% end %>
                                                             <% end %>
                                                         <% else %>
                                                             <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                                <i style="color: #FFFFFF;" class="bi bi-heart fs-5"></i>
+                                                                <img src="/assets/icons/icn_not_heart.png" alt="">
                                                             <% end %>
                                                         <% end %>
 

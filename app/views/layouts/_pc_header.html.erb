@@ -9,7 +9,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarForm">
-            <% if current_page?(root_path) || current_page?(sns_new_path) %>
+            <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}")  %>
                 <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
                     <div class="input-group">
                         <%= f.text_field :search, class: "form-control", placeholder: "search" %>

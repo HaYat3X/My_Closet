@@ -71,7 +71,7 @@ class Sns::PostsController < ApplicationController
         @social.user_id = current_user.id
 
         # * フォームに入力された投稿文と、スタイルを連結する
-        sns_search_value = params[:social][:tag].to_s + params[:social][:message].to_s
+        sns_search_value = params[:social][:tag].to_s + params[:social][:message].to_s + params[:social][:title].to_s
 
         # * クローゼットアイテムの選択された情報を取得
         selected_elements = params[:elements]
@@ -152,7 +152,7 @@ class Sns::PostsController < ApplicationController
         @closets_all = Closet.where(user_id: current_user.id)
 
         # * フォームに入力された投稿文と、スタイルを連結する
-        sns_search_value = params[:social][:tag].to_s + params[:social][:message].to_s
+        sns_search_value = params[:social][:tag].to_s + params[:social][:message].to_s + params[:social][:title].to_s
 
         # * 選択したアイテムを取得
         selected_elements = params[:elements]

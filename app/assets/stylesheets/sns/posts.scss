@@ -170,30 +170,6 @@
     }
     // * PC（大）
     @media (min-width: 1280px) {
-        // ? モバイルのヘッダーは表示しない
-        .mobile_header {
-            display: none;
-        }
-        // ? モバイルのエラーメッセージは表示しない
-        .mobile_error_msg {
-            display: none;
-        }
-        // ? サイドバーの幅の設定
-        .col-lg-2-5 {
-            width: 250px;
-        }
-        // ? コンテンツの幅の設定
-        .col-lg-9-5 {
-            width: calc(100vw - 250px);
-        }
-        // ? PCヘッダーの設定
-        .pc-header {
-            .logo-area {
-                img {
-                    width: 20%;
-                }
-            }
-        }
         // ? SNS一覧ページの設定
         .list-content {
             width: 1014px;

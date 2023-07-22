@@ -11,8 +11,9 @@ class ApplicationController < ActionController::Base
 
     private
 
-    # ! 通知数を表示する
+    # ! デフォルトで利用する変数を定義
     def set_common_variable
+        # * 通知数を表示する
         if user_signed_in?
             @number_of_notifications = Notification.where(user_id: current_user.id).where.not(source_user_id: current_user.id).order(created_at: :desc).where(read: 0)
         else
