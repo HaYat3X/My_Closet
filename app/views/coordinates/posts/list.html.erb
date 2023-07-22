@@ -42,10 +42,10 @@
                             <% if @closets_all.count == 0 %>
                                 <h4 class="fw-bold text-center mt-5">アイテムがまだ登録されていません。</h4>
                             <% else %>
-                                <% @closets_all.each do |c| %>
+                                <% @closets_all.each do |closet| %>
                                     <div class="col-lg-3 mt-1">
-                                        <%= link_to "/closet/show/#{c.id}" do %>
-                                            <%= image_tag c.photograph.url, class: "closet-image" %>
+                                        <%= link_to "/closet/show/#{closet.id}" do %>
+                                            <%= image_tag closet.photograph.url, class: "closet-image" %>
                                         <% end %>
                                     </div>
                                 <% end %>
@@ -84,10 +84,10 @@
                             <% if @closets_tops.count == 0 %>
                                 <h4 class="fw-bold text-center mt-5">トップスアイテムがまだ登録されていません。</h4>
                             <% else %>
-                                <% @closets_tops.each do |c| %>
+                                <% @closets_tops.each do |closet| %>
                                     <div class="col-lg-3 mt-1">
-                                        <%= link_to "/closet/show/#{c.id}" do %>
-                                            <%= image_tag c.photograph.url, class: "closet-image" %>
+                                        <%= link_to "/closet/show/#{closet.id}" do %>
+                                            <%= image_tag closet.photograph.url, class: "closet-image" %>
                                         <% end %>
                                     </div>
                                 <% end %>
@@ -105,10 +105,10 @@
                             <% if @closets_bottoms.count == 0 %>
                                 <h4 class="fw-bold text-center mt-5">ボトムスアイテムがまだ登録されていません。</h4>
                             <% else %>
-                                <% @closets_bottoms.each do |c| %>
+                                <% @closets_bottoms.each do |closet| %>
                                     <div class="col-lg-3 mt-1">
-                                        <%= link_to "/closet/show/#{c.id}" do %>
-                                            <%= image_tag c.photograph.url, class: "closet-image" %>
+                                        <%= link_to "/closet/show/#{closet.id}" do %>
+                                            <%= image_tag closet.photograph.url, class: "closet-image" %>
                                         <% end %>
                                     </div>
                                 <% end %>
@@ -126,10 +126,10 @@
                             <% if @closets_shoes.count == 0 %>
                                 <h4 class="fw-bold text-center mt-5">シューズアイテムがまだ登録されていません。</h4>
                             <% else %>
-                                <% @closets_shoes.each do |c| %>
+                                <% @closets_shoes.each do |closet| %>
                                     <div class="col-lg-3 mt-1">
-                                        <%= link_to "/closet/show/#{c.id}" do %>
-                                            <%= image_tag c.photograph.url, class: "closet-image" %>
+                                        <%= link_to "/closet/show/#{closet.id}" do %>
+                                            <%= image_tag closet.photograph.url, class: "closet-image" %>
                                         <% end %>
                                     </div>
                                 <% end %>
@@ -147,10 +147,10 @@
                             <% if @closets_other.count == 0 %>
                                 <h4 class="fw-bold text-center mt-5">その他のアイテムがまだ登録されていません。</h4>
                             <% else %>
-                                <% @closets_other.each do |c| %>
+                                <% @closets_other.each do |closet| %>
                                     <div class="col-lg-3 mt-1">
-                                        <%= link_to "/closet/show/#{c.id}" do %>
-                                            <%= image_tag c.photograph.url, class: "closet-image" %>
+                                        <%= link_to "/closet/show/#{closet.id}" do %>
+                                            <%= image_tag closet.photograph.url, class: "closet-image" %>
                                         <% end %>
                                     </div>
                                 <% end %>
