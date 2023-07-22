@@ -44,11 +44,11 @@
                             </small>
 
                             <div class="follow-area">
-                                <%= link_to "/profile/follow_list/#{@user.id}", class: "text-dark"  do %>
+                                <%= link_to "/follow_list/#{@user.id}", class: "text-dark"  do %>
                                     <span class="fw-bold"><%= @follow_list %></span>フォロー中
                                 <% end %>
 
-                                <%= link_to "/profile/follower_list/#{@user.id}", class: "text-dark mx-3" do %>
+                                <%= link_to "/follower_list/#{@user.id}", class: "text-dark mx-3" do %>
                                     <span class="fw-bold"><%= @follower_list %></span>フォロワー
                                 <% end %>
                             </div>
@@ -173,7 +173,9 @@
 </div>
 
 <script>
-    $(document).ready(function() {
+if (window.location.pathname === "/profile/show/'<%= j params[:id] %>'") {
+  // 実行したいコードをここに記述
+  $(document).ready(function() {
         <%# ! フォロー中のユーザーの投稿のみに切り替える %>
         const checkbox = document.getElementById('formSwitchCheckDefault');
         const form = document.getElementById('myForm');
@@ -223,4 +225,5 @@
             window.history.pushState({ path: newUrl }, '', newUrl);
         });
     });
+}
 </script>

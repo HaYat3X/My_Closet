@@ -94,7 +94,7 @@
                                                     <div class="col-lg-2">
                                                         <%= label_tag "element_#{closet.id}", image_tag(closet.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
 
-                                                        <%= check_box_tag 'elements[]', closet.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
+                                                        <%= check_box_tag 'elements[]', closet.id, false, id: "element_#{closet.id}", class: "checkbox-image" %>
                                                     </div>
                                                 <% end %>
                                             </div>
@@ -123,6 +123,8 @@
 </div>
 
 <script>
+if (window.location.pathname === "/sns/new") {
+
     <%# ! 選択した画像をプレビューする %>
     var fileInput = document.getElementById('file-input');
     var preview = document.getElementById('image-preview');
@@ -250,4 +252,5 @@
         // エラーメッセージを非表示にする
         hideMessage();
     }
+}
 </script>

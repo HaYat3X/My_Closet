@@ -1,45 +1,40 @@
 <div id="profile_follows">
-    <%# ! header %>
-    <div class="pc-header">
-        <%= render "profile/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2-5 pc-sidebar">
-            <%= render "profile/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="col-lg-9-5 col-12">
-            <%= image_tag "/assets/user/cover_img.jpg", class: "profile-cover" %>
+        <div class="main-content">
+            <%= image_tag "/assets/user/cover_img.png", class: "profile-cover" %>
 
-            <div class="follow-list-content">
-                <ul class="tab-menu nav nav-underline nav-fill">
-                    <li class="nav-item flex-fill">
-                        <%= link_to "フォロー中", "/profile/follow_list/#{params[:id]}", class: "nav-link active text-center" %>
+            <div class="follow-content mx-auto">
+                <div class="tab-menu row">
+                    <li class="col-6">
+                        <%= link_to "フォロー中", "/follow_list/#{@id}", class: "nav-link fw-bold text-center active" %>
                     </li>
 
-                    <li class="nav-item flex-fill">
-                        <%= link_to "フォロワー", "/profile/follower_list/#{params[:id]}", class: "nav-link a text-center" %>
+                    <li class="col-6">
+                        <%= link_to "フォロワー", "/follower_list/#{@id}", class: "nav-link fw-bold text-center" %>
                     </li>
-                </ul>
+                </div>
 
-                <div class="row col-lg-11 mx-auto mt-3">
+                <div class="tab-area">
                     <% @follow_list.each do |f| %>
                         <%# * そのユーザIDをもとにユーザテーブルからデータを取る %>
                         <% @users.each do |u| %>
                             <% if u.id == f.follower_id %>
-                                <table class="table align-middle mb-0">
+                                <table class="table align-middle mb-0 ">
                                     <tbody>
                                         <tr class="user-area">
-                                            <td class="mx-3">
+                                            <td>
                                                 <div class="d-flex align-items-center">
                                                     <%= link_to "/profile/show/#{u.id}" do %>
                                                         <% if u.avatar.url%>
                                                             <%= image_tag u.avatar.url, class: "avatar" %>
                                                         <% else %>
-                                                            <img src="/assets/default-avatar.png"
+                                                            <img src="/assets/user/avatar.png"
                                                                 alt="Generic placeholder image" class="avatar">
                                                         <% end %>
                                                     <% end %>
@@ -52,7 +47,7 @@
 
                                             <td class="text-end">
                                                 <% if u.id == current_user.id %>
-                                                    <%= button_to "プロフィール更新", "/profile/edit/#{u.id}", method: :get, class: "btn px-4 rounded-pill" %>
+                                                    <%= button_to "プロフィール更新", "/profile/edit/#{u.id}", method: :get, class: "btn px-4 edit-btn rounded-pill" %>
                                                 <% else %>
                                                     <% if UserRelation.where(follow_id: current_user.id, follower_id: u.id).exists? %>
                                                         <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "btn px-4 unfollow-btn" %> 
@@ -67,10 +62,12 @@
                             <% end %>
                         <% end %>
                     <% end %>
+
+                    <div class="page d-flex justify-content-center">
+                        <%= paginate @follow_list %>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-

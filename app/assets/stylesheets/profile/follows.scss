@@ -1,193 +1,198 @@
-// ! profilesフォルダのレイアウト （follower_list, follows_list）
-#profile_follows {
-    // ! 全サイズ共通
-    // ? headerの設定
-    .header {
-        background-color: #222222;
-    }
-    // ? サイドバーの設定
-    .sidebar {
-        overflow-y: scroll;
-        background-color: #CBC5C1;
-        box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
-        a {
-            color: #333333;
-            text-decoration: none;
+    // ! profilesフォルダのレイアウト （follower_list, follows_list）
+    #profile_follows {
+        // ! 全サイズ共通
+        // ? headerの設定
+        .header {
+            background-color: #222222;
         }
-        a:hover {
-            background-color: #4B709A;
-            color: #FFFFFF;
-            text-decoration: none;
-        }
-        .active {
-            background-color: #4B709A;
-            color: #FFFFFF;
-            text-decoration: none;
-        }
-        i {
-            margin-right: 15px;
-            font-size: 1.1rem;
-        }
-        hr {
-            border-top: 2px solid #333333;
-        }
-        .post-btn {
-            background-color: #4B709A;
-            color: #FFFFFF;
-            text-decoration: none;
-        }
-        .search-identification a:hover {
-            text-decoration: underline;
-            color: #333333;
+        // ? サイドバーの設定
+        .sidebar {
+            overflow-y: scroll;
             background-color: #CBC5C1;
-        }
-    }
-    // * スマートフォン （小）
-    @media (max-width: 768px) {
-        // ?モバイルサイドバーのレイアウト設定
-        .header {
-            img {
-                width: 40%;
+            box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
+            a {
+                color: #333333;
+                text-decoration: none;
             }
-        }
-    }
-    // * タブレット
-    @media (min-width: 768px) and (max-width: 1280px) {
-        // ?モバイルサイドバーのレイアウト設定
-        .header {
-            img {
-                width: 20%;
-            }
-        }
-    }
-    // * PC（大）
-    @media (min-width: 1280px) {
-        // ? モバイルのヘッダーは表示しない
-        .mobile_header {
-            display: none;
-        }
-        // ? モバイルのエラーメッセージは表示しない
-        .mobile_error_msg {
-            display: none;
-        }
-        // ? サイドバーの幅の設定
-        .col-lg-2-5 {
-            flex: 0 0 19%;
-            max-width: 19%;
-        }
-        // ? コンテンツの幅の設定
-        .col-lg-9-5 {
-            flex: 0 0 81%;
-            max-width: 81%;
-        }
-        // ?ヘッダーアイコンサイズのレイアウト設定
-        .header {
-            img {
-                width: 20%;
-            }
-        }
-        .profile-cover {
-            width: 100%;
-            height: 200px !important;
-        }
-        // ? フォロー中一覧の設定
-        .follow-list-content {
-            margin: 20px 50px;
-            .avatar {
-                width: 45px;
-                height: 45px;
-                border-radius: 50%;
-                object-fit: cover;
-                margin-right: 15px;
-            }
-            .user-area {
-                border-bottom: 1px solid #222222;
-                .unfollow-btn {
-                    background-color: #FFFFFF;
-                    opacity: .5;
-                    color: #000000;
-                }
-                .follow-btn {
-                    background-color: #4B709A;
-                    color: #FFFFFF;
-                }
-            }
-            .edit-btn {
+            a:hover {
                 background-color: #4B709A;
                 color: #FFFFFF;
+                text-decoration: none;
             }
-            .user-post-content {
-                .sns-image {
-                    width: 100%;
-                    height: 330px;
-                    object-fit: cover;
-                }
-                .user-area {
-                    background-color: #222222;
-                    img {
-                        width: 35px;
-                        height: 35px;
-                        border-radius: 50%;
-                        object-fit: cover;
-                        margin-left: 10px;
-                    }
-                    .user-name {
-                        color: #FFFFFF;
-                    }
-                    .user-height {
-                        font-size: 10px;
-                        color: #FFFFFF;
-                    }
-                    .like {
-                        i {
-                            font-size: 18px;
-                        }
-                    }
-                    .number-of-likes {
-                        font-size: 15px;
-                        margin-left: 5px;
-                        color: #FFFFFF;
-                    }
-                }
-                .faq-content {
-                    border-radius: 10px;
-                    .faq-image {
-                        border-radius: 10px 0 0 10px;
-                        width: 100%;
-                        object-fit: cover;
-                        height: 250px;
-                    }
-                    .col-lg-7 {
-                        background-color: #FFFFFF;
-                        opacity: .5;
-                    }
+            .active {
+                background-color: #4B709A;
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+            i {
+                margin-right: 15px;
+                font-size: 1.1rem;
+            }
+            hr {
+                border-top: 2px solid #333333;
+            }
+            .post-btn {
+                background-color: #4B709A;
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+            .search-identification a:hover {
+                text-decoration: underline;
+                color: #333333;
+                background-color: #CBC5C1;
+            }
+        }
+        // * スマートフォン （小）
+        @media (max-width: 768px) {
+            // ?モバイルサイドバーのレイアウト設定
+            .header {
+                img {
+                    width: 40%;
                 }
             }
         }
-        // ? プロフィール編集ページの設定
-        .edit-content {
-            margin: 20px 0;
-            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
-                border-radius: 10px;
-                height: 50px;
-            }
-            select {
-                border-radius: 10px;
-                height: 50px;
-            }
-            .modal-area {
-                .modal-body {
-                    background-color: #333333;
-                    padding: 200px 0;
+        // * タブレット
+        @media (min-width: 768px) and (max-width: 1280px) {
+            // ?モバイルサイドバーのレイアウト設定
+            .header {
+                img {
+                    width: 20%;
                 }
-                .post-area {
-                    background-color: #333333;
-                    .submit-btn {
+            }
+        }
+        // * PC（大）
+        @media (min-width: 1280px) {
+            .profile-cover {
+                width: 100%;
+                height: 243px !important;
+            }
+            // ? フォロー中一覧の設定
+            .follow-content {
+                margin-top: 50px;
+                width: 913px;
+                .tab-menu {
+                    li {
+                        list-style: none;
+                    }
+                    .active {
+                        background-color: #4B709A;
+                        color: #FFFFFF;
+                        border: none;
+                        border-radius: 5px;
+                    }
+                    a {
+                        border-bottom: 3px solid #333333;
+                        color: #333333;
+                        padding: 8px 0;
+                    }
+                }
+                .tab-area {
+                    padding: 0px 30px;
+                    .user-area {
+                        td {
+                            padding: 10px 0;
+                        }
+                        border-bottom: 1px solid #333333;
+                        .avatar {
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            margin-right: 25px;
+                        }
+                        label {
+                            font-size: 16px;
+                        }
+                        .unfollow-btn {
+                            background-color: #FFFFFF;
+                            opacity: .5;
+                            color: #000000;
+                        }
+                        .follow-btn {
+                            background-color: #4B709A;
+                            color: #FFFFFF;
+                        }
+                    }
+                    .edit-btn {
                         background-color: #4B709A;
                         color: #FFFFFF;
                     }
                 }
+                .user-post-content {
+                    .sns-image {
+                        width: 100%;
+                        height: 330px;
+                        object-fit: cover;
+                    }
+                    .user-area {
+                        background-color: #222222;
+                        img {
+                            width: 35px;
+                            height: 35px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            margin-left: 10px;
+                        }
+                        .user-name {
+                            color: #FFFFFF;
+                        }
+                        .user-height {
+                            font-size: 10px;
+                            color: #FFFFFF;
+                        }
+                        .like {
+                            i {
+                                font-size: 18px;
+                            }
+                        }
+                        .number-of-likes {
+                            font-size: 15px;
+                            margin-left: 5px;
+                            color: #FFFFFF;
+                        }
+                    }
+                    .faq-content {
+                        border-radius: 10px;
+                        .faq-image {
+                            border-radius: 10px 0 0 10px;
+                            width: 100%;
+                            object-fit: cover;
+                            height: 250px;
+                        }
+                        .col-lg-7 {
+                            background-color: #FFFFFF;
+                            opacity: .5;
+                        }
+                    }
+                }
+                .page {
+                    margin-top: 50px;
+                }
+            }
+            // ? プロフィール編集ページの設定
+            .edit-content {
+                margin: 20px 0;
+                input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+                    border-radius: 10px;
+                    height: 50px;
+                }
+                select {
+                    border-radius: 10px;
+                    height: 50px;
+                }
+                .modal-area {
+                    .modal-body {
+                        background-color: #333333;
+                        padding: 200px 0;
+                    }
+                    .post-area {
+                        background-color: #333333;
+                        .submit-btn {
+                            background-color: #4B709A;
+                            color: #FFFFFF;
+                        }
+                    }
+                }
             }
         }
     }
-}

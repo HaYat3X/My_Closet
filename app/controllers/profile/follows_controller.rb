@@ -39,24 +39,28 @@ class Profile::FollowsController < ApplicationController
 
     # ! フォロー一覧を取得するメソッド
     def follow_list
-        # ユーザ全員のデータ
+        # ユーザID
+        @id = params[:id]
+
         @users = User.all()
+
         # * あるユーザーがフォローしているユーザー一覧を取得
-        @follow_list = UserRelation.where(follow_id: params[:id])
+        @follow_list = UserRelation.where(follow_id: params[:id]).page(params[:page])
     end
 
     # ! フォローわー一覧を取得するメソッド
     def follower_list
+        @id = params[:id]
+
         # ユーザ全員のデータ
         @users = User.all()
 
         # * あるユーザーがフォローされているユーザー一覧を取得
-        @follower_list = UserRelation.where(follower_id: params[:id])
+        @follower_list = UserRelation.where(follower_id: params[:id]).page(params[:page])
     end
 
     # ! (privateは外部クラスから参照できない)
     private
-
 
     # ! ログインがしているのか判定する
     def move_to_signed_in

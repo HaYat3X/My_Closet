@@ -92,6 +92,8 @@
 </div>
 
 <script>
+if (window.location.pathname === "/sns/new") {
+
     <%# ! 選択した画像をプレビューする %>
     var fileInput = document.getElementById('file-input');
     var preview = document.getElementById('image-preview');
@@ -192,5 +194,5 @@
             },
         });
     });
-
+}
 </script>

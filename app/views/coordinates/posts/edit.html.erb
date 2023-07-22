@@ -97,6 +97,8 @@
     </div>
 </div>
 <script>
+if (window.location.pathname === "/sns/edit/'<%= j @closet.id %>'") {
+
 // 画像選択をプレビューする
 	var fileInput = document.getElementById('file-input');
 	var preview = document.getElementById('image-preview');
@@ -209,5 +211,5 @@
             },
         });
     });
-
+}
 </script>
