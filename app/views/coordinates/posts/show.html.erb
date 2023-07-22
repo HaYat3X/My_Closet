@@ -1,95 +1,84 @@
 <div id="closet_posts">
-    <%# ! header %>
-    <div class="pc-header">
-        <%= render "coordinates/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2-5 pc-sidebar">
-            <%= render "coordinates/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="col-lg-9-5 col-12">
-            <div class="show-content">
-                <h3 class="pt-3 pb-5 fw-bold text-center">アイテム詳細</h3>
+        <div class="main-content">
+            <div class="show-content mx-auto">
+                <h3 class="fw-bold text-center">アイテム詳細</h3>
 
-                <div class="row mx-4 d-flex align-items-center justify-content-center">
-                    <div class="col-lg-5">
+                <div class="row g-0 item-area mx-auto">
+                    <div class="col-lg-6 left-content">
                         <%= image_tag @closet.photograph.url, class: "closet-show-image" %>
                     </div>
 
-                    <div class="col-lg-7 item-data">
-                        <div class="d-flex">
-                            <div class="col-lg-6 col-md-3 col-3 p-1 table-menu">
+                    <div class="col-lg-6 right-content">
+                        <div class="d-flex item-data">
+                            <div class="col-6 table-menu">
                                 メインカテゴリー    
                             </div>
 
-                            <div class="col-lg-6 col-md-9 col-9 p-1 text-end fw-bold">
+                            <div class="col-6 text-end fw-bold">
                                 <%= @closet.big_Category %>
                             </div>
                         </div>
-                        <hr>
 
-                        <div class="d-flex mt-3">
-                            <div class="col-lg-6 col-md-3 col-3 p-1 table-menu">
+                        <div class="d-flex item-data">
+                            <div class="col-6 table-menu">
                                 サブカテゴリー  
                             </div>
 
-                            <div class="col-lg-6 col-md-9 col-9 p-1 text-end fw-bold">
+                            <div class="col-6 text-end fw-bold">
                                 <%= @closet.small_Category %>
                             </div>
                         </div>
-                        <hr>
 
-                        <div class="d-flex mt-3">
-                            <div class="col-lg-6 col-md-3 col-3 p-1 table-menu">
+                        <div class="d-flex item-data">
+                            <div class="col-6 table-menu">
                                 金額
                             </div>
 
-                            <div class="col-lg-6 col-md-9 col-9 p-1 text-end fw-bold">
+                            <div class="col-6 text-end fw-bold">
                                 <% if @closet.price %>
                                     ￥<%= number_with_delimiter(@closet.price, delimiter: ',') %>
                                 <% end %>
                             </div>
                         </div>
-                        <hr>
 
-                        <div class="d-flex mt-3">
-                            <div class="col-lg-6 col-md-3 col-3 p-1 table-menu">
+                        <div class="d-flex item-data">
+                            <div class="col-6 table-menu">
                                 カラー
                             </div>
 
-                            <div class="col-lg-6 col-md-9 col-9 p-1 text-end fw-bold">
+                            <div class="col-6 text-end fw-bold">
                                 <%= @closet.color %>
                             </div>
                         </div>
-                        <hr>
 
-                        <div class="d-flex mt-3">
-                            <div class="col-lg-6 col-md-3 col-3 p-1 table-menu">
+                        <div class="d-flex item-data">
+                            <div class="col-6 table-menu">
                                 サイズ
                             </div>
 
-                            <div class="col-lg-6 col-md-9 col-9 p-1 text-end fw-bold">
+                            <div class="col-6 text-end fw-bold">
                                 <%= @closet.size %>
                             </div>
                         </div>
-                        <hr>
 
-                        <div class="d-flex mt-3">
-                            <div class="col-lg-6 col-md-3 col-3 p-1 table-menu">
+                        <div class="d-flex item-data">
+                            <div class="col-6 table-menu">
                                 ブランド
                             </div>
 
-                            <div class="col-lg-6 col-md-9 col-9 p-1 text-end fw-bold">
+                            <div class="col-6 text-end fw-bold">
                                 <%= @closet.brand %>
                             </div>
                         </div>
-                        <hr>
 
-                        <div class="mt-3">
+                        <div class="delete-edit-area">
                             <% if @closet.user.id == current_user.id %>
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -104,20 +93,77 @@
                         </div>
                     </div>
 
-                    <div class="配置未定">
-                        <% @coordinate_items.flatten.each do |sns| %>
-                            <div>
-                                <%= link_to "/sns/show/#{sns.id}" do %>
-                                    <%= image_tag sns.photograph.url, class: "sns-image" %>
-                                <% end %>
-                            </div>
-                        <% end %>
-                    </div>
-
-                    <div class="mt-5 pt-5 text-center">
+                    <div class="text-center">
                         <%= link_to "戻る", "/closet/list", class: "btn px-5 rounded-pill return-btn" %>
                     </div>
-                </div>    
+                </div>
+
+                <div class="sns-area mx-auto">
+                    <h6 class="fw-bold">このアイテムを使用したコーディネート</h6>
+                    <% @coordinate_items.flatten.each do |sns| %>
+                        <div class="col-lg-3 col-md-3 col-4 mt-1">
+
+                            <%= link_to "/sns/show/#{sns.id}" do %>
+                                <%= image_tag sns.photograph.url, class: "sns-image" %>
+                            <% end %>
+
+                            <div class="user-area py-2">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <% if sns.user.avatar.present? %>
+                                            <%= link_to "/profile/show/#{sns.user_id}" do %>
+                                                <%= image_tag sns.user.avatar.url %>
+                                            <% end %>
+                                        <% else %>
+                                            <%= link_to "/profile/show/#{sns.user_id}" do %>
+                                                <%= image_tag "/assets/user/avatar.png" %>
+                                            <% end %>
+                                        <% end %>
+
+                                        <div class="ms-2">
+                                            <div class="fw-bold user-name m-0">
+                                                <%= sns.user.user_name %>
+                                            </div>
+
+                                            <div class="user-height m-0">
+                                                <% if sns.user.height %>
+                                                    <%= sns.user.height %>cm
+                                                <% else %>
+                                                    身長未設定
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mx-2">
+                                        <div class="like m-0 d-flex align-items-center">
+                                            <%# ?  いいねできるかどうか判定 %>
+                                            <% if user_signed_in? %>
+                                                <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
+                                                    <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
+                                                        <img src="/assets/icons/icn_heart.png" alt="">
+                                                    <% end %>
+                                                <% else %>
+                                                    <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
+                                                        <img src="/assets/icons/icn_not_heart.png" alt="">
+                                                    <% end %>
+                                                <% end %>
+                                            <% else %>
+                                                <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
+                                                    <img src="/assets/icons/icn_not_heart.png" alt="">
+                                                <% end %>
+                                            <% end %>
+
+                                            <span class="number-of-likes align-self-center">
+                                                <%= SocialLike.where(social_id: sns.id).count %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
             </div>
         </div>
     </div>

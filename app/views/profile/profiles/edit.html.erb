@@ -50,8 +50,15 @@
 							<div class="mb-3">
 								<%= f.file_field :avatar,  class: "form-control", placeholder: "アイコン" %>
 							</div>
+
 							<div class="mb-3">
-								<%= f.text_field :user_name, required: true, class: "form-control", placeholder: "名前" %>
+								<%= f.text_field :user_name, class: "form-control", placeholder: "名前" %>
+
+								<div>
+									<% @user.errors[:user_name].each do |error| %>
+										<small class="text-danger">ユーザー名を入力してください。</small>
+									<% end %>
+								</div>
 							</div>
 
 							<div class="mb-3">
@@ -67,7 +74,13 @@
 							</div>
 
 							<div class="mb-3">
-								<%= f.select :gender, [['男', 1], ['女', -1]], { include_blank: '性別を選択してください' }, class: 'form-control' %>
+								<%= f.select :gender, [['男性', 1], ['女性', -1]], { include_blank: '性別を選択してください' }, class: 'form-control' %>
+
+								<div>
+									<% @user.errors[:gender].each do |error| %>
+										<small class="text-danger">性別を選択してください。</small>
+									<% end %>
+								</div>
 							</div>
 
 							<div class="mb-3">
@@ -84,7 +97,6 @@
 </div>
 
 <script>
-    <%# ! 画像選択をキャンセルする %>
 	// 画像選択をプレビューする
 	var fileInput = document.getElementById('file-input');
 	var preview = document.getElementById('image-preview');

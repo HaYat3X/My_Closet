@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2023_07_15_131029) do
 
   create_table "socials", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.string "title", null: false
     t.string "tag"
     t.string "message"
     t.string "photograph", null: false

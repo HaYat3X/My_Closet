@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # ! メール認証ができるように設定変更
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :timeoutable, :trackable
+
   # クローゼットテーブルのアソシエーション
   has_many :closets, dependent: :destroy
 
@@ -25,4 +26,7 @@ class User < ApplicationRecord
   # ! photgraphカラムとアップローダを関連付ける
   mount_uploader :avatar, UserImageUploader
 
+  # ! バリデーション
+  validates :user_name, presence: true
+  validates :gender, presence: true
 end

@@ -40,13 +40,13 @@
     }
     .text-bg-danger {
         position: absolute;
-        top: 0px;
-        right: -5px;
+        top: 2px;
+        right: 2px;
         background-color: red;
         color: white;
         padding: 2px 6px;
         border-radius: 10px;
-        font-size: 10px;
+        font-size: 8px;
     }
 }
 
@@ -54,7 +54,7 @@
 .sidebar {
     overflow-y: scroll;
     background-color: #CBC5C1;
-    box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow);
     a {
         color: #333333;
         text-decoration: none;
@@ -72,6 +72,15 @@
         color: #333333;
         background-color: #CBC5C1;
     }
+}
+
+// * フッターの設定
+.footer {
+    padding: 20px 40px;
+    background-color: #222222;
+    color: #FFFFFF;
+    font-size: 10px;
+    margin-top: 100px;
 }
 
 // * スマートフォン
@@ -176,6 +185,54 @@
             }
         }
     }
+    // ? ページネーションの設定
+    .pagination {
+        .page-item {
+            a {
+                background: #FFFFFF;
+                color: #333333;
+                padding: 12px 20px;
+                border-radius: 10px;
+                font-weight: bold;
+            }
+            a:hover {
+                background: #FFFFFF;
+                color: #333333;
+                padding: 12px 20px;
+                border-radius: 10px;
+                font-weight: bold;
+                opacity: .7;
+            }
+        }
+        .page-btn {
+            a {
+                color: #333333;
+                // padding: 12px 12px;
+                border-radius: 10px;
+                font-weight: bold;
+                font-size: 30px;
+            }
+            a:hover {
+                color: #333333;
+                padding: 12px 12px;
+                border-radius: 10px;
+                font-weight: bold;
+                opacity: .7;
+            }
+        }
+        .active {
+            a {
+                background: #333333;
+                color: #FFFFFF;
+                padding: 12px 20px;
+                border-radius: 10px;
+                font-weight: bold;
+            }
+        }
+        span {
+            padding: 12px 20px;
+        }
+    }
 }
 
 // ! フォント、背景色の定義
@@ -184,14 +241,3 @@ body {
     color: #575757;
     background-color: var(--bg);
 }
-
-.loading {
-    display: none;
-}
-
-// ! 画面の最大サイズを定義する
-// .max-width {
-//     // max-width: 1280px;
-//     // margin: auto;
-//     // box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2), -10px 0px 10px -10px rgba(0, 0, 0, 0.2);
-// }

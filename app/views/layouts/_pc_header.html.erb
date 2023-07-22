@@ -9,27 +9,63 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarForm">
-            <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
-                <div class="input-group">
-                    <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+            <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}")  %>
+                <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search" %>
 
-                    <%= f.button class: "btn bg-white", type: :submit do %>
-                        <i class="bi bi-search"></i>
+                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+
+                <a href="/profile/alert/list" class="btn">
+                    <i class="bi bi-bell fs-4 text-white alert-btn"></i>
+
+                    <% if @number_of_notifications.count != 0 %>
+                        <span class="rounded-pill text-bg-danger">
+                            <small>
+                                <% if @number_of_notifications.count >= 99 %>
+                                    99+
+                                <% else %>
+                                    <%= @number_of_notifications.count %>
+                                <% end %>
+                            </small>
+                        </span>
                     <% end %>
-                </div>
+                </a>
+            <% elsif current_page?("/closet/list") %>
+                <%= form_with(url: "/closet/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+
+                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+
+                <a href="/profile/alert/list" class="btn">
+                    <i class="bi bi-bell fs-4 text-white alert-btn"></i>
+
+                    <% if @number_of_notifications.count != 0 %>
+                        <span class="rounded-pill text-bg-danger">
+                            <small>
+                                <% if @number_of_notifications.count >= 99 %>
+                                    99+
+                                <% else %>
+                                    <%= @number_of_notifications.count %>
+                                <% end %>
+                            </small>
+                        </span>
+                    <% end %>
+                </a>
             <% end %>
-
-            <a href="/profile/alert/list" class="btn">
-                <i class="bi bi-bell fs-4 text-white alert-btn"></i>
-
-                <span class="rounded-pill text-bg-danger">
-                    <small>99+</small>1
-                </span>
-            </a>
         </div>
     </div>
 </nav>
 
-<div class="pc_error_msg">
+<div class="pc-error-msg">
     <%= render "layouts/error" %>
 </div>

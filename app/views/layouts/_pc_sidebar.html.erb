@@ -17,7 +17,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="/closet/list" class="d-flex align-items-center">
+            <a href="/sns/like_ranking" class="d-flex align-items-center">
                 <img src="/assets/icons/icn_ranking.png" alt="">
                 ランキング
             </a>
@@ -52,96 +52,109 @@
             </a>
         </li>
 
-        <li class="post-btn">
-            <a href="/sns/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                </svg>
-                コーディネート投稿
-            </a>
-        </li>
-
-        <hr class="mx-4">
-
-        <div class="search-identification">
-            <label>ブランド</label><br>
-
-            <li class="nav-item">
-                <a href="/sns/search?search=UNIQLO">UNIQLO</a>
+        <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}")  %>
+            <li class="post-btn">
+                <a href="/sns/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                    コーディネート投稿
+                </a>
             </li>
-
-            <li class="nav-item">
-                <a href="/sns/search?search=GU">GU</a>
+        <% elsif current_page?("/closet/list") %>
+            <li class="post-btn">
+                <a href="/closet/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                    アイテム追加
+                </a>
             </li>
-
-            <li class="nav-item">
-                <a href="/sns/search?search=H＆M">H＆M</a>
-            </li>
-
-            <li class="nav-item">
-                <a href="/sns/search?search=ZARA">ZARA</a>
-            </li>
-
-            <li class="nav-item">
-                <a href="/sns/search?search=WEGO">WEGO</a>
-            </li>
+        <% end %>
         
-            <li class="nav-item">
-                <a href="/sns/search?search=NIKE">NIKE</a>
-            </li>
-        
-            <li class="nav-item">
-                <a href="/sns/search?search=ADIDAS">ADIDAS</a>
-            </li>
-
-            <li class="nav-item">
-                <a href="/sns/search?search=GAP">GAP</a>
-            </li>
+        <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}")  %>
+            <hr class="mx-4">
             
-            <li class="nav-item">
-                <a href="/sns/search?search=LOWRYSFARM">LOWRYSFARM</a>
-            </li>
+            <div class="search-identification">
+                <label>ブランド</label><br>
 
-            <label>季節</label><br>
+                <li class="nav-item">
+                    <a href="/sns/search?search=UNIQLO">UNIQLO</a>
+                </li>
 
-            <li class="nav-item">
-                <a href="/sns/search?search=春">春（3月〜5月）</a>
-            </li>
+                <li class="nav-item">
+                    <a href="/sns/search?search=GU">GU</a>
+                </li>
 
-            <li class="nav-item">
-                <a href="/sns/search?search=夏">夏（6月〜8月）</a>
-            </li>
+                <li class="nav-item">
+                    <a href="/sns/search?search=H＆M">H＆M</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/sns/search?search=ZARA">ZARA</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/sns/search?search=WEGO">WEGO</a>
+                </li>
             
-            <li class="nav-item">
-                <a href="/sns/search?search=秋">秋（9月〜11月）</a>
-            </li>
+                <li class="nav-item">
+                    <a href="/sns/search?search=NIKE">NIKE</a>
+                </li>
             
-            <li class="nav-item">
-                <a href="/sns/search?search=冬">冬（12月〜2月）</a>
-            </li>
-            
-            <label>身長</label><br>
+                <li class="nav-item">
+                    <a href="/sns/search?search=ADIDAS">ADIDAS</a>
+                </li>
 
-            <li class="nav-item">
-                <a href="/sns/search?search=~149cm">~149cm</a>
-            </li>
+                <li class="nav-item">
+                    <a href="/sns/search?search=GAP">GAP</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/sns/search?search=LOWRYSFARM">LOWRYSFARM</a>
+                </li>
 
-            <li class="nav-item">
-                <a href="/sns/search?search=150cm~159cm">150cm~159cm</a>
-            </li>
+                <label>季節</label><br>
 
-            <li class="nav-item">
-                <a href="/sns/search?search=160cm~169cm">160cm~169cm</a>
-            </li>
+                <li class="nav-item">
+                    <a href="/sns/search?search=春">春（3月〜5月）</a>
+                </li>
 
-            <li class="nav-item">
-                <a href="/sns/search?search=170cm~179cm">170~179cm</a>
-            </li>    
+                <li class="nav-item">
+                    <a href="/sns/search?search=夏">夏（6月〜8月）</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/sns/search?search=秋">秋（9月〜11月）</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/sns/search?search=冬">冬（12月〜2月）</a>
+                </li>
+                
+                <label>身長</label><br>
 
-            <li class="nav-item">
-                <a href="/sns/search?search=180cm~">180cm~</a>
-            </li>       
-        </div>
+                <li class="nav-item">
+                    <a href="/sns/search?search=~149cm">~149cm</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/sns/search?search=150cm~159cm">150cm~159cm</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/sns/search?search=160cm~169cm">160cm~169cm</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/sns/search?search=170cm~179cm">170~179cm</a>
+                </li>    
+
+                <li class="nav-item">
+                    <a href="/sns/search?search=180cm~">180cm~</a>
+                </li>       
+            </div>
+        <% end %>
 
         <hr class="mx-4">
 

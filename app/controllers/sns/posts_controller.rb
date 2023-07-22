@@ -9,11 +9,23 @@ class Sns::PostsController < ApplicationController
             # ? フォローしているユーザーを取得する
             @follow = UserRelation.where(follow_id: current_user.id)
 
-            # ? フォロー中のユーザーのみのSNSデータを投稿日時が古い順に表示し１ページ毎に48件表示する
-            @snss = Social.where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page]).per(48)
+            # ? フォロー中のユーザーの投稿を全て取得する
+            @sns_all = Social.where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page_all])
+
+            # ? フォロー中の男性ユーザーの投稿を全て取得する
+            @sns_men = Social.joins(:user).where(users: { gender: 1 }).where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page_men])
+
+            # ? フォロー中の女性ユーザーの投稿を全て取得する
+            @sns_women = Social.joins(:user).where(users: { gender: -1 }).where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page_women])
         else
-            # ? SNSデータを投稿日時が古い順に表示し１ページ毎に48件表示する
-            @snss = Social.order(created_at: :desc).page(params[:page]).per(48)
+            # ? ALLタブに表示するデータを取得する
+            @sns_all = Social.order(created_at: :desc).page(params[:page_all])
+
+            # ? 男性の投稿のみ取得する
+            @sns_men = Social.joins(:user).where(users: { gender: 1 }).order(created_at: :desc).page(params[:page_men])
+
+            # ? 女性の投稿のみ取得する
+            @sns_women = Social.joins(:user).where(users: { gender: -1 }).order(created_at: :desc).page(params[:page_women])
         end
     end
 
@@ -59,7 +71,7 @@ class Sns::PostsController < ApplicationController
         @social.user_id = current_user.id
 
         # * フォームに入力された投稿文と、スタイルを連結する
-        sns_search_value = params[:social][:tag].to_s + params[:social][:message].to_s
+        sns_search_value = params[:social][:tag].to_s + params[:social][:message].to_s + params[:social][:title].to_s
 
         # * クローゼットアイテムの選択された情報を取得
         selected_elements = params[:elements]
@@ -140,7 +152,7 @@ class Sns::PostsController < ApplicationController
         @closets_all = Closet.where(user_id: current_user.id)
 
         # * フォームに入力された投稿文と、スタイルを連結する
-        sns_search_value = params[:social][:tag].to_s + params[:social][:message].to_s
+        sns_search_value = params[:social][:tag].to_s + params[:social][:message].to_s + params[:social][:title].to_s
 
         # * 選択したアイテムを取得
         selected_elements = params[:elements]
@@ -209,7 +221,7 @@ class Sns::PostsController < ApplicationController
     # ! 投稿時、編集時にバインドするパラメータ
     def posts_params
         # * socialモデルにバインドする
-        params.require(:social).permit(:tag, :message, :photograph)
+        params.require(:social).permit(:title, :tag, :message, :photograph)
     end
 
     # ! サインインしているのか判定する

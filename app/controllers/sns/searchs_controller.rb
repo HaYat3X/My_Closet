@@ -43,16 +43,16 @@ class Sns::SearchsController < ApplicationController
             end
 
             # ? 検索結果を変数に格納
-            @search_result = Social.where(created_at: start_date..end_date).page(params[:page]).per(48)
+            @search_result = Social.where(created_at: start_date..end_date).page(params[:page])
         elsif height.key?(key_word)
             # ? 身長の最大値と最小値を定義
             min_height, max_height = height[key_word]
 
             # ? 検索結果を変数に格納
-            @search_result = Social.joins(:user).where(users: { height: min_height..max_height }).page(params[:page]).per(48)
+            @search_result = Social.joins(:user).where(users: { height: min_height..max_height }).page(params[:page])
         else
             # ? 入力されたキーワードが指定した値以外の時は、入力されたキーワードで曖昧検索
-            @search_result = search_social('%' + key_word + '%').page(params[:page]).per(48)
+            @search_result = search_social('%' + key_word + '%').page(params[:page])
         end
     end
 

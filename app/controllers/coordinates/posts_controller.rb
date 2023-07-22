@@ -5,22 +5,21 @@ class Coordinates::PostsController < ApplicationController
     # ! クローゼットテーブルからログインしているユーザーの登録したアイテム情報のみを取得するメソッド
     def list
         # * 全てのカテゴリー
-        @closets_all = get_closets_by_category(nil)
-
+        @closets_all = Closet.order(created_at: :desc).where(user_id: current_user.id).page(params[:page_all])
         # * アウターカテゴリー
-        @closets_outer = get_closets_by_category("アウター")
+        @closets_outer = Closet.order(created_at: :desc).where(user_id: current_user.id).where(big_Category: "アウター").page(params[:page_outer])
 
         # * トップスカテゴリー
-        @closets_tops = get_closets_by_category("トップス")
+        @closets_tops = Closet.order(created_at: :desc).where(user_id: current_user.id).where(big_Category: "トップス").page(params[:page_tops])
 
         # * ボトムスカテゴリー
-        @closets_pants = get_closets_by_category("ボトムス")
+        @closets_bottoms = Closet.order(created_at: :desc).where(user_id: current_user.id).where(big_Category: "ボトムス").page(params[:page_bottoms])
 
         # * シューズカテゴリー
-        @closets_shoes = get_closets_by_category("シューズ")
+        @closets_shoes = Closet.order(created_at: :desc).where(user_id: current_user.id).where(big_Category: "シューズ").page(params[:page_shoes])
 
         # * その他カテゴリー
-        @closets_other = get_closets_by_category("その他")
+        @closets_other = Closet.order(created_at: :desc).where(user_id: current_user.id).where(big_Category: "その他").page(params[:page_other])
     end
 
     # ! アイテムを登録するフォームのメソッド
@@ -145,7 +144,7 @@ class Coordinates::PostsController < ApplicationController
 
         # * 大カテゴリーの値に基づいて、返す小カテゴリーの情報を変数にセット
         categories = {
-            "アウター" => ["ベスト", "ジャケット", "トラックジャケット", "MA-1", "マウンテンパーカー", "レザージャケット", "ウインドブレーカー", "ダウンジャケット", "コート", "ピーコート"],
+            "アウター" => ["ベスト", "ジャケット", "トラックジャケット", "MA-1", "パーカー", "レザージャケット", "ウインドブレーカー", "ダウンジャケット", "コート", "ピーコート"],
 
             "トップス" => ["タンクトップ", "Tシャツ", "ブラウス", "ポロシャツ", "シャツ", "スウェット", "パーカー", "カーディガン", "ニットセーター", "ワンピース"
             ],
@@ -162,18 +161,6 @@ class Coordinates::PostsController < ApplicationController
 
         # * JSON形式でレスポンスを返す
         render json: { options: small_Category }
-    end
-
-    # ! ブランドを検索するメソッド
-    def brand_search
-        # * ユーザーが検索したブランドの情報を取得する
-        key_word = '%' + params[:search] + '%'
-
-        # * 大文字、小文字を区別せずに検索
-        search_result = Closet.where("LOWER(brand) LIKE ?", "%#{key_word.downcase}%").distinct.pluck(:brand)
-
-        # * JSON形式でレスポンスを返す
-        render json: { options: search_result }
     end
 
     private

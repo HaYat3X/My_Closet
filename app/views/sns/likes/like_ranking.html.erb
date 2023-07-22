@@ -1,23 +1,13 @@
 <div id="sns_likes">
-    <%# ! ヘッダーエリア %>
-    <div class="mobile-header">
-        <%= render "sns/layouts/mobile_header" %>
-    </div>
-
-    <div class="pc-header">
-        <%= render "sns/layouts/pc_header" %>
-    </div>
-
-    <%# ! サイドバーエリアとコンテンツエリア %>
-    <div class="row g-0">
+    <div class="d-flex">
         <%# * サイドバーエリア %>
         <div class="col-lg-2-5 pc-sidebar">
-            <%= render "sns/layouts/pc_sidebar" %>
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# * コンテンツエリア %>
-        <div class="col-lg-9-5 col-12">
-            <div class="like-ranking-content">
+        <div class="main-content">
+            <div class="like-ranking-content mx-auto">
                 <h1>いいねランキング</h1>
 
                 <ul class="tab-menu nav nav-pills nav-fill col-lg-5 col-md-5">

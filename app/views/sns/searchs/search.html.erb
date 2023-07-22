@@ -1,23 +1,22 @@
 <div id="sns_searchs">
-    <%# ! header %>
-    <div class="mobile-header">
-        <%= render "sns/layouts/mobile_header" %>
-    </div>
-
-    <div class="pc-header">
-        <%= render "sns/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2-5 pc-sidebar">
-            <%= render "sns/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="col-lg-9-5 col-12">
-            <div class="search_content">
-                <h4 class="pt-3">「<%= params[:search] %>」の検索結果</h4>
+        <div class="main-content">
+            <div class="search_content mx-auto">
+                <% if @search_result.count == 0 %>
+                    <h4 class="fw-bold text-center">検索結果：</h4>
+                    <h4 class="fw-bold text-center">「<%= params[:search] %>」</h4>
+                    <p class="text-center fw-bold">（0件）</p>
+                    <h5 class="text-center">条件に当てはまるアイテムが見つかりませんでした。<br>検索条件を変えて検索してみてください。</h5>
+                <% else %>
+                    <h4 class="fw-bold text-center">検索結果：</h4>
+                    <h4 class="fw-bold text-center">「<%= params[:search] %>」</h4>
+                    <p class="text-center fw-bold">（<%= @search_result.count%>件）</p>
                     <div class="row g-1">
                         <% @search_result.each do |sns| %>
                             <div class="col-lg-3 col-md-3 col-4 mt-1">
@@ -48,7 +47,7 @@
                                                     <% if sns.user.height %>
                                                         <%= sns.user.height %>cm
                                                     <% else %>
-                                                        未設定
+                                                        身長未設定
                                                     <% end %>
                                                 </div>
                                             </div>
@@ -60,16 +59,16 @@
                                                 <% if user_signed_in? %>
                                                     <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
                                                         <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
-                                                            <i style="color: #E63758;" class="bi bi-heart-fill"></i>
+                                                            <img src="/assets/icons/icn_heart.png" alt="">
                                                         <% end %>
                                                     <% else %>
                                                         <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                            <i style="color: #FFFFFF;" class="bi bi-heart"></i>
+                                                            <img src="/assets/icons/icn_not_heart.png" alt="">
                                                         <% end %>
                                                     <% end %>
                                                 <% else %>
                                                     <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                        <i style="color: #FFFFFF;" class="bi bi-heart fs-5"></i>
+                                                        <img src="/assets/icons/icn_not_heart.png" alt="">
                                                     <% end %>
                                                 <% end %>
 
@@ -83,11 +82,11 @@
                             </div>
                         <% end %>
 
-                        <div class="mt-3">
+                        <div class="page d-flex justify-content-center">
                             <%= paginate @search_result %>
                         </div>
                     </div>
-                </div>
+                <% end %>
             </div>
         </div>
     </div>

@@ -1,4 +1,10 @@
 ja:
+  views:
+    pagination:
+      last: ""
+      previous: <img src="/assets/icons/icn_back.png" alt="" width="30" height="30">
+      next: <img src="/assets/icons/icn_go.png" alt="" width="30" height="30">
+      truncate: '･･･'
   activerecord:
     errors:
       models:
