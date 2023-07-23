@@ -11,13 +11,13 @@ class Profile::ProfilesController < ApplicationController
         @faq = Question.order(created_at: :desc).where(user_id: @user.id).page(params[:page]).per(16)
 
         # ログイン中のユーザが投稿したSNS投稿
-        @snss = Social.order(created_at: :desc).where(user_id: @user.id).page(params[:page]).per(16)
+        @sns_all = Social.order(created_at: :desc).where(user_id: @user.id).page(params[:page_sns])
 
         #ログイン中のユーザーがいいねしたSNS投稿
-        @sns_likes = SocialLike.order(created_at: :desc).where(user_id: @user.id).page(params[:page]).per(16)
+        @sns_like = Social.joins(:social_likes).where(social_likes: { user_id: @user.id }).order(created_at: :desc).page(params[:page_like])
 
         #ログイン中のユーザーが投稿したクローゼット
-        @closets = Closet.order(created_at: :desc).where(user_id: @user.id).page(params[:page]).per(16)
+        @closets = Closet.order(created_at: :desc).where(user_id: @user.id).page(params[:page_closet])
 
         # フォロー数
         @follow_list = UserRelation.order(created_at: :desc).where(follow_id: params[:id]).count

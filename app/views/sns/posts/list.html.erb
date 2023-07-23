@@ -264,8 +264,8 @@
 </div>
 
 <script>
-    $(document).ready(function() {
-        <%# ! フォロー中のユーザーの投稿のみに切り替える %>
+$(document).ready(function() {
+    <%# ! フォロー中のユーザーの投稿のみに切り替える %>
         const checkbox = document.getElementById('formSwitchCheckDefault');
         const form = document.getElementById('myForm');
 
@@ -313,5 +313,6 @@
             const newUrl = window.location.pathname + '?tab=' + tabId;
             window.history.pushState({ path: newUrl }, '', newUrl);
         });
-    });
+
+});
 </script>

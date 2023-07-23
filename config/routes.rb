@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   delete "sns/delete_like/:id", to:"sns/likes#delete_like"
   get "sns/like_ranking", to: "sns/likes#like_ranking"
 
-
   # ! クローゼット画面のルーティング
   get "closet/list", to: "coordinates/posts#list"
   get "closet/new", to: "coordinates/posts#new"
@@ -30,16 +29,12 @@ Rails.application.routes.draw do
   get "closet/search", to: "coordinates/searchs#search"
   post "/realtime_selected_value", to: "coordinates/posts#realtime_selected_value"
 
-
-  
-
-  # ! Q&A関連
+  # ! コーディネートQ&A画面のルーティング
   # * 投稿フォーム
-  get "question/new", to: "faq/questions#new"
-  # * 投稿処理
-  post "question/create", to: "faq/questions#create"
-  # * 投稿一覧画面
-  get "question/list", to: "faq/questions#list"
+  get "faq/question/new", to: "faq/questions#new"
+  post "faq/question/create", to: "faq/questions#create"
+  get "faq/question/list", to: "faq/questions#list"
+  
   # * 詳細設定
   get "question/show/:id", to: "faq/questions#show"
   # * 投稿編集画面
@@ -76,33 +71,23 @@ Rails.application.routes.draw do
   # * ユーザーの好みを判定する
   post "user_like_create", to: "suggestion/apis#user_like_create"
 
-  # ! プロフィール関連
-  # * プロフィールページ
+  # ! プロフィール画面のルーティング
   get "profile/show/:id", to: "profile/profiles#show"
-  # * プロフィール更新ページ
   get "profile/edit/:id", to: "profile/profiles#edit"
-  # * プロフィール更新
   patch "profile/update/:id", to: "profile/profiles#update"
-  # * フォローする
   post "profile/follow/:id", to: "profile/follows#create_follow"
-  # * フォロー解除する
   delete "profile/follow/:id", to: "profile/follows#delete_follow"
-  # * フォロー一覧
-  get "profile/follow_list/:id", to: "profile/follows#follow_list"
-  # * フォロワー一覧
-  get "profile/follower_list/:id", to: "profile/follows#follower_list"
-  # * お知らせ一覧画面
-  get "profile/alert/list", to: "profile/alerts#list"
-  # * お知らせ一覧画面
-  get "profile/alert/show/:id", to: "profile/alerts#show"
+  get "follow_list/:id", to: "profile/follows#follow_list"
+  get "follower_list/:id", to: "profile/follows#follower_list"
+  get "alert/list", to: "profile/alerts#list"
+  get "alert/show/:id", to: "profile/alerts#show"
   
   #お問い合わせフォーム
   get "contact/new" , to: "contact/contacts#new"
   post "contact/create" , to: "contact/contacts#create"
   get "contact/complete" , to: "contact/contacts#complete"
 
-  # ! 管理者関連
-  # * お知らせ登録フォーム
+  # ! 管理者画面のルーティング
   get "admin/alert/new", to: "admin/alerts#new"
   post "admin/alert/create", to: "admin/alerts#create"
   get "admin/alert/list", to: "admin/alerts#list"
@@ -110,8 +95,6 @@ Rails.application.routes.draw do
   get "admin/alert/edit/:id", to: "admin/alerts#edit"
   patch "admin/alert/update/:id", to: "admin/alerts#update"
   delete "admin/alert/delete/:id", to: "admin/alerts#delete"
-
-  # ! お問い合わせ関連（管理者）
   get "admin/contact/list", to: "admin/contacts#list"
   get "admin/contact/show/:id", to: "admin/contacts#show"
   post "admin/contact/create_handle/:id", to: "admin/contacts#create_handle"

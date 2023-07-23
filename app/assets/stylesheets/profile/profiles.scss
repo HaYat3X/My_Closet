@@ -62,44 +62,30 @@
     }
     // * PC（大）
     @media (min-width: 1280px) {
-        // ? モバイルのヘッダーは表示しない
-        .mobile_header {
-            display: none;
-        }
-        // ? モバイルのエラーメッセージは表示しない
-        .mobile_error_msg {
-            display: none;
-        }
-        // ? サイドバーの幅の設定
-        .col-lg-2-5 {
-            flex: 0 0 19%;
-            max-width: 19%;
-        }
-        // ? コンテンツの幅の設定
-        .col-lg-9-5 {
-            flex: 0 0 81%;
-            max-width: 81%;
-        }
-        // ?ヘッダーアイコンサイズのレイアウト設定
-        .header {
-            img {
-                width: 20%;
-            }
-        }
         // ? プロフィールページの設定
         .profile-cover {
             width: 100%;
-            height: 200px!important;
+            height: 243px !important;
+            object-fit: cover;
         }
         .show-content {
-            margin: 40px 80px;
-            .profile-cover {
-                width: 100px;
-                height: 50px !important;
+            margin-top: 50px;
+            width: 973px;
+            .tab-menu {
+                .active {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                    border: none;
+                    border-radius: 5px;
+                }
+                a {
+                    border-bottom: 3px solid #333333;
+                    color: #333333;
+                }
             }
             .avatar {
-                width: 100px;
-                height: 100px;
+                width: 130px;
+                height: 130px;
                 border-radius: 50%;
                 object-fit: cover;
                 margin-right: 25px;
@@ -108,64 +94,90 @@
                 background-color: #4B709A;
                 color: #FFFFFF;
             }
-            .user-post-content {
-                .sns-image {
-                    width: 100%;
-                    height: 330px;
-                    object-fit: cover;
+            .user-information-area {
+                h4 {
+                    font-size: 28px;
                 }
-                .user-area {
-                    background-color: #222222;
-                    img {
-                        width: 35px;
-                        height: 35px;
-                        border-radius: 50%;
-                        object-fit: cover;
-                        margin-left: 10px;
-                    }
-                    .user-name {
-                        color: #FFFFFF;
-                    }
-                    .user-height {
-                        font-size: 10px;
-                        color: #FFFFFF;
-                    }
-                    .like {
-                        i {
-                            font-size: 18px;
+                small {
+                    font-size: 12px;
+                }
+                .follow-area {
+                    margin-top: 25px;
+                    a {
+                        font-size: 14px;
+                        text-decoration: none;
+                        span {
+                            font-weight: bold;
+                            font-size: 20px;
                         }
                     }
-                    .number-of-likes {
-                        font-size: 15px;
-                        margin-left: 5px;
-                        color: #FFFFFF;
-                    }
                 }
-                .faq-content {
-                    border-radius: 10px;
-                    .faq-image {
-                        border-radius: 10px 0 0 10px;
-                        width: 100%;
-                        object-fit: cover;
-                        height: 250px;
-                    }
-                    .col-lg-7 {
-                        background-color: #FFFFFF;
-                        opacity: .5;
-                    }
+            }
+            .user-post-area {
+                margin-top: 55px;
+                .tab-content {
+                    padding: 0 106.5px;
                 }
+            }
+            .user-post-content {
+                .photograph {
+                    width: 100%;
+                    height: 336px;
+                    object-fit: cover;
+                }
+                .page {
+                    margin-top: 50px;
+                }
+                // .faq-content {
+                //     border-radius: 10px;
+                //     .faq-image {
+                //         border-radius: 10px 0 0 10px;
+                //         width: 100%;
+                //         object-fit: cover;
+                //         height: 250px;
+                //     }
+                //     .col-lg-7 {
+                //         background-color: #FFFFFF;
+                //         opacity: .5;
+                //     }
+                // }
             }
         }
         // ? プロフィール編集ページの設定
         .edit-content {
-            margin: 20px 0;
+            margin-top: 50px;
+            width: 973px;
             input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
                 border-radius: 10px;
                 height: 50px;
+                opacity: .6;
             }
             select {
                 border-radius: 10px;
                 height: 50px;
+                opacity: .6;
+            }
+            textarea {
+                border-radius: 10px;
+                height: 50px;
+                opacity: .6;
+            }
+            .container {
+                position: relative;
+            }
+            #overlay {
+                position: absolute;
+                top: 0;
+                opacity: .6;
+            }
+            .overlay img {
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+            .user-area {
+                width: 793px;
             }
             .modal-area {
                 .modal-body {

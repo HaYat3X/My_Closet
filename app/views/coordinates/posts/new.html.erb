@@ -1,43 +1,38 @@
 <div id="closet_posts">
-    <%# ! header %>
-    <div class="pc-header">
-        <%= render "coordinates/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2-5 pc-sidebar">
-            <%= render "coordinates/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="col-lg-9-5 col-12">
-            <div class="new-content">
-				<h3 class="pt-3 pb-5 fw-bold text-center">アイテム登録</h3>
+        <div class="main-content">
+            <div class="new-edit-content mx-auto">
+				<h4 class="fw-bold text-center">アイテム登録</h4>
 
-                <%= form_with(model: @closet, url: "/closet/create", local: true, class:"col-lg-9 mx-auto") do |f| %>
-					<small class="fw-bold">画像を追加</small>
-					<div class="mb-3">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ItemModal">
-                            アイテム画像
+                <%= form_with(model: @closet, url: "/closet/create", local: true) do |f| %>
+                    <div class="mb-3">
+                        <label class="fw-bold">アイテム画像を追加</label><br>
+                        <button type="button" class="item" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
+                            <div id="image-preview" class="preview"></div>
                         </button>
 
-                        <div class="modal modal-lg fade modal-area modal-dialog-scrollable" id="ItemModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                        <div class="modal fade modal-area modal-dialog-scrollable" id="CoordinateModal" tabindex="-1" aria-labelledby="exampleModalLabel">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">アイテム画像を設定</h6>
+                                        <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">コーディネート画像を設定</h6>
                                     </div>
 
                                     <div class="modal-body">
-                                        <div class="col-lg-5 mx-auto py-4">
-                                            <%= f.file_field :photograph, class: "form-control" %>
+                                        <div class="col-lg-7 mx-auto coordinate-modal">
+                                            <%= f.file_field :photograph, class: "form-control", id: "file-input" %>
                                         </div>
                                     </div>
 
                                     <div class="modal-footer post-area text-center">
                                         <div class="mx-auto">
-                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal">キャンセル</button>
+                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal" onclick="SnsPostFileReset()">キャンセル</button>
                                             <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
                                         </div>
                                     </div>
@@ -50,11 +45,11 @@
                                 <small class="text-danger">アイテム画像を設定してください。</small>
                             <% end %>
                         </div>
-					</div>
+                    </div>
 
-					<small class="fw-bold">アイテム情報</small>
+					<label class="fw-bold">アイテム情報</label><br>
 					<div class="mb-3">
-						<%= f.select :big_Category, ['アウター', 'トップス', 'ボトムス', 'シューズ', 'その他'], {include_blank: 'メインカテゴリーを選択'}, class: 'form-control', id: 'big-category-select' %>
+						<%= f.select :big_Category, ['アウター', 'トップス', 'ボトムス', 'シューズ', 'その他'], {include_blank: 'メインカテゴリーを選択 ▾'}, class: 'form-control', id: 'big-category-select' %>
 
 						<div>
                             <% @closet.errors[:big_Category].each do |error| %>
@@ -64,7 +59,7 @@
 					</div>
 
 					<div class="mb-3">
-						<%= f.select :small_Category, ['ジャケット','コート','ピーコート','ダウンジャケット','レザージャケット','ウインドブレーカー','カーディガン','Tシャツ','シャツ','ブラウス','ポロシャツ',"スウェット",'ニットセーター','パーカー','ジーンズ','パンツ','ショートパンツ','スカート','レギンス','ショーツ','スカート','スニーカー','パンプス','サンダル','ブーツ','フラットシューズ','革靴','ネックレス','ブレスレット',"キャップ",'ピアス','リング','ヘアアクセサリー','その他'], {include_blank: 'サブカテゴリーを選択'}, class: 'form-control', id: "small-category-select" %>
+						<%= f.select :small_Category, ['ジャケット','コート','ピーコート','ダウンジャケット','レザージャケット','ウインドブレーカー','カーディガン','Tシャツ','シャツ','ブラウス','ポロシャツ',"スウェット",'ニットセーター','パーカー','ジーンズ','パンツ','ショートパンツ','スカート','レギンス','ショーツ','スカート','スニーカー','パンプス','サンダル','ブーツ','フラットシューズ','革靴','ネックレス','ブレスレット',"キャップ",'ピアス','リング','ヘアアクセサリー','その他'], {include_blank: 'サブカテゴリーを選択 ▾'}, class: 'form-control', id: "small-category-select" %>
 					</div>
 
 					<div class="mb-3">
@@ -72,7 +67,7 @@
 					</div>
 
 					<div class="mb-3">
-						<%= f.select :color, ['ホワイト系','ブラック系','グレー系','ブラウン系','ベージュ系','グリーン系','ブルー系','パープル系','イエロー系','ピンク系','レッド系',"オレンジ系",'シルバー系','ゴールド系','その他'], {include_blank: 'カラーを選択'}, class: 'form-control' %>
+						<%= f.select :color, ['ホワイト系','ブラック系','グレー系','ブラウン系','ベージュ系','グリーン系','ブルー系','パープル系','イエロー系','ピンク系','レッド系',"オレンジ系",'シルバー系','ゴールド系','その他'], {include_blank: 'カラーを選択 ▾'}, class: 'form-control' %>
 
 						<div>
                             <% @closet.errors[:color].each do |error| %>
@@ -82,7 +77,7 @@
 					</div>
 
 					<div class="mb-3">
-						<%= f.select :size, ['M','L'], {include_blank: 'サイズを選択'}, class: 'form-control' %>
+						<%= f.select :size, ['M','L'], {include_blank: 'サイズを選択 ▾'}, class: 'form-control' %>
 					</div>
 
 					<div class="mb-3">
@@ -95,7 +90,45 @@
         </div>
     </div>
 </div>
+
 <script>
+if (window.location.pathname === "/sns/new") {
+
+    <%# ! 選択した画像をプレビューする %>
+    var fileInput = document.getElementById('file-input');
+    var preview = document.getElementById('image-preview');
+    var reader = new FileReader();
+
+    <%# * 画像を選択していない場合はデフォルト画像を表示する %>
+    var defaultImage = new Image();
+    defaultImage.src = "/assets/adds/img_add.png";
+    defaultImage.alt = 'デフォルト画像';
+    defaultImage.classList.add('preview');
+    defaultImage.style.objectFit = 'cover';
+    defaultImage.style.width = '189px';
+    defaultImage.style.height = '262px';
+    defaultImage.style.borderRadius = '10px';
+    preview.appendChild(defaultImage);
+
+    <%# * 画像が選択されたら、その画像をプレビューする %>
+    fileInput.addEventListener('change', function(event) {
+        var file = event.target.files[0];
+
+        reader.onload = function(e) {
+            preview.innerHTML = '';
+            var image = new Image();
+            image.src = e.target.result;
+            image.alt = 'プレビュー画像';
+            image.classList.add('preview');
+            image.style.width = '189px';
+            image.style.height = '262px';
+            image.style.objectFit = 'cover';
+            image.style.borderRadius = '10px';
+            preview.appendChild(image);
+        };
+
+        reader.readAsDataURL(file);
+    });
 
     $('#big-category-select').change(function() {
         var selectedValue = $(this).val();
@@ -161,5 +194,5 @@
             },
         });
     });
-
+}
 </script>

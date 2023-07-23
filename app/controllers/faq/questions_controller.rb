@@ -5,12 +5,6 @@ class Faq::QuestionsController < ApplicationController
     def new
         # * 使用するモデルを定義する
         @question = Question.new
-
-        # * 性別がnull値だった場合"/question/list"に戻る
-        if current_user.gender.blank? || ![1, -1].include?(current_user.gender)
-            redirect_to "/question/list", alert: "性別を選択することでQ&Aを投稿することができます。"
-        end
-
     end
 
     # ! 登録処理用メソッド
@@ -23,7 +17,7 @@ class Faq::QuestionsController < ApplicationController
 
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @question.save
-            redirect_to "/question/list", notice: "投稿が成功しました。"
+            redirect_to "/faq/question/list", notice: "投稿が成功しました。"
         else
             render :new
         end
@@ -31,9 +25,9 @@ class Faq::QuestionsController < ApplicationController
 
     #質問の一覧を取得する
     def list
-        @questions_mens = Question.order(created_at: :desc).joins(:user).where(users: { gender: 1 })
-        @questions_womens = Question.order(created_at: :desc).joins(:user).where(users: { gender: -1 })
-
+        @questions_all = Question.order(created_at: :desc).page(params[:page_all]).per(128)
+        @questions_men = Question.order(created_at: :desc).joins(:user).where(users: { gender: 1 }).page(params[:page_men]).per(128)
+        @questions_women = Question.order(created_at: :desc).joins(:user).where(users: { gender: -1 }).page(params[:page_women]).per(128)
     end
 
     #詳細表示
@@ -46,8 +40,6 @@ class Faq::QuestionsController < ApplicationController
 
         question_id = params[:id]
         @answers = Answer.order(created_at: :desc).where(question_id: question_id)
-
-
     end
 
     # ! 編集画面

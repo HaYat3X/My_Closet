@@ -1,25 +1,26 @@
 <div id="profile_profiles">
-    <%# ! header %>
-    <div class="pc-header">
-        <%= render "profile/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2-5 pc-sidebar">
-            <%= render "profile/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="col-lg-9-5">
-            <div class="edit-content col-lg-9 mx-auto">
-				<h3 class="pt-3 pb-5 fw-bold text-center">プロフィールを編集</h3>
+        <div class="main-content">
+			<%= image_tag "/assets/user/cover_img.png", class: "profile-cover" %>
 
+            <div class="edit-content mx-auto">
 				<%= form_with(model: @user, url: "/profile/update/#{@user.id}", local: true) do |f| %>
-					<div class="row">
-						<div class="col-lg-3">
+					<div class="d-flex">
+						<div class="avater-area">
 							<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditIconModal">
-								<div id="image-preview" class="preview mx-auto"></div>
+								<div class="container">
+									<div id="image-preview" class="preview mx-auto"></div>
+
+									<div id="overlay" class="overlay">
+										<img src="/assets/user/sample_icon.png" alt="">
+									</div>
+								</div>
 							</button>
 
 							<div class="modal fade modal-area modal-dialog-scrollable" id="EditIconModal" tabindex="-1" aria-labelledby="exampleModalLabel">
@@ -46,11 +47,7 @@
 							</div>
 						</div>
 
-						<div class="col-lg-9">
-							<div class="mb-3">
-								<%= f.file_field :avatar,  class: "form-control", placeholder: "アイコン" %>
-							</div>
-
+						<div class="user-area">
 							<div class="mb-3">
 								<%= f.text_field :user_name, class: "form-control", placeholder: "名前" %>
 
@@ -74,7 +71,7 @@
 							</div>
 
 							<div class="mb-3">
-								<%= f.select :gender, [['男性', 1], ['女性', -1]], { include_blank: '性別を選択してください' }, class: 'form-control' %>
+								<%= f.select :gender, [['男性', 1], ['女性', -1]], { include_blank: '性別を選択 ▾' }, class: 'form-control' %>
 
 								<div>
 									<% @user.errors[:gender].each do |error| %>
@@ -101,17 +98,18 @@
 	var fileInput = document.getElementById('file-input');
 	var preview = document.getElementById('image-preview');
 	var reader = new FileReader(); // FileReaderオブジェクトを作成
+	var defaultImageURL = '<%= j @user.avatar %>'; // 既存の画像URLを取得する
 
 	// デフォルトの画像を表示
 	var defaultImage = new Image();
-	defaultImage.src = "/assets/user/sample.png";
-	defaultImage.alt = 'デフォルト画像';
+	defaultImage.src = defaultImageURL;
+	defaultImage.alt = '';
 	defaultImage.classList.add('preview'); // 追加するクラス名
 	defaultImage.style.width = '150px';
 	defaultImage.style.height = '150px';
 	defaultImage.style.borderRadius = '50%';
 	defaultImage.style.objectFit = 'cover';
-	defaultImage.style.marginRight = '25px';
+	defaultImage.style.marginRight = '20px';
 	preview.appendChild(defaultImage);
 
 	// input fileのchangeイベントを監視
@@ -130,12 +128,16 @@
 			image.style.height = '150px';
 			image.style.borderRadius = '50%';
 			image.style.objectFit = 'cover';
-			image.style.marginRight = '25px';
+			image.style.marginRight = '20px';
 
 			preview.appendChild(image);
 		};
 
 		// ファイルをData URLとして読み込む
 		reader.readAsDataURL(file);
+
+		// プレビューされたらオーバーレイを消す関数
+		const overlay = document.getElementById('overlay');
+		overlay.style.display = 'none';
 	});
 </script>

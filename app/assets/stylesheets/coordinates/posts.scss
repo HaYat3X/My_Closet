@@ -137,16 +137,47 @@
                 margin-top: 50px;
             }
         }
-        // ? クローゼット投稿ページの設定
-        .new-content {
-            margin: 20px 50px;
-            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+        // ? クローゼット投稿、編集ページの設定
+        .new-edit-content {
+            margin-top: 45px;
+            width: 793px;
+            h4 {
+                font-size: 28px;
+                margin-bottom: 60px;
+            }
+            .container {
+                position: relative;
+            }
+            #overlay {
+                position: absolute;
+                top: 0;
+                opacity: .6;
+            }
+            .overlay img {
+                width: 189px;
+                height: 262px;
+                object-fit: cover;
+                border-radius: 10%;
+            }
+            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
                 border-radius: 10px;
                 height: 50px;
+                background-color: #FFFFFF;
+                opacity: .5;
             }
             select {
                 border-radius: 10px;
                 height: 50px;
+                background-color: #FFFFFF;
+                opacity: .5;
+            }
+            label {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+            .item {
+                border: none;
+                background-color: #CBC5C1;
             }
             .modal-area {
                 .modal-body {
@@ -162,32 +193,7 @@
                 }
             }
         }
-        // ? SNS編集ページの設定
-        .edit-content {
-            margin: 20px 50px;
-            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
-                border-radius: 10px;
-                height: 50px;
-            }
-            select {
-                border-radius: 10px;
-                height: 50px;
-            }
-            .modal-area {
-                .modal-body {
-                    background-color: #333333;
-                    padding: 200px 0;
-                }
-            }
-            .post-area {
-                background-color: #333333;
-                .submit-btn {
-                    background-color: #4B709A;
-                    color: #FFFFFF;
-                }
-            }
-        }
-        // ? SNS詳細ページの設定
+        // ? クローゼット詳細ページの設定
         .show-content {
             margin-top: 45px;
             h3 {

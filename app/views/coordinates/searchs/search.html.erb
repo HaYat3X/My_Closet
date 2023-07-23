@@ -1,34 +1,33 @@
 <div id="closet_searchs">
-    <%# ! header %>
-    <div class="pc-header">
-        <%= render "coordinates/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2-5 pc-sidebar">
-            <%= render "coordinates/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="col-lg-9-5 col-12">
-            <div class="search-content">
+        <div class="main-content">
+            <div class="search-content mx-auto">
                 <% if @search_result.count == 0 %>
-                    <h3 class="pt-3 fw-bold text-center">検索結果:</h3>
-                    <h3 class="fw-bold text-center">「<%= params[:search] %>」</h3>
-                    <p class="text-center pb-5">（0件）</p>
-                    <h4 class="text-center">条件に当てはまるアイテムが見つかりませんでした。<br>検索条件を変えて検索してみてください。</h4>
+                    <h4 class="fw-bold text-center">検索結果：</h4>
+                    <h4 class="fw-bold text-center">「<%= params[:search] %>」</h4>
+                    <p class="text-center">（0件）</p>
+                    <h5 class="text-center">条件に当てはまるアイテムが見つかりませんでした。<br>検索条件を変えて検索してみてください。</h5>
                 <% else %>
-                    <h3 class="pt-3 fw-bold text-center">検索結果:</h3>
-                    <h3 class="fw-bold text-center">「<%= params[:search] %>」</h3>
-                    <p class="text-center pb-5">（<%= @search_result.count %>件）</p>
+                    <h4 class="fw-bold text-center">検索結果：</h4>
+                    <h4 class="fw-bold text-center">「<%= params[:search] %>」</h4>
+                    <p class="text-center">（<%= @search_result.count %>件）</p>
 
                     <div class="row g-1">
-                        <% @search_result.each do |c| %>
+                        <% @search_result.each do |closet| %>
                             <div class="col-lg-3 mt-1">
-                                <%= link_to "/closet/show/#{c.id}" do %>
-                                    <%= image_tag c.photograph.url, class: "closet-search-image" %>
+                                <%= link_to "/closet/show/#{closet.id}" do %>
+                                    <%= image_tag closet.photograph.url, class: "closet-search-image" %>
                                 <% end %>
+                            </div>
+
+                            <div class="page d-flex justify-content-center">
+                                <%= paginate @search_result %>
                             </div>
                         <% end %>
                     </div>

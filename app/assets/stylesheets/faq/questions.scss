@@ -1,95 +1,150 @@
 #faq_questions {
-    // ! 全サイズ共通
-    // ?　タブのアクションカラー変更
-    .tab-ul {
-        .active {
-            color: var(--primary);
-        }
-        a {
-            color: var(--dark);
-        }
-    }
-
-    // * sidebar関連
-    .pc-sidebar {
-        border-radius: 5px;
-        // ? アイコンの表示設定
-        i {
-            margin-right: 10px;
-        }
-        // ? リストの表示設定
-        li:hover {
-            background-color: var(--primary);
-            border-radius: 5px;
-        }
-        // ? リンクの表示設定
-        a {
-            color: var(--dark);
-        }
-        a:hover {
-            color: #ffffff;
-        }
-        // ? サインイン、サインアウトのレイアウト
-        .action-link {
-            a:hover {
-                color: var(--dark);
-                background-color: var(--bg);
+    // * スマートフォン
+    @media (max-width: 768px) {}
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 1280px) {}
+    // * PC（大）
+    @media (min-width: 1280px) {
+        .tab-menu {
+            .active {
+                background-color: #4B709A;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 5px;
+            }
+            a {
+                border-bottom: 3px solid #333333;
+                color: #333333;
             }
         }
-        // ? コンテンツエリアと少し幅を空ける
-        .sidebar-content {
-            margin-right: 5px;
+        .list-content {
+            width: 1014px;
+            margin-top: 30px;
+            .question-area {
+                .question_image {
+                    width: 210px;
+                    height: 280px;
+                    object-fit: cover;
+                    border-radius: 10px 0 0 10px;
+                }
+                .question-area {
+                    background-color: #ffffff8b;
+                    width: 280px;
+                    border-radius: 0 10px 10px 0;
+                    padding: 18px 0;
+                    .user-area {
+                        padding: 0 14.5px;
+                        .question-user-image {
+                            width: 45px;
+                            height: 45px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            margin-right: 10px;
+                        }
+                        .user-information {
+                            h5 {
+                                font-size: 16px;
+                            }
+                            small {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                    .question-information {
+                        padding: 0 29px;
+                        font-size: 15px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        height: 175px;
+                    }
+                    .answer {
+                        margin: 0 22px;
+                        img {
+                            width: 18px;
+                            height: 18px;
+                            object-fit: cover;
+                        }
+                        small {
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+            .page {
+                margin-top: 50px;
+            }
         }
-    }
-    // * スマートフォン （小）
-    @media (max-width: 575.98px) {}
-    // * スマートフォン （中）
-    @media (min-width: 576px) and (max-width: 767.98px) {}
-    // * タブレット
-    @media (min-width: 768px) and (max-width: 991.98px) {}
-    // * PC（小）
-    @media (min-width: 992px) and (max-width: 1199.98px) {}
-    // * PC（大）
-    @media (min-width: 1200px) {
-        // ? Q&Aの画像サイズ
-        .question_image {
-            object-fit: cover;
-            width: 100%;
-            height: 330px;
-        }
-        // ? Q&Aのアバターアイコンサイズ
-        .question-user-image {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        // ? Q&A回答一覧画面の画像サイズ
-        .answer-image {
-            width: 100%;
-            height: 330px;
-            object-fit: cover;
-        }
-        // ? Q&A回答一覧画面のユーザーアイコンサイズ
-        .answer-user-image {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            transition: transform 0.3s;
-
-        }
-        // ? Q&A回答一覧画面のアイコン拡大調整
-        .answer-user-image:hover{
-            transform: scale(1.2);
-        }
-
-        .question-user-image{
-            transition: transform 0.3s;
-        }
-        // ? Q&A回答一覧画面のアイコン拡大調整
-        .question-user-image:hover{
-            transform: scale(1.2);
+        .new-edit-content {
+            width: 793px;
+            margin-top: 45px;
+            h3 {
+                font-size: 28px;
+                margin-bottom: 60px;
+            }
+            .container {
+                position: relative;
+            }
+            #overlay {
+                position: absolute;
+                top: 0;
+                opacity: .6;
+            }
+            .overlay img {
+                width: 189px;
+                height: 262px;
+                object-fit: cover;
+                border-radius: 10%;
+            }
+            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
+                border-radius: 10px;
+                height: 50px;
+                background-color: #FFFFFF;
+                opacity: .5;
+            }
+            select {
+                border-radius: 10px;
+                height: 50px;
+                background-color: #FFFFFF;
+                opacity: .5;
+            }
+            textarea {
+                border-radius: 10px;
+                height: 50px;
+                background-color: #FFFFFF;
+                opacity: .5;
+            }
+            label {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+            .coordinate {
+                border: none;
+                background-color: #CBC5C1;
+            }
+            .item {
+                border-radius: 10px;
+                height: 50px;
+                background-color: #FFFFFF;
+                opacity: .5;
+            }
+            .modal-area {
+                .modal-body {
+                    background-color: #333333;
+                    .coordinate-modal {
+                        padding: 200px 0;
+                    }
+                }
+            }
+            .post-area {
+                background-color: #333333;
+                .submit-btn {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                }
+            }
         }
     }
 }

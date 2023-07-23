@@ -168,6 +168,8 @@
 </div>
 
 <script>
+if (window.location.pathname === "/closet/list") {
+
     $(document).ready(function() { 
         <%# ! 現在位置しているタブをアクティブ状態にする %>
         function setActiveTab(tabId) {
@@ -203,4 +205,5 @@
             window.history.pushState({ path: newUrl }, '', newUrl);
         });
     });
+}
 </script>

@@ -99,8 +99,9 @@
                 </div>
 
                 <div class="sns-area mx-auto">
-                    <h6 class="fw-bold">このアイテムを使用したコーディネート</h6>
                     <% @coordinate_items.flatten.each do |sns| %>
+                        <h6 class="fw-bold">このアイテムを使用したコーディネート</h6>
+                        
                         <div class="col-lg-3 col-md-3 col-4 mt-1">
 
                             <%= link_to "/sns/show/#{sns.id}" do %>
