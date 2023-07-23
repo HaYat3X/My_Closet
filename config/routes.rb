@@ -29,16 +29,12 @@ Rails.application.routes.draw do
   get "closet/search", to: "coordinates/searchs#search"
   post "/realtime_selected_value", to: "coordinates/posts#realtime_selected_value"
 
-
-  
-
-  # ! Q&A関連
+  # ! コーディネートQ&A画面のルーティング
   # * 投稿フォーム
-  get "question/new", to: "faq/questions#new"
-  # * 投稿処理
-  post "question/create", to: "faq/questions#create"
-  # * 投稿一覧画面
-  get "question/list", to: "faq/questions#list"
+  get "faq/question/new", to: "faq/questions#new"
+  post "faq/question/create", to: "faq/questions#create"
+  get "faq/question/list", to: "faq/questions#list"
+  
   # * 詳細設定
   get "question/show/:id", to: "faq/questions#show"
   # * 投稿編集画面
@@ -91,8 +87,7 @@ Rails.application.routes.draw do
   post "contact/create" , to: "contact/contacts#create"
   get "contact/complete" , to: "contact/contacts#complete"
 
-  # ! 管理者関連
-  # * お知らせ登録フォーム
+  # ! 管理者画面のルーティング
   get "admin/alert/new", to: "admin/alerts#new"
   post "admin/alert/create", to: "admin/alerts#create"
   get "admin/alert/list", to: "admin/alerts#list"
@@ -100,8 +95,6 @@ Rails.application.routes.draw do
   get "admin/alert/edit/:id", to: "admin/alerts#edit"
   patch "admin/alert/update/:id", to: "admin/alerts#update"
   delete "admin/alert/delete/:id", to: "admin/alerts#delete"
-
-  # ! お問い合わせ関連（管理者）
   get "admin/contact/list", to: "admin/contacts#list"
   get "admin/contact/show/:id", to: "admin/contacts#show"
   post "admin/contact/create_handle/:id", to: "admin/contacts#create_handle"

@@ -264,7 +264,7 @@
 </div>
 
 <script>
-if (window.location.pathname === "/sns/list") {
+$(document).ready(function() {
     <%# ! フォロー中のユーザーの投稿のみに切り替える %>
         const checkbox = document.getElementById('formSwitchCheckDefault');
         const form = document.getElementById('myForm');
@@ -314,7 +314,5 @@ if (window.location.pathname === "/sns/list") {
             window.history.pushState({ path: newUrl }, '', newUrl);
         });
 
-}
-
-
+});
 </script>
