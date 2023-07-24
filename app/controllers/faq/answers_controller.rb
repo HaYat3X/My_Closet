@@ -16,6 +16,9 @@ class Faq::AnswersController < ApplicationController
         # * 投稿をIDを保存
         @answer.question_id = params[:id]
 
+
+        @answers = Answer.order(created_at: :desc).where(question_id: @question.id)
+
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @answer.save
             # ? 通知を作成

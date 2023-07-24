@@ -39,7 +39,7 @@ class Faq::QuestionsController < ApplicationController
 
 
         question_id = params[:id]
-        @answers = Answer.order(created_at: :desc).where(question_id: question_id)
+        @answers = Answer.order(created_at: :desc).where(question_id: @question.id)
     end
 
     # ! 編集画面

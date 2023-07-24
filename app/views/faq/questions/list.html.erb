@@ -52,7 +52,7 @@
                                             </div>
 
                                             <div class="answer d-flex align-items-center justify-content-end">
-                                                <%= link_to "/question/show/#{question.id}", style: "text-decoration: none; display: flex; align-items: center; margin-right: 2px;" do %>
+                                                <%= link_to "/faq/question/show/#{question.id}", style: "text-decoration: none; display: flex; align-items: center; margin-right: 2px;" do %>
                                                     <img src="/assets/icons/icn_message_b.png" alt="">
                                                 <% end %>
 
@@ -81,7 +81,7 @@
 
                                         <div class="question-area">
                                             <div class="d-flex align-items-center user-area">
-                                                <%= link_to "/profile/show/#{question.user.id}" do %>
+                                                <%= link_to "/faq/profile/show/#{question.user.id}" do %>
                                                     <% if question.user.avatar.url %>
                                                         <%= image_tag question.user.avatar.url, class: "question-user-image" %>
                                                     <% else %>
@@ -148,7 +148,7 @@
                                             </div>
 
                                             <div class="answer d-flex align-items-center justify-content-end">
-                                                <%= link_to "/question/show/#{question.id}", style: "text-decoration: none; display: flex; align-items: center; margin-right: 2px;" do %>
+                                                <%= link_to "/faq/question/show/#{question.id}", style: "text-decoration: none; display: flex; align-items: center; margin-right: 2px;" do %>
                                                     <img src="/assets/icons/icn_message_b.png" alt="">
                                                 <% end %>
 
