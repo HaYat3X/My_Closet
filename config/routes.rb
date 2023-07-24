@@ -38,22 +38,12 @@ Rails.application.routes.draw do
   patch "faq/question/update/:id", to: "faq/questions#update"
   delete "faq/question/delete/:id", to: "faq/questions#delete"
   get "faq/question/search", to: "faq/searchs#search"
-
-
-  # * 回答投稿処理 
   get "faq/answer/new/:id", to: "faq/answers#new"
   post "faq/answer/create/:id", to: "faq/answers#create"
-  
-  # * 回答削除
   delete "faq/answer/delete/:id", to: "faq/answers#delete"
-  # * 回答編集画面
   get "faq/answer/edit/:id", to: "faq/answers#edit"
-  # * 回答更新
   patch "faq/answer/update/:id", to: "faq/answers#update"
-
-  # * いいね機能
   post "faq/create_like/:id", to: "faq/likes#create_like"
-  # * いいねを解除する機能
   delete "faq/create_delete/:id", to: "faq/likes#delete_like"
 
   # ! 提案関連
