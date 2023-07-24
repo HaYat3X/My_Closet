@@ -1,7 +1,14 @@
 class Faq::AnswersController < ApplicationController
+    # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
+    before_action :move_to_signed_in, except: []
 
-            # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
-            before_action :move_to_signed_in, except: []
+    def new
+        @answer = Answer.new()
+
+        # * 回答する質問を取得
+        @question = Question.find(params[:id])
+    end
+
     # ! FAQ回答処理用メソッド
     def create
         # * 投稿時にバインドするパラメータを付与する
@@ -23,9 +30,9 @@ class Faq::AnswersController < ApplicationController
         if @answer.save
             # ? 通知を作成
             notice = Notification.create(user_id: @question.user_id, notification_type: "answer", source_user_id: current_user.id, source_post_id: @answer.question_id)
-            redirect_to "/question/show/#{params[:id]}", notice: "質問に回答しました。"
+            redirect_to "/faq/question/show/#{params[:id]}", notice: "質問に回答しました。"
         else
-            render template: 'faq/questions/show'
+            render :new
         end
     end
 

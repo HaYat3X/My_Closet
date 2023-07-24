@@ -40,11 +40,6 @@ class Faq::QuestionsController < ApplicationController
     def show
         @question = Question.find(params[:id])
 
-        # * アンサーフォームの設置
-        @answer = Answer.new
-
-
-        question_id = params[:id]
         @answers = Answer.order(created_at: :desc).where(question_id: @question.id)
     end
 

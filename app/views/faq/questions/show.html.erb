@@ -42,79 +42,14 @@
                         </div>
 
                         <% if current_user.id == @question.user.id %>
-                            <%= link_to "編集", "/faq/question/edit//#{@question.id}", class: "btn btn-outline-primary px-5" %>
+                            <%= link_to "編集", "/faq/question/edit/#{@question.id}", class: "btn btn-outline-primary px-5" %>
                             <%= link_to "削除", "/faq/question/delete/#{@question.id}", method: :delete, class: "btn btn-outline-danger px-5" %>
                         <% end %>
                     </div>
                 </div>
 
                 <div class="mx-auto col-7 modal-btn">
-                    <a href="#" type="button" class="btn-primary btn col-12">
-                        質問に回答する
-                    </a>
-                </div>
-
-                <div class="modal modal-xl fade modal-area modal-dialog-scrollable" id="AnswerModal" tabindex="-1" aria-labelledby="exampleModalLabel">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">質問に回答する</h6>
-                            </div>
-
-                            <div class="modal-body">
-                                <div class="answer-modal">
-                                    <div class="question-area">
-                                        <div class="d-flex align-items-center user">
-                                            <%= link_to "/profile/show/#{@question.user.id}" do %>
-                                                <% if @question.user.avatar.url %>
-                                                    <%= image_tag @question.user.avatar.url, class: "question-user-image" %>
-                                                <% else %>
-                                                    <img src="/assets/user/avatar.png" alt="Generic placeholder image" class="question-user-image">
-                                                <% end %>
-                                            <% end %>
-
-                                            <div class="user-information">
-                                                <h5 class="mb-0 fw-bold"><%= @question.user.user_name %></h5>
-                                                <small><%= @question.created_at.strftime('%m月%d日 %H時%M分') %></small>
-                                            </div>
-                                        </div>
-
-                                        <div class="question">
-                                            <%= simple_format(@question.question) %>
-                                        </div>
-
-                                        <%= image_tag @question.photograph.url, class: "question_image" %>
-                                    </div>
-                                
-                                    <%= form_with(model: @answer, url: "/faq/answer/create/#{@question.id}", local: true) do |f| %>
-                                        <div class="mb-3">
-                                            <%= f.text_area :answer, class: "form-control", placeholder: "回答内容を入力...", style: "height: 150px;" %>
-
-                                            <div>
-                                                <% @answer.errors[:answer].each do |error| %>
-                                                    <small class="text-danger">回答内容を入力してください。</small>
-                                                <% end %>
-                                            </div>
-
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
-                                        </div>
-
-                                        <%= f.submit "登録する", class: "btn btn-primary" %>
-                                    <% end %>
-                                </div>
-
-                                <div class="modal-footer post-area text-center">
-                                    <div class="mx-auto">
-                                        <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal">キャンセル</button>
-                                        <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <%= link_to "質問に回答する", "/faq/answer/new/#{@question.id}", class: "btn col-12" %>
                 </div>
 
                 <div class="answer-area d-flex g-0">
@@ -133,7 +68,7 @@
                                     <% if answer.user.avatar.url %>
                                         <%= image_tag answer.user.avatar.url, class: "answer-user-image" %>
                                     <% else %>
-                                        <img src="/assets/user/avatar.png" alt="Generic placeholder image" class="question-user-image">
+                                        <img src="/assets/user/avatar.png" alt="Generic placeholder image" class="answer-user-image">
                                     <% end %>
                                 <% end %>
 
