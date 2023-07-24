@@ -30,13 +30,11 @@ Rails.application.routes.draw do
   post "/realtime_selected_value", to: "coordinates/posts#realtime_selected_value"
 
   # ! コーディネートQ&A画面のルーティング
-  # * 投稿フォーム
   get "faq/question/new", to: "faq/questions#new"
   post "faq/question/create", to: "faq/questions#create"
   get "faq/question/list", to: "faq/questions#list"
-  
-  # * 詳細設定
-  get "question/show/:id", to: "faq/questions#show"
+  get "faq/question/show/:id", to: "faq/questions#show"
+
   # * 投稿編集画面
   get "question/edit/:id", to: "faq/questions#edit"
   # * 投稿更新

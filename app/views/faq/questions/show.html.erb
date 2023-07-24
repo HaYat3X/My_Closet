@@ -1,145 +1,169 @@
 <div id="faq_questions">
-    <%# ! header %>
-    <div class="pc-header">
-        <%= render "faq/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
-            <%= render "faq/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10">
-            <div class="h-100">
-                <div class="list_content">
-                    <div class="bg-white">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <%= image_tag @question.photograph.url, class: "question_image" %>
-                            </div>
+        <div class="main-content">
+            <div class="show-content mx-auto">
+                <div class="number-of-answer d-flex align-items-center">                         
+                    回答数：
+                    <small class="m-0">
+                        <%= Answer.where(question_id: @question.id).count %>
+                    </small>
+                    件
+                </div>
 
-                            <div class="col-lg-9 py-3">
-                                <div class="d-flex">
-                                    <%= link_to "/profile/show/#{@question.user.id}" do %>
-                                    <% if @question.user.avatar.url %>
-                                        <%= image_tag @question.user.avatar.url, class: "question-user-image" %>
-                                    <% else %>
-                                        <img src="/assets/default-avatar.png" alt="Generic placeholder image" class="question-user-image">
-                                    <% end %>
-                                    <% end %>
-
-                                    <div class="fw-bold d-flex align-items-center mx-3">
-                                        <%= @question.user.user_name %>
-                                        <%= @question.user.gender %>
-                                    </div>
-                                </div>
-
-                                <p class="fw-bold my-4">
-                                    <%= @question.question %>
-                                </p>
-
-                                <%= link_to "/question/show/#{@question.id}", style: "text-decoration: none;", class: "text-dark" do %>
-                                    <i class="bi bi-chat-square-text fs-5"></i>
-                                <% end %>
-
-                                <%= Answer.where(question_id: @question.id).count %>
-                            </div>
-
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="mx-3 mt-3">
-                        <button type="button" class="btn btn-outline-primary col-12" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            回答する
-                        </button>
-
-                        <div class="collapse" id="collapseExample">
-                            <div class="card card-body">
-                                <% if @answer.errors.any? %>
-                                    <div class="alert alert-danger" role="alert">
-                                        <% @answer.errors.each do |error| %>
-                                            <strong>エラー！</strong> - <%= error.full_message %><br>
-                                        <% end %>
-                                    </div>
-                                <% end %>
-
-                                <%= form_with(model: @answer, url: "/faq/answer/create/#{@question.id}", local: true, :html => {class:"needs-validation", :novalidate => true}) do |f| %>
-                                    <div class="mb-3">
-                                        <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
-                                    </div>
-                                    <div class="mb-3">
-                                        <%= f.text_area :answer, class: "form-control", placeholder: "回答内容", required: true %>
-                                        <div class="invalid-feedback">
-                                            回答内容を入力してください。
-                                        </div>
-                                    </div>
-                                    <%= f.submit "登録する", class: "btn btn-primary" %>
-                                <% end %>
-                            </div>
-                        </div>
+                <div class="row g-0 question-area">
+                    <div class="col-3">
+                        <%= image_tag @question.photograph.url, class: "question_image" %>
                     </div>
 
-                    <div class="mt-3 my-5">
-                        <h6 class="text-center fw-bold">みんなの回答<%= Answer.where(question_id: @question.id).count %>件</h6>
-                        <% @answers.each do |a| %>
-                            <div class="bg-white g-0 mt-3">
-                                <div class="row">
-                                <div class="col-lg-3">
-                                    <% if a.photograph.url %>
-                                        <%= image_tag a.photograph.url, class: "answer-image" %>
-                                    <% else %>
-                                        <img src="/assets/img_1.png" alt="Generic placeholder image" class="answer-image">
-                                    <% end %>
-                                </div>
-                                <div class="col-lg-9 py-3">
-                                    <div class="d-flex">
-                                        <%= link_to "/profile/show/#{a.user.id}" do %>
-                                        <% if a.user.avatar.url %>
-                                            <%= image_tag a.user.avatar.url, class: "answer-user-image" %>
-                                        <% else %>
-                                            <img src="/assets/default-avatar.png" alt="Generic placeholder image" class="answer-user-image">
-                                        <% end %>
-                                        <% end %>
-                                        <div class="fw-bold d-flex align-items-center mx-3">
-                                            <%= a.user.user_name %>
-                                            <%= a.user.gender %>
-                                        </div>
-                                    </div>
+                    <div class="col-9">
+                        <div class="d-flex user">
+                            <%= link_to "/profile/show/#{@question.user.id}" do %>
+                                <% if @question.user.avatar.url %>
+                                    <%= image_tag @question.user.avatar.url, class: "question-user-image" %>
+                                <% else %>
+                                    <img src="/assets/user/avatar.png" alt="Generic placeholder image" class="question-user-image">
+                                <% end %>
+                            <% end %>
 
-
-                                    <p class="fw-bold my-4">
-                                        <%= a.answer %>
-
-                                        <div class="my-3 mx-1" style="padding-right: 25px;">
-                                            <% if a.user.id == current_user.id %>
-                                                <%= link_to "編集", "/faq/answer/edit/#{a.id}", class: "btn btn-outline-primary px-5" %>
-                                                <%= link_to "削除", "/faq/answer/delete/#{a.id}", method: :delete, class: "btn btn-outline-danger px-5" %>
-                                            <% end %>
-                                        </div>
-
-                                    </p>
-
-                                    <div class="" style="padding-right: 25px;">
-                                    <% if AnswerLike.where(user_id: current_user.id, answer_id: a.id).exists? %>
-                                        <%= link_to "/faq/create_delete/#{a.id}", method: :delete, style: "text-decoration: none;", class: "text-dark" do %>
-                                            <i class="bi bi-heart-fill fs-5"></i>
-                                        <% end %>
-                                    <% else %>
-                                        <%= link_to "/faq/create_like/#{a.id}", method: :post, style: "text-decoration: none;", class: "text-dark" do %>
-                                            <i class="bi bi-heart fs-5"></i>
-                                        <% end %>
-
-                                    <% end %>
-                                    <%= AnswerLike.where(answer_id: a.id).count %>人のユーザがいいねしました。
-                                    </div>
-                                </div>
-                                </div>
+                            <div class="user-information">
+                                <h5 class="mb-0 fw-bold"><%= @question.user.user_name %></h5>
+                                <small><%= @question.created_at.strftime('%m月%d日 %H時%M分') %></small>
                             </div>
+                        </div>
+
+                        <div class="question">                   
+                            <%= simple_format(@question.question) %>
+                        </div>
+
+                        <% if current_user.id == @question.user.id %>
+                            <%= link_to "編集", "/question/edit//#{@question.id}", class: "btn btn-outline-primary px-5" %>
+                            <%= link_to "削除", "/question/delete/#{@question.id}", method: :delete, class: "btn btn-outline-danger px-5" %>
                         <% end %>
                     </div>
+                </div>
+
+                <div class="mx-auto col-7 modal-btn">
+                    <a href="#" type="button" class="btn-primary btn col-12">
+                        質問に回答する
+                    </a>
+                </div>
+
+                <div class="modal modal-xl fade modal-area modal-dialog-scrollable" id="AnswerModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">質問に回答する</h6>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="answer-modal">
+                                    <div class="question-area">
+                                        <div class="d-flex align-items-center user">
+                                            <%= link_to "/profile/show/#{@question.user.id}" do %>
+                                                <% if @question.user.avatar.url %>
+                                                    <%= image_tag @question.user.avatar.url, class: "question-user-image" %>
+                                                <% else %>
+                                                    <img src="/assets/user/avatar.png" alt="Generic placeholder image" class="question-user-image">
+                                                <% end %>
+                                            <% end %>
+
+                                            <div class="user-information">
+                                                <h5 class="mb-0 fw-bold"><%= @question.user.user_name %></h5>
+                                                <small><%= @question.created_at.strftime('%m月%d日 %H時%M分') %></small>
+                                            </div>
+                                        </div>
+
+                                        <div class="question">
+                                            <%= simple_format(@question.question) %>
+                                        </div>
+
+                                        <%= image_tag @question.photograph.url, class: "question_image" %>
+                                    </div>
+                                
+                                    <%= form_with(model: @answer, url: "/faq/answer/create/#{@question.id}", local: true) do |f| %>
+                                        <div class="mb-3">
+                                            <%= f.text_area :answer, class: "form-control", placeholder: "回答内容を入力...", style: "height: 150px;" %>
+
+                                            <div>
+                                                <% @answer.errors[:answer].each do |error| %>
+                                                    <small class="text-danger">回答内容を入力してください。</small>
+                                                <% end %>
+                                            </div>
+
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
+                                        </div>
+
+                                        <%= f.submit "登録する", class: "btn btn-primary" %>
+                                    <% end %>
+                                </div>
+
+                                <div class="modal-footer post-area text-center">
+                                    <div class="mx-auto">
+                                        <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal">キャンセル</button>
+                                        <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="answer-area d-flex g-0">
+                    <% @answers.each do |answer| %>
+                        <div class="col-3">
+                            <% if answer.photograph.url %>
+                                <%= image_tag answer.photograph.url, class: "answer-image" %>
+                            <% else %>
+                                <img class="answer-image" src="/assets/adds/img_add.png" alt="">
+                            <% end %>    
+                        </div>
+
+                        <div class="col-9">
+                            <div class="d-flex user">
+                                <%= link_to "/profile/show/#{answer.user.id}" do %>
+                                    <% if answer.user.avatar.url %>
+                                        <%= image_tag answer.user.avatar.url, class: "answer-user-image" %>
+                                    <% else %>
+                                        <img src="/assets/user/avatar.png" alt="Generic placeholder image" class="question-user-image">
+                                    <% end %>
+                                <% end %>
+
+                                <div class="user-information">
+                                    <h5 class="mb-0 fw-bold"><%= answer.user.user_name %></h5>
+                                    <small><%= answer.created_at.strftime('%m月%d日 %H時%M分') %></small>
+                                </div>
+                            </div>
+
+                            <div class="question">                   
+                                <%= simple_format(answer.answer) %>
+                            </div>
+
+                            <% if current_user.id == answer.user.id %>
+                                <%= link_to "編集", "/faq/answer/edit/#{answer.id}", class: "btn btn-outline-primary px-5" %>
+                                <%= link_to "削除", "/faq/answer/delete/#{answer.id}", method: :delete, class: "btn btn-outline-danger px-5" %>
+                            <% end %>
+
+                            <% if AnswerLike.where(user_id: current_user.id, answer_id: answer.id).exists? %>
+                                <%= link_to "/faq/create_delete/#{answer.id}", method: :delete, style: "text-decoration: none;", class: "text-dark" do %>
+                                        <i class="bi bi-heart-fill fs-5"></i>
+                                <% end %>
+                            <% else %>
+                                <%= link_to "/faq/create_like/#{answer.id}", method: :post, style: "text-decoration: none;", class: "text-dark" do %>
+                                    <i class="bi bi-heart fs-5"></i>
+                                <% end %>
+                            <% end %>
+                            <%= AnswerLike.where(answer_id: answer.id).count %>人のユーザがいいねしました。
+                        </div>
+                    <% end %>
                 </div>
             </div>
         </div>
