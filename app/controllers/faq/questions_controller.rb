@@ -65,7 +65,7 @@ class Faq::QuestionsController < ApplicationController
 
         # 更新
         if @question.update(posts_params)
-            redirect_to "/question/list", notice: "投稿を編集しました"
+            redirect_to "/faq/question/show/#{@question.id}", notice: "投稿を編集しました"
         else
             redirect_to "/", alert: "投稿の編集に失敗しました"
         end
@@ -83,7 +83,7 @@ class Faq::QuestionsController < ApplicationController
     
         # 削除
         if @question.destroy
-            redirect_to "/question/list", notice: "投稿を削除しました"
+            redirect_to "/faq/question/list", notice: "投稿を削除しました"
         else
             redirect_to "/", alert: "投稿の編集に削除しました"
         end

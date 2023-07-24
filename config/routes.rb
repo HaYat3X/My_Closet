@@ -34,13 +34,11 @@ Rails.application.routes.draw do
   post "faq/question/create", to: "faq/questions#create"
   get "faq/question/list", to: "faq/questions#list"
   get "faq/question/show/:id", to: "faq/questions#show"
+  get "faq/question/edit/:id", to: "faq/questions#edit"
+  patch "faq/question/update/:id", to: "faq/questions#update"
+  delete "faq/question/delete/:id", to: "faq/questions#delete"
 
-  # * 投稿編集画面
-  get "question/edit/:id", to: "faq/questions#edit"
-  # * 投稿更新
-  patch "question/update/:id", to: "faq/questions#update"
-  # * 投稿削除
-  delete "question/delete/:id", to: "faq/questions#delete"
+
   # * 検索画面
   get "question/search", to: "faq/searchs#search"
   # * 回答投稿処理 
