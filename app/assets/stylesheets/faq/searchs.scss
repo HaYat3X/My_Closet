@@ -1,3 +1,84 @@
-// Place all the styles related to the faq/searchs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+// ! searchsフォルダのレイアウト （search）
+#faq_searchs {
+    // ! 全サイズ共通
+    // * スマートフォン （小）
+    @media (max-width: 768px) {}
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 1280px) {}
+    // * PC（大）
+    @media (min-width: 1280px) {
+        // ? 質問検索ページの設定
+        .search_content {
+            width: 1014px;
+            margin-top: 45px;
+            h4 {
+                font-size: 28px;
+            }
+            p {
+                font-size: 16px;
+                align-items: center;
+                margin-top: 16px;
+                margin-bottom: 60px;
+            }
+            h5 {
+                font-size: 22px;
+            }
+            .question-area {
+                .question_image {
+                    width: 210px;
+                    height: 280px;
+                    object-fit: cover;
+                    border-radius: 10px 0 0 10px;
+                }
+                .question-area {
+                    background-color: #ffffff8b;
+                    width: 280px;
+                    border-radius: 0 10px 10px 0;
+                    padding: 18px 0;
+                    .user-area {
+                        padding: 0 14.5px;
+                        .question-user-image {
+                            width: 45px;
+                            height: 45px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            margin-right: 10px;
+                        }
+                        .user-information {
+                            h5 {
+                                font-size: 16px;
+                            }
+                            small {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                    .question-information {
+                        padding: 0 29px;
+                        font-size: 15px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        height: 175px;
+                    }
+                    .answer {
+                        margin: 0 22px;
+                        img {
+                            width: 18px;
+                            height: 18px;
+                            object-fit: cover;
+                        }
+                        small {
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+            .page {
+                margin-top: 50px;
+            }
+        }
+    }
+}

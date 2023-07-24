@@ -1,0 +1,134 @@
+<div id="faq_answers">
+    <div class="d-flex">
+        <%# ! sidebar %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="main-content">
+            <div class="new-edit-content mx-auto">
+                <div class="row g-0 question-area">
+                    <div class="col-3">
+                        <%= image_tag @question.photograph.url, class: "question_image" %>
+                    </div>
+
+                    <div class="col-9">
+                        <div class="d-flex user">
+                            <%= link_to "/profile/show/#{@question.user.id}" do %>
+                                <% if @question.user.avatar.url %>
+                                    <%= image_tag @question.user.avatar.url, class: "question-user-image" %>
+                                <% else %>
+                                    <img src="/assets/user/avatar.png" alt="Generic placeholder image" class="question-user-image">
+                                <% end %>
+                            <% end %>
+
+                            <div class="user-information">
+                                <h5 class="mb-0 fw-bold"><%= @question.user.user_name %></h5>
+                                <small><%= @question.created_at.strftime('%m月%d日 %H時%M分') %></small>
+                            </div>
+                        </div>
+
+                        <div class="question">                   
+                            <%= simple_format(@question.question) %>
+                        </div>
+
+                        <% if current_user.id == @question.user.id %>
+                            <%= link_to "編集", "/faq/question/edit/#{@question.id}", class: "btn btn-outline-primary px-5" %>
+                            <%= link_to "削除", "/faq/question/delete/#{@question.id}", method: :delete, class: "btn btn-outline-danger px-5" %>
+                        <% end %>
+                    </div>
+                </div>
+
+                <%= form_with(model: @answer, url: "/faq/answer/create/#{@question.id}", local: true, class: "mx-auto") do |f| %>
+                    <div class="mb-3">
+                    <label class="fw-bold">コーディネート画像を追加</label><br>
+                        <button type="button" class="coordinate" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
+                            <div id="image-preview" class="preview"></div>
+                        </button>
+
+                        <div class="modal fade modal-area modal-dialog-scrollable" id="CoordinateModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">回答画像を設定</h6>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="col-lg-7 mx-auto coordinate-modal">
+                                            <%= f.file_field :photograph, class: "form-control", id: "file-input" %>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer post-area text-center">
+                                        <div class="mx-auto">
+                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal">キャンセル</button>
+                                            <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <% @question.errors[:photograph].each do |error| %>
+                                <small class="text-danger">コーディネート質問画像を設定してください。</small>
+                            <% end %>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <%= f.text_area :answer, class: "form-control", placeholder: "回答内容を入力...", style: "height: 150px;" %>
+
+                        <div>
+                            <% @answer.errors[:answer].each do |error| %>
+                                <small class="text-danger">回答内容をを入力してください。</small>
+                            <% end %>
+                        </div>
+                    </div>
+
+                    <%= f.submit "回答する", class: "btn btn-primary" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    <%# ! 選択した画像をプレビューする %>
+    var fileInput = document.getElementById('file-input');
+    var preview = document.getElementById('image-preview');
+    var reader = new FileReader();
+
+    <%# * 画像を選択していない場合はデフォルト画像を表示する %>
+    var defaultImage = new Image();
+    defaultImage.src = "/assets/adds/img_add.png";
+    defaultImage.alt = 'デフォルト画像';
+    defaultImage.classList.add('preview');
+    defaultImage.style.objectFit = 'cover';
+    defaultImage.style.width = '189px';
+    defaultImage.style.height = '262px';
+    defaultImage.style.borderRadius = '10px';
+    preview.appendChild(defaultImage);
+
+    <%# * 画像が選択されたら、その画像をプレビューする %>
+    fileInput.addEventListener('change', function(event) {
+        var file = event.target.files[0];
+
+        reader.onload = function(e) {
+            preview.innerHTML = '';
+            var image = new Image();
+            image.src = e.target.result;
+            image.alt = 'プレビュー画像';
+            image.classList.add('preview');
+            image.style.width = '189px';
+            image.style.height = '262px';
+            image.style.objectFit = 'cover';
+            image.style.borderRadius = '10px';
+            preview.appendChild(image);
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+</script>

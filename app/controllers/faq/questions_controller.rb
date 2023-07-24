@@ -15,6 +15,12 @@ class Faq::QuestionsController < ApplicationController
         # * ログインしているユーザの情報を取得し、user_idのカラムにバインドする
         @question.user_id = current_user.id
 
+        # * フォームに入力された大カテゴリーと小カテゴリーとカラーとサイズと値段とブランドを連結する
+        search_value = [params[:question][:question], params[:question][:category]].join
+
+        # * searchカラムにsearch_valueを保存する
+        @question.search = search_value
+
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @question.save
             redirect_to "/faq/question/list", notice: "投稿が成功しました。"
@@ -34,11 +40,6 @@ class Faq::QuestionsController < ApplicationController
     def show
         @question = Question.find(params[:id])
 
-        # * アンサーフォームの設置
-        @answer = Answer.new
-
-
-        question_id = params[:id]
         @answers = Answer.order(created_at: :desc).where(question_id: @question.id)
     end
 
@@ -63,9 +64,15 @@ class Faq::QuestionsController < ApplicationController
             redirect_to "/", alert: "不正なアクセスが行われました。"
         end
 
+        # * フォームに入力された大カテゴリーと小カテゴリーとカラーとサイズと値段とブランドを連結する
+        search_value = [params[:question][:question], params[:question][:category]].join
+
+        # * searchカラムにsearch_valueを保存する
+        @question.search = search_value
+
         # 更新
         if @question.update(posts_params)
-            redirect_to "/question/list", notice: "投稿を編集しました"
+            redirect_to "/faq/question/show/#{@question.id}", notice: "投稿を編集しました"
         else
             redirect_to "/", alert: "投稿の編集に失敗しました"
         end
@@ -83,7 +90,7 @@ class Faq::QuestionsController < ApplicationController
     
         # 削除
         if @question.destroy
-            redirect_to "/question/list", notice: "投稿を削除しました"
+            redirect_to "/faq/question/list", notice: "投稿を削除しました"
         else
             redirect_to "/", alert: "投稿の編集に削除しました"
         end
