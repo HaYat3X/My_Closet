@@ -15,6 +15,12 @@ class Faq::QuestionsController < ApplicationController
         # * ログインしているユーザの情報を取得し、user_idのカラムにバインドする
         @question.user_id = current_user.id
 
+        # * フォームに入力された大カテゴリーと小カテゴリーとカラーとサイズと値段とブランドを連結する
+        search_value = [params[:question][:question], params[:question][:category]].join
+
+        # * searchカラムにsearch_valueを保存する
+        @question.search = search_value
+
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @question.save
             redirect_to "/faq/question/list", notice: "投稿が成功しました。"
@@ -62,6 +68,12 @@ class Faq::QuestionsController < ApplicationController
         if @question.user_id != current_user.id
             redirect_to "/", alert: "不正なアクセスが行われました。"
         end
+
+        # * フォームに入力された大カテゴリーと小カテゴリーとカラーとサイズと値段とブランドを連結する
+        search_value = [params[:question][:question], params[:question][:category]].join
+
+        # * searchカラムにsearch_valueを保存する
+        @question.search = search_value
 
         # 更新
         if @question.update(posts_params)

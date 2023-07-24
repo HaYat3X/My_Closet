@@ -25,11 +25,11 @@
                                     <%= image_tag closet.photograph.url, class: "closet-search-image" %>
                                 <% end %>
                             </div>
-
-                            <div class="page d-flex justify-content-center">
-                                <%= paginate @search_result %>
-                            </div>
                         <% end %>
+
+                        <div class="page d-flex justify-content-center">
+                            <%= paginate @search_result %>
+                        </div>
                     </div>
                 <% end %>
             </div>

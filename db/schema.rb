@@ -80,8 +80,9 @@ ActiveRecord::Schema.define(version: 2023_07_15_131029) do
   create_table "questions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "photograph", null: false
-    t.string "question", limit: 100, null: false
+    t.string "question", null: false
     t.string "category", null: false
+    t.string "search"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_questions_on_user_id"

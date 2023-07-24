@@ -1,66 +1,68 @@
-<div id="faq_questions">
-    <%# ! header %>
-    <div class="pc-header">
-        <%= render "faq/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+<div id="faq_searchs">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
-            <%= render "faq/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10">
-            <div class="h-100">
-            <h4 class="pt-3">「<%= params[:search] %>」の検索結果</h4>
-            <div class="list_content">
-            <% @search_result.each do |q| %>
-                <div class="bg-white mt-2">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <%= image_tag q.photograph.url, class: "question_image" %>
-                        </div>
+        <div class="main-content">
+            <div class="search_content mx-auto">
+                <% if @search_result.count == 0 %>
+                    <h4 class="fw-bold text-center">検索結果：</h4>
+                    <h4 class="fw-bold text-center">「<%= params[:search] %>」</h4>
+                    <p class="text-center fw-bold">（0件）</p>
+                    <h5 class="text-center">条件に当てはまるアイテムが見つかりませんでした。<br>検索条件を変えて検索してみてください。</h5>
+                <% else %>
+                    <h4 class="fw-bold text-center">検索結果：</h4>
+                    <h4 class="fw-bold text-center">「<%= params[:search] %>」</h4>
+                    <p class="text-center fw-bold">（<%= @search_result.count%>件）</p>
+                    <div class="row question-area">
+                        <% @search_result.each do |question| %>
+                            <div class="col-lg-6 mt-4">
+                                <div class="d-flex">
+                                    <%= image_tag question.photograph.url, class: "question_image" %>
 
-                        <div class="col-lg-9 py-3">
-                            <div class="d-flex">
-                                <% if q.user.avatar.url %>
-                                    <%= image_tag q.user.avatar.url, class: "question-user-image" %>
-                                <% else %>
-                                    <img src="/assets/default-avatar.png" alt="Generic placeholder image" class="question-user-image">
-                                <% end %>
+                                    <div class="question-area">
+                                        <div class="d-flex align-items-center user-area">
+                                            <%= link_to "/profile/show/#{question.user.id}" do %>
+                                                <% if question.user.avatar.url %>
+                                                    <%= image_tag question.user.avatar.url, class: "question-user-image" %>
+                                                <% else %>
+                                                    <img src="/assets/user/avatar.png" alt="Generic placeholder image" class="question-user-image">
+                                                <% end %>
+                                            <% end %>
 
-                                <div class="fw-bold d-flex align-items-center mx-3">
-                                    <%= q.user.user_name %>
-                                    <%= q.user.gender %>
+                                            <div class="user-information">
+                                                <h5 class="mb-0 fw-bold"><%= question.user.user_name %></h5>
+                                                <small><%= question.created_at.strftime('%m月%d日') %></small>
+                                            </div>
+                                        </div>
+
+                                        <div class="question-information">
+                                            <%= truncate(question.question, length: 44) %>
+                                        </div>
+
+                                        <div class="answer d-flex align-items-center justify-content-end">
+                                            <%= link_to "/faq/question/show/#{question.id}", style: "text-decoration: none; display: flex; align-items: center; margin-right: 2px;" do %>
+                                                <img src="/assets/icons/icn_message_b.png" alt="">
+                                            <% end %>
+
+                                            <small class="m-0">
+                                                <%= Answer.where(question_id: question.id).count %>
+                                            </small>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        <% end %>
 
-                            <p class="fw-bold my-4">
-                                <%= q.question %>
-                            </p>
-
-                            <%= link_to "/question/show/#{q.id}", style: "text-decoration: none;", class: "text-dark" do %>
-                                <i class="bi bi-chat-square-text fs-5"></i>
-                            <% end %>
-
-                            <%# 回答数 %>
-                            <%= Answer.where(question_id: q.id).count %><br>
-                            <br>
-
-                            <% if current_user.id == q.user.id %>
-                                <%= link_to "編集", "/question/edit//#{q.id}", class: "btn btn-outline-primary px-5" %>
-                                <%= link_to "削除", "/question/delete/#{q.id}", method: :delete, class: "btn btn-outline-danger px-5" %>
-                            <% end %>
+                        <div class="page d-flex justify-content-center">
+                            <%= paginate @search_result %>
                         </div>
                     </div>
-                </div>
-            <% end %>
-        </div>
-
+                <% end %>
             </div>
         </div>
     </div>
 </div>
-
-
