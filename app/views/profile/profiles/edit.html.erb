@@ -60,10 +60,20 @@
 
 							<div class="mb-3">
 								<%= f.number_field :height, class: "form-control", placeholder: "身長" %>
+
+								<div>
+									<% @user.errors[:height].each do |error| %>
+										<small class="text-danger">身長は300cm以内で設定してください。</small>
+									<% end %>
+								</div>
 							</div>
 
 							<div class="mb-3">
 								<%= f.number_field :weight, class: "form-control", placeholder: "体重" %>
+
+								<% @user.errors[:height].each do |error| %>
+									<small class="text-danger">体重は600kg以内で設定してください。</small>
+								<% end %>
 							</div>
 
 							<div class="mb-3">
