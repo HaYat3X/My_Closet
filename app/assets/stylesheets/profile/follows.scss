@@ -1,47 +1,5 @@
     // ! profilesフォルダのレイアウト （follower_list, follows_list）
     #profile_follows {
-        // ! 全サイズ共通
-        // ? headerの設定
-        .header {
-            background-color: #222222;
-        }
-        // ? サイドバーの設定
-        .sidebar {
-            overflow-y: scroll;
-            background-color: #CBC5C1;
-            box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
-            a {
-                color: #333333;
-                text-decoration: none;
-            }
-            a:hover {
-                background-color: #4B709A;
-                color: #FFFFFF;
-                text-decoration: none;
-            }
-            .active {
-                background-color: #4B709A;
-                color: #FFFFFF;
-                text-decoration: none;
-            }
-            i {
-                margin-right: 15px;
-                font-size: 1.1rem;
-            }
-            hr {
-                border-top: 2px solid #333333;
-            }
-            .post-btn {
-                background-color: #4B709A;
-                color: #FFFFFF;
-                text-decoration: none;
-            }
-            .search-identification a:hover {
-                text-decoration: underline;
-                color: #333333;
-                background-color: #CBC5C1;
-            }
-        }
         // * スマートフォン （小）
         @media (max-width: 768px) {
             // ?モバイルサイドバーのレイアウト設定
@@ -71,9 +29,6 @@
                 margin-top: 50px;
                 width: 913px;
                 .tab-menu {
-                    li {
-                        list-style: none;
-                    }
                     .active {
                         background-color: #4B709A;
                         color: #FFFFFF;
@@ -83,10 +38,9 @@
                     a {
                         border-bottom: 3px solid #333333;
                         color: #333333;
-                        padding: 8px 0;
                     }
                 }
-                .tab-area {
+                .tab-content {
                     padding: 0px 30px;
                     .user-area {
                         td {
@@ -167,31 +121,6 @@
                 }
                 .page {
                     margin-top: 50px;
-                }
-            }
-            // ? プロフィール編集ページの設定
-            .edit-content {
-                margin: 20px 0;
-                input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
-                    border-radius: 10px;
-                    height: 50px;
-                }
-                select {
-                    border-radius: 10px;
-                    height: 50px;
-                }
-                .modal-area {
-                    .modal-body {
-                        background-color: #333333;
-                        padding: 200px 0;
-                    }
-                    .post-area {
-                        background-color: #333333;
-                        .submit-btn {
-                            background-color: #4B709A;
-                            color: #FFFFFF;
-                        }
-                    }
                 }
             }
         }

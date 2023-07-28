@@ -44,11 +44,11 @@
                             </small>
 
                             <div class="follow-area">
-                                <%= link_to "/follow_list/#{@user.id}", class: "text-dark"  do %>
+                                <%= link_to "/follow/#{@user.id}?tab=follow_all", class: "text-dark"  do %>
                                     <span class="fw-bold"><%= @follow_list %></span>フォロー中
                                 <% end %>
 
-                                <%= link_to "/follower_list/#{@user.id}", class: "text-dark mx-3" do %>
+                                <%= link_to "/follow/#{@user.id}?tab=follower", class: "text-dark mx-3" do %>
                                     <span class="fw-bold"><%= @follower_list %></span>フォロワー
                                 <% end %>
                             </div>

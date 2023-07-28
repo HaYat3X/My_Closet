@@ -58,8 +58,7 @@ Rails.application.routes.draw do
   patch "profile/update/:id", to: "profile/profiles#update"
   post "profile/follow/:id", to: "profile/follows#create_follow"
   delete "profile/follow/:id", to: "profile/follows#delete_follow"
-  get "follow_list/:id", to: "profile/follows#follow_list"
-  get "follower_list/:id", to: "profile/follows#follower_list"
+  get "follow/:id", to: "profile/follows#follow"
   get "alert/list", to: "profile/alerts#list"
   get "alert/show/:id", to: "profile/alerts#show"
   

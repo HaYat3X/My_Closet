@@ -1,0 +1,163 @@
+<div id="profile_follows">
+    <div class="d-flex">
+        <%# ! sidebar %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="main-content">
+            <%= image_tag "/assets/user/cover_img.png", class: "profile-cover" %>
+
+            <div class="follow-content mx-auto">
+                <ul class="tab-menu nav nav-underline nav-fill">
+                    <li class="nav-item flex-fill">
+                        <a href="?tab=follow_all" class="nav-link fw-bold <%= params[:tab].nil? || params[:tab] == 'follow_all' ? 'active' : '' %>">フォロー中</a>
+                    </li>
+
+                    <li class="nav-item flex-fill">
+                        <a href="?page=1&tab=follower" class="nav-link fw-bold <%= params[:tab] == 'follower' ? 'active' : '' %>">フォロワー</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content mt-2">
+                    <%# ? 全ての投稿を表示する %>
+                    <div id="follow_all" class="tab-pane active">
+                        <% @follow_list.each do |f| %>
+                            <%# * そのユーザIDをもとにユーザテーブルからデータを取る %>
+                            <% @users.each do |u| %>
+                                <% if u.id == f.follower_id %>
+                                    <table class="table align-middle mb-0">
+                                        <tbody>
+                                            <tr class="user-area">
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <%= link_to "/profile/show/#{u.id}" do %>
+                                                            <% if u.avatar.url%>
+                                                                <%= image_tag u.avatar.url, class: "avatar" %>
+                                                            <% else %>
+                                                                <img src="/assets/user/avatar.png"
+                                                                    alt="Generic placeholder image" class="avatar">
+                                                            <% end %>
+                                                        <% end %>
+
+                                                        <div>
+                                                            <label class="fw-bold"><%= u.user_name %></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                                <td class="text-end">
+                                                    <% if u.id == current_user.id %>
+                                                        <%= button_to "プロフィール更新", "/profile/edit/#{u.id}", method: :get, class: "btn px-4 edit-btn rounded-pill" %>
+                                                    <% else %>
+                                                        <% if UserRelation.where(follow_id: current_user.id, follower_id: u.id).exists? %>
+                                                            <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "btn px-4 unfollow-btn" %> 
+                                                        <% else %>
+                                                            <%= button_to "フォローする", "/profile/follow/#{u.id}", method: :post, class: "btn px-4 follow-btn" %> 
+                                                        <% end %>
+                                                    <% end %>
+                                                </td>
+                                            </tr>                    
+                                        </tbody>
+                                    </table>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+
+                        <div class="page d-flex justify-content-center">
+                            <%= paginate @follow_list, param_name: :page_follow, params: { tab: "follow_all" } %>
+                        </div>
+                    </div>
+
+                    <div id="follower" class="tab-pane">
+                        <% @follower_list.each do |f| %>
+                            <%# * そのユーザIDをもとにユーザテーブルからデータを取る %>
+                            <% @users.each do |u| %>
+                                <% if u.id == f.follow_id %>
+                                    <table class="table align-middle mb-0 ">
+                                        <tbody>
+                                            <tr class="user-area">
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <%= link_to "/profile/show/#{u.id}" do %>
+                                                            <% if u.avatar.url%>
+                                                                <%= image_tag u.avatar.url, class: "avatar" %>
+                                                            <% else %>
+                                                                <img src="/assets/user/avatar.png"
+                                                                    alt="Generic placeholder image" class="avatar">
+                                                            <% end %>
+                                                        <% end %>
+
+                                                        <div>
+                                                            <label class="fw-bold"><%= u.user_name %></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                                <td class="text-end">
+                                                    <% if u.id == current_user.id %>
+                                                        <%= button_to "プロフィール更新", "/profile/edit/#{u.id}", method: :get, class: "btn px-4 edit-btn rounded-pill" %>
+                                                    <% else %>
+                                                        <% if UserRelation.where(follow_id: current_user.id, follower_id: u.id).exists? %>
+                                                            <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "btn px-4 unfollow-btn" %> 
+                                                        <% else %>
+                                                            <%= button_to "フォローする", "/profile/follow/#{u.id}", method: :post, class: "btn px-4 follow-btn" %> 
+                                                        <% end %>
+                                                    <% end %>
+                                                </td>
+                                            </tr>                    
+                                        </tbody>
+                                    </table>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+
+                        <div class="page d-flex justify-content-center">
+                            <%= paginate @follower_list, param_name: :page_follower, params: { tab: "follower" } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function() { 
+        <%# ! 現在位置しているタブをアクティブ状態にする %>
+        function setActiveTab(tabId) {
+            $('.tab-menu .nav-link').removeClass('active');
+            $('.tab-content .tab-pane').removeClass('show active');
+            $('#' + tabId).addClass('show active');
+            $('.tab-menu .nav-link[href*="tab=' + tabId + '"]').addClass('active');
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabValue = urlParams.get('tab');
+
+        if (tabValue) {
+            const tabId = tabValue.toLowerCase();
+            setActiveTab(tabId);
+        } else {
+            $('.tab-menu .nav-link[href*="?tab=all"]').addClass('active');
+            $('.tab-content .tab-pane#all').addClass('show active');
+        }
+
+        <%# ! ページ遷移時にタブの位置を保持する %>
+        $(document).on('click', '.tab-menu .nav-link', function(event) {
+            event.preventDefault();
+            const tabId = $(this).attr('href').split('tab=')[1].toLowerCase();
+
+            if (tabId === 'page') {
+                return;
+            }
+
+            setActiveTab(tabId);
+
+            const newUrl = window.location.pathname + '?tab=' + tabId;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+        });
+    });
+</script>
