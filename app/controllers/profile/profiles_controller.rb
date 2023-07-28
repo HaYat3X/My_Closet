@@ -39,32 +39,20 @@ class Profile::ProfilesController < ApplicationController
 
     # ! データを更新
     def update
-        @user_data = User.find(params[:id])
+        @user = User.find(params[:id])
       
         # * 編集権限がない場合はリダイレクト
-        if @user_data.id != current_user.id
+        if @user.id != current_user.id
           redirect_to "/", alert: "不正なアクセスが行われました。"
         end
-      
-        # ? 外部クラスをインスタンス化
-        suggestions_controller = Suggestion::ApisController.new()
+    
 
         # * プロフィールの更新処理が成功しているか判定する
-      if @user_data.update(posts_params)
-        # * 身長・体重・性別が更新されているのか判定する
-        if @user_data.saved_change_to_height? || @user_data.saved_change_to_weight? || @user_data.saved_change_to_gender?
-        # * Suggestレコードが存在する場合は、call_gpt_updateを呼び出し、存在しない場合は call_gptを呼び出す
-          result = Suggest.exists?(user_id: @user_data.id) ? suggestions_controller.call_gpt_update(@user_data.id) : suggestions_controller.call_gpt(@user_data.id)
-          # * 結果の flash メッセージの種類に応じて、フラッシュのキーを設定する
-          flash_key = result[:flash] == 'notice' ? :notice : :alert
-          # * 結果のリダイレクト先URLと flash メッセージを含むフラッシュハッシュを指定してリダイレクトする
-          redirect_to result[:redirect_url], flash: { flash_key => result[:flash_message] }
+        if @user.update(posts_params)
+            redirect_to "/profile/show/#{@user.id}", notice: "プロフィールを編集しました"
         else
-          redirect_to "/profile/show/#{@user_data.id}", notice: "プロフィールを編集しました"
+            render :edit
         end
-      else
-        redirect_to "/profile/show/#{@user_data.id}", alert: "プロフィールの編集に失敗しました"
-      end
     end
     
     private

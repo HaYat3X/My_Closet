@@ -46,17 +46,11 @@ Rails.application.routes.draw do
   post "faq/create_like/:id", to: "faq/likes#create_like"
   delete "faq/create_delete/:id", to: "faq/likes#delete_like"
 
-  # ! 提案関連
-  # * 提案ページ
+  # ! 提案画面のルーティング
   get "suggestion", to: "suggestion/suggestions#suggestion"
-  # * apiのコール
   post "call_gpt", to: "suggestion/apis#call_gpt"
-  # * 各ユーザーのファッションの投稿の傾向を保存する
-  post "call_user", to: "suggestion/apis#call_user"
-  # * call_gptによる提案を更新する
   patch "call_gpt_update", to: "suggestion/apis#call_gpt_update"
-  # * ユーザーの好みを判定する
-  post "user_like_create", to: "suggestion/apis#user_like_create"
+  patch "user_like_create", to: "suggestion/suggestions#user_like_create"
 
   # ! プロフィール画面のルーティング
   get "profile/show/:id", to: "profile/profiles#show"

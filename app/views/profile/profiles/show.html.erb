@@ -173,7 +173,6 @@
 </div>
 
 <script>
-if (window.location.pathname === "/profile/show/'<%= j params[:id] %>'") {
   // 実行したいコードをここに記述
   $(document).ready(function() {
         <%# ! フォロー中のユーザーの投稿のみに切り替える %>
@@ -225,5 +224,4 @@ if (window.location.pathname === "/profile/show/'<%= j params[:id] %>'") {
             window.history.pushState({ path: newUrl }, '', newUrl);
         });
     });
-}
 </script>
