@@ -200,7 +200,10 @@
                 }
             }
             .answer-area {
-                background-color: #ffffff7d;
+                .answer {
+                    background-color: #ffffff7d;
+                    margin-bottom: 20px;
+                }
                 .user {
                     margin-top: 20px;
                     margin-left: 20px;

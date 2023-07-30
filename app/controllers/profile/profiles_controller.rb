@@ -8,7 +8,7 @@ class Profile::ProfilesController < ApplicationController
         @user = User.find(params[:id])
 
         # * ログイン中のユーザが投稿した着こなしQ&A投稿を取得
-        @faq = Question.order(created_at: :desc).where(user_id: @user.id).page(params[:page]).per(16)
+        @questions = Question.order(created_at: :desc).where(user_id: @user.id).page(params[:page_question]).per(128)
 
         # ログイン中のユーザが投稿したSNS投稿
         @sns_all = Social.order(created_at: :desc).where(user_id: @user.id).page(params[:page_sns])

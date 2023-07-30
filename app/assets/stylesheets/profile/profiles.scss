@@ -115,32 +115,70 @@
             }
             .user-post-area {
                 margin-top: 55px;
-                .tab-content {
-                    padding: 0 106.5px;
-                }
             }
             .user-post-content {
+                padding: 0 106.5px;
                 .photograph {
                     width: 100%;
                     height: 336px;
                     object-fit: cover;
                 }
-                .page {
-                    margin-top: 50px;
+            }
+            .question-area {
+                .question_image {
+                    width: 202px;
+                    height: 270px;
+                    object-fit: cover;
+                    border-radius: 10px 0 0 10px;
                 }
-                // .faq-content {
-                //     border-radius: 10px;
-                //     .faq-image {
-                //         border-radius: 10px 0 0 10px;
-                //         width: 100%;
-                //         object-fit: cover;
-                //         height: 250px;
-                //     }
-                //     .col-lg-7 {
-                //         background-color: #FFFFFF;
-                //         opacity: .5;
-                //     }
-                // }
+                .question-area {
+                    background-color: #ffffff8b;
+                    width: 280px;
+                    border-radius: 0 10px 10px 0;
+                    padding-top: 22px;
+                    .user-area {
+                        padding: 0 14.5px;
+                        .question-user-image {
+                            width: 45px;
+                            height: 45px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            margin-right: 10px;
+                        }
+                        .user-information {
+                            h5 {
+                                font-size: 16px;
+                            }
+                            small {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                    .question-information {
+                        padding: 0 29px;
+                        font-size: 15px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        height: 160px;
+                    }
+                    .answer {
+                        margin: 0 22px;
+                        img {
+                            width: 18px;
+                            height: 18px;
+                            object-fit: cover;
+                        }
+                        small {
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+            .page {
+                margin-top: 50px;
             }
         }
         // ? プロフィール編集ページの設定

@@ -44,11 +44,11 @@
                             </small>
 
                             <div class="follow-area">
-                                <%= link_to "/follow_list/#{@user.id}", class: "text-dark"  do %>
+                                <%= link_to "/follow/#{@user.id}?tab=follow_all", class: "text-dark"  do %>
                                     <span class="fw-bold"><%= @follow_list %></span>フォロー中
                                 <% end %>
 
-                                <%= link_to "/follower_list/#{@user.id}", class: "text-dark mx-3" do %>
+                                <%= link_to "/follow/#{@user.id}?tab=follower", class: "text-dark mx-3" do %>
                                     <span class="fw-bold"><%= @follower_list %></span>フォロワー
                                 <% end %>
                             </div>
@@ -89,79 +89,103 @@
                         </li>
 
                         <li class="nav-item flex-fill">
-                            <a href="#faq" class="nav-link fw-bold" data-bs-toggle="tab">質問</a>
+                            <a href="?page=1&tab=question" class="nav-link fw-bold <%= params[:tab] == 'question' ? 'active' : '' %>">質問</a>
                         </li>
                     </ul>
 
-                    <div class="user-post-content">
-                        <div class="tab-content mt-3">
-                            <div id="sns" class="tab-pane active">
-                                <div class="row g-1">
-                                    <% @sns_all.each do |sns| %>
-                                        <div class="col-lg-4">
-                                            <%= link_to "/sns/show/#{sns.id}" do %>
-                                                <%= image_tag sns.photograph.url, class: "photograph" %>
-                                            <% end %>
-                                        </div>
-                                    <% end %>
-                                </div>
-
-                                <div class="page d-flex justify-content-center">
-                                    <%= paginate @sns_all, param_name: :page_sns, params: { tab: "sns" } %>
-                                </div>
+                    <div class="tab-content mt-3">
+                        <div id="sns" class="tab-pane active user-post-content">
+                            <div class="row g-1">
+                                <% @sns_all.each do |sns| %>
+                                    <div class="col-lg-4">
+                                        <%= link_to "/sns/show/#{sns.id}" do %>
+                                            <%= image_tag sns.photograph.url, class: "photograph" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
                             </div>
 
-                            <div id="like" class="tab-pane">
-                                <div class="row g-1">
-                                    <% @sns_like.each do |sns| %>
-                                        <div class="col-lg-4">
-                                            <%= link_to "/sns/show/#{sns.id}" do %>
-                                                <%= image_tag sns.photograph.url, class: "photograph" %>
-                                            <% end %>
-                                        </div>
-                                    <% end %>
-                                </div>
+                            <div class="page d-flex justify-content-center">
+                                <%= paginate @sns_all, param_name: :page_sns, params: { tab: "sns" } %>
+                            </div>
+                        </div>
 
-                                <div class="page d-flex justify-content-center">
-                                    <%= paginate @sns_like, param_name: :page_like, params: { tab: "like" } %>
-                                </div>
+                        <div id="like" class="tab-pane user-post-content">
+                            <div class="row g-1">
+                                <% @sns_like.each do |sns| %>
+                                    <div class="col-lg-4">
+                                        <%= link_to "/sns/show/#{sns.id}" do %>
+                                            <%= image_tag sns.photograph.url, class: "photograph" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
                             </div>
 
-                            <div id="closet" class="tab-pane">
-                                <div class="row g-1">
-                                    <% @closets.each do |closet| %>
-                                        <div class="col-lg-4">
-                                            <%= link_to "/closet/show/#{closet.id}" do %>
-                                                <%= image_tag closet.photograph.url, class: "photograph" %>
-                                            <% end %>
-                                        </div>
-                                    <% end %>
-                                </div>
+                            <div class="page d-flex justify-content-center">
+                                <%= paginate @sns_like, param_name: :page_like, params: { tab: "like" } %>
+                            </div>
+                        </div>
 
-                                <div class="page d-flex justify-content-center">
-                                    <%= paginate @closets, param_name: :page_closet, params: { tab: "closet" } %>
-                                </div>
+                        <div id="closet" class="tab-pane user-post-content">
+                            <div class="row g-1">
+                                <% @closets.each do |closet| %>
+                                    <div class="col-lg-4">
+                                        <%= link_to "/closet/show/#{closet.id}" do %>
+                                            <%= image_tag closet.photograph.url, class: "photograph" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
                             </div>
 
-                            <div id="faq" class="tab-pane mt-1">
-                                <div class="row g-5">
-                                    <% @faq.each do |f| %>
-                                        <div class="col-lg-6">
-                                            <div class="faq-content">
-                                                <div class="row g-0">
-                                                    <div class="col-lg-5">
-                                                        <%= image_tag f.photograph.url, class: "faq-image" %>
+                            <div class="page d-flex justify-content-center">
+                                <%= paginate @closets, param_name: :page_closet, params: { tab: "closet" } %>
+                            </div>
+                        </div>
+
+
+                        <div id="question" class="tab-pane question">
+                            <div class="row question-area">
+                                <% @questions.each do |question| %>
+                                    <div class="col-lg-6">
+                                        <div class="d-flex">
+                                            <%= image_tag question.photograph.url, class: "question_image" %>
+
+                                            <div class="question-area">
+                                                <div class="d-flex align-items-center user-area">
+                                                    <%= link_to "/profile/show/#{question.user.id}" do %>
+                                                        <% if question.user.avatar.url %>
+                                                            <%= image_tag question.user.avatar.url, class: "question-user-image" %>
+                                                        <% else %>
+                                                            <img src="/assets/user/avatar.png" alt="Generic placeholder image" class="question-user-image">
+                                                        <% end %>
+                                                    <% end %>
+
+                                                    <div class="user-information">
+                                                        <h5 class="mb-0 fw-bold"><%= question.user.user_name %></h5>
+                                                        <small><%= question.created_at.strftime('%m月%d日') %></small>
                                                     </div>
+                                                </div>
 
-                                                    <div class="col-lg-7">
-                                                        投稿者情報
-                                                    </div>
+                                                <div class="question-information">
+                                                    <%= truncate(question.question, length: 44) %>
+                                                </div>
+
+                                                <div class="answer d-flex align-items-center justify-content-end">
+                                                    <%= link_to "/faq/question/show/#{question.id}", style: "text-decoration: none; display: flex; align-items: center; margin-right: 2px;" do %>
+                                                        <img src="/assets/icons/icn_message_b.png" alt="">
+                                                    <% end %>
+
+                                                    <small class="m-0">
+                                                        <%= Answer.where(question_id: question.id).count %>
+                                                    </small>
                                                 </div>
                                             </div>
                                         </div>
-                                    <% end %>
+                                    </div>
+                                <% end %>
 
-                                    <%= paginate @faq %>
+                                <div class="page d-flex justify-content-center">
+                                    <%= paginate @questions, param_name: :page_question, params: { tab: "question" } %>
                                 </div>
                             </div>
                         </div>
