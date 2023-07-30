@@ -3,56 +3,105 @@
         <label>メニュー</label>
 
         <li class="nav-item">
-            <a href="/" class="d-flex align-items-center active" aria-current="page">
-                <img src="/assets/icons/icn_home.png" alt="">
-                ホーム
-            </a>
+            <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}") %>
+                <a href="/" class="d-flex align-items-center active" aria-current="page">
+                    <img src="/assets/icons/icn_home.png" alt="">
+                    ホーム
+                </a>
+            <% else %>
+                <a href="/" class="d-flex align-items-center" aria-current="page">
+                    <img src="/assets/icons/icn_home.png" alt="">
+                    ホーム
+                </a>
+            <% end %>
         </li>
 
         <li class="nav-item">
-            <a href="/suggestion" class="d-flex align-items-center">
-                <img src="/assets/icons/icn_AI.png" alt="">
-                コーディネート提案
-            </a>
+            <% if current_page?("/suggestion") %>
+                <a href="/suggestion" class="d-flex align-items-center active">
+                    <img src="/assets/icons/icn_AI.png" alt="">
+                    コーディネート提案
+                </a>
+            <% else %>
+                <a href="/suggestion" class="d-flex align-items-center">
+                    <img src="/assets/icons/icn_AI.png" alt="">
+                    コーディネート提案
+                </a>
+            <% end %>
         </li>
 
         <li class="nav-item">
-            <a href="/sns/like_ranking" class="d-flex align-items-center">
-                <img src="/assets/icons/icn_ranking.png" alt="">
-                ランキング
-            </a>
+            <% if current_page?("/sns/like_ranking") %>
+                <a href="/sns/like_ranking" class="d-flex align-items-center active">
+                    <img src="/assets/icons/icn_ranking.png" alt="">
+                    ランキング
+                </a>
+            <% else %>
+                <a href="/sns/like_ranking" class="d-flex align-items-center">
+                    <img src="/assets/icons/icn_ranking.png" alt="">
+                    ランキング
+                </a>
+            <% end %>
         </li>
 
         <li class="nav-item">
             <%# * ユーザーがログインしているかの判定をする %>
-            <% if user_signed_in? %>
-                <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center" do %>
-                    <img src="/assets/icons/icn_user.png" alt="">
-                    マイページ
+            <% if current_page?("/profile/show/#{params[:id]}") || current_page?("/profile/edit/#{params[:id]}") ||  current_page?("/follow/#{params[:id]}") %>
+                <% if user_signed_in? %>
+                    <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center active" do %>
+                        <img src="/assets/icons/icn_user.png" alt="">
+                        マイページ
+                    <% end %>
+                <% else %>
+                    <%= link_to "/profile/show/1", class: "d-flex align-items-center active" do %>
+                        <img src="/assets/icons/icn_user.png" alt="">
+                        マイページ
+                    <% end %>
                 <% end %>
             <% else %>
-                <%= link_to "/profile/show/1", class: "d-flex align-items-center" do %>
-                    <img src="/assets/icons/icn_user.png" alt="">
-                    マイページ
+                <% if user_signed_in? %>
+                    <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center" do %>
+                        <img src="/assets/icons/icn_user.png" alt="">
+                        マイページ
+                    <% end %>
+                <% else %>
+                    <%= link_to "/profile/show/1", class: "d-flex align-items-center" do %>
+                        <img src="/assets/icons/icn_user.png" alt="">
+                        マイページ
+                    <% end %>
                 <% end %>
             <% end %>
         </li>
 
         <li class="nav-item">
-            <a href="/closet/list" class="d-flex align-items-center">
-                <img src="/assets/icons/icn_closet.png" alt="">
-                クローゼット
-            </a>
+            <% if current_page?("/closet/list") || current_page?("/closet/show/#{params[:id]}") || current_page?("/closet/search") || current_page?("/closet/new") || current_page?("/closet/edit/#{params[:id]}") %>
+                <a href="/closet/list" class="d-flex align-items-center active">
+                    <img src="/assets/icons/icn_closet.png" alt="">
+                    クローゼット
+                </a>
+            <% else %>
+                <a href="/closet/list" class="d-flex align-items-center">
+                    <img src="/assets/icons/icn_closet.png" alt="">
+                    クローゼット
+                </a>
+            <% end %>
         </li>
 
         <li class="nav-item">
-            <a href="/faq/question/list" class="d-flex align-items-center">
-                <img src="/assets/icons/icn_faq.png" alt="">
-                コーディネートQ&A
-            </a>
+            <% if current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") %>
+                <a href="/faq/question/list" class="d-flex align-items-center active">
+                    <img src="/assets/icons/icn_faq.png" alt="">
+                    コーディネートQ&A
+                </a>
+            <% else %>
+                <a href="/faq/question/list" class="d-flex align-items-center">
+                    <img src="/assets/icons/icn_faq.png" alt="">
+                    コーディネートQ&A
+                </a>
+            <% end %>
         </li>
 
-        <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}")  %>
+        <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}") %>
             <li class="post-btn">
                 <a href="/sns/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
@@ -61,13 +110,22 @@
                     コーディネート投稿
                 </a>
             </li>
-        <% elsif current_page?("/closet/list") %>
+        <% elsif current_page?("/closet/list") || current_page?("/closet/show/#{params[:id]}") || current_page?("/closet/search") || current_page?("/closet/new") || current_page?("/closet/edit/#{params[:id]}") %>
             <li class="post-btn">
                 <a href="/closet/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                     </svg>
                     アイテム追加
+                </a>
+            </li>
+        <% elsif current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") %>
+            <li class="post-btn">
+                <a href="/faq/question/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                    質問を投稿
                 </a>
             </li>
         <% end %>
@@ -161,22 +219,30 @@
         <label>その他</label>
 
         <li class="nav-item">
-            <a href="/contact/new" class="d-flex align-items-center">
-                <i class="bi bi-box-arrow-up-right"></i>
-                お問い合わせ
-            </a>
+            <% if current_page?("/contact/new") || current_page?("/contact/complete") %>
+                <a href="/contact/new" class="d-flex align-items-center active">
+                    <img src="/assets/icons/icn_contact.png" alt="">
+                    お問い合わせ
+                </a>
+            <% else %>
+                <a href="/contact/new" class="d-flex align-items-center">
+                    <img src="/assets/icons/icn_contact.png" alt="">
+                    お問い合わせ
+                </a>
+            <% end %>
         </li>
+
         
         <li class="nav-item pb-5">
             <%# * ユーザーがログインしているかの判定をする %>
             <% if user_signed_in? %>
                 <%= link_to destroy_user_session_path, method: :delete, class: "d-flex align-items-center" do %>
-                    <i class="bi bi-person-circle"></i>
+                    <img src="/assets/icons/icn_user.png" alt="">
                     ログアウト
                 <% end %>
             <% else %>
                 <%= link_to new_user_session_path, method: :get, class: "d-flex align-items-centerb" do %>
-                    <i class="bi bi-person-circle"></i>
+                    <img src="/assets/icons/icn_user.png" alt="">
                     ログイン
                 <% end %>
             <% end %>
