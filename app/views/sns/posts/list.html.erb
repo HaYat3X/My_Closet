@@ -152,8 +152,7 @@
                                                         <% if user_signed_in? %>
                                                             <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
                                                                 <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
-                                                                    <i style="color: #E63758;" class="bi bi-heart-fill"></i>
-                                                                <img src="/assets/icons/icn_heart.png" alt="">
+                                                                    <img src="/assets/icons/icn_heart.png" alt="">
                                                                 <% end %>
                                                             <% else %>
                                                                 <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
@@ -264,32 +263,34 @@
 </div>
 
 <script>
-$(document).ready(function() {
-    <%# ! フォロー中のユーザーの投稿のみに切り替える %>
-        const checkbox = document.getElementById('formSwitchCheckDefault');
-        const form = document.getElementById('myForm');
+    <%# ! htmlの要素が読み込まれたら処理を開始する %>
+    $(document).ready(function() {
+        <%# * 処理の目的 => フォロー中のユーザーの投稿のみに切り替える %>
+        <%# * 入力 => チェックボックスの選択状況 %>
+        <%# * 加工 => チェックボックスの選択状態を監視し、フォームを送信する %>
+        <%# * 出力 => なし %>
+        const checkbox = $('#formSwitchCheckDefault');
+        const form = $('#myForm');
 
-        <%# ! フォロー中のユーザーの投稿のみに切り替える %>
-        if (checkbox && form) {
-            checkbox.addEventListener('change', () => {
-                if (checkbox.checked) {
-                    form.submit();
-                } else {
-                    form.submit();
-                }
-            });
-        }
-        
-        <%# ! 現在位置しているタブをアクティブ状態にする %>
+        checkbox.on('change', handleCheckboxChange);
+
+        const handleCheckboxChange = () => {
+            form.submit();
+        };
+
+        <%# * 処理の目的 => 特定のタブを選択状態にする %>
+        <%# * 入力 => 選択しているタブの情報 %>
+        <%# * 加工 => 選択しているタブの情報を取得し、選択状態にする %>
+        <%# * 出力 => activeクラス %>
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabValue = urlParams.get('tab');
+
         function setActiveTab(tabId) {
             $('.tab-menu .nav-link').removeClass('active');
             $('.tab-content .tab-pane').removeClass('show active');
             $('#' + tabId).addClass('show active');
             $('.tab-menu .nav-link[href*="tab=' + tabId + '"]').addClass('active');
         }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const tabValue = urlParams.get('tab');
 
         if (tabValue) {
             const tabId = tabValue.toLowerCase();
@@ -299,7 +300,10 @@ $(document).ready(function() {
             $('.tab-content .tab-pane#all').addClass('show active');
         }
 
-        <%# ! ページ遷移時にタブの位置を保持する %>
+        <%# * 処理の目的 => ページ遷移した際に、タブの位置を保持する %>
+        <%# * 入力 => ページ遷移する際に位置しているタブ %>
+        <%# * 加工 => ページ遷移する前に位置しているタブを取得し、遷移後、そのタブの位置を保持する %>
+        <%# * 出力 => タブの情報 %>
         $(document).on('click', '.tab-menu .nav-link', function(event) {
             event.preventDefault();
             const tabId = $(this).attr('href').split('tab=')[1].toLowerCase();
@@ -313,6 +317,5 @@ $(document).ready(function() {
             const newUrl = window.location.pathname + '?tab=' + tabId;
             window.history.pushState({ path: newUrl }, '', newUrl);
         });
-
-});
+    });
 </script>
