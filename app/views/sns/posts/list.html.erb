@@ -8,6 +8,10 @@
 
         <%# * コンテンツエリア %>
         <div class="main-content">
+            <div class="pc-error-msg">
+                <%= render "layouts/error" %>
+            </div>
+            
             <div class="list-content mx-auto">
                 <% if user_signed_in? %>
                     <form id="myForm" class="d-flex justify-content-end" action="/" method="get">
@@ -258,6 +262,8 @@
                     </div>
                 </div>
             </div>
+            <%# ! フッター表示 %>
+            <%= render "layouts/footer" %>
         </div>
     </div>
 </div>
@@ -272,11 +278,11 @@
         const checkbox = $('#formSwitchCheckDefault');
         const form = $('#myForm');
 
-        checkbox.on('change', handleCheckboxChange);
-
         const handleCheckboxChange = () => {
             form.submit();
         };
+
+        checkbox.on('change', handleCheckboxChange);
 
         <%# * 処理の目的 => 特定のタブを選択状態にする %>
         <%# * 入力 => 選択しているタブの情報 %>

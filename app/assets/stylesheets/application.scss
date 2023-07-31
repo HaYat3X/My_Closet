@@ -30,6 +30,7 @@
 .header {
     background-color: #222222;
     padding: 14px 40px;
+    height: 90px;
     .alert-btn {
         margin-left: 5px;
     }
@@ -83,6 +84,9 @@
     color: #FFFFFF;
     font-size: 10px;
     margin-top: 150px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 // * スマートフォン

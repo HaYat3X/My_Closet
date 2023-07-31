@@ -117,8 +117,15 @@ ActiveRecord::Schema.define(version: 2023_07_15_131029) do
 
   create_table "suggests", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "style1"
-    t.string "style2"
+    t.string "personal_color"
+    t.string "eye_color", null: false
+    t.string "hair_color", null: false
+    t.string "skin_color", null: false
+    t.string "size", null: false
+    t.integer "style1", null: false
+    t.integer "style2", null: false
+    t.integer "style3", null: false
+    t.string "total_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_suggests_on_user_id"
@@ -148,13 +155,6 @@ ActiveRecord::Schema.define(version: 2023_07_15_131029) do
     t.string "user_name", default: "", null: false
     t.integer "age"
     t.string "avatar"
-    t.integer "size"
-    t.integer "favorite_color1"
-    t.integer "favorite_color2"
-    t.integer "favorite_color3"
-    t.integer "favorite_color4"
-    t.integer "favorite_color5"
-    t.integer "total_price"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

@@ -48,9 +48,9 @@ Rails.application.routes.draw do
 
   # ! 提案画面のルーティング
   get "suggestion", to: "suggestion/suggestions#suggestion"
-  post "call_gpt", to: "suggestion/apis#call_gpt"
-  patch "call_gpt_update", to: "suggestion/apis#call_gpt_update"
-  patch "user_like_create", to: "suggestion/suggestions#user_like_create"
+  # post "call_gpt", to: "suggestion/apis#call_gpt"
+  # patch "call_gpt_update", to: "suggestion/apis#call_gpt_update"
+  post "suggest_create", to: "suggestion/suggestions#suggest_create"
 
   # ! プロフィール画面のルーティング
   get "profile/show/:id", to: "profile/profiles#show"

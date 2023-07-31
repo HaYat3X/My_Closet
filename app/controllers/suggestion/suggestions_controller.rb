@@ -6,46 +6,42 @@ class Suggestion::SuggestionsController < ApplicationController
     # ! 加工 => 提案情報に基づいてコーディネートを取得する
     # ! 出力 => SNSのコーディネート20件
     def suggestion
-        # * ユーザ情報を取得
-        @user = User.find(current_user.id)
-
-        # * ログインしているユーザ以外のユーザ情報を取得
-        other_users = User.where.not(id: current_user.id)
+        # * 提案する
+        @suggest = Suggest.new()
 
         # * AIによる提案情報が存在するか判定
         if Suggest.exists?(user_id: current_user.id)
-            # ? ユーザに提案されたファッションスタイルを取得する
-            suggest = Suggest.find_by(user_id: current_user.id)
+            other_users_suggest = Suggest.where.not(user_id: current_user.id)
+            user_suggest = Suggest.find_by(user_id: current_user.id)
 
-            # ? 提案情報に基づいてコーディネートを取得する
-            # @suggestions = Social.where("(tag LIKE ? OR tag LIKE ?) AND user_id != ?", suggest.style1 ||= "", suggest.style2 ||= "", current_user.id).joins(:user).where(users: { gender: @user.gender }).order("RANDOM()").limit(4)
-            # ! 男なのに女の投稿も表示されるのをなおす
+            puts "ログインしているユーザー：#{user_suggest.personal_color}"
+            
+            other_users_suggest.each do |single|
+                puts "ログインしている以外のユーザー：#{single.personal_color}"
+            end
+
+            current_user_gender = User.find(current_user.id).gender
+
+            @recommend = recommend(current_user_gender, user_suggest, other_users_suggest)
+
+            # * パーソナルカラー
+            @personal_color = user_suggest.personal_color
         end
-
-        # * パーソナルカラーを判定
-        favorite_colors = {
-            favorite_color1: @user.favorite_color1,
-            favorite_color2: @user.favorite_color2,
-            favorite_color3: @user.favorite_color3,
-            favorite_color4: @user.favorite_color4,
-            favorite_color5: @user.favorite_color5
-        }
-
-        # * パーソナルカラーを特定
-        @most_favorite_colour = favorite_colors.max_by { |_, color| color.to_i }.first
-        
-        # * 結果を出力
-        @recommend = recommend(@user, other_users)
     end
 
     # ! ユーザの好みを決定する
-    def user_like_create
+    def suggest_create
         @user = User.find(current_user.id)
+        @suggest = Suggest.new(posts_params)
 
-        if @user.update(posts_params)
-            redirect_to "/suggestion", notice: "好みを設定しました。"
+        @suggest.user_id = current_user.id
+
+        # * ログインしているユーザ以外のユーザ情報を取得    
+        if @suggest.save
+            # * GPTリクエスト
+            call_gpt(current_user.id)
         else
-            redirect_to "/suggestion", alert: "好みを設定に失敗しました。"
+            render :suggestion
         end
     end
 
@@ -61,27 +57,110 @@ class Suggestion::SuggestionsController < ApplicationController
 
     # ! 編集時にバインドするパラメータ
     def posts_params
-        # * Userモデルにバインドする
-        params.require(:user).permit(:size, :favorite_color1, :favorite_color2, :favorite_color3, :favorite_color4, :favorite_color5, :total_price)
+        # * suggestモデルにバインドする
+        params.require(:suggest).permit(:eye_color, :hair_color, :skin_color, :size, :style1, :style2, :style3, :total_price)
+    end
+
+    # ! GPTにリクエストする
+    def call_gpt(user_id)
+        # * ユーザーの設定した好みを取得する
+        suggest = Suggest.find_by(user_id: user_id.to_i)
+
+        # * GPT日クエストする文章
+        request = "
+            ##Instruction##
+            パーソナルカラー診断を行ってください。
+            
+            ##Input##
+            瞳の色が#{suggest.eye_color}色、髪の色が#{suggest.hair_color}色、肌の色が#{suggest.skin_color}色の人のパーソナルカラーを診断をしてください。
+            
+            ##Context##
+            パーソナルカラーは以下の4つと定義します。
+            1. 春 (Spring)：明るく温かみのある色
+            2. 夏 (Summer): やわらかなパステルカラーやクールな色
+            3. 秋 (Autumn): 温かみのある濃い色
+            4. 冬 (Winter): 鮮やかでクリアな色
+            
+            ##Output##
+            回答は、
+            1、春 (Spring)
+            2、夏 (Summer)
+            3、秋 (Autumn)
+            4、冬 (Winter) 
+            いずれかのみで回答してください。
+            解説なしで端的に結果だけ教えてください。
+        "
+            
+        # * APIキーセット
+        client = OpenAI::Client.new(access_token: ENV['GPT_ACCESS_KEY'])
+            
+        # * GPTのレスポンス 
+        response = client.chat(
+            parameters: {
+                # ? 使用するGPTのエンジンを指定
+                model: "gpt-3.5-turbo",
+                
+                # ? レスポンスの形式を指定
+                messages: [{ role: "system", content: "You are a helpful assistant. response to japanese" }, { role: "user", content: request }],
+                    
+                # ? 応答のランダム性と最大文字数を指定
+                temperature: 0,
+                max_tokens: 200,
+            },
+        )
+        
+        if response['error']
+            # エラーに対する処理を行う
+            puts "GPT APIエラー：#{response['error']['message']}"
+
+            # ? 提案に失敗したら、好みのデータを消す
+            suggest.delete() 
+
+            # 例：エラーが発生した場合、デフォルトの提案ページにリダイレクトする
+            redirect_to "/suggestion", alert: "AI提案に失敗しました。もう一度お試しください。"
+        else
+            # * GPTのレスポンスから返答メッセージのみを抽出
+            content = response.dig("choices", 0, "message", "content")
+            puts "レスポンス：#{content}"
+        
+            # * GPTの提案から提案されたスタイルを抜き出す
+            pull_out = content.match(/(春|夏|秋|冬) \((Spring|Summer|Autumn|Winter)\)/).to_s
+
+            if pull_out.nil? || pull_out.empty?
+                pull_out = "夏 (Summer)"
+            end
+
+            puts "パーソナルカラー：#{pull_out}"
+
+            # * 提案の成功、失敗によって設定したURLにフラッシュメッセージを変更し出力する
+            if suggest.update(personal_color: pull_out)
+                redirect_to "/suggestion", notice: "AI提案した。"
+            else
+                redirect_to "/suggestion", alert: "AI提案に失敗しました。もう一度お試しください。"
+            end
+        end
     end
 
     # !  レコメンドする
-    def recommend(user, other_users)
+    def recommend(user_gender, user, other_users)
         # * ログインしているユーザーのベクトルを作成
         user_vector = [
             # ? 属性を設定していない場合は、0を代入
-            user.size.nil? ? 0 : user.size,
-            user.size.nil? ? 0 : user.favorite_color1,
-            user.size.nil? ? 0 : user.favorite_color2,
-            user.size.nil? ? 0 : user.favorite_color3,
-            user.size.nil? ? 0 : user.favorite_color4,
-            user.size.nil? ? 0 : user.favorite_color5,
-            user.total_price.nil? ? 0 : user.total_price
+            user.size.nil? ? 0 : user.size.to_i,
+            user.style1.nil? ? 0 : user.style1.to_i,
+            user.style2.nil? ? 0 : user.style2.to_i,
+            user.style3.nil? ? 0 : user.style3.to_i,
+            user.total_price.nil? ? 0 : user.total_price.to_i,
         ]
 
-        other_users_vectors = other_users.pluck(:size, :favorite_color1, :favorite_color2, :favorite_color3, :favorite_color4, :favorite_color5, :total_price).map do |vector|
-            # ? 属性を設定していない場合は、0を代入
-            vector.map { |element| element.nil? ? 0 : element }
+        puts "ユーザーのベクトル => #{user_vector}"
+
+        other_users_vectors = other_users.pluck(:size, :style1, :style2, :style3, :total_price).map do |vector|
+            vector.map! { |element| element.nil? ? 0 : element.to_i }
+        
+            puts "ユーザー以外のベクトル => #{vector}"
+        
+            vector
         end
 
         # * 類似度と類似度を測定したユーザーを格納する配列
@@ -99,24 +178,23 @@ class Suggestion::SuggestionsController < ApplicationController
         # * 1に近い（類似度が高い）順に並び替え
         similarities.sort_by! { |similarity| similarity[1] }.reverse!
 
+        similarities.each do |similarity|
+            puts "ユーザーID：#{similarity[0].user_id}との類似度：#{similarity[1]}"
+        end
+
         # * コサイン類似度の高いユーザーを表示
         similar_users = similarities.map { |similarity| similarity[0] }
 
         # * コーディネートを格納する配列
         posts = []
 
-        # * 類似度の高いユーザ順にコーディネートを取得する
-        similar_users.each do |user|
-            # ? 性別が同じユーザーから投稿を取得
-            if user.gender == user.gender
-                # ? 一人のユーザーから最大5件の投稿をランダムに取得する
-                user_posts = Social.where(user_id: user.id).order("RANDOM()").limit(5)
+        similar_users.each do |other_user|
+            # ? 性別が同じかつ類似度か高いユーザーから投稿を取得
+            user_posts = Social.joins(:user).where(users: { gender: user_gender, id: other_user.user_id }).order("RANDOM()").limit(1)
 
-                # ? 配列に格納
+            # ? 4件投稿が集まるまで取得
+            if user_posts.length <= 4
                 posts.concat(user_posts)
-
-                # ? 20件取得したら終了
-                break if posts.size >= 20
             end
         end
 
