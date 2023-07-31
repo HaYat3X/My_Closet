@@ -214,68 +214,70 @@
                             <% end %>
 
                         <% else %>
-                            <% @recommend.each do |sns| %>
-                                <div class="col-lg-3 col-md-3 col-4 mt-1">
-                                    <%= link_to "/sns/show/#{sns.id}" do %>
-                                        <%= image_tag sns.photograph.url, class: "sns-image" %>
-                                    <% end %>
+                            <div class="row g-1">
+                                <% @recommend.each do |sns| %>
+                                    <div class="col-lg-3 col-md-3 col-4 mt-1">
+                                        <%= link_to "/sns/show/#{sns.id}" do %>
+                                            <%= image_tag sns.photograph.url, class: "sns-image" %>
+                                        <% end %>
 
-                                    <div class="user-area py-2">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <% if sns.user.avatar.present? %>
-                                                    <%= link_to "/profile/show/#{sns.user_id}" do %>
-                                                        <%= image_tag sns.user.avatar.url %>
-                                                    <% end %>
-                                                <% else %>
-                                                    <%= link_to "/profile/show/#{sns.user_id}" do %>
-                                                        <%= image_tag "/assets/user/avatar.png" %>
-                                                    <% end %>
-                                                <% end %>
-
-                                                <div class="ms-2">
-                                                    <div class="fw-bold user-name m-0">
-                                                        <%= sns.user.user_name %>
-                                                    </div>
-
-                                                    <div class="user-height m-0">
-                                                        <% if sns.user.height %>
-                                                            <%= sns.user.height %>cm
-                                                        <% else %>
-                                                            身長未設定
+                                        <div class="user-area py-2">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <% if sns.user.avatar.present? %>
+                                                        <%= link_to "/profile/show/#{sns.user_id}" do %>
+                                                            <%= image_tag sns.user.avatar.url %>
                                                         <% end %>
+                                                    <% else %>
+                                                        <%= link_to "/profile/show/#{sns.user_id}" do %>
+                                                            <%= image_tag "/assets/user/avatar.png" %>
+                                                        <% end %>
+                                                    <% end %>
+
+                                                    <div class="ms-2">
+                                                        <div class="fw-bold user-name m-0">
+                                                            <%= sns.user.user_name %>
+                                                        </div>
+
+                                                        <div class="user-height m-0">
+                                                            <% if sns.user.height %>
+                                                                <%= sns.user.height %>cm
+                                                            <% else %>
+                                                                身長未設定
+                                                            <% end %>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="mx-2">
-                                                <div class="like m-0 d-flex align-items-center">
-                                                    <%# ?  いいねできるかどうか判定 %>
-                                                    <% if user_signed_in? %>
-                                                        <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
-                                                            <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
-                                                                <img src="/assets/icons/icn_heart.png" alt="">
+                                                <div class="mx-2">
+                                                    <div class="like m-0 d-flex align-items-center">
+                                                        <%# ?  いいねできるかどうか判定 %>
+                                                        <% if user_signed_in? %>
+                                                            <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
+                                                                <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
+                                                                    <img src="/assets/icons/icn_heart.png" alt="">
+                                                                <% end %>
+                                                            <% else %>
+                                                                <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
+                                                                    <img src="/assets/icons/icn_not_heart.png" alt="">
+                                                                <% end %>
                                                             <% end %>
                                                         <% else %>
                                                             <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
                                                                 <img src="/assets/icons/icn_not_heart.png" alt="">
                                                             <% end %>
                                                         <% end %>
-                                                    <% else %>
-                                                        <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                            <img src="/assets/icons/icn_not_heart.png" alt="">
-                                                        <% end %>
-                                                    <% end %>
 
-                                                    <span class="number-of-likes align-self-center">
-                                                        <%= SocialLike.where(social_id: sns.id).count %>
-                                                    </span>
+                                                        <span class="number-of-likes align-self-center">
+                                                            <%= SocialLike.where(social_id: sns.id).count %>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            <% end %>
+                                <% end %>
+                            </div>
                         <% end %>
                     </div>
                 </div>

@@ -18,7 +18,8 @@ class Suggestion::SuggestionsController < ApplicationController
             suggest = Suggest.find_by(user_id: current_user.id)
 
             # ? 提案情報に基づいてコーディネートを取得する
-            @suggestions = Social.where("(tag LIKE ? OR tag LIKE ?) AND user_id != ?", suggest.style1 ||= "", suggest.style2 ||= "", current_user.id).joins(:user).where(users: { gender: @user.gender }).order("RANDOM()").limit(20)
+            # @suggestions = Social.where("(tag LIKE ? OR tag LIKE ?) AND user_id != ?", suggest.style1 ||= "", suggest.style2 ||= "", current_user.id).joins(:user).where(users: { gender: @user.gender }).order("RANDOM()").limit(4)
+            # ! 男なのに女の投稿も表示されるのをなおす
         end
 
         # * パーソナルカラーを判定
