@@ -170,6 +170,9 @@
     }
     // * PC（大）
     @media (min-width: 1280px) {
+        .main-content {
+            position: relative;
+        }
         // ? SNS一覧ページの設定
         .list-content {
             width: 1014px;

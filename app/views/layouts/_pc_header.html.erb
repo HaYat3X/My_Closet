@@ -1,4 +1,4 @@
-<nav class="header pc-header navbar navbar-expand-lg">
+<nav class="header pc-header navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand logo-area d-flex align-items-center" href="/">
             <%= image_tag "/assets/logos/logo1.png" %>
@@ -21,7 +21,7 @@
                 <% end %>
 
                 <a href="/alert/list" class="btn">
-                    <i class="bi bi-bell fs-4 text-white alert-btn"></i>
+                    <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
 
                     <% if @number_of_notifications.count != 0 %>
                         <span class="rounded-pill text-bg-danger">
@@ -73,7 +73,7 @@
                 <% end %>
 
                 <a href="/alert/list" class="btn">
-                    <i class="bi bi-bell fs-4 text-white alert-btn"></i>
+                    <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
 
                     <% if @number_of_notifications.count != 0 %>
                         <span class="rounded-pill text-bg-danger">
@@ -89,7 +89,7 @@
                 </a>
             <% else %>
                 <a href="/alert/list" class="btn d-flex ms-auto">
-                    <i class="bi bi-bell fs-4 text-white alert-btn"></i>
+                    <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
 
                     <% if @number_of_notifications.count != 0 %>
                         <span class="rounded-pill text-bg-danger">
@@ -107,10 +107,6 @@
         </div>
     </div>
 </nav>
-
-<div class="pc-error-msg">
-    <%= render "layouts/error" %>
-</div>
 
 <script>
     $(function(){

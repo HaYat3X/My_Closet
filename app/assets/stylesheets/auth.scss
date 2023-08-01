@@ -1,83 +1,21 @@
 // ! registerセクション
 #auth {
     // ! 全サイズ共通
-    // ? headerの設定
-    .header {
-        background-color: #222222;
-    }
     // ? 認証フォームのリンクの設定
-    .shared {
-        label {
-            color: #222222;
-        }
-        a {
-            color: #4B709A;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    }
     // * スマートフォン
-    @media (max-width: 768px) {
-        // ? PC用のヘッダーは表示しない
-        .pc-header {
-            display: none;
-        }
-        // ? PCのサイドバーは表示しない
-        .pc-sidebar {
-            display: none;
-        }
-        // ? PCのエラーメッセージは表示しない
-        .pc_error_msg {
-            display: none;
-        }
-    }
+    @media (max-width: 768px) {}
     // * タブレット
-    @media (min-width: 768px) and (max-width: 1280px) {
-        // ? PC用のヘッダーは表示しない
-        .pc-header {
-            display: none;
-        }
-        // ? PCのサイドバーは表示しない
-        .pc-sidebar {
-            display: none;
-        }
-        // ?モバイルサイドバーのレイアウト設定
-        .mobile_header {
-            img {
-                width: 20%;
-            }
-            .navbar-toggler {
-                background-color: #ffffff;
-                transition: opacity 0.5s ease;
-            }
-            .search_icon {
-                display: none;
-            }
-        }
-    }
+    @media (min-width: 768px) and (max-width: 1280px) {}
     // * PC（大）
     @media (min-width: 1280px) {
-        // ? モバイルのヘッダーは表示しない
-        .mobile_header {
-            display: none;
-        }
-        // ? モバイルのエラーメッセージは表示しない
-        .mobile_error_msg {
-            display: none;
-        }
-        // ? PCヘッダーの設定
-        .pc-header {
-            .logo-area {
-                img {
-                    width: 20%;
-                }
-            }
-        }
-        // ? 認証コンテンツの設定
         .auth-content {
             width: 350px;
+            h2 {
+                margin-top: 40px;
+                padding-top: 90px;
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
             input:not([type="checkbox"]):not([type="submit"]) {
                 border-radius: 10px;
                 height: 50px;
@@ -95,7 +33,7 @@
             margin-top: 40px;
             .submit-btn {
                 margin-top: 40px;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
                 background-color: #4B709A;
                 opacity: 0.7;
                 height: 50px;
@@ -106,6 +44,20 @@
                 background-color: #4b709a;
                 border-radius: 10px;
                 opacity: 1;
+            }
+            .shared {
+                label {
+                    color: #727272;
+                }
+                a {
+                    color: #333333;
+                    text-decoration: none;
+                    font-size: 15px;
+                }
+                a:hover {
+                    text-decoration: underline;
+                    font-size: 15px;
+                }
             }
         }
     }

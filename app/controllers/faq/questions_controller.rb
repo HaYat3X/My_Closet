@@ -31,9 +31,9 @@ class Faq::QuestionsController < ApplicationController
 
     #質問の一覧を取得する
     def list
-        @questions_all = Question.order(created_at: :desc).page(params[:page_all]).per(128)
-        @questions_men = Question.order(created_at: :desc).joins(:user).where(users: { gender: 1 }).page(params[:page_men]).per(128)
-        @questions_women = Question.order(created_at: :desc).joins(:user).where(users: { gender: -1 }).page(params[:page_women]).per(128)
+        @questions_all = Question.order(created_at: :desc).page(params[:page_all]).per(32)
+        @questions_men = Question.order(created_at: :desc).joins(:user).where(users: { gender: 1 }).page(params[:page_men]).per(32)
+        @questions_women = Question.order(created_at: :desc).joins(:user).where(users: { gender: -1 }).page(params[:page_women]).per(32)
     end
 
     #詳細表示

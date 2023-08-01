@@ -11,13 +11,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :user_name, default: "", null: false
       t.integer :age, default: ""
       t.string :avatar
-      t.integer :size, default: ""
-      t.integer :favorite_color1, default: ""
-      t.integer :favorite_color2, default: ""
-      t.integer :favorite_color3, default: ""
-      t.integer :favorite_color4, default: ""
-      t.integer :favorite_color5, default: ""
-      t.integer :total_price, default: ""
 
       # Database authenticatable
       t.string :email, null: false, default: ""

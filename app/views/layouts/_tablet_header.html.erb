@@ -1,0 +1,368 @@
+<nav class="navbar fixed-top tablet-header header">
+    <div class="d-flex align-items-center">
+        <button type="button" class="btn hamburger" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-expanded="false" aria-controls="offcanvasNavbar" aria-label="ナビゲーションの切替">
+            <%= image_tag "/assets/icons/icn_menu.png" %>
+        </button>
+
+        <a class="navbar-brand logo-area" href="/">
+            <%= image_tag "/assets/logos/logo1.png" %>
+        </a>
+    </div>
+
+    <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}")  %>
+        <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+            <div class="input-group">
+                <%= f.text_field :search, class: "form-control", placeholder: "search", required: true, id: "search" %>
+
+                <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                    <i class="bi bi-search"></i>
+                <% end %>
+            </div>
+        <% end %>
+
+        <a href="/alert/list" class="btn">
+            <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
+
+            <% if @number_of_notifications.count != 0 %>
+                <span class="rounded-pill text-bg-danger">
+                    <small>
+                        <% if @number_of_notifications.count >= 99 %>
+                            99+
+                        <% else %>
+                            <%= @number_of_notifications.count %>
+                        <% end %>
+                    </small>
+                </span>
+            <% end %>
+        </a>
+    <% elsif current_page?("/closet/list") || current_page?("/closet/show/#{params[:id]}") || current_page?("/closet/search") || current_page?("/closet/new") || current_page?("/closet/edit/#{params[:id]}") %>
+        <%= form_with(url: "/closet/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+            <div class="input-group">
+                <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+
+                <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                    <i class="bi bi-search"></i>
+                <% end %>
+            </div>
+        <% end %>
+
+        <a href="/alert/list" class="btn">
+            <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
+
+            <% if @number_of_notifications.count != 0 %>
+                <span class="rounded-pill text-bg-danger">
+                    <small>
+                        <% if @number_of_notifications.count >= 99 %>
+                            99+
+                        <% else %>
+                            <%= @number_of_notifications.count %>
+                        <% end %>
+                    </small>
+                </span>
+            <% end %>
+        </a>
+    <% elsif current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") %>
+        <%= form_with(url: "/faq/question/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+            <div class="input-group">
+                <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+
+                <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                    <i class="bi bi-search"></i>
+                <% end %>
+            </div>
+        <% end %>
+
+        <a href="/alert/list" class="btn">
+            <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">        
+
+            <% if @number_of_notifications.count != 0 %>
+                <span class="rounded-pill text-bg-danger">
+                    <small>
+                        <% if @number_of_notifications.count >= 99 %>
+                            99+
+                        <% else %>
+                            <%= @number_of_notifications.count %>
+                        <% end %>
+                    </small>
+                </span>
+            <% end %>
+        </a>
+    <% else %>
+        <a href="/alert/list" class="btn d-flex ms-auto">
+            <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">        
+
+            <% if @number_of_notifications.count != 0 %>
+                <span class="rounded-pill text-bg-danger">
+                    <small>
+                        <% if @number_of_notifications.count >= 99 %>
+                            99+
+                        <% else %>
+                            <%= @number_of_notifications.count %>
+                        <% end %>
+                    </small>
+                </span>
+            <% end %>
+        </a>
+    <% end %>
+
+    <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">閉じる</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="閉じる"></button>
+        </div>
+
+        <div class="offcanvas-body">
+            <div class="d-flex flex-column flex-shrink-0 sticky-top">
+                <ul class="nav nav-pills flex-column">
+                    <label>メニュー</label>
+
+                    <li class="nav-item">
+                        <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}") %>
+                            <a href="/" class="d-flex align-items-center active" aria-current="page">
+                                <img src="/assets/icons/icn_home.png" alt="">
+                                ホーム
+                            </a>
+                        <% else %>
+                            <a href="/" class="d-flex align-items-center" aria-current="page">
+                                <img src="/assets/icons/icn_home.png" alt="">
+                                ホーム
+                            </a>
+                        <% end %>
+                    </li>
+
+                    <li class="nav-item">
+                        <% if current_page?("/suggestion") %>
+                            <a href="/suggestion" class="d-flex align-items-center active">
+                                <img src="/assets/icons/icn_AI.png" alt="">
+                                コーディネート提案
+                            </a>
+                        <% else %>
+                            <a href="/suggestion" class="d-flex align-items-center">
+                                <img src="/assets/icons/icn_AI.png" alt="">
+                                コーディネート提案
+                            </a>
+                        <% end %>
+                    </li>
+
+                    <li class="nav-item">
+                        <% if current_page?("/sns/like_ranking") %>
+                            <a href="/sns/like_ranking" class="d-flex align-items-center active">
+                                <img src="/assets/icons/icn_ranking.png" alt="">
+                                ランキング
+                            </a>
+                        <% else %>
+                            <a href="/sns/like_ranking" class="d-flex align-items-center">
+                                <img src="/assets/icons/icn_ranking.png" alt="">
+                                ランキング
+                            </a>
+                        <% end %>
+                    </li>
+
+                    <li class="nav-item">
+                        <%# * ユーザーがログインしているかの判定をする %>
+                        <% if current_page?("/profile/show/#{params[:id]}") || current_page?("/profile/edit/#{params[:id]}") ||  current_page?("/follow/#{params[:id]}") %>
+                            <% if user_signed_in? %>
+                                <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center active" do %>
+                                    <img src="/assets/icons/icn_user.png" alt="">
+                                    マイページ
+                                <% end %>
+                            <% else %>
+                                <%= link_to "/profile/show/1", class: "d-flex align-items-center active" do %>
+                                    <img src="/assets/icons/icn_user.png" alt="">
+                                    マイページ
+                                <% end %>
+                            <% end %>
+                        <% else %>
+                            <% if user_signed_in? %>
+                                <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center" do %>
+                                    <img src="/assets/icons/icn_user.png" alt="">
+                                    マイページ
+                                <% end %>
+                            <% else %>
+                                <%= link_to "/profile/show/1", class: "d-flex align-items-center" do %>
+                                    <img src="/assets/icons/icn_user.png" alt="">
+                                    マイページ
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    </li>
+
+                    <li class="nav-item">
+                        <% if current_page?("/closet/list") || current_page?("/closet/show/#{params[:id]}") || current_page?("/closet/search") || current_page?("/closet/new") || current_page?("/closet/edit/#{params[:id]}") %>
+                            <a href="/closet/list" class="d-flex align-items-center active">
+                                <img src="/assets/icons/icn_closet.png" alt="">
+                                クローゼット
+                            </a>
+                        <% else %>
+                            <a href="/closet/list" class="d-flex align-items-center">
+                                <img src="/assets/icons/icn_closet.png" alt="">
+                                クローゼット
+                            </a>
+                        <% end %>
+                    </li>
+
+                    <li class="nav-item">
+                        <% if current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") %>
+                            <a href="/faq/question/list" class="d-flex align-items-center active">
+                                <img src="/assets/icons/icn_faq.png" alt="">
+                                コーディネートQ&A
+                            </a>
+                        <% else %>
+                            <a href="/faq/question/list" class="d-flex align-items-center">
+                                <img src="/assets/icons/icn_faq.png" alt="">
+                                コーディネートQ&A
+                            </a>
+                        <% end %>
+                    </li>
+
+                    <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}") %>
+                        <li class="post-btn">
+                            <a href="/sns/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                                コーディネート投稿
+                            </a>
+                        </li>
+                    <% elsif current_page?("/closet/list") || current_page?("/closet/show/#{params[:id]}") || current_page?("/closet/search") || current_page?("/closet/new") || current_page?("/closet/edit/#{params[:id]}") %>
+                        <li class="post-btn">
+                            <a href="/closet/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                                アイテム追加
+                            </a>
+                        </li>
+                    <% elsif current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") %>
+                        <li class="post-btn">
+                            <a href="/faq/question/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                                質問を投稿
+                            </a>
+                        </li>
+                    <% end %>
+                    
+                    <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}")  %>
+                        <hr class="mx-4">
+                        
+                        <div class="search-identification">
+                            <label>ブランド</label><br>
+
+                            <li class="nav-item">
+                                <a href="/sns/search?search=UNIQLO">UNIQLO</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/sns/search?search=GU">GU</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/sns/search?search=H＆M">H＆M</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/sns/search?search=ZARA">ZARA</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/sns/search?search=WEGO">WEGO</a>
+                            </li>
+                        
+                            <li class="nav-item">
+                                <a href="/sns/search?search=NIKE">NIKE</a>
+                            </li>
+                        
+                            <li class="nav-item">
+                                <a href="/sns/search?search=ADIDAS">ADIDAS</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/sns/search?search=GAP">GAP</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a href="/sns/search?search=LOWRYSFARM">LOWRYSFARM</a>
+                            </li>
+
+                            <label>季節</label><br>
+
+                            <li class="nav-item">
+                                <a href="/sns/search?search=春">春（3月〜5月）</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/sns/search?search=夏">夏（6月〜8月）</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a href="/sns/search?search=秋">秋（9月〜11月）</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a href="/sns/search?search=冬">冬（12月〜2月）</a>
+                            </li>
+                            
+                            <label>身長</label><br>
+
+                            <li class="nav-item">
+                                <a href="/sns/search?search=~149cm">~149cm</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/sns/search?search=150cm~159cm">150cm~159cm</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/sns/search?search=160cm~169cm">160cm~169cm</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/sns/search?search=170cm~179cm">170~179cm</a>
+                            </li>    
+
+                            <li class="nav-item">
+                                <a href="/sns/search?search=180cm~">180cm~</a>
+                            </li>       
+                        </div>
+                    <% end %>
+
+                    <hr class="mx-4">
+
+                    <label>その他</label>
+
+                    <li class="nav-item">
+                        <% if current_page?("/contact/new") || current_page?("/contact/complete") %>
+                            <a href="/contact/new" class="d-flex align-items-center active">
+                                <img src="/assets/icons/icn_contact.png" alt="">
+                                お問い合わせ
+                            </a>
+                        <% else %>
+                            <a href="/contact/new" class="d-flex align-items-center">
+                                <img src="/assets/icons/icn_contact.png" alt="">
+                                お問い合わせ
+                            </a>
+                        <% end %>
+                    </li>
+
+                    
+                    <li class="nav-item pb-5">
+                        <%# * ユーザーがログインしているかの判定をする %>
+                        <% if user_signed_in? %>
+                            <%= link_to destroy_user_session_path, method: :delete, class: "d-flex align-items-center" do %>
+                                <img src="/assets/icons/icn_user.png" alt="">
+                                ログアウト
+                            <% end %>
+                        <% else %>
+                            <%= link_to new_user_session_path, method: :get, class: "d-flex align-items-centerb" do %>
+                                <img src="/assets/icons/icn_user.png" alt="">
+                                ログイン
+                            <% end %>
+                        <% end %>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</nav>
+

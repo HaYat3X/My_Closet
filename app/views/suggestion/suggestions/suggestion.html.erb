@@ -7,215 +7,17 @@
 
         <%# ! contents %>
         <div class="main-content">
+            <div class="pc-error-msg">
+                <%= render "layouts/error" %>
+            </div>
+
             <div class="suggest-content mx-auto">
-                <ul class="tab-menu nav nav-underline nav-fill">
-                    <li class="nav-item flex-fill">
-                        <a href="?tab=ai" class="nav-link fw-bold <%= params[:tab].nil? || params[:tab] == 'ai' ? 'active' : '' %>">AI提案</a>
-                    </li>
-
-                    <li class="nav-item flex-fill">
-                        <a href="?tab=recommend" class="nav-link fw-bold <%= params[:tab] == 'recommend' ? 'active' : '' %>">おすすめ</a>
-                    </li>
-                </ul>
-
-                <div class="tab-content mt-3">
-                    <%# ? AIによるコーデ提案エリア %>
-                    <div id="ai" class="tab-pane active">
-                        <div class="row g-1">
-                            <%# ! 提案データがあるか判定 %>
-                            <% if Suggest.exists?(user_id: current_user.id) %>
-                                <div>
-                                    <% suggestion = Suggest.find_by(user_id: current_user.id) %>
-                                    <% if (Time.now - suggestion.created_at) >= 1.week %>
-                                        <%= link_to "もう一度提案", "/call_gpt_update", method: :patch, class: "btn btn-primary", id: "proposal-link" %>
-                                    <% else %>
-                                        AI提案は1週間に1回実行できます。
-                                    <% end %>
-                                
-                                    <div id="spinner-container" style="display: none;">
-                                        <div class="spinner-border" role="status">
-                                            <span class="visually-hidden">Loading...</span>
-                                        </div>
-                                        AIがコーディネートを提案中...
-                                    </div>
-                                </div>
-                            
-                                <% @suggestions.each do |sns| %>
-                                    <div class="col-lg-3 col-md-3 col-4 mt-1">
-                                        <%= link_to "/sns/show/#{sns.id}" do %>
-                                            <%= image_tag sns.photograph.url, class: "sns-image" %>
-                                        <% end %>
-
-                                        <div class="user-area py-2">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <% if sns.user.avatar.present? %>
-                                                        <%= link_to "/profile/show/#{sns.user_id}" do %>
-                                                            <%= image_tag sns.user.avatar.url %>
-                                                        <% end %>
-                                                    <% else %>
-                                                        <%= link_to "/profile/show/#{sns.user_id}" do %>
-                                                            <%= image_tag "/assets/user/avatar.png" %>
-                                                        <% end %>
-                                                    <% end %>
-
-                                                    <div class="ms-2">
-                                                        <div class="fw-bold user-name m-0">
-                                                            <%= sns.user.user_name %>
-                                                        </div>
-
-                                                        <div class="user-height m-0">
-                                                            <% if sns.user.height %>
-                                                                <%= sns.user.height %>cm
-                                                            <% else %>
-                                                                身長未設定
-                                                            <% end %>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="mx-2">
-                                                    <div class="like m-0 d-flex align-items-center">
-                                                        <%# ?  いいねできるかどうか判定 %>
-                                                        <% if user_signed_in? %>
-                                                            <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
-                                                                <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
-                                                                    <img src="/assets/icons/icn_heart.png" alt="">
-                                                                <% end %>
-                                                            <% else %>
-                                                                <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                                    <img src="/assets/icons/icn_not_heart.png" alt="">
-                                                                <% end %>
-                                                            <% end %>
-                                                        <% else %>
-                                                            <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                                <img src="/assets/icons/icn_not_heart.png" alt="">
-                                                            <% end %>
-                                                        <% end %>
-
-                                                        <span class="number-of-likes align-self-center">
-                                                            <%= SocialLike.where(social_id: sns.id).count %>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <% end %>
-                            <% else %>
-                                <% if current_user.height.nil? || current_user.weight.nil? %>
-                                    プロフィールを入力してください。
-                                <% else %>
-                                    <%= link_to "提案実行", "/call_gpt", method: :post, class: "btn btn-primary", id: "proposal-link" %>
-
-                                    <div id="spinner-container" style="display: none;">
-                                        <div class="spinner-border" role="status">
-                                            <span class="visually-hidden">Loading...</span>
-                                        </div>
-                                        AIがコーディネートを提案中...
-                                    </div>
-                                <% end %>
-                            <% end %>
-                        </div>
-                    </div>
-
-                    <%# ? AIによるコーデ提案エリア %>
-                    <div id="recommend" class="tab-pane">
-                        <% if current_user.size.blank? || current_user.favorite_color1.blank? || current_user.favorite_color2.blank? || current_user.favorite_color3.blank? || current_user.favorite_color4.blank? || current_user.favorite_color5.blank? || current_user.total_price.blank? %>
-                            <%= form_with(model: @user, url: "/user_like_create", local: true, html: { class: "needs-validation", novalidate: true }) do |f| %>
-                            <div class="mb-3">
-                                <p>あなたはオーバーサイズかジャストサイズ、どちらが好きですか？</p>
-                                <%= f.radio_button :size, -1, id: "radio-a01", required: true %>
-                                <%= f.label :size, "オーバーサイズ", class: "radio-a-label", for: "radio-a01" %>
-
-                                <%= f.radio_button :size, 1, id: "radio-a02", required: true  %>
-                                <%= f.label :size, "ジャストサイズ", class: "radio-a-label", for: "radio-a02" %>
-
-                                <div class="invalid-feedback">
-                                    サイズ感の好みを設定して下さい。
-                                </div>
-                            </div>
-                            <hr>
-
-                            <div class="mb-3">
-                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
-                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
-                                <%= f.select :favorite_color1, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control', required: true %>
-                                <div class="invalid-feedback">
-                                    好みを設定して下さい。
-                                </div>
-                            </div>
-                            <hr>
-
-                            <div class="mb-3">
-                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
-                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
-                                <%= f.select :favorite_color2, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control', required: true %>
-                                <div class="invalid-feedback">
-                                    好みを設定して下さい。
-                                </div>
-
-                            </div>
-                            <hr>
-                            <div class="mb-3">
-                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
-                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
-                                <%= f.select :favorite_color3, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control', required: true %>
-
-                                <div class="invalid-feedback">
-                                    好みを設定して下さい。
-                                </div>
-
-                            </div>
-                            <hr>
-                            <div class="mb-3">
-                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
-                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
-                                <%= f.select :favorite_color4, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control', required: true %>
-
-                                <div class="invalid-feedback">
-                                    好みを設定して下さい。
-                                </div>
-
-                            </div>
-                            <hr>
-                            <div class="mb-3">
-                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
-                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
-                                <%= f.select :favorite_color5, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control', required: true %>
-
-                                <div class="invalid-feedback">
-                                    好みを設定して下さい。
-                                </div>
-
-                            </div>
-                            <hr>
-                            <div class="mb-3">
-                                <p>あなたが、服に宛てられる予算はいくらですか？</p>
-                                <%= f.radio_button :total_price, 1, id: "radio-a03", required: true %>
-                                <%= f.label :total_price, "総額10000円以下", class: "radio-a-label", for: "radio-a03" %>
-                                
-                                <%= f.radio_button :total_price, 2, id: "radio-a04", required: true %>
-                                <%= f.label :total_price, "総額10000円以上〜15000円以下", class: "radio-a-label", for: "radio-a04" %>
-
-                                <%= f.radio_button :total_price, 3, id: "radio-a05", required: true %>
-                                <%= f.label :total_price, "総額15000円以上〜20000円以下", class: "radio-a-label", for: "radio-a05" %>
-
-                                <%= f.radio_button :total_price, 4, id: "radio-a06", required: true %>
-                                <%= f.label :total_price, "総額20000円以上〜25000円以下", class: "radio-a-label", for: "radio-a06" %>
-
-                                <%= f.radio_button :total_price, 5, id: "radio-a07", required: true %>
-                                <%= f.label :total_price, "総額25000円以上", class: "radio-a-label", for: "radio-a07" %>
-                                <div class="invalid-feedback">
-                                    好みを設定して下さい。
-                                </div>
-                            </div>
-                            <%= f.submit "好み設定", class: "btn mt-3 btn-primary" %>
-                            <% end %>
-
-                        <% else %>
+                <%# ! 提案データがあるか判定 %>
+                <% if Suggest.exists?(user_id: current_user.id) %>
+                    <div class="row g-1">
                             <% @recommend.each do |sns| %>
                                 <div class="col-lg-3 col-md-3 col-4 mt-1">
+
                                     <%= link_to "/sns/show/#{sns.id}" do %>
                                         <%= image_tag sns.photograph.url, class: "sns-image" %>
                                     <% end %>
@@ -276,12 +78,158 @@
                                     </div>
                                 </div>
                             <% end %>
-                        <% end %>
-                    </div>
-                </div>
+                        </div>
+                <% else %>
+
+                        <%= form_with(model: @suggest, url: "/suggest_create", local: true) do |f| %>
+                            <div class="mb-3">
+                                <p>あなたはオーバーサイズかジャストサイズ、どちらが好きですか？</p>
+                                <%= f.radio_button :size, -1, id: "radio-a01" %>
+                                <%= f.label :size, "オーバーサイズ", class: "radio-a-label", for: "radio-a01" %>
+
+                                <%= f.radio_button :size, 1, id: "radio-a02" %>
+                                <%= f.label :size, "ジャストサイズ", class: "radio-a-label", for: "radio-a02" %>
+
+                                <div>
+                                    <% @suggest.errors[:size].each do |error| %>
+                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
+                                    <% end %>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="mb-3">
+                                <p>あなたの瞳の色を選んでください？</p>
+                                <%= f.radio_button :eye_color, "黒っぽい", id: "radio-a01" %>
+                                <%= f.label :eye_color, "黒っぽい", class: "radio-a-label", for: "radio-a01" %>
+
+                                <%= f.radio_button :eye_color, "茶色っぽい", id: "radio-a02" %>
+                                <%= f.label :eye_color, "茶色っぽい", class: "radio-a-label", for: "radio-a02" %>
+
+                                <%= f.radio_button :eye_color, "青っぽい", id: "radio-a03" %>
+                                <%= f.label :eye_color, "青っぽい", class: "radio-a-label", for: "radio-a03" %>
+
+                                <div>
+                                    <% @suggest.errors[:eye_color].each do |error| %>
+                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
+                                    <% end %>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="mb-3">
+                                <p>あなたの髪の色を選んでください？</p>
+                                <%= f.radio_button :hair_color, "黒っぽい", id: "radio-a01" %>
+                                <%= f.label :hair_color, "黒っぽい", class: "radio-a-label", for: "radio-a01" %>
+
+                                <%= f.radio_button :hair_color, "茶色っぽい", id: "radio-a02" %>
+                                <%= f.label :hair_color, "茶色っぽい", class: "radio-a-label", for: "radio-a02" %>
+
+                                <%= f.radio_button :hair_color, "青っぽい", id: "radio-a03" %>
+                                <%= f.label :hair_color, "青っぽい", class: "radio-a-label", for: "radio-a03" %>
+
+                                <div>
+                                    <% @suggest.errors[:hair_color].each do |error| %>
+                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
+                                    <% end %>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="mb-3">
+                                <p>あなたの肌の色を選んでください？</p>
+                                <%= f.radio_button :skin_color, "黒っぽい", id: "radio-a01" %>
+                                <%= f.label :skin_color, "黒っぽい", class: "radio-a-label", for: "radio-a01" %>
+
+                                <%= f.radio_button :skin_color, "茶色っぽい", id: "radio-a02" %>
+                                <%= f.label :skin_color, "茶色っぽい", class: "radio-a-label", for: "radio-a02" %>
+
+                                <%= f.radio_button :skin_color, "青っぽい", id: "radio-a03" %>
+                                <%= f.label :skin_color, "青っぽい", class: "radio-a-label", for: "radio-a03" %>
+
+                                <div>
+                                    <% @suggest.errors[:skin_color].each do |error| %>
+                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
+                                    <% end %>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="mb-3">
+                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
+                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
+                                <%= f.select :style1, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
+                                
+                                <div>
+                                    <% @suggest.errors[:style1].each do |error| %>
+                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
+                                    <% end %>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="mb-3">
+                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
+                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
+                                <%= f.select :style2, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
+
+                                <div>
+                                    <% @suggest.errors[:style2].each do |error| %>
+                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
+                                    <% end %>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
+                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
+                                <%= f.select :style3, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
+
+                                <div>
+                                    <% @suggest.errors[:style3].each do |error| %>
+                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
+                                    <% end %>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="mb-3">
+                                <p>あなたが、服に宛てられる予算はいくらですか？</p>
+                                <%= f.radio_button :total_price, 1, id: "radio-a03" %>
+                                <%= f.label :total_price, "総額10000円以下", class: "radio-a-label", for: "radio-a03" %>
+                                
+                                <%= f.radio_button :total_price, 2, id: "radio-a04" %>
+                                <%= f.label :total_price, "総額10000円以上〜15000円以下", class: "radio-a-label", for: "radio-a04" %>
+
+                                <%= f.radio_button :total_price, 3, id: "radio-a05" %>
+                                <%= f.label :total_price, "総額15000円以上〜20000円以下", class: "radio-a-label", for: "radio-a05" %>
+
+                                <%= f.radio_button :total_price, 4, id: "radio-a06" %>
+                                <%= f.label :total_price, "総額20000円以上〜25000円以下", class: "radio-a-label", for: "radio-a06" %>
+
+                                <%= f.radio_button :total_price, 5, id: "radio-a07" %>
+                                <%= f.label :total_price, "総額25000円以上", class: "radio-a-label", for: "radio-a07" %>
+                                
+                                <div>
+                                    <% @suggest.errors[:total_price].each do |error| %>
+                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
+                                    <% end %>
+                                </div>
+                            </div>
+
+                            <%= f.submit "好み設定", class: "btn mt-3 btn-primary" %>
+
+                        <%# <div id="spinner-container" style="display: none;">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            AIがコーディネートを提案中...
+                        </div> %>
+                    <% end %>
+                <% end %>
             </div>
         </div>
-    </div>  
+    </div>
 </div>
 
 <script>
@@ -311,24 +259,4 @@
       $("#spinner-container").show();
     });
   });
-
-    // 無効なフィールドがある場合にフォーム送信を無効にするスターターJavaScriptの例
-    (() => {
-    'use strict'
-
-    // Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
-    const forms = document.querySelectorAll('.needs-validation')
-
-    // ループして帰順を防ぐ
-    Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-        }, false)
-    })
-    })()
 </script>

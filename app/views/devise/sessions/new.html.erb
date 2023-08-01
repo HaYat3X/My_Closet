@@ -1,7 +1,11 @@
 <div id="auth">
-	<h2 class="text-center fw-bold" style="margin-top: 92px;">ログイン</h2>
+    <div class="pc-error-msg">
+        <%= render "layouts/error" %>
+    </div>
 
 	<div class="auth-content mx-auto">
+		<h2 class="text-center fw-bold">ログイン</h2>
+
 		<%# * サインインフォーム %>
 		<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|%>
 
@@ -27,7 +31,9 @@
 				<%= f.submit "ログイン", class: "btn col-12 fw-bold submit-btn"%>
 			</div>
 		<% end %>
-
-		<%= render "devise/shared/links" %>
+		
+		<div class="col-10 mx-auto">
+			<%= render "devise/shared/links" %>
+		</div>
 	</div>
 </div>

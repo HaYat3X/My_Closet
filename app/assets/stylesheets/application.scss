@@ -20,16 +20,22 @@
     --bg: #CBC5C1;
 }
 
+// ! フォント、背景色の定義
+body {
+    font-family: Hiragino Kaku Gothic Pro;
+    color: #222222;
+    background-color: var(--bg);
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 
-// ! 全サイズ共通
 // ? headerの設定
 .header {
     background-color: #222222;
-    padding: 14px 40px;
+    height: 90px;
     .alert-btn {
         margin-left: 5px;
     }
@@ -42,13 +48,18 @@
     }
     .text-bg-danger {
         position: absolute;
-        top: 2px;
-        right: 2px;
+        top: 0px;
+        right: 6px;
         background-color: red;
         color: white;
         padding: 2px 6px;
         border-radius: 10px;
         font-size: 8px;
+    }
+    .bell-btn {
+        width: 30px;
+        height: 30px;
+        margin-left: 10px;
     }
 }
 
@@ -83,6 +94,9 @@
     color: #FFFFFF;
     font-size: 10px;
     margin-top: 150px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 // * スマートフォン
@@ -112,17 +126,65 @@
         display: none;
     }
     // ?モバイルサイドバーのレイアウト設定
-    .mobile_header {
-        img {
-            width: 20%;
+    .tablet-header {
+        padding: 14px 20px;
+        .logo-area {
+            img {
+                width: 175.385px;
+                height: 40px;
+            }
         }
-        .navbar-toggler {
-            background-color: #ffffff;
-            transition: opacity 0.5s ease;
+        .hamburger {
+            img {
+                width: 45px;
+            }
         }
-        .search_icon {
-            display: none;
+        .sidebar {
+            overflow: auto;
+            height: 100%;
+            width: 267px;
+            ul {
+                .nav-item {
+                    a {
+                        font-size: 14px;
+                        padding: 8px 40px;
+                    }
+                    img {
+                        margin-right: 10px;
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+                label {
+                    font-size: 20px;
+                    padding: 0 40px;
+                    margin: 20px 0 15px;
+                }
+                .post-btn {
+                    margin: 0 30px;
+                    margin-top: 10px;
+                    a {
+                        background-color: #4B709A;
+                        color: #FFFFFF;
+                        text-decoration: none;
+                        font-size: 14px;
+                    }
+                }
+            }
         }
+        // .hamburger {
+        //     img {
+        //         width: 45px;
+        //         height: 45px;
+        //     }
+        // }
+        // .navbar-toggler {
+        //     background-color: #ffffff;
+        //     transition: opacity 0.5s ease;
+        // }
+        // .search_icon {
+        //     display: none;
+        // }
     }
 }
 
@@ -130,6 +192,9 @@
 @media (min-width: 1280px) {
     // ? モバイルのヘッダーは表示しない
     .mobile_header {
+        display: none;
+    }
+    .tablet-header {
         display: none;
     }
     // ? モバイルのエラーメッセージは表示しない
@@ -181,6 +246,7 @@
     }
     // ? PCヘッダーの設定
     .pc-header {
+        padding: 14px 40px;
         .logo-area {
             img {
                 width: 20%;
@@ -235,11 +301,4 @@
             padding: 12px 20px;
         }
     }
-}
-
-// ! フォント、背景色の定義
-body {
-    font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
-    color: #575757;
-    background-color: var(--bg);
 }

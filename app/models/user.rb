@@ -29,6 +29,6 @@ class User < ApplicationRecord
   # ! バリデーション
   validates :user_name, presence: true
   validates :gender, presence: true
-  validates :height, numericality: { greater_than: 0, less_than: 300 }
-  validates :weight, numericality: { greater_than: 0, less_than: 600 }
+  validates :height, numericality: { greater_than: 0, less_than: 300 }, allow_blank: true
+  validates :weight, numericality: { greater_than: 0, less_than: 600 }, allow_blank: true
 end
