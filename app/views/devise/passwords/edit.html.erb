@@ -1,7 +1,7 @@
 <div id="auth">
-    <h2 class="text-center fw-bold" style="margin-top: 92px;">パスワード再設定</h2>
-
     <div class="auth-content mx-auto">
+        <h2 class="text-center fw-bold">パスワード再設定</h2>
+
         <%# * パスワードリセットフォーム %>
         <%= form_for(resource, as: resource_name, url: password_path(resource_name), :html => {method: :put, class:"needs-validation", :novalidate => true}) do |f| %>            
             <%= f.hidden_field :reset_password_token %>
@@ -27,4 +27,6 @@
 
         <%= render "devise/shared/links" %>
     </div>
+
+    <%= render "layouts/footer" %>
 </div>

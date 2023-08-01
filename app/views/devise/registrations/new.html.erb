@@ -1,7 +1,7 @@
 <div id="auth">
-    <h2 class="text-center fw-bold" style="margin-top: 92px;">新規会員登録</h2>
-
     <div class="auth-content mx-auto">
+        <h2 class="text-center fw-bold">新規会員登録</h2>
+
         <%# * サインアップフォーム %>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>    
             <%# ? ユーザ名入力エリア %>
@@ -65,4 +65,6 @@
 
         <%= render "devise/shared/links" %>
     </div>
+
+    <%= render "layouts/footer" %>
 </div>
