@@ -131,6 +131,10 @@ body {
     .pc-sidebar {
         display: none;
     }
+    // ? PCのエラーメッセージは表示しない
+    .pc-error-msg {
+        display: none;
+    }
     // ?モバイルサイドバーのレイアウト設定
     .tablet-header {
         padding: 14px 20px;
@@ -203,8 +207,8 @@ body {
     .tablet-header {
         display: none;
     }
-    // ? モバイルのエラーメッセージは表示しない
-    .mobile_error_msg {
+    // ? タブレットのエラーメッセージは表示しない
+    .tablet-error-msg {
         display: none;
     }
     // ? PCのサイドバーのレイアウト設定
