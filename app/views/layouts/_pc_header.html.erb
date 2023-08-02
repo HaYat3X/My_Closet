@@ -46,8 +46,8 @@
                     </div>
                 <% end %>
 
-                <a href="/alert/list" class="btn">
-                    <i class="bi bi-bell fs-4 text-white alert-btn"></i>
+                <a href="/alert/list" class="btn alert-btn">
+                    <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
 
                     <% if @number_of_notifications.count != 0 %>
                         <span class="rounded-pill text-bg-danger">
@@ -72,7 +72,7 @@
                     </div>
                 <% end %>
 
-                <a href="/alert/list" class="btn">
+                <a href="/alert/list" class="btn alert-btn">
                     <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
 
                     <% if @number_of_notifications.count != 0 %>
@@ -88,7 +88,7 @@
                     <% end %>
                 </a>
             <% else %>
-                <a href="/alert/list" class="btn d-flex ms-auto">
+                <a href="/alert/list" class="btn d-flex ms-auto alert-btn">
                     <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
 
                     <% if @number_of_notifications.count != 0 %>

@@ -1,20 +1,19 @@
 <div id="contact_contacts">
     <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2-5 pc-sidebar">
+        <div class="pc-sidebar">
             <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
         <div class="main-content">
-            <div class="new-content mx-auto">
+            <div class="new-content">
                 <h4 class="fw-bold text-center">お問い合わせ</h4>
 
                 <p class="text-center">
                     弊社へのお問い合わせはこちらからお願いいたします。<br>
                     下記に必要事項をご記入の上、お問い合わせください。
                 </p>
-
 
                 <%= form_with(model: @contact, url: "/contact/create", local: true) do |f| %>
                     <div class="mb-3">
@@ -55,16 +54,3 @@
         </div>
     </div>
 </div>
-
-
-            <div class="col-lg-5 mx-auto mt-5">
-                
-
-                <% if @contact.errors.any? %>
-                    <% @contact.errors.each do |error| %>
-                        <label class="text-danger"><%= error.full_message %></label><br>
-                    <% end %>
-                <% end %>
-
-
-            </div>

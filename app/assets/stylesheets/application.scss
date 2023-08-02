@@ -52,9 +52,6 @@ body {
         color: #FFFFFF;
         text-decoration: none;
     }
-    hr {
-        border-top: 2px solid #333333;
-    }
     .search-identification a:hover {
         text-decoration: underline;
         color: #333333;
@@ -90,12 +87,16 @@ body {
     .pc-sidebar {
         display: none;
     }
+    // ? コンテンツの幅の設定
+    .main-content {
+        width: 100%;
+    }
     // * タブレットのヘッダーは表示しない
     .tablet-header {
         display: none;
     }
-    // * PCのエラーメッセージは表示しない
-    .pc-error-msg {
+    // ? サイドバーの幅の設定
+    .side-content {
         display: none;
     }
     // * ヘッダー分の余白を設定
@@ -132,7 +133,7 @@ body {
             }
         }
         .hamburger {
-            margin-right: 25px;
+            margin-right: 12px;
             img {
                 width: 35px;
             }
@@ -162,16 +163,22 @@ body {
             overflow: auto;
             height: 100%;
             width: 267px;
+            .btn-close {
+                font-size: 20px;
+                font-weight: bold;
+                margin-right: 10px;
+                margin-top: 10px;
+            }
             ul {
                 .nav-item {
                     a {
-                        font-size: 14px;
-                        padding: 8px 40px;
+                        font-size: 16px;
+                        padding: 13px 40px;
                     }
                     img {
                         margin-right: 10px;
-                        width: 18px;
-                        height: 18px;
+                        width: 20px;
+                        height: 20px;
                     }
                 }
                 hr {
@@ -179,18 +186,19 @@ body {
                     background: #727272;
                 }
                 label {
-                    font-size: 20px;
+                    font-size: 22px;
                     padding: 0 40px;
                     margin: 20px 0 15px;
                 }
                 .post-btn {
                     margin: 20px 30px 60px;
                     a {
+                        gap: 5px;
                         background-color: #4B709A;
                         color: #FFFFFF;
                         text-decoration: none;
-                        font-size: 14px;
-                        padding: 10px 0;
+                        font-size: 16px;
+                        padding: 13px 0;
                     }
                 }
             }
@@ -212,16 +220,16 @@ body {
     .pc-header {
         display: none;
     }
-    // ? PCのサイドバーは表示しない
-    .pc-sidebar {
-        display: none;
-    }
-    // ? PCのエラーメッセージは表示しない
-    .pc-error-msg {
+    // ? サイドバーの幅の設定
+    .side-content {
         display: none;
     }
     .mobile-header {
         display: none;
+    }
+    // ? コンテンツの幅の設定
+    .main-content {
+        width: 100%;
     }
     .tablet-header {
         padding: 14px 20px;
@@ -236,24 +244,51 @@ body {
                 width: 45px;
             }
         }
+        .alert-btn {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .text-bg-danger {
+            position: absolute;
+            top: 23px;
+            right: 28px;
+            background-color: red;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 8px;
+        }
+        .bell-btn {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+        }
         .sidebar {
             overflow: auto;
             height: 100%;
             width: 267px;
+            .btn-close {
+                font-size: 30px;
+                font-weight: bold;
+                margin-right: 10px;
+                margin-top: 10px;
+            }
             ul {
                 .nav-item {
                     a {
-                        font-size: 14px;
+                        font-size: 16px;
                         padding: 8px 40px;
                     }
                     img {
                         margin-right: 10px;
-                        width: 18px;
-                        height: 18px;
+                        width: 20px;
+                        height: 20px;
                     }
                 }
                 label {
-                    font-size: 20px;
+                    font-size: 22px;
                     padding: 0 40px;
                     margin: 20px 0 15px;
                 }
@@ -264,7 +299,7 @@ body {
                         background-color: #4B709A;
                         color: #FFFFFF;
                         text-decoration: none;
-                        font-size: 14px;
+                        font-size: 16px;
                     }
                 }
             }
@@ -279,14 +314,10 @@ body {
         height: 90px;
     }
     // ? モバイルのヘッダーは表示しない
-    .mobile_header {
+    .mobile-header {
         display: none;
     }
     .tablet-header {
-        display: none;
-    }
-    // ? タブレットのエラーメッセージは表示しない
-    .tablet-error-msg {
         display: none;
     }
     // ? スマホのヘッダーの高さが70pxなのでその分ひく
@@ -338,6 +369,27 @@ body {
     }
     // ? PCヘッダーの設定
     .pc-header {
+        .alert-btn {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .text-bg-danger {
+            position: absolute;
+            top: -3px;
+            right: 7px;
+            background-color: red;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 8px;
+        }
+        .bell-btn {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+        }
         padding: 14px 40px;
         .logo-area {
             img {

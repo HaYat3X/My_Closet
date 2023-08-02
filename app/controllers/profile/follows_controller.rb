@@ -6,7 +6,7 @@ class Profile::FollowsController < ApplicationController
     def create_follow
         # * １、フォローされる人のIDを取得
         follower = params[:id].to_i
-       
+    
         # * ２、フォローする人のIDを取得
         follow = current_user.id
 
@@ -21,16 +21,21 @@ class Profile::FollowsController < ApplicationController
             redirect_to "/"
         end
     end
+
     # ! フォローを解除するメソッド
     def delete_follow
         # * １、フォロー解除される人のIDを取得
         follower_delete = params[:id].to_i
         # * ２、フォロー解除する人のIDを取得
         follow_delete = current_user.id
+
         # * ３、フォロー解除するデータを取得
         delete_follow = UserRelation.find_by(follow_id: follow_delete, follower_id: follower_delete)
         
         if delete_follow.destroy
+            notice = Notification.where(user_id: follower_delete, notification_type: "follow", source_user_id: follow_delete, source_post_id: 0).first
+
+            notice.destroy
             redirect_to request.referer, notice: "フォロー解除しました"
         else
             redirect_to "/"
