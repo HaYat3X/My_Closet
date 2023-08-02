@@ -10,7 +10,7 @@
                 </a>
             <% else %>
                 <a href="/" class="d-flex align-items-center" aria-current="page">
-                    <img src="/assets/icons/icn_home.png" alt="">
+                    <img src="/assets/icons/icn_home_b.png" alt="">
                     ホーム
                 </a>
             <% end %>
@@ -19,7 +19,7 @@
         <li class="nav-item">
             <% if current_page?("/suggestion") %>
                 <a href="/suggestion" class="d-flex align-items-center active">
-                    <img src="/assets/icons/icn_AI.png" alt="">
+                    <img src="/assets/icons/icn_AI_w.png" alt="">
                     コーディネート提案
                 </a>
             <% else %>
@@ -33,7 +33,7 @@
         <li class="nav-item">
             <% if current_page?("/sns/like_ranking") %>
                 <a href="/sns/like_ranking" class="d-flex align-items-center active">
-                    <img src="/assets/icons/icn_ranking.png" alt="">
+                    <img src="/assets/icons/icn_ranking_w.png" alt="">
                     ランキング
                 </a>
             <% else %>
@@ -49,12 +49,12 @@
             <% if current_page?("/profile/show/#{params[:id]}") || current_page?("/profile/edit/#{params[:id]}") ||  current_page?("/follow/#{params[:id]}") %>
                 <% if user_signed_in? %>
                     <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center active" do %>
-                        <img src="/assets/icons/icn_user.png" alt="">
+                        <img src="/assets/icons/icn_user_w.png" alt="">
                         マイページ
                     <% end %>
                 <% else %>
                     <%= link_to "/profile/show/1", class: "d-flex align-items-center active" do %>
-                        <img src="/assets/icons/icn_user.png" alt="">
+                        <img src="/assets/icons/icn_user.png_w" alt="">
                         マイページ
                     <% end %>
                 <% end %>
@@ -76,7 +76,7 @@
         <li class="nav-item">
             <% if current_page?("/closet/list") || current_page?("/closet/show/#{params[:id]}") || current_page?("/closet/search") || current_page?("/closet/new") || current_page?("/closet/edit/#{params[:id]}") %>
                 <a href="/closet/list" class="d-flex align-items-center active">
-                    <img src="/assets/icons/icn_closet.png" alt="">
+                    <img src="/assets/icons/icn_closet_w.png" alt="">
                     クローゼット
                 </a>
             <% else %>
@@ -90,7 +90,7 @@
         <li class="nav-item">
             <% if current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") %>
                 <a href="/faq/question/list" class="d-flex align-items-center active">
-                    <img src="/assets/icons/icn_faq.png" alt="">
+                    <img src="/assets/icons/icn_advice_w.png" alt="">
                     コーディネートQ&A
                 </a>
             <% else %>
@@ -221,7 +221,7 @@
         <li class="nav-item">
             <% if current_page?("/contact/new") || current_page?("/contact/complete") %>
                 <a href="/contact/new" class="d-flex align-items-center active">
-                    <img src="/assets/icons/icn_contact.png" alt="">
+                    <img src="/assets/icons/icn_contact_w.png" alt="">
                     お問い合わせ
                 </a>
             <% else %>
