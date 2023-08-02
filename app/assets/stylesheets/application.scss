@@ -27,40 +27,15 @@ body {
     background-color: var(--bg);
 }
 
+// ! 空白を初期
 * {
     margin: 0;
     padding: 0;
 }
 
-// ? headerの設定
+// ! headerの共通部分の設定
 .header {
     background-color: #222222;
-    height: 90px;
-    .alert-btn {
-        margin-left: 5px;
-    }
-    .btn {
-        position: relative;
-        display: inline-block;
-    }
-    .alert-btn {
-        position: relative;
-    }
-    .text-bg-danger {
-        position: absolute;
-        top: 0px;
-        right: 6px;
-        background-color: red;
-        color: white;
-        padding: 2px 6px;
-        border-radius: 10px;
-        font-size: 8px;
-    }
-    .bell-btn {
-        width: 30px;
-        height: 30px;
-        margin-left: 10px;
-    }
 }
 
 // ? サイドバーの設定
@@ -99,8 +74,140 @@ body {
     width: 100%;
 }
 
-// * スマートフォン
+// * アラートの設定
+.alert {
+    padding: 7px;
+    margin: 0;
+}
+
+// ! スマートフォン
 @media (max-width: 768px) {
+    // * PC用のヘッダーは表示しない
+    .pc-header {
+        display: none;
+    }
+    // * PCのサイドバーは表示しない
+    .pc-sidebar {
+        display: none;
+    }
+    // * タブレットのヘッダーは表示しない
+    .tablet-header {
+        display: none;
+    }
+    // * PCのエラーメッセージは表示しない
+    .pc-error-msg {
+        display: none;
+    }
+    // * ヘッダー分の余白を設定
+    .content {
+        margin-top: 70px;
+    }
+    // * モバイルのヘッダーのレイアウト設定
+    .mobile-header {
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 5px;
+        padding-right: 15px;
+        .logo-area {
+            display: flex;
+            align-items: center;
+            width: auto;
+            height: 100%;
+            margin: 0 auto;
+            img {
+                height: 30px;
+            }
+        }
+        .search-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            padding: 0;
+            appearance: none;
+            img {
+                width: 25px;
+            }
+        }
+        .hamburger {
+            margin-right: 25px;
+            img {
+                width: 35px;
+            }
+        }
+        .alert-btn {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .text-bg-danger {
+            position: absolute;
+            top: -8px;
+            right: -4px;
+            background-color: red;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 8px;
+        }
+        .bell-btn {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+        }
+        .sidebar {
+            overflow: auto;
+            height: 100%;
+            width: 267px;
+            ul {
+                .nav-item {
+                    a {
+                        font-size: 14px;
+                        padding: 8px 40px;
+                    }
+                    img {
+                        margin-right: 10px;
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+                hr {
+                    margin: 10px 40px;
+                    background: #727272;
+                }
+                label {
+                    font-size: 20px;
+                    padding: 0 40px;
+                    margin: 20px 0 15px;
+                }
+                .post-btn {
+                    margin: 20px 30px 60px;
+                    a {
+                        background-color: #4B709A;
+                        color: #FFFFFF;
+                        text-decoration: none;
+                        font-size: 14px;
+                        padding: 10px 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// * タブレット
+@media (min-width: 768px) and (max-width: 1280px) {
+    // ? headerの設定
+    .header {
+        height: 90px;
+    }
+    // ? スマホのヘッダーの高さが70pxなのでその分ひく
+    .content {
+        margin-top: 90px;
+    }
     // ? PC用のヘッダーは表示しない
     .pc-header {
         display: none;
@@ -110,22 +217,12 @@ body {
         display: none;
     }
     // ? PCのエラーメッセージは表示しない
-    .pc_error_msg {
+    .pc-error-msg {
         display: none;
     }
-}
-
-// * タブレット
-@media (min-width: 768px) and (max-width: 1280px) {
-    // ? PC用のヘッダーは表示しない
-    .pc-header {
+    .mobile-header {
         display: none;
     }
-    // ? PCのサイドバーは表示しない
-    .pc-sidebar {
-        display: none;
-    }
-    // ?モバイルサイドバーのレイアウト設定
     .tablet-header {
         padding: 14px 20px;
         .logo-area {
@@ -172,24 +269,15 @@ body {
                 }
             }
         }
-        // .hamburger {
-        //     img {
-        //         width: 45px;
-        //         height: 45px;
-        //     }
-        // }
-        // .navbar-toggler {
-        //     background-color: #ffffff;
-        //     transition: opacity 0.5s ease;
-        // }
-        // .search_icon {
-        //     display: none;
-        // }
     }
 }
 
 // * PC（大）
 @media (min-width: 1280px) {
+    // ? headerの設定
+    .header {
+        height: 90px;
+    }
     // ? モバイルのヘッダーは表示しない
     .mobile_header {
         display: none;
@@ -197,9 +285,13 @@ body {
     .tablet-header {
         display: none;
     }
-    // ? モバイルのエラーメッセージは表示しない
-    .mobile_error_msg {
+    // ? タブレットのエラーメッセージは表示しない
+    .tablet-error-msg {
         display: none;
+    }
+    // ? スマホのヘッダーの高さが70pxなのでその分ひく
+    .content {
+        margin-top: 90px;
     }
     // ? PCのサイドバーのレイアウト設定
     .pc-sidebar {

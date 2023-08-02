@@ -19,9 +19,10 @@
         <%# ! ヘッダー表示 %>
         <%= render "layouts/pc_header" %>
         <%= render "layouts/tablet_header" %>
+        <%= render "layouts/mobile_header" %>
 
         <%# ! 認証ページでは、サイドバーを表示しない %>
-        <div style="margin-top: 90px;">
+        <div class="content">
             <%= yield %>
         </div>
 
