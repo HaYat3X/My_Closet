@@ -1,6 +1,13 @@
 // ! registerセクション
 #auth {
-    // ! 全サイズ共通
+    // * モバイル
+    @media (max-width: 768px) {
+        // ? お問い合わせ画面
+        .auth-content {
+            padding: 0 40px;
+        }
+    }
+    // * 全サイズ共通
     .auth-content {
         width: 350px;
         h2 {

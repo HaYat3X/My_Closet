@@ -10,17 +10,17 @@
             <div class="list-content mx-auto">
                 <h4 class="fw-bold text-center">通知</h4>
 
-                <ul class="tab-menu nav nav-underline nav-fill">
+                <ul class="tab-menu nav nav-fill">
                     <li class="nav-item flex-fill">
-                        <a href="?tab=to_you" class="nav-link fw-bold <%= params[:tab].nil? || params[:tab] == 'to_you' ? 'active' : '' %>">あなたへ</a>
+                        <a href="?tab=to_you" class="nav-link <%= params[:tab].nil? || params[:tab] == 'to_you' ? 'active' : '' %>">あなたへ</a>
                     </li>
 
                     <li class="nav-item flex-fill">
-                        <a href="?page=1&tab=management" class="nav-link fw-bold <%= params[:tab] == 'management' ? 'active' : '' %>">運営から</a>
+                        <a href="?page=1&tab=management" class="nav-link <%= params[:tab] == 'management' ? 'active' : '' %>">運営から</a>
                     </li>
                 </ul>
 
-                <div class="tab-content mt-3">
+                <div class="tab-content mt-2">
                     <div id="to_you" class="tab-pane active">
                         <% @notification.each do |n| %>
                             <%= link_to "/alert/show/#{n.id}", style: "text-decoration: none;" do %>
@@ -31,7 +31,8 @@
 
                                             <div class="align-items-center alart-title">    
                                                 <h6 class="fw-bold mb-0 mt-1">いいね！通知</h6>
-                                                <%= User.find(n.source_user_id).user_name %>さんがあなたの投稿にいいね！しました。
+
+                                                <label><%= User.find(n.source_user_id).user_name %>さんがあなたの投稿にいいね！しました。</label>
                                             </div>
 
                                             <div class="align-items-center ms-auto">
@@ -50,7 +51,8 @@
 
                                             <div class="align-items-center alart-title">    
                                                 <h6 class="fw-bold mb-0 mt-1">回答通知</h6>
-                                                <%= User.find(n.source_user_id).user_name %>さんがあなたの質問に回答しました。
+
+                                                <label><%= User.find(n.source_user_id).user_name %>さんがあなたの質問に回答しました。</label>
                                             </div>
 
                                             <div class="align-items-center ms-auto">
@@ -69,7 +71,8 @@
 
                                             <div class="align-items-center alart-title">    
                                                 <h6 class="fw-bold mb-0 mt-1">フォロー通知</h6>
-                                                <%= User.find(n.source_user_id).user_name %>さんがあなたをフォローしました。
+                                                
+                                                <label><%= User.find(n.source_user_id).user_name %>さんがあなたをフォローしました。</label>
                                             </div>
 
                                             <div class="align-items-center ms-auto">
@@ -100,7 +103,8 @@
 
                                     <div class="align-items-center alart-title">    
                                         <h6 class="fw-bold mb-0 mt-1">MY CLOSET運営</h6>
-                                        <%= a.title %>
+                                        
+                                        <label><%= a.title %></label>
                                     </div>
 
                                     <div class="d-flex align-items-center ms-auto">

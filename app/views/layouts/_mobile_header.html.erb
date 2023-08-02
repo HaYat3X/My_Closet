@@ -83,7 +83,7 @@
         </div>
     <% else %>
         <div>
-            <a href="/alert/list" class="alert-btn" style="margin-left: 20px;">
+            <a href="/alert/list" class="alert-btn" style="margin-left: 25px;">
                 <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">        
 
                 <% if @number_of_notifications.count != 0 %>
@@ -103,6 +103,11 @@
 
     <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="Navbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="d-flex flex-column flex-shrink-0 sticky-top">
+            <%# <button type="button" class="btn-close text-end" data-bs-dismiss="offcanvas" aria-label="閉じる"></button> %>
+            <div class="text-end">
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="閉じる"></button>
+            </div>
+
             <ul class="nav nav-pills flex-column">
                 <label>メニュー</label>
 
@@ -210,7 +215,7 @@
                 <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}") %>
                     <li class="post-btn">
                         <a href="/sns/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                             </svg>
                             コーディネート投稿
@@ -219,7 +224,7 @@
                 <% elsif current_page?("/closet/list") || current_page?("/closet/show/#{params[:id]}") || current_page?("/closet/search") || current_page?("/closet/new") || current_page?("/closet/edit/#{params[:id]}") %>
                     <li class="post-btn">
                         <a href="/closet/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                             </svg>
                             アイテム追加
@@ -228,7 +233,7 @@
                 <% elsif current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") %>
                     <li class="post-btn">
                         <a href="/faq/question/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                             </svg>
                             質問を投稿

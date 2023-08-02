@@ -31,6 +31,8 @@ class Sns::LikesController < ApplicationController
     def delete_like
         # * URLから投稿IDを取得する
         post_id = params[:id]
+        post = Social.find(post_id)
+        post_user_id = post.user_id
 
         # * ログイン中のユーザIDを取得する
         user_id = current_user.id
@@ -40,6 +42,9 @@ class Sns::LikesController < ApplicationController
 
         # * いいね削除が成功、失敗の判定をする
         if @likedelete.destroy
+            notice = Notification.where(user_id: post_user_id, notification_type: "like", source_user_id: user_id, source_post_id: post_id).first
+
+            notice.destroy
             redirect_to request.referer, notice: "いいねを解除しました。"
         else
             redirect_to request.referer, alert: "いいね解除に失敗しました。"

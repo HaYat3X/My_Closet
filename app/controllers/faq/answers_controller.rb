@@ -47,9 +47,12 @@ class Faq::AnswersController < ApplicationController
     
         # 削除
         if @answer.destroy
+            notice = Notification.where(user_id: @question.user_id, notification_type: "answer", source_user_id: current_user.id, source_post_id: @answer.question_id).first
+
+            notice.destroy
             redirect_to "/faq/question/show/#{@question.id}", notice: "投稿を削除しました"
         else
-            redirect_to"/", alert: "投稿の編集に削除しました"
+            redirect_to "/", alert: "投稿の編集に削除しました"
         end
     end
 
