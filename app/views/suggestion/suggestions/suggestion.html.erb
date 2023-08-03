@@ -7,9 +7,7 @@
 
         <%# ! contents %>
         <div class="main-content">
-            <div class="pc-error-msg">
-                <%= render "layouts/error" %>
-            </div>
+            <%= render "layouts/error" %>
 
             <div class="suggest-content mx-auto">
                 <%# ! 提案データがあるか判定 %>
@@ -80,151 +78,221 @@
                             <% end %>
                         </div>
                 <% else %>
+                    <%= form_with(model: @suggest, url: "/suggest_create", local: true, :html => {class:"needs-validation ", :novalidate => true}) do |f| %>
+                        <div class="question">
+                            <p>Q1、あなたはオーバーサイズの洋服かジャストサイズの洋服、どちらが好みですか？</p>
 
-                        <%= form_with(model: @suggest, url: "/suggest_create", local: true) do |f| %>
-                            <div class="mb-3">
-                                <p>あなたはオーバーサイズかジャストサイズ、どちらが好きですか？</p>
-                                <%= f.radio_button :size, -1, id: "radio-a01" %>
-                                <%= f.label :size, "オーバーサイズ", class: "radio-a-label", for: "radio-a01" %>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <%= f.radio_button :size, -1, id: "over-size", required: true %>
 
-                                <%= f.radio_button :size, 1, id: "radio-a02" %>
-                                <%= f.label :size, "ジャストサイズ", class: "radio-a-label", for: "radio-a02" %>
+                                    <label for="over-size">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
+                                    </label>
 
-                                <div>
-                                    <% @suggest.errors[:size].each do |error| %>
-                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
-                                    <% end %>
+                                    <div class="invalid-feedback">
+                                        質問に回答してください。
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <%= f.radio_button :size, 1, id: "just-size", required: true %>
+
+                                    <label for="just-size">
+                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                    </label>
                                 </div>
                             </div>
-                            <hr>
+                        </div>
 
-                            <div class="mb-3">
-                                <p>あなたの瞳の色を選んでください？</p>
-                                <%= f.radio_button :eye_color, "黒っぽい", id: "radio-a01" %>
-                                <%= f.label :eye_color, "黒っぽい", class: "radio-a-label", for: "radio-a01" %>
+                        <div class="question">
+                            <p>Q2、あなたの瞳の色を選んでください。</p>
 
-                                <%= f.radio_button :eye_color, "茶色っぽい", id: "radio-a02" %>
-                                <%= f.label :eye_color, "茶色っぽい", class: "radio-a-label", for: "radio-a02" %>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <%= f.radio_button :eye_color, "黒っぽい", id: "radio1", required: true %>
 
-                                <%= f.radio_button :eye_color, "青っぽい", id: "radio-a03" %>
-                                <%= f.label :eye_color, "青っぽい", class: "radio-a-label", for: "radio-a03" %>
+                                    <label for="radio1">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
+                                    </label>
+                                </div>
 
-                                <div>
-                                    <% @suggest.errors[:eye_color].each do |error| %>
-                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
-                                    <% end %>
+                                <div class="col-6">
+                                    <%= f.radio_button :eye_color, "茶色っぽい", id: "radio2", required: true %>
+
+                                    <label for="radio2">
+                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                    </label>
+                                </div>
+
+                                <div class="col-6">
+                                    <%= f.radio_button :eye_color, "黒っぽい", id: "radio3", required: true %>
+
+                                    <label for="radio3">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
+                                    </label>
+
+                                    <div class="invalid-feedback">
+                                        質問に回答してください。
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <%= f.radio_button :eye_color, "茶色っぽい", id: "radio4", required: true %>
+
+                                    <label for="radio4">
+                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                    </label>
                                 </div>
                             </div>
-                            <hr>
+                        </div>
 
-                            <div class="mb-3">
-                                <p>あなたの髪の色を選んでください？</p>
-                                <%= f.radio_button :hair_color, "黒っぽい", id: "radio-a01" %>
-                                <%= f.label :hair_color, "黒っぽい", class: "radio-a-label", for: "radio-a01" %>
+                        <div class="question">
+                            <p>Q3、あなたの髪の色を選んでください。</p>
 
-                                <%= f.radio_button :hair_color, "茶色っぽい", id: "radio-a02" %>
-                                <%= f.label :hair_color, "茶色っぽい", class: "radio-a-label", for: "radio-a02" %>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <%= f.radio_button :hair_color, "黒っぽい", id: "radio5", required: true %>
 
-                                <%= f.radio_button :hair_color, "青っぽい", id: "radio-a03" %>
-                                <%= f.label :hair_color, "青っぽい", class: "radio-a-label", for: "radio-a03" %>
+                                    <label for="radio5">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
+                                    </label>
+                                </div>
 
-                                <div>
-                                    <% @suggest.errors[:hair_color].each do |error| %>
-                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
-                                    <% end %>
+                                <div class="col-6">
+                                    <%= f.radio_button :hair_color, "茶色っぽい", id: "radio6", required: true %>
+
+                                    <label for="radio6">
+                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                    </label>
+                                </div>
+
+                                <div class="col-6">
+                                    <%= f.radio_button :hair_color, "黒っぽい", id: "radio7", required: true %>
+
+                                    <label for="radio7">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
+                                    </label>
+
+                                    <div class="invalid-feedback">
+                                        質問に回答してください。
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <%= f.radio_button :hair_color, "茶色っぽい", id: "radio8", required: true %>
+
+                                    <label for="radio8">
+                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                    </label>
                                 </div>
                             </div>
-                            <hr>
+                        </div>
 
-                            <div class="mb-3">
-                                <p>あなたの肌の色を選んでください？</p>
-                                <%= f.radio_button :skin_color, "黒っぽい", id: "radio-a01" %>
-                                <%= f.label :skin_color, "黒っぽい", class: "radio-a-label", for: "radio-a01" %>
+                        <div class="question">
+                            <p>Q4、あなたの肌の色を選んでください。</p>
 
-                                <%= f.radio_button :skin_color, "茶色っぽい", id: "radio-a02" %>
-                                <%= f.label :skin_color, "茶色っぽい", class: "radio-a-label", for: "radio-a02" %>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <%= f.radio_button :hair_color, "黒っぽい", id: "radio9", required: true %>
 
-                                <%= f.radio_button :skin_color, "青っぽい", id: "radio-a03" %>
-                                <%= f.label :skin_color, "青っぽい", class: "radio-a-label", for: "radio-a03" %>
+                                    <label for="radio9">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
+                                    </label>
+                                </div>
 
-                                <div>
-                                    <% @suggest.errors[:skin_color].each do |error| %>
-                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
-                                    <% end %>
+                                <div class="col-6">
+                                    <%= f.radio_button :hair_color, "茶色っぽい", id: "radio10", required: true %>
+
+                                    <label for="radio10">
+                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                    </label>
+                                </div>
+
+                                <div class="col-6">
+                                    <%= f.radio_button :hair_color, "黒っぽい", id: "radio11", required: true %>
+
+                                    <label for="radio11">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
+                                    </label>
+
+                                    <div class="invalid-feedback">
+                                        質問に回答してください。
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <%= f.radio_button :hair_color, "茶色っぽい", id: "radio12", required: true %>
+
+                                    <label for="radio12">
+                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                    </label>
                                 </div>
                             </div>
-                            <hr>
+                        </div>
 
-                            <div class="mb-3">
-                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
-                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
-                                <%= f.select :style1, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
+                        <div class="question">
+                            <p>Q5、この画像を評価してください。</p>
+
+                            <div class="text-center">
+                                <img src="/assets/suggest/test1.png" class="evaluation" alt="">
+                            </div>
+
+                            <%= f.select :style1, [['5. 好み', '5'], ['4. まあ好み', '4'], ['3. どちらちとも言えない', '3'], ['2. あまり好みじゃない', '2'], ['1. 好みじゃやない', '1']], { include_blank: '評価してください ▾' }, class: 'form-control', required: true %>
+
+                            <div class="invalid-feedback">
+                                質問に回答してください。
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <p>Q6、この画像を評価してください。</p>
+
+                            <div class="text-center">
+                                <img src="/assets/suggest/test1.png" class="evaluation" alt="">
+                            </div>
+
+                            <%= f.select :style2, [['5. 好み', '5'], ['4. まあ好み', '4'], ['3. どちらちとも言えない', '3'], ['2. あまり好みじゃない', '2'], ['1. 好みじゃやない', '1']], { include_blank: '評価してください ▾' }, class: 'form-control', required: true %>
+
+                            <div class="invalid-feedback">
+                                質問に回答してください。
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <p>Q7、この画像を評価してください。</p>
+
+                            <div class="text-center">
+                                <img src="/assets/suggest/test1.png" class="evaluation" alt="">
+                            </div>
                                 
-                                <div>
-                                    <% @suggest.errors[:style1].each do |error| %>
-                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
-                                    <% end %>
+                            <%= f.select :style3, [['5. 好み', '5'], ['4. まあ好み', '4'], ['3. どちらちとも言えない', '3'], ['2. あまり好みじゃない', '2'], ['1. 好みじゃやない', '1']], { include_blank: '評価してください ▾' }, class: 'form-control', required: true %>
+
+                            <div class="invalid-feedback">
+                                質問に回答してください。
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <p>Q8、あなたが、服に宛てられる予算はいくらですか？</p>
+
+                            <%= f.select :total_price, [['1. 総額10000円以下', '1'], ['2. 総額10000円以上〜15000円以下', '2'], ['3. 総額15000円以上〜20000円以下', '3'], ['4. 総額20000円以上〜25000円以下', '4'], ['5. 総額25000円以上', '5']], { include_blank: '評価してください ▾' }, class: 'form-control', required: true %>
+
+                            <div class="invalid-feedback">
+                                質問に回答してください。
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8 col-12 col-md-8 mx-auto">
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="/induction" class="btn col-12 cancel-btn">キャンセル</a>
+                                </div>
+                                <div class="col-6">
+                                    <%= f.submit "診断する", class: "btn col-12 submit-btn" %>
                                 </div>
                             </div>
-                            <hr>
-
-                            <div class="mb-3">
-                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
-                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
-                                <%= f.select :style2, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
-
-                                <div>
-                                    <% @suggest.errors[:style2].each do |error| %>
-                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
-                                    <% end %>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="mb-3">
-                                <p>この画像を評価してください(好みじゃない:1 あまり好みじゃない:2 どちらでもない:3 まあ好み:4 好み:5)</p>
-                                <%= image_tag "/assets/default-avatar.png",class: "rounded-circle me-2" %>
-                                <%= f.select :style3, ['1', '2', '3', '4', '5'], { include_blank: '評価してください' }, class: 'form-control' %>
-
-                                <div>
-                                    <% @suggest.errors[:style3].each do |error| %>
-                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
-                                    <% end %>
-                                </div>
-                            </div>
-                            <hr>
-
-                            <div class="mb-3">
-                                <p>あなたが、服に宛てられる予算はいくらですか？</p>
-                                <%= f.radio_button :total_price, 1, id: "radio-a03" %>
-                                <%= f.label :total_price, "総額10000円以下", class: "radio-a-label", for: "radio-a03" %>
-                                
-                                <%= f.radio_button :total_price, 2, id: "radio-a04" %>
-                                <%= f.label :total_price, "総額10000円以上〜15000円以下", class: "radio-a-label", for: "radio-a04" %>
-
-                                <%= f.radio_button :total_price, 3, id: "radio-a05" %>
-                                <%= f.label :total_price, "総額15000円以上〜20000円以下", class: "radio-a-label", for: "radio-a05" %>
-
-                                <%= f.radio_button :total_price, 4, id: "radio-a06" %>
-                                <%= f.label :total_price, "総額20000円以上〜25000円以下", class: "radio-a-label", for: "radio-a06" %>
-
-                                <%= f.radio_button :total_price, 5, id: "radio-a07" %>
-                                <%= f.label :total_price, "総額25000円以上", class: "radio-a-label", for: "radio-a07" %>
-                                
-                                <div>
-                                    <% @suggest.errors[:total_price].each do |error| %>
-                                        <small class="text-danger">コーディネートタイトルを入力してください。</small>
-                                    <% end %>
-                                </div>
-                            </div>
-
-                            <%= f.submit "好み設定", class: "btn mt-3 btn-primary" %>
-
-                        <%# <div id="spinner-container" style="display: none;">
-                            <div class="spinner-border" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                            AIがコーディネートを提案中...
-                        </div> %>
+                        </div>
                     <% end %>
                 <% end %>
             </div>
@@ -233,30 +301,53 @@
 </div>
 
 <script>
-  $(document).ready(function() {
-        <%# ! 現在位置しているタブをアクティブ状態にする %>
-        function setActiveTab(tabId) {
-            $('.tab-menu .nav-link').removeClass('active');
-            $('.tab-content .tab-pane').removeClass('show active');
-            $('#' + tabId).addClass('show active');
-            $('.tab-menu .nav-link[href*="tab=' + tabId + '"]').addClass('active');
-        }
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const tabValue = urlParams.get('tab');
+//   $(document).ready(function() {
+//         <%# ! 現在位置しているタブをアクティブ状態にする %>
+//         function setActiveTab(tabId) {
+//             $('.tab-menu .nav-link').removeClass('active');
+//             $('.tab-content .tab-pane').removeClass('show active');
+//             $('#' + tabId).addClass('show active');
+//             $('.tab-menu .nav-link[href*="tab=' + tabId + '"]').addClass('active');
+//         }
 
-        if (tabValue) {
-            const tabId = tabValue.toLowerCase();
-            setActiveTab(tabId);
-        } else {
-            $('.tab-menu .nav-link[href*="?tab=all"]').addClass('active');
-            $('.tab-content .tab-pane#all').addClass('show active');
-        }
+//         const urlParams = new URLSearchParams(window.location.search);
+//         const tabValue = urlParams.get('tab');
 
-    $("#proposal-link").click(function() {
-      // ボタンを非表示にし、スピナーを表示する
-      $(this).hide();
-      $("#spinner-container").show();
-    });
-  });
+//         if (tabValue) {
+//             const tabId = tabValue.toLowerCase();
+//             setActiveTab(tabId);
+//         } else {
+//             $('.tab-menu .nav-link[href*="?tab=all"]').addClass('active');
+//             $('.tab-content .tab-pane#all').addClass('show active');
+//         }
+
+//     $("#proposal-link").click(function() {
+//       // ボタンを非表示にし、スピナーを表示する
+//       $(this).hide();
+//       $("#spinner-container").show();
+//     });
+//   });
+</script>
+
+<script>
+// 無効なフィールドがある場合にフォーム送信を無効にするスターターJavaScriptの例
+(() => {
+  'use strict'
+
+  // Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // ループして帰順を防ぐ
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
 </script>

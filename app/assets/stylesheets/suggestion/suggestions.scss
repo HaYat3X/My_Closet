@@ -2,15 +2,12 @@
 #suggestion_suggestions {
     // ! 全サイズ共通
     // * スマートフォン （小）
-    @media (max-width: 768px) {}
-    // * タブレット
-    @media (min-width: 768px) and (max-width: 1280px) {}
-    // * PC（大）
-    @media (min-width: 1280px) {
+    @media (max-width: 768px) {
         // ? SNS一覧ページの設定
         .suggest-content {
-            width: 1014px;
-            margin-top: 25px;
+            // width: 1014px;
+            // margin-top: 25px;
+            padding: 100px 40px;
             margin-bottom: 150px;
             .sns-image {
                 width: 100%;
@@ -49,6 +46,244 @@
             }
             .page {
                 margin-top: 50px;
+            }
+            form {
+                width: 310px;
+                margin: 0 auto;
+                margin-top: 100px;
+                .question {
+                    margin-bottom: 100px;
+                }
+                p {
+                    font-size: 16px;
+                    font-weight: 600;
+                    margin-bottom: 40px;
+                }
+                input[type="radio"] {
+                    display: none;
+                }
+                input[type="radio"]:checked+label img {
+                    border: 3px solid #4B709A;
+                    border-radius: 10px;
+                    box-sizing: border-box;
+                }
+                select {
+                    margin-top: 40px;
+                    border-radius: 10px;
+                    height: 50px;
+                    background-color: #FFFFFF;
+                    opacity: .6;
+                    color: #333333;
+                }
+                .select-img {
+                    width: 150px;
+                    height: 150px;
+                }
+                .evaluation {
+                    width: 310px;
+                    height: 413px;
+                }
+                .cancel-btn {
+                    color: #4B709A;
+                    border: 2px solid #4B709A;
+                    border-radius: 10px;
+                }
+                .submit-btn {
+                    background-color: #4B709A;
+                    border: 2px solid #4B709A;
+                    color: #FFFFFF;
+                    border-radius: 10px;
+                }
+            }
+        }
+    }
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 1280px) {
+        // ? SNS一覧ページの設定
+        .suggest-content {
+            width: 1014px;
+            // margin-top: 25px;
+            margin-bottom: 150px;
+            .sns-image {
+                width: 100%;
+                height: 340px;
+                object-fit: cover;
+            }
+            .user-area {
+                background-color: #222222;
+                img {
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin-left: 10px;
+                }
+                .user-name {
+                    color: #FFFFFF;
+                }
+                .user-height {
+                    font-size: 10px;
+                    color: #FFFFFF;
+                }
+                .like {
+                    img {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                .number-of-likes {
+                    font-size: 14px;
+                    margin-top: 2px;
+                    margin-left: 5px;
+                    color: #FFFFFF;
+                    opacity: .6;
+                }
+            }
+            .page {
+                margin-top: 50px;
+            }
+            form {
+                width: 550px;
+                margin: 0 auto;
+                margin-top: 100px;
+                .question {
+                    margin-bottom: 100px;
+                }
+                p {
+                    font-size: 16px;
+                    font-weight: 600;
+                    margin-bottom: 40px;
+                }
+                input[type="radio"] {
+                    display: none;
+                }
+                input[type="radio"]:checked+label img {
+                    border: 3px solid #4B709A;
+                    border-radius: 10px;
+                    box-sizing: border-box;
+                }
+                select {
+                    margin-top: 40px;
+                    border-radius: 10px;
+                    height: 50px;
+                    background-color: #FFFFFF;
+                    opacity: .6;
+                    color: #333333;
+                }
+                .select-img {
+                    width: 270px;
+                    height: 270px;
+                }
+                .evaluation {
+                    width: 350px;
+                    height: 467px;
+                }
+                .cancel-btn {
+                    color: #4B709A;
+                    border: 2px solid #4B709A;
+                    border-radius: 10px;
+                }
+                .submit-btn {
+                    background-color: #4B709A;
+                    border: 2px solid #4B709A;
+                    color: #FFFFFF;
+                    border-radius: 10px;
+                }
+            }
+        }
+    }
+    // * PC（大）
+    @media (min-width: 1280px) {
+        // ? SNS一覧ページの設定
+        .suggest-content {
+            width: 1014px;
+            // margin-top: 25px;
+            margin-bottom: 150px;
+            .sns-image {
+                width: 100%;
+                height: 340px;
+                object-fit: cover;
+            }
+            .user-area {
+                background-color: #222222;
+                img {
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin-left: 10px;
+                }
+                .user-name {
+                    color: #FFFFFF;
+                }
+                .user-height {
+                    font-size: 10px;
+                    color: #FFFFFF;
+                }
+                .like {
+                    img {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                .number-of-likes {
+                    font-size: 14px;
+                    margin-top: 2px;
+                    margin-left: 5px;
+                    color: #FFFFFF;
+                    opacity: .6;
+                }
+            }
+            .page {
+                margin-top: 50px;
+            }
+            form {
+                width: 550px;
+                margin: 0 auto;
+                margin-top: 100px;
+                .question {
+                    margin-bottom: 100px;
+                }
+                p {
+                    font-size: 16px;
+                    font-weight: 600;
+                    margin-bottom: 40px;
+                }
+                input[type="radio"] {
+                    display: none;
+                }
+                input[type="radio"]:checked+label img {
+                    border: 3px solid #4B709A;
+                    border-radius: 10px;
+                    box-sizing: border-box;
+                }
+                select {
+                    margin-top: 40px;
+                    border-radius: 10px;
+                    height: 50px;
+                    background-color: #FFFFFF;
+                    opacity: .6;
+                    color: #333333;
+                }
+                .select-img {
+                    width: 270px;
+                    height: 270px;
+                }
+                .evaluation {
+                    width: 350px;
+                    height: 467px;
+                }
+                .cancel-btn {
+                    color: #4B709A;
+                    border: 2px solid #4B709A;
+                    border-radius: 10px;
+                }
+                .submit-btn {
+                    background-color: #4B709A;
+                    border: 2px solid #4B709A;
+                    color: #FFFFFF;
+                    border-radius: 10px;
+                }
             }
         }
     }

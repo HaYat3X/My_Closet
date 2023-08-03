@@ -47,9 +47,8 @@ Rails.application.routes.draw do
   delete "faq/create_delete/:id", to: "faq/likes#delete_like"
 
   # ! 提案画面のルーティング
+  get "induction", to: "suggestion/suggestions#induction"
   get "suggestion", to: "suggestion/suggestions#suggestion"
-  # post "call_gpt", to: "suggestion/apis#call_gpt"
-  # patch "call_gpt_update", to: "suggestion/apis#call_gpt_update"
   post "suggest_create", to: "suggestion/suggestions#suggest_create"
 
   # ! プロフィール画面のルーティング

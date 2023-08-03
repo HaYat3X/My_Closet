@@ -45,6 +45,10 @@ class Suggestion::SuggestionsController < ApplicationController
         end
     end
 
+    # ! 始めて提案するユーザーのために、提案画面へ誘導する
+    def induction
+    end
+
     # ! (privateは外部クラスから参照できない)
     private
     
