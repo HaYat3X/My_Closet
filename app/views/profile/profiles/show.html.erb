@@ -61,35 +61,35 @@
                             <% else %>
                                 <%# ! フォローしているかしていないか判断する %>
                                 <% if UserRelation.where(follow_id: current_user.id, follower_id: @user.id).exists? %>
-                                <%= button_to "フォロー解除", "/profile/follow/#{@user.id}", method: :delete, class: "btn btn-outline-primary align-self-center" %>
+                                    <%= button_to "フォロー解除", "/profile/follow/#{@user.id}", method: :delete, class: "btn rounded-pill un-follow-btn px-4 align-self-center" %>
                                 <% else %>
-                                <%= button_to "フォロー", "/profile/follow/#{@user.id}", method: :post, class: "btn btn-primary align-self-center" %>
+                                    <%= button_to "フォローする", "/profile/follow/#{@user.id}", method: :post, class: "btn rounded-pill follow-btn px-4 align-self-center" %>
                                 <% end %>
                             <% end %>
                         </div>
                     </div>
                 </div>
 
-                <div class="" style="margin-top: 24px;">
+                <div style="margin-top: 24px;">
                     <%= simple_format(@user.profile) %>
                 </div>
 
                 <div class="user-post-area">
-                    <ul class="tab-menu nav nav-underline nav-fill">
+                    <ul class="tab-menu nav nav-fill">
                         <li class="nav-item flex-fill">
-                            <a href="?tab=sns" class="nav-link fw-bold <%= params[:tab].nil? || params[:tab] == 'sns' ? 'active' : '' %>">コーディネート</a>
+                            <a href="?tab=sns" class="nav-link <%= params[:tab].nil? || params[:tab] == 'sns' ? 'active' : '' %>">コーディネート</a>
                         </li>
 
                         <li class="nav-item flex-fill">
-                            <a href="?page=1&tab=like" class="nav-link fw-bold <%= params[:tab] == 'like' ? 'active' : '' %>">いいね！</a>
+                            <a href="?page=1&tab=like" class="nav-link <%= params[:tab] == 'like' ? 'active' : '' %>">いいね！</a>
                         </li>
 
                         <li class="nav-item flex-fill">
-                            <a href="?page=1&tab=closet" class="nav-link fw-bold <%= params[:tab] == 'closet' ? 'active' : '' %>">クローゼット</a>
+                            <a href="?page=1&tab=closet" class="nav-link <%= params[:tab] == 'closet' ? 'active' : '' %>">クローゼット</a>
                         </li>
 
                         <li class="nav-item flex-fill">
-                            <a href="?page=1&tab=question" class="nav-link fw-bold <%= params[:tab] == 'question' ? 'active' : '' %>">質問</a>
+                            <a href="?page=1&tab=question" class="nav-link <%= params[:tab] == 'question' ? 'active' : '' %>">質問</a>
                         </li>
                     </ul>
 
@@ -97,7 +97,7 @@
                         <div id="sns" class="tab-pane active user-post-content">
                             <div class="row g-1">
                                 <% @sns_all.each do |sns| %>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 col-md-4">
                                         <%= link_to "/sns/show/#{sns.id}" do %>
                                             <%= image_tag sns.photograph.url, class: "photograph" %>
                                         <% end %>
@@ -113,7 +113,7 @@
                         <div id="like" class="tab-pane user-post-content">
                             <div class="row g-1">
                                 <% @sns_like.each do |sns| %>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 col-md-4">
                                         <%= link_to "/sns/show/#{sns.id}" do %>
                                             <%= image_tag sns.photograph.url, class: "photograph" %>
                                         <% end %>
@@ -129,7 +129,7 @@
                         <div id="closet" class="tab-pane user-post-content">
                             <div class="row g-1">
                                 <% @closets.each do |closet| %>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 col-md-4">
                                         <%= link_to "/closet/show/#{closet.id}" do %>
                                             <%= image_tag closet.photograph.url, class: "photograph" %>
                                         <% end %>
@@ -142,32 +142,16 @@
                             </div>
                         </div>
 
-
                         <div id="question" class="tab-pane question">
                             <div class="row question-area">
                                 <% @questions.each do |question| %>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6 col-md-6">
                                         <div class="d-flex">
                                             <%= image_tag question.photograph.url, class: "question_image" %>
 
                                             <div class="question-area">
-                                                <div class="d-flex align-items-center user-area">
-                                                    <%= link_to "/profile/show/#{question.user.id}" do %>
-                                                        <% if question.user.avatar.url %>
-                                                            <%= image_tag question.user.avatar.url, class: "question-user-image" %>
-                                                        <% else %>
-                                                            <img src="/assets/user/avatar.png" alt="Generic placeholder image" class="question-user-image">
-                                                        <% end %>
-                                                    <% end %>
-
-                                                    <div class="user-information">
-                                                        <h5 class="mb-0 fw-bold"><%= question.user.user_name %></h5>
-                                                        <small><%= question.created_at.strftime('%m月%d日') %></small>
-                                                    </div>
-                                                </div>
-
                                                 <div class="question-information">
-                                                    <%= truncate(question.question, length: 44) %>
+                                                    <%= truncate(question.question, length: 38) %>
                                                 </div>
 
                                                 <div class="answer d-flex align-items-center justify-content-end">
