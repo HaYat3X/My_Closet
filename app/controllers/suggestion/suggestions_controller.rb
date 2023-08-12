@@ -13,19 +13,77 @@ class Suggestion::SuggestionsController < ApplicationController
         if Suggest.exists?(user_id: current_user.id)
             other_users_suggest = Suggest.where.not(user_id: current_user.id)
             user_suggest = Suggest.find_by(user_id: current_user.id)
+            current_user_gender = User.find(current_user.id).gender
 
+            # * レコメンドでおすすめコーデを取得する
+            @recommend = recommend(current_user_gender, user_suggest, other_users_suggest)
+
+            # * パーソナルカラーと好きなコーデによって表示する画像を返す
+            case personal_color = user_suggest.personal_color
+            when personal_color === "春 (Spring)"
+                @img_path = "/assets/suggest/sample.png"
+                
+                if current_user_gender == 1
+                    @suggest_img_1 = "/assets/suggest/test3.png"
+                    @suggest_img_2 = "/assets/suggest/test3.png"
+                    @suggest_img_3 = "/assets/suggest/test3.png"
+                    @suggest_img_4 = "/assets/suggest/test3.png"
+                else
+                    @suggest_img_1 = "/assets/suggest/test3.png"
+                    @suggest_img_2 = "/assets/suggest/test3.png"
+                    @suggest_img_3 = "/assets/suggest/test3.png"
+                    @suggest_img_4 = "/assets/suggest/test3.png"
+                end
+            when personal_color === "夏 (Summer)"
+                @img_path = "/assets/suggest/sample.png"
+
+                if current_user_gender == 1
+                    @suggest_img_1 = "/assets/suggest/test3.png"
+                    @suggest_img_2 = "/assets/suggest/test3.png"
+                    @suggest_img_3 = "/assets/suggest/test3.png"
+                    @suggest_img_4 = "/assets/suggest/test3.png"
+                else
+                    @suggest_img_1 = "/assets/suggest/test3.png"
+                    @suggest_img_2 = "/assets/suggest/test3.png"
+                    @suggest_img_3 = "/assets/suggest/test3.png"
+                    @suggest_img_4 = "/assets/suggest/test3.png"
+                end
+            when personal_color === "秋 (Autumn)"
+                @img_path = "/assets/suggest/sample.png"
+
+                if current_user_gender == 1
+                    @suggest_img_1 = "/assets/suggest/test3.png"
+                    @suggest_img_2 = "/assets/suggest/test3.png"
+                    @suggest_img_3 = "/assets/suggest/test3.png"
+                    @suggest_img_4 = "/assets/suggest/test3.png"
+                else
+                    @suggest_img_1 = "/assets/suggest/test3.png"
+                    @suggest_img_2 = "/assets/suggest/test3.png"
+                    @suggest_img_3 = "/assets/suggest/test3.png"
+                    @suggest_img_4 = "/assets/suggest/test3.png"
+                end
+            else 
+                @img_path = "/assets/suggest/sample.png"
+
+                if current_user_gender == 1
+                    @suggest_img_1 = "/assets/suggest/test3.png"
+                    @suggest_img_2 = "/assets/suggest/test3.png"
+                    @suggest_img_3 = "/assets/suggest/test3.png"
+                    @suggest_img_4 = "/assets/suggest/test3.png"
+                else
+                    @suggest_img_1 = "/assets/suggest/test3.png"
+                    @suggest_img_2 = "/assets/suggest/test3.png"
+                    @suggest_img_3 = "/assets/suggest/test3.png"
+                    @suggest_img_4 = "/assets/suggest/test3.png"
+                end
+            end
+
+            # * デバッグ
             puts "ログインしているユーザー：#{user_suggest.personal_color}"
             
             other_users_suggest.each do |single|
                 puts "ログインしている以外のユーザー：#{single.personal_color}"
             end
-
-            current_user_gender = User.find(current_user.id).gender
-
-            @recommend = recommend(current_user_gender, user_suggest, other_users_suggest)
-
-            # * パーソナルカラー
-            @personal_color = user_suggest.personal_color
         end
     end
 
