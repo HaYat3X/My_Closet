@@ -39,8 +39,8 @@
 
                     <div class="mb-3">
                         <button type="button" class="coordinate" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
-                            <div class="container">
-								<div id="image-preview" class="preview mx-auto"></div>
+                            <div class="modal-container">
+								<div id="image-preview" class="preview"></div>
 								
 								<div id="overlay" class="overlay">
 									<img src="/assets/adds/img_add.png" alt="">
@@ -83,7 +83,7 @@
                             着用アイテムを選択 ▾
                         </button>
 
-                        <div class="modal modal-xl fade modal-area modal-dialog-scrollable" id="ItemModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                        <div class="modal fade modal-area modal-dialog-scrollable" id="ItemModal" tabindex="-1" aria-labelledby="exampleModalLabel">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -91,14 +91,15 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <div id="scrollContainer">
+                                        <div id="scrollContainer" class="mx-auto">
                                             <p id="messageContainer" class="text-danger small"></p>
-                                            <div class="row g-1">
-                                                <% @closets_all.each do |c| %>
-                                                    <div class="col-lg-2">
-                                                        <%= label_tag "element_#{c.id}", image_tag(c.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
 
-                                                        <%= check_box_tag 'elements[]', c.id, false, id: "element_#{c.id}", class: "checkbox-image" %>
+                                            <div class="row g-1">
+                                                <% @closets_all.each do |closet| %>
+                                                    <div class="flex">
+                                                        <%= label_tag "element_#{closet.id}", image_tag(closet.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
+
+                                                        <%= check_box_tag 'elements[]', closet.id, false, id: "element_#{closet.id}", class: "checkbox-image" %>
                                                     </div>
                                                 <% end %>
                                             </div>
@@ -116,9 +117,16 @@
                         </div>
                     </div>
 
-                    <div class="post-area py-3 ms-auto">
-                        <a href="/" class="btn px-3 text-white border">キャンセル</a>
-                        <%= f.submit "投稿", class: "btn px-3 submit-btn" %>
+                    <div class="col-lg-8 col-12 col-md-8 mx-auto" style="margin-top: 100px;">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="/" class="btn col-12 cancel-btn">キャンセル</a>
+                            </div>
+
+                            <div class="col-6">
+                                <%= f.submit "更新する", class: "btn col-12 submit-btn" %>
+                            </div>
+                        </div>
                     </div>
                 <% end %>
             </div>
@@ -127,10 +135,61 @@
 </div>
 
 <script>
-if (window.location.pathname === "/sns/edit/'<%= j @social.id %>'") {}
 
-	<%# ! クローゼットアイテムの表示 %>
-	$(document).ready(function() {
+$(document).ready(function() {
+    <%# * 処理の目的 => 選択された画像をプレビューする %>
+    <%# * 入力 => 選択した画像 %>
+    <%# * 加工 => 選択した画像を取得し、プレビューする %>
+    <%# * 出力 => プレビュー %>
+    const fileInput = document.getElementById('file-input');
+    const preview = document.getElementById('image-preview');
+    const overlay = document.getElementById('overlay');
+    const defaultImageURL = '<%= j @social.photograph %>';
+
+    // デフォルトの画像を表示する関数
+    function displayDefaultImage() {
+        const defaultImage = new Image();
+        defaultImage.src = defaultImageURL;
+        defaultImage.alt = 'デフォルト画像';
+        defaultImage.classList.add('preview');
+        defaultImage.style.width = '189px';
+        defaultImage.style.height = '262px';
+        defaultImage.style.borderRadius = '10%';
+        defaultImage.style.objectFit = 'cover';
+        preview.appendChild(defaultImage);
+    }
+
+    function displayPreviewImage(imageDataURL) {
+        preview.innerHTML = '';
+
+        const image = new Image();
+        image.src = imageDataURL;
+        image.alt = 'プレビュー画像';
+        image.classList.add('preview');
+        image.style.width = '189px';
+        image.style.height = '262px';
+        image.style.objectFit = 'cover';
+        image.style.borderRadius = '10%';
+        preview.appendChild(image);
+    }
+
+    // input fileのchangeイベントを監視
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0]; // 選択されたファイルを取得
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            displayPreviewImage(e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+
+        overlay.style.display = 'none';
+    });
+
+    displayDefaultImage();
+});
+
+$(document).ready(function() {
   var maxSelection = 6;
   var checkboxes = $('.checkbox-image');
   var selectedImages = [];
@@ -217,49 +276,49 @@ if (window.location.pathname === "/sns/edit/'<%= j @social.id %>'") {}
 });
 
 // 画像選択をプレビューする
-	var fileInput = document.getElementById('file-input');
-	var preview = document.getElementById('image-preview');
-	var reader = new FileReader(); // FileReaderオブジェクトを作成
-	var defaultImageURL = '<%= j @social.photograph %>'; // 既存の画像URLを取得する
+	// var fileInput = document.getElementById('file-input');
+	// var preview = document.getElementById('image-preview');
+	// var reader = new FileReader(); // FileReaderオブジェクトを作成
+	// var defaultImageURL = '<%= j @social.photograph %>'; // 既存の画像URLを取得する
 
-	// デフォルトの画像を表示
-	var defaultImage = new Image();
-	defaultImage.src = defaultImageURL;
-	defaultImage.alt = 'デフォルト画像';
-	defaultImage.classList.add('preview'); // 追加するクラス名
-	defaultImage.style.width = '189px';
-	defaultImage.style.height = '262px';
-	defaultImage.style.borderRadius = '10%';
-	defaultImage.style.objectFit = 'cover';
+	// // デフォルトの画像を表示
+	// var defaultImage = new Image();
+	// defaultImage.src = defaultImageURL;
+	// defaultImage.alt = 'デフォルト画像';
+	// defaultImage.classList.add('preview'); // 追加するクラス名
+	// defaultImage.style.width = '189px';
+	// defaultImage.style.height = '262px';
+	// defaultImage.style.borderRadius = '10%';
+	// defaultImage.style.objectFit = 'cover';
 
-	preview.appendChild(defaultImage);
+	// preview.appendChild(defaultImage);
 
-	// input fileのchangeイベントを監視
-	fileInput.addEventListener('change', function(event) {
-		var file = event.target.files[0]; // 選択されたファイルを取得
+	// // input fileのchangeイベントを監視
+	// fileInput.addEventListener('change', function(event) {
+	// 	var file = event.target.files[0]; // 選択されたファイルを取得
 
-		// ファイルの読み込みが完了したらプレビューを表示
-		reader.onload = function(e) {
-			preview.innerHTML = ''; // プレビューをクリア
+	// 	// ファイルの読み込みが完了したらプレビューを表示
+	// 	reader.onload = function(e) {
+	// 		preview.innerHTML = ''; // プレビューをクリア
 
-			var image = new Image();
-			image.src = e.target.result;
-			image.alt = 'プレビュー画像';
-			image.classList.add('preview'); // 追加するクラス名
-			image.style.width = '189px';
-			image.style.height = '262px';
-			image.style.objectFit = 'cover';
-			image.style.borderRadius = '10%';
+	// 		var image = new Image();
+	// 		image.src = e.target.result;
+	// 		image.alt = 'プレビュー画像';
+	// 		image.classList.add('preview'); // 追加するクラス名
+	// 		image.style.width = '189px';
+	// 		image.style.height = '262px';
+	// 		image.style.objectFit = 'cover';
+	// 		image.style.borderRadius = '10%';
 
 
-			preview.appendChild(image);
-		};
+	// 		preview.appendChild(image);
+	// 	};
 
-		// ファイルをData URLとして読み込む
-		reader.readAsDataURL(file);
+	// 	// ファイルをData URLとして読み込む
+	// 	reader.readAsDataURL(file);
 
-		// プレビューされたらオーバーレイを消す関数
-		const overlay = document.getElementById('overlay');
-		overlay.style.display = 'none';
-	});
+	// 	// プレビューされたらオーバーレイを消す関数
+	// 	const overlay = document.getElementById('overlay');
+	// 	overlay.style.display = 'none';
+	// });
 </script>

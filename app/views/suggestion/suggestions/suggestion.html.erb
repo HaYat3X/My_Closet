@@ -9,74 +9,31 @@
         <div class="main-content">
             <%= render "layouts/error" %>
 
+            <% if Suggest.exists?(user_id: current_user.id) %>
+                <%= image_tag @img_path, class: "recommend-img" %>
+            <% end %>
+
             <div class="suggest-content mx-auto">
                 <%# ! 提案データがあるか判定 %>
                 <% if Suggest.exists?(user_id: current_user.id) %>
                     <div class="row g-1">
-                            <% @recommend.each do |sns| %>
-                                <div class="col-lg-3 col-md-3 col-4 mt-1">
-
-                                    <%= link_to "/sns/show/#{sns.id}" do %>
-                                        <%= image_tag sns.photograph.url, class: "sns-image" %>
-                                    <% end %>
-
-                                    <div class="user-area py-2">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <% if sns.user.avatar.present? %>
-                                                    <%= link_to "/profile/show/#{sns.user_id}" do %>
-                                                        <%= image_tag sns.user.avatar.url %>
-                                                    <% end %>
-                                                <% else %>
-                                                    <%= link_to "/profile/show/#{sns.user_id}" do %>
-                                                        <%= image_tag "/assets/user/avatar.png" %>
-                                                    <% end %>
-                                                <% end %>
-
-                                                <div class="ms-2">
-                                                    <div class="fw-bold user-name m-0">
-                                                        <%= sns.user.user_name %>
-                                                    </div>
-
-                                                    <div class="user-height m-0">
-                                                        <% if sns.user.height %>
-                                                            <%= sns.user.height %>cm
-                                                        <% else %>
-                                                            身長未設定
-                                                        <% end %>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="mx-2">
-                                                <div class="like m-0 d-flex align-items-center">
-                                                    <%# ?  いいねできるかどうか判定 %>
-                                                    <% if user_signed_in? %>
-                                                        <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
-                                                            <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
-                                                                <img src="/assets/icons/icn_heart.png" alt="">
-                                                            <% end %>
-                                                        <% else %>
-                                                            <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                                <img src="/assets/icons/icn_not_heart.png" alt="">
-                                                            <% end %>
-                                                        <% end %>
-                                                    <% else %>
-                                                        <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                            <img src="/assets/icons/icn_not_heart.png" alt="">
-                                                        <% end %>
-                                                    <% end %>
-
-                                                    <span class="number-of-likes align-self-center">
-                                                        <%= SocialLike.where(social_id: sns.id).count %>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <% end %>
+                        <div class="flex mt-1 d-flex">
+                            <%= image_tag @suggest_img_1, class: "sns-image", style: "margin-right: 5px;" %>
+                            <%= image_tag @suggest_img_2, class: "sns-image", style: "margin-right: 5px;" %>
+                            <%= image_tag @suggest_img_3, class: "sns-image", style: "margin-right: 5px;" %>
+                            <%= image_tag @suggest_img_4, class: "sns-image" %>
                         </div>
+                    </div>
+
+                    <div class="row g-1 mt-1">
+                        <% @recommend.each do |sns| %>
+                            <div class="flex">
+                                <%= link_to "/sns/show/#{sns.id}" do %>
+                                    <%= image_tag sns.photograph.url, class: "sns-image" %>
+                                <% end %>
+                            </div>
+                        <% end %>
+                    </div>
                 <% else %>
                     <%= form_with(model: @suggest, url: "/suggest_create", local: true, :html => {class:"needs-validation ", :novalidate => true}) do |f| %>
                         <div class="question">
@@ -194,7 +151,7 @@
 
                             <div class="row g-2">
                                 <div class="col-6">
-                                    <%= f.radio_button :hair_color, "黒っぽい", id: "radio9", required: true %>
+                                    <%= f.radio_button :skin_color, "黒っぽい", id: "radio9", required: true %>
 
                                     <label for="radio9">
                                         <img src="/assets/suggest/test1.png" alt="" class="select-img">
@@ -202,7 +159,7 @@
                                 </div>
 
                                 <div class="col-6">
-                                    <%= f.radio_button :hair_color, "茶色っぽい", id: "radio10", required: true %>
+                                    <%= f.radio_button :skin_color, "茶色っぽい", id: "radio10", required: true %>
 
                                     <label for="radio10">
                                         <img src="/assets/suggest/test2.png" alt="" class="select-img">
@@ -210,7 +167,7 @@
                                 </div>
 
                                 <div class="col-6">
-                                    <%= f.radio_button :hair_color, "黒っぽい", id: "radio11", required: true %>
+                                    <%= f.radio_button :skin_color, "黒っぽい", id: "radio11", required: true %>
 
                                     <label for="radio11">
                                         <img src="/assets/suggest/test1.png" alt="" class="select-img">
@@ -222,7 +179,7 @@
                                 </div>
 
                                 <div class="col-6">
-                                    <%= f.radio_button :hair_color, "茶色っぽい", id: "radio12", required: true %>
+                                    <%= f.radio_button :skin_color, "茶色っぽい", id: "radio12", required: true %>
 
                                     <label for="radio12">
                                         <img src="/assets/suggest/test2.png" alt="" class="select-img">
@@ -301,53 +258,23 @@
 </div>
 
 <script>
+    // 無効なフィールドがある場合にフォーム送信を無効にするスターターJavaScriptの例
+    (() => {
+        'use strict'
 
-//   $(document).ready(function() {
-//         <%# ! 現在位置しているタブをアクティブ状態にする %>
-//         function setActiveTab(tabId) {
-//             $('.tab-menu .nav-link').removeClass('active');
-//             $('.tab-content .tab-pane').removeClass('show active');
-//             $('#' + tabId).addClass('show active');
-//             $('.tab-menu .nav-link[href*="tab=' + tabId + '"]').addClass('active');
-//         }
+        // Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
+        const forms = document.querySelectorAll('.needs-validation')
 
-//         const urlParams = new URLSearchParams(window.location.search);
-//         const tabValue = urlParams.get('tab');
+        // ループして帰順を防ぐ
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
 
-//         if (tabValue) {
-//             const tabId = tabValue.toLowerCase();
-//             setActiveTab(tabId);
-//         } else {
-//             $('.tab-menu .nav-link[href*="?tab=all"]').addClass('active');
-//             $('.tab-content .tab-pane#all').addClass('show active');
-//         }
-
-//     $("#proposal-link").click(function() {
-//       // ボタンを非表示にし、スピナーを表示する
-//       $(this).hide();
-//       $("#spinner-container").show();
-//     });
-//   });
-</script>
-
-<script>
-// 無効なフィールドがある場合にフォーム送信を無効にするスターターJavaScriptの例
-(() => {
-  'use strict'
-
-  // Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
-  const forms = document.querySelectorAll('.needs-validation')
-
-  // ループして帰順を防ぐ
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
 </script>
