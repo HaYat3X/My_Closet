@@ -78,11 +78,11 @@
                             着用アイテムを選択 ▾
                         </button>
 
-                        <div class="modal modal-xl fade modal-area modal-dialog-scrollable" id="Item1Modal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                        <div class="modal fade modal-area modal-dialog-scrollable" id="Item1Modal" tabindex="-1" aria-labelledby="exampleModalLabel">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">クローゼットからアイテムを追加</h6>
+                                        <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">クローゼットからアイテムを追加（6件まで）</h6>
                                     </div>
 
                                     <div class="modal-body">
@@ -91,7 +91,7 @@
 
                                             <div class="row g-1">
                                                 <% @closets_all.each do |closet| %>
-                                                    <div class="col-lg-2">
+                                                    <div class="flex">
                                                         <%= label_tag "element_#{closet.id}", image_tag(closet.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
 
                                                         <%= check_box_tag 'elements[]', closet.id, false, id: "element_#{closet.id}", class: "checkbox-image" %>
@@ -112,9 +112,16 @@
                         </div>
                     </div>
 
-                    <div class="post-area py-3 ms-auto">
-                        <a href="/" class="btn px-3 text-white border">キャンセル</a>
-                        <%= f.submit "投稿", class: "btn px-3 submit-btn" %>
+                    <div class="col-lg-8 col-12 col-md-8 mx-auto" style="margin-top: 100px;">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="/" class="btn col-12 cancel-btn">キャンセル</a>
+                            </div>
+
+                            <div class="col-6">
+                                <%= f.submit "投稿する", class: "btn col-12 submit-btn" %>
+                            </div>
+                        </div>
                     </div>
                 <% end %>
             </div>
@@ -123,134 +130,116 @@
 </div>
 
 <script>
-if (window.location.pathname === "/sns/new") {
+    <%# ! htmlの要素が読み込まれたら処理を開始する %>
+    $(document).ready(function() {
+        <%# * 処理の目的 => 選択された画像をプレビューする %>
+        <%# * 入力 => 選択した画像 %>
+        <%# * 加工 => 選択した画像を取得し、プレビューする %>
+        <%# * 出力 => プレビュー %>
+        const fileInput = document.getElementById('file-input');
+        const preview = document.getElementById('image-preview');
+        const reader = new FileReader();
 
-    <%# ! 選択した画像をプレビューする %>
-    var fileInput = document.getElementById('file-input');
-    var preview = document.getElementById('image-preview');
-    var reader = new FileReader();
+        const defaultImage = createPreviewImage("/assets/adds/img_add.png", 'デフォルト画像');
+        preview.appendChild(defaultImage);
 
-    <%# * 画像を選択していない場合はデフォルト画像を表示する %>
-    var defaultImage = new Image();
-    defaultImage.src = "/assets/adds/img_add.png";
-    defaultImage.alt = 'デフォルト画像';
-    defaultImage.classList.add('preview');
-    defaultImage.style.objectFit = 'cover';
-    defaultImage.style.width = '189px';
-    defaultImage.style.height = '262px';
-    defaultImage.style.borderRadius = '10px';
-    preview.appendChild(defaultImage);
+        fileInput.addEventListener('change', handleFileChange);
 
-    <%# * 画像が選択されたら、その画像をプレビューする %>
-    fileInput.addEventListener('change', function(event) {
-        var file = event.target.files[0];
-
-        reader.onload = function(e) {
-            preview.innerHTML = '';
-            var image = new Image();
-            image.src = e.target.result;
-            image.alt = 'プレビュー画像';
-            image.classList.add('preview');
-            image.style.width = '189px';
-            image.style.height = '262px';
-            image.style.objectFit = 'cover';
-            image.style.borderRadius = '10px';
-            preview.appendChild(image);
-        };
-
-        reader.readAsDataURL(file);
-    });
-
-    // * 選択できるアイテムの上限を設定
-    var maxSelection = 6;
-
-    // * チェックボックスの要素を変数に格納
-    var checkboxes = $('.checkbox-image');
-
-    // * 選択された画像が入る配列を定義
-    var selectedImages = [];
-
-    // * 選択順に番号を表示するためにカウンター
-    var markCounter = 1;
-
-    // * 選択数が6件超えた場合に、エラーメッセージを表示する要素を変数に格納
-    var messageContainer = $('#messageContainer');
-
-    // * チェックボックスの状態を取得
-    checkboxes.change(function() {
-        // ? 選択されているチェックボックスの数を取得
-        var selectedCount = checkboxes.filter(':checked').length;
-        var image = $(this).prev('.checkbox-image-label').find('img');
-        var label = $(this).prev('.checkbox-image-label');
-
-        if ($(this).is(':checked')) {
-            // ? 画像が選択された場合
-            if (selectedCount <= maxSelection) {
-                // 選択数が最大選択数以下の場合は、選択された順に画像の上に番号を表示
-                var mark = $('<span class="image-mark">' + markCounter + '</span>');
-                markCounter++;
-                selectedImages.push({
-                    image: image,
-                    mark: mark,
-                });
-                // cssの適用
-                image.addClass('selected-image');
-                label.append(mark).css('position', 'relative');
-            } else {
-                // 選択数が最大選択数を超えた場合は、チェックできないようにする
-                $(this).prop('checked', false);
-                // エラーメッセージの表示
-                showMessage('アイテムの最大選択数は6アイテムまでです。');
-            }
-        } else {
-            // ? 画像が選択解除された場合
-            var index = selectedImages.findIndex(function(item) {
-                return item.image.is(image);
-            });
-            if (index > -1) {
-                // 選択された画像が配列内に存在する場合は、cssの適用を解除
-                var removedItem = selectedImages.splice(index, 1)[0];
-                removedItem.image.removeClass('selected-image');
-                removedItem.mark.remove();
-            }
-            // カウンターを1減らし、番号を再度適用する
-            selectedImages.forEach(function(item, index) {
-                item.mark.text(index + 1);
-            });
-            // カウンターを1減らす
-            markCounter--;
+        function handleFileChange(event) {
+            const file = event.target.files[0];
+            reader.onload = function(e) {
+                clearPreview();
+                const image = createPreviewImage(e.target.result, 'プレビュー画像');
+                preview.appendChild(image);
+            };
+            reader.readAsDataURL(file);
         }
 
-        // ? 選択されたアイテムが6件以下の場合は、エラーメッセージの表示を解除
-        if (selectedCount <= maxSelection) {
+        function createPreviewImage(src, altText) {
+            const image = new Image();
+            image.src = src;
+            image.alt = altText;
+            setPreviewStyles(image);
+            return image;
+        }
+
+        function setPreviewStyles(imageElement) {
+            imageElement.classList.add('preview');
+            imageElement.style.width = '189px';
+            imageElement.style.height = '262px';
+            imageElement.style.objectFit = 'cover';
+            imageElement.style.borderRadius = '10px';
+        }
+
+        function clearPreview() {
+            preview.innerHTML = '';
+        }
+
+        <%# * 処理の目的 => クローゼットから選択した洋服を表示する %>
+        <%# * 入力 => 選択した洋服 %>
+        <%# * 加工 => 選択された洋服を選択した順に番号をつける %>
+        <%# * 出力 => プレビュー %>
+        var maxSelection = 6;
+        var checkboxes = $('.checkbox-image');
+        var selectedImages = [];
+        var markCounter = 1;
+        var messageContainer = $('#messageContainer');
+
+        checkboxes.change(function() {
+            var selectedCount = checkboxes.filter(':checked').length;
+            var image = $(this).prev('.checkbox-image-label').find('img');
+            var label = $(this).prev('.checkbox-image-label');
+
+            if ($(this).is(':checked')) {
+                if (selectedCount <= maxSelection) {
+                    var mark = $('<span class="image-mark">' + markCounter + '</span>');
+                    markCounter++;
+                    selectedImages.push({
+                        image: image,
+                        mark: mark,
+                    });
+                    image.addClass('selected-image');
+                    label.append(mark).css('position', 'relative');
+                } else {
+                    $(this).prop('checked', false);
+                    showMessage('アイテムの最大選択数は6アイテムまでです。');
+                }
+            } else {
+                var index = selectedImages.findIndex(function(item) {
+                    return item.image.is(image);
+                });
+                if (index > -1) {
+                    var removedItem = selectedImages.splice(index, 1)[0];
+                    removedItem.image.removeClass('selected-image');
+                    removedItem.mark.remove();
+                }
+                selectedImages.forEach(function(item, index) {
+                    item.mark.text(index + 1);
+                });
+                markCounter--;
+            }
+
+            if (selectedCount <= maxSelection) {
+                hideMessage();
+            }
+        });
+
+        function showMessage(message) {
+            messageContainer.text(message).show();
+            alert("アイテムの最大選択数は6件です。")
+        }
+
+        function hideMessage() {
+            messageContainer.hide();
+        }
+
+        function SnsClosetItemReset() {
+            selectedImages = [];
+            markCounter = 1;
+            checkboxes.prop('checked', false);
+            $('.checkbox-image-label').find('.selected-image').removeClass('selected-image');
+            $('.image-mark').remove();
             hideMessage();
         }
     });
-
-    // * エラーメッセージを表示する関数
-    function showMessage(message) {
-        messageContainer.text(message).show();
-    }
-
-    // * エラーメッセージを非表示にする関数
-    function hideMessage() {
-        messageContainer.hide();
-    }
-
-    function SnsClosetItemReset() {
-        // 選択された画像をリセットするため、配列とカウンターを初期化
-        selectedImages = [];
-        markCounter = 1;
-
-        // チェックボックスの状態を初期化
-        checkboxes.prop('checked', false);
-
-        // 画像の表示や番号の削除をリセット
-        $('.checkbox-image-label').find('.selected-image').removeClass('selected-image');
-        $('.image-mark').remove();
-
-        // エラーメッセージを非表示にする
-        hideMessage();
-    }
-}
 </script>
