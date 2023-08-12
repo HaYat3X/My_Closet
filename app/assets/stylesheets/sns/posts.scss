@@ -128,19 +128,18 @@
                 font-size: 28px;
                 margin-bottom: 60px;
             }
-            .container {
+            .modal-container {
                 position: relative;
             }
             #overlay {
                 position: absolute;
                 top: 0;
-                opacity: .6;
+                opacity: .5;
             }
             .overlay img {
                 width: 189px;
                 height: 262px;
                 object-fit: cover;
-                border-radius: 10%;
             }
             input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
                 border-radius: 10px;
@@ -311,7 +310,7 @@
                 font-size: 28px;
                 margin-bottom: 60px;
             }
-            .container {
+            .modal-container {
                 position: relative;
             }
             #overlay {
@@ -323,7 +322,6 @@
                 width: 189px;
                 height: 262px;
                 object-fit: cover;
-                border-radius: 10%;
             }
             input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
                 border-radius: 10px;
@@ -496,7 +494,7 @@
                 font-size: 28px;
                 margin-bottom: 60px;
             }
-            .container {
+            .modal-container {
                 position: relative;
             }
             #overlay {
@@ -508,7 +506,6 @@
                 width: 189px;
                 height: 262px;
                 object-fit: cover;
-                border-radius: 10%;
             }
             input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
                 border-radius: 10px;
