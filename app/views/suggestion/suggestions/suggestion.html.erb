@@ -17,15 +17,12 @@
                 <%# ! 提案データがあるか判定 %>
                 <% if Suggest.exists?(user_id: current_user.id) %>
                     <div class="row g-1">
-                        <div class="flex mt-1 d-flex">
-                            <%= image_tag @suggest_img_1, class: "sns-image", style: "margin-right: 5px;" %>
-                            <%= image_tag @suggest_img_2, class: "sns-image", style: "margin-right: 5px;" %>
-                            <%= image_tag @suggest_img_3, class: "sns-image", style: "margin-right: 5px;" %>
-                            <%= image_tag @suggest_img_4, class: "sns-image" %>
-                        </div>
-                    </div>
-
-                    <div class="row g-1 mt-1">
+                        <% @suggest_imgs.each do |suggest_img| %>
+                            <div class="flex">
+                                <%= image_tag suggest_img, class: "sns-image" %>
+                            </div>
+                        <% end %>
+                        
                         <% @recommend.each do |sns| %>
                             <div class="flex">
                                 <%= link_to "/sns/show/#{sns.id}" do %>

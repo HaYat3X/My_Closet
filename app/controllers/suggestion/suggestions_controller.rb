@@ -24,57 +24,33 @@ class Suggestion::SuggestionsController < ApplicationController
                 @img_path = "/assets/suggest/sample.png"
                 
                 if current_user_gender == 1
-                    @suggest_img_1 = "/assets/suggest/test3.png"
-                    @suggest_img_2 = "/assets/suggest/test3.png"
-                    @suggest_img_3 = "/assets/suggest/test3.png"
-                    @suggest_img_4 = "/assets/suggest/test3.png"
+                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 else
-                    @suggest_img_1 = "/assets/suggest/test3.png"
-                    @suggest_img_2 = "/assets/suggest/test3.png"
-                    @suggest_img_3 = "/assets/suggest/test3.png"
-                    @suggest_img_4 = "/assets/suggest/test3.png"
+                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 end
             when personal_color === "夏 (Summer)"
                 @img_path = "/assets/suggest/sample.png"
 
                 if current_user_gender == 1
-                    @suggest_img_1 = "/assets/suggest/test3.png"
-                    @suggest_img_2 = "/assets/suggest/test3.png"
-                    @suggest_img_3 = "/assets/suggest/test3.png"
-                    @suggest_img_4 = "/assets/suggest/test3.png"
+                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 else
-                    @suggest_img_1 = "/assets/suggest/test3.png"
-                    @suggest_img_2 = "/assets/suggest/test3.png"
-                    @suggest_img_3 = "/assets/suggest/test3.png"
-                    @suggest_img_4 = "/assets/suggest/test3.png"
+                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 end
             when personal_color === "秋 (Autumn)"
                 @img_path = "/assets/suggest/sample.png"
 
                 if current_user_gender == 1
-                    @suggest_img_1 = "/assets/suggest/test3.png"
-                    @suggest_img_2 = "/assets/suggest/test3.png"
-                    @suggest_img_3 = "/assets/suggest/test3.png"
-                    @suggest_img_4 = "/assets/suggest/test3.png"
+                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 else
-                    @suggest_img_1 = "/assets/suggest/test3.png"
-                    @suggest_img_2 = "/assets/suggest/test3.png"
-                    @suggest_img_3 = "/assets/suggest/test3.png"
-                    @suggest_img_4 = "/assets/suggest/test3.png"
+                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 end
             else 
                 @img_path = "/assets/suggest/sample.png"
 
                 if current_user_gender == 1
-                    @suggest_img_1 = "/assets/suggest/test3.png"
-                    @suggest_img_2 = "/assets/suggest/test3.png"
-                    @suggest_img_3 = "/assets/suggest/test3.png"
-                    @suggest_img_4 = "/assets/suggest/test3.png"
+                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 else
-                    @suggest_img_1 = "/assets/suggest/test3.png"
-                    @suggest_img_2 = "/assets/suggest/test3.png"
-                    @suggest_img_3 = "/assets/suggest/test3.png"
-                    @suggest_img_4 = "/assets/suggest/test3.png"
+                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 end
             end
 
