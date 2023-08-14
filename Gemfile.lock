@@ -308,7 +308,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
-  carrierwave (~> 2.0)
+  carrierwave
   devise
   devise-i18n
   dotenv-rails
@@ -317,7 +317,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   kaminari
   listen (~> 3.3)
-  mini_magick (>= 4.9.5, < 5)
+  mini_magick
   net-smtp
   pg (~> 1.1)
   puma (~> 5.0)

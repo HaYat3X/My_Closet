@@ -68,6 +68,7 @@
                         <div>
                             <% @social.errors[:photograph].each do |error| %>
                                 <small class="text-danger">コーディネート画像を設定してください。</small>
+                                <small class="text-danger"><%= error %></small>
                             <% end %>
                         </div>
                     </div>
