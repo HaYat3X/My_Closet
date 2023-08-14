@@ -1,10 +1,11 @@
 ja:
   views:
     pagination:
-      last: ""
-      previous: <img src="/assets/icons/icn_back.png" alt="" width="30" height="30">
-      next: <img src="/assets/icons/icn_go.png" alt="" width="30" height="30">
-      truncate: '･･･'
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."
   activerecord:
     errors:
       models:

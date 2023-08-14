@@ -3,116 +3,89 @@
     // ! 全サイズ共通
     // ? 一覧ページのUI設定
     .list-content {
-        input[type="checkbox"] {
-            display: none;
+        margin-top: 25px;
+        margin-bottom: 150px;
+        .tab-menu.nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
         }
-        input[type="radio"] {
-            display: none;
+        .tab-menu.nav .nav-item {
+            flex: 1;
+            padding: 0;
         }
-        label {
-            position: relative;
-            padding-left: 50px;
-            cursor: pointer;
-        }
-        label::before,
-        label::after {
-            content: "";
+        .tab-menu.nav .nav-link {
             display: block;
-            position: absolute;
-            top: 50%;
-            left: 0px;
-            transform: translateY(-50%);
-            border: 1.4px solid rgba(0, 0, 0, .3);
-            border-radius: 50%;
-            transition: .2s;
+            text-align: center;
+            padding: 10px;
+            border: 2px solid #333333;
+            box-sizing: border-box;
+            border-radius: 5px;
+            color: #333333;
         }
-        label::before {
-            background-color: rgba(0, 106, 182, .2);
-            border: 1.4px solid rgba(0, 0, 0, .3);
-            border-radius: 12px;
-            height: 20px;
-            width: 40px;
-            top: 50%;
-            left: 5px;
+        .tab-menu.nav .nav-link.active {
+            background-color: #4B709A;
+            color: #FFFFFF;
+            border: 2px solid #4B709A;
+            box-sizing: border-box;
         }
-        label::after {
-            background-color: #fff;
-            border-radius: 50%;
-            height: 23px;
-            width: 23px;
-            top: 50%;
-            left: 0px;
+        .flex {
+            float: left;
         }
-        input:checked+label::before {
-            background-color: rgb(0, 106, 182);
+        .sns-image {
+            width: 100%;
+            object-fit: cover;
         }
-        input:checked+label::after {
-            left: 26px;
-        }
-        .tab-menu {
-            .active {
-                background-color: #4B709A;
+        .user-area {
+            background-color: #222222;
+            padding: 10px;
+            img {
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            .user-name {
                 color: #FFFFFF;
-                border: none;
-                border-radius: 5px;
             }
-            a {
-                border-bottom: 3px solid #333333;
-                color: #333333;
+            .user-height {
+                font-size: 10px;
+                color: #FFFFFF;
             }
+            .like {
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+            .number-of-likes {
+                font-size: 14px;
+                margin-top: 2px;
+                margin-left: 5px;
+                color: #FFFFFF;
+                opacity: .6;
+            }
+        }
+        .page {
+            margin-top: 50px;
         }
     }
     // * スマートフォン （小）
     @media (max-width: 768px) {
         // ? SNS一覧ページの設定
         .list-content {
-            // width: 760px;
-            margin-top: 25px;
-            margin-bottom: 150px;
             .flex {
                 width: 50%;
-                float: left;
             }
             .sns-image {
-                width: 100%;
                 height: auto;
-                object-fit: cover;
             }
             .user-area {
-                background-color: #222222;
-                padding: 10px;
                 img {
                     width: 35px;
                     height: 35px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    // margin-left: 10px;
                 }
                 .user-name {
-                    color: #FFFFFF;
                     font-size: 14px;
-                    margin-bottom: 5px;
                 }
-                .user-height {
-                    font-size: 10px;
-                    color: #FFFFFF;
-                }
-                .like {
-                    img {
-                        width: 20px;
-                        height: 20px;
-                    }
-                }
-                .number-of-likes {
-                    font-size: 14px;
-                    margin-top: 2px;
-                    margin-left: 5px;
-                    color: #FFFFFF;
-                    opacity: .6;
-                }
-            }
-            .page {
-                margin-top: 50px;
             }
         }
         .new-edit-content {
@@ -251,53 +224,27 @@
     @media (min-width: 768px) and (max-width: 1280px) {
         // ? SNS一覧ページの設定
         .list-content {
+            .tab-menu.nav {
+                width: 400px;
+            }
+            .tab-menu.nav .nav-link {
+                font-size: 16px;
+            }
             width: 760px;
-            margin-top: 25px;
-            margin-bottom: 150px;
             .flex {
                 width: 33.3%;
-                float: left;
             }
             .sns-image {
-                width: 100%;
                 height: 340px;
-                object-fit: cover;
             }
             .user-area {
-                background-color: #222222;
-                padding: 10px;
                 img {
                     width: 35px;
                     height: 35px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    // margin-left: 10px;
                 }
                 .user-name {
-                    color: #FFFFFF;
                     font-size: 14px;
-                    margin-bottom: 5px;
                 }
-                .user-height {
-                    font-size: 10px;
-                    color: #FFFFFF;
-                }
-                .like {
-                    img {
-                        width: 20px;
-                        height: 20px;
-                    }
-                }
-                .number-of-likes {
-                    font-size: 14px;
-                    margin-top: 2px;
-                    margin-left: 5px;
-                    color: #FFFFFF;
-                    opacity: .6;
-                }
-            }
-            .page {
-                margin-top: 50px;
             }
         }
         // ? SNS投稿、編集ページの設定
@@ -432,56 +379,29 @@
     }
     // * PC（大）
     @media (min-width: 1280px) {
-        .main-content {
-            position: relative;
-        }
         // ? SNS一覧ページの設定
         .list-content {
+            .tab-menu.nav {
+                width: 400px;
+            }
+            .tab-menu.nav .nav-link {
+                font-size: 16px;
+            }
             width: 1014px;
-            margin-top: 25px;
-            margin-bottom: 150px;
             .flex {
                 width: 25%;
-                float: left;
             }
             .sns-image {
-                width: 100%;
                 height: 340px;
-                object-fit: cover;
             }
             .user-area {
-                background-color: #222222;
-                padding: 10px;
                 img {
                     width: 35px;
                     height: 35px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    // margin-left: 10px;
                 }
                 .user-name {
-                    color: #FFFFFF;
+                    font-size: 16px;
                 }
-                .user-height {
-                    font-size: 10px;
-                    color: #FFFFFF;
-                }
-                .like {
-                    img {
-                        width: 20px;
-                        height: 20px;
-                    }
-                }
-                .number-of-likes {
-                    font-size: 14px;
-                    margin-top: 2px;
-                    margin-left: 5px;
-                    color: #FFFFFF;
-                    opacity: .6;
-                }
-            }
-            .page {
-                margin-top: 50px;
             }
         }
         // ? SNS投稿、編集ページの設定
