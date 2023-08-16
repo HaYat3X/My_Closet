@@ -8,6 +8,42 @@
 
         <%# * コンテンツエリア %>
         <div class="main-content">
+            <div class="collapse p-3" id="collapseSns" style="background-color: #222222; width: 100%;">
+                <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search", required: true, id: "search" %>
+
+                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+
+            <div class="collapse p-3" id="collapseCloset" style="background-color: #222222; width: 100%;">
+                <%= form_with(url: "/closet/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+
+                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+
+            <div class="collapse p-3" id="collapseFaq" style="background-color: #222222; width: 100%;">
+                <%= form_with(url: "/faq/question/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+
+                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+
             <div class="pc-error-msg">
                 <%= render "layouts/error" %>
             </div>
@@ -114,7 +150,7 @@
                         <div class="row g-1">
                             <% @sns_men.each do |sns| %>
                                 <% if sns.user.gender == 1 %>
-                                    <div class="col-xl-3 col-md-4 col-4 mt-1">
+                                    <div class="flex mt-1">
 
                                         <%= link_to "/sns/show/#{sns.id}" do %>
                                             <%= image_tag sns.photograph.url, class: "sns-image" %>
@@ -187,7 +223,7 @@
                         <div class="row g-1">
                             <% @sns_women.each do |sns| %>
                                 <% if sns.user.gender == -1 %>
-                                    <div class="col-xl-3 col-md-4 col-4 mt-1">
+                                    <div class="flex mt-1">
 
                                         <%= link_to "/sns/show/#{sns.id}" do %>
                                             <%= image_tag sns.photograph.url, class: "sns-image" %>

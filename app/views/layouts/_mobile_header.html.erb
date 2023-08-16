@@ -11,7 +11,7 @@
 
     <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}")  %>
         <div>
-            <button type="button" class="search-btn" data-bs-toggle="collapse" data-bs-target="#collapseSns" aria-expanded="false" aria-controls="collapseExample">
+            <button type="button" class="search-btn" id="delayed-search-btn" data-bs-toggle="collapse" data-bs-target="#collapseSns" aria-expanded="false" aria-controls="collapseExample">
                 <img src="/assets/icons/icn_search_w.png" alt="">
             </button>
         </div>
@@ -103,7 +103,6 @@
 
     <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="Navbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="d-flex flex-column flex-shrink-0 sticky-top">
-            <%# <button type="button" class="btn-close text-end" data-bs-dismiss="offcanvas" aria-label="閉じる"></button> %>
             <div class="text-end">
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="閉じる"></button>
             </div>
@@ -360,39 +359,3 @@
         </div>
     </div>
 </nav>
-
-<div class="collapse p-3" id="collapseSns" style="margin-top: 70px; background-color: #222222; width: 100%;">
-    <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
-        <div class="input-group">
-            <%= f.text_field :search, class: "form-control", placeholder: "search", required: true, id: "search" %>
-
-            <%= f.button class: "btn bg-white btn-white", type: :submit do %>
-                <i class="bi bi-search"></i>
-            <% end %>
-        </div>
-    <% end %>
-</div>
-
-<div class="collapse p-3" id="collapseCloset" style="margin-top: 70px; background-color: #222222; width: 100%;">
-    <%= form_with(url: "/closet/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
-        <div class="input-group">
-            <%= f.text_field :search, class: "form-control", placeholder: "search" %>
-
-            <%= f.button class: "btn bg-white btn-white", type: :submit do %>
-                <i class="bi bi-search"></i>
-            <% end %>
-        </div>
-    <% end %>
-</div>
-
-<div class="collapse p-3" id="collapseFaq" style="margin-top: 70px; background-color: #222222; width: 100%;">
-    <%= form_with(url: "/faq/question/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
-        <div class="input-group">
-            <%= f.text_field :search, class: "form-control", placeholder: "search" %>
-
-            <%= f.button class: "btn bg-white btn-white", type: :submit do %>
-                <i class="bi bi-search"></i>
-            <% end %>
-        </div>
-    <% end %>
-</div>
