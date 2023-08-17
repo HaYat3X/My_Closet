@@ -2,177 +2,51 @@
 #sns_searchs {
     // ! 全サイズ共通
     // ? 検索結果ページのUI設定
-    .list-content {
-        input[type="checkbox"] {
-            display: none;
+    .search_content {
+        margin-top: 45px;
+        margin-bottom: 150px;
+        .sns-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
         }
-        label {
-            position: relative;
-            padding-left: 50px;
-            cursor: pointer;
-        }
-        label::before,
-        label::after {
-            content: "";
-            display: block;
-            position: absolute;
-            top: 50%;
-            left: 0px;
-            transform: translateY(-50%);
-            border: 1.4px solid rgba(0, 0, 0, .3);
-            border-radius: 50%;
-            transition: .2s;
-        }
-        label::before {
-            background-color: rgba(0, 106, 182, .2);
-            border: 1.4px solid rgba(0, 0, 0, .3);
-            border-radius: 12px;
-            height: 20px;
-            width: 40px;
-            top: 50%;
-            left: 5px;
-        }
-        label::after {
-            background-color: #fff;
-            border-radius: 50%;
-            height: 23px;
-            width: 23px;
-            top: 50%;
-            left: 0px;
-        }
-        input:checked+label::before {
-            background-color: rgb(0, 106, 182);
-        }
-        input:checked+label::after {
-            left: 26px;
-        }
-        .tab-menu {
-            .active {
-                background-color: #4B709A;
+        .user-area {
+            background-color: #222222;
+            padding: 10px;
+            img {
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            .user-name {
                 color: #FFFFFF;
-                border: none;
             }
-            a {
-                border: 1px solid #333333;
-                color: #333333;
+            .user-height {
+                font-size: 10px;
+                color: #FFFFFF;
             }
-        }
-    }
-    // * スマートフォン （小）
-    @media (max-width: 768px) {
-        // ? PC用のヘッダーは表示しない
-        .pc-header {
-            display: none;
-        }
-        // ? PCのサイドバーは表示しない
-        .pc-sidebar {
-            display: none;
-        }
-        // ? PCのエラーメッセージは表示しない
-        .pc_error_msg {
-            display: none;
-        }
-        // ?モバイルサイドバーのレイアウト設定
-        .mobile_header {
-            .tablet-search-form {
-                display: none;
-            }
-            img {
-                width: 40%;
-            }
-            .navbar-toggler {
-                background-color: #ffffff;
-            }
-            .icon {
-                background-color: #fff;
-            }
-            .sidebar {
-                width: 80%;
-                transition: opacity 1.0s ease;
-            }
-        }
-        // ? SNS一覧ページの設定
-        .search_content {
-            margin: 100px 1px;
-            .sns-image {
-                width: 100%;
-                height: 190px;
-                object-fit: cover;
-            }
-            .user-area {
-                display: none;
-            }
-            .form-check-label {
-                margin-bottom: 10px;
-            }
-        }
-    }
-    // * タブレット
-    @media (min-width: 768px) and (max-width: 1280px) {
-        // ? PC用のヘッダーは表示しない
-        .pc-header {
-            display: none;
-        }
-        // ? PCのサイドバーは表示しない
-        .pc-sidebar {
-            display: none;
-        }
-        // ?モバイルサイドバーのレイアウト設定
-        .mobile_header {
-            img {
-                width: 20%;
-            }
-            .navbar-toggler {
-                background-color: #ffffff;
-                transition: opacity 0.5s ease;
-            }
-            .search_icon {
-                display: none;
-            }
-        }
-        // ? SNS一覧ページの設定
-        .search_content {
-            margin: 100px 1px;
-            .sns-image {
-                width: 100%;
-                height: 275px;
-                object-fit: cover;
-            }
-            .user-area {
-                background-color: #222222;
+            .like {
                 img {
-                    width: 35px;
-                    height: 35px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    margin-left: 10px;
-                }
-                .user-name {
-                    color: #FFFFFF;
-                }
-                .user-height {
-                    font-size: 10px;
-                    color: #FFFFFF;
-                }
-                .like {
-                    i {
-                        font-size: 18px;
-                    }
-                }
-                .number-of-likes {
-                    font-size: 15px;
-                    margin-left: 5px;
-                    color: #FFFFFF;
+                    width: 20px;
+                    height: 20px;
                 }
             }
+            .number-of-likes {
+                font-size: 14px;
+                margin-top: 2px;
+                margin-left: 5px;
+                color: #FFFFFF;
+                opacity: .6;
+            }
+        }
+        .page {
+            margin-top: 50px;
         }
     }
-    // * PC（大）
-    @media (min-width: 1280px) {
-        // ? SNS一覧ページの設定
+    // * スマートフォン
+    @media (max-width: 768px) {
+        // ? SNS検索ページの設定
         .search_content {
-            width: 973px;
-            margin-top: 45px;
+            padding: 0 3px;
             h4 {
                 font-size: 28px;
             }
@@ -185,43 +59,79 @@
             h5 {
                 font-size: 22px;
             }
-            .sns-image {
-                width: 100%;
-                height: 320px;
-                object-fit: cover;
+            .flex {
+                width: 50%;
             }
             .user-area {
-                background-color: #222222;
                 img {
                     width: 35px;
                     height: 35px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    margin-left: 10px;
                 }
                 .user-name {
-                    color: #FFFFFF;
-                }
-                .user-height {
-                    font-size: 10px;
-                    color: #FFFFFF;
-                }
-                .like {
-                    img {
-                        width: 20px;
-                        height: 20px;
-                    }
-                }
-                .number-of-likes {
                     font-size: 14px;
-                    margin-top: 2px;
-                    margin-left: 5px;
-                    color: #FFFFFF;
-                    opacity: .6;
                 }
             }
-            .page {
-                margin-top: 50px;
+        }
+    }
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 1280px) {
+        // ? SNS検索ページの設定
+        .search_content {
+            width: 760px;
+            h4 {
+                font-size: 28px;
+            }
+            p {
+                font-size: 16px;
+                align-items: center;
+                margin-top: 16px;
+                margin-bottom: 60px;
+            }
+            h5 {
+                font-size: 22px;
+            }
+            .flex {
+                width: 33.3%;
+            }
+            .user-area {
+                img {
+                    width: 35px;
+                    height: 35px;
+                }
+                .user-name {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    // * PC（大）
+    @media (min-width: 1280px) {
+        // ? SNS検索ページの設定
+        .search_content {
+            width: 1014px;
+            h4 {
+                font-size: 28px;
+            }
+            p {
+                font-size: 16px;
+                align-items: center;
+                margin-top: 16px;
+                margin-bottom: 60px;
+            }
+            h5 {
+                font-size: 22px;
+            }
+            .flex {
+                width: 25%;
+            }
+            .user-area {
+                img {
+                    width: 35px;
+                    height: 35px;
+                }
+                .user-name {
+                    font-size: 16px;
+                }
             }
         }
     }
