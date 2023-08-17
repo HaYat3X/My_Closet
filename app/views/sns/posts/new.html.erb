@@ -50,14 +50,14 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <div class="col-lg-7 mx-auto coordinate-modal">
+                                        <div class="coordinate-modal">
                                             <%= f.file_field :photograph, class: "form-control", id: "file-input" %>
                                         </div>
                                     </div>
 
                                     <div class="modal-footer post-area text-center">
                                         <div class="mx-auto">
-                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal" onclick="SnsPostFileReset()">キャンセル</button>
+                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal">キャンセル</button>
                                             <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
                                         </div>
                                     </div>
@@ -81,18 +81,17 @@
                         <div class="modal fade modal-area modal-dialog-scrollable" id="Item1Modal" tabindex="-1" aria-labelledby="exampleModalLabel">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">クローゼットからアイテムを追加（6件まで）</h6>
+                                    <div class="modal-header-origin">
+                                        <h6 class="modal-title fs-6 fw-bold text-center" id="exampleModalLabel">着用した洋服を追加</h6>
+                                        <div id="messageContainer" class="text-danger small text-center"></div>
                                     </div>
 
                                     <div class="modal-body">
                                         <div id="scrollContainer" class="mx-auto">
-                                            <p id="messageContainer" class="text-danger small"></p>
-
                                             <div class="row g-1">
                                                 <% @closets_all.each do |closet| %>
                                                     <div class="flex">
-                                                        <%= label_tag "element_#{closet.id}", image_tag(closet.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
+                                                        <%= label_tag "element_#{closet.id}", image_tag(closet.photograph.url(:forced_size), class: "sns-post-image"), class: "checkbox-image-label mb-0" %>
 
                                                         <%= check_box_tag 'elements[]', closet.id, false, id: "element_#{closet.id}", class: "checkbox-image" %>
                                                     </div>
@@ -103,7 +102,7 @@
 
                                     <div class="modal-footer post-area text-center">
                                         <div class="mx-auto">
-                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal" onclick="SnsClosetItemReset()">キャンセル</button>
+                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal" id="resetButton">キャンセル</button>
                                             <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
                                         </div>
                                     </div>
@@ -119,7 +118,7 @@
                             </div>
 
                             <div class="col-6">
-                                <%= f.submit "投稿する", class: "btn col-12 submit-btn" %>
+                                <%= f.submit "投稿する", data: { disable_with: "投稿中..." }, class: "btn col-12 submit-btn" %>
                             </div>
                         </div>
                     </div>
@@ -233,13 +232,12 @@
             messageContainer.hide();
         }
 
-        function SnsClosetItemReset() {
-            selectedImages = [];
-            markCounter = 1;
+        $('#resetButton').click(function() {
             checkboxes.prop('checked', false);
-            $('.checkbox-image-label').find('.selected-image').removeClass('selected-image');
+            selectedImages = [];
+            $('.selected-image').removeClass('selected-image');
             $('.image-mark').remove();
             hideMessage();
-        }
+        });
     });
 </script>

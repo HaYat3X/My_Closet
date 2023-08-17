@@ -13,7 +13,9 @@ gem 'devise'
 gem 'rails-i18n', '~> 6.0'
 gem 'devise-i18n'
 # * 画像投稿するためのGem
-gem 'carrierwave', '~> 2.0'
+# gem 'carrierwave', '~> 2.0'
+gem 'carrierwave'
+gem 'mini_magick'
 # * ページネーション機能を実装するためのGem
 gem 'kaminari'
 # * ChatGPTを使用するためのGem

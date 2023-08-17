@@ -11,6 +11,8 @@ WORKDIR ${APP_ROOT}
 COPY Gemfile Gemfile.lock ${APP_ROOT}/
 
 RUN apk update && apk add --no-cache \
+       imagemagick \
+       imagemagick-dev\
        libc6-compat \
        nodejs \
        postgresql-client \

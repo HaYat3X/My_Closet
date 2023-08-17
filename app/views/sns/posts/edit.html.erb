@@ -43,7 +43,7 @@
 								<div id="image-preview" class="preview"></div>
 								
 								<div id="overlay" class="overlay">
-									<img src="/assets/adds/img_add.png" alt="">
+									<img src="/assets/adds/bg_setting2.png" alt="">
 								</div>
                             </div>
                         </button>
@@ -56,7 +56,7 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <div class="col-lg-7 mx-auto coordinate-modal">
+                                        <div class="coordinate-modal">
                                             <%= f.file_field :photograph, class: "form-control", id: "file-input" %>
                                         </div>
                                     </div>
@@ -86,18 +86,17 @@
                         <div class="modal fade modal-area modal-dialog-scrollable" id="ItemModal" tabindex="-1" aria-labelledby="exampleModalLabel">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">クローゼットからアイテムを追加</h6>
+                                    <div class="modal-header-origin">
+                                        <h6 class="modal-title fs-6 fw-bold text-center" id="exampleModalLabel">クローゼットからアイテムを追加</h6>
+                                        <div id="messageContainer" class="text-danger small text-center"></div>
                                     </div>
 
                                     <div class="modal-body">
                                         <div id="scrollContainer" class="mx-auto">
-                                            <p id="messageContainer" class="text-danger small"></p>
-
                                             <div class="row g-1">
                                                 <% @closets_all.each do |closet| %>
                                                     <div class="flex">
-                                                        <%= label_tag "element_#{closet.id}", image_tag(closet.photograph.url, class: "sns-post-image"), class: "checkbox-image-label" %>
+                                                        <%= label_tag "element_#{closet.id}", image_tag(closet.photograph.url(:forced_size), class: "sns-post-image"), class: "checkbox-image-label mb-0" %>
 
                                                         <%= check_box_tag 'elements[]', closet.id, false, id: "element_#{closet.id}", class: "checkbox-image" %>
                                                     </div>
@@ -124,7 +123,7 @@
                             </div>
 
                             <div class="col-6">
-                                <%= f.submit "更新する", class: "btn col-12 submit-btn" %>
+                                <%= f.submit "更新する", data: { disable_with: "更新中..." }, class: "btn col-12 submit-btn" %>
                             </div>
                         </div>
                     </div>
@@ -135,190 +134,139 @@
 </div>
 
 <script>
+    $(document).ready(function() {
+        <%# * 処理の目的 => 選択された画像をプレビューする %>
+        <%# * 入力 => 選択した画像 %>
+        <%# * 加工 => 選択した画像を取得し、プレビューする %>
+        <%# * 出力 => プレビュー %>
+        const fileInput = document.getElementById('file-input');
+        const preview = document.getElementById('image-preview');
+        const overlay = document.getElementById('overlay');
+        const defaultImageURL = '<%= j @social.photograph %>';
 
-$(document).ready(function() {
-    <%# * 処理の目的 => 選択された画像をプレビューする %>
-    <%# * 入力 => 選択した画像 %>
-    <%# * 加工 => 選択した画像を取得し、プレビューする %>
-    <%# * 出力 => プレビュー %>
-    const fileInput = document.getElementById('file-input');
-    const preview = document.getElementById('image-preview');
-    const overlay = document.getElementById('overlay');
-    const defaultImageURL = '<%= j @social.photograph %>';
-
-    // デフォルトの画像を表示する関数
-    function displayDefaultImage() {
-        const defaultImage = new Image();
-        defaultImage.src = defaultImageURL;
-        defaultImage.alt = 'デフォルト画像';
-        defaultImage.classList.add('preview');
-        defaultImage.style.width = '189px';
-        defaultImage.style.height = '262px';
-        defaultImage.style.borderRadius = '10%';
-        defaultImage.style.objectFit = 'cover';
-        preview.appendChild(defaultImage);
-    }
-
-    function displayPreviewImage(imageDataURL) {
-        preview.innerHTML = '';
-
-        const image = new Image();
-        image.src = imageDataURL;
-        image.alt = 'プレビュー画像';
-        image.classList.add('preview');
-        image.style.width = '189px';
-        image.style.height = '262px';
-        image.style.objectFit = 'cover';
-        image.style.borderRadius = '10%';
-        preview.appendChild(image);
-    }
-
-    // input fileのchangeイベントを監視
-    fileInput.addEventListener('change', function(event) {
-        const file = event.target.files[0]; // 選択されたファイルを取得
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            displayPreviewImage(e.target.result);
-        };
-
-        reader.readAsDataURL(file);
-
-        overlay.style.display = 'none';
-    });
-
-    displayDefaultImage();
-});
-
-$(document).ready(function() {
-  var maxSelection = 6;
-  var checkboxes = $('.checkbox-image');
-  var selectedImages = [];
-  var messageContainer = $('#messageContainer');
-
-  checkboxes.change(function() {
-    var selectedCount = checkboxes.filter(':checked').length;
-    var image = $(this).prev('.checkbox-image-label').find('img');
-    var label = $(this).prev('.checkbox-image-label');
-
-    if ($(this).is(':checked')) {
-      if (selectedCount <= maxSelection) {
-        if (!image.hasClass('selected-image')) {
-          var mark = $('<span class="image-mark">' + (selectedImages.length + 1) + '</span>');
-          selectedImages.push({
-            image: image,
-            mark: mark
-          });
-          image.addClass('selected-image');
-          label.append(mark).css('position', 'relative');
+        function displayDefaultImage() {
+            const defaultImage = new Image();
+            defaultImage.src = defaultImageURL;
+            defaultImage.alt = 'デフォルト画像';
+            defaultImage.classList.add('preview');
+            defaultImage.style.width = '189px';
+            defaultImage.style.height = '262px';
+            defaultImage.style.borderRadius = '5%';
+            defaultImage.style.objectFit = 'cover';
+            preview.appendChild(defaultImage);
         }
-      } else {
-        $(this).prop('checked', false);
-        showMessage('アイテムの最大選択数は6件です。');
-      }
-    } else {
-      var index = selectedImages.findIndex(function(item) {
-        return item.image.is(image);
-      });
-      if (index > -1) {
-        var removedItem = selectedImages.splice(index, 1)[0];
-        removedItem.image.removeClass('selected-image');
-        removedItem.mark.remove();
 
-        selectedImages.forEach(function(item, index) {
-          item.mark.text(index + 1);
+        function displayPreviewImage(imageDataURL) {
+            preview.innerHTML = '';
+
+            const image = new Image();
+            image.src = imageDataURL;
+            image.alt = 'プレビュー画像';
+            image.classList.add('preview');
+            image.style.width = '189px';
+            image.style.height = '262px';
+            image.style.objectFit = 'cover';
+            image.style.borderRadius = '5%';
+            preview.appendChild(image);
+        }
+
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                displayPreviewImage(e.target.result);
+            };
+
+            reader.readAsDataURL(file);
+
+            overlay.style.display = 'none';
         });
-      }
-    }
 
-    // 選択されたアイテムが6件以下の場合は、エラーメッセージの表示を解除
-    if (selectedCount <= maxSelection) {
-      hideMessage();
-    }
-  });
+        displayDefaultImage();
 
-  function selectCheckboxById(id) {
-    var checkbox = $('#' + id);
-    checkbox.prop('checked', true).trigger('change');
-  }
+        <%# * 処理の目的 => 既に選択されたアイテムを表示、選択されたアイテムを表示する %>
+        <%# * 入力 => 選択した画像、選択されている画像 %>
+        <%# * 加工 => 選択した画像を取得し、プレビューする %>
+        <%# * 出力 => プレビュー %>
+        var maxSelection = 6;
+        var checkboxes = $('.checkbox-image');
+        var selectedImages = [];
+        var messageContainer = $('#messageContainer');
 
-  var itemIds = [
-    '<%= j @item1 %>',
-    '<%= j @item2 %>',
-    '<%= j @item3 %>',
-    '<%= j @item4 %>',
-    '<%= j @item5 %>',
-    '<%= j @item6 %>'
-  ];
+        checkboxes.change(function() {
+            var selectedCount = checkboxes.filter(':checked').length;
+            var image = $(this).prev('.checkbox-image-label').find('img');
+            var label = $(this).prev('.checkbox-image-label');
 
-  itemIds.forEach(function(itemId) {
-    if (itemId !== '' && itemId !== '<%= j @defaultItemId %>') {
-      selectCheckboxById('element_' + itemId);
-    }
-  });
+            if ($(this).is(':checked')) {
+                if (selectedCount <= maxSelection) {
+                    if (!image.hasClass('selected-image')) {
+                        var mark = $('<span class="image-mark">' + (selectedImages.length + 1) + '</span>');
+                        selectedImages.push({
+                            image: image,
+                            mark: mark
+                        });
+                        image.addClass('selected-image');
+                        label.append(mark).css('position', 'relative');
+                    }
+                } else {
+                    $(this).prop('checked', false);
+                    showMessage('アイテムの最大選択数は6件です。');
+                }
+            } else {
+                var index = selectedImages.findIndex(function(item) {
+                    return item.image.is(image);
+                });
+                if (index > -1) {
+                    var removedItem = selectedImages.splice(index, 1)[0];
+                    removedItem.image.removeClass('selected-image');
+                    removedItem.mark.remove();
 
-  // エラーメッセージを表示する関数
-  function showMessage(message) {
-    messageContainer.text(message).show();
-  }
+                    selectedImages.forEach(function(item, index) {
+                        item.mark.text(index + 1);
+                    });
+                }
+            }
 
-  // エラーメッセージを非表示にする関数
-  function hideMessage() {
-    messageContainer.hide();
-  }
+            if (selectedCount <= maxSelection) {
+                hideMessage();
+            }
+        });
 
-  $('#resetButton').click(function() {
-    checkboxes.prop('checked', false); // すべてのチェックボックスのチェックを外す
-    selectedImages = []; // 選択された画像の情報をリセット
-    $('.selected-image').removeClass('selected-image'); // 選択された画像のスタイルをリセット
-    $('.image-mark').remove(); // 画像のマークを削除
-    hideMessage(); // エラーメッセージを非表示にする
-  });
-});
+        function selectCheckboxById(id) {
+            var checkbox = $('#' + id);
+            checkbox.prop('checked', true).trigger('change');
+        }
 
-// 画像選択をプレビューする
-	// var fileInput = document.getElementById('file-input');
-	// var preview = document.getElementById('image-preview');
-	// var reader = new FileReader(); // FileReaderオブジェクトを作成
-	// var defaultImageURL = '<%= j @social.photograph %>'; // 既存の画像URLを取得する
+        var itemIds = [
+            '<%= j @item1 %>',
+            '<%= j @item2 %>',
+            '<%= j @item3 %>',
+            '<%= j @item4 %>',
+            '<%= j @item5 %>',
+            '<%= j @item6 %>'
+        ];
 
-	// // デフォルトの画像を表示
-	// var defaultImage = new Image();
-	// defaultImage.src = defaultImageURL;
-	// defaultImage.alt = 'デフォルト画像';
-	// defaultImage.classList.add('preview'); // 追加するクラス名
-	// defaultImage.style.width = '189px';
-	// defaultImage.style.height = '262px';
-	// defaultImage.style.borderRadius = '10%';
-	// defaultImage.style.objectFit = 'cover';
+        itemIds.forEach(function(itemId) {
+            if (itemId !== '' && itemId !== '<%= j @defaultItemId %>') {
+                selectCheckboxById('element_' + itemId);
+            }
+        });
 
-	// preview.appendChild(defaultImage);
+        function showMessage(message) {
+            messageContainer.text(message).show();
+        }
 
-	// // input fileのchangeイベントを監視
-	// fileInput.addEventListener('change', function(event) {
-	// 	var file = event.target.files[0]; // 選択されたファイルを取得
+        function hideMessage() {
+            messageContainer.hide();
+        }
 
-	// 	// ファイルの読み込みが完了したらプレビューを表示
-	// 	reader.onload = function(e) {
-	// 		preview.innerHTML = ''; // プレビューをクリア
-
-	// 		var image = new Image();
-	// 		image.src = e.target.result;
-	// 		image.alt = 'プレビュー画像';
-	// 		image.classList.add('preview'); // 追加するクラス名
-	// 		image.style.width = '189px';
-	// 		image.style.height = '262px';
-	// 		image.style.objectFit = 'cover';
-	// 		image.style.borderRadius = '10%';
-
-
-	// 		preview.appendChild(image);
-	// 	};
-
-	// 	// ファイルをData URLとして読み込む
-	// 	reader.readAsDataURL(file);
-
-	// 	// プレビューされたらオーバーレイを消す関数
-	// 	const overlay = document.getElementById('overlay');
-	// 	overlay.style.display = 'none';
-	// });
+        $('#resetButton').click(function() {
+            checkboxes.prop('checked', false);
+            selectedImages = [];
+            $('.selected-image').removeClass('selected-image');
+            $('.image-mark').remove();
+            hideMessage();
+        });
+    });
 </script>

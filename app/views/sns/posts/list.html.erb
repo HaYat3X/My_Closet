@@ -8,6 +8,42 @@
 
         <%# * コンテンツエリア %>
         <div class="main-content">
+            <div class="collapse p-3" id="collapseSns" style="background-color: #222222; width: 100%;">
+                <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search", required: true, id: "search" %>
+
+                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+
+            <div class="collapse p-3" id="collapseCloset" style="background-color: #222222; width: 100%;">
+                <%= form_with(url: "/closet/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+
+                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+
+            <div class="collapse p-3" id="collapseFaq" style="background-color: #222222; width: 100%;">
+                <%= form_with(url: "/faq/question/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+
+                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+
             <div class="pc-error-msg">
                 <%= render "layouts/error" %>
             </div>
@@ -18,21 +54,21 @@
                         <div class="form-check">
                             <%# ? フォロー中のみに切り替える %>
                             <input type="checkbox" class="form-check-input" value="true" id="formSwitchCheckDefault" name="followed_only" <%= params[:followed_only] == 'true' ? 'checked' : '' %>>
-                            <label for="formSwitchCheckDefault" class="form-check-label fw-bold mb-2">フォロー中</label>
+                            <label for="formSwitchCheckDefault" class="form-check-label fw-bold mb-2">フォロー中のみ</label>
                         </div>
                     </form>
                 <% end %>
 
-                <ul class="tab-menu nav nav-underline nav-fill">
-                    <li class="nav-item flex-fill">
+                <ul class="tab-menu nav">
+                    <li class="nav-item">
                         <a href="?tab=all" class="nav-link fw-bold <%= params[:tab].nil? || params[:tab] == 'all' ? 'active' : '' %>">ALL</a>
                     </li>
 
-                    <li class="nav-item flex-fill">
+                    <li class="nav-item mx-2">
                         <a href="?page=1&tab=men" class="nav-link fw-bold <%= params[:tab] == 'men' ? 'active' : '' %>">MEN</a>
                     </li>
-                    
-                    <li class="nav-item flex-fill">
+                
+                    <li class="nav-item">
                         <a href="?page=1&tab=women" class="nav-link fw-bold <%= params[:tab] == 'women' ? 'active' : '' %>">WOMEN</a>
                     </li>
                 </ul>
@@ -45,7 +81,7 @@
                                 <div class="flex mt-1">
 
                                     <%= link_to "/sns/show/#{sns.id}" do %>
-                                        <%= image_tag sns.photograph.url, class: "sns-image" %>
+                                        <%= image_tag sns.photograph.url(:forced_size), class: "sns-image" %>
                                     <% end %>
 
                                     <div class="user-area">
@@ -114,10 +150,10 @@
                         <div class="row g-1">
                             <% @sns_men.each do |sns| %>
                                 <% if sns.user.gender == 1 %>
-                                    <div class="col-xl-3 col-md-4 col-4 mt-1">
+                                    <div class="flex mt-1">
 
                                         <%= link_to "/sns/show/#{sns.id}" do %>
-                                            <%= image_tag sns.photograph.url, class: "sns-image" %>
+                                            <%= image_tag sns.photograph.url(:forced_size), class: "sns-image" %>
                                         <% end %>
 
                                         <div class="user-area">
@@ -187,10 +223,10 @@
                         <div class="row g-1">
                             <% @sns_women.each do |sns| %>
                                 <% if sns.user.gender == -1 %>
-                                    <div class="col-xl-3 col-md-4 col-4 mt-1">
+                                    <div class="flex mt-1">
 
                                         <%= link_to "/sns/show/#{sns.id}" do %>
-                                            <%= image_tag sns.photograph.url, class: "sns-image" %>
+                                            <%= image_tag sns.photograph.url(:forced_size), class: "sns-image" %>
                                         <% end %>
 
                                         <div class="user-area">
