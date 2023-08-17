@@ -61,7 +61,7 @@ Rails.application.routes.draw do
   get "alert/list", to: "profile/alerts#list"
   get "alert/show/:id", to: "profile/alerts#show"
   
-  #お問い合わせフォーム
+  # ! お問い合わせフォーム
   get "contact/new" , to: "contact/contacts#new"
   post "contact/create" , to: "contact/contacts#create"
   get "contact/complete" , to: "contact/contacts#complete"
@@ -78,5 +78,8 @@ Rails.application.routes.draw do
   get "admin/contact/show/:id", to: "admin/contacts#show"
   post "admin/contact/create_handle/:id", to: "admin/contacts#create_handle"
   post "admin/contact/delete_handle/:id", to: "admin/contacts#delete_handle"
+
+  # ! 特設ページのルーティング
+  get "sns/special", to: "sns/posts#special"
 end
 
