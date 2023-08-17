@@ -153,7 +153,7 @@
                                     <div class="flex mt-1">
 
                                         <%= link_to "/sns/show/#{sns.id}" do %>
-                                            <%= image_tag sns.photograph.url, class: "sns-image" %>
+                                            <%= image_tag sns.photograph.url(:forced_size), class: "sns-image" %>
                                         <% end %>
 
                                         <div class="user-area">
@@ -226,7 +226,7 @@
                                     <div class="flex mt-1">
 
                                         <%= link_to "/sns/show/#{sns.id}" do %>
-                                            <%= image_tag sns.photograph.url, class: "sns-image" %>
+                                            <%= image_tag sns.photograph.url(:forced_size), class: "sns-image" %>
                                         <% end %>
 
                                         <div class="user-area">

@@ -5,6 +5,7 @@
     .list-content {
         margin-top: 25px;
         margin-bottom: 150px;
+        padding: 0 3px;
         .tab-menu.nav {
             display: flex;
             justify-content: space-between;
@@ -34,6 +35,7 @@
         }
         .sns-image {
             width: 100%;
+            height: auto;
             object-fit: cover;
         }
         .user-area {
@@ -68,15 +70,137 @@
             margin-top: 50px;
         }
     }
-    // * スマートフォン （小）
+    .new-edit-content {
+        margin-top: 45px;
+        margin-bottom: 150px;
+        h3 {
+            font-size: 28px;
+            margin-bottom: 60px;
+        }
+        .modal-container {
+            position: relative;
+        }
+        #overlay {
+            position: absolute;
+            top: 0;
+            opacity: .6;
+        }
+        .overlay img {
+            width: 189px;
+            height: 262px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
+            border-radius: 10px;
+            height: 50px;
+            background-color: #FFFFFF;
+            opacity: .5;
+        }
+        select {
+            border-radius: 10px;
+            height: 50px;
+            background-color: #FFFFFF;
+            opacity: .5;
+        }
+        textarea {
+            border-radius: 10px;
+            height: 50px;
+            background-color: #FFFFFF;
+            opacity: .5;
+        }
+        label {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .item {
+            border-radius: 10px;
+            height: 50px;
+            background-color: #FFFFFF;
+            opacity: .5;
+        }
+        .coordinate {
+            border: none;
+            background-color: #CBC5C1;
+        }
+        .modal-area {
+            .modal-dialog {
+                margin: 0 auto;
+            }
+            .modal-header-origin {
+                padding: 20px 10px;
+            }
+            .modal-body {
+                background-color: #333333;
+                .flex {
+                    float: left;
+                }
+                .sns-post-image {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                }
+                #scrollContainer {
+                    overflow-y: scroll;
+                }
+                #scrollContainer::-webkit-scrollbar {
+                    width: 10px;
+                }
+                #scrollContainer::-webkit-scrollbar-track {
+                    background-color: var(--bg);
+                }
+                #scrollContainer::-webkit-scrollbar-thumb {
+                    background-color: #4B709A;
+                }
+                .image-mark {
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                    background-color: #4B709A;
+                    color: #ffffff;
+                    padding: 5px 10px;
+                    border-radius: 50%;
+                    font-size: 15px;
+                    font-weight: bold;
+                }
+                .checkbox-image {
+                    display: none;
+                }
+                .selected-image {
+                    border: 3px solid #FFFFFF;
+                    border-radius: 5px;
+                    position: relative;
+                }
+                .checkbox-image-label:hover {
+                    cursor: pointer;
+                }
+            }
+            .post-area {
+                background-color: #333333;
+                .submit-btn {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                }
+            }
+        }
+        .cancel-btn {
+            color: #4B709A;
+            border: 2px solid #4B709A;
+            border-radius: 10px;
+        }
+        .submit-btn {
+            background-color: #4B709A;
+            border: 2px solid #4B709A;
+            color: #FFFFFF;
+            border-radius: 10px;
+        }
+    }
+    // * スマホ
     @media (max-width: 768px) {
         // ? SNS一覧ページの設定
         .list-content {
             .flex {
                 width: 50%;
-            }
-            .sns-image {
-                height: auto;
             }
             .user-area {
                 img {
@@ -88,134 +212,24 @@
                 }
             }
         }
-        .new-edit-content {
-            padding: 0 20px;
-        }
         // ? SNS投稿、編集ページの設定
         .new-edit-content {
+            padding: 0 20px;
             width: 350px;
-            margin-top: 45px;
-            margin-bottom: 150px;
-            h3 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            .modal-container {
-                position: relative;
-            }
-            #overlay {
-                position: absolute;
-                top: 0;
-                opacity: .5;
-            }
-            .overlay img {
-                width: 189px;
-                height: 262px;
-                object-fit: cover;
-            }
-            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
-            select {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
-            textarea {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
-            label {
-                font-size: 14px;
-                margin-bottom: 15px;
-            }
-            .coordinate {
-                border: none;
-                background-color: #CBC5C1;
-            }
-            .item {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
             .modal-area {
                 .modal-dialog {
-                    // max-width: 100%;
+                    max-width: 95%;
                 }
                 .modal-body {
-                    background-color: #333333;
                     .coordinate-modal {
-                        padding: 200px 0;
+                        padding: 150px 10px;
                     }
                     .flex {
-                        width: 50%;
-                        float: left;
-                    }
-                    .sns-post-image {
-                        width: 100%;
-                        height: 250px;
-                        object-fit: cover;
+                        width: 33.3%;
                     }
                     #scrollContainer {
-                        height: 500px;
-                        overflow-y: scroll;
+                        height: 400px;
                     }
-                    #scrollContainer::-webkit-scrollbar {
-                        width: 10px;
-                    }
-                    #scrollContainer::-webkit-scrollbar-track {
-                        background-color: #4B709A;
-                    }
-                    #scrollContainer::-webkit-scrollbar-thumb {
-                        background-color: var(--bg);
-                    }
-                    .image-mark {
-                        position: absolute;
-                        top: 5px;
-                        right: 5px;
-                        background-color: #4B709A;
-                        color: #ffffff;
-                        padding: 5px 10px;
-                        border-radius: 50%;
-                        font-size: 15px;
-                        font-weight: bold;
-                    }
-                    .checkbox-image {
-                        display: none;
-                    }
-                    .selected-image {
-                        border: 3px solid #FFFFFF;
-                        border-radius: 5px;
-                        position: relative;
-                    }
-                    .checkbox-image-label:hover {
-                        cursor: pointer;
-                    }
-                }
-            }
-            .cancel-btn {
-                color: #4B709A;
-                border: 2px solid #4B709A;
-                border-radius: 10px;
-            }
-            .submit-btn {
-                background-color: #4B709A;
-                border: 2px solid #4B709A;
-                color: #FFFFFF;
-                border-radius: 10px;
-            }
-            .post-area {
-                background-color: #333333;
-                .submit-btn {
-                    background-color: #4B709A;
-                    color: #FFFFFF;
                 }
             }
         }
@@ -234,9 +248,6 @@
             .flex {
                 width: 33.3%;
             }
-            .sns-image {
-                height: 340px;
-            }
             .user-area {
                 img {
                     width: 35px;
@@ -250,57 +261,6 @@
         // ? SNS投稿、編集ページの設定
         .new-edit-content {
             width: 550px;
-            margin-top: 45px;
-            margin-bottom: 150px;
-            h3 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            .modal-container {
-                position: relative;
-            }
-            #overlay {
-                position: absolute;
-                top: 0;
-                opacity: .6;
-            }
-            .overlay img {
-                width: 189px;
-                height: 262px;
-                object-fit: cover;
-            }
-            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
-            select {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
-            textarea {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
-            label {
-                font-size: 14px;
-                margin-bottom: 15px;
-            }
-            .coordinate {
-                border: none;
-                background-color: #CBC5C1;
-            }
-            .item {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
             .modal-area {
                 .modal-dialog {
                     max-width: 730px;
@@ -308,71 +268,15 @@
                 .modal-body {
                     background-color: #333333;
                     .coordinate-modal {
-                        padding: 200px 0;
+                        padding: 200px 150px;
                     }
                     .flex {
-                        width: 33.3%;
-                        float: left;
-                    }
-                    .sns-post-image {
-                        width: 100%;
-                        height: 340px;
-                        object-fit: cover;
+                        width: 25%;
                     }
                     #scrollContainer {
-                        height: 500px;
-                        overflow-y: scroll;
                         width: 650px;
+                        height: 380px;
                     }
-                    #scrollContainer::-webkit-scrollbar {
-                        width: 10px;
-                    }
-                    #scrollContainer::-webkit-scrollbar-track {
-                        background-color: #4B709A;
-                    }
-                    #scrollContainer::-webkit-scrollbar-thumb {
-                        background-color: var(--bg);
-                    }
-                    .image-mark {
-                        position: absolute;
-                        top: 5px;
-                        right: 5px;
-                        background-color: #4B709A;
-                        color: #ffffff;
-                        padding: 5px 10px;
-                        border-radius: 50%;
-                        font-size: 15px;
-                        font-weight: bold;
-                    }
-                    .checkbox-image {
-                        display: none;
-                    }
-                    .selected-image {
-                        border: 3px solid #FFFFFF;
-                        border-radius: 5px;
-                        position: relative;
-                    }
-                    .checkbox-image-label:hover {
-                        cursor: pointer;
-                    }
-                }
-            }
-            .cancel-btn {
-                color: #4B709A;
-                border: 2px solid #4B709A;
-                border-radius: 10px;
-            }
-            .submit-btn {
-                background-color: #4B709A;
-                border: 2px solid #4B709A;
-                color: #FFFFFF;
-                border-radius: 10px;
-            }
-            .post-area {
-                background-color: #333333;
-                .submit-btn {
-                    background-color: #4B709A;
-                    color: #FFFFFF;
                 }
             }
         }
@@ -391,9 +295,6 @@
             .flex {
                 width: 25%;
             }
-            .sns-image {
-                height: 340px;
-            }
             .user-area {
                 img {
                     width: 35px;
@@ -407,57 +308,6 @@
         // ? SNS投稿、編集ページの設定
         .new-edit-content {
             width: 793px;
-            margin-top: 45px;
-            margin-bottom: 150px;
-            h3 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            .modal-container {
-                position: relative;
-            }
-            #overlay {
-                position: absolute;
-                top: 0;
-                opacity: .6;
-            }
-            .overlay img {
-                width: 189px;
-                height: 262px;
-                object-fit: cover;
-            }
-            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
-            select {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
-            textarea {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
-            label {
-                font-size: 14px;
-                margin-bottom: 15px;
-            }
-            .coordinate {
-                border: none;
-                background-color: #CBC5C1;
-            }
-            .item {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
             .modal-area {
                 .modal-dialog {
                     max-width: 1200px;
@@ -465,71 +315,15 @@
                 .modal-body {
                     background-color: #333333;
                     .coordinate-modal {
-                        padding: 200px 0;
+                        padding: 200px 300px;
                     }
                     .flex {
-                        width: 25%;
-                        float: left;
-                    }
-                    .sns-post-image {
-                        width: 250px;
-                        height: 340px;
-                        object-fit: cover;
+                        width: 20%;
                     }
                     #scrollContainer {
-                        height: 500px;
-                        overflow-y: scroll;
                         width: 1014px;
+                        height: 500px;
                     }
-                    #scrollContainer::-webkit-scrollbar {
-                        width: 10px;
-                    }
-                    #scrollContainer::-webkit-scrollbar-track {
-                        background-color: #4B709A;
-                    }
-                    #scrollContainer::-webkit-scrollbar-thumb {
-                        background-color: var(--bg);
-                    }
-                    .image-mark {
-                        position: absolute;
-                        top: 5px;
-                        right: 5px;
-                        background-color: #4B709A;
-                        color: #ffffff;
-                        padding: 5px 10px;
-                        border-radius: 50%;
-                        font-size: 15px;
-                        font-weight: bold;
-                    }
-                    .checkbox-image {
-                        display: none;
-                    }
-                    .selected-image {
-                        border: 3px solid #FFFFFF;
-                        border-radius: 5px;
-                        position: relative;
-                    }
-                    .checkbox-image-label:hover {
-                        cursor: pointer;
-                    }
-                }
-            }
-            .cancel-btn {
-                color: #4B709A;
-                border: 2px solid #4B709A;
-                border-radius: 10px;
-            }
-            .submit-btn {
-                background-color: #4B709A;
-                border: 2px solid #4B709A;
-                color: #FFFFFF;
-                border-radius: 10px;
-            }
-            .post-area {
-                background-color: #333333;
-                .submit-btn {
-                    background-color: #4B709A;
-                    color: #FFFFFF;
                 }
             }
         }
