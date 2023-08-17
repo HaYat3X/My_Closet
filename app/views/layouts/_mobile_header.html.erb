@@ -327,6 +327,20 @@
                 <label style="margin-top: 80px;">その他</label>
 
                 <li class="nav-item">
+                    <% if current_page?("/sns/special") %>
+                        <a href="/sns/special" class="d-flex align-items-center active">
+                            <img src="/assets/icons/icn_contact_w.png" alt="">
+                            学園祭特設ページ
+                        </a>
+                    <% else %>
+                        <a href="/sns/special" class="d-flex align-items-center">
+                            <img src="/assets/icons/icn_contact.png" alt="">
+                            学園祭特設ページ
+                        </a>
+                    <% end %>
+                </li>
+
+                <li class="nav-item">
                     <% if current_page?("/contact/new") || current_page?("/contact/complete") %>
                         <a href="/contact/new" class="d-flex align-items-center active">
                             <img src="/assets/icons/icn_contact_w.png" alt="">
