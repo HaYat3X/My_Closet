@@ -9,29 +9,29 @@
         <div class="main-content">
             <div class="list-content mx-auto">
                 <%# * タブ切り替え %>
-                <ul class="tab-menu nav nav-underline nav-fill">
-                    <li class="nav-item flex-fill">
-                        <a href="?tab=all" class="nav-link fw-bold <%= params[:tab].nil? || params[:tab] == 'all' ? 'active' : '' %>">ALL</a>
+                <ul class="tab-menu nav">
+                    <li class="nav-item">
+                        <a href="?tab=all" class="nav-link <%= params[:tab].nil? || params[:tab] == 'all' ? 'active' : '' %>">ALL</a>
                     </li>
 
-                    <li class="nav-item flex-fill">
-                        <a href="?tab=outer" class="nav-link fw-bold <%= params[:tab] == 'outer' ? 'active' : '' %>">OUTER</a>
+                    <li class="nav-item">
+                        <a href="?tab=outer" class="nav-link <%= params[:tab] == 'outer' ? 'active' : '' %>">OUTER</a>
                     </li>
 
-                    <li class="nav-item flex-fill">
-                        <a href="?tab=tops" class="nav-link fw-bold <%= params[:tab] == 'tops' ? 'active' : '' %>">TOPS</a>
+                    <li class="nav-item">
+                        <a href="?tab=tops" class="nav-link <%= params[:tab] == 'tops' ? 'active' : '' %>">TOPS</a>
                     </li>
 
-                    <li class="nav-item flex-fill">
-                        <a href="?tab=bottoms" class="nav-link fw-bold <%= params[:tab] == 'bottoms' ? 'active' : '' %>">BOTTOMS</a>
+                    <li class="nav-item">
+                        <a href="?tab=bottoms" class="nav-link <%= params[:tab] == 'bottoms' ? 'active' : '' %>">BOTTOMS</a>
                     </li>
 
-                    <li class="nav-item flex-fill">
-                        <a href="?tab=shoes" class="nav-link fw-bold <%= params[:tab] == 'shoes' ? 'active' : '' %>">SHOES</a>
+                    <li class="nav-item">
+                        <a href="?tab=shoes" class="nav-link <%= params[:tab] == 'shoes' ? 'active' : '' %>">SHOES</a>
                     </li>
 
-                    <li class="nav-item flex-fill">
-                        <a href="?tab=other" class="nav-link fw-bold <%= params[:tab] == 'other' ? 'active' : '' %>">OTHER</a>
+                    <li class="nav-item">
+                        <a href="?tab=other" class="nav-link <%= params[:tab] == 'other' ? 'active' : '' %>">OTHER</a>
                     </li>
                 </ul>
 
@@ -43,9 +43,9 @@
                                 <h4 class="fw-bold text-center mt-5">アイテムがまだ登録されていません。</h4>
                             <% else %>
                                 <% @closets_all.each do |closet| %>
-                                    <div class="col-lg-3 mt-1">
+                                    <div class="flex mt-1">
                                         <%= link_to "/closet/show/#{closet.id}" do %>
-                                            <%= image_tag closet.photograph.url, class: "closet-image" %>
+                                            <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
                                         <% end %>
                                     </div>
                                 <% end %>
@@ -66,7 +66,7 @@
                                 <% @closets_outer.each do |c| %>
                                     <div class="col-lg-3 mt-1">
                                         <%= link_to "/closet/show/#{c.id}" do %>
-                                            <%= image_tag c.photograph.url, class: "closet-image" %>
+                                            <%= image_tag c.photograph.url(:forced_size), class: "closet-image" %>
                                         <% end %>
                                     </div>
                                 <% end %>
@@ -87,7 +87,7 @@
                                 <% @closets_tops.each do |closet| %>
                                     <div class="col-lg-3 mt-1">
                                         <%= link_to "/closet/show/#{closet.id}" do %>
-                                            <%= image_tag closet.photograph.url, class: "closet-image" %>
+                                            <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
                                         <% end %>
                                     </div>
                                 <% end %>
@@ -108,7 +108,7 @@
                                 <% @closets_bottoms.each do |closet| %>
                                     <div class="col-lg-3 mt-1">
                                         <%= link_to "/closet/show/#{closet.id}" do %>
-                                            <%= image_tag closet.photograph.url, class: "closet-image" %>
+                                            <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
                                         <% end %>
                                     </div>
                                 <% end %>
@@ -129,7 +129,7 @@
                                 <% @closets_shoes.each do |closet| %>
                                     <div class="col-lg-3 mt-1">
                                         <%= link_to "/closet/show/#{closet.id}" do %>
-                                            <%= image_tag closet.photograph.url, class: "closet-image" %>
+                                            <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
                                         <% end %>
                                     </div>
                                 <% end %>
@@ -150,7 +150,7 @@
                                 <% @closets_other.each do |closet| %>
                                     <div class="col-lg-3 mt-1">
                                         <%= link_to "/closet/show/#{closet.id}" do %>
-                                            <%= image_tag closet.photograph.url, class: "closet-image" %>
+                                            <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
                                         <% end %>
                                     </div>
                                 <% end %>
@@ -168,19 +168,21 @@
 </div>
 
 <script>
-if (window.location.pathname === "/closet/list") {
+    <%# ! htmlの要素が読み込まれたら処理を開始する %>
+    $(document).ready(function() {
+        <%# * 処理の目的 => 特定のタブを選択状態にする %>
+        <%# * 入力 => 選択しているタブの情報 %>
+        <%# * 加工 => 選択しているタブの情報を取得し、選択状態にする %>
+        <%# * 出力 => activeクラス %>
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabValue = urlParams.get('tab');
 
-    $(document).ready(function() { 
-        <%# ! 現在位置しているタブをアクティブ状態にする %>
         function setActiveTab(tabId) {
             $('.tab-menu .nav-link').removeClass('active');
             $('.tab-content .tab-pane').removeClass('show active');
             $('#' + tabId).addClass('show active');
             $('.tab-menu .nav-link[href*="tab=' + tabId + '"]').addClass('active');
         }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const tabValue = urlParams.get('tab');
 
         if (tabValue) {
             const tabId = tabValue.toLowerCase();
@@ -190,7 +192,10 @@ if (window.location.pathname === "/closet/list") {
             $('.tab-content .tab-pane#all').addClass('show active');
         }
 
-        <%# ! ページ遷移時にタブの位置を保持する %>
+        <%# * 処理の目的 => ページ遷移した際に、タブの位置を保持する %>
+        <%# * 入力 => ページ遷移する際に位置しているタブ %>
+        <%# * 加工 => ページ遷移する前に位置しているタブを取得し、遷移後、そのタブの位置を保持する %>
+        <%# * 出力 => タブの情報 %>
         $(document).on('click', '.tab-menu .nav-link', function(event) {
             event.preventDefault();
             const tabId = $(this).attr('href').split('tab=')[1].toLowerCase();
@@ -205,5 +210,4 @@ if (window.location.pathname === "/closet/list") {
             window.history.pushState({ path: newUrl }, '', newUrl);
         });
     });
-}
 </script>
