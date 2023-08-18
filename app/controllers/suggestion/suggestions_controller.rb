@@ -236,6 +236,8 @@ class Suggestion::SuggestionsController < ApplicationController
             end
         end
 
+        puts "取得した投稿=> #{posts}"
+
         # * 提案された投稿を返す
         posts
     end

@@ -125,16 +125,44 @@
                 </li>
 
                 <li class="nav-item">
-                    <% if current_page?("/suggestion") %>
-                        <a href="/suggestion" class="d-flex align-items-center active">
-                            <img src="/assets/icons/icn_AI_w.png" alt="">
-                            コーディネート提案
-                        </a>
+                    <% if current_page?("/suggestion") || current_page?("/induction") %>
+                        <% if user_signed_in? %>
+                            <% if Suggest.exists?(user_id: current_user.id) %>
+                                <a href="/suggestion" class="d-flex align-items-center active">
+                                    <img src="/assets/icons/icn_AI_w.png" alt="">
+                                    コーディネート提案
+                                </a>
+                            <% else %>
+                                <a href="/induction" class="d-flex align-items-center active">
+                                    <img src="/assets/icons/icn_AI_w.png" alt="">
+                                    コーディネート提案
+                                </a>
+                            <% end %>
+                        <% else %>
+                            <a href="/suggestion" class="d-flex align-items-center active">
+                                <img src="/assets/icons/icn_AI_w.png" alt="">
+                                コーディネート提案
+                            </a>
+                        <% end %>
                     <% else %>
-                        <a href="/suggestion" class="d-flex align-items-center">
-                            <img src="/assets/icons/icn_AI.png" alt="">
-                            コーディネート提案
-                        </a>
+                        <% if user_signed_in? %>
+                            <% if Suggest.exists?(user_id: current_user.id) %>
+                                <a href="/suggestion" class="d-flex align-items-center">
+                                    <img src="/assets/icons/icn_AI.png" alt="">
+                                    コーディネート提案
+                                </a>
+                            <% else %>
+                                <a href="/induction" class="d-flex align-items-center">
+                                    <img src="/assets/icons/icn_AI.png" alt="">
+                                    コーディネート提案
+                                </a>
+                            <% end %>
+                        <% else %>
+                            <a href="/suggestion" class="d-flex align-items-center">
+                                <img src="/assets/icons/icn_AI.png" alt="">
+                                コーディネート提案
+                            </a>
+                        <% end %>
                     <% end %>
                 </li>
 
@@ -327,6 +355,20 @@
                 <label style="margin-top: 80px;">その他</label>
 
                 <li class="nav-item">
+                    <% if current_page?("/sns/special") %>
+                        <a href="/sns/special" class="d-flex align-items-center active">
+                            <img src="/assets/icons/icn_contact_w.png" alt="">
+                            学園祭特設ページ
+                        </a>
+                    <% else %>
+                        <a href="/sns/special" class="d-flex align-items-center">
+                            <img src="/assets/icons/icn_contact.png" alt="">
+                            学園祭特設ページ
+                        </a>
+                    <% end %>
+                </li>
+
+                <li class="nav-item">
                     <% if current_page?("/contact/new") || current_page?("/contact/complete") %>
                         <a href="/contact/new" class="d-flex align-items-center active">
                             <img src="/assets/icons/icn_contact_w.png" alt="">
@@ -359,3 +401,39 @@
         </div>
     </div>
 </nav>
+
+<div class="collapse p-3" id="collapseSns" style="background-color: #222222; width: 100%; margin-top: 70px;">
+    <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+        <div class="input-group">
+            <%= f.text_field :search, class: "form-control", placeholder: "search", required: true, id: "search" %>
+
+            <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                <i class="bi bi-search"></i>
+            <% end %>
+        </div>
+    <% end %>
+</div>
+
+            <div class="collapse p-3" id="collapseCloset" style="background-color: #222222; width: 100%;">
+                <%= form_with(url: "/closet/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+
+                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+
+            <div class="collapse p-3" id="collapseFaq" style="background-color: #222222; width: 100%;">
+                <%= form_with(url: "/faq/question/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+
+                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>

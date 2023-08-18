@@ -38,6 +38,7 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="fw-bold">コーディネート画像を変更</label><br>
                         <button type="button" class="coordinate" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
                             <div class="modal-container">
 								<div id="image-preview" class="preview"></div>
@@ -79,6 +80,8 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="fw-bold">着用アイテムを追加</label><br>
+                        <span id="selectedCount"></span>
                         <button type="button" class="text-start btn col-12 item" data-bs-toggle="modal" data-bs-target="#ItemModal">
                             着用アイテムを選択 ▾
                         </button>
@@ -230,6 +233,12 @@
 
             if (selectedCount <= maxSelection) {
                 hideMessage();
+            }
+
+            if (selectedCount <= maxSelection) {
+                $('#selectedCount').text(selectedCount + "件のアイテムを選択しています。");
+            } else {
+                $('#selectedCount').text(maxSelection + "件のアイテムを選択しています。");
             }
         });
 

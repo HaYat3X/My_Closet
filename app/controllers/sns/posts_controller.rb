@@ -216,6 +216,12 @@ class Sns::PostsController < ApplicationController
         end
     end
 
+    # ! 特設ページ
+    def special
+        # * 特定のアカウントの投稿のみを取得する
+        @sns_all = Social.where(user_id: 1).order(created_at: :desc)
+    end
+
     private
 
     # ! 投稿時、編集時にバインドするパラメータ
