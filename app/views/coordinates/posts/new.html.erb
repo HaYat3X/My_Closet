@@ -8,7 +8,7 @@
         <%# ! contents %>
         <div class="main-content">
             <div class="new-edit-content mx-auto">
-				<h4 class="fw-bold text-center">アイテム登録</h4>
+				<h4 class="fw-bold text-center">洋服を登録</h4>
 
                 <%= form_with(model: @closet, url: "/closet/create", local: true) do |f| %>
                     <div class="mb-3">
@@ -84,7 +84,17 @@
 						<%= f.text_field :brand, placeholder: "ブランドを入力", class: 'form-control' %>
 					</div>
 
-					<%= f.submit "登録する", class: "btn btn-primary mt-3" %>
+                    <div class="col-lg-8 col-12 col-md-8 mx-auto" style="margin-top: 100px;">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="/closet/list" class="btn col-12 cancel-btn">キャンセル</a>
+                            </div>
+
+                            <div class="col-6">
+                                <%= f.submit "投稿する", data: { disable_with: "投稿中..." }, class: "btn col-12 submit-btn" %>
+                            </div>
+                        </div>
+                    </div>
                 <% end %>
             </div>
         </div>
@@ -92,105 +102,116 @@
 </div>
 
 <script>
+    <%# ! htmlの要素が読み込まれたら処理を開始する %>
+    $(document).ready(function() {
+        <%# * 処理の目的 => 選択された画像をプレビューする %>
+        <%# * 入力 => 選択した画像 %>
+        <%# * 加工 => 選択した画像を取得し、プレビューする %>
+        <%# * 出力 => プレビュー %>
+        const fileInput = document.getElementById('file-input');
+        const preview = document.getElementById('image-preview');
+        const reader = new FileReader();
 
-    <%# ! 選択した画像をプレビューする %>
-    var fileInput = document.getElementById('file-input');
-    var preview = document.getElementById('image-preview');
-    var reader = new FileReader();
+        const defaultImage = createPreviewImage("/assets/adds/img_add.png", 'デフォルト画像');
+        preview.appendChild(defaultImage);
 
-    <%# * 画像を選択していない場合はデフォルト画像を表示する %>
-    var defaultImage = new Image();
-    defaultImage.src = "/assets/adds/img_add.png";
-    defaultImage.alt = 'デフォルト画像';
-    defaultImage.classList.add('preview');
-    defaultImage.style.objectFit = 'cover';
-    defaultImage.style.width = '189px';
-    defaultImage.style.height = '262px';
-    defaultImage.style.borderRadius = '10px';
-    preview.appendChild(defaultImage);
+        fileInput.addEventListener('change', handleFileChange);
 
-    <%# * 画像が選択されたら、その画像をプレビューする %>
-    fileInput.addEventListener('change', function(event) {
-        var file = event.target.files[0];
+        function handleFileChange(event) {
+            const file = event.target.files[0];
+            reader.onload = function(e) {
+                clearPreview();
+                const image = createPreviewImage(e.target.result, 'プレビュー画像');
+                preview.appendChild(image);
+            };
+            reader.readAsDataURL(file);
+        }
 
-        reader.onload = function(e) {
+        function createPreviewImage(src, altText) {
+            const image = new Image();
+            image.src = src;
+            image.alt = altText;
+            setPreviewStyles(image);
+            return image;
+        }
+
+        function setPreviewStyles(imageElement) {
+            imageElement.classList.add('preview');
+            imageElement.style.width = '189px';
+            imageElement.style.height = '262px';
+            imageElement.style.objectFit = 'cover';
+            imageElement.style.borderRadius = '10px';
+        }
+
+        function clearPreview() {
             preview.innerHTML = '';
-            var image = new Image();
-            image.src = e.target.result;
-            image.alt = 'プレビュー画像';
-            image.classList.add('preview');
-            image.style.width = '189px';
-            image.style.height = '262px';
-            image.style.objectFit = 'cover';
-            image.style.borderRadius = '10px';
-            preview.appendChild(image);
-        };
+        }
 
-        reader.readAsDataURL(file);
-    });
+        <%# * 処理の目的 => 選択されたメインカテゴリーからサブカテゴリーを取得 %>
+        <%# * 入力 => 選択したメインカテゴリー %>
+        <%# * 加工 => AJAXリクエストを使用し、サブカテゴリーを取得 %>
+        <%# * 出力 => サブカテゴリー %>
+        $('#big-category-select').change(function() {
+            var selectedValue = $(this).val();
+            var smallCategorySelect = $('#small-category-select');
 
-    $('#big-category-select').change(function() {
-        var selectedValue = $(this).val();
-        var smallCategorySelect = $('#small-category-select');
-
-        $.ajax({
-            url: '/realtime_selected_value', // 適切なエンドポイントのURLを設定
-            method: 'POST',
-            data: { selected_value: selectedValue },
-            success: function(response) {
-                smallCategorySelect.empty(); // 小カテゴリーセレクトボックスをクリア
-                var options = response.options;
-                if (options) {
-                    for (var i = 0; i < options.length; i++) {
-                        var option = $('<option>').text(options[i]);
-                        smallCategorySelect.append(option); // 選択肢を追加
+            $.ajax({
+                url: '/realtime_selected_value',
+                data: { selected_value: selectedValue },
+                success: function(response) {
+                    smallCategorySelect.empty();
+                    var options = response.options;
+                    if (options) {
+                        for (var i = 0; i < options.length; i++) {
+                            var option = $('<option>').text(options[i]);
+                            smallCategorySelect.append(option);
+                        }
+                    } else {
+                        var default_options = [
+                            'ジャケット',
+                            'コート',
+                            'ピーコート',
+                            'ダウンジャケット',
+                            'レザージャケット',
+                            'ウインドブレーカー',
+                            'カーディガン',
+                            'Tシャツ',
+                            'シャツ',
+                            'ブラウス',
+                            'ポロシャツ',
+                            'ニットセーター',
+                            'パーカー',
+                            'ジーンズ',
+                            'パンツ',
+                            'ショートパンツ',
+                            'スカート',
+                            'レギンス',
+                            'ショーツ',
+                            'スカート',
+                            'スニーカー',
+                            'パンプス',
+                            'サンダル',
+                            'ブーツ',
+                            'フラットシューズ',
+                            '革靴',
+                            'ネックレス',
+                            'ブレスレット',
+                            'ピアス',
+                            'リング',
+                            'ヘアアクセサリー',
+                            'その他',
+                        ];
+                        for (var i = 0; i < default_options.length; i++) {
+                            var option = $('<option>').text(default_options[i]);
+                            smallCategorySelect.append(option);
+                        }
                     }
-                } else {
-                    // デフォルトの値を追加する
-                    var default_options = [
-                        'ジャケット',
-                        'コート',
-                        'ピーコート',
-                        'ダウンジャケット',
-                        'レザージャケット',
-                        'ウインドブレーカー',
-                        'カーディガン',
-                        'Tシャツ',
-                        'シャツ',
-                        'ブラウス',
-                        'ポロシャツ',
-                        'ニットセーター',
-                        'パーカー',
-                        'ジーンズ',
-                        'パンツ',
-                        'ショートパンツ',
-                        'スカート',
-                        'レギンス',
-                        'ショーツ',
-                        'スカート',
-                        'スニーカー',
-                        'パンプス',
-                        'サンダル',
-                        'ブーツ',
-                        'フラットシューズ',
-                        '革靴',
-                        'ネックレス',
-                        'ブレスレット',
-                        'ピアス',
-                        'リング',
-                        'ヘアアクセサリー',
-                        'その他',
-                    ];
-                    for (var i = 0; i < default_options.length; i++) {
-                        var option = $('<option>').text(default_options[i]);
-                        smallCategorySelect.append(option); // 選択肢を追加
-                    }
-                }
-            },
+                },
 
-            error: function(error) {
+                error: function(error) {
 
-            },
+                },
+            });
         });
     });
 </script>
