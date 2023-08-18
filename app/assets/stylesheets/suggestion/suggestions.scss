@@ -1,7 +1,58 @@
 // ! suggestionフォルダのレイアウト （suggestions）
 #suggestion_suggestions {
-    // ! 全サイズ共通
-    // * スマートフォン （小）
+    // * 全サイズ共通
+    .suggest-content {
+        margin-top: 25px;
+        margin-bottom: 150px;
+        .flex {
+            float: left;
+        }
+        .sns-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        form {
+            margin: 0 auto;
+            margin-top: 100px;
+            .question {
+                margin-bottom: 100px;
+            }
+            p {
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 40px;
+            }
+            input[type="radio"] {
+                display: none;
+            }
+            input[type="radio"]:checked+label img {
+                border: 3px solid #4B709A;
+                border-radius: 10px;
+                box-sizing: border-box;
+            }
+            select {
+                margin-top: 40px;
+                border-radius: 10px;
+                height: 50px;
+                background-color: #FFFFFF;
+                opacity: .6;
+                color: #333333;
+            }
+            .cancel-btn {
+                color: #4B709A;
+                border: 2px solid #4B709A;
+                border-radius: 10px;
+            }
+            .submit-btn {
+                background-color: #4B709A;
+                border: 2px solid #4B709A;
+                color: #FFFFFF;
+                border-radius: 10px;
+            }
+        }
+    }
+    // * スマホ
     @media (max-width: 768px) {
         // ? 提案誘導画面の設定
         .induction-content {
@@ -57,45 +108,16 @@
         }
         // ? SNS一覧ページの設定
         .suggest-content {
-            // width: 1014px;
-            margin-top: 25px;
-            margin-bottom: 150px;
             .flex {
                 width: 50%;
-                float: left;
-            }
-            .sns-image {
-                width: 100%;
-                height: 280px;
-                object-fit: cover;
             }
             form {
                 width: 310px;
-                margin: 0 auto;
-                margin-top: 100px;
-                .question {
-                    margin-bottom: 100px;
-                }
+                padding: 0 20px;
                 p {
                     font-size: 16px;
                     font-weight: 600;
                     margin-bottom: 40px;
-                }
-                input[type="radio"] {
-                    display: none;
-                }
-                input[type="radio"]:checked+label img {
-                    border: 3px solid #4B709A;
-                    border-radius: 10px;
-                    box-sizing: border-box;
-                }
-                select {
-                    margin-top: 40px;
-                    border-radius: 10px;
-                    height: 50px;
-                    background-color: #FFFFFF;
-                    opacity: .6;
-                    color: #333333;
                 }
                 .select-img {
                     width: 150px;
@@ -104,17 +126,6 @@
                 .evaluation {
                     width: 310px;
                     height: 413px;
-                }
-                .cancel-btn {
-                    color: #4B709A;
-                    border: 2px solid #4B709A;
-                    border-radius: 10px;
-                }
-                .submit-btn {
-                    background-color: #4B709A;
-                    border: 2px solid #4B709A;
-                    color: #FFFFFF;
-                    border-radius: 10px;
                 }
             }
         }
@@ -175,45 +186,11 @@
         // ? 提案ページの設定
         .suggest-content {
             width: 760px;
-            margin-top: 25px;
-            margin-bottom: 150px;
             .flex {
                 width: 33.3%;
-                float: left;
-            }
-            .sns-image {
-                width: 100%;
-                height: 340px;
-                object-fit: cover;
             }
             form {
                 width: 550px;
-                margin: 0 auto;
-                margin-top: 100px;
-                .question {
-                    margin-bottom: 100px;
-                }
-                p {
-                    font-size: 16px;
-                    font-weight: 600;
-                    margin-bottom: 40px;
-                }
-                input[type="radio"] {
-                    display: none;
-                }
-                input[type="radio"]:checked+label img {
-                    border: 3px solid #4B709A;
-                    border-radius: 10px;
-                    box-sizing: border-box;
-                }
-                select {
-                    margin-top: 40px;
-                    border-radius: 10px;
-                    height: 50px;
-                    background-color: #FFFFFF;
-                    opacity: .6;
-                    color: #333333;
-                }
                 .select-img {
                     width: 270px;
                     height: 270px;
@@ -221,17 +198,6 @@
                 .evaluation {
                     width: 350px;
                     height: 467px;
-                }
-                .cancel-btn {
-                    color: #4B709A;
-                    border: 2px solid #4B709A;
-                    border-radius: 10px;
-                }
-                .submit-btn {
-                    background-color: #4B709A;
-                    border: 2px solid #4B709A;
-                    color: #FFFFFF;
-                    border-radius: 10px;
                 }
             }
         }
@@ -321,45 +287,11 @@
         // ? 提案ページの設定
         .suggest-content {
             width: 1014px;
-            margin-top: 25px;
-            margin-bottom: 150px;
             .flex {
                 width: 25%;
-                float: left;
-            }
-            .sns-image {
-                width: 100%;
-                height: 340px;
-                object-fit: cover;
             }
             form {
                 width: 550px;
-                margin: 0 auto;
-                margin-top: 100px;
-                .question {
-                    margin-bottom: 100px;
-                }
-                p {
-                    font-size: 16px;
-                    font-weight: 600;
-                    margin-bottom: 40px;
-                }
-                input[type="radio"] {
-                    display: none;
-                }
-                input[type="radio"]:checked+label img {
-                    border: 3px solid #4B709A;
-                    border-radius: 10px;
-                    box-sizing: border-box;
-                }
-                select {
-                    margin-top: 40px;
-                    border-radius: 10px;
-                    height: 50px;
-                    background-color: #FFFFFF;
-                    opacity: .6;
-                    color: #333333;
-                }
                 .select-img {
                     width: 270px;
                     height: 270px;
@@ -367,17 +299,6 @@
                 .evaluation {
                     width: 350px;
                     height: 467px;
-                }
-                .cancel-btn {
-                    color: #4B709A;
-                    border: 2px solid #4B709A;
-                    border-radius: 10px;
-                }
-                .submit-btn {
-                    background-color: #4B709A;
-                    border: 2px solid #4B709A;
-                    color: #FFFFFF;
-                    border-radius: 10px;
                 }
             }
         }

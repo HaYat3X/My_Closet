@@ -26,7 +26,7 @@
                         <% @recommend.each do |sns| %>
                             <div class="flex">
                                 <%= link_to "/sns/show/#{sns.id}" do %>
-                                    <%= image_tag sns.photograph.url, class: "sns-image" %>
+                                    <%= image_tag sns.photograph.url(:forced_size), class: "sns-image" %>
                                 <% end %>
                             </div>
                         <% end %>
@@ -243,7 +243,7 @@
                                     <a href="/induction" class="btn col-12 cancel-btn">キャンセル</a>
                                 </div>
                                 <div class="col-6">
-                                    <%= f.submit "診断する", class: "btn col-12 submit-btn" %>
+                                    <%= f.submit "診断する", data: { disable_with: "診断中..." }, class: "btn col-12 submit-btn" %>
                                 </div>
                             </div>
                         </div>
@@ -255,14 +255,14 @@
 </div>
 
 <script>
-    // 無効なフィールドがある場合にフォーム送信を無効にするスターターJavaScriptの例
+    <%# * 処理の目的 => 空で送信されたフィールドをチェックする %>
+    <%# * 入力 => フィールド値 %>
+    <%# * 加工 => バリデーションチェック %>
+    <%# * 出力 => エラーメッセージ %>
     (() => {
         'use strict'
-
-        // Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
         const forms = document.querySelectorAll('.needs-validation')
 
-        // ループして帰順を防ぐ
         Array.from(forms).forEach(form => {
             form.addEventListener('submit', event => {
                 if (!form.checkValidity()) {
