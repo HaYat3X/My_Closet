@@ -14,13 +14,13 @@
 					<div class="mb-3">
                         <label class="fw-bold">アイテム画像を追加</label><br>
                         <button type="button" class="item" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
-                            <div class="container">
-								<div id="image-preview" class="preview mx-auto"></div>
-
+                            <div class="modal-container">
+								<div id="image-preview" class="preview"></div>
+								
 								<div id="overlay" class="overlay">
-									<img src="/assets/adds/img_add.png" alt="">
+									<img src="/assets/adds/bg_setting2.png" alt="">
 								</div>
-							</div>
+                            </div>
                         </button>
 
                         <div class="modal fade modal-area modal-dialog-scrollable" id="CoordinateModal" tabindex="-1" aria-labelledby="exampleModalLabel">
@@ -31,14 +31,14 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <div class="col-lg-7 mx-auto coordinate-modal">
+                                        <div class="coordinate-modal">
                                             <%= f.file_field :photograph, class: "form-control", id: "file-input" %>
                                         </div>
                                     </div>
 
                                     <div class="modal-footer post-area text-center">
                                         <div class="mx-auto">
-                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal" onclick="SnsPostFileReset()">キャンセル</button>
+                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal">キャンセル</button>
                                             <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
                                         </div>
                                     </div>
@@ -65,7 +65,7 @@
 					</div>
 
 					<div class="mb-3">
-						<%= f.select :small_Category, ['ジャケット','コート','ピーコート','ダウンジャケット','レザージャケット','ウインドブレーカー','カーディガン','Tシャツ','シャツ','ブラウス','ポロシャツ',"スウェット",'ニットセーター','パーカー','ジーンズ','パンツ','ショートパンツ','スカート','レギンス','ショーツ','スカート','スニーカー','パンプス','サンダル','ブーツ','フラットシューズ','革靴','ネックレス','ブレスレット',"キャップ",'ピアス','リング','ヘアアクセサリー','その他'], {include_blank: 'サブカテゴリーを選択 ▾'}, class: 'form-control', id: "small-category-select" %>
+						<%= f.select :small_Category, ["ベスト", "ジャケット", "トラックジャケット", "MA-1", "パーカー", "レザージャケット", "ウインドブレーカー", "ダウンジャケット", "コート", "ピーコート","タンクトップ", "Tシャツ", "ブラウス", "ポロシャツ", "シャツ", "スウェット", "パーカー", "カーディガン", "ニットセーター", "ワンピース","ショーツ", "パンツ", "ジーンズ", "レギンス", "スカート", "オーバーオール","スニーカー", "サンダル", "ブーツ", "パンプス", "フラットシューズ", "ローファー", "革靴","ネックレス", "ブレスレット", "ピアス", "キャップ", "リング", "ヘアアクセサリー", "ネクタイ", "ベルト", "バック", "その他"], {include_blank: 'サブカテゴリーを選択 ▾', selected: "#{@closet.small_Category}"}, class: 'form-control', id: "small-category-select" %>
 					</div>
 
 					<div class="mb-3">
@@ -90,126 +90,109 @@
 						<%= f.text_field :brand, placeholder: "ブランドを入力", class: 'form-control' %>
 					</div>
 
-					<%= f.submit "編集する", class: "btn btn-primary mt-3" %>
+					<div class="col-lg-8 col-12 col-md-8 mx-auto" style="margin-top: 100px;">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="/closet/list" class="btn col-12 cancel-btn">キャンセル</a>
+                            </div>
+
+                            <div class="col-6">
+                                <%= f.submit "更新する", data: { disable_with: "更新中..." }, class: "btn col-12 submit-btn" %>
+                            </div>
+                        </div>
+                    </div>
                 <% end %>
             </div>
         </div>
     </div>
 </div>
+
 <script>
-if (window.location.pathname === "/sns/edit/'<%= j @closet.id %>'") {
+    $(document).ready(function() {
+        <%# * 処理の目的 => 選択された画像をプレビューする %>
+        <%# * 入力 => 選択した画像 %>
+        <%# * 加工 => 選択した画像を取得し、プレビューする %>
+        <%# * 出力 => プレビュー %>
+        const fileInput = document.getElementById('file-input');
+        const preview = document.getElementById('image-preview');
+        const overlay = document.getElementById('overlay');
+        const defaultImageURL = '<%= j @closet.photograph %>';
 
-// 画像選択をプレビューする
-	var fileInput = document.getElementById('file-input');
-	var preview = document.getElementById('image-preview');
-	var reader = new FileReader(); // FileReaderオブジェクトを作成
-	var defaultImageURL = '<%= j @closet.photograph %>'; // 既存の画像URLを取得する
+        function displayDefaultImage() {
+            const defaultImage = new Image();
+            defaultImage.src = defaultImageURL;
+            defaultImage.alt = 'デフォルト画像';
+            defaultImage.classList.add('preview');
+            defaultImage.style.width = '189px';
+            defaultImage.style.height = '262px';
+            defaultImage.style.borderRadius = '5%';
+            defaultImage.style.objectFit = 'cover';
+            preview.appendChild(defaultImage);
+        }
 
-	// デフォルトの画像を表示
-	var defaultImage = new Image();
-	defaultImage.src = defaultImageURL;
-	defaultImage.alt = 'デフォルト画像';
-	defaultImage.classList.add('preview'); // 追加するクラス名
-	defaultImage.style.width = '189px';
-	defaultImage.style.height = '262px';
-	defaultImage.style.borderRadius = '10%';
-	defaultImage.style.objectFit = 'cover';
+        function displayPreviewImage(imageDataURL) {
+            preview.innerHTML = '';
 
-	preview.appendChild(defaultImage);
+            const image = new Image();
+            image.src = imageDataURL;
+            image.alt = 'プレビュー画像';
+            image.classList.add('preview');
+            image.style.width = '189px';
+            image.style.height = '262px';
+            image.style.objectFit = 'cover';
+            image.style.borderRadius = '5%';
+            preview.appendChild(image);
+        }
 
-	// input fileのchangeイベントを監視
-	fileInput.addEventListener('change', function(event) {
-		var file = event.target.files[0]; // 選択されたファイルを取得
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                displayPreviewImage(e.target.result);
+            };
 
-		// ファイルの読み込みが完了したらプレビューを表示
-		reader.onload = function(e) {
-			preview.innerHTML = ''; // プレビューをクリア
+            reader.readAsDataURL(file);
 
-			var image = new Image();
-			image.src = e.target.result;
-			image.alt = 'プレビュー画像';
-			image.classList.add('preview'); // 追加するクラス名
-			image.style.width = '189px';
-			image.style.height = '262px';
-			image.style.objectFit = 'cover';
-			image.style.borderRadius = '10%';
+            overlay.style.display = 'none';
+        });
 
+        displayDefaultImage();
 
-			preview.appendChild(image);
-		};
+        <%# * 処理の目的 => 選択されたメインカテゴリーからサブカテゴリーを取得 %>
+        <%# * 入力 => 選択したメインカテゴリー %>
+        <%# * 加工 => AJAXリクエストを使用し、サブカテゴリーを取得 %>
+        <%# * 出力 => サブカテゴリー %>
+        $('#big-category-select').change(function() {
+            var selectedValue = $(this).val();
+            var smallCategorySelect = $('#small-category-select');
 
-		// ファイルをData URLとして読み込む
-		reader.readAsDataURL(file);
-
-		// プレビューされたらオーバーレイを消す関数
-		const overlay = document.getElementById('overlay');
-		overlay.style.display = 'none';
-	});
-
-
-    $('#big-category-select').change(function() {
-        var selectedValue = $(this).val();
-        var smallCategorySelect = $('#small-category-select');
-
-        $.ajax({
-            url: '/realtime_selected_value', // 適切なエンドポイントのURLを設定
-            method: 'POST',
-            data: { selected_value: selectedValue },
-            success: function(response) {
-                smallCategorySelect.empty(); // 小カテゴリーセレクトボックスをクリア
-                var options = response.options;
-                if (options) {
-                    for (var i = 0; i < options.length; i++) {
-                        var option = $('<option>').text(options[i]);
-                        smallCategorySelect.append(option); // 選択肢を追加
+            $.ajax({
+                url: '/realtime_selected_value',
+                method: 'POST',
+                data: { selected_value: selectedValue },
+                success: function(response) {
+                    smallCategorySelect.empty();
+                    var options = response.options;
+                    if (options) {
+                        for (var i = 0; i < options.length; i++) {
+                            var option = $('<option>').text(options[i]);
+                            smallCategorySelect.append(option);
+                        }
+                    } else {
+                        var default_options = [
+                            "ベスト", "ジャケット", "トラックジャケット", "MA-1", "パーカー", "レザージャケット", "ウインドブレーカー", "ダウンジャケット", "コート", "ピーコート","タンクトップ", "Tシャツ", "ブラウス", "ポロシャツ", "シャツ", "スウェット", "パーカー", "カーディガン", "ニットセーター", "ワンピース","ショーツ", "パンツ", "ジーンズ", "レギンス", "スカート", "オーバーオール","スニーカー", "サンダル", "ブーツ", "パンプス", "フラットシューズ", "ローファー", "革靴","ネックレス", "ブレスレット", "ピアス", "キャップ", "リング", "ヘアアクセサリー", "ネクタイ", "ベルト", "バック", "その他",
+                        ];
+                        for (var i = 0; i < default_options.length; i++) {
+                            var option = $('<option>').text(default_options[i]);
+                            smallCategorySelect.append(option);
+                        }
                     }
-                } else {
-                    // デフォルトの値を追加する
-                    var default_options = [
-                        'ジャケット',
-                        'コート',
-                        'ピーコート',
-                        'ダウンジャケット',
-                        'レザージャケット',
-                        'ウインドブレーカー',
-                        'カーディガン',
-                        'Tシャツ',
-                        'シャツ',
-                        'ブラウス',
-                        'ポロシャツ',
-                        'ニットセーター',
-                        'パーカー',
-                        'ジーンズ',
-                        'パンツ',
-                        'ショートパンツ',
-                        'スカート',
-                        'レギンス',
-                        'ショーツ',
-                        'スカート',
-                        'スニーカー',
-                        'パンプス',
-                        'サンダル',
-                        'ブーツ',
-                        'フラットシューズ',
-                        '革靴',
-                        'ネックレス',
-                        'ブレスレット',
-                        'ピアス',
-                        'リング',
-                        'ヘアアクセサリー',
-                        'その他',
-                    ];
-                    for (var i = 0; i < default_options.length; i++) {
-                        var option = $('<option>').text(default_options[i]);
-                        smallCategorySelect.append(option); // 選択肢を追加
-                    }
-                }
-            },
+                },
 
-            error: function(error) {
+                error: function(error) {
 
-            },
+                },
+            });
         });
     });
-}
 </script>

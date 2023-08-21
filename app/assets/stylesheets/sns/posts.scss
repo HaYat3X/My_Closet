@@ -119,6 +119,18 @@
             background-color: #CBC5C1;
         }
         .modal-area {
+            .modal-body {
+                background-color: #333333;
+            }
+            .post-area {
+                background-color: #333333;
+                .submit-btn {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                }
+            }
+        }
+        .modal-area-origin {
             .modal-dialog {
                 margin: 0 auto;
             }
@@ -216,14 +228,14 @@
                 font-size: 16px;
                 margin-bottom: 15px;
             }
-            .modal-area {
+            .coordinate-modal {
+                padding: 150px 10px;
+            }
+            .modal-area-origin {
                 .modal-dialog {
                     max-width: 95%;
                 }
                 .modal-body {
-                    .coordinate-modal {
-                        padding: 150px 10px;
-                    }
                     .flex {
                         width: 33.3%;
                     }
@@ -265,15 +277,15 @@
                 font-size: 16px;
                 margin-bottom: 15px;
             }
-            .modal-area {
+            .coordinate-modal {
+                padding: 200px 50px;
+            }
+            .modal-area-origin {
                 .modal-dialog {
                     max-width: 730px;
                 }
                 .modal-body {
                     background-color: #333333;
-                    .coordinate-modal {
-                        padding: 200px 150px;
-                    }
                     .flex {
                         width: 25%;
                     }
@@ -316,15 +328,15 @@
                 font-size: 15px;
                 margin-bottom: 15px;
             }
-            .modal-area {
+            .coordinate-modal {
+                padding: 200px 50px;
+            }
+            .modal-area-origin {
                 .modal-dialog {
                     max-width: 1200px;
                 }
                 .modal-body {
                     background-color: #333333;
-                    .coordinate-modal {
-                        padding: 200px 300px;
-                    }
                     .flex {
                         width: 20%;
                     }
