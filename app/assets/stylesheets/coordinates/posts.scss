@@ -1,6 +1,16 @@
 // ! postsフォルダのレイアウト （edit, list, new, show）
 #closet_posts {
     // ! 全サイズ共通
+    // * クローゼット一覧ページの設定
+    .list-content {
+        margin-top: 60px;
+        margin-bottom: 150px;
+        .closet-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    }
     // * クローゼット投稿、編集ページの設定
     .new-edit-content {
         margin-top: 45px;
@@ -65,6 +75,34 @@
     }
     // * スマートフォン （小）
     @media (max-width: 768px) {
+        // ? クローゼット一覧ページの設定
+        .list-content {
+            .tab-menu.nav {
+                display: flex;
+                justify-content: space-between;
+                padding: 0;
+            }
+            .tab-menu.nav .nav-item {
+                flex: 1;
+                padding: 0;
+            }
+            .tab-menu.nav .nav-link {
+                display: block;
+                text-align: center;
+                padding: 13px;
+                background-color: #ffffffae;
+                color: #333333;
+                font-size: 14px;
+            }
+            .tab-menu.nav .nav-link.active {
+                background-color: #4B709A;
+                color: #FFFFFF;
+            }
+            .flex {
+                width: 33.3%;
+                float: left;
+            }
+        }
         // ? クローゼット投稿、編集画面
         .new-edit-content {
             padding: 0 20px;
@@ -80,6 +118,35 @@
     }
     // * タブレット
     @media (min-width: 768px) and (max-width: 1280px) {
+        // ? クローゼット一覧ページの設定
+        .list-content {
+            .tab-menu.nav {
+                display: flex;
+                justify-content: space-between;
+                padding: 0;
+            }
+            .tab-menu.nav .nav-item {
+                flex: 1;
+                padding: 0;
+            }
+            .tab-menu.nav .nav-link {
+                display: block;
+                text-align: center;
+                padding: 13px;
+                background-color: #ffffffae;
+                color: #333333;
+                font-size: 14px;
+            }
+            .tab-menu.nav .nav-link.active {
+                background-color: #4B709A;
+                color: #FFFFFF;
+            }
+            width: 760px;
+            .flex {
+                width: 25%;
+                float: left;
+            }
+        }
         // ? クローゼット投稿、編集画面
         .new-edit-content {
             width: 550px;
@@ -96,8 +163,6 @@
     @media (min-width: 1280px) {
         // ? クローゼット一覧ページの設定
         .list-content {
-            margin-top: 60px;
-            margin-bottom: 150px;
             width: 973px;
             .tab-menu.nav {
                 display: flex;
@@ -123,11 +188,6 @@
             .flex {
                 width: 20%;
                 float: left;
-            }
-            .closet-image {
-                width: 100%;
-                height: auto;
-                object-fit: cover;
             }
             .page {
                 margin-top: 50px;

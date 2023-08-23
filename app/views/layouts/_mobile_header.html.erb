@@ -414,17 +414,17 @@
     <% end %>
 </div>
 
-            <div class="collapse p-3" id="collapseCloset" style="background-color: #222222; width: 100%;">
-                <%= form_with(url: "/closet/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
-                    <div class="input-group">
-                        <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+<div class="collapse p-3" id="collapseCloset" style="background-color: #222222; width: 100%; margin-top: 70px;">
+    <%= form_with(url: "/closet/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+        <div class="input-group">
+            <%= f.text_field :search, class: "form-control", placeholder: "search", required: true %>
 
-                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
-                            <i class="bi bi-search"></i>
-                        <% end %>
-                    </div>
-                <% end %>
-            </div>
+            <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                <i class="bi bi-search"></i>
+            <% end %>
+        </div>
+    <% end %>
+</div>
 
             <div class="collapse p-3" id="collapseFaq" style="background-color: #222222; width: 100%;">
                 <%= form_with(url: "/faq/question/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>

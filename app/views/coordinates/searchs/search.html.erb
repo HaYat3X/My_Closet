@@ -20,9 +20,9 @@
 
                     <div class="row g-1">
                         <% @search_result.each do |closet| %>
-                            <div class="col-lg-3 mt-1">
+                            <div class="flex mt-1">
                                 <%= link_to "/closet/show/#{closet.id}" do %>
-                                    <%= image_tag closet.photograph.url, class: "closet-search-image" %>
+                                    <%= image_tag closet.photograph.url(:forced_size), class: "closet-search-image" %>
                                 <% end %>
                             </div>
                         <% end %>
