@@ -29,6 +29,74 @@
             box-sizing: border-box;
         }
     }
+    // * 質問投稿、編集ページの設定
+    .new-edit-content {
+        margin-top: 45px;
+        margin-bottom: 150px;
+        h3 {
+            font-size: 28px;
+            margin-bottom: 60px;
+        }
+        .modal-area {
+            .modal-body {
+                background-color: #333333;
+            }
+            .post-area {
+                background-color: #333333;
+                .submit-btn {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                }
+            }
+        }
+        .modal-container {
+            position: relative;
+        }
+        #overlay {
+            position: absolute;
+            top: 0;
+            opacity: .6;
+        }
+        .overlay img {
+            width: 189px;
+            height: 262px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
+            border-radius: 10px;
+            height: 50px;
+            background-color: #FFFFFF;
+            opacity: .5;
+        }
+        select {
+            border-radius: 10px;
+            height: 50px;
+            background-color: #FFFFFF;
+            opacity: .5;
+        }
+        textarea {
+            border-radius: 10px;
+            height: 50px;
+            background-color: #FFFFFF;
+            opacity: .5;
+        }
+        .item {
+            border: none;
+            background-color: #CBC5C1;
+        }
+        .cancel-btn {
+            color: #4B709A;
+            border: 2px solid #4B709A;
+            border-radius: 10px;
+        }
+        .submit-btn {
+            background-color: #4B709A;
+            border: 2px solid #4B709A;
+            color: #FFFFFF;
+            border-radius: 10px;
+        }
+    }
     // * スマートフォン
     @media (max-width: 768px) {
         // ? 質問一覧画面
@@ -109,6 +177,18 @@
                         }
                     }
                 }
+            }
+        }
+        // ? 質問投稿、編集画面
+        .new-edit-content {
+            padding: 0 20px;
+            width: 350px;
+            label {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            .coordinate-modal {
+                padding: 150px 10px;
             }
         }
     }
@@ -197,6 +277,17 @@
                 }
             }
         }
+        // ? 質問投稿、編集画面
+        .new-edit-content {
+            width: 550px;
+            label {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            .coordinate-modal {
+                padding: 200px 50px;
+            }
+        }
     }
     // * PC（大）
     @media (min-width: 1280px) {
@@ -283,73 +374,15 @@
                 }
             }
         }
+        // ? 質問投稿、編集ページの設定
         .new-edit-content {
             width: 793px;
-            margin-top: 45px;
-            h3 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            .container {
-                position: relative;
-            }
-            #overlay {
-                position: absolute;
-                top: 0;
-                opacity: .6;
-            }
-            .overlay img {
-                width: 189px;
-                height: 262px;
-                object-fit: cover;
-                border-radius: 10%;
-            }
-            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
-            select {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
-            textarea {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
             label {
-                font-size: 14px;
+                font-size: 15px;
                 margin-bottom: 15px;
             }
-            .coordinate {
-                border: none;
-                background-color: #CBC5C1;
-            }
-            .item {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
-            .modal-area {
-                .modal-body {
-                    background-color: #333333;
-                    .coordinate-modal {
-                        padding: 200px 0;
-                    }
-                }
-            }
-            .post-area {
-                background-color: #333333;
-                .submit-btn {
-                    background-color: #4B709A;
-                    color: #FFFFFF;
-                }
+            .coordinate-modal {
+                padding: 200px 50px;
             }
         }
         .show-content {
