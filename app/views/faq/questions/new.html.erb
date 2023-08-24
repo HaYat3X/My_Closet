@@ -8,11 +8,11 @@
         <%# ! contents %>
         <div class="main-content">
             <div class="new-edit-content mx-auto">
-				<h3 class="fw-bold text-center">コーディネート質問</h3>
+				<h3 class="fw-bold text-center">質問を投稿</h3>
 				<%= form_with(model: @question, url: "/faq/question/create/", local: true) do |f| %>
 					<div class="mb-3">
                         <label class="fw-bold">コーディネート画像を追加</label><br>
-                        <button type="button" class="coordinate" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
+                        <button type="button" class="item" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
                             <div id="image-preview" class="preview"></div>
                         </button>
 
@@ -24,7 +24,7 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <div class="col-lg-7 mx-auto coordinate-modal">
+                                        <div class="coordinate-modal">
                                             <%= f.file_field :photograph, class: "form-control", id: "file-input" %>
                                         </div>
                                     </div>
@@ -67,7 +67,17 @@
                         </div>
 					</div>
 					
-					<%= f.submit "登録する", class: "btn btn-primary" %>
+					<div class="col-lg-8 col-12 col-md-8 mx-auto" style="margin-top: 100px;">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="/faq/question/list" class="btn col-12 cancel-btn">キャンセル</a>
+                            </div>
+
+                            <div class="col-6">
+                                <%= f.submit "投稿する", data: { disable_with: "投稿中..." }, class: "btn col-12 submit-btn" %>
+                            </div>
+                        </div>
+                    </div>
 				<% end %>
             </div>
         </div>
@@ -75,47 +85,49 @@
 </div>
 
 <script>
-    <%# ! 選択した画像をプレビューする %>
-    var fileInput = document.getElementById('file-input');
-    var preview = document.getElementById('image-preview');
-    var reader = new FileReader();
+    <%# ! htmlの要素が読み込まれたら処理を開始する %>
+    $(document).ready(function() {
+        <%# * 処理の目的 => 選択された画像をプレビューする %>
+        <%# * 入力 => 選択した画像 %>
+        <%# * 加工 => 選択した画像を取得し、プレビューする %>
+        <%# * 出力 => プレビュー %>
+        const fileInput = document.getElementById('file-input');
+        const preview = document.getElementById('image-preview');
+        const reader = new FileReader();
 
-    <%# * 画像を選択していない場合はデフォルト画像を表示する %>
-    var defaultImage = new Image();
-    defaultImage.src = "/assets/adds/img_add.png";
-    defaultImage.alt = 'デフォルト画像';
-    defaultImage.classList.add('preview');
-    defaultImage.style.objectFit = 'cover';
-    defaultImage.style.width = '189px';
-    defaultImage.style.height = '262px';
-    defaultImage.style.borderRadius = '10px';
-    preview.appendChild(defaultImage);
+        const defaultImage = createPreviewImage("/assets/adds/img_add.png", 'デフォルト画像');
+        preview.appendChild(defaultImage);
 
-    <%# * 画像が選択されたら、その画像をプレビューする %>
-    fileInput.addEventListener('change', function(event) {
-        var file = event.target.files[0];
+        fileInput.addEventListener('change', handleFileChange);
 
-        reader.onload = function(e) {
+        function handleFileChange(event) {
+            const file = event.target.files[0];
+            reader.onload = function(e) {
+                clearPreview();
+                const image = createPreviewImage(e.target.result, 'プレビュー画像');
+                preview.appendChild(image);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function createPreviewImage(src, altText) {
+            const image = new Image();
+            image.src = src;
+            image.alt = altText;
+            setPreviewStyles(image);
+            return image;
+        }
+
+        function setPreviewStyles(imageElement) {
+            imageElement.classList.add('preview');
+            imageElement.style.width = '189px';
+            imageElement.style.height = '262px';
+            imageElement.style.objectFit = 'cover';
+            imageElement.style.borderRadius = '10px';
+        }
+
+        function clearPreview() {
             preview.innerHTML = '';
-            var image = new Image();
-            image.src = e.target.result;
-            image.alt = 'プレビュー画像';
-            image.classList.add('preview');
-            image.style.width = '189px';
-            image.style.height = '262px';
-            image.style.objectFit = 'cover';
-            image.style.borderRadius = '10px';
-            preview.appendChild(image);
-        };
-
-        reader.readAsDataURL(file);
+        }
     });
-
 </script>
-
-
-
-
-
-    
-      

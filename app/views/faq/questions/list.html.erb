@@ -25,7 +25,7 @@
                 <div class="tab-content mt-3">
                     <%# ? allエリア %>
                     <div id="all" class="tab-pane active">
-                        <div class="question-area">
+                        <div class="question-area row">
                             <% @questions_all.each do |question| %>
                                 <div class="flex">
                                     <div class="d-flex">
@@ -82,7 +82,7 @@
 
                     <%# ? menエリア %>
                     <div id="men" class="tab-pane">
-                        <div class="question-area">
+                        <div class="question-area row">
                             <% @questions_men.each do |question| %>
                                 <div class="flex">
                                     <div class="d-flex">
@@ -139,7 +139,7 @@
 
                     <%# ? womenエリア %>
                     <div id="women" class="tab-pane">
-                        <div class="question-area">
+                        <div class="question-area row">
                             <% @questions_women.each do |question| %>
                                 <div class="flex">
                                     <div class="d-flex">
