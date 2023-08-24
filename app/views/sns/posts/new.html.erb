@@ -79,7 +79,7 @@
                             着用アイテムを選択 ▾
                         </button>
 
-                        <div class="modal fade modal-area modal-dialog-scrollable" id="Item1Modal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                        <div class="modal fade modal-area-origin modal-dialog-scrollable" id="Item1Modal" tabindex="-1" aria-labelledby="exampleModalLabel">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header-origin">
@@ -244,6 +244,8 @@
             $('.selected-image').removeClass('selected-image');
             $('.image-mark').remove();
             hideMessage();
+
+            $('#selectedCount').text("0件のアイテムを選択しています。");
         });
     });
 </script>

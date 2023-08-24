@@ -6,32 +6,36 @@
         </div>
 
         <%# ! contents %>
-        <div class="main-content">
+        <div class="main-content" style="margin: 45px 0 150px;">
             <div class="list-content mx-auto">
-                <ul class="tab-menu nav nav-underline nav-fill" role="tablist">
-                    <li class="nav-item flex-fill">
-                        <a href="?tab=all" class="nav-link fw-bold <%= params[:tab].nil? || params[:tab] == 'all' ? 'active' : '' %>">ALL</a>
+                <ul class="tab-menu nav" role="tablist">
+                    <li class="nav-item">
+                        <a href="?tab=all" class="nav-link <%= params[:tab].nil? || params[:tab] == 'all' ? 'active' : '' %>">ALL</a>
                     </li>
 
-                    <li class="nav-item flex-fill">
-                        <a href="?page=1&tab=men" class="nav-link fw-bold <%= params[:tab] == 'men' ? 'active' : '' %>">MEN</a>
+                    <li class="nav-item mx-2">
+                        <a href="?page=1&tab=men" class="nav-link <%= params[:tab] == 'men' ? 'active' : '' %>">MEN</a>
                     </li>
 
-                    <li class="nav-item flex-fill">
-                        <a href="?page=1&tab=women" class="nav-link fw-bold <%= params[:tab] == 'women' ? 'active' : '' %>">WOMEN</a>
+                    <li class="nav-item"> 
+                        <a href="?page=1&tab=women" class="nav-link <%= params[:tab] == 'women' ? 'active' : '' %>">WOMEN</a>
                     </li>
                 </ul>
 
-                <div class="tab-content mt-2">
+                <div class="tab-content mt-3">
                     <%# ? allエリア %>
                     <div id="all" class="tab-pane active">
-                        <div class="row question-area">
+                        <div class="question-area">
                             <% @questions_all.each do |question| %>
-                                <div class="col-lg-6 mt-4">
+                                <div class="flex">
                                     <div class="d-flex">
-                                        <%= image_tag question.photograph.url, class: "question_image" %>
+                                        <div class="left-content">
+                                            <%= link_to "/faq/question/show/#{question.id}" do %>
+                                                <%= image_tag question.photograph.url(:forced_size) %>
+                                            <% end %>
+                                        </div>
 
-                                        <div class="question-area">
+                                        <div class="right-content">
                                             <div class="d-flex align-items-center user-area">
                                                 <%= link_to "/profile/show/#{question.user.id}" do %>
                                                     <% if question.user.avatar.url %>
@@ -42,8 +46,13 @@
                                                 <% end %>
 
                                                 <div class="user-information">
-                                                    <h5 class="mb-0 fw-bold"><%= question.user.user_name %></h5>
-                                                    <small><%= question.created_at.strftime('%m月%d日') %></small>
+                                                    <h5 class="mb-0 fw-bold">
+                                                        <%= question.user.user_name %>
+                                                    </h5>
+                                                    
+                                                    <small>
+                                                        <%= question.created_at.strftime('%m月%d日') %>
+                                                    </small>
                                                 </div>
                                             </div>
 
@@ -51,17 +60,17 @@
                                                 <%= truncate(question.question, length: 44) %>
                                             </div>
 
-                                            <div class="answer d-flex align-items-center justify-content-end">
-                                                <%= link_to "/faq/question/show/#{question.id}", style: "text-decoration: none; display: flex; align-items: center; margin-right: 2px;" do %>
+                                            <div class="answer-area">
+                                                <%= link_to "/faq/question/show/#{question.id}" do %>
                                                     <img src="/assets/icons/icn_message_b.png" alt="">
                                                 <% end %>
 
-                                                <small class="m-0">
+                                                <small class="mt-2">
                                                     <%= Answer.where(question_id: question.id).count %>
                                                 </small>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>    
                                 </div>
                             <% end %>
 
@@ -73,15 +82,19 @@
 
                     <%# ? menエリア %>
                     <div id="men" class="tab-pane">
-                        <div class="row question-area">
+                        <div class="question-area">
                             <% @questions_men.each do |question| %>
-                                <div class="col-lg-6 mt-4">
+                                <div class="flex">
                                     <div class="d-flex">
-                                        <%= image_tag question.photograph.url, class: "question_image" %>
+                                        <div class="left-content">
+                                            <%= link_to "/faq/question/show/#{question.id}" do %>
+                                                <%= image_tag question.photograph.url(:forced_size) %>
+                                            <% end %>
+                                        </div>
 
-                                        <div class="question-area">
+                                        <div class="right-content">
                                             <div class="d-flex align-items-center user-area">
-                                                <%= link_to "/faq/profile/show/#{question.user.id}" do %>
+                                                <%= link_to "/profile/show/#{question.user.id}" do %>
                                                     <% if question.user.avatar.url %>
                                                         <%= image_tag question.user.avatar.url, class: "question-user-image" %>
                                                     <% else %>
@@ -90,8 +103,13 @@
                                                 <% end %>
 
                                                 <div class="user-information">
-                                                    <h5 class="mb-0 fw-bold"><%= question.user.user_name %></h5>
-                                                    <small><%= question.created_at.strftime('%m月%d日') %></small>
+                                                    <h5 class="mb-0 fw-bold">
+                                                        <%= question.user.user_name %>
+                                                    </h5>
+                                                    
+                                                    <small>
+                                                        <%= question.created_at.strftime('%m月%d日') %>
+                                                    </small>
                                                 </div>
                                             </div>
 
@@ -99,17 +117,17 @@
                                                 <%= truncate(question.question, length: 44) %>
                                             </div>
 
-                                            <div class="answer d-flex align-items-center justify-content-end">
-                                                <%= link_to "/question/show/#{question.id}", style: "text-decoration: none; display: flex; align-items: center; margin-right: 2px;" do %>
+                                            <div class="answer-area">
+                                                <%= link_to "/faq/question/show/#{question.id}" do %>
                                                     <img src="/assets/icons/icn_message_b.png" alt="">
                                                 <% end %>
 
-                                                <small class="m-0">
+                                                <small class="mt-2">
                                                     <%= Answer.where(question_id: question.id).count %>
                                                 </small>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>    
                                 </div>
                             <% end %>
 
@@ -121,13 +139,17 @@
 
                     <%# ? womenエリア %>
                     <div id="women" class="tab-pane">
-                        <div class="row question-area">
+                        <div class="question-area">
                             <% @questions_women.each do |question| %>
-                                <div class="col-lg-6 mt-4">
+                                <div class="flex">
                                     <div class="d-flex">
-                                        <%= image_tag question.photograph.url, class: "question_image" %>
+                                        <div class="left-content">
+                                            <%= link_to "/faq/question/show/#{question.id}" do %>
+                                                <%= image_tag question.photograph.url(:forced_size) %>
+                                            <% end %>
+                                        </div>
 
-                                        <div class="question-area">
+                                        <div class="right-content">
                                             <div class="d-flex align-items-center user-area">
                                                 <%= link_to "/profile/show/#{question.user.id}" do %>
                                                     <% if question.user.avatar.url %>
@@ -138,8 +160,13 @@
                                                 <% end %>
 
                                                 <div class="user-information">
-                                                    <h5 class="mb-0 fw-bold"><%= question.user.user_name %></h5>
-                                                    <small><%= question.created_at.strftime('%m月%d日') %></small>
+                                                    <h5 class="mb-0 fw-bold">
+                                                        <%= question.user.user_name %>
+                                                    </h5>
+                                                    
+                                                    <small>
+                                                        <%= question.created_at.strftime('%m月%d日') %>
+                                                    </small>
                                                 </div>
                                             </div>
 
@@ -147,17 +174,17 @@
                                                 <%= truncate(question.question, length: 44) %>
                                             </div>
 
-                                            <div class="answer d-flex align-items-center justify-content-end">
-                                                <%= link_to "/faq/question/show/#{question.id}", style: "text-decoration: none; display: flex; align-items: center; margin-right: 2px;" do %>
+                                            <div class="answer-area">
+                                                <%= link_to "/faq/question/show/#{question.id}" do %>
                                                     <img src="/assets/icons/icn_message_b.png" alt="">
                                                 <% end %>
 
-                                                <small class="m-0">
+                                                <small class="mt-2">
                                                     <%= Answer.where(question_id: question.id).count %>
                                                 </small>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>    
                                 </div>
                             <% end %>
 
@@ -173,17 +200,21 @@
 </div>
 
 <script>
-  $(document).ready(function() {
-        <%# ! 現在位置しているタブをアクティブ状態にする %>
+    <%# ! htmlの要素が読み込まれたら処理を開始する %>
+    $(document).ready(function() {
+        <%# * 処理の目的 => 特定のタブを選択状態にする %>
+        <%# * 入力 => 選択しているタブの情報 %>
+        <%# * 加工 => 選択しているタブの情報を取得し、選択状態にする %>
+        <%# * 出力 => activeクラス %>
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabValue = urlParams.get('tab');
+
         function setActiveTab(tabId) {
             $('.tab-menu .nav-link').removeClass('active');
             $('.tab-content .tab-pane').removeClass('show active');
             $('#' + tabId).addClass('show active');
             $('.tab-menu .nav-link[href*="tab=' + tabId + '"]').addClass('active');
         }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const tabValue = urlParams.get('tab');
 
         if (tabValue) {
             const tabId = tabValue.toLowerCase();
@@ -193,7 +224,10 @@
             $('.tab-content .tab-pane#all').addClass('show active');
         }
 
-        <%# ! ページ遷移時にタブの位置を保持する %>
+        <%# * 処理の目的 => ページ遷移した際に、タブの位置を保持する %>
+        <%# * 入力 => ページ遷移する際に位置しているタブ %>
+        <%# * 加工 => ページ遷移する前に位置しているタブを取得し、遷移後、そのタブの位置を保持する %>
+        <%# * 出力 => タブの情報 %>
         $(document).on('click', '.tab-menu .nav-link', function(event) {
             event.preventDefault();
             const tabId = $(this).attr('href').split('tab=')[1].toLowerCase();
@@ -207,5 +241,5 @@
             const newUrl = window.location.pathname + '?tab=' + tabId;
             window.history.pushState({ path: newUrl }, '', newUrl);
         });
-  });
+    });
 </script>

@@ -1,183 +1,58 @@
 // ! searchsフォルダのレイアウト （search）
 #closet_searchs {
     // ! 全サイズ共通
-    // ? headerの設定
-    .header {
-        background-color: #222222;
-    }
-    // ? サイドバーの設定
-    .sidebar {
-        overflow-y: scroll;
-        background-color: #CBC5C1;
-        box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 0.2);
-        a {
-            color: #333333;
-            text-decoration: none;
+    // * クローゼット検索ページ
+    .search-content {
+        margin-top: 45px;
+        margin-bottom: 150px;
+        h4 {
+            font-size: 28px;
         }
-        a:hover {
-            background-color: #4B709A;
-            color: #FFFFFF;
-            text-decoration: none;
+        p {
+            font-size: 16px;
+            align-items: center;
+            margin-top: 16px;
+            margin-bottom: 60px;
         }
-        .active {
-            background-color: #4B709A;
-            color: #FFFFFF;
-            text-decoration: none;
+        h5 {
+            font-size: 22px;
         }
-        i {
-            margin-right: 15px;
-            font-size: 1.1rem;
+        .flex {
+            float: left;
         }
-        hr {
-            border-top: 2px solid #333333;
-        }
-        .post-btn {
-            background-color: #4B709A;
-            color: #FFFFFF;
-            text-decoration: none;
-        }
-        .search-identification a:hover {
-            text-decoration: underline;
-            color: #333333;
-            background-color: #CBC5C1;
+        .closet-search-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
         }
     }
     // * スマートフォン （小）
     @media (max-width: 768px) {
-        // ? PC用のヘッダーは表示しない
-        .pc-header {
-            display: none;
-        }
-        // ? PCのサイドバーは表示しない
-        .pc-sidebar {
-            display: none;
-        }
-        // ? PCのエラーメッセージは表示しない
-        .pc_error_msg {
-            display: none;
-        }
-        // ?モバイルサイドバーのレイアウト設定
-        .mobile_header {
-            .tablet-search-form {
-                display: none;
-            }
-            img {
-                width: 40%;
-            }
-            .navbar-toggler {
-                background-color: #ffffff;
-            }
-            .icon {
-                background-color: #fff;
-            }
-            .sidebar {
-                width: 80%;
-                transition: opacity 1.0s ease;
-            }
-        }
-        // ? SNS一覧ページの設定
-        .list-content {
-            margin: 100px 1px;
-            .sns-image {
-                width: 100%;
-                height: 190px;
-                object-fit: cover;
-            }
-            .user-area {
-                display: none;
-            }
-            .form-check-label {
-                margin-bottom: 10px;
+        // ? クローゼット検索ページ
+        .search-content {
+            padding: 0 3px;
+            .flex {
+                width: 33.3%;
             }
         }
     }
     // * タブレット
     @media (min-width: 768px) and (max-width: 1280px) {
-        // ? PC用のヘッダーは表示しない
-        .pc-header {
-            display: none;
-        }
-        // ? PCのサイドバーは表示しない
-        .pc-sidebar {
-            display: none;
-        }
-        // ?モバイルサイドバーのレイアウト設定
-        .mobile_header {
-            img {
-                width: 20%;
-            }
-            .navbar-toggler {
-                background-color: #ffffff;
-                transition: opacity 0.5s ease;
-            }
-            .search_icon {
-                display: none;
-            }
-        }
-        // ? SNS一覧ページの設定
-        .list-content {
-            margin: 100px 1px;
-            .sns-image {
-                width: 100%;
-                height: 275px;
-                object-fit: cover;
-            }
-            .user-area {
-                background-color: #222222;
-                img {
-                    width: 35px;
-                    height: 35px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    margin-left: 10px;
-                }
-                .user-name {
-                    color: #FFFFFF;
-                }
-                .user-height {
-                    font-size: 10px;
-                    color: #FFFFFF;
-                }
-                .like {
-                    i {
-                        font-size: 18px;
-                    }
-                }
-                .number-of-likes {
-                    font-size: 15px;
-                    margin-left: 5px;
-                    color: #FFFFFF;
-                }
+        // ? クローゼット検索ページ
+        .search-content {
+            width: 760px;
+            .flex {
+                width: 25%;
             }
         }
     }
     // * PC（大）
     @media (min-width: 1280px) {
-        // ? クローゼット検索ページの設定
+        // ? クローゼット検索ページ
         .search-content {
             width: 973px;
-            margin-top: 45px;
-            h4 {
-                font-size: 28px;
-            }
-            p {
-                font-size: 16px;
-                align-items: center;
-                margin-top: 16px;
-                margin-bottom: 60px;
-            }
-            h5 {
-                font-size: 22px;
-            }
-            .sns-image {
-                width: 100%;
-                height: 320px;
-                object-fit: cover;
-            }
-            .closet-search-image {
-                width: 100%;
-                height: 350px;
-                object-fit: cover;
+            .flex {
+                width: 20%;
             }
         }
     }

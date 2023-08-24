@@ -25,14 +25,14 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <div class="col-lg-7 mx-auto coordinate-modal">
+                                        <div class="coordinate-modal">
                                             <%= f.file_field :photograph, class: "form-control", id: "file-input" %>
                                         </div>
                                     </div>
 
                                     <div class="modal-footer post-area text-center">
                                         <div class="mx-auto">
-                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal" onclick="SnsPostFileReset()">キャンセル</button>
+                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal">キャンセル</button>
                                             <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
                                         </div>
                                     </div>
@@ -59,7 +59,7 @@
 					</div>
 
 					<div class="mb-3">
-						<%= f.select :small_Category, ['ジャケット','コート','ピーコート','ダウンジャケット','レザージャケット','ウインドブレーカー','カーディガン','Tシャツ','シャツ','ブラウス','ポロシャツ',"スウェット",'ニットセーター','パーカー','ジーンズ','パンツ','ショートパンツ','スカート','レギンス','ショーツ','スカート','スニーカー','パンプス','サンダル','ブーツ','フラットシューズ','革靴','ネックレス','ブレスレット',"キャップ",'ピアス','リング','ヘアアクセサリー','その他'], {include_blank: 'サブカテゴリーを選択 ▾'}, class: 'form-control', id: "small-category-select" %>
+						<%= f.select :small_Category, ["ベスト", "ジャケット", "トラックジャケット", "MA-1", "パーカー", "レザージャケット", "ウインドブレーカー", "ダウンジャケット", "コート", "ピーコート","タンクトップ", "Tシャツ", "ブラウス", "ポロシャツ", "シャツ", "スウェット", "パーカー", "カーディガン", "ニットセーター", "ワンピース","ショーツ", "パンツ", "ジーンズ", "レギンス", "スカート", "オーバーオール","スニーカー", "サンダル", "ブーツ", "パンプス", "フラットシューズ", "ローファー", "革靴","ネックレス", "ブレスレット", "ピアス", "キャップ", "リング", "ヘアアクセサリー", "ネクタイ", "ベルト", "バック", "その他"], {include_blank: 'サブカテゴリーを選択 ▾'}, class: 'form-control', id: "small-category-select" %>
 					</div>
 
 					<div class="mb-3">
@@ -77,7 +77,7 @@
 					</div>
 
 					<div class="mb-3">
-						<%= f.select :size, ['M','L'], {include_blank: 'サイズを選択 ▾'}, class: 'form-control' %>
+						<%= f.select :size, ['XXS','XS','S','M','L','XL','XXL','その他'], {include_blank: 'サイズを選択 ▾'}, class: 'form-control' %>
 					</div>
 
 					<div class="mb-3">
@@ -91,7 +91,7 @@
                             </div>
 
                             <div class="col-6">
-                                <%= f.submit "投稿する", data: { disable_with: "投稿中..." }, class: "btn col-12 submit-btn" %>
+                                <%= f.submit "登録する", data: { disable_with: "登録中..." }, class: "btn col-12 submit-btn" %>
                             </div>
                         </div>
                     </div>
@@ -157,6 +157,7 @@
 
             $.ajax({
                 url: '/realtime_selected_value',
+                method: 'POST',
                 data: { selected_value: selectedValue },
                 success: function(response) {
                     smallCategorySelect.empty();
@@ -168,38 +169,7 @@
                         }
                     } else {
                         var default_options = [
-                            'ジャケット',
-                            'コート',
-                            'ピーコート',
-                            'ダウンジャケット',
-                            'レザージャケット',
-                            'ウインドブレーカー',
-                            'カーディガン',
-                            'Tシャツ',
-                            'シャツ',
-                            'ブラウス',
-                            'ポロシャツ',
-                            'ニットセーター',
-                            'パーカー',
-                            'ジーンズ',
-                            'パンツ',
-                            'ショートパンツ',
-                            'スカート',
-                            'レギンス',
-                            'ショーツ',
-                            'スカート',
-                            'スニーカー',
-                            'パンプス',
-                            'サンダル',
-                            'ブーツ',
-                            'フラットシューズ',
-                            '革靴',
-                            'ネックレス',
-                            'ブレスレット',
-                            'ピアス',
-                            'リング',
-                            'ヘアアクセサリー',
-                            'その他',
+                            "ベスト", "ジャケット", "トラックジャケット", "MA-1", "パーカー", "レザージャケット", "ウインドブレーカー", "ダウンジャケット", "コート", "ピーコート","タンクトップ", "Tシャツ", "ブラウス", "ポロシャツ", "シャツ", "スウェット", "パーカー", "カーディガン", "ニットセーター", "ワンピース","ショーツ", "パンツ", "ジーンズ", "レギンス", "スカート", "オーバーオール","スニーカー", "サンダル", "ブーツ", "パンプス", "フラットシューズ", "ローファー", "革靴","ネックレス", "ブレスレット", "ピアス", "キャップ", "リング", "ヘアアクセサリー", "ネクタイ", "ベルト", "バック", "その他",
                         ];
                         for (var i = 0; i < default_options.length; i++) {
                             var option = $('<option>').text(default_options[i]);

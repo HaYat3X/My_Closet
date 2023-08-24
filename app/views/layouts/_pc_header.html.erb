@@ -12,7 +12,7 @@
             <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}")  %>
                 <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
                     <div class="input-group">
-                        <%= f.text_field :search, class: "form-control", placeholder: "search", required: true, id: "search" %>
+                        <%= f.text_field :search, class: "form-control", placeholder: "search", required: true %>
 
                         <%= f.button class: "btn bg-white btn-white", type: :submit do %>
                             <i class="bi bi-search"></i>
@@ -38,7 +38,7 @@
             <% elsif current_page?("/closet/list") || current_page?("/closet/show/#{params[:id]}") || current_page?("/closet/search") || current_page?("/closet/new") || current_page?("/closet/edit/#{params[:id]}") %>
                 <%= form_with(url: "/closet/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
                     <div class="input-group">
-                        <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+                        <%= f.text_field :search, class: "form-control", placeholder: "search", required: true %>
 
                         <%= f.button class: "btn bg-white btn-white", type: :submit do %>
                             <i class="bi bi-search"></i>
@@ -107,17 +107,3 @@
         </div>
     </div>
 </nav>
-
-<script>
-    $(function(){
-        $("#search").on("invalid", function(e){
-            if ( e.currentTarget.validity.valueMissing ) {
-                this.setCustomValidity("検索キーワードを入力してください。");
-            }
-        }).on("input",function(){
-            this.blur();
-            this.setCustomValidity("");
-            this.focus();
-        });
-    });
-</script>

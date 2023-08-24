@@ -64,7 +64,7 @@
                                 <h4 class="fw-bold text-center mt-5">アウターアイテムがまだ登録されていません。</h4>
                             <% else %>
                                 <% @closets_outer.each do |c| %>
-                                    <div class="col-lg-3 mt-1">
+                                    <div class="flex mt-1">
                                         <%= link_to "/closet/show/#{c.id}" do %>
                                             <%= image_tag c.photograph.url(:forced_size), class: "closet-image" %>
                                         <% end %>
@@ -85,7 +85,7 @@
                                 <h4 class="fw-bold text-center mt-5">トップスアイテムがまだ登録されていません。</h4>
                             <% else %>
                                 <% @closets_tops.each do |closet| %>
-                                    <div class="col-lg-3 mt-1">
+                                    <div class="flex mt-1">
                                         <%= link_to "/closet/show/#{closet.id}" do %>
                                             <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
                                         <% end %>
@@ -106,7 +106,7 @@
                                 <h4 class="fw-bold text-center mt-5">ボトムスアイテムがまだ登録されていません。</h4>
                             <% else %>
                                 <% @closets_bottoms.each do |closet| %>
-                                    <div class="col-lg-3 mt-1">
+                                    <div class="flex mt-1">
                                         <%= link_to "/closet/show/#{closet.id}" do %>
                                             <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
                                         <% end %>
@@ -127,7 +127,7 @@
                                 <h4 class="fw-bold text-center mt-5">シューズアイテムがまだ登録されていません。</h4>
                             <% else %>
                                 <% @closets_shoes.each do |closet| %>
-                                    <div class="col-lg-3 mt-1">
+                                    <div class="flex mt-1">
                                         <%= link_to "/closet/show/#{closet.id}" do %>
                                             <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
                                         <% end %>
@@ -148,7 +148,7 @@
                                 <h4 class="fw-bold text-center mt-5">その他のアイテムがまだ登録されていません。</h4>
                             <% else %>
                                 <% @closets_other.each do |closet| %>
-                                    <div class="col-lg-3 mt-1">
+                                    <div class="flex mt-1">
                                         <%= link_to "/closet/show/#{closet.id}" do %>
                                             <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
                                         <% end %>

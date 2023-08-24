@@ -1,37 +1,59 @@
 #faq_questions {
-    // * スマートフォン
-    @media (max-width: 768px) {}
-    // * タブレット
-    @media (min-width: 768px) and (max-width: 1280px) {}
-    // * PC（大）
-    @media (min-width: 1280px) {
-        .tab-menu {
-            .active {
-                background-color: #4B709A;
-                color: #FFFFFF;
-                border: none;
-                border-radius: 5px;
-            }
-            a {
-                border-bottom: 3px solid #333333;
-                color: #333333;
-            }
+    // ! 全サイズ共通
+    // * 質問一覧画面
+    .list-content {
+        // margin-top: 45px;
+        // margin-bottom: 150px;
+        .tab-menu.nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
         }
+        .tab-menu.nav .nav-item {
+            flex: 1;
+            padding: 0;
+        }
+        .tab-menu.nav .nav-link {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            border: 2px solid #333333;
+            box-sizing: border-box;
+            border-radius: 5px;
+            color: #333333;
+        }
+        .tab-menu.nav .nav-link.active {
+            background-color: #4B709A;
+            color: #FFFFFF;
+            border: 2px solid #4B709A;
+            box-sizing: border-box;
+        }
+    }
+    // * スマートフォン
+    @media (max-width: 768px) {
+        // ? 質問一覧画面
         .list-content {
-            width: 1014px;
-            margin-top: 30px;
+            padding: 0 10px;
             .question-area {
-                .question_image {
-                    width: 210px;
-                    height: 280px;
-                    object-fit: cover;
-                    border-radius: 10px 0 0 10px;
+                width: 100%;
+                .flex {
+                    width: 100%;
+                    margin-bottom: 10px;
                 }
-                .question-area {
+                .left-content {
+                    width: 42%;
+                    img {
+                        width: 100%;
+                        height: auto;
+                        object-fit: cover;
+                        border-radius: 10px 0 0 10px;
+                    }
+                }
+                .right-content {
+                    width: 58%;
                     background-color: #ffffff8b;
-                    width: 280px;
                     border-radius: 0 10px 10px 0;
-                    padding: 18px 0;
+                    padding: 18.5px 0;
                     .user-area {
                         padding: 0 14.5px;
                         .question-user-image {
@@ -51,17 +73,21 @@
                         }
                     }
                     .question-information {
-                        padding: 0 29px;
+                        padding: 0 30px;
                         font-size: 15px;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
                         text-align: center;
-                        height: 175px;
+                        height: 100px;
                     }
-                    .answer {
-                        margin: 0 22px;
+                    .answer-area {
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: flex-end;
+                        height: 100px;
+                        margin: 0 14.5px;
                         img {
                             width: 18px;
                             height: 18px;
@@ -69,12 +95,102 @@
                         }
                         small {
                             font-size: 16px;
+                            text-align: center;
                         }
                     }
                 }
             }
-            .page {
-                margin-top: 50px;
+        }
+    }
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 1280px) {}
+    // * PC（大）
+    @media (min-width: 1280px) {
+        // ? 質問一覧画面
+        .list-content {
+            .tab-menu.nav {
+                width: 400px;
+            }
+            .tab-menu.nav .nav-link {
+                font-size: 16px;
+            }
+            width: 1014px;
+            .flex {
+                width: 50%;
+                float: left;
+                margin-bottom: 10px;
+                padding-right: 20px;
+            }
+            .flex:nth-child(even) {
+                padding-right: 0;
+            }
+            .question-area {
+                width: 100%;
+                .left-content {
+                    width: 42%;
+                    img {
+                        width: 100%;
+                        height: auto;
+                        object-fit: cover;
+                        border-radius: 10px 0 0 10px;
+                    }
+                }
+                .right-content {
+                    width: 58%;
+                    background-color: #ffffff8b;
+                    border-radius: 0 10px 10px 0;
+                    padding: 18.5px 0;
+                    .user-area {
+                        padding: 0 15.5px;
+                        padding-top: 3px;
+                        .question-user-image {
+                            width: 45px;
+                            height: 45px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            margin-right: 10px;
+                        }
+                        .user-information {
+                            h5 {
+                                font-size: 16px;
+                            }
+                            small {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                    .question-information {
+                        padding: 0 30px;
+                        font-size: 15px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        height: 170px;
+                    }
+                    .answer-area {
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: flex-end;
+                        margin: 0 14.5px;
+                        img {
+                            width: 18px;
+                            height: 18px;
+                            object-fit: cover;
+                            margin-right: 2px;
+                        }
+                        small {
+                            font-size: 16px;
+                            display: flex;
+                            align-items: center;
+                            height: 20px;
+                        }
+                    }
+                    .page {
+                        margin-top: 50px;
+                    }
+                }
             }
         }
         .new-edit-content {

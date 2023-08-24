@@ -1,66 +1,169 @@
 // ! postsフォルダのレイアウト （edit, list, new, show）
 #closet_posts {
     // ! 全サイズ共通
+    // * クローゼット一覧ページの設定
+    .list-content {
+        margin-top: 60px;
+        margin-bottom: 150px;
+        .closet-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    }
+    // * クローゼット投稿、編集ページの設定
+    .new-edit-content {
+        margin-top: 45px;
+        margin-bottom: 150px;
+        h4 {
+            font-size: 28px;
+            margin-bottom: 60px;
+        }
+        .modal-area {
+            .modal-body {
+                background-color: #333333;
+            }
+            .post-area {
+                background-color: #333333;
+                .submit-btn {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                }
+            }
+        }
+        .modal-container {
+            position: relative;
+        }
+        #overlay {
+            position: absolute;
+            top: 0;
+            opacity: .6;
+        }
+        .overlay img {
+            width: 189px;
+            height: 262px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
+            border-radius: 10px;
+            height: 50px;
+            background-color: #FFFFFF;
+            opacity: .5;
+        }
+        select {
+            border-radius: 10px;
+            height: 50px;
+            background-color: #FFFFFF;
+            opacity: .5;
+        }
+        .item {
+            border: none;
+            background-color: #CBC5C1;
+        }
+        .cancel-btn {
+            color: #4B709A;
+            border: 2px solid #4B709A;
+            border-radius: 10px;
+        }
+        .submit-btn {
+            background-color: #4B709A;
+            border: 2px solid #4B709A;
+            color: #FFFFFF;
+            border-radius: 10px;
+        }
+    }
     // * スマートフォン （小）
     @media (max-width: 768px) {
-        // ? PC用のヘッダーは表示しない
-        .pc-header {
-            display: none;
-        }
-        // ? PCのサイドバーは表示しない
-        .pc-sidebar {
-            display: none;
-        }
-        // ? PCのエラーメッセージは表示しない
-        .pc_error_msg {
-            display: none;
-        }
-        // ?モバイルサイドバーのレイアウト設定
-        .mobile_header {
-            .tablet-search-form {
-                display: none;
-            }
-            img {
-                width: 40%;
-            }
-            .navbar-toggler {
-                background-color: #ffffff;
-            }
-            .icon {
-                background-color: #fff;
-            }
-            .sidebar {
-                width: 80%;
-                transition: opacity 1.0s ease;
-            }
-        }
-        // ? SNS一覧ページの設定
+        // ? クローゼット一覧ページの設定
         .list-content {
-            margin: 100px 1px;
-            .sns-image {
-                width: 100%;
-                height: 190px;
-                object-fit: cover;
+            .tab-menu.nav {
+                display: flex;
+                justify-content: space-between;
+                padding: 0;
             }
-            .user-area {
-                display: none;
+            .tab-menu.nav .nav-item {
+                flex: 1;
+                padding: 0;
             }
-            .form-check-label {
-                margin-bottom: 10px;
+            .tab-menu.nav .nav-link {
+                display: block;
+                text-align: center;
+                padding: 13px;
+                background-color: #ffffffae;
+                color: #333333;
+                font-size: 14px;
+            }
+            .tab-menu.nav .nav-link.active {
+                background-color: #4B709A;
+                color: #FFFFFF;
+            }
+            padding: 0 3px;
+            .flex {
+                width: 33.3%;
+                float: left;
+            }
+        }
+        // ? クローゼット投稿、編集画面
+        .new-edit-content {
+            padding: 0 20px;
+            width: 350px;
+            label {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            .coordinate-modal {
+                padding: 150px 10px;
             }
         }
     }
     // * タブレット
     @media (min-width: 768px) and (max-width: 1280px) {
-        // ? SNS一覧ページの設定
-        .list-content {}
+        // ? クローゼット一覧ページの設定
+        .list-content {
+            .tab-menu.nav {
+                display: flex;
+                justify-content: space-between;
+                padding: 0;
+            }
+            .tab-menu.nav .nav-item {
+                flex: 1;
+                padding: 0;
+            }
+            .tab-menu.nav .nav-link {
+                display: block;
+                text-align: center;
+                padding: 13px;
+                background-color: #ffffffae;
+                color: #333333;
+                font-size: 14px;
+            }
+            .tab-menu.nav .nav-link.active {
+                background-color: #4B709A;
+                color: #FFFFFF;
+            }
+            width: 760px;
+            .flex {
+                width: 25%;
+                float: left;
+            }
+        }
+        // ? クローゼット投稿、編集画面
+        .new-edit-content {
+            width: 550px;
+            label {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            .coordinate-modal {
+                padding: 200px 50px;
+            }
+        }
     }
     // * PC（大）
     @media (min-width: 1280px) {
         // ? クローゼット一覧ページの設定
         .list-content {
-            margin-top: 60px;
-            margin-bottom: 150px;
             width: 973px;
             .tab-menu.nav {
                 display: flex;
@@ -74,7 +177,7 @@
             .tab-menu.nav .nav-link {
                 display: block;
                 text-align: center;
-                padding: 12px;
+                padding: 13px;
                 background-color: #ffffffae;
                 color: #333333;
                 font-size: 14px;
@@ -84,13 +187,8 @@
                 color: #FFFFFF;
             }
             .flex {
-                width: 25%;
+                width: 20%;
                 float: left;
-            }
-            .closet-image {
-                width: 100%;
-                height: auto;
-                object-fit: cover;
             }
             .page {
                 margin-top: 50px;
@@ -98,70 +196,13 @@
         }
         // ? クローゼット投稿、編集ページの設定
         .new-edit-content {
-            margin-top: 45px;
-            margin-bottom: 150px;
             width: 793px;
-            h4 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            .container {
-                position: relative;
-            }
-            #overlay {
-                position: absolute;
-                top: 0;
-                opacity: .6;
-            }
-            .overlay img {
-                width: 189px;
-                height: 262px;
-                object-fit: cover;
-                border-radius: 10%;
-            }
-            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
-            select {
-                border-radius: 10px;
-                height: 50px;
-                background-color: #FFFFFF;
-                opacity: .5;
-            }
             label {
                 font-size: 15px;
                 margin-bottom: 15px;
             }
-            .item {
-                border: none;
-                background-color: #CBC5C1;
-            }
-            .modal-area {
-                .modal-body {
-                    background-color: #333333;
-                    padding: 200px 0;
-                }
-            }
-            .post-area {
-                background-color: #333333;
-                .submit-btn {
-                    background-color: #4B709A;
-                    color: #FFFFFF;
-                }
-            }
-            .cancel-btn {
-                color: #4B709A;
-                border: 2px solid #4B709A;
-                border-radius: 10px;
-            }
-            .submit-btn {
-                background-color: #4B709A;
-                border: 2px solid #4B709A;
-                color: #FFFFFF;
-                border-radius: 10px;
+            .coordinate-modal {
+                padding: 200px 50px;
             }
         }
         // ? クローゼット詳細ページの設定
