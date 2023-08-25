@@ -116,7 +116,7 @@
         </li>
 
         <li class="nav-item">
-            <% if current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") %>
+            <% if current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") || current_page?("/faq/answer/new/#{params[:id]}") || current_page?("/faq/answer/edit/#{params[:id]}") %>
                 <a href="/faq/question/list" class="d-flex align-items-center active">
                     <img src="/assets/icons/icn_advice_w.png" alt="">
                     コーディネートQ&A
