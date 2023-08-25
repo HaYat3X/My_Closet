@@ -11,4 +11,5 @@ class Answer < ApplicationRecord
 
     # ! バリデーション
     validates :answer, presence: true
+    validates :photograph, presence: true
 end
