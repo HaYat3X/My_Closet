@@ -38,7 +38,7 @@ body {
     background-color: #222222;
 }
 
-// ? サイドバーの設定
+// ! サイドバーの設定
 .sidebar {
     overflow-y: scroll;
     background-color: #CBC5C1;
@@ -59,7 +59,7 @@ body {
     }
 }
 
-// * フッターの設定
+//! フッターの設定
 .footer {
     padding: 20px 40px;
     background-color: #222222;
@@ -71,31 +71,31 @@ body {
     width: 100%;
 }
 
-// * アラートの設定
+// ! アラートメッセージの設定
 .alert {
     padding: 7px;
     margin: 0;
 }
 
-// ! スマートフォン
+// ! モバイル
 @media (max-width: 768px) {
-    // * PC用のヘッダーは表示しない
+    // * PC用のヘッダーを非表示
     .pc-header {
         display: none;
     }
-    // * PCのサイドバーは表示しない
+    // * PCのサイドバーの非表示
     .pc-sidebar {
         display: none;
     }
-    // ? コンテンツの幅の設定
+    // * コンテンツの幅の設定
     .main-content {
         width: 100%;
     }
-    // * タブレットのヘッダーは表示しない
+    // * タブレットのヘッダーの非表示
     .tablet-header {
         display: none;
     }
-    // ? サイドバーの幅の設定
+    // * サイドバーを非表示
     .side-content {
         display: none;
     }
@@ -103,7 +103,7 @@ body {
     .content {
         margin-top: 70px;
     }
-    // * モバイルのヘッダーのレイアウト設定
+    // * モバイルのヘッダーのレイアウト
     .mobile-header {
         height: 70px;
         display: flex;
@@ -208,29 +208,31 @@ body {
 
 // * タブレット
 @media (min-width: 768px) and (max-width: 1280px) {
-    // ? headerの設定
+    // * headerの設定
     .header {
         height: 90px;
     }
-    // ? スマホのヘッダーの高さが70pxなのでその分ひく
+    // * コンテンツの高さを設定
     .content {
         margin-top: 90px;
     }
-    // ? PC用のヘッダーは表示しない
+    // * PCのヘッダーの非表示
     .pc-header {
         display: none;
     }
-    // ? サイドバーの幅の設定
+    // * サイドコンテンツの非表示
     .side-content {
         display: none;
     }
+    // * モバイルのヘッダーを非表示
     .mobile-header {
         display: none;
     }
-    // ? コンテンツの幅の設定
+    // * コンテンツの幅の設定
     .main-content {
         width: 100%;
     }
+    // * タブレットのヘッダーの設定
     .tablet-header {
         padding: 14px 20px;
         .logo-area {
@@ -311,22 +313,23 @@ body {
 
 // * PC（大）
 @media (min-width: 1280px) {
-    // ? headerの設定
+    // * headerの設定
     .header {
         height: 90px;
     }
-    // ? モバイルのヘッダーは表示しない
+    // * モバイルのヘッダーの非表示
     .mobile-header {
         display: none;
     }
+    // * タブレットハッダーのの非表示
     .tablet-header {
         display: none;
     }
-    // ? スマホのヘッダーの高さが70pxなのでその分ひく
+    // * コンテンツの高さを設定
     .content {
         margin-top: 90px;
     }
-    // ? PCのサイドバーのレイアウト設定
+    // * PCのサイドバーのレイアウト設定
     .pc-sidebar {
         ul {
             .nav-item {
@@ -363,15 +366,15 @@ body {
             font-size: 18px;
         }
     }
-    // ? サイドバーの幅の設定
+    // * サイドバーの幅の設定
     .side-content {
         width: 267px;
     }
-    // ? コンテンツの幅の設定
+    // * コンテンツの幅の設定
     .main-content {
         width: calc(100vw - 267px);
     }
-    // ? PCヘッダーの設定
+    // * PCヘッダーの設定
     .pc-header {
         .alert-btn {
             position: relative;
