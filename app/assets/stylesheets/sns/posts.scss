@@ -219,6 +219,9 @@
                     font-size: 14px;
                 }
             }
+            .pc-tablet {
+                display: none;
+            }
         }
         // ? SNS投稿、編集ページの設定
         .new-edit-content {
@@ -268,6 +271,9 @@
                 .user-name {
                     font-size: 14px;
                 }
+            }
+            .mobile {
+                display: none;
             }
         }
         // ? SNS投稿、編集ページの設定
@@ -319,6 +325,9 @@
                 .user-name {
                     font-size: 16px;
                 }
+            }
+            .mobile {
+                display: none;
             }
         }
         // ? SNS投稿、編集ページの設定
