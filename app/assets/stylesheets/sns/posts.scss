@@ -150,15 +150,15 @@
                 #scrollContainer {
                     overflow-y: scroll;
                 }
-                #scrollContainer::-webkit-scrollbar {
-                    width: 10px;
-                }
-                #scrollContainer::-webkit-scrollbar-track {
-                    background-color: var(--bg);
-                }
-                #scrollContainer::-webkit-scrollbar-thumb {
-                    background-color: #4B709A;
-                }
+                // #scrollContainer::-webkit-scrollbar {
+                //     width: 10px;
+                // }
+                // #scrollContainer::-webkit-scrollbar-track {
+                //     background-color: var(--bg);
+                // }
+                // #scrollContainer::-webkit-scrollbar-thumb {
+                //     background-color: #4B709A;
+                // }
                 .image-mark {
                     position: absolute;
                     top: 5px;
@@ -202,7 +202,7 @@
             border-radius: 10px;
         }
     }
-    // * スマホ
+    // * モバイル
     @media (max-width: 768px) {
         // ? SNS一覧ページの設定
         .list-content {
@@ -303,7 +303,7 @@
             }
         }
     }
-    // * PC（大）
+    // * PC
     @media (min-width: 1280px) {
         // ? SNS一覧ページの設定
         .list-content {
