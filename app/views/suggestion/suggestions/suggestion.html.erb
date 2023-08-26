@@ -16,7 +16,7 @@
             <div class="suggest-content mx-auto">
                 <%# ! 提案データがあるか判定 %>
                 <% if Suggest.exists?(user_id: current_user.id) %>
-                    <div class="row g-1">
+                    <div class="row g-1 suggest-area">
                         <% @suggest_imgs.each do |suggest_img| %>
                             <div class="flex">
                                 <%= image_tag suggest_img, class: "sns-image" %>
@@ -53,7 +53,7 @@
                                     <%= f.radio_button :size, 1, id: "just-size", required: true %>
 
                                     <label for="just-size">
-                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
                                     </label>
                                 </div>
                             </div>
@@ -75,11 +75,11 @@
                                     <%= f.radio_button :eye_color, "茶色っぽい", id: "radio2", required: true %>
 
                                     <label for="radio2">
-                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
                                     </label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class="col-6 mt-2">
                                     <%= f.radio_button :eye_color, "黒っぽい", id: "radio3", required: true %>
 
                                     <label for="radio3">
@@ -91,11 +91,11 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6">
+                                <div class="col-6 mt-2">
                                     <%= f.radio_button :eye_color, "茶色っぽい", id: "radio4", required: true %>
 
                                     <label for="radio4">
-                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
                                     </label>
                                 </div>
                             </div>
@@ -117,11 +117,11 @@
                                     <%= f.radio_button :hair_color, "茶色っぽい", id: "radio6", required: true %>
 
                                     <label for="radio6">
-                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
                                     </label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class="col-6 mt-2">
                                     <%= f.radio_button :hair_color, "黒っぽい", id: "radio7", required: true %>
 
                                     <label for="radio7">
@@ -133,11 +133,11 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6">
+                                <div class="col-6 mt-2">
                                     <%= f.radio_button :hair_color, "茶色っぽい", id: "radio8", required: true %>
 
                                     <label for="radio8">
-                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
                                     </label>
                                 </div>
                             </div>
@@ -159,11 +159,11 @@
                                     <%= f.radio_button :skin_color, "茶色っぽい", id: "radio10", required: true %>
 
                                     <label for="radio10">
-                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
                                     </label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class="col-6 mt-2">
                                     <%= f.radio_button :skin_color, "黒っぽい", id: "radio11", required: true %>
 
                                     <label for="radio11">
@@ -175,18 +175,18 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6">
+                                <div class="col-6 mt-2">
                                     <%= f.radio_button :skin_color, "茶色っぽい", id: "radio12", required: true %>
 
                                     <label for="radio12">
-                                        <img src="/assets/suggest/test2.png" alt="" class="select-img">
+                                        <img src="/assets/suggest/test1.png" alt="" class="select-img">
                                     </label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="question">
-                            <p>Q5、この画像を評価してください。</p>
+                            <p>Q5、このコーディネートがどのくらい好きか評価してください。</p>
 
                             <div class="text-center">
                                 <img src="/assets/suggest/test1.png" class="evaluation" alt="">
@@ -200,7 +200,7 @@
                         </div>
 
                         <div class="question">
-                            <p>Q6、この画像を評価してください。</p>
+                            <p>Q6、このコーディネートがどのくらい好きか評価してください。</p>
 
                             <div class="text-center">
                                 <img src="/assets/suggest/test1.png" class="evaluation" alt="">
@@ -214,7 +214,7 @@
                         </div>
 
                         <div class="question">
-                            <p>Q7、この画像を評価してください。</p>
+                            <p>Q7、このコーディネートがどのくらい好きか評価してください。</p>
 
                             <div class="text-center">
                                 <img src="/assets/suggest/test1.png" class="evaluation" alt="">
@@ -228,7 +228,7 @@
                         </div>
 
                         <div class="question">
-                            <p>Q8、あなたが、服に宛てられる予算はいくらですか？</p>
+                            <p>Q8、あなたが、服に宛てる予算はいくらくらいですか？</p>
 
                             <%= f.select :total_price, [['1. 総額10000円以下', '1'], ['2. 総額10000円以上〜15000円以下', '2'], ['3. 総額15000円以上〜20000円以下', '3'], ['4. 総額20000円以上〜25000円以下', '4'], ['5. 総額25000円以上', '5']], { include_blank: '評価してください ▾' }, class: 'form-control', required: true %>
 

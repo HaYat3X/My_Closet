@@ -7,6 +7,8 @@
 
         <%# ! contents %>
         <div class="main-content">
+            <%= render "layouts/error" %>
+
             <div class="search_content mx-auto">
                 <% if @search_result.count == 0 %>
                     <h4 class="fw-bold text-center">検索結果：</h4>

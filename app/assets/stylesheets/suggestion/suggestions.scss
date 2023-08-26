@@ -2,8 +2,9 @@
 #suggestion_suggestions {
     // * 全サイズ共通
     .suggest-content {
-        margin-top: 25px;
-        margin-bottom: 150px;
+        .suggest-area {
+            margin: 25px auto 150px;
+        }
         .flex {
             float: left;
         }
@@ -13,8 +14,7 @@
             object-fit: cover;
         }
         form {
-            margin: 0 auto;
-            margin-top: 100px;
+            margin: 100px auto 150px;
             .question {
                 margin-bottom: 100px;
             }
@@ -108,24 +108,31 @@
         }
         // ? SNS一覧ページの設定
         .suggest-content {
+            .suggest-area {
+                padding: 0 3px;
+            }
             .flex {
                 width: 50%;
             }
             form {
                 width: 310px;
-                padding: 0 20px;
+                .flex {
+                    width: 50%;
+                }
                 p {
                     font-size: 16px;
                     font-weight: 600;
                     margin-bottom: 40px;
                 }
                 .select-img {
-                    width: 150px;
-                    height: 150px;
+                    width: 100%;
+                    height: 151px;
+                    object-fit: cover;
                 }
                 .evaluation {
                     width: 310px;
                     height: 413px;
+                    object-fit: cover;
                 }
             }
         }
@@ -185,19 +192,23 @@
         }
         // ? 提案ページの設定
         .suggest-content {
-            width: 760px;
+            .suggest-area {
+                width: 760px;
+            }
             .flex {
                 width: 33.3%;
             }
             form {
                 width: 550px;
                 .select-img {
-                    width: 270px;
-                    height: 270px;
+                    width: 100%;
+                    height: 271px;
+                    object-fit: cover;
                 }
                 .evaluation {
                     width: 350px;
                     height: 467px;
+                    object-fit: cover;
                 }
             }
         }
@@ -286,19 +297,23 @@
         }
         // ? 提案ページの設定
         .suggest-content {
-            width: 1014px;
+            .suggest-area {
+                width: 1014px;
+            }
             .flex {
                 width: 25%;
             }
             form {
                 width: 550px;
                 .select-img {
-                    width: 270px;
-                    height: 270px;
+                    width: 100%;
+                    height: 271px;
+                    object-fit: cover;
                 }
                 .evaluation {
                     width: 350px;
                     height: 467px;
+                    object-fit: cover;
                 }
             }
         }
