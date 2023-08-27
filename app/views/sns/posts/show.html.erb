@@ -7,10 +7,12 @@
 
         <%# ! contents %>
         <div class="main-content">
+            <%= render "layouts/error" %>
+
             <div class="show-content mx-auto">
-                <div class="row g-0">
-                    <div class="col-lg-6 left-content">
-                        <%= image_tag @sns.photograph.url, class: "sns-show-img" %>
+                <div class="d-flex-origin">
+                    <div class="left-content">
+                        <%= image_tag @sns.photograph.url(:forced_size), class: "sns-show-img" %>
 
                         <div class="d-flex align-items-center user-area">
                             <%= link_to "/profile/show/#{@sns.user.id}" do %>
@@ -54,23 +56,9 @@
                                 <%= SocialLike.where(social_id: @sns.id).count %>人のユーザがいいねしました！
                             </div>
                         </div>
-
-                        <div class="himself_area row">
-                            <% if user_signed_in? %>
-                                <% if current_user.id == @sns.user.id  %>
-                                    <div class="col-lg-6">
-                                        <%= link_to "コーディネートを削除", "/sns/delete/#{@sns.id}", method: :delete, class: "delete-btn btn col-12" %>
-                                    </div>
-                                    
-                                    <div class="col-lg-6">
-                                        <%= link_to "コーディネートを編集", "/sns/edit/#{@sns.id}", class: "edit-btn btn col-12" %>
-                                    </div>
-                                <% end %>
-                            <% end %>
-                        </div>
                     </div>
 
-                    <div class="col-lg-6 right-content">
+                    <div class="right-content">
                         <h4 class="title fw-bold mb-0"><%= @sns.title %></h4>
                         
                         <div class="message">
@@ -85,52 +73,52 @@
                             ＃<%= @sns.tag %>
                         </div>
 
-                        <div class="row g-2 item-area">
-                            <label class="fw-bold">着用アイテム</label>
-                            <div class="col-lg-4">
+                        <div class="item-area row g-2">
+                            <label class="fw-bold">着用アイテム</label><br>
+                            <div class="flex">
                                 <% if @item1 %>
                                     <%= link_to "/closet/show/#{@item1.id}" do %>
-                                        <%= image_tag @item1.photograph.url, class: "item-img" %>
+                                        <%= image_tag @item1.photograph.url(:forced_size), class: "item-img" %>
                                     <% end %>
                                 <% end %>
                             </div>
 
-                            <div class="col-lg-4">
+                            <div class="flex">
                                 <% if @item2 %>
                                     <%= link_to "/closet/show/#{@item2.id}" do %>
-                                        <%= image_tag @item2.photograph.url, class: "item-img" %>
+                                        <%= image_tag @item2.photograph.url(:forced_size), class: "item-img" %>
                                     <% end %>
                                 <% end %>
                             </div>
 
-                            <div class="col-lg-4">
+                            <div class="flex">
                                 <% if @item3 %>
                                     <%= link_to "/closet/show/#{@item3.id}" do %>
-                                        <%= image_tag @item3.photograph.url, class: "item-img" %>
+                                        <%= image_tag @item3.photograph.url(:forced_size), class: "item-img" %>
                                     <% end %>
                                 <% end %>
                             </div>
 
-                            <div class="col-lg-4 mt-2">
+                            <div class="flex mt-2">
                                 <% if @item4 %>
                                     <%= link_to "/closet/show/#{@item4.id}" do %>
-                                        <%= image_tag @item4.photograph.url, class: "item-img" %>
+                                        <%= image_tag @item4.photograph.url(:forced_size), class: "item-img" %>
                                     <% end %>
                                 <% end %>
                             </div>
 
-                            <div class="col-lg-4 mt-2">
+                            <div class="flex mt-2">
                                 <% if @item5 %>
                                     <%= link_to "/closet/show/#{@item5.id}" do %>
-                                        <%= image_tag @item5.photograph.url, class: "item-img" %>
+                                        <%= image_tag @item5.photograph.url(:forced_size), class: "item-img" %>
                                     <% end %>
                                 <% end %>
                             </div>
 
-                            <div class="col-lg-4 mt-2">
+                            <div class="flex mt-2">
                                 <% if @item6 %>
                                     <%= link_to "/closet/show/#{@item6.id}" do %>
-                                        <%= image_tag @item6.photograph.url, class: "item-img" %>
+                                        <%= image_tag @item6.photograph.url(:forced_size), class: "item-img" %>
                                     <% end %>
                                 <% end %>
                             </div>
@@ -138,8 +126,25 @@
                     </div>
                 </div>
 
+                <div class="himself-area row">
+                    <% if user_signed_in? %>
+                        <% if current_user.id == @sns.user.id  %>
+                            <div class="col-6">
+                                <%= link_to "コーディネートを削除", "/sns/delete/#{@sns.id}", method: :delete, class: "delete-btn btn col-12" %>
+                            </div>
+                                    
+                            <div class="col-6">
+                                <%= link_to "コーディネートを編集", "/sns/edit/#{@sns.id}", class: "edit-btn btn col-12" %>
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
+
                 <div class="back-btn">
-                    <a href="/" class="btn px-5 rounded-pill">&lt; 戻る</a>
+                    <a href="/" class="btn px-5 rounded-pill">
+                        <img src="/assets/icons/icn_back.png" alt="">
+                        戻る
+                    </a>
                 </div>
             </div>
         </div>

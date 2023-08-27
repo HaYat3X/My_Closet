@@ -7,6 +7,8 @@
 
         <%# ! contents %>
         <div class="main-content">
+            <%= render "layouts/error" %>
+
             <div class="search_content mx-auto">
                 <% if @search_result.count == 0 %>
                     <h4 class="fw-bold text-center">検索結果：</h4>
@@ -20,12 +22,11 @@
                     <div class="row g-1">
                         <% @search_result.each do |sns| %>
                             <div class="flex mt-1">
-
                                 <%= link_to "/sns/show/#{sns.id}" do %>
                                     <%= image_tag sns.photograph.url(:forced_size), class: "sns-image" %>
                                 <% end %>
 
-                                <div class="user-area">
+                                <div class="user-area pc-tablet">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center">
                                             <% if sns.user.avatar.present? %>
@@ -40,7 +41,7 @@
 
                                             <div class="ms-2">
                                                 <div class="fw-bold user-name">
-                                                    <%= sns.user.user_name %>
+                                                    <%= truncate(sns.user.user_name, length: 10) %>
                                                 </div>
 
                                                 <div class="user-height m-0">
@@ -53,29 +54,68 @@
                                             </div>
                                         </div>
 
-                                        <div class="mx-2">
-                                            <div class="like m-0 d-flex align-items-center">
-                                                <%# ?  いいねできるかどうか判定 %>
-                                                <% if user_signed_in? %>
-                                                    <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
-                                                        <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
-                                                            <img src="/assets/icons/icn_heart.png" alt="">
-                                                        <% end %>
-                                                    <% else %>
-                                                        <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                            <img src="/assets/icons/icn_not_heart.png" alt="">
-                                                        <% end %>
+                                        <div class="like m-0 d-flex align-items-center">
+                                            <%# ?  いいねできるかどうか判定 %>
+                                            <% if user_signed_in? %>
+                                                <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
+                                                    <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
+                                                        <img src="/assets/icons/icn_heart.png" alt="">
                                                     <% end %>
                                                 <% else %>
                                                     <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
                                                         <img src="/assets/icons/icn_not_heart.png" alt="">
-                                                    <% end %>
+                                                        <% end %>
                                                 <% end %>
+                                            <% else %>
+                                                <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
+                                                    <img src="/assets/icons/icn_not_heart.png" alt="">
+                                                <% end %>
+                                            <% end %>
 
-                                                <span class="number-of-likes align-self-center">
-                                                    <%= SocialLike.where(social_id: sns.id).count %>
-                                                </span>
+                                            <span class="number-of-likes align-self-center">
+                                                <%= SocialLike.where(social_id: sns.id).count %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="user-area mobile">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <% if sns.user.avatar.present? %>
+                                                <%= link_to "/profile/show/#{sns.user_id}" do %>
+                                                    <%= image_tag sns.user.avatar.url %>
+                                                <% end %>
+                                            <% else %>
+                                                <%= link_to "/profile/show/#{sns.user_id}" do %>
+                                                    <%= image_tag "/assets/user/avatar.png" %>
+                                                <% end %>
+                                            <% end %>
+
+                                            <div class="ms-2">
+                                                <div class="fw-bold user-name">
+                                                    <%= truncate(sns.user.user_name, length: 8) %>
+                                                </div>
                                             </div>
+                                        </div>
+
+                                        <div class="like m-0 d-flex align-items-center">
+                                            <%# ?  いいねできるかどうか判定 %>
+                                            <% if user_signed_in? %>
+                                                <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
+                                                    <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
+                                                        <img src="/assets/icons/icn_heart.png" alt="">
+                                                    <% end %>
+                                                <% else %>
+                                                    <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
+                                                        <img src="/assets/icons/icn_not_heart.png" alt="">
+                                                        <% end %>
+                                                <% end %>
+                                            <% else %>
+                                                <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
+                                                    <img src="/assets/icons/icn_not_heart.png" alt="">
+                                                <% end %>
+                                            <% end %>
                                         </div>
                                     </div>
                                 </div>

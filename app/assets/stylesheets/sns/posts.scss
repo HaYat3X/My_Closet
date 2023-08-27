@@ -69,6 +69,7 @@
             margin-top: 50px;
         }
     }
+    // * SNS投稿、編集ページ
     .new-edit-content {
         margin-top: 45px;
         margin-bottom: 150px;
@@ -150,15 +151,15 @@
                 #scrollContainer {
                     overflow-y: scroll;
                 }
-                #scrollContainer::-webkit-scrollbar {
-                    width: 10px;
-                }
-                #scrollContainer::-webkit-scrollbar-track {
-                    background-color: var(--bg);
-                }
-                #scrollContainer::-webkit-scrollbar-thumb {
-                    background-color: #4B709A;
-                }
+                // #scrollContainer::-webkit-scrollbar {
+                //     width: 10px;
+                // }
+                // #scrollContainer::-webkit-scrollbar-track {
+                //     background-color: var(--bg);
+                // }
+                // #scrollContainer::-webkit-scrollbar-thumb {
+                //     background-color: #4B709A;
+                // }
                 .image-mark {
                     position: absolute;
                     top: 5px;
@@ -202,7 +203,112 @@
             border-radius: 10px;
         }
     }
-    // * スマホ
+    // * SNS詳細ページ
+    .show-content {
+        margin-top: 45px;
+        margin-bottom: 150px;
+        .left-content {
+            width: 100%;
+            .sns-show-img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+            .user-area {
+                margin-top: 15px;
+                .user-img {
+                    width: 45px;
+                    height: 45px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-right: 10px;
+                }
+                h6 {
+                    font-size: 18px;
+                }
+                small {
+                    font-size: 12px;
+                }
+            }
+            .like-area {
+                margin-top: 30px;
+                img {
+                    width: 18px;
+                    height: 18px;
+                }
+                .number-of-like {
+                    font-size: 14px;
+                    margin-left: 10px;
+                }
+            }
+        }
+        .right-content {
+            width: 100%;
+            .title {
+                font-size: 22px;
+                padding: 20px 0;
+            }
+            .message {
+                font-size: 14px;
+                padding-top: 20px;
+                padding-bottom: 40px;
+            }
+            span {
+                font-size: 12px;
+                color: #333333;
+            }
+            .tag {
+                background-color: #222222;
+                color: #FFFFFF;
+                font-size: 14px;
+                margin: 20px 0;
+            }
+            .item-area {
+                margin-top: 50px;
+                label {
+                    font-size: 15px;
+                    margin-bottom: 10px;
+                }
+                .flex {
+                    width: 33.3%;
+                }
+                .item-img {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 10px;
+                    object-fit: cover;
+                }
+            }
+        }
+        .himself-area {
+            margin-top: 50px;
+            .delete-btn {
+                color: #4B709A;
+                border: 2px solid #4B709A;
+                border-radius: 10px;
+            }
+            .edit-btn {
+                background-color: #4B709A;
+                border: 2px solid #4B709A;
+                color: #FFFFFF;
+                border-radius: 10px;
+            }
+        }
+        .back-btn {
+            text-align: center;
+            margin-top: 125px;
+            a {
+                background-color: #4B709A;
+                font-size: 14px;
+                color: #FFFFFF;
+                img {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+    }
+    // * モバイル
     @media (max-width: 768px) {
         // ? SNS一覧ページの設定
         .list-content {
@@ -218,6 +324,9 @@
                 .user-name {
                     font-size: 14px;
                 }
+            }
+            .pc-tablet {
+                display: none;
             }
         }
         // ? SNS投稿、編集ページの設定
@@ -245,6 +354,29 @@
                 }
             }
         }
+        // ? SNS詳細ページ
+        .show-content {
+            .d-flex-origin {
+                display: block;
+            }
+            .left-content {
+                .user-area {
+                    padding: 0 20px;
+                }
+                .like-area {
+                    padding: 0 20px;
+                }
+            }
+            .right-content {
+                padding: 0 20px;
+                .title {
+                    margin-top: 50px;
+                }
+            }
+            .himself-area {
+                width: 100%;
+            }
+        }
     }
     // * タブレット
     @media (min-width: 768px) and (max-width: 1280px) {
@@ -268,6 +400,9 @@
                 .user-name {
                     font-size: 14px;
                 }
+            }
+            .mobile {
+                display: none;
             }
         }
         // ? SNS投稿、編集ページの設定
@@ -296,8 +431,24 @@
                 }
             }
         }
+        // ? SNS詳細ページ
+        .show-content {
+            width: 760px;
+            .d-flex-origin {
+                display: flex;
+            }
+            .left-content {
+                padding-right: 22.5px;
+            }
+            .right-content {
+                padding-left: 22.5px;
+            }
+            .himself-area {
+                width: 50%;
+            }
+        }
     }
-    // * PC（大）
+    // * PC
     @media (min-width: 1280px) {
         // ? SNS一覧ページの設定
         .list-content {
@@ -319,6 +470,9 @@
                 .user-name {
                     font-size: 16px;
                 }
+            }
+            .mobile {
+                display: none;
             }
         }
         // ? SNS投稿、編集ページの設定
@@ -347,102 +501,20 @@
                 }
             }
         }
-        // ? SNS詳細ページの設定
+        // ? SNS詳細ページ
         .show-content {
             width: 973px;
-            margin-top: 48px;
+            .d-flex-origin {
+                display: flex;
+            }
             .left-content {
                 padding-right: 22.5px;
-                .sns-show-img {
-                    width: 100%;
-                    height: 646px;
-                    object-fit: cover;
-                }
-                .user-area {
-                    margin-top: 16px;
-                    .user-img {
-                        width: 45px;
-                        height: 45px;
-                        object-fit: cover;
-                        border-radius: 50%;
-                        margin-right: 10px;
-                    }
-                    h6 {
-                        font-size: 18px;
-                    }
-                    small {
-                        font-size: 12px;
-                    }
-                }
-                .like-area {
-                    margin-top: 32px;
-                    img {
-                        width: 18px;
-                        height: 18px;
-                    }
-                    .number-of-like {
-                        font-size: 14px;
-                        margin-left: 10px;
-                    }
-                }
-                .himself_area {
-                    margin-top: 100px;
-                    .delete-btn {
-                        color: #4B709A;
-                        border: 2px solid #4B709A;
-                        border-radius: 10px;
-                    }
-                    .edit-btn {
-                        background-color: #4B709A;
-                        border: 2px solid #4B709A;
-                        color: #FFFFFF;
-                        border-radius: 10px;
-                    }
-                }
             }
             .right-content {
                 padding-left: 22.5px;
-                .title {
-                    font-size: 22px;
-                    padding: 20px 0;
-                }
-                .message {
-                    font-size: 14px;
-                    padding-top: 20px;
-                    padding-bottom: 40px;
-                }
-                span {
-                    font-size: 12px;
-                    color: #333333;
-                }
-                .tag {
-                    background-color: #222222;
-                    color: #FFFFFF;
-                    font-size: 14px;
-                    margin: 20px 0;
-                }
-                .item-area {
-                    margin-top: 50px;
-                    label {
-                        font-size: 14px;
-                        margin-bottom: 10px;
-                    }
-                    .item-img {
-                        width: 100%;
-                        height: 220px;
-                        border-radius: 10px;
-                        object-fit: cover;
-                    }
-                }
             }
-            .back-btn {
-                text-align: center;
-                margin-top: 125px;
-                margin-bottom: 140px;
-                a {
-                    background-color: #4B709A;
-                    color: #FFFFFF;
-                }
+            .himself-area {
+                width: 50%;
             }
         }
     }

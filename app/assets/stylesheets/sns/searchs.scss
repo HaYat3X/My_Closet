@@ -3,8 +3,11 @@
     // ! 全サイズ共通
     // ? 検索結果ページのUI設定
     .search_content {
-        margin-top: 45px;
+        margin-top: 25px;
         margin-bottom: 150px;
+        .flex {
+            float: left;
+        }
         .sns-image {
             width: 100%;
             height: auto;
@@ -71,13 +74,15 @@
                     font-size: 14px;
                 }
             }
+            .pc-tablet {
+                display: none;
+            }
         }
     }
     // * タブレット
     @media (min-width: 768px) and (max-width: 1280px) {
         // ? SNS検索ページの設定
         .search_content {
-            width: 760px;
             h4 {
                 font-size: 28px;
             }
@@ -90,6 +95,7 @@
             h5 {
                 font-size: 22px;
             }
+            width: 760px;
             .flex {
                 width: 33.3%;
             }
@@ -99,8 +105,11 @@
                     height: 35px;
                 }
                 .user-name {
-                    font-size: 16px;
+                    font-size: 14px;
                 }
+            }
+            .mobile {
+                display: none;
             }
         }
     }
@@ -108,7 +117,6 @@
     @media (min-width: 1280px) {
         // ? SNS検索ページの設定
         .search_content {
-            width: 1014px;
             h4 {
                 font-size: 28px;
             }
@@ -121,6 +129,7 @@
             h5 {
                 font-size: 22px;
             }
+            width: 1014px;
             .flex {
                 width: 25%;
             }
@@ -132,6 +141,9 @@
                 .user-name {
                     font-size: 16px;
                 }
+            }
+            .mobile {
+                display: none;
             }
         }
     }
