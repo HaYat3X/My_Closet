@@ -1,20 +1,105 @@
     // ! profilesフォルダのレイアウト （follower_list, follows_list）
     #profile_follows {
+        // ? フォロー中、フォロワーページ
+        .profile-cover {
+            width: 100%;
+            object-fit: cover;
+        }
+        .follow-content {
+            margin-top: 50px;
+            margin-bottom: 150px;
+            .tab-menu.nav {
+                display: flex;
+                justify-content: space-between;
+                padding: 0;
+            }
+            .tab-menu.nav .nav-item {
+                flex: 1;
+                padding: 0;
+            }
+            .tab-menu.nav .nav-link {
+                display: block;
+                text-align: center;
+                padding: 10px;
+                color: #333333;
+                font-size: 14px;
+                border-bottom: 1px solid #ABA6A2;
+                box-sizing: border-box;
+            }
+            .tab-menu.nav .nav-link.active {
+                background-color: #333333;
+                color: #FFFFFF;
+            }
+            .tab-content {
+                .user-area {
+                    td {
+                        padding: 10px 0;
+                    }
+                    border-bottom: 1px solid #ABA6A2;
+                    .avatar {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        margin-right: 15px;
+                    }
+                    label {
+                        font-size: 16px;
+                    }
+                    .unfollow-btn {
+                        background-color: #FFFFFF;
+                        opacity: .5;
+                        color: #000000;
+                        font-size: 14px;
+                        padding: 12px 20px;
+                        border: none;
+                        border-radius: 10px;
+                    }
+                    .follow-btn {
+                        background-color: #4B709A;
+                        color: #FFFFFF;
+                        font-size: 14px;
+                        padding: 12px 20px;
+                        border: none;
+                        border-radius: 10px;
+                    }
+                    .edit-btn {
+                        background-color: #4B709A;
+                        color: #FFFFFF;
+                        font-size: 14px;
+                        padding: 12px 20px;
+                        border: none;
+                        border-radius: 10px;
+                    }
+                }
+            }
+            .page {
+                margin-top: 50px;
+            }
+        }
         // * スマートフォン （小）
         @media (max-width: 768px) {
-            // ?モバイルサイドバーのレイアウト設定
-            .header {
-                img {
-                    width: 40%;
+            // ? フォロー中、フォロワーページ
+            .profile-cover {
+                height: 173px !important;
+            }
+            .follow-content {
+                padding: 0 10px;
+                .tab-content {
+                    padding: 0px 10px;
                 }
             }
         }
         // * タブレット
         @media (min-width: 768px) and (max-width: 1280px) {
-            // ?モバイルサイドバーのレイアウト設定
-            .header {
-                img {
-                    width: 20%;
+            .profile-cover {
+                height: 243px !important;
+            }
+            // ? フォロー中、フォロワーページ
+            .follow-content {
+                width: 694px;
+                .tab-content {
+                    padding: 0px 30px;
                 }
             }
         }
@@ -24,103 +109,11 @@
                 width: 100%;
                 height: 243px !important;
             }
-            // ? フォロー中一覧の設定
+            // ? フォロー中、フォロワーページ
             .follow-content {
-                margin-top: 50px;
                 width: 913px;
-                .tab-menu {
-                    .active {
-                        background-color: #4B709A;
-                        color: #FFFFFF;
-                        border: none;
-                        border-radius: 5px;
-                    }
-                    a {
-                        border-bottom: 3px solid #333333;
-                        color: #333333;
-                    }
-                }
                 .tab-content {
                     padding: 0px 30px;
-                    .user-area {
-                        td {
-                            padding: 10px 0;
-                        }
-                        border-bottom: 1px solid #333333;
-                        .avatar {
-                            width: 50px;
-                            height: 50px;
-                            border-radius: 50%;
-                            object-fit: cover;
-                            margin-right: 25px;
-                        }
-                        label {
-                            font-size: 16px;
-                        }
-                        .unfollow-btn {
-                            background-color: #FFFFFF;
-                            opacity: .5;
-                            color: #000000;
-                        }
-                        .follow-btn {
-                            background-color: #4B709A;
-                            color: #FFFFFF;
-                        }
-                    }
-                    .edit-btn {
-                        background-color: #4B709A;
-                        color: #FFFFFF;
-                    }
-                }
-                .user-post-content {
-                    .sns-image {
-                        width: 100%;
-                        height: 330px;
-                        object-fit: cover;
-                    }
-                    .user-area {
-                        background-color: #222222;
-                        img {
-                            width: 35px;
-                            height: 35px;
-                            border-radius: 50%;
-                            object-fit: cover;
-                            margin-left: 10px;
-                        }
-                        .user-name {
-                            color: #FFFFFF;
-                        }
-                        .user-height {
-                            font-size: 10px;
-                            color: #FFFFFF;
-                        }
-                        .like {
-                            i {
-                                font-size: 18px;
-                            }
-                        }
-                        .number-of-likes {
-                            font-size: 15px;
-                            margin-left: 5px;
-                            color: #FFFFFF;
-                        }
-                    }
-                    .faq-content {
-                        border-radius: 10px;
-                        .faq-image {
-                            border-radius: 10px 0 0 10px;
-                            width: 100%;
-                            object-fit: cover;
-                            height: 250px;
-                        }
-                        .col-lg-7 {
-                            background-color: #FFFFFF;
-                            opacity: .5;
-                        }
-                    }
-                }
-                .page {
-                    margin-top: 50px;
                 }
             }
         }
