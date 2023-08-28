@@ -8,7 +8,7 @@
                 
                 <div>
                     <% resource.errors[:user_name].each do |error| %>
-                        <small class="text-danger">ユーザー名を入力してください。</small>
+                        <small class="text-danger">ユーザー名<%= error %></small>
                     <% end %>
                 </div>
             </div>
