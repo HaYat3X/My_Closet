@@ -11,12 +11,12 @@
             <%= image_tag "/assets/user/cover_img.png", class: "profile-cover" %>
 
             <div class="follow-content mx-auto">
-                <ul class="tab-menu nav nav-underline nav-fill">
-                    <li class="nav-item flex-fill">
+                <ul class="tab-menu nav">
+                    <li class="nav-item">
                         <a href="?tab=follow_all" class="nav-link fw-bold <%= params[:tab].nil? || params[:tab] == 'follow_all' ? 'active' : '' %>">フォロー中</a>
                     </li>
 
-                    <li class="nav-item flex-fill">
+                    <li class="nav-item">
                         <a href="?page=1&tab=follower" class="nav-link fw-bold <%= params[:tab] == 'follower' ? 'active' : '' %>">フォロワー</a>
                     </li>
                 </ul>
@@ -43,19 +43,21 @@
                                                         <% end %>
 
                                                         <div>
-                                                            <label class="fw-bold"><%= u.user_name %></label>
+                                                            <label class="fw-bold">
+                                                                <%= u.user_name %>
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </td>
 
                                                 <td class="text-end">
                                                     <% if u.id == current_user.id %>
-                                                        <%= button_to "プロフィール更新", "/profile/edit/#{u.id}", method: :get, class: "btn px-4 edit-btn rounded-pill" %>
+                                                        <%= button_to "プロフィール更新", "/profile/edit/#{u.id}", method: :get, class: "edit-btn rounded-pill" %>
                                                     <% else %>
                                                         <% if UserRelation.where(follow_id: current_user.id, follower_id: u.id).exists? %>
-                                                            <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "btn px-4 unfollow-btn" %> 
+                                                            <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "unfollow-btn" %> 
                                                         <% else %>
-                                                            <%= button_to "フォローする", "/profile/follow/#{u.id}", method: :post, class: "btn px-4 follow-btn" %> 
+                                                            <%= button_to "フォローする", "/profile/follow/#{u.id}", method: :post, class: "follow-btn" %> 
                                                         <% end %>
                                                     <% end %>
                                                 </td>
