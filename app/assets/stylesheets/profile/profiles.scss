@@ -190,6 +190,74 @@
                 }
             }
         }
+        // ? プロフィール編集ページ
+        .edit-content {
+            margin-top: 50px;
+            margin-bottom: 150px;
+            padding: 0 20px;
+            .flex {
+                display: block;
+            }
+            .avater-area {
+                text-align: center;
+                .origin-btn {
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+                    outline: none;
+                    padding: 0;
+                    appearance: none;
+                }
+            }
+            .user-area {
+                padding: 0 20px;
+                margin-top: 30px;
+            }
+            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+                border-radius: 10px;
+                height: 50px;
+                opacity: .6;
+            }
+            select {
+                border-radius: 10px;
+                height: 50px;
+                opacity: .6;
+            }
+            textarea {
+                opacity: .6;
+            }
+            .modal-area {
+                .modal-body {
+                    background-color: #333333;
+                }
+                .post-area {
+                    background-color: #333333;
+                    .submit-btn {
+                        background-color: #4B709A;
+                        color: #FFFFFF;
+                    }
+                }
+                .coordinate-modal {
+                    padding: 150px 10px;
+                }
+            }
+            .cancel-btn {
+                color: #4B709A;
+                border: 2px solid #4B709A;
+                border-radius: 10px;
+            }
+            .submit-btn {
+                background-color: #4B709A;
+                border: 2px solid #4B709A;
+                color: #FFFFFF;
+                border-radius: 10px;
+            }
+            .col-12 {
+                // padding: 0 20px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
     }
     // * タブレット
     @media (min-width: 768px) and (max-width: 1280px) {
@@ -257,6 +325,68 @@
                         }
                     }
                 }
+            }
+        }
+        // ? プロフィール編集ページ
+        .edit-content {
+            margin-top: 50px;
+            margin-bottom: 150px;
+            width: 754px;
+            .flex {
+                display: flex;
+            }
+            .avater-area {
+                width: 200px;
+                .origin-btn {
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+                    outline: none;
+                    padding: 0;
+                    appearance: none;
+                }
+            }
+            .user-area {
+                width: 550px;
+            }
+            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+                border-radius: 10px;
+                height: 50px;
+                opacity: .6;
+            }
+            select {
+                border-radius: 10px;
+                height: 50px;
+                opacity: .6;
+            }
+            textarea {
+                opacity: .6;
+            }
+            .modal-area {
+                .modal-body {
+                    background-color: #333333;
+                }
+                .post-area {
+                    background-color: #333333;
+                    .submit-btn {
+                        background-color: #4B709A;
+                        color: #FFFFFF;
+                    }
+                }
+                .coordinate-modal {
+                    padding: 200px 50px;
+                }
+            }
+            .cancel-btn {
+                color: #4B709A;
+                border: 2px solid #4B709A;
+                border-radius: 10px;
+            }
+            .submit-btn {
+                background-color: #4B709A;
+                border: 2px solid #4B709A;
+                color: #FFFFFF;
+                border-radius: 10px;
             }
         }
     }
@@ -331,10 +461,28 @@
                 }
             }
         }
-        // ? プロフィール編集ページの設定
+        // ? プロフィール編集ページ
         .edit-content {
             margin-top: 50px;
+            margin-bottom: 150px;
             width: 973px;
+            .flex {
+                display: flex;
+            }
+            .avater-area {
+                width: 200px;
+                .origin-btn {
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+                    outline: none;
+                    padding: 0;
+                    appearance: none;
+                }
+            }
+            .user-area {
+                width: 773px;
+            }
             input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
                 border-radius: 10px;
                 height: 50px;
@@ -346,31 +494,11 @@
                 opacity: .6;
             }
             textarea {
-                border-radius: 10px;
-                height: 50px;
                 opacity: .6;
-            }
-            .container {
-                position: relative;
-            }
-            #overlay {
-                position: absolute;
-                top: 0;
-                opacity: .6;
-            }
-            .overlay img {
-                width: 150px;
-                height: 150px;
-                object-fit: cover;
-                border-radius: 50%;
-            }
-            .user-area {
-                width: 793px;
             }
             .modal-area {
                 .modal-body {
                     background-color: #333333;
-                    padding: 200px 0;
                 }
                 .post-area {
                     background-color: #333333;
@@ -379,6 +507,20 @@
                         color: #FFFFFF;
                     }
                 }
+                .coordinate-modal {
+                    padding: 200px 50px;
+                }
+            }
+            .cancel-btn {
+                color: #4B709A;
+                border: 2px solid #4B709A;
+                border-radius: 10px;
+            }
+            .submit-btn {
+                background-color: #4B709A;
+                border: 2px solid #4B709A;
+                color: #FFFFFF;
+                border-radius: 10px;
             }
         }
     }
