@@ -1,7 +1,7 @@
 // ! profilesフォルダのレイアウト （edit, show）
 #profile_profiles {
     // ! 全サイズ共通
-    // ? プロフィール
+    // ? プロフィールページ
     .profile-cover {
         width: 100%;
         object-fit: cover;
@@ -91,16 +91,6 @@
                         background-color: #ffffff8b;
                         border-radius: 0 10px 10px 0;
                         padding: 18.5px 0;
-                        // .question-information {
-                        //     padding: 0 30px;
-                        //     font-size: 15px;
-                        //     display: flex;
-                        //     flex-direction: column;
-                        //     justify-content: center;
-                        //     align-items: center;
-                        //     text-align: center;
-                        //     height: 136px;
-                        // }
                         .answer-area {
                             display: flex;
                             justify-content: flex-end;
@@ -127,6 +117,57 @@
             margin-top: 50px;
         }
     }
+    // * プロフィール編集ページ
+    .edit-content {
+        margin-top: 50px;
+        margin-bottom: 150px;
+        .avater-area {
+            .origin-btn {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                outline: none;
+                padding: 0;
+                appearance: none;
+            }
+        }
+        input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+            border-radius: 10px;
+            height: 50px;
+            opacity: .6;
+        }
+        select {
+            border-radius: 10px;
+            height: 50px;
+            opacity: .6;
+        }
+        textarea {
+            opacity: .6;
+        }
+        .modal-area {
+            .modal-body {
+                background-color: #333333;
+            }
+            .post-area {
+                background-color: #333333;
+                .submit-btn {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                }
+            }
+        }
+        .cancel-btn {
+            color: #4B709A;
+            border: 2px solid #4B709A;
+            border-radius: 10px;
+        }
+        .submit-btn {
+            background-color: #4B709A;
+            border: 2px solid #4B709A;
+            color: #FFFFFF;
+            border-radius: 10px;
+        }
+    }
     // * スマートフォン （小）
     @media (max-width: 768px) {
         // ? プロフィール
@@ -139,6 +180,9 @@
             }
             .pc-tablet-menu {
                 display: none;
+            }
+            .mobile-menu {
+                padding: 0 3px;
             }
             .mobile {
                 padding: 0 20px;
@@ -192,68 +236,21 @@
         }
         // ? プロフィール編集ページ
         .edit-content {
-            margin-top: 50px;
-            margin-bottom: 150px;
             padding: 0 20px;
             .flex {
                 display: block;
             }
             .avater-area {
                 text-align: center;
-                .origin-btn {
-                    background-color: transparent;
-                    border: none;
-                    cursor: pointer;
-                    outline: none;
-                    padding: 0;
-                    appearance: none;
-                }
             }
             .user-area {
                 padding: 0 20px;
                 margin-top: 30px;
             }
-            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
-                border-radius: 10px;
-                height: 50px;
-                opacity: .6;
-            }
-            select {
-                border-radius: 10px;
-                height: 50px;
-                opacity: .6;
-            }
-            textarea {
-                opacity: .6;
-            }
-            .modal-area {
-                .modal-body {
-                    background-color: #333333;
-                }
-                .post-area {
-                    background-color: #333333;
-                    .submit-btn {
-                        background-color: #4B709A;
-                        color: #FFFFFF;
-                    }
-                }
-                .coordinate-modal {
-                    padding: 150px 10px;
-                }
-            }
-            .cancel-btn {
-                color: #4B709A;
-                border: 2px solid #4B709A;
-                border-radius: 10px;
-            }
-            .submit-btn {
-                background-color: #4B709A;
-                border: 2px solid #4B709A;
-                color: #FFFFFF;
-                border-radius: 10px;
+            .coordinate-modal {
+                padding: 150px 10px;
             }
             .col-12 {
-                // padding: 0 20px;
                 padding-left: 20px;
                 padding-right: 20px;
             }
@@ -329,64 +326,18 @@
         }
         // ? プロフィール編集ページ
         .edit-content {
-            margin-top: 50px;
-            margin-bottom: 150px;
             width: 754px;
             .flex {
                 display: flex;
             }
             .avater-area {
                 width: 200px;
-                .origin-btn {
-                    background-color: transparent;
-                    border: none;
-                    cursor: pointer;
-                    outline: none;
-                    padding: 0;
-                    appearance: none;
-                }
             }
             .user-area {
                 width: 550px;
             }
-            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
-                border-radius: 10px;
-                height: 50px;
-                opacity: .6;
-            }
-            select {
-                border-radius: 10px;
-                height: 50px;
-                opacity: .6;
-            }
-            textarea {
-                opacity: .6;
-            }
-            .modal-area {
-                .modal-body {
-                    background-color: #333333;
-                }
-                .post-area {
-                    background-color: #333333;
-                    .submit-btn {
-                        background-color: #4B709A;
-                        color: #FFFFFF;
-                    }
-                }
-                .coordinate-modal {
-                    padding: 200px 50px;
-                }
-            }
-            .cancel-btn {
-                color: #4B709A;
-                border: 2px solid #4B709A;
-                border-radius: 10px;
-            }
-            .submit-btn {
-                background-color: #4B709A;
-                border: 2px solid #4B709A;
-                color: #FFFFFF;
-                border-radius: 10px;
+            .coordinate-modal {
+                padding: 200px 50px;
             }
         }
     }
@@ -463,64 +414,18 @@
         }
         // ? プロフィール編集ページ
         .edit-content {
-            margin-top: 50px;
-            margin-bottom: 150px;
             width: 973px;
             .flex {
                 display: flex;
             }
             .avater-area {
                 width: 200px;
-                .origin-btn {
-                    background-color: transparent;
-                    border: none;
-                    cursor: pointer;
-                    outline: none;
-                    padding: 0;
-                    appearance: none;
-                }
             }
             .user-area {
                 width: 773px;
             }
-            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
-                border-radius: 10px;
-                height: 50px;
-                opacity: .6;
-            }
-            select {
-                border-radius: 10px;
-                height: 50px;
-                opacity: .6;
-            }
-            textarea {
-                opacity: .6;
-            }
-            .modal-area {
-                .modal-body {
-                    background-color: #333333;
-                }
-                .post-area {
-                    background-color: #333333;
-                    .submit-btn {
-                        background-color: #4B709A;
-                        color: #FFFFFF;
-                    }
-                }
-                .coordinate-modal {
-                    padding: 200px 50px;
-                }
-            }
-            .cancel-btn {
-                color: #4B709A;
-                border: 2px solid #4B709A;
-                border-radius: 10px;
-            }
-            .submit-btn {
-                background-color: #4B709A;
-                border: 2px solid #4B709A;
-                color: #FFFFFF;
-                border-radius: 10px;
+            .coordinate-modal {
+                padding: 200px 50px;
             }
         }
     }
