@@ -27,7 +27,7 @@ class User < ApplicationRecord
   mount_uploader :avatar, UserImageUploader
 
   # ! バリデーション
-  validates :user_name, presence: true
+  validates :user_name, presence: true, length: { maximum: 20 }
   validates :gender, presence: true
   validates :height, numericality: { greater_than: 0, less_than: 300 }, allow_blank: true
   validates :weight, numericality: { greater_than: 0, less_than: 600 }, allow_blank: true
