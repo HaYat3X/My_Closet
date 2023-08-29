@@ -66,6 +66,52 @@
             }
         }
     }
+    // * お知らせ詳細ページ
+    .show-content {
+        margin-top: 45px;
+        margin-bottom: 150px;
+        h4 {
+            font-size: 28px;
+            margin-bottom: 60px;
+        }
+        h5 {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .alert-body {
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+            color: #333333;
+            .alert-title {
+                h6 {
+                    font-size: 14px;
+                }
+                small {
+                    font-size: 12px;
+                    color: #727272;
+                }
+            }
+            .alert-post {
+                background-color: #D9D9D9;
+            }
+        }
+        .alert-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        a {
+            background-color: #4B709A;
+            font-size: 14px;
+            color: #FFFFFF;
+            img {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
     // * スマートフォン （小）
     @media (max-width: 768px) {
         // ? お知らせ一覧ページ
@@ -80,52 +126,18 @@
         }
         // ? お知らせ詳細ページの設定
         .show-content {
-            margin-top: 45px;
             padding: 0 10px;
-            width: 370px;
-            h4 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            h5 {
-                font-size: 20px;
-                margin-bottom: 30px;
-            }
             .alert-body {
                 padding: 50px 20px;
-                border-radius: 5px;
-                background-color: rgba(255, 255, 255, 0.5);
-                color: #333333;
-                .alert-text {
-                    padding: 50px 0;
-                }
                 .alert-post {
-                    background-color: #D9D9D9;
-                    width: calc(100% + 80px);
-                    margin: 50px -40px;
+                    width: calc(100% + 40px);
+                    margin: 50px -20px;
+                    .post-img {
+                        width: 190.5px;
+                        height: auto;
+                        object-fit: cover;
+                    }
                 }
-                h6 {
-                    font-size: 14px;
-                }
-                small {
-                    font-size: 12px;
-                }
-            }
-            .alert-image {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                object-fit: cover;
-                margin-right: 15px;
-            }
-            .post-img {
-                width: 300px;
-                height: 400px;
-                object-fit: cover;
-            }
-            a {
-                background-color: #4B709A;
-                color: #FFFFFF;
             }
         }
     }
@@ -143,46 +155,18 @@
         }
         // ? お知らせ詳細ページの設定
         .show-content {
-            margin-top: 45px;
             width: 753px;
-            h4 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            h5 {
-                font-size: 28px;
-                margin-bottom: 30px;
-            }
             .alert-body {
                 padding: 100px 40px;
-                border-radius: 5px;
-                background-color: rgba(255, 255, 255, 0.5);
-                color: #333333;
-                .alert-text {
-                    padding: 50px 0;
-                }
                 .alert-post {
-                    background-color: #D9D9D9;
                     width: calc(100% + 80px);
                     margin: 50px -40px;
+                    .post-img {
+                        width: 300px;
+                        height: auto;
+                        object-fit: cover;
+                    }
                 }
-            }
-            .alert-image {
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                border: 2px solid black;
-                object-fit: cover;
-                margin-right: 15px;
-            }
-            .post-img {
-                width: 300px;
-                height: 400px;
-                object-fit: cover;
-            }
-            a {
-                background-color: #4B709A;
-                color: #FFFFFF;
             }
         }
     }
@@ -200,45 +184,17 @@
         }
         // ? お知らせ詳細ページの設定
         .show-content {
-            margin-top: 45px;
             width: 973px;
-            h4 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            h5 {
-                font-size: 28px;
-                margin-bottom: 30px;
-            }
             .alert-body {
                 padding: 100px;
-                border-radius: 5px;
-                background-color: rgba(255, 255, 255, 0.5);
-                color: #333333;
-                .alert-text {
-                    padding: 50px 0;
-                }
                 .alert-post {
                     margin: 50px 0;
-                    background-color: #D9D9D9;
+                    img {
+                        width: 300px;
+                        height: auto;
+                        object-fit: cover;
+                    }
                 }
-            }
-            .alert-image {
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                border: 2px solid black;
-                object-fit: cover;
-                margin-right: 15px;
-            }
-            .post-img {
-                width: 300px;
-                height: 400px;
-                object-fit: cover;
-            }
-            a {
-                background-color: #4B709A;
-                color: #FFFFFF;
             }
         }
     }

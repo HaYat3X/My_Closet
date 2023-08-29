@@ -26,7 +26,7 @@ class Profile::AlertsController < ApplicationController
                     @source_post_id = Social.where(id: @notification.source_post_id).first
                 else
                     # * 回答
-                    @source_answer_post_id = Question.find(@notification.source_post_id)
+                    @source_answer_post_id = Question.where(id: @notification.source_post_id).first
                 end
             end
             
