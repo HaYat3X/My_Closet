@@ -6,7 +6,7 @@ class Profile::AlertsController < ApplicationController
     def list
         @alerts = Alert.order(created_at: :desc).page(params[:page_alert])
         # * 自分に当てられた通知かつ、通知の作成元が自分以外の通知を取得
-        @notification = Notification.where(user_id: current_user.id).where.not(source_user_id: current_user.id).order(created_at: :desc).order(read: :asc).page(params[:page_notification])
+        @notification = Notification.where(user_id: current_user.id).where.not(source_user_id: current_user.id).order(read: :asc).order(created_at: :desc).page(params[:page_notification])
     end
     
     # * お知らせ詳細取得
