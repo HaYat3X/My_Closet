@@ -7,108 +7,112 @@
 
         <%# ! contents %>
         <div class="main-content">
+        <%= render "layouts/error" %>
+        
             <div class="show-content mx-auto">
                 <h3 class="fw-bold text-center">アイテム詳細</h3>
 
-                <div class="row g-0 item-area mx-auto">
-                    <div class="col-lg-6 left-content">
-                        <%= image_tag @closet.photograph.url, class: "closet-show-image" %>
+                <div class="d-flex-origin">
+                    <div class="left-content">
+                        <%= image_tag @closet.photograph.url(:forced_size), class: "closet-show-image" %>
                     </div>
 
-                    <div class="col-lg-6 right-content">
-                        <div class="d-flex item-data">
-                            <div class="col-6 table-menu">
-                                メインカテゴリー    
-                            </div>
+                    <div class="right-content">
+                        <div class="item-data">
+                            <span class="category">
+                                メインカテゴリー
+                            </span>
 
-                            <div class="col-6 text-end fw-bold">
+                            <span class="data">
                                 <%= @closet.big_Category %>
-                            </div>
+                            </span>
                         </div>
 
-                        <div class="d-flex item-data">
-                            <div class="col-6 table-menu">
-                                サブカテゴリー  
-                            </div>
+                        <div class="item-data" style="margin-top: 24px;">
+                            <span class="category">
+                                サブカテゴリー
+                            </span>
 
-                            <div class="col-6 text-end fw-bold">
+                            <span class="data">
                                 <%= @closet.small_Category %>
-                            </div>
+                            </span>
                         </div>
 
-                        <div class="d-flex item-data">
-                            <div class="col-6 table-menu">
+                        <div class="item-data" style="margin-top: 24px;">
+                            <span class="category">
                                 金額
-                            </div>
+                            </span>
 
-                            <div class="col-6 text-end fw-bold">
+                            <span class="data">
                                 <% if @closet.price %>
                                     ￥<%= number_with_delimiter(@closet.price, delimiter: ',') %>
                                 <% end %>
-                            </div>
+                            </span>
                         </div>
 
-                        <div class="d-flex item-data">
-                            <div class="col-6 table-menu">
+                        <div class="item-data" style="margin-top: 24px;">
+                            <span class="category">
                                 カラー
-                            </div>
+                            </span>
 
-                            <div class="col-6 text-end fw-bold">
+                            <span class="data">
                                 <%= @closet.color %>
-                            </div>
+                            </span>
                         </div>
 
-                        <div class="d-flex item-data">
-                            <div class="col-6 table-menu">
+                        <div class="item-data" style="margin-top: 24px;">
+                            <span class="category">
                                 サイズ
-                            </div>
+                            </span>
 
-                            <div class="col-6 text-end fw-bold">
+                            <span class="data">
                                 <%= @closet.size %>
-                            </div>
+                            </span>
                         </div>
 
-                        <div class="d-flex item-data">
-                            <div class="col-6 table-menu">
+                        <div class="item-data" style="margin-top: 24px;">
+                            <span class="category">
                                 ブランド
-                            </div>
+                            </span>
 
-                            <div class="col-6 text-end fw-bold">
+                            <span class="data">
                                 <%= @closet.brand %>
-                            </div>
+                            </span>
                         </div>
 
                         <div class="delete-edit-area">
                             <% if @closet.user.id == current_user.id %>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <%= button_to "このアイテム削除", "/closet/delete/#{@closet.id}", method: :delete, class: "btn col-12 delete-btn" %>
+                                <div class="row g-0">
+                                    <div class="col-6" style="padding-right: 10px;">
+                                        <%= button_to "削除", "/closet/delete/#{@closet.id}", method: :delete, class: "btn col-12 delete-btn" %>
                                     </div>
 
-                                    <div class="col-lg-6">
-                                        <%= link_to "アイテム情報を編集" , "/closet/edit/#{@closet.id}", class: "btn col-12 edit-btn" %>
+                                    <div class="col-6" style="padding-left: 10px;">
+                                        <%= link_to "編集" , "/closet/edit/#{@closet.id}", class: "btn col-12 edit-btn" %>
                                     </div>
                                 </div>
                             <% end %>
                         </div>
                     </div>
+                </div>
 
-                    <div class="text-center">
-                        <%= link_to "戻る", "/closet/list", class: "btn px-5 rounded-pill return-btn" %>
-                    </div>
+                <div class="back-btn">
+                    <a href="/" class="btn px-5 rounded-pill">
+                        <img src="/assets/icons/icn_back.png" alt="">
+                        戻る
+                    </a>
                 </div>
 
                 <div class="sns-area mx-auto">
-                    <% @coordinate_items.flatten.each do |sns| %>
-                        <h6 class="fw-bold">このアイテムを使用したコーディネート</h6>
-                        
-                        <div class="col-lg-3 col-md-3 col-4 mt-1">
+                    <h6 class="fw-bold">このアイテムを使用したコーディネート</h6>
 
+                    <% @sns_all.flatten.each do |sns| %>
+                        <div class="flex mt-1">
                             <%= link_to "/sns/show/#{sns.id}" do %>
-                                <%= image_tag sns.photograph.url, class: "sns-image" %>
+                                <%= image_tag sns.photograph.url(:forced_size), class: "sns-image" %>
                             <% end %>
 
-                            <div class="user-area py-2">
+                            <div class="user-area pc-tablet">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
                                         <% if sns.user.avatar.present? %>
@@ -122,8 +126,8 @@
                                         <% end %>
 
                                         <div class="ms-2">
-                                            <div class="fw-bold user-name m-0">
-                                                <%= sns.user.user_name %>
+                                            <div class="fw-bold user-name">
+                                                <%= truncate(sns.user.user_name, length: 10) %>
                                             </div>
 
                                             <div class="user-height m-0">
@@ -136,29 +140,68 @@
                                         </div>
                                     </div>
 
-                                    <div class="mx-2">
-                                        <div class="like m-0 d-flex align-items-center">
-                                            <%# ?  いいねできるかどうか判定 %>
-                                            <% if user_signed_in? %>
-                                                <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
-                                                    <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
-                                                        <img src="/assets/icons/icn_heart.png" alt="">
-                                                    <% end %>
-                                                <% else %>
-                                                    <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
-                                                        <img src="/assets/icons/icn_not_heart.png" alt="">
-                                                    <% end %>
+                                    <div class="like m-0 d-flex align-items-center">
+                                        <%# ?  いいねできるかどうか判定 %>
+                                        <% if user_signed_in? %>
+                                            <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
+                                                <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
+                                                    <img src="/assets/icons/icn_heart.png" alt="">
                                                 <% end %>
                                             <% else %>
                                                 <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
                                                     <img src="/assets/icons/icn_not_heart.png" alt="">
                                                 <% end %>
                                             <% end %>
+                                        <% else %>
+                                            <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
+                                                <img src="/assets/icons/icn_not_heart.png" alt="">
+                                            <% end %>
+                                        <% end %>
 
-                                            <span class="number-of-likes align-self-center">
-                                                <%= SocialLike.where(social_id: sns.id).count %>
-                                            </span>
+                                        <span class="number-of-likes align-self-center">
+                                            <%= SocialLike.where(social_id: sns.id).count %>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="user-area mobile">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <% if sns.user.avatar.present? %>
+                                            <%= link_to "/profile/show/#{sns.user_id}" do %>
+                                                <%= image_tag sns.user.avatar.url %>
+                                            <% end %>
+                                        <% else %>
+                                            <%= link_to "/profile/show/#{sns.user_id}" do %>
+                                                <%= image_tag "/assets/user/avatar.png" %>
+                                            <% end %>
+                                        <% end %>
+
+                                        <div class="ms-2">
+                                            <div class="fw-bold user-name">
+                                                <%= truncate(sns.user.user_name, length: 8) %>
+                                            </div>
                                         </div>
+                                    </div>
+
+                                    <div class="like m-0 d-flex align-items-center">
+                                        <%# ?  いいねできるかどうか判定 %>
+                                        <% if user_signed_in? %>
+                                            <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
+                                                <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
+                                                    <img src="/assets/icons/icn_heart.png" alt="">
+                                                <% end %>
+                                            <% else %>
+                                                <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
+                                                    <img src="/assets/icons/icn_not_heart.png" alt="">
+                                                <% end %>
+                                            <% end %>
+                                        <% else %>
+                                            <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
+                                                <img src="/assets/icons/icn_not_heart.png" alt="">
+                                            <% end %>
+                                        <% end %>
                                     </div>
                                 </div>
                             </div>
@@ -169,5 +212,3 @@
         </div>
     </div>
 </div>
-
-
