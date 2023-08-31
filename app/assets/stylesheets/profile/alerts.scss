@@ -1,265 +1,200 @@
 // ! profilesフォルダのレイアウト （show, list）
 #profile_alerts {
     // ! 全サイズ共通
-    // * スマートフォン （小）
-    @media (max-width: 768px) {
-        // ? お知らせ一覧ページの設定
-        .list-content {
-            margin-top: 45px;
-            h4 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            padding: 0 10px;
-            width: 370px;
-            h6 {
-                font-size: 16px;
-            }
-            label {
-                font-size: 14px;
-                margin-top: 5px;
-            }
-            .tab-menu {
-                .active {
-                    background-color: #222222;
-                    color: #FFFFFF;
-                    border: none;
-                }
-                a {
-                    border-bottom: 1px solid #ABA6A2;
-                    box-sizing: border-box;
-                    color: #333333;
-                }
-            }
-            .alert-body {
-                border-radius: 5px;
-                background-color: rgba(255, 255, 255, 0.5);
-                color: #333333;
-                padding: 15px;
-                margin-bottom: 15px;
-            }
+    // * お知らせ一覧ページ
+    .list-content {
+        margin-top: 45px;
+        margin-bottom: 150px;
+        h4 {
+            font-size: 28px;
+            margin-bottom: 60px;
+        }
+        .tab-menu.nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+        }
+        .tab-menu.nav .nav-item {
+            flex: 1;
+            padding: 0;
+        }
+        .tab-menu.nav .nav-link {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            color: #333333;
+            font-size: 14px;
+            border-bottom: 1px solid #ABA6A2;
+            box-sizing: border-box;
+        }
+        .tab-menu.nav .nav-link.active {
+            background-color: #333333;
+            color: #FFFFFF;
+        }
+        .alert-body {
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+            color: #333333;
+            margin-bottom: 15px;
             .alert-image {
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
-                border: 2px solid black;
                 object-fit: cover;
-                margin-right: 10px;
+            }
+            .alert-title {
+                h6 {
+                    font-size: 16px;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                }
+                label {
+                    font-size: 14px;
+                }
+            }
+            .alert-time {
+                margin: 0 0 0 auto;
+                width: 130px;
+                .time {
+                    font-size: 14px;
+                    padding-top: 5px;
+                }
+                small {
+                    font-size: 12px;
+                    font-weight: bold;
+                }
             }
         }
-        // ? お知らせ詳細ページの設定
-        .show-content {
-            margin-top: 45px;
-            padding: 0 10px;
-            width: 370px;
-            h4 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            h5 {
-                font-size: 20px;
-                margin-bottom: 30px;
-            }
-            .alert-body {
-                padding: 50px 20px;
-                border-radius: 5px;
-                background-color: rgba(255, 255, 255, 0.5);
-                color: #333333;
-                .alert-text {
-                    padding: 50px 0;
-                }
-                .alert-post {
-                    background-color: #D9D9D9;
-                    width: calc(100% + 80px);
-                    margin: 50px -40px;
-                }
+    }
+    // * お知らせ詳細ページ
+    .show-content {
+        margin-top: 45px;
+        margin-bottom: 150px;
+        h4 {
+            font-size: 28px;
+            margin-bottom: 60px;
+        }
+        h5 {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .alert-body {
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+            color: #333333;
+            .alert-title {
                 h6 {
                     font-size: 14px;
                 }
                 small {
                     font-size: 12px;
+                    color: #727272;
                 }
             }
-            .alert-image {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                object-fit: cover;
-                margin-right: 15px;
+            .alert-post {
+                background-color: #D9D9D9;
             }
-            .post-img {
-                width: 300px;
-                height: 400px;
-                object-fit: cover;
+        }
+        .alert-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        a {
+            background-color: #4B709A;
+            font-size: 14px;
+            color: #FFFFFF;
+            img {
+                width: 16px;
+                height: 16px;
             }
-            a {
-                background-color: #4B709A;
-                color: #FFFFFF;
+        }
+    }
+    // * スマートフォン （小）
+    @media (max-width: 768px) {
+        // ? お知らせ一覧ページ
+        .list-content {
+            padding: 0 10px;
+            .alert-body {
+                padding: 15px 15px;
+                .alert-image {
+                    margin-right: 10px;
+                }
+            }
+        }
+        // ? お知らせ詳細ページの設定
+        .show-content {
+            padding: 0 10px;
+            .alert-body {
+                padding: 50px 20px;
+                .alert-post {
+                    width: calc(100% + 40px);
+                    margin: 50px -20px;
+                    .post-img {
+                        width: 190.5px;
+                        height: auto;
+                        object-fit: cover;
+                    }
+                }
             }
         }
     }
     // * タブレット
     @media (min-width: 768px) and (max-width: 1280px) {
-        // ? お知らせ一覧ページの設定
+        // ? お知らせ一覧ページ
         .list-content {
-            margin-top: 45px;
-            h4 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            width: 640px;
-            .tab-menu {
-                .active {
-                    background-color: #222222;
-                    color: #FFFFFF;
-                    border: none;
-                }
-                a {
-                    border-bottom: 1px solid #ABA6A2;
-                    box-sizing: border-box;
-                    color: #333333;
-                }
-            }
+            width: 700px;
             .alert-body {
-                border-radius: 5px;
-                background-color: rgba(255, 255, 255, 0.5);
-                color: #333333;
                 padding: 15px 30px;
-                margin-bottom: 15px;
-            }
-            .alert-image {
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                border: 2px solid black;
-                object-fit: cover;
-                margin-right: 20px;
+                .alert-image {
+                    margin-right: 20px;
+                }
             }
         }
         // ? お知らせ詳細ページの設定
         .show-content {
-            margin-top: 45px;
             width: 753px;
-            h4 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            h5 {
-                font-size: 28px;
-                margin-bottom: 30px;
-            }
             .alert-body {
                 padding: 100px 40px;
-                border-radius: 5px;
-                background-color: rgba(255, 255, 255, 0.5);
-                color: #333333;
-                .alert-text {
-                    padding: 50px 0;
-                }
                 .alert-post {
-                    background-color: #D9D9D9;
                     width: calc(100% + 80px);
                     margin: 50px -40px;
+                    .post-img {
+                        width: 300px;
+                        height: auto;
+                        object-fit: cover;
+                    }
                 }
-            }
-            .alert-image {
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                border: 2px solid black;
-                object-fit: cover;
-                margin-right: 15px;
-            }
-            .post-img {
-                width: 300px;
-                height: 400px;
-                object-fit: cover;
-            }
-            a {
-                background-color: #4B709A;
-                color: #FFFFFF;
             }
         }
     }
-    // * PC（大）
+    // * PC
     @media (min-width: 1280px) {
-        // ? お知らせ一覧ページの設定
+        // ? お知らせ一覧ページ
         .list-content {
-            margin-top: 45px;
-            h4 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            width: 640px;
-            .tab-menu {
-                .active {
-                    background-color: #222222;
-                    color: #FFFFFF;
-                    border: none;
-                }
-                a {
-                    border-bottom: 1px solid #ABA6A2;
-                    box-sizing: border-box;
-                    color: #333333;
-                }
-            }
+            width: 700px;
             .alert-body {
                 padding: 15px 30px;
-                border-radius: 5px;
-                background-color: rgba(255, 255, 255, 0.5);
-                color: #333333;
-                margin-bottom: 15px;
-            }
-            .alert-image {
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                border: 2px solid black;
-                object-fit: cover;
-                margin-right: 20px;
+                .alert-image {
+                    margin-right: 20px;
+                }
             }
         }
         // ? お知らせ詳細ページの設定
         .show-content {
-            margin-top: 45px;
             width: 973px;
-            h4 {
-                font-size: 28px;
-                margin-bottom: 60px;
-            }
-            h5 {
-                font-size: 28px;
-                margin-bottom: 30px;
-            }
             .alert-body {
                 padding: 100px;
-                border-radius: 5px;
-                background-color: rgba(255, 255, 255, 0.5);
-                color: #333333;
-                .alert-text {
-                    padding: 50px 0;
-                }
                 .alert-post {
                     margin: 50px 0;
-                    background-color: #D9D9D9;
+                    img {
+                        width: 300px;
+                        height: auto;
+                        object-fit: cover;
+                    }
                 }
-            }
-            .alert-image {
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                border: 2px solid black;
-                object-fit: cover;
-                margin-right: 15px;
-            }
-            .post-img {
-                width: 300px;
-                height: 400px;
-                object-fit: cover;
-            }
-            a {
-                background-color: #4B709A;
-                color: #FFFFFF;
             }
         }
     }

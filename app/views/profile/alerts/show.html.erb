@@ -7,6 +7,8 @@
 
         <%# ! contents %>
         <div class="main-content">
+			<%= render "layouts/error" %>
+
             <div class="show-content mx-auto">
                 <h4 class="fw-bold text-center">通知</h4>
 
@@ -36,7 +38,7 @@
                                 <div class="d-flex align-items-center">
                                     <%= image_tag "/assets/icons/icn_like.png", class: "alert-image" %>
 
-                                    <div class="align-items-center alart-title">
+                                    <div class="align-items-center alert-title">
                                         <h6 class="fw-bold mb-0 mt-1">いいね！通知</h6>
                                         <small><%= @notification.created_at.strftime('%m月%d日 %H:%M') %></small>
                                     </div> 
@@ -44,12 +46,12 @@
 
                                 <div class="alert-post text-center">
                                     <%= link_to "/sns/show/#{@source_post_id.id}" do %>
-                                        <%= image_tag @source_post_id.photograph.url, class: "post-img" %>
+                                        <%= image_tag @source_post_id.photograph.url(:forced_size), class: "post-img" %>
                                     <% end %>
                                 </div> 
                             <% end %>
                         <% elsif @notification.notification_type === "answer" %>
-                            <% if @source_post_id %>
+                            <% if @source_post_id.nil? %>
                                 <h4 class="fw-bold">投稿が削除されました。</h4>
                             <% else %>
                                 <h5 class="fw-bold"><%= @source_user_id.user_name %>さんがあなたの着こなしの質問に回答しました。</h5>
@@ -57,7 +59,7 @@
                                 <div class="d-flex align-items-center my-3">
                                     <%= image_tag "/assets/icons/icn_q&a.png", class: "alert-image" %>
 
-                                    <div class="align-items-center alart-title">
+                                    <div class="align-items-center alert-title">
                                         <h6 class="fw-bold mb-0 mt-1">回答通知</h6>
                                         <small><%= @notification.created_at.strftime('%m月%d日 %H:%M') %></small>
                                     </div> 
@@ -65,7 +67,7 @@
 
                                 <div class="alert-post text-center">
                                     <%= link_to "/question/show/#{@source_answer_post_id.id}" do %>
-                                        <%= image_tag @source_answer_post_id.photograph.url, class: "post-img" %>
+                                        <%= image_tag @source_answer_post_id.photograph.url(:forced_size), class: "post-img" %>
                                     <% end %>
                                 </div>
                             <% end %>
@@ -75,16 +77,18 @@
                             <div class="d-flex align-items-center my-3">
                                 <%= image_tag "/assets/icons/icn_follow.png", class: "alert-image" %>
 
-                                <div class="align-items-center alart-title">
+                                <div class="align-items-center alert-title">
                                     <h6 class="fw-bold mb-0 mt-1">フォロー通知</h6>
-                                    <small><%= @notification.created_at.strftime('%m月%d日 %H:%M') %></small>
+                                    <small>
+                                        <%= @notification.created_at.strftime('%m月%d日 %H:%M') %>
+                                    </small>
                                 </div> 
                             </div>
 
                             <div class="alert-post text-center">
                                 <%= link_to "/profile/show/#{@source_user_id.id}" do %>
                                     <% if @source_user_id.avatar.url %>
-                                        <%= image_tag @source_user_id.avatar.url, class: "post-img" %>
+                                        <%= image_tag @source_user_id.avatar.url(:forced_size), class: "post-img" %>
                                     <% else %>
                                         <img src="/assets/user/avatar.png" alt="Generic placeholder image" class="post-img">
                                     <% end %>
@@ -94,7 +98,10 @@
                     <% end %>
                     
                     <div class="pt-3 text-center">
-                        <a href="/alert/list" class="btn px-5 rounded-pill">&lt; 戻る</a>
+                        <a href="/alert/list" class="btn px-5 rounded-pill">
+                            <img src="/assets/icons/icn_back.png" alt="">
+                            戻る
+                        </a>
                     </div>
                 </div>
             </div>

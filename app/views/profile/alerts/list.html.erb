@@ -7,15 +7,17 @@
 
         <%# ! contents %>
         <div class="main-content">
+			<%= render "layouts/error" %>
+
             <div class="list-content mx-auto">
                 <h4 class="fw-bold text-center">通知</h4>
 
-                <ul class="tab-menu nav nav-fill">
-                    <li class="nav-item flex-fill">
+                <ul class="tab-menu nav">
+                    <li class="nav-item">
                         <a href="?tab=to_you" class="nav-link <%= params[:tab].nil? || params[:tab] == 'to_you' ? 'active' : '' %>">あなたへ</a>
                     </li>
 
-                    <li class="nav-item flex-fill">
+                    <li class="nav-item">
                         <a href="?page=1&tab=management" class="nav-link <%= params[:tab] == 'management' ? 'active' : '' %>">運営から</a>
                     </li>
                 </ul>
@@ -29,60 +31,66 @@
                                         <div class="d-flex align-items-center">
                                             <%= image_tag "/assets/icons/icn_like.png", class: "alert-image" %>
 
-                                            <div class="align-items-center alart-title">    
-                                                <h6 class="fw-bold mb-0 mt-1">いいね！通知</h6>
+                                            <div class="align-items-center alert-title">    
+                                                <h6 class="fw-bold">いいね！通知</h6>
 
-                                                <label><%= User.find(n.source_user_id).user_name %>さんがあなたの投稿にいいね！しました。</label>
+                                                <label>
+                                                    <%= User.find(n.source_user_id).user_name %>さんがあなたの投稿にいいね！しました。
+                                                </label>
                                             </div>
 
-                                            <div class="align-items-center ms-auto">
+                                            <div class="align-items-center alert-time text-end">
                                                 <% if n.read == 0 %>
-                                                    <div class="text-center">
-                                                        <small class="text-danger">NEW</small>
-                                                    </div>
+                                                    <small class="text-danger">NEW</small>
                                                 <% end %>
 
-                                                <%= time_ago_in_words(n.created_at) %>前
+                                                <div class="time">
+                                                    <%= time_ago_in_words(n.created_at) %>前
+                                                </div>
                                             </div>
                                         </div>
                                     <% elsif n.notification_type === "answer" %>
                                         <div class="d-flex align-items-center">
                                             <%= image_tag "/assets/icons/icn_q&a.png", class: "alert-image" %>
 
-                                            <div class="align-items-center alart-title">    
-                                                <h6 class="fw-bold mb-0 mt-1">回答通知</h6>
+                                            <div class="align-items-center alert-title">    
+                                                <h6 class="fw-bold">回答通知</h6>
 
-                                                <label><%= User.find(n.source_user_id).user_name %>さんがあなたの質問に回答しました。</label>
+                                                <label>
+                                                    <%= User.find(n.source_user_id).user_name %>さんがあなたの質問に回答しました。
+                                                </label>
                                             </div>
 
-                                            <div class="align-items-center ms-auto">
+                                            <div class="align-items-center alert-time text-end">
                                                 <% if n.read == 0 %>
-                                                    <div class="text-center">
-                                                        <small class="text-danger">NEW</small>
-                                                    </div>
+                                                    <small class="text-danger">NEW</small>
                                                 <% end %>
 
-                                                <%= time_ago_in_words(n.created_at) %>前
+                                                <div class="time">
+                                                    <%= time_ago_in_words(n.created_at) %>前
+                                                </div>
                                             </div>
                                         </div>
                                     <% elsif n.notification_type === "follow" %>
                                         <div class="d-flex align-items-center">
                                             <%= image_tag "/assets/icons/icn_follow.png", class: "alert-image" %>
 
-                                            <div class="align-items-center alart-title">    
-                                                <h6 class="fw-bold mb-0 mt-1">フォロー通知</h6>
+                                            <div class="align-items-center alert-title">    
+                                                <h6 class="fw-bold">フォロー通知</h6>
                                                 
-                                                <label><%= User.find(n.source_user_id).user_name %>さんがあなたをフォローしました。</label>
+                                                <label>
+                                                    <%= User.find(n.source_user_id).user_name %>さんがあなたをフォローしました。
+                                                </label>
                                             </div>
 
-                                            <div class="align-items-center ms-auto">
+                                            <div class="align-items-center alert-time text-end">
                                                 <% if n.read == 0 %>
-                                                    <div class="text-center">
-                                                        <small class="text-danger">NEW</small>
-                                                    </div>
+                                                    <small class="text-danger">NEW</small>
                                                 <% end %>
                                                         
-                                                <%= time_ago_in_words(n.created_at) %>前
+                                                <div class="time">
+                                                    <%= time_ago_in_words(n.created_at) %>前
+                                                </div>
                                             </div>
                                         </div>
                                     <% end %>
@@ -101,14 +109,18 @@
                                 <div class="d-flex align-items-center alert-body">
                                     <%= image_tag "/assets/icons/icn_official.png", class: "alert-image" %>
 
-                                    <div class="align-items-center alart-title">    
-                                        <h6 class="fw-bold mb-0 mt-1">MY CLOSET運営</h6>
+                                    <div class="align-items-center alert-title">    
+                                        <h6 class="fw-bold">MY CLOSET運営</h6>
                                         
-                                        <label><%= a.title %></label>
+                                        <label>
+                                            <%= a.title %>
+                                        </label>
                                     </div>
 
-                                    <div class="d-flex align-items-center ms-auto">
-                                        <%= time_ago_in_words(a.created_at) %>前
+                                    <div class="d-flex align-items-center alert-time text-end">
+                                        <div class="time">
+                                            <%= time_ago_in_words(n.created_at) %>前
+                                        </div>
                                     </div>
                                 </div>
                             <% end %>

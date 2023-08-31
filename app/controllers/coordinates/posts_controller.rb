@@ -108,11 +108,11 @@ class Coordinates::PostsController < ApplicationController
                         .pluck(:id)
 
         # 類似しているアイテムを表示
-        @coordinate_items = []
+        @sns_all = []
 
         item_id.each do |item|
             coordinate = Social.where("item1 = :item OR item2 = :item OR item3 = :item OR item4 = :item OR item5 = :item OR item6 = :item", item: item)
-            @coordinate_items << coordinate
+            @sns_all << coordinate
         end
     end
 

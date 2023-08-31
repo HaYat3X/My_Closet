@@ -5,10 +5,29 @@
     .list-content {
         margin-top: 60px;
         margin-bottom: 150px;
+        .tab-menu.nav .nav-item {
+            flex: 1;
+            padding: 0;
+        }
+        .tab-menu.nav .nav-link {
+            display: block;
+            text-align: center;
+            padding: 13px;
+            background-color: #ffffffae;
+            color: #333333;
+            font-size: 14px;
+        }
+        .tab-menu.nav .nav-link.active {
+            background-color: #4B709A;
+            color: #FFFFFF;
+        }
         .closet-image {
             width: 100%;
             height: auto;
             object-fit: cover;
+        }
+        .page {
+            margin-top: 50px;
         }
     }
     // * クローゼット投稿、編集ページの設定
@@ -73,30 +92,47 @@
             border-radius: 10px;
         }
     }
+    // * クローゼット詳細画面
+    .show-content {
+        .sns-area {
+            .user-area {
+                background-color: #222222;
+                padding: 10px;
+                img {
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+                .user-name {
+                    color: #FFFFFF;
+                }
+                .user-height {
+                    font-size: 10px;
+                    color: #FFFFFF;
+                }
+                .like {
+                    img {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                .number-of-likes {
+                    font-size: 14px;
+                    margin-top: 2px;
+                    margin-left: 5px;
+                    color: #FFFFFF;
+                    opacity: .6;
+                }
+            }
+        }
+    }
     // * スマートフォン （小）
     @media (max-width: 768px) {
         // ? クローゼット一覧ページの設定
         .list-content {
             .tab-menu.nav {
-                display: flex;
-                justify-content: space-between;
                 padding: 0;
-            }
-            .tab-menu.nav .nav-item {
-                flex: 1;
-                padding: 0;
-            }
-            .tab-menu.nav .nav-link {
-                display: block;
-                text-align: center;
-                padding: 13px;
-                background-color: #ffffffae;
-                color: #333333;
-                font-size: 14px;
-            }
-            .tab-menu.nav .nav-link.active {
-                background-color: #4B709A;
-                color: #FFFFFF;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
             }
             padding: 0 3px;
             .flex {
@@ -116,6 +152,102 @@
                 padding: 150px 10px;
             }
         }
+        // ? クローゼット詳細ページの設定
+        .show-content {
+            margin-top: 45px;
+            h3 {
+                margin-bottom: 60px;
+                font-size: 28px;
+            }
+            .d-flex-origin {
+                display: block;
+            }
+            .left-content {
+                // width: 100%;
+                // padding-right: 45px;
+                img {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                }
+            }
+            .right-content {
+                margin-top: 50px;
+                width: 100%;
+                .item-data {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 14px 20px;
+                    border-bottom: 1px solid #ABA6A2;
+                    font-size: 16px;
+                    .category {
+                        text-align: left;
+                    }
+                    .data {
+                        text-align: right;
+                        font-weight: bold;
+                    }
+                }
+                .delete-edit-area {
+                    padding: 0 20px;
+                    margin-top: 60px;
+                    .delete-btn {
+                        color: #4B709A;
+                        border: 2px solid #4B709A;
+                        border-radius: 10px;
+                        box-sizing: border-box;
+                    }
+                    .edit-btn {
+                        background-color: #4B709A;
+                        color: #FFFFFF;
+                        border-radius: 10px;
+                    }
+                }
+            }
+            .back-btn {
+                text-align: center;
+                margin-top: 125px;
+                a {
+                    background-color: #4B709A;
+                    font-size: 14px;
+                    color: #FFFFFF;
+                    img {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+            .sns-area {
+                margin-top: 120px;
+                // width: 760px;
+                h6 {
+                    font-size: 18px;
+                    margin-bottom: 40px;
+                }
+                .flex {
+                    width: 50%;
+                    float: left;
+                }
+                .sns-image {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                }
+                .user-area {
+                    img {
+                        width: 35px;
+                        height: 35px;
+                    }
+                    .user-name {
+                        font-size: 16px;
+                    }
+                }
+                .mobile {
+                    display: none;
+                }
+            }
+        }
     }
     // * タブレット
     @media (min-width: 768px) and (max-width: 1280px) {
@@ -125,22 +257,6 @@
                 display: flex;
                 justify-content: space-between;
                 padding: 0;
-            }
-            .tab-menu.nav .nav-item {
-                flex: 1;
-                padding: 0;
-            }
-            .tab-menu.nav .nav-link {
-                display: block;
-                text-align: center;
-                padding: 13px;
-                background-color: #ffffffae;
-                color: #333333;
-                font-size: 14px;
-            }
-            .tab-menu.nav .nav-link.active {
-                background-color: #4B709A;
-                color: #FFFFFF;
             }
             width: 760px;
             .flex {
@@ -159,6 +275,100 @@
                 padding: 200px 50px;
             }
         }
+        // ? クローゼット詳細ページの設定
+        .show-content {
+            margin-top: 45px;
+            h3 {
+                margin-bottom: 60px;
+                font-size: 28px;
+            }
+            width: 760px;
+            .d-flex-origin {
+                display: flex;
+            }
+            .left-content {
+                padding-right: 45px;
+                img {
+                    width: 325px;
+                    height: auto;
+                    object-fit: cover;
+                }
+            }
+            .right-content {
+                width: 100%;
+                .item-data {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 14px 20px;
+                    border-bottom: 1px solid #ABA6A2;
+                    font-size: 16px;
+                    .category {
+                        text-align: left;
+                    }
+                    .data {
+                        text-align: right;
+                        font-weight: bold;
+                    }
+                }
+                .delete-edit-area {
+                    margin-top: 60px;
+                    .delete-btn {
+                        color: #4B709A;
+                        border: 2px solid #4B709A;
+                        border-radius: 10px;
+                    }
+                    .edit-btn {
+                        background-color: #4B709A;
+                        border: 2px solid #4B709A;
+                        color: #FFFFFF;
+                        border-radius: 10px;
+                    }
+                }
+            }
+            .back-btn {
+                text-align: center;
+                margin-top: 125px;
+                a {
+                    background-color: #4B709A;
+                    font-size: 14px;
+                    color: #FFFFFF;
+                    img {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+            .sns-area {
+                margin-top: 120px;
+                width: 760px;
+                h6 {
+                    font-size: 18px;
+                    margin-bottom: 40px;
+                }
+                .flex {
+                    width: 33.3%;
+                    float: left;
+                }
+                .sns-image {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                }
+                .user-area {
+                    img {
+                        width: 35px;
+                        height: 35px;
+                    }
+                    .user-name {
+                        font-size: 16px;
+                    }
+                }
+                .mobile {
+                    display: none;
+                }
+            }
+        }
     }
     // * PC（大）
     @media (min-width: 1280px) {
@@ -170,28 +380,9 @@
                 justify-content: space-between;
                 padding: 0;
             }
-            .tab-menu.nav .nav-item {
-                flex: 1;
-                padding: 0;
-            }
-            .tab-menu.nav .nav-link {
-                display: block;
-                text-align: center;
-                padding: 13px;
-                background-color: #ffffffae;
-                color: #333333;
-                font-size: 14px;
-            }
-            .tab-menu.nav .nav-link.active {
-                background-color: #4B709A;
-                color: #FFFFFF;
-            }
             .flex {
                 width: 20%;
                 float: left;
-            }
-            .page {
-                margin-top: 50px;
             }
         }
         // ? クローゼット投稿、編集ページの設定
@@ -210,82 +401,92 @@
             margin-top: 45px;
             h3 {
                 margin-bottom: 60px;
+                font-size: 28px;
             }
-            .item-area {
-                width: 973px;
-                .left-content {
-                    padding-right: 45px;
-                    .closet-show-image {
-                        width: 425px;
-                        height: 566px;
-                        object-fit: cover;
+            width: 973px;
+            .d-flex-origin {
+                display: flex;
+            }
+            .left-content {
+                padding-right: 45px;
+                img {
+                    width: 425px;
+                    height: auto;
+                    object-fit: cover;
+                }
+            }
+            .right-content {
+                width: 100%;
+                .item-data {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 14px 20px;
+                    border-bottom: 1px solid #ABA6A2;
+                    font-size: 16px;
+                    .category {
+                        text-align: left;
+                    }
+                    .data {
+                        text-align: right;
+                        font-weight: bold;
                     }
                 }
-                .right-content {
-                    .item-data {
-                        padding: 14px 20px;
-                        border-bottom: 1px solid #333333;
-                        margin-bottom: 24px;
+                .delete-edit-area {
+                    margin-top: 60px;
+                    .delete-btn {
+                        color: #4B709A;
+                        border: 2px solid #4B709A;
+                        border-radius: 10px;
                     }
-                    .delete-edit-area {
-                        padding-top: 36px;
-                        .delete-btn {
-                            color: #4B709A;
-                            border: 2px solid #4B709A;
-                            border-radius: 10px;
-                        }
-                        .edit-btn {
-                            background-color: #4B709A;
-                            border: 2px solid #4B709A;
-                            color: #FFFFFF;
-                            border-radius: 10px;
-                        }
+                    .edit-btn {
+                        background-color: #4B709A;
+                        border: 2px solid #4B709A;
+                        color: #FFFFFF;
+                        border-radius: 10px;
                     }
                 }
-                .return-btn {
-                    margin-top: 125px;
+            }
+            .back-btn {
+                text-align: center;
+                margin-top: 125px;
+                a {
                     background-color: #4B709A;
+                    font-size: 14px;
                     color: #FFFFFF;
-                    margin-bottom: 120px;
+                    img {
+                        width: 16px;
+                        height: 16px;
+                    }
                 }
             }
             .sns-area {
+                margin-top: 120px;
                 width: 1014px;
                 h6 {
                     font-size: 18px;
-                    margin-bottom: 39px;
+                    margin-bottom: 40px;
+                }
+                .flex {
+                    width: 25%;
+                    float: left;
                 }
                 .sns-image {
                     width: 100%;
-                    height: 340px;
+                    height: auto;
                     object-fit: cover;
                 }
                 .user-area {
-                    background-color: #222222;
                     img {
                         width: 35px;
                         height: 35px;
-                        border-radius: 50%;
-                        object-fit: cover;
-                        margin-left: 10px;
                     }
                     .user-name {
-                        color: #FFFFFF;
+                        font-size: 16px;
                     }
-                    .user-height {
-                        font-size: 10px;
-                        color: #FFFFFF;
-                    }
-                    .like {
-                        i {
-                            font-size: 18px;
-                        }
-                    }
-                    .number-of-likes {
-                        font-size: 15px;
-                        margin-left: 5px;
-                        color: #FFFFFF;
-                    }
+                }
+                .mobile {
+                    display: none;
                 }
             }
         }
