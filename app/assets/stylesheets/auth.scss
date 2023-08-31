@@ -26,8 +26,11 @@
             background-color: #4B709A;
             opacity: 0.7;
             height: 50px;
-            color: #FFFFFF;
+            font-size: 18px;
             border-radius: 10px;
+            padding: 11px 11px;
+            color: #FFFFFF;
+            border: none;
         }
         .submit-btn:hover {
             background-color: #4b709a;
@@ -51,7 +54,7 @@
     @media (max-width: 768px) {
         // ? 認証ページ
         .auth-content {
-            padding: 0 20px;
+            padding: 0 40px;
             .shared {
                 a {
                     font-size: 16px;
