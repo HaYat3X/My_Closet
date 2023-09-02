@@ -15,7 +15,14 @@
 					<div class="flex">
 						<div class="avater-area">
 							<button type="button" class="origin-btn" data-bs-toggle="modal" data-bs-target="#EditIconModal">
-								<div id="image-preview" class="preview mx-auto"></div>
+								<div class="modal-container">
+									<div id="image-preview" class="preview mx-aut0"></div>
+									
+									<div id="overlay" class="overlay">
+										<img src="/assets/user/cover.png" alt="">
+									</div>
+								</div>
+								<%# <div id="image-preview" class="preview mx-auto"></div> %>
 							</button>
 
 							<div class="modal fade modal-area modal-dialog-scrollable" id="EditIconModal" tabindex="-1" aria-labelledby="exampleModalLabel">
@@ -117,7 +124,7 @@
         const fileInput = document.getElementById('file-input');
         const preview = document.getElementById('image-preview');
         const overlay = document.getElementById('overlay');
-        const defaultImageURL = '/assets/user/cover.png';
+        const defaultImageURL = '<%= j @user.avatar %>';
 
         function displayDefaultImage() {
             const defaultImage = new Image();

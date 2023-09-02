@@ -21,7 +21,9 @@ class Suggestion::SuggestionsController < ApplicationController
             # * パーソナルカラーと好きなコーデによって表示する画像を返す
             case personal_color = user_suggest.personal_color
             when personal_color === "春 (Spring)"
-                @img_path = "/assets/suggest/sample.png"
+                @pc_img_path = "/assets/suggest/pc_spring.png"
+                @mobile_img_path = "/assets/suggest/mobile_spring.png"
+                @tablet_img_path = "/assets/suggest/tablet_spring.png"
                 
                 if current_user_gender == 1
                     @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
@@ -29,7 +31,9 @@ class Suggestion::SuggestionsController < ApplicationController
                     @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 end
             when personal_color === "夏 (Summer)"
-                @img_path = "/assets/suggest/sample.png"
+                @pc_img_path = "/assets/suggest/pc_summer.png"
+                @mobile_img_path = "/assets/suggest/mobile_summer.png"
+                @tablet_img_path = "/assets/suggest/tablet_summer.png"
 
                 if current_user_gender == 1
                     @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
@@ -37,7 +41,9 @@ class Suggestion::SuggestionsController < ApplicationController
                     @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 end
             when personal_color === "秋 (Autumn)"
-                @img_path = "/assets/suggest/sample.png"
+                @pc_img_path = "/assets/suggest/pc_autumn.png"
+                @mobile_img_path = "/assets/suggest/mobile_autumn.png"
+                @tablet_img_path = "/assets/suggest/tablet_autumn.png"
 
                 if current_user_gender == 1
                     @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
@@ -45,7 +51,9 @@ class Suggestion::SuggestionsController < ApplicationController
                     @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 end
             else 
-                @img_path = "/assets/suggest/sample.png"
+                @pc_img_path = "/assets/suggest/pc_winter.png"
+                @mobile_img_path = "/assets/suggest/mobile_winter.png"
+                @tablet_img_path = "/assets/suggest/tablet_winter.png"
 
                 if current_user_gender == 1
                     @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
