@@ -18,15 +18,15 @@
             display: block;
             text-align: center;
             padding: 10px;
-            border: 2px solid #333333;
+            // border-bottom: 2px solid #333333;
             box-sizing: border-box;
-            border-radius: 5px;
+            // border-radius: 5px;
             color: #333333;
         }
         .tab-menu.nav .nav-link.active {
-            background-color: #4B709A;
-            color: #FFFFFF;
-            border: 2px solid #4B709A;
+            // background-color: #4B709A;
+            color: #4B709A;
+            border-bottom: 2px solid #4B709A;
             box-sizing: border-box;
         }
         .flex {
@@ -312,6 +312,22 @@
     @media (max-width: 768px) {
         // ? SNS一覧ページの設定
         .list-content {
+            .tab-menu.nav .nav-link {
+                display: block;
+                text-align: center;
+                padding: 10px;
+                // border-bottom: 2px solid #333333;
+                box-sizing: border-box;
+                // border-radius: 5px;
+                color: #333333;
+                font-size: 16px;
+            }
+            .tab-menu.nav .nav-link.active {
+                // background-color: #4B709A;
+                color: #4B709A;
+                border-bottom: 2px solid #4B709A;
+                box-sizing: border-box;
+            }
             padding: 0 3px;
             .flex {
                 width: 50%;

@@ -128,7 +128,9 @@
                     background-color: #ffffff8b;
                     border-radius: 0 10px 10px 0;
                     padding: 18.5px 0;
+                    position: relative;
                     .user-area {
+                        position: absolute;
                         padding: 0 14.5px;
                         .question-user-image {
                             width: 45px;
@@ -147,18 +149,23 @@
                         }
                     }
                     .question-information {
-                        padding: 0 30px;
-                        font-size: 15px;
+                        position: absolute;
+                        top: 45%;
+                        // left: 50%;
+                        // padding: 0 30px;
+                        // font-size: 15px;
                         // display: flex;
                         // flex-direction: column;
                         // justify-content: center;
                         // align-items: center;
-                        text-align: center;
+                        // text-align: center;
                         // height: 100px;
                     }
                     .answer-area {
+                        position: absolute;
+                        right: 0;
                         display: flex;
-                        justify-content: flex-end;
+                        bottom: 0;
                         align-items: flex-end;
                         margin: 0 14.5px;
                         img {

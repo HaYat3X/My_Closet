@@ -54,6 +54,12 @@
     }
     // * スマホ
     @media (max-width: 768px) {
+        .pc-img {
+            display: none;
+        }
+        .tablet-img {
+            display: none;
+        }
         // ? 提案誘導画面の設定
         .induction-content {
             .section1 {
@@ -139,6 +145,12 @@
     }
     // * タブレット
     @media (min-width: 768px) and (max-width: 1280px) {
+        .pc-img {
+            display: none;
+        }
+        .mobile-img {
+            display: none;
+        }
         // ? 提案誘導画面の設定
         .induction-content {
             .section1 {
@@ -215,6 +227,12 @@
     }
     // * PC
     @media (min-width: 1280px) {
+        .mobile-img {
+            display: none;
+        }
+        .tablet-img {
+            display: none;
+        }
         // ? 提案誘導画面の設定
         .induction-content {
             .section1 {

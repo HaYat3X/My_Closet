@@ -10,7 +10,17 @@
             <%= render "layouts/error" %>
 
             <% if Suggest.exists?(user_id: current_user.id) %>
-                <%= image_tag @img_path, class: "recommend-img" %>
+                <div class="pc-img">
+                    <%= image_tag @pc_img_path, style: "width: 100%;" %>
+                </div>
+
+                <div class="mobile-img">
+                    <%= image_tag @mobile_img_path, style: "width: 100%;" %>
+                </div>
+
+                <div class="tablet-img">
+                    <%= image_tag @tablet_img_path, style: "width: 100%;" %>
+                </div>
             <% end %>
 
             <div class="suggest-content mx-auto">
