@@ -64,7 +64,7 @@
 					</div>
 
 					<div class="mb-3">
-						<%= f.select :category, ['アウター', 'トップス', 'ボトムス', 'シューズ', 'その他'], {include_blank: '質問カテゴリーを選択 ▾'}, class: 'form-control' %>
+						<%= f.select :category, ['着回し相談', 'コーディネート相談', '購入相談'], {include_blank: '質問カテゴリーを選択 ▾'}, class: 'form-control' %>
 							
 						<div>
                             <% @question.errors[:category].each do |error| %>

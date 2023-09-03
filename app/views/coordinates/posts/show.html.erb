@@ -107,7 +107,7 @@
                     <h6 class="fw-bold">このアイテムを使用したコーディネート</h6>
 
                     <% @sns_all.flatten.each do |sns| %>
-                        <div class="flex mt-1">
+                        <div class="flex mt-1 mb-5">
                             <%= link_to "/sns/show/#{sns.id}" do %>
                                 <%= image_tag sns.photograph.url(:forced_size), class: "sns-image" %>
                             <% end %>

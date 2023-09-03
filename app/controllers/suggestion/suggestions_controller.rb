@@ -19,8 +19,8 @@ class Suggestion::SuggestionsController < ApplicationController
             @recommend = recommend(current_user_gender, user_suggest, other_users_suggest)
 
             # * パーソナルカラーと好きなコーデによって表示する画像を返す
-            case personal_color = user_suggest.personal_color
-            when personal_color === "春 (Spring)"
+            puts user_suggest.personal_color
+            if user_suggest.personal_color === "春 (Spring)"
                 @pc_img_path = "/assets/suggest/pc_spring.png"
                 @mobile_img_path = "/assets/suggest/mobile_spring.png"
                 @tablet_img_path = "/assets/suggest/tablet_spring.png"
@@ -30,7 +30,7 @@ class Suggestion::SuggestionsController < ApplicationController
                 else
                     @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 end
-            when personal_color === "夏 (Summer)"
+            elsif user_suggest.personal_color === "夏 (Summer)"
                 @pc_img_path = "/assets/suggest/pc_summer.png"
                 @mobile_img_path = "/assets/suggest/mobile_summer.png"
                 @tablet_img_path = "/assets/suggest/tablet_summer.png"
@@ -40,7 +40,7 @@ class Suggestion::SuggestionsController < ApplicationController
                 else
                     @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 end
-            when personal_color === "秋 (Autumn)"
+            elsif user_suggest.personal_color === "秋 (Autumn)"
                 @pc_img_path = "/assets/suggest/pc_autumn.png"
                 @mobile_img_path = "/assets/suggest/mobile_autumn.png"
                 @tablet_img_path = "/assets/suggest/tablet_autumn.png"
@@ -50,7 +50,7 @@ class Suggestion::SuggestionsController < ApplicationController
                 else
                     @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
                 end
-            else 
+            elsif user_suggest.personal_color === "冬 (Winter)" 
                 @pc_img_path = "/assets/suggest/pc_winter.png"
                 @mobile_img_path = "/assets/suggest/mobile_winter.png"
                 @tablet_img_path = "/assets/suggest/tablet_winter.png"

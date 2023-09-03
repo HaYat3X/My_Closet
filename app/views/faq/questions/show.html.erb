@@ -116,7 +116,7 @@
                             <% end %>
 
                             <div class="align-items-center number-of-like">    
-                                <%= SocialLike.where(social_id: answer.id).count %>人のユーザがいいねしました！
+                                <%= AnswerLike.where(answer_id: answer.id).count %>人のユーザがいいねしました！
                             </div>
                         </div>
                     </div>

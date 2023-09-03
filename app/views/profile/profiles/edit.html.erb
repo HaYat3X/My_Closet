@@ -124,7 +124,15 @@
         const fileInput = document.getElementById('file-input');
         const preview = document.getElementById('image-preview');
         const overlay = document.getElementById('overlay');
-        const defaultImageURL = '<%= j @user.avatar %>';
+		let defaultImageURL;
+    
+		if ('<%= j @user.avatar %>' === '') {
+			defaultImageURL = '/assets/user/avatar.png';
+			console.log("初期画像")
+		} else {
+			defaultImageURL = '<%= j @user.avatar %>';
+			console.log("初期画像じゃない")
+		}
 
         function displayDefaultImage() {
             const defaultImage = new Image();
