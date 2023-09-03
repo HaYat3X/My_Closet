@@ -51,7 +51,7 @@
                                 </div> 
                             <% end %>
                         <% elsif @notification.notification_type === "answer" %>
-                            <% if @source_post_id.nil? %>
+                            <% if @source_post_id %>
                                 <h4 class="fw-bold">投稿が削除されました。</h4>
                             <% else %>
                                 <h5 class="fw-bold"><%= @source_user_id.user_name %>さんがあなたの着こなしの質問に回答しました。</h5>

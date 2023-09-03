@@ -130,11 +130,11 @@
                     <% if user_signed_in? %>
                         <% if current_user.id == @sns.user.id  %>
                             <div class="col-6">
-                                <%= link_to "コーディネートを削除", "/sns/delete/#{@sns.id}", method: :delete, class: "delete-btn btn col-12" %>
+                                <%= link_to "削除", "/sns/delete/#{@sns.id}", method: :delete, class: "delete-btn btn col-12" %>
                             </div>
                                     
                             <div class="col-6">
-                                <%= link_to "コーディネートを編集", "/sns/edit/#{@sns.id}", class: "edit-btn btn col-12" %>
+                                <%= link_to "編集", "/sns/edit/#{@sns.id}", class: "edit-btn btn col-12" %>
                             </div>
                         <% end %>
                     <% end %>

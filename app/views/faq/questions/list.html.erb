@@ -25,7 +25,7 @@
                 <div class="tab-content mt-3">
                     <%# ? allエリア %>
                     <div id="all" class="tab-pane active">
-                        <div class="question-area row">
+                        <div class="question-area row g-3">
                             <% @questions_all.each do |question| %>
                                 <div class="flex">
                                     <div class="d-flex">
@@ -57,7 +57,7 @@
                                             </div>
 
                                             <div class="question-information">
-                                                <%= truncate(question.question, length: 44) %>
+                                                <%= truncate(question.question, length: 20) %>
                                             </div>
 
                                             <div class="answer-area">
