@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_30_025051) do
+ActiveRecord::Schema.define(version: 2023_07_15_131029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,20 +21,6 @@ ActiveRecord::Schema.define(version: 2023_05_30_025051) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-    t.integer "failed_attempts", default: 0, null: false
-    t.string "unlock_token"
-    t.datetime "locked_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
@@ -81,11 +67,22 @@ ActiveRecord::Schema.define(version: 2023_05_30_025051) do
     t.index ["user_id"], name: "index_closets_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "notification_type", null: false
+    t.integer "source_user_id", null: false
+    t.integer "source_post_id", null: false
+    t.integer "read", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "questions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "photograph", null: false
-    t.string "question", limit: 100, null: false
+    t.string "question", null: false
     t.string "category", null: false
+    t.string "search"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_questions_on_user_id"
@@ -102,6 +99,7 @@ ActiveRecord::Schema.define(version: 2023_05_30_025051) do
 
   create_table "socials", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.string "title", null: false
     t.string "tag"
     t.string "message"
     t.string "photograph", null: false
@@ -119,8 +117,15 @@ ActiveRecord::Schema.define(version: 2023_05_30_025051) do
 
   create_table "suggests", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "style1"
-    t.string "style2"
+    t.string "personal_color"
+    t.string "eye_color", null: false
+    t.string "hair_color", null: false
+    t.string "skin_color", null: false
+    t.string "size", null: false
+    t.integer "style1", null: false
+    t.integer "style2", null: false
+    t.integer "style3", null: false
+    t.string "total_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_suggests_on_user_id"
@@ -143,14 +148,13 @@ ActiveRecord::Schema.define(version: 2023_05_30_025051) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "gender", default: ""
+    t.integer "gender"
     t.string "profile", default: ""
     t.integer "height"
     t.integer "weight"
     t.string "user_name", default: "", null: false
     t.integer "age"
     t.string "avatar"
-    t.string "tendency"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

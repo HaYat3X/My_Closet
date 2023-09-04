@@ -1,14 +1,70 @@
-<p class="fw-bold"><%= @email %>様</p>
-<p>「My Closet（マイクローゼット）」をいつもご利用頂き、ありがとうございます。お客様のアカウントがロックされたことをお知らせします。</p>
-<p>アカウントのロックを解除するには、以下のリンクをクリックしてください。</p>
-<p>パスワードをリセットするために、下記の「ロック解除する」ボタンをクリックしてパスワードをリセットしてください。</p>
-<p><%= link_to 'ロックを解除する', unlock_url(@resource, unlock_token: @token) %></p>
-<p>このメールに身に覚えがない場合は、このメールを削除してください。</p>
-<p>
-    --------------------<br>
-    運営事務局<br>
-    責任者： 竹中<br>
-    E-mail: kd1360801@st.kobedenshi.ac.jp<br>
-    住所: ダチョウシステムズ本社 <br>
-    --------------------
-</p>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <style>
+        body {
+            font-family: Hiragino Kaku Gothic Pro;
+            color: #222222;
+            padding: 0;
+            margin: 0;
+        }
+        .content {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px 40px;
+            border: 1px solid #333333;
+            border-radius: 5px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 120px;
+            height: auto;
+            border-radius: 50%;
+        }
+        .fw-bold {
+            font-weight: bold;
+        }
+        p {
+            color: #222222;
+        }
+        .message {
+            margin-bottom: 80px;
+        }
+        .button {
+            text-align: center;
+        }
+        .button a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4b709a;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="logo">
+            <%= image_tag attachments['logo.png'].url, alt: 'Company Logo' %>
+        </div>
+
+        <div class="message">
+            <p class="fw-bold"><%= @resource.user_name %>様</p>
+            <p>「MY CLOSET（マイクローゼット）」をいつもご利用頂き、ありがとうございます。<br>
+            お客様のアカウントがロックされたことをお知らせします。</p>
+            <p>アカウントのロックを解除するために、下記の「解除する」ボタンを押してアカウントロックを解除してください。</p>
+            <p>このメールに身に覚えがない場合は、このメールを削除してください。</p>
+        </div>
+
+        <div class="button">
+            <%= link_to '解除する', unlock_url(@resource, unlock_token: @token) %>
+        </div>
+    </div>
+</body>
+
+</html>

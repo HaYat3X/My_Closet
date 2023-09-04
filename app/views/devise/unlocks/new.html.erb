@@ -1,27 +1,21 @@
-<div id="auth" class="col-lg-4 col-md-6 col-12 mt-5 mx-auto">
-    <h2 class="text-center mb-5 fw-bold text-primary">My Closet</h2>
+<div id="auth" style="padding-top: 90px; padding-bottom: 150px;">
+    <div class="auth-content mx-auto">
+        <h2 class="text-center fw-bold">アカウント復旧</h2>
 
-    <%# * アカウントロック解除フォーム %>
-    <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), :html => {class:"needs-validation", :novalidate => true}) do |f|%>
+        <%= form_for(resource, as: resource_name, url: unlock_path(resource_name)) do |f|%>
+            <div class="mt-3">
+                <%= f.email_field :email, placeholder: "メールアドレス", class: "form-control", autofocus: true, autocomplete: "email" %>
 
-        <%# ? バックエンド側でのバリデーションチェック %>
-        <%= render "devise/shared/error_messages", resource: resource %>
-
-        <%# ? メールアドレス入力エリア %>
-        <div class="mt-3 input-group">
-            <span class="input-group-text" id="addon-wrapping">
-                <i class="bi bi-envelope"></i>
-            </span>
-            <%= f.email_field :email, placeholder: "メールアドレス", class: "form-control", autofocus: true, autocomplete: "email" ,required: true%>
-            <div class="invalid-feedback">
-                メールアドレスを入力して下さい。
+                <div>
+                    <%= render "devise/shared/error_messages", resource: resource %>
+                </div>
             </div>
-        </div>
 
-        <div class="my-3">
-          <%= f.submit "アカウントロック解除", class: "btn btn-outline-primary col-12" %>
-        </div>
-    <% end %>
+            <div class="mx-auto col-11">
+                <%= f.submit "アカウントを復旧", class: "btn col-12 fw-bold submit-btn" %>
+            </div>
 
-    <%= render "devise/shared/links" %>
+            <%= render "devise/shared/links" %>
+        <% end %>
+    </div>
 </div>

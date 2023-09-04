@@ -1,0 +1,109 @@
+<nav class="header pc-header navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand logo-area d-flex align-items-center" href="/">
+            <%= image_tag "/assets/logos/logo1.png" %>
+        </a>
+
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarForm" aria-controls="navbarForm" aria-expanded="false" aria-label="ナビゲーションの切替">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarForm">
+            <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}")  %>
+                <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search", required: true %>
+
+                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+
+                <a href="/alert/list" class="btn alert-btn">
+                    <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
+
+                    <% if @number_of_notifications.count != 0 %>
+                        <span class="rounded-pill text-bg-danger">
+                            <small>
+                                <% if @number_of_notifications.count >= 99 %>
+                                    99+
+                                <% else %>
+                                    <%= @number_of_notifications.count %>
+                                <% end %>
+                            </small>
+                        </span>
+                    <% end %>
+                </a>
+            <% elsif current_page?("/closet/list") || current_page?("/closet/show/#{params[:id]}") || current_page?("/closet/search") || current_page?("/closet/new") || current_page?("/closet/edit/#{params[:id]}") %>
+                <%= form_with(url: "/closet/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search", required: true %>
+
+                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+
+                <a href="/alert/list" class="btn alert-btn">
+                    <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
+
+                    <% if @number_of_notifications.count != 0 %>
+                        <span class="rounded-pill text-bg-danger">
+                            <small>
+                                <% if @number_of_notifications.count >= 99 %>
+                                    99+
+                                <% else %>
+                                    <%= @number_of_notifications.count %>
+                                <% end %>
+                            </small>
+                        </span>
+                    <% end %>
+                </a>
+            <% elsif current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") %>
+                <%= form_with(url: "/faq/question/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                    <div class="input-group">
+                        <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+
+                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                            <i class="bi bi-search"></i>
+                        <% end %>
+                    </div>
+                <% end %>
+
+                <a href="/alert/list" class="btn alert-btn">
+                    <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
+
+                    <% if @number_of_notifications.count != 0 %>
+                        <span class="rounded-pill text-bg-danger">
+                            <small>
+                                <% if @number_of_notifications.count >= 99 %>
+                                    99+
+                                <% else %>
+                                    <%= @number_of_notifications.count %>
+                                <% end %>
+                            </small>
+                        </span>
+                    <% end %>
+                </a>
+            <% else %>
+                <a href="/alert/list" class="btn d-flex ms-auto alert-btn">
+                    <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
+
+                    <% if @number_of_notifications.count != 0 %>
+                        <span class="rounded-pill text-bg-danger">
+                            <small>
+                                <% if @number_of_notifications.count >= 99 %>
+                                    99+
+                                <% else %>
+                                    <%= @number_of_notifications.count %>
+                                <% end %>
+                            </small>
+                        </span>
+                    <% end %>
+                </a>
+            <% end %>
+        </div>
+    </div>
+</nav>

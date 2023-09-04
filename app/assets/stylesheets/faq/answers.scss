@@ -1,3 +1,262 @@
-// Place all the styles related to the faq/answers controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+#faq_answers {
+    // ! 全サイズ共通
+    // * 質問投稿、編集ページの設定
+    .new-edit-content {
+        margin-top: 45px;
+        margin-bottom: 150px;
+        h3 {
+            font-size: 28px;
+            margin-bottom: 60px;
+        }
+        form {
+            .modal-area {
+                .modal-body {
+                    background-color: #333333;
+                }
+                .post-area {
+                    background-color: #333333;
+                    .submit-btn {
+                        background-color: #4B709A;
+                        color: #FFFFFF;
+                    }
+                }
+            }
+            .modal-container {
+                position: relative;
+            }
+            #overlay {
+                position: absolute;
+                top: 0;
+                opacity: .6;
+            }
+            .overlay img {
+                width: 189px;
+                height: 262px;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+            input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
+                border-radius: 10px;
+                height: 50px;
+                background-color: #FFFFFF;
+                opacity: .5;
+            }
+            select {
+                border-radius: 10px;
+                height: 50px;
+                background-color: #FFFFFF;
+                opacity: .5;
+            }
+            textarea {
+                border-radius: 10px;
+                height: 50px;
+                background-color: #FFFFFF;
+                opacity: .5;
+            }
+            .item {
+                border: none;
+                background-color: #CBC5C1;
+            }
+            .cancel-btn {
+                color: #4B709A;
+                border: 2px solid #4B709A;
+                border-radius: 10px;
+            }
+            .submit-btn {
+                background-color: #4B709A;
+                border: 2px solid #4B709A;
+                color: #FFFFFF;
+                border-radius: 10px;
+            }
+        }
+    }
+    // * スマートフォン
+    @media (max-width: 768px) {
+        // ? 質問投稿、編集ページの設定
+        .new-edit-content {
+            padding: 0 20px;
+            .question-area {
+                background-color: #ffffff7d;
+                padding: 20px 30px;
+                margin: 0 auto;
+                .user-area {
+                    .question-user-image {
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        margin-right: 10px;
+                    }
+                    .user-information {
+                        h5 {
+                            font-size: 16px;
+                        }
+                        small {
+                            font-size: 12px;
+                        }
+                    }
+                }
+                .delete-btn {
+                    color: #4B709A;
+                    border: 2px solid #4B709A;
+                    border-radius: 10px;
+                }
+                .edit-btn {
+                    background-color: #4B709A;
+                    border: 2px solid #4B709A;
+                    color: #FFFFFF;
+                    border-radius: 10px;
+                }
+                .question-content {
+                    font-size: 18px;
+                    margin-top: 25px;
+                    margin-bottom: 40px;
+                }
+                .question-image {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    margin-bottom: 30px;
+                }
+            }
+            form {
+                width: 350px;
+                margin: 50px auto 0;
+                label {
+                    font-size: 15px;
+                    margin-bottom: 15px;
+                }
+                .coordinate-modal {
+                    padding: 200px 50px;
+                }
+            }
+        }
+    }
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 1280px) {
+        // ? 質問投稿、編集ページの設定
+        .new-edit-content {
+            .question-area {
+                background-color: #ffffff7d;
+                padding: 30px 60px;
+                width: 760px;
+                margin: 0 auto;
+                .user-area {
+                    .question-user-image {
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        margin-right: 10px;
+                    }
+                    .user-information {
+                        h5 {
+                            font-size: 16px;
+                        }
+                        small {
+                            font-size: 12px;
+                        }
+                    }
+                }
+                .delete-btn {
+                    color: #4B709A;
+                    border: 2px solid #4B709A;
+                    border-radius: 10px;
+                }
+                .edit-btn {
+                    background-color: #4B709A;
+                    border: 2px solid #4B709A;
+                    color: #FFFFFF;
+                    border-radius: 10px;
+                }
+                .question-content {
+                    font-size: 18px;
+                    margin-top: 25px;
+                    margin-bottom: 40px;
+                }
+                .question-image {
+                    width: 40%;
+                    height: auto;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    margin-bottom: 30px;
+                }
+            }
+            form {
+                width: 550px;
+                margin: 50px auto 0;
+                label {
+                    font-size: 15px;
+                    margin-bottom: 15px;
+                }
+                .coordinate-modal {
+                    padding: 200px 50px;
+                }
+            }
+        }
+    }
+    // * PC（大）
+    @media (min-width: 1280px) {
+        // ? 質問投稿、編集ページの設定
+        .new-edit-content {
+            .question-area {
+                background-color: #ffffff7d;
+                padding: 40px 100px;
+                width: 973px;
+                margin: 0 auto;
+                .user-area {
+                    .question-user-image {
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        margin-right: 10px;
+                    }
+                    .user-information {
+                        h5 {
+                            font-size: 16px;
+                        }
+                        small {
+                            font-size: 12px;
+                        }
+                    }
+                }
+                .delete-btn {
+                    color: #4B709A;
+                    border: 2px solid #4B709A;
+                    border-radius: 10px;
+                }
+                .edit-btn {
+                    background-color: #4B709A;
+                    border: 2px solid #4B709A;
+                    color: #FFFFFF;
+                    border-radius: 10px;
+                }
+                .question-content {
+                    font-size: 18px;
+                    margin-top: 25px;
+                    margin-bottom: 40px;
+                }
+                .question-image {
+                    width: 35%;
+                    height: auto;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    margin-bottom: 30px;
+                }
+            }
+            form {
+                width: 793px;
+                margin: 50px auto 0;
+                label {
+                    font-size: 15px;
+                    margin-bottom: 15px;
+                }
+                .coordinate-modal {
+                    padding: 200px 50px;
+                }
+            }
+        }
+    }
+}

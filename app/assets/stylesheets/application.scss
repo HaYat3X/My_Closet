@@ -2,6 +2,7 @@
 @import "./coordinates/posts";
 @import "./sns/posts";
 @import "./sns/searchs";
+@import "./sns/likes";
 @import "./faq/questions";
 @import "./profile/profiles";
 @import "./profile/follows";
@@ -9,26 +10,398 @@
 @import "./coordinates/searchs";
 @import "./contact/contacts";
 @import "./suggestion/suggestions";
-:root {
+@import "./faq/searchs";
+@import "./faq/answers";
+ :root {
     --primary: #0d6efd;
     --dark: #21252f;
     --body: #888;
     --box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
-    --bg: #e0e0e0;
+    --bg: #CBC5C1;
 }
 
+// ! フォント、背景色の定義
+body {
+    font-family: Hiragino Kaku Gothic Pro;
+    color: #222222;
+    background-color: var(--bg);
+}
+
+// ! 空白を初期
 * {
     margin: 0;
     padding: 0;
 }
 
-body {
-    font-family: Sora, "sans-serif";
-    line-height: 1.7;
-    color: #575757;
-    background-color: var(--bg);
+// ! headerの共通部分の設定
+.header {
+    background-color: #222222;
 }
 
-.loading {
-    display: none;
+// ! サイドバーの設定
+.sidebar {
+    overflow-y: scroll;
+    background-color: #CBC5C1;
+    box-shadow: var(--box-shadow);
+    a {
+        color: #333333;
+        text-decoration: none;
+    }
+    .active {
+        background-color: #4B709A;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+    .search-identification a:hover {
+        text-decoration: underline;
+        color: #333333;
+        background-color: #CBC5C1;
+    }
+}
+
+//! フッターの設定
+.footer {
+    padding: 20px 40px;
+    background-color: #222222;
+    color: #FFFFFF;
+    font-size: 10px;
+    margin-top: 150px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+// ! アラートメッセージの設定
+.alert {
+    padding: 7px;
+    margin: 0;
+}
+
+// ! モバイル
+@media (max-width: 768px) {
+    // * PC用のヘッダーを非表示
+    .pc-header {
+        display: none;
+    }
+    // * PCのサイドバーの非表示
+    .pc-sidebar {
+        display: none;
+    }
+    // * コンテンツの幅の設定
+    .main-content {
+        width: 100%;
+    }
+    // * タブレットのヘッダーの非表示
+    .tablet-header {
+        display: none;
+    }
+    // * サイドバーを非表示
+    .side-content {
+        display: none;
+    }
+    // * ヘッダー分の余白を設定
+    .content {
+        margin-top: 70px;
+    }
+    // * モバイルのヘッダーのレイアウト
+    .mobile-header {
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 5px;
+        padding-right: 15px;
+        .logo-area {
+            display: flex;
+            align-items: center;
+            width: auto;
+            height: 100%;
+            margin: 0 auto;
+            img {
+                height: 30px;
+            }
+        }
+        .search-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            padding: 0;
+            appearance: none;
+            img {
+                width: 25px;
+            }
+        }
+        .hamburger {
+            margin-right: 12px;
+            img {
+                width: 35px;
+            }
+        }
+        .alert-btn {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .text-bg-danger {
+            position: absolute;
+            top: -8px;
+            right: -4px;
+            background-color: red;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 8px;
+        }
+        .bell-btn {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+        }
+        .sidebar {
+            overflow: auto;
+            height: 100%;
+            width: 267px;
+            .btn-close {
+                font-size: 20px;
+                font-weight: bold;
+                margin-right: 10px;
+                margin-top: 10px;
+            }
+            ul {
+                .nav-item {
+                    a {
+                        font-size: 16px;
+                        padding: 13px 40px;
+                    }
+                    img {
+                        margin-right: 10px;
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                hr {
+                    margin: 10px 40px;
+                    background: #727272;
+                }
+                label {
+                    font-size: 22px;
+                    padding: 0 40px;
+                    margin: 20px 0 15px;
+                }
+                .post-btn {
+                    margin: 20px 30px 60px;
+                    a {
+                        gap: 5px;
+                        background-color: #4B709A;
+                        color: #FFFFFF;
+                        text-decoration: none;
+                        font-size: 16px;
+                        padding: 13px 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// * タブレット
+@media (min-width: 768px) and (max-width: 1280px) {
+    // * headerの設定
+    .header {
+        height: 90px;
+    }
+    // * コンテンツの高さを設定
+    .content {
+        margin-top: 90px;
+    }
+    // * PCのヘッダーの非表示
+    .pc-header {
+        display: none;
+    }
+    // * サイドコンテンツの非表示
+    .side-content {
+        display: none;
+    }
+    // * モバイルのヘッダーを非表示
+    .mobile-header {
+        display: none;
+    }
+    // * コンテンツの幅の設定
+    .main-content {
+        width: 100%;
+    }
+    // * タブレットのヘッダーの設定
+    .tablet-header {
+        padding: 14px 20px;
+        .logo-area {
+            img {
+                width: 175.385px;
+                height: 40px;
+            }
+        }
+        .hamburger {
+            img {
+                width: 45px;
+            }
+        }
+        .alert-btn {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .text-bg-danger {
+            position: absolute;
+            top: 23px;
+            right: 28px;
+            background-color: red;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 8px;
+        }
+        .bell-btn {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+        }
+        .sidebar {
+            overflow: auto;
+            height: 100%;
+            width: 267px;
+            .btn-close {
+                font-size: 25px;
+                font-weight: bold;
+                margin-right: 10px;
+                margin-top: 10px;
+            }
+            ul {
+                .nav-item {
+                    a {
+                        font-size: 16px;
+                        padding: 8px 40px;
+                    }
+                    img {
+                        margin-right: 10px;
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                label {
+                    font-size: 22px;
+                    padding: 0 40px;
+                    margin: 20px 0 15px;
+                }
+                .post-btn {
+                    margin: 0 30px;
+                    margin-top: 10px;
+                    a {
+                        gap: 5px;
+                        background-color: #4B709A;
+                        color: #FFFFFF;
+                        text-decoration: none;
+                        font-size: 16px;
+                        padding: 13px 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// * PC（大）
+@media (min-width: 1280px) {
+    // * headerの設定
+    .header {
+        height: 90px;
+    }
+    // * モバイルのヘッダーの非表示
+    .mobile-header {
+        display: none;
+    }
+    // * タブレットハッダーのの非表示
+    .tablet-header {
+        display: none;
+    }
+    // * コンテンツの高さを設定
+    .content {
+        margin-top: 90px;
+    }
+    // * PCのサイドバーのレイアウト設定
+    .pc-sidebar {
+        ul {
+            .nav-item {
+                a {
+                    font-size: 14px;
+                    padding: 8px 40px;
+                }
+                img {
+                    margin-right: 10px;
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+            label {
+                font-size: 20px;
+                padding: 0 40px;
+                margin: 20px 0 15px;
+            }
+            .post-btn {
+                margin: 0 30px;
+                margin-top: 10px;
+                a {
+                    gap: 5px;
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                    text-decoration: none;
+                    font-size: 14px;
+                    padding: 12px 0;
+                }
+            }
+        }
+        i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+    }
+    // * サイドバーの幅の設定
+    .side-content {
+        width: 267px;
+    }
+    // * コンテンツの幅の設定
+    .main-content {
+        width: calc(100vw - 267px);
+    }
+    // * PCヘッダーの設定
+    .pc-header {
+        .alert-btn {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .text-bg-danger {
+            position: absolute;
+            top: -3px;
+            right: 7px;
+            background-color: red;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 8px;
+        }
+        .bell-btn {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+        }
+        padding: 14px 40px;
+        .logo-area {
+            img {
+                width: 20%;
+            }
+        }
+    }
 }

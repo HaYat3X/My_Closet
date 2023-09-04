@@ -1,79 +1,447 @@
 // ! profilesフォルダのレイアウト （edit, show）
 #profile_profiles {
     // ! 全サイズ共通
-    // ?　タブのアクションカラー変更
-    .tab-ul {
-        .active {
-            color: var(--primary);
-        }
-        a {
-            color: var(--dark);
-        }
+    // ? プロフィールページ
+    .profile-cover {
+        width: 100%;
+        object-fit: cover;
     }
-    // * sidebar関連
-    .pc-sidebar {
-        border-radius: 5px;
-        // ? アイコンの表示設定
-        i {
-            margin-right: 10px;
+    .show-content {
+        margin-bottom: 150px;
+        .tab-menu.nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
         }
-        // ? リストの表示設定
-        li:hover {
-            background-color: var(--primary);
-            border-radius: 5px;
+        .tab-menu.nav .nav-item {
+            flex: 1;
+            padding: 0;
         }
-        // ? リンクの表示設定
-        a {
-            color: var(--dark);
+        .tab-menu.nav .nav-link {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            color: #333333;
+            font-size: 14px;
         }
-        a:hover {
-            color: #ffffff;
-        }
-        // ? サインイン、サインアウトのレイアウト
-        .action-link {
-            a:hover {
-                color: var(--dark);
-                background-color: var(--bg);
+        .tab-menu.nav .nav-link.active {
+            background-color: #4B709A;
+            color: #FFFFFF;
+            svg {
+                path {
+                    fill: #FFFFFF;
+                }
             }
         }
-        // ? コンテンツエリアと少し幅を空ける
-        .sidebar-content {
-            margin-right: 5px;
+        .edit-btn {
+            background-color: #4B709A;
+            color: #FFFFFF;
+        }
+        .follow-btn {
+            background-color: #4B709A;
+            color: #FFFFFF;
+        }
+        .un-follow-btn {
+            background-color: #E5E2E0;
+            color: #222222;
+        }
+        h4 {
+            font-size: 28px;
+        }
+        small {
+            font-size: 12px;
+        }
+        .avatar {
+            width: 135px;
+            height: 135px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .profile {
+            margin-top: 24px;
+        }
+        .user-post-area {
+            margin-top: 50px;
+            .user-post-content {
+                .flex {
+                    float: left;
+                }
+                .photograph {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                }
+            }
+            .user-question-content {
+                .question-area {
+                    .flex {
+                        margin-bottom: 10px;
+                    }
+                    .left-content {
+                        width: 42%;
+                        img {
+                            width: 100%;
+                            height: auto;
+                            object-fit: cover;
+                            border-radius: 10px 0 0 10px;
+                        }
+                    }
+                    .right-content {
+                        width: 58%;
+                        background-color: #ffffff8b;
+                        border-radius: 0 10px 10px 0;
+                        padding: 18.5px 0;
+                        .answer-area {
+                            display: flex;
+                            justify-content: flex-end;
+                            align-items: flex-end;
+                            margin: 0 14.5px;
+                            img {
+                                width: 18px;
+                                height: 18px;
+                                object-fit: cover;
+                                margin-right: 2px;
+                            }
+                            small {
+                                font-size: 16px;
+                                display: flex;
+                                align-items: center;
+                                height: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .page {
+            margin-top: 50px;
         }
     }
-    // * スマートフォン （小）
-    @media (max-width: 575.98px) {}
-    // * スマートフォン （中）
-    @media (min-width: 576px) and (max-width: 767.98px) {}
-    // * タブレット
-    @media (min-width: 768px) and (max-width: 991.98px) {}
-    // * PC（小）
-    @media (min-width: 992px) and (max-width: 1199.98px) {}
-    // * PC（大）
-    @media (min-width: 1200px) {
-        // ? プロフィール画面のアイコンサイズ
-        .avatar {
+    // * プロフィール編集ページ
+    .edit-content {
+        margin-bottom: 150px;
+        .avater-area {
+            .origin-btn {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                outline: none;
+                padding: 0;
+                appearance: none;
+            }
+        }
+        input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+            border-radius: 10px;
+            height: 50px;
+            opacity: .6;
+        }
+        select {
+            border-radius: 10px;
+            height: 50px;
+            opacity: .6;
+        }
+        textarea {
+            opacity: .6;
+        }
+        .modal-container {
+            position: relative;
+        }
+        #overlay {
+            position: absolute;
+            top: 0;
+            opacity: .6;
+        }
+        .overlay img {
             width: 150px;
             height: 150px;
             object-fit: cover;
             border-radius: 50%;
         }
-        // ? マイページ投稿画像のサイズ
-        .profiles_image {
-            height: 250px;
-            width: 100%;
-            object-fit: cover;
-        }
-        // ? プロフィール画面のフォロー、フォロワーリンクの調整
-        .follows_area {
-            a {
-                text-decoration: none;
+        .modal-area {
+            .modal-body {
+                background-color: #333333;
+            }
+            .post-area {
+                background-color: #333333;
+                .submit-btn {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                }
             }
         }
-        .follows_area {
-            a:hover {
-                text-decoration: underline;
-                border-bottom: 1.5px solid;
+        .cancel-btn {
+            color: #4B709A;
+            border: 2px solid #4B709A;
+            border-radius: 10px;
+        }
+        .submit-btn {
+            background-color: #4B709A;
+            border: 2px solid #4B709A;
+            color: #FFFFFF;
+            border-radius: 10px;
+        }
+    }
+    // * スマートフォン （小）
+    @media (max-width: 768px) {
+        // ? プロフィール
+        .profile-cover {
+            height: 173px !important;
+        }
+        .show-content {
+            .pc-tablet {
+                display: none;
+            }
+            .pc-tablet-menu {
+                display: none;
+            }
+            .mobile-menu {
+                padding: 0 3px;
+            }
+            .mobile {
+                padding: 0 20px;
+                margin-top: -70px;
+                text-align: center;
+                .follow-area {
+                    margin-top: 30px;
+                    a {
+                        font-size: 14px;
+                        text-decoration: none;
+                        span {
+                            font-weight: bold;
+                            font-size: 20px;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+            .profile {
+                text-align: center;
+                padding: 0 20px;
+            }
+            .user-post-area {
+                .user-post-content {
+                    padding: 0 3px;
+                    .flex {
+                        width: 50%;
+                    }
+                }
+                .user-question-content {
+                    padding: 0 10px;
+                    .question-area {
+                        .flex {
+                            width: 100%;
+                        }
+                        .right-content {
+                            .question-information {
+                                padding: 0 30px;
+                                font-size: 15px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                                text-align: center;
+                                // height: 136px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // ? プロフィール編集ページ
+        .edit-content {
+            margin-top: -80px;
+            padding: 0 20px;
+            .flex {
+                display: block;
+            }
+            .avater-area {
+                text-align: center;
+            }
+            .user-area {
+                padding: 0 20px;
+                margin-top: 30px;
+            }
+            .coordinate-modal {
+                padding: 150px 10px;
+            }
+            .col-12 {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    }
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 1280px) {
+        // ? プロフィールページの設定
+        .profile-cover {
+            height: 243px !important;
+        }
+        .show-content {
+            margin-top: 50px;
+            width: 753px;
+            .mobile {
+                display: none;
+            }
+            .mobile-menu {
+                display: none;
+            }
+            .pc-tablet {
+                display: flex;
+                align-items: center;
+                .avatar {
+                    margin-right: 40px;
+                }
+                .user-information-area {
+                    .follow-area {
+                        margin-top: 30px;
+                        display: flex;
+                        a {
+                            display: flex;
+                            align-items: center;
+                            font-size: 14px;
+                            text-decoration: none;
+                            span {
+                                font-weight: bold;
+                                font-size: 22px;
+                                margin-right: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+            .user-post-area {
+                margin-top: 50px;
+                .user-post-content {
+                    .flex {
+                        width: 33.3%;
+                    }
+                }
+                .user-question-content {
+                    .question-area {
+                        .flex {
+                            width: 50%;
+                            float: left;
+                        }
+                        .right-content {
+                            .question-information {
+                                padding: 0 30px;
+                                font-size: 15px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                                text-align: center;
+                                height: 136px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // ? プロフィール編集ページ
+        .edit-content {
+            margin-top: 50px;
+            width: 754px;
+            .flex {
+                display: flex;
+            }
+            .avater-area {
+                width: 200px;
+            }
+            .user-area {
+                width: 550px;
+            }
+            .coordinate-modal {
+                padding: 200px 50px;
+            }
+        }
+    }
+    // * PC（大）
+    @media (min-width: 1280px) {
+        // ? プロフィールページの設定
+        .profile-cover {
+            width: 100%;
+            height: 243px !important;
+            object-fit: cover;
+        }
+        .show-content {
+            margin-top: 50px;
+            width: 973px;
+            .mobile {
+                display: none;
+            }
+            .mobile-menu {
+                display: none;
+            }
+            .pc-tablet {
+                display: flex;
+                align-items: center;
+                .avatar {
+                    margin-right: 40px;
+                }
+                .user-information-area {
+                    .follow-area {
+                        margin-top: 30px;
+                        display: flex;
+                        a {
+                            display: flex;
+                            align-items: center;
+                            font-size: 14px;
+                            text-decoration: none;
+                            span {
+                                font-weight: bold;
+                                font-size: 22px;
+                                margin-right: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+            .user-post-area {
+                margin-top: 50px;
+                .user-post-content {
+                    .flex {
+                        width: 33.3%;
+                    }
+                    padding: 0 120px;
+                }
+                .user-question-content {
+                    .question-area {
+                        .flex {
+                            width: 50%;
+                            float: left;
+                        }
+                        .right-content {
+                            .question-information {
+                                padding: 0 30px;
+                                font-size: 15px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                                text-align: center;
+                                height: 196px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // ? プロフィール編集ページ
+        .edit-content {
+            width: 973px;
+            margin-top: 50px;
+            .flex {
+                display: flex;
+            }
+            .avater-area {
+                width: 200px;
+            }
+            .user-area {
+                width: 773px;
+            }
+            .coordinate-modal {
+                padding: 200px 50px;
             }
         }
     }

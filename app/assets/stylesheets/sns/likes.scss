@@ -1,3 +1,161 @@
-// Place all the styles related to the sns/likes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+// ! postsフォルダのレイアウト （edit, list, new, show）
+#sns_likes {
+    // ! 全サイズ共通
+    // ? 一覧ページのUI設定
+    .list-content {
+        margin-top: 25px;
+        margin-bottom: 150px;
+        .tab-menu.nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+        }
+        .tab-menu.nav .nav-item {
+            flex: 1;
+            padding: 0;
+        }
+        .tab-menu.nav .nav-link {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            border: 2px solid #333333;
+            box-sizing: border-box;
+            border-radius: 5px;
+            color: #333333;
+        }
+        .tab-menu.nav .nav-link.active {
+            background-color: #4B709A;
+            color: #FFFFFF;
+            border: 2px solid #4B709A;
+            box-sizing: border-box;
+        }
+        .flex {
+            float: left;
+        }
+        .sns-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .user-area {
+            background-color: #222222;
+            padding: 10px;
+            img {
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            .user-name {
+                color: #FFFFFF;
+            }
+            .user-height {
+                font-size: 10px;
+                color: #FFFFFF;
+            }
+            .like {
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+            .number-of-likes {
+                font-size: 14px;
+                margin-top: 2px;
+                margin-left: 5px;
+                color: #FFFFFF;
+                opacity: .6;
+            }
+        }
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+        .ranking-overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #FFFFFF;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    }
+    // * モバイル
+    @media (max-width: 768px) {
+        // ? SNS一覧ページの設定
+        .list-content {
+            padding: 0 3px;
+            .flex {
+                width: 50%;
+            }
+            .user-area {
+                img {
+                    width: 35px;
+                    height: 35px;
+                }
+                .user-name {
+                    font-size: 14px;
+                }
+            }
+            .pc-tablet {
+                display: none;
+            }
+        }
+    }
+    // * タブレット
+    @media (min-width: 768px) and (max-width: 1280px) {
+        // ? SNS一覧ページの設定
+        .list-content {
+            .tab-menu.nav {
+                width: 400px;
+            }
+            .tab-menu.nav .nav-link {
+                font-size: 16px;
+            }
+            width: 760px;
+            .flex {
+                width: 33.3%;
+            }
+            .user-area {
+                img {
+                    width: 35px;
+                    height: 35px;
+                }
+                .user-name {
+                    font-size: 14px;
+                }
+            }
+            .mobile {
+                display: none;
+            }
+        }
+    }
+    // * PC
+    @media (min-width: 1280px) {
+        // ? SNS一覧ページの設定
+        .list-content {
+            .tab-menu.nav {
+                width: 400px;
+            }
+            .tab-menu.nav .nav-link {
+                font-size: 16px;
+            }
+            width: 1014px;
+            .flex {
+                width: 25%;
+            }
+            .user-area {
+                img {
+                    width: 35px;
+                    height: 35px;
+                }
+                .user-name {
+                    font-size: 16px;
+                }
+            }
+            .mobile {
+                display: none;
+            }
+        }
+    }
+}

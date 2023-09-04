@@ -1,51 +1,144 @@
 <div id="faq_questions">
-    <%# ! header %>
-    <div class="pc-header">
-        <%= render "faq/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
-            <%= render "faq/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10">
-            <div class="h-100 bg-white py-5">
-                <% if @question.errors.any? %>
-                    <div class="alert alert-danger col-lg-8 mx-auto" role="alert">
-                        <% @question.errors.each do |error| %>
-                        <strong>エラー！</strong> - <%= error.full_message %><br>
-                        <% end %>
+        <div class="main-content">
+            <div class="new-edit-content mx-auto">
+				<h3 class="fw-bold text-center">コーディネート質問編集</h3>
+				<%= form_with(model: @question, url: "/faq/question/update/#{@question.id}", local: true) do |f| %>
+					<div class="mb-3">
+                        <label class="fw-bold">コーディネート画像を追加</label><br>
+                        <button type="button" class="item" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
+                            <div class="modal-container">
+								<div id="image-preview" class="preview"></div>
+								
+								<div id="overlay" class="overlay">
+									<img src="/assets/adds/bg_setting2.png" alt="">
+								</div>
+                            </div>
+                        </button>
+
+                        <div class="modal fade modal-area modal-dialog-scrollable" id="CoordinateModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">コーディネート質問画像を設定</h6>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="col-lg-7 mx-auto coordinate-modal">
+                                            <%= f.file_field :photograph, class: "form-control", id: "file-input" %>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer post-area text-center">
+                                        <div class="mx-auto">
+                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal">キャンセル</button>
+                                            <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <% @question.errors[:photograph].each do |error| %>
+                                <small class="text-danger">コーディネート質問画像を設定してください。</small>
+                            <% end %>
+                        </div>
                     </div>
-    <% end %>
-    
-    <%= form_with(model: @question, url: "/question/update/#{@question.id}", local: true, :html => {class:"needs-validation col-lg-8 mx-auto", :novalidate => true}) do |f| %>
-                  <div class="mb-3">
-                    <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.text_area :question, class: "form-control", placeholder: "質問内容" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.select :category, ['アウター', 'トップス', 'ボトムス', 'シューズ', 'その他'], {include_blank: '選択してください'}, class: 'form-control', required: true %>
-                    <div class="invalid-feedback">
-                      大カテゴリーを入力して下さい
+
+					<div class="mb-3">
+						<label class="fw-bold">質問内容</label><br>
+						<%= f.text_area :question, class: "form-control", placeholder: "質問内容を入力...", style: "height: 150px;" %>
+
+						<div>
+                            <% @question.errors[:question].each do |error| %>
+                                <small class="text-danger">質問内容を入力してください。</small>
+                            <% end %>
+                        </div>
+					</div>
+
+					<div class="mb-3">
+						<%= f.select :category, ['着回し相談', 'コーディネート相談', '購入相談'], {include_blank: '質問カテゴリーを選択 ▾'}, class: 'form-control' %>
+							
+						<div>
+                            <% @question.errors[:category].each do |error| %>
+                                <small class="text-danger">質問カテゴリーを設定してください。</small>
+                            <% end %>
+                        </div>
+					</div>
+					
+					<div class="col-lg-8 col-12 col-md-8 mx-auto" style="margin-top: 100px;">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="/faq/question/list" class="btn col-12 cancel-btn">キャンセル</a>
+                            </div>
+
+                            <div class="col-6">
+                                <%= f.submit "更新する", data: { disable_with: "更新中..." }, class: "btn col-12 submit-btn" %>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <%= f.submit "登録する", class: "btn btn-primary" %>
-                <% end %>
+				<% end %>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+	$(document).ready(function() {
+        <%# * 処理の目的 => 選択された画像をプレビューする %>
+        <%# * 入力 => 選択した画像 %>
+        <%# * 加工 => 選択した画像を取得し、プレビューする %>
+        <%# * 出力 => プレビュー %>
+        const fileInput = document.getElementById('file-input');
+        const preview = document.getElementById('image-preview');
+        const overlay = document.getElementById('overlay');
+        const defaultImageURL = '<%= j @question.photograph.url %>';
 
+        function displayDefaultImage() {
+            const defaultImage = new Image();
+            defaultImage.src = defaultImageURL;
+            defaultImage.alt = 'デフォルト画像';
+            defaultImage.classList.add('preview');
+            defaultImage.style.width = '189px';
+            defaultImage.style.height = '262px';
+            defaultImage.style.borderRadius = '5%';
+            defaultImage.style.objectFit = 'cover';
+            preview.appendChild(defaultImage);
+        }
 
+        function displayPreviewImage(imageDataURL) {
+            preview.innerHTML = '';
 
+            const image = new Image();
+            image.src = imageDataURL;
+            image.alt = 'プレビュー画像';
+            image.classList.add('preview');
+            image.style.width = '189px';
+            image.style.height = '262px';
+            image.style.objectFit = 'cover';
+            image.style.borderRadius = '5%';
+            preview.appendChild(image);
+        }
 
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                displayPreviewImage(e.target.result);
+            };
 
+            reader.readAsDataURL(file);
 
-    
-      
+            overlay.style.display = 'none';
+        });
+
+        displayDefaultImage();
+    });
+</script>

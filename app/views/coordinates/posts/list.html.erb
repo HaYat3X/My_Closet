@@ -1,64 +1,80 @@
 <div id="closet_posts">
-    <%# ! header %>
-    <div class="pc-header">
-        <%= render "coordinates/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
-            <%= render "coordinates/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10 col-12">
-            <div class="bg-white h-100">
+        <div class="main-content">
+        <%= render "layouts/error" %>
+        
+            <div class="list-content mx-auto">
                 <%# * タブ切り替え %>
-                <ul class="nav nav-underline tab-ul" role="tablist">
-                    <li class="nav-item flex-fill">
-                        <a href="#all" class="nav-link active text-center" data-bs-toggle="tab">すべて</a>
+                <ul class="tab-menu nav">
+                    <li class="nav-item">
+                        <a href="?tab=all" class="nav-link <%= params[:tab].nil? || params[:tab] == 'all' ? 'active' : '' %>">ALL</a>
                     </li>
-                    <li class="nav-item flex-fill">
-                        <a href="#outer" class="nav-link text-center" data-bs-toggle="tab">アウター</a>
+
+                    <li class="nav-item">
+                        <a href="?tab=outer" class="nav-link <%= params[:tab] == 'outer' ? 'active' : '' %>">OUTER</a>
                     </li>
-                    <li class="nav-item flex-fill">
-                        <a href="#tops" class="nav-link text-center" data-bs-toggle="tab">トップス</a>
+
+                    <li class="nav-item">
+                        <a href="?tab=tops" class="nav-link <%= params[:tab] == 'tops' ? 'active' : '' %>">TOPS</a>
                     </li>
-                    <li class="nav-item flex-fill">
-                        <a href="#bottoms" class="nav-link text-center" data-bs-toggle="tab">ボトムス</a>
+
+                    <li class="nav-item">
+                        <a href="?tab=bottoms" class="nav-link <%= params[:tab] == 'bottoms' ? 'active' : '' %>">BOTTOMS</a>
                     </li>
-                    <li class="nav-item flex-fill">
-                        <a href="#shoes" class="nav-link text-center" data-bs-toggle="tab">シューズ</a>
+
+                    <li class="nav-item">
+                        <a href="?tab=shoes" class="nav-link <%= params[:tab] == 'shoes' ? 'active' : '' %>">SHOES</a>
                     </li>
-                    <li class="nav-item flex-fill">
-                        <a href="#other" class="nav-link text-center" data-bs-toggle="tab">その他</a>
+
+                    <li class="nav-item">
+                        <a href="?tab=other" class="nav-link <%= params[:tab] == 'other' ? 'active' : '' %>">OTHER</a>
                     </li>
                 </ul>
 
-                <div class="tab-content mt-2">
+                <div class="tab-content">
                     <%# ? allタブエリア %>
                     <div id="all" class="tab-pane active">
                         <div class="row g-1">
-                            <% @closets_all.each do |c| %>
-                                <div class="col-lg-3 mt-1">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet_image" %>
-                                    <% end %>
+                            <% if @closets_all.count == 0 %>
+                                <h4 class="fw-bold text-center mt-5">アイテムがまだ登録されていません。</h4>
+                            <% else %>
+                                <% @closets_all.each do |closet| %>
+                                    <div class="flex mt-1">
+                                        <%= link_to "/closet/show/#{closet.id}" do %>
+                                            <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+                                
+                                <div class="page d-flex justify-content-center">
+                                    <%= paginate @closets_all, param_name: :page_all, params: { tab: "all" } %>
                                 </div>
                             <% end %>
-
-                            <%= paginate @closets_all %>
                         </div>
                     </div>
 
                     <%# ? outerタブエリア %>
                     <div id="outer" class="tab-pane">
                         <div class="row g-1">
-                            <% @closets_outer.each do |c| %>
-                                <div class="col-lg-3 mt-1">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet_image" %>
-                                    <% end %>
+                            <% if @closets_outer.count == 0 %>
+                                <h4 class="fw-bold text-center mt-5">アウターアイテムがまだ登録されていません。</h4>
+                            <% else %>
+                                <% @closets_outer.each do |c| %>
+                                    <div class="flex mt-1">
+                                        <%= link_to "/closet/show/#{c.id}" do %>
+                                            <%= image_tag c.photograph.url(:forced_size), class: "closet-image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+
+                                <div class="page d-flex justify-content-center">
+                                    <%= paginate @closets_outer, param_name: :page_outer, params: { tab: "outer" } %>
                                 </div>
                             <% end %>
                         </div>
@@ -67,11 +83,19 @@
                     <%# ? topsタブエリア %>
                     <div id="tops" class="tab-pane">
                         <div class="row g-1">
-                            <% @closets_tops.each do |c| %>
-                                <div class="col-lg-3 mt-1">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet_image" %>
-                                    <% end %>
+                            <% if @closets_tops.count == 0 %>
+                                <h4 class="fw-bold text-center mt-5">トップスアイテムがまだ登録されていません。</h4>
+                            <% else %>
+                                <% @closets_tops.each do |closet| %>
+                                    <div class="flex mt-1">
+                                        <%= link_to "/closet/show/#{closet.id}" do %>
+                                            <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+
+                                <div class="page d-flex justify-content-center">
+                                    <%= paginate @closets_tops, param_name: :page_tops, params: { tab: "tops" } %>
                                 </div>
                             <% end %>
                         </div>
@@ -80,11 +104,19 @@
                     <%# ? ボトムスタブエリア %>
                     <div id="bottoms" class="tab-pane">
                         <div class="row g-1">
-                            <% @closets_pants.each do |c| %>
-                                <div class="col-lg-3 mt-1">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet_image" %>
-                                    <% end %>
+                            <% if @closets_bottoms.count == 0 %>
+                                <h4 class="fw-bold text-center mt-5">ボトムスアイテムがまだ登録されていません。</h4>
+                            <% else %>
+                                <% @closets_bottoms.each do |closet| %>
+                                    <div class="flex mt-1">
+                                        <%= link_to "/closet/show/#{closet.id}" do %>
+                                            <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+
+                                <div class="page d-flex justify-content-center">
+                                    <%= paginate @closets_bottoms, param_name: :page_bottoms, params: { tab: "bottoms" } %>
                                 </div>
                             <% end %>
                         </div>
@@ -93,11 +125,19 @@
                     <%# ? shoesタブエリア %>
                     <div id="shoes" class="tab-pane">
                         <div class="row g-1">
-                            <% @closets_shoes.each do |c| %>
-                                <div class="col-lg-3 mt-1">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet_image" %>
-                                    <% end %>
+                            <% if @closets_shoes.count == 0 %>
+                                <h4 class="fw-bold text-center mt-5">シューズアイテムがまだ登録されていません。</h4>
+                            <% else %>
+                                <% @closets_shoes.each do |closet| %>
+                                    <div class="flex mt-1">
+                                        <%= link_to "/closet/show/#{closet.id}" do %>
+                                            <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+
+                                <div class="page d-flex justify-content-center">
+                                    <%= paginate @closets_shoes, param_name: :page_shoes, params: { tab: "shoes" } %>
                                 </div>
                             <% end %>
                         </div>
@@ -106,11 +146,19 @@
                     <%# ? otherタブエリア %>
                     <div id="other" class="tab-pane">
                         <div class="row g-1">
-                            <% @closets_other.each do |c| %>
-                                <div class="col-lg-3 mt-1">
-                                    <%= link_to "/closet/show/#{c.id}" do %>
-                                        <%= image_tag c.photograph.url, class: "closet_image" %>
-                                    <% end %>
+                            <% if @closets_other.count == 0 %>
+                                <h4 class="fw-bold text-center mt-5">その他のアイテムがまだ登録されていません。</h4>
+                            <% else %>
+                                <% @closets_other.each do |closet| %>
+                                    <div class="flex mt-1">
+                                        <%= link_to "/closet/show/#{closet.id}" do %>
+                                            <%= image_tag closet.photograph.url(:forced_size), class: "closet-image" %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+
+                                <div class="page d-flex justify-content-center">
+                                    <%= paginate @closets_other, param_name: :page_other, params: { tab: "other" } %>
                                 </div>
                             <% end %>
                         </div>
@@ -120,3 +168,48 @@
         </div>
     </div>
 </div>
+
+<script>
+    <%# ! htmlの要素が読み込まれたら処理を開始する %>
+    $(document).ready(function() {
+        <%# * 処理の目的 => 特定のタブを選択状態にする %>
+        <%# * 入力 => 選択しているタブの情報 %>
+        <%# * 加工 => 選択しているタブの情報を取得し、選択状態にする %>
+        <%# * 出力 => activeクラス %>
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabValue = urlParams.get('tab');
+
+        function setActiveTab(tabId) {
+            $('.tab-menu .nav-link').removeClass('active');
+            $('.tab-content .tab-pane').removeClass('show active');
+            $('#' + tabId).addClass('show active');
+            $('.tab-menu .nav-link[href*="tab=' + tabId + '"]').addClass('active');
+        }
+
+        if (tabValue) {
+            const tabId = tabValue.toLowerCase();
+            setActiveTab(tabId);
+        } else {
+            $('.tab-menu .nav-link[href*="?tab=all"]').addClass('active');
+            $('.tab-content .tab-pane#all').addClass('show active');
+        }
+
+        <%# * 処理の目的 => ページ遷移した際に、タブの位置を保持する %>
+        <%# * 入力 => ページ遷移する際に位置しているタブ %>
+        <%# * 加工 => ページ遷移する前に位置しているタブを取得し、遷移後、そのタブの位置を保持する %>
+        <%# * 出力 => タブの情報 %>
+        $(document).on('click', '.tab-menu .nav-link', function(event) {
+            event.preventDefault();
+            const tabId = $(this).attr('href').split('tab=')[1].toLowerCase();
+
+            if (tabId === 'page') {
+                return;
+            }
+
+            setActiveTab(tabId);
+
+            const newUrl = window.location.pathname + '?tab=' + tabId;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+        });
+    });
+</script>

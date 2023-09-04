@@ -1,15 +1,42 @@
 class Profile::AlertsController < ApplicationController
     # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
-    before_action :move_to_signed_in, except: [:list, :show]
+    before_action :move_to_signed_in, except: []
 
     # * お知らせを一覧取得
     def list
-        @alerts = Alert.all()
+        @alerts = Alert.order(created_at: :desc).page(params[:page_alert])
+        # * 自分に当てられた通知かつ、通知の作成元が自分以外の通知を取得
+        @notification = Notification.where(user_id: current_user.id).where.not(source_user_id: current_user.id).order(read: :asc).order(created_at: :desc).page(params[:page_notification])
     end
     
     # * お知らせ詳細取得
     def show
-        @alert = Alert.find(params[:id])
+        @id = params[:id]
+
+        if @id.end_with?("_management")
+            @alert = Alert.find(params[:id].chomp("_management"))
+        else
+            @notification = Notification.find(params[:id])
+            # * 通知を発生させたユーザー情報
+            @source_user_id = User.find(@notification.source_user_id)
+
+            if @notification.source_post_id != 0
+                if @notification.notification_type === "like"
+                    # * SNSいいね通知投稿
+                    @source_post_id = Social.where(id: @notification.source_post_id).first
+                else
+                    # * 回答
+                    @source_answer_post_id = Question.where(id: @notification.source_post_id).first
+                end
+            end
+            
+            # * 通知を既読にする
+            if @notification.update(read: 1)
+                render :show
+            else
+                render :show
+            end
+        end        
     end    
 
     private

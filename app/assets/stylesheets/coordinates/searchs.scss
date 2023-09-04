@@ -1,61 +1,59 @@
 // ! searchsフォルダのレイアウト （search）
 #closet_searchs {
     // ! 全サイズ共通
-    // ?　タブのアクションカラー変更
-    .tab-ul {
-        .active {
-            color: var(--primary);
+    // * クローゼット検索ページ
+    .search-content {
+        margin-top: 45px;
+        margin-bottom: 150px;
+        h4 {
+            font-size: 28px;
         }
-        a {
-            color: var(--dark);
+        p {
+            font-size: 16px;
+            align-items: center;
+            margin-top: 16px;
+            margin-bottom: 60px;
         }
-    }
-    // * sidebar関連
-    .pc-sidebar {
-        border-radius: 5px;
-        // ? アイコンの表示設定
-        i {
-            margin-right: 10px;
+        h5 {
+            font-size: 22px;
         }
-        // ? リストの表示設定
-        li:hover {
-            background-color: var(--primary);
-            border-radius: 5px;
+        .flex {
+            float: left;
         }
-        // ? リンクの表示設定
-        a {
-            color: var(--dark);
-        }
-        a:hover {
-            color: #ffffff;
-        }
-        // ? サインイン、サインアウトのレイアウト
-        .action-link {
-            a:hover {
-                color: var(--dark);
-                background-color: var(--bg);
-            }
-        }
-        // ? コンテンツエリアと少し幅を空ける
-        .sidebar-content {
-            margin-right: 5px;
+        .closet-search-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
         }
     }
     // * スマートフォン （小）
-    @media (max-width: 575.98px) {}
-    // * スマートフォン （中）
-    @media (min-width: 576px) and (max-width: 767.98px) {}
+    @media (max-width: 768px) {
+        // ? クローゼット検索ページ
+        .search-content {
+            padding: 0 3px;
+            .flex {
+                width: 33.3%;
+            }
+        }
+    }
     // * タブレット
-    @media (min-width: 768px) and (max-width: 991.98px) {}
-    // * PC（小）
-    @media (min-width: 992px) and (max-width: 1199.98px) {}
+    @media (min-width: 768px) and (max-width: 1280px) {
+        // ? クローゼット検索ページ
+        .search-content {
+            width: 760px;
+            .flex {
+                width: 25%;
+            }
+        }
+    }
     // * PC（大）
-    @media (min-width: 1200px) {
-        // ?　クローゼットに追加された画像比を調整する
-        .closet_image {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
+    @media (min-width: 1280px) {
+        // ? クローゼット検索ページ
+        .search-content {
+            width: 973px;
+            .flex {
+                width: 20%;
+            }
         }
     }
 }

@@ -1,49 +1,132 @@
 <div id="sns_searchs">
-    <%# ! header %>
-    <div class="mobile-header">
-        <%= render "sns/layouts/mobile_header" %>
-    </div>
-
-    <div class="pc-header">
-        <%= render "sns/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
-            <%= render "sns/layouts/pc_sidebar" %>
-        </div>
-
-        <div class="col-12 mobile-sidebar">
-            <%= render "sns/layouts/mobile_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10 col-12">
+        <div class="main-content">
+            <%= render "layouts/error" %>
 
-
-            <div class="bg-white h-100">
-            <%# 検索結果表示タブ %>
-            <h4 class="pt-3">「<%= params[:search] %>」の検索結果</h4>
-                    <div class="tab-content mt-3">
-                        <%# ? allタブエリア %>
-                        <div id="all" class="tab-pane active">
-                            <div class="row g-1">
-                                <% @search_result.each do |s| %>
-                                    <div class="col-lg-3 col-md-4 col-4 mt-1">
-                                        <%= link_to "/sns/show/#{s.id}" do %>
-                                            <%= image_tag s.photograph.url, class: "sns_search_image" %>
-                                        <% end %>
-                                    </div>
+            <div class="search_content mx-auto">
+                <% if @search_result.count == 0 %>
+                    <h4 class="fw-bold text-center">検索結果：</h4>
+                    <h4 class="fw-bold text-center">「<%= params[:search] %>」</h4>
+                    <p class="text-center fw-bold">（0件）</p>
+                    <h5 class="text-center">条件に当てはまるコーディネートが見つかりませんでした。<br>検索条件を変えて検索してみてください。</h5>
+                <% else %>
+                    <h4 class="fw-bold text-center">検索結果：</h4>
+                    <h4 class="fw-bold text-center">「<%= params[:search] %>」</h4>
+                    <p class="text-center fw-bold">（<%= @search_result.count%>件）</p>
+                    <div class="row g-1">
+                        <% @search_result.each do |sns| %>
+                            <div class="flex mt-1">
+                                <%= link_to "/sns/show/#{sns.id}" do %>
+                                    <%= image_tag sns.photograph.url(:forced_size), class: "sns-image" %>
                                 <% end %>
 
-                                <div class="mt-3">
-                                    <%= paginate @search_result %>
+                                <div class="user-area pc-tablet">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <% if sns.user.avatar.present? %>
+                                                <%= link_to "/profile/show/#{sns.user_id}" do %>
+                                                    <%= image_tag sns.user.avatar.url %>
+                                                <% end %>
+                                            <% else %>
+                                                <%= link_to "/profile/show/#{sns.user_id}" do %>
+                                                    <%= image_tag "/assets/user/avatar.png" %>
+                                                <% end %>
+                                            <% end %>
+
+                                            <div class="ms-2">
+                                                <div class="fw-bold user-name">
+                                                    <%= truncate(sns.user.user_name, length: 10) %>
+                                                </div>
+
+                                                <div class="user-height m-0">
+                                                    <% if sns.user.height %>
+                                                        <%= sns.user.height %>cm
+                                                    <% else %>
+                                                        身長未設定
+                                                    <% end %>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="like m-0 d-flex align-items-center">
+                                            <%# ?  いいねできるかどうか判定 %>
+                                            <% if user_signed_in? %>
+                                                <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
+                                                    <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
+                                                        <img src="/assets/icons/icn_heart.png" alt="">
+                                                    <% end %>
+                                                <% else %>
+                                                    <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
+                                                        <img src="/assets/icons/icn_not_heart.png" alt="">
+                                                        <% end %>
+                                                <% end %>
+                                            <% else %>
+                                                <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
+                                                    <img src="/assets/icons/icn_not_heart.png" alt="">
+                                                <% end %>
+                                            <% end %>
+
+                                            <span class="number-of-likes align-self-center">
+                                                <%= SocialLike.where(social_id: sns.id).count %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="user-area mobile">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <% if sns.user.avatar.present? %>
+                                                <%= link_to "/profile/show/#{sns.user_id}" do %>
+                                                    <%= image_tag sns.user.avatar.url %>
+                                                <% end %>
+                                            <% else %>
+                                                <%= link_to "/profile/show/#{sns.user_id}" do %>
+                                                    <%= image_tag "/assets/user/avatar.png" %>
+                                                <% end %>
+                                            <% end %>
+
+                                            <div class="ms-2">
+                                                <div class="fw-bold user-name">
+                                                    <%= truncate(sns.user.user_name, length: 8) %>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="like m-0 d-flex align-items-center">
+                                            <%# ?  いいねできるかどうか判定 %>
+                                            <% if user_signed_in? %>
+                                                <% if SocialLike.where(social_id: sns.id, user_id: current_user.id).exists? %>
+                                                    <%= link_to "/sns/delete_like/#{sns.id}", method: :delete do %>
+                                                        <img src="/assets/icons/icn_heart.png" alt="">
+                                                    <% end %>
+                                                <% else %>
+                                                    <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
+                                                        <img src="/assets/icons/icn_not_heart.png" alt="">
+                                                        <% end %>
+                                                <% end %>
+                                            <% else %>
+                                                <%= link_to "/sns/create_like/#{sns.id}", method: :post do %>
+                                                    <img src="/assets/icons/icn_not_heart.png" alt="">
+                                                <% end %>
+                                            <% end %>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        <% end %>
+
+                        <div class="page d-flex justify-content-center">
+                            <%= paginate @search_result %>
                         </div>
                     </div>
-                </div>
+                <% end %>
             </div>
         </div>
     </div>

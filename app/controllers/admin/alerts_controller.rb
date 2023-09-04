@@ -4,7 +4,7 @@ class Admin::AlertsController < ApplicationController
 
     # * お知らせ投稿フォーム
     def new
-        @alert = Alert.new() 
+        @alert = Alert.new()
     end
 
     # * お知らせ登録
@@ -12,7 +12,7 @@ class Admin::AlertsController < ApplicationController
         @alert = Alert.new(posts_params)
 
         if @alert.save
-            redirect_to "/"
+            redirect_to "/admin/alert/list"
         else
             render :new
         end
@@ -31,7 +31,6 @@ class Admin::AlertsController < ApplicationController
     # * お知らせ編集フォーム
     def edit
         @alert = Alert.find(params[:id])
-
     end
 
     # * お知らせ更新フォーム
@@ -39,7 +38,7 @@ class Admin::AlertsController < ApplicationController
         @alert = Alert.find(params[:id])
 
         if @alert.update(posts_params)
-            redirect_to "/"
+            redirect_to "/admin/alert/list"
         else
             render :new
         end
@@ -50,7 +49,7 @@ class Admin::AlertsController < ApplicationController
         @alert = Alert.find(params[:id])
 
         if @alert.destroy
-            redirect_to "/", notice: "投稿を削除しました"
+            redirect_to "/admin/alert/list", notice: "投稿を削除しました"
         else
             redirect_to "/", alert: "投稿の削除に失敗しました"
         end
@@ -63,10 +62,10 @@ class Admin::AlertsController < ApplicationController
         params.require(:alert).permit(:title, :content)
     end
 
-     # ! ログインがしているのか判定する
-     def move_to_signed_in
-         unless admin_signed_in?
-             redirect_to new_admin_session_path, alert: "この操作は、サインインが必要です。"
-         end
-     end
+    # ! ログインがしているのか判定する
+    def move_to_signed_in
+        unless admin_signed_in?
+            redirect_to new_admin_session_path, alert: "この操作は、サインインが必要です。"
+        end
+    end
 end

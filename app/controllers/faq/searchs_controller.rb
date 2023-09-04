@@ -8,12 +8,12 @@ class Faq::SearchsController < ApplicationController
         # * 大文字、小文字を区別せずに検索
         question_table = Question.arel_table
         # * 検索
-        @search_result = Question.where(question_table[:category].matches(key_word))
+        @search_result = Question.where(question_table[:search].matches(key_word)).page(params[:page_all]).per(32)
     end
-
 
     # ! (privateは外部クラスから参照できない)
     private
+
     # ! ログインがしているのか判定する
     def move_to_signed_in
         unless user_signed_in?

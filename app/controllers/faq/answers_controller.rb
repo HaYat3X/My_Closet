@@ -1,7 +1,14 @@
 class Faq::AnswersController < ApplicationController
+    # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
+    before_action :move_to_signed_in, except: []
 
-            # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
-            before_action :move_to_signed_in, except: []
+    def new
+        @answer = Answer.new()
+
+        # * 回答する質問を取得
+        @question = Question.find(params[:id])
+    end
+
     # ! FAQ回答処理用メソッド
     def create
         # * 投稿時にバインドするパラメータを付与する
@@ -14,13 +21,15 @@ class Faq::AnswersController < ApplicationController
         @answer.user_id = current_user.id
 
         # * 投稿をIDを保存
-        @answer.question_id = params[:id]
+        @answer.question_id = @question.id
 
         # * 投稿が成功したら一覧表示ページへリダイレクト、投稿失敗時はエラーメッセージを表示する
         if @answer.save
-            redirect_to "/question/show/#{params[:id]}", notice: "質問に回答しました。"
+            # ? 通知を作成
+            notice = Notification.create(user_id: @question.user_id, notification_type: "answer", source_user_id: current_user.id, source_post_id: @answer.question_id)
+            redirect_to "/faq/question/show/#{@question.id}", notice: "質問に回答しました。"
         else
-            render template: 'faq/questions/show'
+            render :new
         end
     end
 
@@ -33,12 +42,17 @@ class Faq::AnswersController < ApplicationController
         if @answer.user_id != current_user.id
             redirect_to "/", alert: "不正なアクセスが行われました。"
         end
+
+        @question = Question.find(@answer.question_id)
     
         # 削除
         if @answer.destroy
-            redirect_to "/question/list", notice: "投稿を削除しました"
+            notice = Notification.where(user_id: @question.user_id, notification_type: "answer", source_user_id: current_user.id, source_post_id: @answer.question_id).first
+
+            notice.destroy
+            redirect_to "/faq/question/show/#{@question.id}", notice: "投稿を削除しました"
         else
-            redirect_to"/", alert: "投稿の編集に削除しました"
+            redirect_to "/", alert: "投稿の編集に削除しました"
         end
     end
 
@@ -46,6 +60,9 @@ class Faq::AnswersController < ApplicationController
     def edit
         # * urlから投稿id取得
         @answer = Answer.find(params[:id])
+
+        # * 質問を取得
+        @question = Question.find(@answer.question_id)
 
         #ユーザーIDが自分のではなかった場合、他のユーザーIDから削除できないようにする。
         if @answer.user_id != current_user.id
@@ -63,9 +80,12 @@ class Faq::AnswersController < ApplicationController
             redirect_to "/", alert: "不正なアクセスが行われました。"
         end
 
+                # * 質問を取得
+                @question = Question.find(@answer.question_id)
+
         # 更新
         if @answer.update(posts_params)
-            redirect_to "/question/list", notice: "回答を編集しました"
+            redirect_to "/faq/question/show/#{@question.id}", notice: "回答を編集しました"
         else
             redirect_to "/", alert: "投稿の編集に失敗しました。"
         end

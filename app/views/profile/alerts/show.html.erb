@@ -1,123 +1,110 @@
 <div id="profile_alerts">
-    <%# ! header %>
-    <div class="pc-header">
-        <%= render "profile/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
-            <div class="sidebar-content d-flex flex-column flex-shrink-0 p-3 bg-white sticky-top vh-100">
-                <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link fw-bold d-flex align-items-center" aria-current="page">
-                            <i class="bi bi-chat fs-5"></i>
-                            SNS
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <% if user_signed_in? %>
-                            <%= link_to "/profile/show/#{current_user.id}", class: "nav-link fw-bold d-flex align-items-center" do %>
-                            <i class="bi bi-person fs-5"></i>
-                            マイページ
-                            <% end %>
-                        <% end %>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/closet/list" class="nav-link fw-bold d-flex align-items-center">
-                            <i class="bi bi bi-grid fs-5"></i>
-                            クローゼット
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/question/list" class="nav-link fw-bold d-flex align-items-center">
-                            <i class="bi bi-question-circle fs-5"></i>
-                            Q&A
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/suggestion" class="nav-link fw-bold d-flex align-items-center">
-                            <i class="bi bi-robot fs-5"></i>
-                            AI提案
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/profile/alert/list" class="nav-link active text-white fw-bold d-flex align-items-center">
-                            <i class="bi bi-bell fs-5"></i>
-                            通知
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/contact/new" class="nav-link fw-bold d-flex align-items-center">
-                            <i class="bi bi-box-arrow-up-right fs-5"></i>
-                            お問い合わせ
-                        </a>
-                    </li>
-                    
-                </ul>
-                <hr>
-                <div class="dropdown" style="margin-bottom: 90px;">
-                    <%# ? サインインしている場合はユーザ情報、サインアウトしている場合はデフォルト情報が表示される %>
-                    <% if user_signed_in? %>
-                        <% if current_user.avatar.url == nil %>
-                            <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center text-white text-decoration-none dropdown-toggle", "data-bs-toggle": "dropdown", "aria-expanded": "false" do %>
-                                <%= image_tag "/assets/default-avatar.png", size: "30x30", class: "rounded-circle me-2" %>
-                                <label class="text-dark"><%= current_user.user_name %></label> 
-                            <% end %>
-                        <% else %>
-                            <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center text-white text-decoration-none dropdown-toggle", "data-bs-toggle": "dropdown", "aria-expanded": "false" do %>
-                                <%= image_tag current_user.avatar.url, size: "30x30", class: "rounded-circle me-2" %>
-                                <label class="text-dark"><%= current_user.user_name %></label> 
-                            <% end %>
-                        <% end %>
-                    <% else %>
-                        <%= link_to "/", class: "d-flex align-items-center text-white text-decoration-none dropdown-toggle", "data-bs-toggle": "dropdown", "aria-expanded": "false" do %>
-                            <%= image_tag "/assets/default-avatar.png", size: "30x30", class: "rounded-circle me-2" %>
-                            <label class="text-dark">ゲスト</label> 
-                        <% end %>
-                    <% end %>
-                    <ul class="dropdown-menu text-small shadow">
-                        <li class="action-link">
-                            <%# ? サインインしている場合はサインアウトボタン、サインアウトしている場合はサインインボタンが表示される %>
-                            <% if user_signed_in? %>
-                                <%= link_to "サインアウト", destroy_user_session_path, method: :delete, class: "dropdown-item col-12" %>    
-                            <% else %>
-                                <%= link_to "サインイン", new_user_session_path, method: :get, class: "dropdown-item col-12" %>
-                            <% end %>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="bg-white list_content col-lg-10 col-12">
-            <div class="list_content col-lg-8 col-12 mx-auto">
+        <div class="main-content">
+			<%= render "layouts/error" %>
 
-                <div class="bg-white py-5 h-100">
-                    <div class="list_content col-lg-9 ">
-                        <h1><%= @alert.title %></h1>
-                        <p><%= @alert.content %></p>
+            <div class="show-content mx-auto">
+                <h4 class="fw-bold text-center">通知</h4>
+
+                <div class="alert-body">
+                    <% if @id.end_with?("_management") %>
+                        <h5 class="fw-bold"><%= @alert.title %></h5>
+
+                        <div class="d-flex align-items-center">
+                            <%= image_tag "/assets/icons/icn_official.png", class: "alert-image" %>
+
+                            <div class="align-items-center alart-title">
+                                <h6 class="fw-bold mb-0 mt-1">MY CLOSET運営</h6>
+                                <small><%= @alert.created_at.strftime('%m月%d日 %H:%M') %></small>
+                            </div> 
+                        </div>
+
+                        <div class="alert-text">
+                            <%= simple_format(@alert.content) %>
+                        </div>
+                    <% else %>
+                        <% if @notification.notification_type === "like" %>
+                            <% if @source_post_id.nil? %>
+                                <h4 class="fw-bold">投稿が削除されました。</h4>
+                            <% else %>
+                                <h5 class="fw-bold"><%= @source_user_id.user_name %>さんがあなたの投稿にいいねしました。</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <%= image_tag "/assets/icons/icn_like.png", class: "alert-image" %>
+
+                                    <div class="align-items-center alert-title">
+                                        <h6 class="fw-bold mb-0 mt-1">いいね！通知</h6>
+                                        <small><%= @notification.created_at.strftime('%m月%d日 %H:%M') %></small>
+                                    </div> 
+                                </div>
+
+                                <div class="alert-post text-center">
+                                    <%= link_to "/sns/show/#{@source_post_id.id}" do %>
+                                        <%= image_tag @source_post_id.photograph.url(:forced_size), class: "post-img" %>
+                                    <% end %>
+                                </div> 
+                            <% end %>
+                        <% elsif @notification.notification_type === "answer" %>
+                            <% if @source_post_id %>
+                                <h4 class="fw-bold">投稿が削除されました。</h4>
+                            <% else %>
+                                <h5 class="fw-bold"><%= @source_user_id.user_name %>さんがあなたの着こなしの質問に回答しました。</h5>
+
+                                <div class="d-flex align-items-center my-3">
+                                    <%= image_tag "/assets/icons/icn_q&a.png", class: "alert-image" %>
+
+                                    <div class="align-items-center alert-title">
+                                        <h6 class="fw-bold mb-0 mt-1">回答通知</h6>
+                                        <small><%= @notification.created_at.strftime('%m月%d日 %H:%M') %></small>
+                                    </div> 
+                                </div>
+
+                                <div class="alert-post text-center">
+                                    <%= link_to "/question/show/#{@source_answer_post_id.id}" do %>
+                                        <%= image_tag @source_answer_post_id.photograph.url(:forced_size), class: "post-img" %>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                        <% elsif @notification.notification_type === "follow" %>
+                            <h5 class="fw-bold"><%= @source_user_id.user_name %>さんがあなたをフォローしました。</h5>
+
+                            <div class="d-flex align-items-center my-3">
+                                <%= image_tag "/assets/icons/icn_follow.png", class: "alert-image" %>
+
+                                <div class="align-items-center alert-title">
+                                    <h6 class="fw-bold mb-0 mt-1">フォロー通知</h6>
+                                    <small>
+                                        <%= @notification.created_at.strftime('%m月%d日 %H:%M') %>
+                                    </small>
+                                </div> 
+                            </div>
+
+                            <div class="alert-post text-center">
+                                <%= link_to "/profile/show/#{@source_user_id.id}" do %>
+                                    <% if @source_user_id.avatar.url %>
+                                        <%= image_tag @source_user_id.avatar.url(:forced_size), class: "post-img" %>
+                                    <% else %>
+                                        <img src="/assets/user/avatar.png" alt="Generic placeholder image" class="post-img">
+                                    <% end %>
+                                <% end %>
+                            </div>                        
+                        <% end %>
+                    <% end %>
+                    
+                    <div class="pt-3 text-center">
+                        <a href="/alert/list" class="btn px-5 rounded-pill">
+                            <img src="/assets/icons/icn_back.png" alt="">
+                            戻る
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-
-
-<div id="sns_form">
-
-    <%# ! header %>
-    
-
-    <div class="row">
-        <%# ! sidebar %>
-        <div class="col-lg-3">
-            
-        </div>
-
-        <%# ! contents %>
     </div>
 </div>

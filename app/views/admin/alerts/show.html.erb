@@ -1,9 +1,24 @@
-        <div class="list_content col-lg-9">
-                <div class="bg-white p-3 m-5">
-                    <%= @alert.title %>
-                    <%= @alert.content %>
-                </div>
-                <%= link_to "編集", "/admin/alert/edit/#{@alert.id}" %>
-                <%= link_to "削除", "/admin/alert/delete/#{@alert.id}",method: :delete %>
-                </div>
+<div class="container">
+    <div class="row g-1">
+        <div class="col-lg-3">
+            <%= render "admin/layouts/sidebar" %>
         </div>
+
+        <div class="col-lg-9">
+            <div class="bg-white h-100">
+                <div class="p-5">
+                    <div>
+                        <h4><%= @alert.title %></h4>
+                    </div>
+                    
+                    <div class="my-2">
+                        <%= @alert.content %>
+                    </div>
+                    
+                    <%= link_to "編集", "/admin/alert/edit/#{@alert.id}", class: "btn btn-primary" %>
+                    <%= link_to "削除", "/admin/alert/delete/#{@alert.id}", class: "btn btn-danger", method: :delete %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

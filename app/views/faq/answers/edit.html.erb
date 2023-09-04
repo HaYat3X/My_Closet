@@ -1,45 +1,175 @@
-<div id="faq_questions">
-    <%# ! header %>
-    <div class="pc-header">
-        <%= render "faq/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+<div id="faq_answers">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
-            <%= render "faq/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10">
-            <div class="h-100 bg-white py-5">
-                <% if @answer.errors.any? %>
-                    <div class="alert alert-danger col-lg-8 mx-auto" role="alert">
-                        <% @answer.errors.each do |error| %>
-                        <strong>エラー！</strong> - <%= error.full_message %><br>
+        <div class="main-content">
+            <div class="new-edit-content mx-auto">
+                <div class="question-area">
+                    <div class="d-flex align-items-center user-area">
+                        <%= link_to "/profile/show/#{@question.user.id}" do %>
+                            <% if @question.user.avatar.url %>
+                                <%= image_tag @question.user.avatar.url, class: "question-user-image" %>
+                            <% else %>
+                                <img src="/assets/user/avatar.png" alt="Generic placeholder image" class="question-user-image">
+                            <% end %>
                         <% end %>
+
+                        <div class="user-information">
+                            <h5 class="mb-0 fw-bold">
+                                <%= @question.user.user_name %>
+                            </h5>
+                                                    
+                            <small>
+                                <%= @question.created_at.strftime('%m月%d日 %H:%M') %>
+                            </small>
+                        </div>
                     </div>
-    <% end %>
-    
-    <%= form_with(model: @answer, url: "/faq/answer/update/#{@answer.id}", local: true, :html => {class:"needs-validation col-lg-8 mx-auto", :novalidate => true}) do |f| %>
-                  <div class="mb-3">
-                    <%= f.file_field :photograph, class: "form-control", placeholder: "写真" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.text_area :answer, class: "form-control", placeholder: "編集内容" %>
-                  </div>
-                  <%= f.submit "登録する", class: "btn btn-primary" %>
+
+                    <div class="question-content">
+                        <%= simple_format(@question.question) %>
+                    </div>
+
+                    <%= image_tag @question.photograph.url(:forced_size), class: "question-image" %>
+
+                    <% if current_user.id == @question.user.id  %>
+                        <div class="col-lg-6 col-12 col-md-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <%= link_to "質問を削除", "/faq/question/delete/#{@question.id}", method: :delete, class: "btn col-12 delete-btn" %>
+                                </div>
+
+                                <div class="col-6">
+                                    <%= link_to "質問を編集", "/faq/question/edit/#{@question.id}", class: "btn col-12 edit-btn" %>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+
+                <%= form_with(model: @answer, url: "/faq/answer/update/#{@answer.id}", local: true) do |f| %>
+                    <div class="mb-3">
+                        <label class="fw-bold">コーディネート画像を追加</label><br>
+
+                        <button type="button" class="item" data-bs-toggle="modal" data-bs-target="#CoordinateModal">
+                            <div class="madal-container">
+								<div id="image-preview" class="preview mx-auto"></div>
+								
+								<div id="overlay" class="overlay">
+									<img src="/assets/adds/img_add.png" alt="">
+								</div>
+                            </div>
+                        </button>
+
+                        <div class="modal fade modal-area modal-dialog-scrollable" id="CoordinateModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">回答画像を設定</h6>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="coordinate-modal">
+                                            <%= f.file_field :photograph, class: "form-control", id: "file-input" %>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer post-area text-center">
+                                        <div class="mx-auto">
+                                            <button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal">キャンセル</button>
+                                            <button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <% @answer.errors[:photograph].each do |error| %>
+                                <small class="text-danger">回答画像を設定してください。</small>
+                            <% end %>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <%= f.text_area :answer, class: "form-control", placeholder: "回答内容を入力...", style: "height: 150px;" %>
+
+                        <div>
+                            <% @answer.errors[:answer].each do |error| %>
+                                <small class="text-danger">回答内容をを入力してください。</small>
+                            <% end %>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 col-12 col-md-8 mx-auto" style="margin-top: 100px;">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="/faq/question/list" class="btn col-12 cancel-btn">キャンセル</a>
+                            </div>
+
+                            <div class="col-6">
+                                <%= f.submit "更新する", data: { disable_with: "更新中..." }, class: "btn col-12 submit-btn" %>
+                            </div>
+                        </div>
+                    </div>
                 <% end %>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+	$(document).ready(function() {
+        <%# * 処理の目的 => 選択された画像をプレビューする %>
+        <%# * 入力 => 選択した画像 %>
+        <%# * 加工 => 選択した画像を取得し、プレビューする %>
+        <%# * 出力 => プレビュー %>
+        const fileInput = document.getElementById('file-input');
+        const preview = document.getElementById('image-preview');
+        const overlay = document.getElementById('overlay');
+        const defaultImageURL = '<%= j @question.photograph.url %>';
 
+        function displayDefaultImage() {
+            const defaultImage = new Image();
+            defaultImage.src = defaultImageURL;
+            defaultImage.alt = 'デフォルト画像';
+            defaultImage.classList.add('preview');
+            defaultImage.style.width = '189px';
+            defaultImage.style.height = '262px';
+            defaultImage.style.borderRadius = '5%';
+            defaultImage.style.objectFit = 'cover';
+            preview.appendChild(defaultImage);
+        }
 
+        function displayPreviewImage(imageDataURL) {
+            preview.innerHTML = '';
 
+            const image = new Image();
+            image.src = imageDataURL;
+            image.alt = 'プレビュー画像';
+            image.classList.add('preview');
+            image.style.width = '189px';
+            image.style.height = '262px';
+            image.style.objectFit = 'cover';
+            image.style.borderRadius = '5%';
+            preview.appendChild(image);
+        }
 
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                displayPreviewImage(e.target.result);
+            };
 
+            reader.readAsDataURL(file);
 
-    
-      
+            overlay.style.display = 'none';
+        });
+
+        displayDefaultImage();
+    });
+</script>

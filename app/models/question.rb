@@ -8,7 +8,7 @@ class Question < ApplicationRecord
 
     # ! バリデーション
     validates :photograph, presence: true
-    validates :question, presence: true, length: { maximum: 100 }
+    validates :question, presence: true
     validates :category, presence: true
 
     #answerテーブルのアソシエーション

@@ -1,0 +1,26 @@
+<div id="contact_contacts">
+    <div class="d-flex">
+        <%# ! sidebar %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
+        </div>
+
+        <%# ! contents %>
+        <div class="main-content">
+            <div class="complete-content mx-auto">
+                <h4 class="text-center fw-bold">お問い合わせ</h4>
+
+                <div class="mt-5">
+                    <p class="text-center">
+                        お問い合わせありがとうございます。メッセージを送信しました。<br>
+                        近日中に改めてご連絡いたします。
+                    </p>
+                    
+                    <div class="text-center">
+                        <%= button_to "戻る", "/contact/new", class: "btn col-8 fw-bold submit-btn", method: :get  %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

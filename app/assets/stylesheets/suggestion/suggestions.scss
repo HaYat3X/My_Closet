@@ -1,70 +1,339 @@
 // ! suggestionフォルダのレイアウト （suggestions）
 #suggestion_suggestions {
-    // ! 全サイズ共通
-    // ?　タブのアクションカラー変更
-    .tab-ul {
-        .active {
-            color: var(--primary);
+    // * 全サイズ共通
+    .suggest-content {
+        .suggest-area {
+            margin: 25px auto 150px;
         }
-        a {
-            color: var(--dark);
+        .flex {
+            float: left;
         }
-    }
-    // * sidebar関連
-    .pc-sidebar {
-        border-radius: 5px;
-        // ? アイコンの表示設定
-        i {
-            margin-right: 10px;
+        .sns-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
         }
-        // ? リストの表示設定
-        li:hover {
-            background-color: var(--primary);
-            border-radius: 5px;
-        }
-        // ? リンクの表示設定
-        a {
-            color: var(--dark);
-        }
-        a:hover {
-            color: #ffffff;
-        }
-        // ? サインイン、サインアウトのレイアウト
-        .action-link {
-            a:hover {
-                color: var(--dark);
-                background-color: var(--bg);
+        form {
+            margin: 100px auto 150px;
+            .question {
+                margin-bottom: 100px;
+            }
+            p {
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 40px;
+            }
+            input[type="radio"] {
+                display: none;
+            }
+            input[type="radio"]:checked+label img {
+                border: 3px solid #4B709A;
+                border-radius: 10px;
+                box-sizing: border-box;
+            }
+            select {
+                margin-top: 40px;
+                border-radius: 10px;
+                height: 50px;
+                background-color: #FFFFFF;
+                opacity: .6;
+                color: #333333;
+            }
+            .cancel-btn {
+                color: #4B709A;
+                border: 2px solid #4B709A;
+                border-radius: 10px;
+            }
+            .submit-btn {
+                background-color: #4B709A;
+                border: 2px solid #4B709A;
+                color: #FFFFFF;
+                border-radius: 10px;
             }
         }
-        // ? コンテンツエリアと少し幅を空ける
-        .sidebar-content {
-            margin-right: 5px;
+    }
+    // * スマホ
+    @media (max-width: 768px) {
+        .pc-img {
+            display: none;
+        }
+        .tablet-img {
+            display: none;
+        }
+        // ? 提案誘導画面の設定
+        .induction-content {
+            .section1 {
+                padding: 0 20px;
+                background-color: #4B709A;
+                h2 {
+                    color: #FFFFFF;
+                    font-size: 22px;
+                }
+                .suggest-btn {
+                    border: 2px solid #FFFFFF;
+                    color: white;
+                    padding: 10px auto;
+                    font-size: 14px;
+                }
+            }
+            .section2 {
+                padding: 50px 20px;
+                .row {
+                    width: 350px;
+                    margin: auto;
+                    display: block;
+                }
+                background-color: #D9D9D9;
+                .flex1 {
+                    width: 100%;
+                    h2 {
+                        font-size: 30px;
+                        color: #4B709A;
+                    }
+                    p {
+                        margin-top: 50px;
+                        span {
+                            color: #4B709A;
+                        }
+                    }
+                    margin-bottom: 80px;
+                }
+                .flex2 {
+                    width: 100%;
+                }
+                .induction-img {
+                    width: 100%;
+                    height: 400px;
+                    object-fit: cover;
+                }
+            }
+        }
+        .recommend-img {
+            width: 100%;
+            height: auto;
+        }
+        // ? SNS一覧ページの設定
+        .suggest-content {
+            .suggest-area {
+                padding: 0 3px;
+            }
+            .flex {
+                width: 50%;
+            }
+            form {
+                width: 310px;
+                .flex {
+                    width: 50%;
+                }
+                p {
+                    font-size: 16px;
+                    font-weight: 600;
+                    margin-bottom: 40px;
+                }
+                .select-img {
+                    width: 100%;
+                    height: 151px;
+                    object-fit: cover;
+                }
+                .evaluation {
+                    width: 310px;
+                    height: 413px;
+                    object-fit: cover;
+                }
+            }
         }
     }
-    // * スマートフォン （小）
-    @media (max-width: 575.98px) {}
-    // * スマートフォン （中）
-    @media (min-width: 576px) and (max-width: 767.98px) {}
     // * タブレット
-    @media (min-width: 768px) and (max-width: 991.98px) {}
-    // * PC（小）
-    @media (min-width: 992px) and (max-width: 1199.98px) {}
-    // * PC（大）
-    @media (min-width: 1200px) {
-        // * AIによる提案画像UIを調整
-        .suggestion-image{
-            object-fit: cover;
+    @media (min-width: 768px) and (max-width: 1280px) {
+        .pc-img {
+            display: none;
+        }
+        .mobile-img {
+            display: none;
+        }
+        // ? 提案誘導画面の設定
+        .induction-content {
+            .section1 {
+                background-color: #4B709A;
+                h2 {
+                    color: #FFFFFF;
+                }
+                .suggest-btn {
+                    border: 2px solid #FFFFFF;
+                    color: white;
+                    padding: 10px auto;
+                    font-size: 16px;
+                }
+            }
+            .section2 {
+                padding-top: 80px;
+                padding-bottom: 80px;
+                .row {
+                    width: 550px;
+                    margin: auto;
+                    display: block;
+                }
+                background-color: #D9D9D9;
+                .flex1 {
+                    width: 100%;
+                    h2 {
+                        font-size: 40px;
+                        color: #4B709A;
+                    }
+                    p {
+                        margin-top: 50px;
+                        span {
+                            color: #4B709A;
+                        }
+                    }
+                    margin-bottom: 80px;
+                }
+                .flex2 {
+                    width: 100%;
+                }
+                .induction-img {
+                    width: 80%;
+                    height: 500px;
+                    object-fit: cover;
+                }
+            }
+        }
+        .recommend-img {
             width: 100%;
-            height: 400px;
+            height: auto;
         }
-        // AIから提案されたuser一覧アイコンUI調整
-        .suggestion-user-image{
-            transition: transform 0.3s;
+        // ? 提案ページの設定
+        .suggest-content {
+            .suggest-area {
+                width: 760px;
+            }
+            .flex {
+                width: 33.3%;
+            }
+            form {
+                width: 550px;
+                .select-img {
+                    width: 100%;
+                    height: 271px;
+                    object-fit: cover;
+                }
+                .evaluation {
+                    width: 350px;
+                    height: 467px;
+                    object-fit: cover;
+                }
+            }
         }
-        .suggestion-user-image:hover{
-            transform: scale(1.2);
+    }
+    // * PC
+    @media (min-width: 1280px) {
+        .mobile-img {
+            display: none;
         }
-
-
+        .tablet-img {
+            display: none;
+        }
+        // ? 提案誘導画面の設定
+        .induction-content {
+            .section1 {
+                background-color: #4B709A;
+                h2 {
+                    color: #FFFFFF;
+                }
+                .suggest-btn {
+                    border: 2px solid #FFFFFF;
+                    color: white;
+                    padding: 10px auto;
+                    font-size: 22px;
+                }
+            }
+            .section2 {
+                padding-top: 100px;
+                padding-bottom: 100px;
+                .row {
+                    width: 950px;
+                    margin: auto;
+                    display: flex;
+                }
+                background-color: #D9D9D9;
+                .flex1 {
+                    width: 60%;
+                    h2 {
+                        font-size: 40px;
+                        color: #4B709A;
+                    }
+                    p {
+                        margin-top: 100px;
+                        span {
+                            color: #4B709A;
+                        }
+                    }
+                }
+                .flex2 {
+                    width: 40%;
+                }
+                .induction-img {
+                    width: 100%;
+                    height: 500px;
+                    object-fit: cover;
+                }
+            }
+            .section3 {
+                background-color: #D9D9D9;
+                .row {
+                    width: 950px;
+                    margin: auto;
+                    display: flex;
+                }
+                .flex1 {
+                    width: 40%;
+                }
+                .flex2 {
+                    width: 60%;
+                    padding-left: 80px;
+                    h2 {
+                        font-size: 40px;
+                        color: #4B709A;
+                    }
+                    p {
+                        margin-top: 100px;
+                        span {
+                            color: #4B709A;
+                        }
+                    }
+                }
+                .induction-img {
+                    width: 100%;
+                    height: 500px;
+                    object-fit: cover;
+                }
+            }
+        }
+        .recommend-img {
+            width: 100%;
+            height: auto;
+        }
+        // ? 提案ページの設定
+        .suggest-content {
+            .suggest-area {
+                width: 1014px;
+            }
+            .flex {
+                width: 25%;
+            }
+            form {
+                width: 550px;
+                .select-img {
+                    width: 100%;
+                    height: 271px;
+                    object-fit: cover;
+                }
+                .evaluation {
+                    width: 350px;
+                    height: 467px;
+                    object-fit: cover;
+                }
+            }
+        }
     }
 }

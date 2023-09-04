@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row g-1">
+        <div class="col-lg-3">
+            <%= render "admin/layouts/sidebar" %>
+        </div>
+
+        <div class="col-lg-9">
+            <div class="bg-white h-100">
+                <div class="p-5">
+                    <div class="d-flex border">
+                        <div class="col-lg-3 col-md-3 col-3 p-3 text-white fw-bold table-menu bg-secondary">
+                            メールアドレス
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-9 p-3">
+                            <%= @contact.email %>
+                        </div>
+                    </div>
+
+                    <div class="d-flex border">
+                        <div class="col-lg-3 col-md-3 col-3 p-3 text-white fw-bold table-menu bg-secondary">
+                            名前
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-9 p-3">
+                            <%= @contact.name %>
+                        </div>
+                    </div>
+
+                    <div class="d-flex border">
+                        <div class="col-lg-3 col-md-3 col-3 p-3 text-white fw-bold table-menu bg-secondary">
+                            お問い合わせ内容
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-9 p-3">
+                            <%= @contact.content %>
+                        </div>
+                    </div>
+
+                    <div class="d-flex border">
+                        <div class="col-lg-3 col-md-3 col-3 p-3 text-white fw-bold table-menu bg-secondary">
+                            対応状況
+                        </div>
+
+                        <div class="col-lg-9 col-md-9 col-9 p-3">
+                            <% if @contact.status == 0 %>
+                                現在の対応状況：<label class="fw-bold text-danger mb-2">未対応</label>
+                                <%= button_to "対応完了にする", "/admin/contact/create_handle/#{@contact.id}", method: :post, class: "btn btn-primary" %> 
+                            <% end %>
+
+                            <% if @contact.status == 1 %>
+                                現在の対応状況：<label class="fw-bold text-success mb-2">対応完了</label>
+                                <%= button_to "未対応にする", "/admin/contact/delete_handle/#{@contact.id}", method: :post, class: "btn btn-danger" %> 
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,53 +1,177 @@
 <div id="profile_profiles">
-    <%# ! header %>
-    <div class="pc-header">
-        <%= render "profile/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
-            <%= render "profile/layouts/pc_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10">
-            <div class="bg-white py-5 h-100">
-                <%= form_with(model: @user_data, url: "/profile/update/#{@user_data.id}", local: true, :html => {class:"needs-validation mx-auto col-lg-8", :novalidate => true}) do |f| %>
-                  <!-- プロフィール画面のビューファイル -->
-                  <% if @suggestion_result %>
-                  ローディング中
-                  <% end %>
+        <div class="main-content">
+			<%= render "layouts/error" %>
+			<%= image_tag "/assets/user/cover_img.png", class: "profile-cover" %>
 
-                  <div class="mb-3">
-                    <%= f.file_field :avatar,  class: "form-control", placeholder: "アイコン" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.text_field :user_name, required: true, class: "form-control", placeholder: "名前" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.number_field :height, class: "form-control", placeholder: "身長" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.number_field :weight, class: "form-control", placeholder: "体重" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.number_field :age, class: "form-control", placeholder: "年齢" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.select :gender, ['男', '女'], {include_blank: '性別を選択してください'}, class: 'form-control' %>
-                  </div>
-                  <div class="mb-3">
-                    <%= f.text_area :profile, class: "form-control", placeholder: "プロフィール" %>
-                  </div>
-                  <%= f.submit "登録する", data: { disable_with: "プロフィールを更新中..." }, class: "btn btn-primary" %>
-                  <div class="loading">
-                    <%= image_tag '/assets/Now-Loading.gif', size: "200x200" %>
-                  </div>
-                <% end %>
-                </div>
+            <div class="edit-content mx-auto">
+				<%= form_with(model: @user, url: "/profile/update/#{@user.id}", local: true) do |f| %>
+					<div class="flex">
+						<div class="avater-area">
+							<button type="button" class="origin-btn" data-bs-toggle="modal" data-bs-target="#EditIconModal">
+								<div class="modal-container">
+									<div id="image-preview" class="preview mx-aut0"></div>
+									
+									<div id="overlay" class="overlay">
+										<img src="/assets/user/cover.png" alt="">
+									</div>
+								</div>
+								<%# <div id="image-preview" class="preview mx-auto"></div> %>
+							</button>
 
+							<div class="modal fade modal-area modal-dialog-scrollable" id="EditIconModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h6 class="modal-title fs-6 fw-bold mx-auto" id="exampleModalLabel">プロフィール画像を設定</h6>
+										</div>
+
+										<div class="modal-body">
+											<div class="coordinate-modal">
+												<%= f.file_field :avatar, class: "form-control", id: "file-input" %>
+											</div>
+										</div>
+
+										<div class="modal-footer post-area text-center">
+											<div class="mx-auto">
+												<button type="button" class="btn px-3 text-white border" data-bs-dismiss="modal">キャンセル</button>
+												<button type="button" class="btn px-3 submit-btn" data-bs-dismiss="modal">選択</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="user-area">
+							<div class="mb-3">
+								<%= f.text_field :user_name, class: "form-control", placeholder: "名前" %>
+
+								<div>
+									<% @user.errors[:user_name].each do |error| %>
+										<small class="text-danger">ユーザー名を入力してください。</small>
+									<% end %>
+								</div>
+							</div>
+
+							<div class="mb-3">
+								<%= f.number_field :height, class: "form-control", placeholder: "身長" %>
+
+								<div>
+									<% @user.errors[:height].each do |error| %>
+										<small class="text-danger">身長は300cm以内で設定してください。</small>
+									<% end %>
+								</div>
+							</div>
+
+							<div class="mb-3">
+								<%= f.number_field :weight, class: "form-control", placeholder: "体重" %>
+
+								<% @user.errors[:height].each do |error| %>
+									<small class="text-danger">体重は600kg以内で設定してください。</small>
+								<% end %>
+							</div>
+
+							<div class="mb-3">
+								<%= f.number_field :age, class: "form-control", placeholder: "年齢" %>
+							</div>
+
+							<div class="mb-3">
+								<%= f.select :gender, [['男性', 1], ['女性', -1]], { include_blank: '性別を選択 ▾' }, class: 'form-control' %>
+
+								<div>
+									<% @user.errors[:gender].each do |error| %>
+										<small class="text-danger">性別を選択してください。</small>
+									<% end %>
+								</div>
+							</div>
+
+							<div class="mb-3">
+								<%= f.text_area :profile, class: "form-control", placeholder: "プロフィールを入力...", style: "height: 150px;" %>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-8 col-12 col-md-8 mx-auto" style="margin-top: 100px;">
+						<div class="row">
+							<div class="col-6">
+								<a href="/faq/question/list" class="btn col-12 cancel-btn">キャンセル</a>
+							</div>
+
+							<div class="col-6">
+								<%= f.submit "更新する", data: { disable_with: "更新中..." }, class: "btn col-12 submit-btn" %>
+							</div>
+						</div>
+					</div>
+				<% end %>                      
             </div>
         </div>
     </div>
 </div>
+
+<script>
+	$(document).ready(function() {
+        <%# * 処理の目的 => 選択された画像をプレビューする %>
+        <%# * 入力 => 選択した画像 %>
+        <%# * 加工 => 選択した画像を取得し、プレビューする %>
+        <%# * 出力 => プレビュー %>
+        const fileInput = document.getElementById('file-input');
+        const preview = document.getElementById('image-preview');
+        const overlay = document.getElementById('overlay');
+		let defaultImageURL;
+    
+		if ('<%= j @user.avatar %>' === '') {
+			defaultImageURL = '/assets/user/avatar.png';
+			console.log("初期画像")
+		} else {
+			defaultImageURL = '<%= j @user.avatar %>';
+			console.log("初期画像じゃない")
+		}
+
+        function displayDefaultImage() {
+            const defaultImage = new Image();
+            defaultImage.src = defaultImageURL;
+            defaultImage.alt = 'デフォルト画像';
+            defaultImage.classList.add('preview');
+            defaultImage.style.width = '150px';
+            defaultImage.style.height = '150px';
+            defaultImage.style.borderRadius = '50%';
+            defaultImage.style.objectFit = 'cover';
+            preview.appendChild(defaultImage);
+        }
+
+        function displayPreviewImage(imageDataURL) {
+            preview.innerHTML = '';
+
+            const image = new Image();
+            image.src = imageDataURL;
+            image.alt = 'プレビュー画像';
+            image.classList.add('preview');
+            image.style.width = '150px';
+            image.style.height = '150px';
+            image.style.objectFit = 'cover';
+            image.style.borderRadius = '50%';
+            preview.appendChild(image);
+        }
+
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                displayPreviewImage(e.target.result);
+            };
+
+            reader.readAsDataURL(file);
+
+            overlay.style.display = 'none';
+        });
+
+        displayDefaultImage();
+    });
+</script>

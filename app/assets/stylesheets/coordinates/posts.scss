@@ -1,108 +1,494 @@
 // ! postsフォルダのレイアウト （edit, list, new, show）
 #closet_posts {
     // ! 全サイズ共通
-    // ?　タブのアクションカラー変更
-    .tab-ul {
-        .active {
-            color: var(--primary);
+    // * クローゼット一覧ページの設定
+    .list-content {
+        margin-top: 60px;
+        margin-bottom: 150px;
+        .tab-menu.nav .nav-item {
+            flex: 1;
+            padding: 0;
         }
-        a {
-            color: var(--dark);
+        .tab-menu.nav .nav-link {
+            display: block;
+            text-align: center;
+            padding: 13px;
+            background-color: #ffffffae;
+            color: #333333;
+            font-size: 14px;
+        }
+        .tab-menu.nav .nav-link.active {
+            background-color: #4B709A;
+            color: #FFFFFF;
+        }
+        .closet-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .page {
+            margin-top: 50px;
         }
     }
-    .radio-a {
-        display: flex;
-        gap: 5px;
-        li {
-            list-style: none;
+    // * クローゼット投稿、編集ページの設定
+    .new-edit-content {
+        margin-top: 45px;
+        margin-bottom: 150px;
+        h4 {
+            font-size: 28px;
+            margin-bottom: 60px;
         }
-        padding: 0;
-    }
-    .radio-a input[type="radio"] {
-        position: absolute;
-        white-space: nowrap;
-        border: 0;
-        clip: rect(0 0 0 0);
-        clip-path: inset(50%);
-        overflow: hidden;
-        height: 1px;
-        width: 1px;
-        margin: -1px;
-        padding: 0;
-    }
-    .radio-a-label {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        border: 1px solid black;
-        // background-color: #ddd;
-        // color: #fff;
-        aspect-ratio: 1 / 1;
-        width: 80px;
-        cursor: pointer;
-        font-size: 15px;
-        border-radius: 5px;
-    }
-    .radio-a input[type="radio"]:checked+.radio-a-label {
-        border: 6px solid var(--primary);
-    }
-    // * sidebar関連
-    .pc-sidebar {
-        border-radius: 5px;
-        // ? アイコンの表示設定
-        i {
-            margin-right: 10px;
-        }
-        // ? リストの表示設定
-        li:hover {
-            background-color: var(--primary);
-            border-radius: 5px;
-        }
-        // ? リンクの表示設定
-        a {
-            color: var(--dark);
-        }
-        a:hover {
-            color: #ffffff;
-        }
-        // ? サインイン、サインアウトのレイアウト
-        .action-link {
-            a:hover {
-                color: var(--dark);
-                background-color: var(--bg);
+        .modal-area {
+            .modal-body {
+                background-color: #333333;
+            }
+            .post-area {
+                background-color: #333333;
+                .submit-btn {
+                    background-color: #4B709A;
+                    color: #FFFFFF;
+                }
             }
         }
-        // ? コンテンツエリアと少し幅を空ける
-        .sidebar-content {
-            margin-right: 5px;
+        .modal-container {
+            position: relative;
+        }
+        #overlay {
+            position: absolute;
+            top: 0;
+            opacity: .6;
+        }
+        .overlay img {
+            width: 189px;
+            height: 262px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        input:not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]) {
+            border-radius: 10px;
+            height: 50px;
+            background-color: #FFFFFF;
+            opacity: .5;
+        }
+        select {
+            border-radius: 10px;
+            height: 50px;
+            background-color: #FFFFFF;
+            opacity: .5;
+        }
+        .item {
+            border: none;
+            background-color: #CBC5C1;
+        }
+        .cancel-btn {
+            color: #4B709A;
+            border: 2px solid #4B709A;
+            border-radius: 10px;
+        }
+        .submit-btn {
+            background-color: #4B709A;
+            border: 2px solid #4B709A;
+            color: #FFFFFF;
+            border-radius: 10px;
+        }
+    }
+    // * クローゼット詳細画面
+    .show-content {
+        .sns-area {
+            .user-area {
+                background-color: #222222;
+                padding: 10px;
+                img {
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+                .user-name {
+                    color: #FFFFFF;
+                }
+                .user-height {
+                    font-size: 10px;
+                    color: #FFFFFF;
+                }
+                .like {
+                    img {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                .number-of-likes {
+                    font-size: 14px;
+                    margin-top: 2px;
+                    margin-left: 5px;
+                    color: #FFFFFF;
+                    opacity: .6;
+                }
+            }
         }
     }
     // * スマートフォン （小）
-    @media (max-width: 575.98px) {}
-    // * スマートフォン （中）
-    @media (min-width: 576px) and (max-width: 767.98px) {}
+    @media (max-width: 768px) {
+        // ? クローゼット一覧ページの設定
+        .list-content {
+            .tab-menu.nav {
+                padding: 0;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            padding: 0 3px;
+            .flex {
+                width: 33.3%;
+                float: left;
+            }
+        }
+        // ? クローゼット投稿、編集画面
+        .new-edit-content {
+            padding: 0 20px;
+            width: 350px;
+            label {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            .coordinate-modal {
+                padding: 150px 10px;
+            }
+        }
+        // ? クローゼット詳細ページの設定
+        .show-content {
+            margin-top: 45px;
+            h3 {
+                margin-bottom: 60px;
+                font-size: 28px;
+            }
+            .d-flex-origin {
+                display: block;
+            }
+            .left-content {
+                // width: 100%;
+                // padding-right: 45px;
+                img {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                }
+            }
+            .right-content {
+                margin-top: 50px;
+                width: 100%;
+                .item-data {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 14px 20px;
+                    border-bottom: 1px solid #ABA6A2;
+                    font-size: 16px;
+                    .category {
+                        text-align: left;
+                    }
+                    .data {
+                        text-align: right;
+                        font-weight: bold;
+                    }
+                }
+                .delete-edit-area {
+                    padding: 0 20px;
+                    margin-top: 60px;
+                    .delete-btn {
+                        color: #4B709A;
+                        border: 2px solid #4B709A;
+                        border-radius: 10px;
+                        box-sizing: border-box;
+                    }
+                    .edit-btn {
+                        background-color: #4B709A;
+                        color: #FFFFFF;
+                        border-radius: 10px;
+                    }
+                }
+            }
+            .back-btn {
+                text-align: center;
+                margin-top: 125px;
+                a {
+                    background-color: #4B709A;
+                    font-size: 14px;
+                    color: #FFFFFF;
+                    img {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+            .sns-area {
+                margin-top: 120px;
+                // width: 760px;
+                h6 {
+                    font-size: 18px;
+                    margin-bottom: 40px;
+                }
+                .flex {
+                    width: 50%;
+                    float: left;
+                }
+                .sns-image {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                }
+                .user-area {
+                    img {
+                        width: 35px;
+                        height: 35px;
+                    }
+                    .user-name {
+                        font-size: 16px;
+                    }
+                }
+                .mobile {
+                    display: none;
+                }
+            }
+        }
+    }
     // * タブレット
-    @media (min-width: 768px) and (max-width: 991.98px) {}
-    // * PC（小）
-    @media (min-width: 992px) and (max-width: 1199.98px) {}
+    @media (min-width: 768px) and (max-width: 1280px) {
+        // ? クローゼット一覧ページの設定
+        .list-content {
+            .tab-menu.nav {
+                display: flex;
+                justify-content: space-between;
+                padding: 0;
+            }
+            width: 760px;
+            .flex {
+                width: 25%;
+                float: left;
+            }
+        }
+        // ? クローゼット投稿、編集画面
+        .new-edit-content {
+            width: 550px;
+            label {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            .coordinate-modal {
+                padding: 200px 50px;
+            }
+        }
+        // ? クローゼット詳細ページの設定
+        .show-content {
+            margin-top: 45px;
+            h3 {
+                margin-bottom: 60px;
+                font-size: 28px;
+            }
+            width: 760px;
+            .d-flex-origin {
+                display: flex;
+            }
+            .left-content {
+                padding-right: 45px;
+                img {
+                    width: 325px;
+                    height: auto;
+                    object-fit: cover;
+                }
+            }
+            .right-content {
+                width: 100%;
+                .item-data {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 14px 20px;
+                    border-bottom: 1px solid #ABA6A2;
+                    font-size: 16px;
+                    .category {
+                        text-align: left;
+                    }
+                    .data {
+                        text-align: right;
+                        font-weight: bold;
+                    }
+                }
+                .delete-edit-area {
+                    margin-top: 60px;
+                    .delete-btn {
+                        color: #4B709A;
+                        border: 2px solid #4B709A;
+                        border-radius: 10px;
+                    }
+                    .edit-btn {
+                        background-color: #4B709A;
+                        border: 2px solid #4B709A;
+                        color: #FFFFFF;
+                        border-radius: 10px;
+                    }
+                }
+            }
+            .back-btn {
+                text-align: center;
+                margin-top: 125px;
+                a {
+                    background-color: #4B709A;
+                    font-size: 14px;
+                    color: #FFFFFF;
+                    img {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+            .sns-area {
+                margin-top: 120px;
+                width: 760px;
+                h6 {
+                    font-size: 18px;
+                    margin-bottom: 40px;
+                }
+                .flex {
+                    width: 33.3%;
+                    float: left;
+                }
+                .sns-image {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                }
+                .user-area {
+                    img {
+                        width: 35px;
+                        height: 35px;
+                    }
+                    .user-name {
+                        font-size: 16px;
+                    }
+                }
+                .mobile {
+                    display: none;
+                }
+            }
+        }
+    }
     // * PC（大）
-    @media (min-width: 1200px) {
-        // ?　クローゼットに追加された画像比を調整する
-        .closet_image {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
+    @media (min-width: 1280px) {
+        // ? クローゼット一覧ページの設定
+        .list-content {
+            width: 973px;
+            .tab-menu.nav {
+                display: flex;
+                justify-content: space-between;
+                padding: 0;
+            }
+            .flex {
+                width: 20%;
+                float: left;
+            }
         }
-        // ? 詳細画像のサイズ調整
-        .closet_show_image {
-            object-fit: cover;
-            width: 100%;
-            height: 800px;
+        // ? クローゼット投稿、編集ページの設定
+        .new-edit-content {
+            width: 793px;
+            label {
+                font-size: 15px;
+                margin-bottom: 15px;
+            }
+            .coordinate-modal {
+                padding: 200px 50px;
+            }
         }
-        // ? カラー選択のフォントサイズ
-        .radio-a-label{
-            font-weight: bold;
+        // ? クローゼット詳細ページの設定
+        .show-content {
+            margin-top: 45px;
+            h3 {
+                margin-bottom: 60px;
+                font-size: 28px;
+            }
+            width: 973px;
+            .d-flex-origin {
+                display: flex;
+            }
+            .left-content {
+                padding-right: 45px;
+                img {
+                    width: 425px;
+                    height: auto;
+                    object-fit: cover;
+                }
+            }
+            .right-content {
+                width: 100%;
+                .item-data {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 14px 20px;
+                    border-bottom: 1px solid #ABA6A2;
+                    font-size: 16px;
+                    .category {
+                        text-align: left;
+                    }
+                    .data {
+                        text-align: right;
+                        font-weight: bold;
+                    }
+                }
+                .delete-edit-area {
+                    margin-top: 60px;
+                    .delete-btn {
+                        color: #4B709A;
+                        border: 2px solid #4B709A;
+                        border-radius: 10px;
+                    }
+                    .edit-btn {
+                        background-color: #4B709A;
+                        border: 2px solid #4B709A;
+                        color: #FFFFFF;
+                        border-radius: 10px;
+                    }
+                }
+            }
+            .back-btn {
+                text-align: center;
+                margin-top: 125px;
+                a {
+                    background-color: #4B709A;
+                    font-size: 14px;
+                    color: #FFFFFF;
+                    img {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+            .sns-area {
+                margin-top: 120px;
+                width: 1014px;
+                h6 {
+                    font-size: 18px;
+                    margin-bottom: 40px;
+                }
+                .flex {
+                    width: 25%;
+                    float: left;
+                }
+                .sns-image {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                }
+                .user-area {
+                    img {
+                        width: 35px;
+                        height: 35px;
+                    }
+                    .user-name {
+                        font-size: 16px;
+                    }
+                }
+                .mobile {
+                    display: none;
+                }
+            }
         }
     }
 }

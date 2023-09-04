@@ -1,145 +1,151 @@
 <div id="sns_posts">
-    <%# ! header %>
-    <div class="mobile-header">
-        <%= render "sns/layouts/mobile_header" %>
-    </div>
-
-    <div class="pc-header">
-        <%= render "sns/layouts/pc_header" %>
-    </div>
-
-    <div class="row g-0">
+    <div class="d-flex">
         <%# ! sidebar %>
-        <div class="col-lg-2 pc-sidebar">
-            <%= render "sns/layouts/pc_sidebar" %>
-        </div>
-
-        <div class="col-12 mobile-sidebar">
-            <%= render "sns/layouts/mobile_sidebar" %>
+        <div class="side-content">
+            <%= render "layouts/pc_sidebar" %>
         </div>
 
         <%# ! contents %>
-        <div class="list_content col-lg-10 col-12">
-            <div class="bg-white h-100">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <%= image_tag @sns.photograph.url, class: "sns-show-image" %>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="row" style="padding-right: 25px;">
-                            <div class="col-lg-2 pt-3">
+        <div class="main-content">
+            <%= render "layouts/error" %>
+
+            <div class="show-content mx-auto">
+                <div class="d-flex-origin">
+                    <div class="left-content">
+                        <%= image_tag @sns.photograph.url(:forced_size), class: "sns-show-img" %>
+
+                        <div class="d-flex align-items-center user-area">
                             <%= link_to "/profile/show/#{@sns.user.id}" do %>
                                 <% if @sns.user.avatar.url%>
-                                    <%= image_tag @sns.user.avatar.url, class: "sns-post-user-avatar" %>
+                                    <%= image_tag @sns.user.avatar.url, class: "user-img" %>
                                 <% else %>
-                                    <%= image_tag "/assets/default-avatar.png", class: "sns-post-user-avatar" %>
+                                    <%= image_tag "/assets/user/avatar.png", class: "user-img" %>
                                 <% end %>
                             <% end %>
-                            </div>
-                            <div class="fw-bold col-lg-6 d-flex align-items-center">
-                                <%= @sns.user.user_name %>
-                            </div>
-                            <div class="col-lg-4 text-end" style="margin-top: 20px;">
-                                <% if user_signed_in? %>
-                                    <% if @sns.user.id == current_user.id %>
-                                        
+
+                            <div class="align-items-center">    
+                                <h6 class="mb-0 fw-bold"><%= @sns.user.user_name %></h6>
+                                <small>
+                                    <% if @sns.user.height %>
+                                        <%= @sns.user.height %>cm
                                     <% else %>
-                                        <%# ! フォローしているかしていないか判断する %>
-                                        <% if UserRelation.where(follow_id: current_user.id, follower_id: @sns.user.id).exists? %>
-                                            <%= button_to "フォロー解除", "/profile/follow/#{@sns.user.id}", method: :delete, class: "btn btn-outline-primary" %> 
-                                        <% else %>
-                                            <%= button_to "フォロー", "/profile/follow/#{@sns.user.id}", method: :post, class: "btn btn-primary" %> 
-                                        <% end %>
+                                        身長未設定    
                                     <% end %>
-                                <% else %>
-                                    <%= button_to "フォロー", "/profile/follow/#{@sns.user.id}", method: :post, class: "btn btn-primary" %> 
-                                <% end %>
+                                </small>
                             </div>
                         </div>
-                        <div class="mt-3" style="padding-right: 25px;">
-                            <%= @sns.message %>
-                        </div>
-                        <div class="row g-1 mt-3" style="padding-right: 25px;">
-                            <div class="col-lg-4">
-                                <% if @item1 %>
-                                    <%= link_to "/closet/show/#{@item1.id}" do %>
-                                        <%= image_tag @item1.photograph.url, class: "sns-show-item-image" %>
-                                    <% end %>
-                                <% end %>
-                            </div>
-                            <div class="col-lg-4">
-                                <% if @item2 %>
-                                    <%= link_to "/closet/show/#{@item2.id}" do %>
-                                        <%= image_tag @item2.photograph.url, class: "sns-show-item-image" %>
-                                    <% end %>
-                                <% end %>
-                            </div>
-                            <div class="col-lg-4">
-                                <% if @item3 %>
-                                    <%= link_to "/closet/show/#{@item3.id}" do %>
-                                        <%= image_tag @item3.photograph.url, class: "sns-show-item-image" %>
-                                    <% end %>
-                                <% end %>
-                            </div>
-                            <div class="col-lg-4 mt-1">
-                                <% if @item4 %>
-                                    <%= link_to "/closet/show/#{@item4.id}" do %>
-                                        <%= image_tag @item4.photograph.url, class: "sns-show-item-image" %>
-                                    <% end %>
-                                <% end %>
-                            </div>
-                            <div class="col-lg-4 mt-1">
-                                <% if @item5 %>
-                                    <%= link_to "/closet/show/#{@item5.id}" do %>
-                                        <%= image_tag @item5.photograph.url, class: "sns-show-item-image" %>
-                                    <% end %>
-                                <% end %>
-                            </div>
-                            <div class="col-lg-4 mt-1">
-                                <% if @item6 %>
-                                    <%= link_to "/closet/show/#{@item6.id}" do %>
-                                        <%= image_tag @item6.photograph.url, class: "sns-show-item-image" %>
-                                    <% end %>
-                                <% end %>
-                            </div>
-                        </div>
-                        <div class="row mt-3" style="padding-right: 25px;">
-                            <div class="col-lg-6">
-                                #<%= @sns.tag %>
-                            </div>
-                            <div class="col-lg-6 text-end">
-                                <%= time_ago_in_words(@sns.created_at) %>前
-                            </div>
-                        </div>
-                        <div class="mt-3" style="padding-right: 25px;">
+
+                        <div class="d-flex align-items-center like-area">
                             <% if user_signed_in? %>
                                 <% if SocialLike.where(social_id: @sns.id, user_id: current_user.id).exists? %>
-                                        <%= link_to "/sns/delete_like/#{@sns.id}", method: :delete, class: "btn" do %>
-                                            <i class="bi bi-heart-fill fs-4"></i>
-                                        <% end %>
+                                    <%= link_to "/sns/delete_like/#{@sns.id}", method: :delete do %>
+                                        <img src="/assets/icons/icn_heart.png" alt="">
+                                    <% end %>
                                 <% else %>
-                                        <%= link_to "/sns/create_like/#{@sns.id}", method: :post, class: "btn" do %>
-                                            <i class="bi bi-heart fs-5"></i>
-                                        <% end %>
+                                    <%= link_to "/sns/create_like/#{@sns.id}", method: :post do %>
+                                        <img src="/assets/icons/icn_not_heart.png" alt="">
+                                    <% end %>
                                 <% end %>
                             <% else %>
-                                <%= link_to "/sns/create_like/#{@sns.id}", method: :post, class: "btn" do %>
-                                    <i class="bi bi-heart fs-5"></i>
+                                <%= link_to "/sns/create_like/#{@sns.id}", method: :post do %>
+                                    <img src="/assets/icons/icn_not_heart.png" alt="">
                                 <% end %>
                             <% end %>
-                            <%= SocialLike.where(social_id: @sns.id).count %>人のユーザがいいねしました！
+
+                            <div class="align-items-center number-of-like">    
+                                <%= SocialLike.where(social_id: @sns.id).count %>人のユーザがいいねしました！
+                            </div>
                         </div>
-                        <div class="my-3" style="padding-right: 25px;">
-                            <% if user_signed_in? %>
-                                <% if current_user.id == @sns.user.id  %>
-                                    <%= link_to "編集", "/sns/edit/#{@sns.id}", class: "btn btn-outline-primary px-5" %>
-                                    <%= link_to "削除", "/sns/delete/#{@sns.id}", method: :delete, class: "btn btn-outline-danger px-5" %>
+                    </div>
+
+                    <div class="right-content">
+                        <h4 class="title fw-bold mb-0"><%= @sns.title %></h4>
+                        
+                        <div class="message">
+                            <%= simple_format(@sns.message) %>
+                        </div>
+
+                        <div>
+                            <span><%= @sns.created_at.strftime('%m月%d日 %H:%M') %></span>
+                        </div>
+
+                        <div class="tag btn px-2">
+                            ＃<%= @sns.tag %>
+                        </div>
+
+                        <div class="item-area row g-2">
+                            <label class="fw-bold">着用アイテム</label><br>
+                            <div class="flex">
+                                <% if @item1 %>
+                                    <%= link_to "/closet/show/#{@item1.id}" do %>
+                                        <%= image_tag @item1.photograph.url(:forced_size), class: "item-img" %>
+                                    <% end %>
                                 <% end %>
-                            <% end %>
+                            </div>
+
+                            <div class="flex">
+                                <% if @item2 %>
+                                    <%= link_to "/closet/show/#{@item2.id}" do %>
+                                        <%= image_tag @item2.photograph.url(:forced_size), class: "item-img" %>
+                                    <% end %>
+                                <% end %>
+                            </div>
+
+                            <div class="flex">
+                                <% if @item3 %>
+                                    <%= link_to "/closet/show/#{@item3.id}" do %>
+                                        <%= image_tag @item3.photograph.url(:forced_size), class: "item-img" %>
+                                    <% end %>
+                                <% end %>
+                            </div>
+
+                            <div class="flex mt-2">
+                                <% if @item4 %>
+                                    <%= link_to "/closet/show/#{@item4.id}" do %>
+                                        <%= image_tag @item4.photograph.url(:forced_size), class: "item-img" %>
+                                    <% end %>
+                                <% end %>
+                            </div>
+
+                            <div class="flex mt-2">
+                                <% if @item5 %>
+                                    <%= link_to "/closet/show/#{@item5.id}" do %>
+                                        <%= image_tag @item5.photograph.url(:forced_size), class: "item-img" %>
+                                    <% end %>
+                                <% end %>
+                            </div>
+
+                            <div class="flex mt-2">
+                                <% if @item6 %>
+                                    <%= link_to "/closet/show/#{@item6.id}" do %>
+                                        <%= image_tag @item6.photograph.url(:forced_size), class: "item-img" %>
+                                    <% end %>
+                                <% end %>
+                            </div>
                         </div>
                     </div>
                 </div>
 
+                <div class="himself-area row">
+                    <% if user_signed_in? %>
+                        <% if current_user.id == @sns.user.id  %>
+                            <div class="col-6">
+                                <%= link_to "削除", "/sns/delete/#{@sns.id}", method: :delete, class: "delete-btn btn col-12" %>
+                            </div>
+                                    
+                            <div class="col-6">
+                                <%= link_to "編集", "/sns/edit/#{@sns.id}", class: "edit-btn btn col-12" %>
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
+
+                <div class="back-btn">
+                    <a href="/" class="btn px-5 rounded-pill">
+                        <img src="/assets/icons/icn_back.png" alt="">
+                        戻る
+                    </a>
+                </div>
             </div>
         </div>
     </div>

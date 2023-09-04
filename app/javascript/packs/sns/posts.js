@@ -1,3 +1,26 @@
+// ! SNS投稿画面で画像の選択をキャンセルする
+export function SnsPostFileReset() {
+    var fileField = document.querySelector('#exampleModal input[type="file"]');
+    fileField.value = '';
+}
+
+// ! SNS一覧画面でフォロー中と全ての投稿を切り替える
+export function SnsListSwitching() {
+    const checkbox = document.getElementById('formSwitchCheckDefault');
+    const form = document.getElementById('myForm');
+
+    // checkboxとformがnullでないことを確認する
+    if (checkbox && form) {
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                form.submit();
+            } else {
+                form.submit();
+            }
+        });
+    }
+}
+
 // ! SNS投稿画面で着用アイテムの選択数や選択上限、選択した場合のUIを制御
 export function SnsNewItemSelect() {
     // * 選択できるアイテムの上限を設定
@@ -30,7 +53,7 @@ export function SnsNewItemSelect() {
                 markCounter++;
                 selectedImages.push({
                     image: image,
-                    mark: mark
+                    mark: mark,
                 });
                 // cssの適用
                 image.addClass('selected-image');

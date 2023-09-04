@@ -5,7 +5,12 @@ class Admin::ContactsController < ApplicationController
 
     # * お問い合わせ一覧取得
     def list
-        @contacts = UserContact.all()        
+        @contacts = UserContact.all()
+    end
+
+    # * お問い合わせ詳細取得
+    def show
+        @contact = UserContact.find(params[:id])
     end
 
     # * お問い合わせ対応完了処理
@@ -13,18 +18,18 @@ class Admin::ContactsController < ApplicationController
         @handle = UserContact.find(params[:id])
 
         if @handle.update(status: 1)
-            redirect_to "/"
+            redirect_to "/admin/contact/list/"
         else
             render :new
         end
     end
-    
+
     # * お問い合わせ対応完了解除処理
     def delete_handle
         @handle = UserContact.find(params[:id])
 
         if @handle.update(status: 0)
-            redirect_to "/"
+            redirect_to "/admin/contact/list/"
         else
             render :new
         end

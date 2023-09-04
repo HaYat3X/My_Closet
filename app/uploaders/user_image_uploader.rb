@@ -1,7 +1,7 @@
 class UserImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
     # * 本番環境とローカル環境でアップロードする環境を分ける
@@ -11,6 +11,10 @@ class UserImageUploader < CarrierWave::Uploader::Base
     else
       # ? LOCAL
       storage :file
+    end
+
+    version :forced_size do
+      process resize_to_fill: [300, 300]
     end
 
   # Override the directory where uploaded files will be stored.
