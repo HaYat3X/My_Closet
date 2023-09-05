@@ -26,9 +26,9 @@ class Suggestion::SuggestionsController < ApplicationController
                 @tablet_img_path = "/assets/suggest/tablet_spring.png"
                 
                 if current_user_gender == 1
-                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
+                    @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png"]
                 else
-                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
+                    @suggest_imgs = ["/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
                 end
             elsif user_suggest.personal_color === "夏 (Summer)"
                 @pc_img_path = "/assets/suggest/pc_summer.png"
@@ -36,9 +36,9 @@ class Suggestion::SuggestionsController < ApplicationController
                 @tablet_img_path = "/assets/suggest/tablet_summer.png"
 
                 if current_user_gender == 1
-                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
+                    @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png"]
                 else
-                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
+                    @suggest_imgs = ["/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
                 end
             elsif user_suggest.personal_color === "秋 (Autumn)"
                 @pc_img_path = "/assets/suggest/pc_autumn.png"
@@ -46,9 +46,9 @@ class Suggestion::SuggestionsController < ApplicationController
                 @tablet_img_path = "/assets/suggest/tablet_autumn.png"
 
                 if current_user_gender == 1
-                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
+                    @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png"]
                 else
-                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
+                    @suggest_imgs = ["/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
                 end
             elsif user_suggest.personal_color === "冬 (Winter)" 
                 @pc_img_path = "/assets/suggest/pc_winter.png"
@@ -56,9 +56,9 @@ class Suggestion::SuggestionsController < ApplicationController
                 @tablet_img_path = "/assets/suggest/tablet_winter.png"
 
                 if current_user_gender == 1
-                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
+                    @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png"]
                 else
-                    @suggest_imgs = ["/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png", "/assets/suggest/test3.png"]
+                    @suggest_imgs = ["/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
                 end
             end
 

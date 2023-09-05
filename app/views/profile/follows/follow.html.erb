@@ -100,12 +100,12 @@
 
                                                 <td class="text-end">
                                                     <% if u.id == current_user.id %>
-                                                        <%= button_to "プロフィール更新", "/profile/edit/#{u.id}", method: :get, class: "btn px-4 edit-btn rounded-pill" %>
+                                                        <%= button_to "プロフィール更新", "/profile/edit/#{u.id}", method: :get, class: "btn edit-btn rounded-pill" %>
                                                     <% else %>
                                                         <% if UserRelation.where(follow_id: current_user.id, follower_id: u.id).exists? %>
-                                                            <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "btn px-4 unfollow-btn" %> 
+                                                            <%= button_to "フォロー解除", "/profile/follow/#{u.id}", method: :delete, class: "unfollow-btn" %> 
                                                         <% else %>
-                                                            <%= button_to "フォローする", "/profile/follow/#{u.id}", method: :post, class: "btn px-4 follow-btn" %> 
+                                                            <%= button_to "フォローする", "/profile/follow/#{u.id}", method: :post, class: "follow-btn" %> 
                                                         <% end %>
                                                     <% end %>
                                                 </td>
