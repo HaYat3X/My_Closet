@@ -89,7 +89,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { host: "https://desolate-dusk-06840-e48eebd43f6f.herokuapp.com/" }
+  config.action_mailer.default_url_options = { host: "https://frozen-cove-82653-5359138e2ddd.herokuapp.com" }
 
   # ! メール認証用の設定
   config.action_mailer.raise_delivery_errors = true
