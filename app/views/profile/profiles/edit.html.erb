@@ -22,7 +22,6 @@
 										<img src="/assets/user/cover.png" alt="">
 									</div>
 								</div>
-								<%# <div id="image-preview" class="preview mx-auto"></div> %>
 							</button>
 
 							<div class="modal fade modal-area modal-dialog-scrollable" id="EditIconModal" tabindex="-1" aria-labelledby="exampleModalLabel">
@@ -126,12 +125,10 @@
         const overlay = document.getElementById('overlay');
 		let defaultImageURL;
     
-		if ('<%= j @user.avatar %>' === '') {
+		if ('<%= j @user.avatar.url %>' === '') {
 			defaultImageURL = '/assets/user/avatar.png';
-			console.log("初期画像")
 		} else {
-			defaultImageURL = '<%= j @user.avatar %>';
-			console.log("初期画像じゃない")
+			defaultImageURL = '<%= j @user.avatar.url %>';
 		}
 
         function displayDefaultImage() {
