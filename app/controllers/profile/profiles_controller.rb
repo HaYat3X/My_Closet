@@ -1,6 +1,6 @@
 class Profile::ProfilesController < ApplicationController
     # ! ログインが必要ないメソッドを記述する (ログインが必要なメソッドは書かない)
-    before_action :move_to_signed_in, except: []
+    before_action :move_to_signed_in, except: [:show]
 
     # ! ログイン中のユーザを取得
     def show
