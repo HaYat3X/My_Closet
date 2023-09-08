@@ -57,14 +57,16 @@
                         </div>
 
                         <div class="ml-auto">
-                            <% if @user.id == current_user.id %>
-                                <%= button_to "プロフィール更新", "/profile/edit/#{@user.id}", method: :get, class: "btn rounded-pill edit-btn px-4 align-self-center" %>
-                            <% else %>
-                                <%# ! フォローしているかしていないか判断する %>
-                                <% if UserRelation.where(follow_id: current_user.id, follower_id: @user.id).exists? %>
-                                    <%= button_to "フォロー解除", "/profile/follow/#{@user.id}", method: :delete, class: "btn rounded-pill un-follow-btn px-4 align-self-center" %>
+                            <% if user_signed_in? %>
+                                <% if @user.id == current_user.id %>
+                                    <%= button_to "プロフィール更新", "/profile/edit/#{@user.id}", method: :get, class: "btn rounded-pill edit-btn px-4 align-self-center" %>
                                 <% else %>
-                                    <%= button_to "フォローする", "/profile/follow/#{@user.id}", method: :post, class: "btn rounded-pill follow-btn px-4 align-self-center" %>
+                                    <%# ! フォローしているかしていないか判断する %>
+                                    <% if UserRelation.where(follow_id: current_user.id, follower_id: @user.id).exists? %>
+                                        <%= button_to "フォロー解除", "/profile/follow/#{@user.id}", method: :delete, class: "btn rounded-pill un-follow-btn px-4 align-self-center" %>
+                                    <% else %>
+                                        <%= button_to "フォローする", "/profile/follow/#{@user.id}", method: :post, class: "btn rounded-pill follow-btn px-4 align-self-center" %>
+                                    <% end %>
                                 <% end %>
                             <% end %>
                         </div>
@@ -113,14 +115,16 @@
                     </div>
 
                     <div style="margin-top: 24px;">
-                        <% if @user.id == current_user.id %>
-                            <%= button_to "プロフィール更新", "/profile/edit/#{@user.id}", method: :get, class: "btn rounded-pill edit-btn px-4 align-self-center" %>
-                        <% else %>
-                            <%# ! フォローしているかしていないか判断する %>
-                            <% if UserRelation.where(follow_id: current_user.id, follower_id: @user.id).exists? %>
-                                <%= button_to "フォロー解除", "/profile/follow/#{@user.id}", method: :delete, class: "btn rounded-pill un-follow-btn px-4 align-self-center" %>
+                        <% if user_signed_in? %>
+                            <% if @user.id == current_user.id %>
+                                <%= button_to "プロフィール更新", "/profile/edit/#{@user.id}", method: :get, class: "btn rounded-pill edit-btn px-4 align-self-center" %>
                             <% else %>
-                                <%= button_to "フォローする", "/profile/follow/#{@user.id}", method: :post, class: "btn rounded-pill follow-btn px-4 align-self-center" %>
+                                <%# ! フォローしているかしていないか判断する %>
+                                <% if UserRelation.where(follow_id: current_user.id, follower_id: @user.id).exists? %>
+                                    <%= button_to "フォロー解除", "/profile/follow/#{@user.id}", method: :delete, class: "btn rounded-pill un-follow-btn px-4 align-self-center" %>
+                                <% else %>
+                                    <%= button_to "フォローする", "/profile/follow/#{@user.id}", method: :post, class: "btn rounded-pill follow-btn px-4 align-self-center" %>
+                                <% end %>
                             <% end %>
                         <% end %>
                     </div>
