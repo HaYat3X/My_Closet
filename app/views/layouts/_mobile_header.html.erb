@@ -1,104 +1,124 @@
 <nav class="navbar mobile-header header fixed-top">
-    <div class="sidebar-btn">
-        <button type="button" class="btn hamburger" data-bs-toggle="offcanvas" data-bs-target="#Navbar" aria-expanded="false" aria-controls="offcanvasNavbar" aria-label="ナビゲーションの切替">
-            <%= image_tag "/assets/icons/icn_menu.png" %>
-        </button>
-    </div>
+    <button type="button" class="hamburger" data-bs-toggle="offcanvas" data-bs-target="#Navbar" aria-expanded="false" aria-controls="offcanvasNavbar" aria-label="ナビゲーションの切替">
+        <%= image_tag "/assets/icons/icn_menu.png" %>
+    </button>
 
     <a class="navbar-brand logo-area" href="/">
-        <%= image_tag "/assets/logos/logo1.png" %>
+        <%= image_tag "/assets/logos/logo1.png", class: "logo-img" %>
     </a>
 
     <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}")  %>
-        <div>
-            <button type="button" class="search-btn" id="delayed-search-btn" data-bs-toggle="collapse" data-bs-target="#collapseSns" aria-expanded="false" aria-controls="collapseExample">
-                <img src="/assets/icons/icn_search_w.png" alt="">
-            </button>
-        </div>
+        <button type="button" class="search-btn" id="delayed-search-btn" data-bs-toggle="collapse" data-bs-target="#collapseSns" aria-expanded="false" aria-controls="collapseExample">
+            <img src="/assets/icons/icn_search_w.png" alt="">
+        </button>
 
-        <div>
-            <a href="/alert/list" class="alert-btn">
-                <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
+        <a href="/alert/list" class="alert-area">
+            <img src="/assets/icons/icn_bell.png" class="bell-img" alt="">
 
-                <% if @number_of_notifications.count != 0 %>
-                    <span class="rounded-pill text-bg-danger">
-                        <small>
-                            <% if @number_of_notifications.count >= 99 %>
-                                99+
-                            <% else %>
-                                <%= @number_of_notifications.count %>
-                            <% end %>
-                        </small>
-                    </span>
-                <% end %>
-            </a>
+            <% if @number_of_notifications.count != 0 %>
+                <span class="rounded-pill text-bg-danger">
+                    <small>
+                        <% if @number_of_notifications.count >= 99 %>
+                            99+
+                        <% else %>
+                            <%= @number_of_notifications.count %>
+                        <% end %>
+                    </small>
+                </span>
+            <% end %>
+        </a>
+
+        <div class="collapse p-2" id="collapseSns" style="background-color: #222222; border-radius: 5px; width: 100%; margin-top: 5px;">
+            <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                <div class="input-group">
+                    <%= f.text_field :search, class: "form-control", placeholder: "search", required: true, id: "search" %>
+
+                    <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                        <i class="bi bi-search"></i>
+                    <% end %>
+                </div>
+            <% end %>
         </div>
     <% elsif current_page?("/closet/list") || current_page?("/closet/show/#{params[:id]}") || current_page?("/closet/search") || current_page?("/closet/new") || current_page?("/closet/edit/#{params[:id]}") %>
-        <div>
-            <button type="button" class="search-btn" data-bs-toggle="collapse" data-bs-target="#collapseCloset" aria-expanded="false" aria-controls="collapseExample">
-                <img src="/assets/icons/icn_search_w.png" alt="">
-            </button>
-        </div>
+        <button type="button" class="search-btn" data-bs-toggle="collapse" data-bs-target="#collapseCloset" aria-expanded="false" aria-controls="collapseExample">
+            <img src="/assets/icons/icn_search_w.png" alt="">
+        </button>
 
-        <div>
-            <a href="/alert/list" class="alert-btn">
-                <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">
+        <a href="/alert/list" class="alert-area">
+            <img src="/assets/icons/icn_bell.png" class="bell-img" alt="">
 
-                <% if @number_of_notifications.count != 0 %>
-                    <span class="rounded-pill text-bg-danger">
-                        <small>
-                            <% if @number_of_notifications.count >= 99 %>
-                                99+
-                            <% else %>
-                                <%= @number_of_notifications.count %>
-                            <% end %>
-                        </small>
-                    </span>
-                <% end %>
-            </a>
+            <% if @number_of_notifications.count != 0 %>
+                <span class="rounded-pill text-bg-danger">
+                    <small>
+                        <% if @number_of_notifications.count >= 99 %>
+                            99+
+                        <% else %>
+                            <%= @number_of_notifications.count %>
+                        <% end %>
+                    </small>
+                </span>
+            <% end %>
+        </a>
+
+        <div class="collapse p-2" id="collapseCloset" style="background-color: #222222; width: 100%; margin-top: 5px; border-radius: 5px;">
+            <%= form_with(url: "/closet/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                <div class="input-group">
+                    <%= f.text_field :search, class: "form-control", placeholder: "search", required: true %>
+
+                    <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                        <i class="bi bi-search"></i>
+                    <% end %>
+                </div>
+            <% end %>
         </div>
     <% elsif current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") %>
-        <div>
-            <button type="button" class="search-btn" data-bs-toggle="collapse" data-bs-target="#collapseFaq" aria-expanded="false" aria-controls="collapseExample">
-                <img src="/assets/icons/icn_search_w.png" alt="">
-            </button>
-        </div>
+        <button type="button" class="search-btn" data-bs-toggle="collapse" data-bs-target="#collapseFaq" aria-expanded="false" aria-controls="collapseExample">
+            <img src="/assets/icons/icn_search_w.png" alt="">
+        </button>
 
-        <div>
-            <a href="/alert/list" class="alert-btn">
-                <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">        
+        <a href="/alert/list" class="alert-area">
+            <img src="/assets/icons/icn_bell.png" class="bell-img" alt="">        
 
-                <% if @number_of_notifications.count != 0 %>
-                    <span class="rounded-pill text-bg-danger">
-                        <small>
-                            <% if @number_of_notifications.count >= 99 %>
-                                99+
-                            <% else %>
-                                <%= @number_of_notifications.count %>
-                            <% end %>
-                        </small>
-                    </span>
-                <% end %>
-            </a>
+            <% if @number_of_notifications.count != 0 %>
+                <span class="rounded-pill text-bg-danger">
+                    <small>
+                        <% if @number_of_notifications.count >= 99 %>
+                            99+
+                        <% else %>
+                            <%= @number_of_notifications.count %>
+                        <% end %>
+                    </small>
+                </span>
+            <% end %>
+        </a>
+
+        <div class="collapse p-2" id="collapseFaq" style="background-color: #222222; width: 100%; margin-top: 5px; border-radius: 5px;">
+            <%= form_with(url: "/faq/question/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
+                <div class="input-group">
+                    <%= f.text_field :search, class: "form-control", placeholder: "search" %>
+
+                    <%= f.button class: "btn bg-white btn-white", type: :submit do %>
+                        <i class="bi bi-search"></i>
+                    <% end %>
+                </div>
+            <% end %>
         </div>
     <% else %>
-        <div>
-            <a href="/alert/list" class="alert-btn" style="margin-left: 25px;">
-                <img src="/assets/icons/icn_bell.png" class="bell-btn" alt="">        
+        <a href="/alert/list" class="alert-area" style="margin-left: 25px;">
+            <img src="/assets/icons/icn_bell.png" class="bell-img" alt="">        
 
-                <% if @number_of_notifications.count != 0 %>
-                    <span class="rounded-pill text-bg-danger">
-                        <small>
-                            <% if @number_of_notifications.count >= 99 %>
-                                99+
-                            <% else %>
-                                <%= @number_of_notifications.count %>
-                            <% end %>
-                        </small>
-                    </span>
-                <% end %>
-            </a>
-        </div>
+            <% if @number_of_notifications.count != 0 %>
+                <span class="rounded-pill text-bg-danger">
+                    <small>
+                        <% if @number_of_notifications.count >= 99 %>
+                            99+
+                        <% else %>
+                            <%= @number_of_notifications.count %>
+                        <% end %>
+                    </small>
+                </span>
+            <% end %>
+        </a>
     <% end %>
 
     <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="Navbar" aria-labelledby="offcanvasNavbarLabel">
@@ -389,39 +409,3 @@
         </div>
     </div>
 </nav>
-
-<div class="collapse p-3" id="collapseSns" style="background-color: #222222; width: 100%; margin-top: 70px;">
-    <%= form_with(url: "/sns/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
-        <div class="input-group">
-            <%= f.text_field :search, class: "form-control", placeholder: "search", required: true, id: "search" %>
-
-            <%= f.button class: "btn bg-white btn-white", type: :submit do %>
-                <i class="bi bi-search"></i>
-            <% end %>
-        </div>
-    <% end %>
-</div>
-
-<div class="collapse p-3" id="collapseCloset" style="background-color: #222222; width: 100%; margin-top: 70px;">
-    <%= form_with(url: "/closet/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
-        <div class="input-group">
-            <%= f.text_field :search, class: "form-control", placeholder: "search", required: true %>
-
-            <%= f.button class: "btn bg-white btn-white", type: :submit do %>
-                <i class="bi bi-search"></i>
-            <% end %>
-        </div>
-    <% end %>
-</div>
-
-            <div class="collapse p-3" id="collapseFaq" style="background-color: #222222; width: 100%;">
-                <%= form_with(url: "/faq/question/search", local: true, method: :get, class: "d-flex ms-auto") do |f| %>
-                    <div class="input-group">
-                        <%= f.text_field :search, class: "form-control", placeholder: "search" %>
-
-                        <%= f.button class: "btn bg-white btn-white", type: :submit do %>
-                            <i class="bi bi-search"></i>
-                        <% end %>
-                    </div>
-                <% end %>
-            </div>
