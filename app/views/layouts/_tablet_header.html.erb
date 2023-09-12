@@ -193,7 +193,7 @@
                                 マイページ
                             <% end %>
                         <% else %>
-                            <%= link_to "/profile/show/1", class: "d-flex align-items-center" do %>
+                            <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center" do %>
                                 <img src="/assets/icons/icn_user.png" alt="">
                                 マイページ
                             <% end %>
