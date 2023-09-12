@@ -184,11 +184,11 @@ body {
                     }
                 }
                 hr {
-                    margin: 10px 40px;
+                    margin: 20px 40px;
                     background: #727272;
                 }
                 label {
-                    font-size: 22px;
+                    font-size: 20px;
                     padding: 0 40px;
                     margin: 20px 0 15px;
                 }
@@ -201,6 +201,14 @@ body {
                         text-decoration: none;
                         font-size: 16px;
                         padding: 13px 0;
+                    }
+                }
+                .search-identification {
+                    li {
+                        margin: 5px 0;
+                        a {
+                            text-decoration: none;
+                        }
                     }
                 }
             }

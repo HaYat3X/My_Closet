@@ -209,7 +209,7 @@
                                 マイページ
                             <% end %>
                         <% else %>
-                            <%= link_to "/profile/show/1", class: "d-flex align-items-center" do %>
+                            <%= link_to "/profile/show/#{current_user.id}", class: "d-flex align-items-center" do %>
                                 <img src="/assets/icons/icn_user.png" alt="">
                                 マイページ
                             <% end %>
@@ -249,27 +249,27 @@
                 
                 <% if current_page?(root_path) || current_page?("/sns/show/#{params[:id]}") || current_page?(sns_search_path) || current_page?(sns_new_path) || current_page?("/sns/edit/#{params[:id]}") %>
                     <li class="post-btn">
-                        <a href="/sns/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        <a href="/sns/new" class="rounded-pill col-12 d-flex align-items-center justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 21" fill="none">
+                                <path d="M16.3337 11.3334H11.3337V16.3334H9.66699V11.3334H4.66699V9.66675H9.66699V4.66675H11.3337V9.66675H16.3337V11.3334Z" fill="#FAFBFC"/>
                             </svg>
                             コーディネート投稿
                         </a>
                     </li>
                 <% elsif current_page?("/closet/list") || current_page?("/closet/show/#{params[:id]}") || current_page?("/closet/search") || current_page?("/closet/new") || current_page?("/closet/edit/#{params[:id]}") %>
                     <li class="post-btn">
-                        <a href="/closet/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        <a href="/closet/new" class="rounded-pill col-12 d-flex align-items-center justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 21" fill="none">
+                                <path d="M16.3337 11.3334H11.3337V16.3334H9.66699V11.3334H4.66699V9.66675H9.66699V4.66675H11.3337V9.66675H16.3337V11.3334Z" fill="#FAFBFC"/>
                             </svg>
                             アイテム追加
                         </a>
                     </li>
                 <% elsif current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") %>
                     <li class="post-btn">
-                        <a href="/faq/question/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        <a href="/faq/question/new" class="rounded-pill col-12 d-flex align-items-center justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 21" fill="none">
+                                <path d="M16.3337 11.3334H11.3337V16.3334H9.66699V11.3334H4.66699V9.66675H9.66699V4.66675H11.3337V9.66675H16.3337V11.3334Z" fill="#FAFBFC"/>
                             </svg>
                             質問を投稿
                         </a>
@@ -316,7 +316,7 @@
                             <a href="/sns/search?search=LOWRYSFARM">LOWRYSFARM</a>
                         </li>
 
-                        <label>季節</label><br>
+                        <label>季節で検索</label><br>
 
                         <li class="nav-item">
                             <a href="/sns/search?search=春">春（3月〜5月）</a>
@@ -334,7 +334,7 @@
                             <a href="/sns/search?search=冬">冬（12月〜2月）</a>
                         </li>
                             
-                        <label>身長</label><br>
+                        <label>身長で検索</label><br>
 
                         <li class="nav-item">
                             <a href="/sns/search?search=~149cm">~149cm</a>
@@ -358,6 +358,24 @@
                     </div>
 
                     <hr>
+                <% end %>
+
+                <% if current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}")  %>
+                <div class="search-identification">
+                        <label>カテゴリーで検索</label><br>
+
+                        <li class="nav-item">
+                            <a href="/faq/question/search?search=着回し相談">着回し相談</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/faq/question/search?search=コーディネート相談">コーディネート相談</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/faq/question/search?search=購入相談">購入相談</a>
+                        </li>  
+                    </div>
                 <% end %>
 
                 <label style="margin-top: 80px;">その他</label>
