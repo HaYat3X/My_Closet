@@ -14,7 +14,7 @@
             </div>
 
             <div class="mt-3">
-                <%= f.select :gender, [['男性', 1], ['女性', -1]], { include_blank: '性別を選択 ▾' }, class: 'form-control' %>
+                <%= f.select :gender, [['男性', 1], ['女性', -1]], ['その他', 0], { include_blank: '性別を選択 ▾' }, class: 'form-control' %>
 
                 <div>
                     <% resource.errors[:gender].each do |error| %>
