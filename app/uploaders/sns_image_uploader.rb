@@ -13,6 +13,16 @@ class SnsImageUploader < CarrierWave::Uploader::Base
     storage :file
   end
 
+  process :optimize_image
+
+  def optimize_image
+    manipulate! do |img|
+      img.strip
+      img.quality(80)
+      img.resize '800x800>' # 最大サイズを指定 (800x800ピクセル)
+    end
+  end
+
   # storage :fog
   
   # Override the directory where uploaded files will be stored.
