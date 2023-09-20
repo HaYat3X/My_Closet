@@ -3,7 +3,7 @@ class CustomDeviseMailer < ApplicationMailer
         @token = token
         @resource = record
     
-        attachments.inline['logo.png'] = File.read(Rails.root.join('app/assets/images/logos/favicon.png'))
+        attachments.inline['logo.png'] = File.read(Rails.root.join('app/assets/images/logos/icn_official.png'))
 
         mail(
             to: record.email,
@@ -17,7 +17,7 @@ class CustomDeviseMailer < ApplicationMailer
         @token = token
         @resource = record
     
-        attachments.inline['logo.png'] = File.read(Rails.root.join('app/assets/images/logos/favicon.png'))
+        attachments.inline['logo.png'] = File.read(Rails.root.join('app/assets/images/logos/icn_official.png'))
 
         mail(
             to: record.email,
@@ -31,7 +31,7 @@ class CustomDeviseMailer < ApplicationMailer
         @token = token
         @resource = record
     
-        attachments.inline['logo.png'] = File.read(Rails.root.join('app/assets/images/logos/favicon.png'))
+        attachments.inline['logo.png'] = File.read(Rails.root.join('app/assets/images/logos/icn_official.png'))
 
         mail(
             to: record.email,
@@ -45,7 +45,7 @@ class CustomDeviseMailer < ApplicationMailer
         @token = token
         @resource = record
     
-        attachments.inline['logo.png'] = File.read(Rails.root.join('app/assets/images/logos/favicon.png'))
+        attachments.inline['logo.png'] = File.read(Rails.root.join('app/assets/images/logos/icn_official.png'))
 
         mail(
             to: record.email,
