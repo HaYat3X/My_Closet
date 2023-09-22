@@ -15,11 +15,18 @@ class UserImageUploader < CarrierWave::Uploader::Base
     end
 
     process :optimize_image
+    process :fix_exif_rotation 
 
 	def optimize_image
 		manipulate! do |img|
-			img.strip
-			img.resize '250x250>'
+			# img.strip
+			img.resize '500x500>'
+		end
+	end
+
+	def fix_exif_rotation
+		manipulate! do |img|
+			img.auto_orient
 		end
 	end
 
