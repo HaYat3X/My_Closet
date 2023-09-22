@@ -22,7 +22,7 @@ class SnsImageUploader < CarrierWave::Uploader::Base
 
 	def fix_exif_rotation
 		manipulate! do |img|
-			mg.auto_orient
+			img.auto_orient
 		end
 	end
 
