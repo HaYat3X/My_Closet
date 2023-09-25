@@ -18,16 +18,64 @@
             display: block;
             text-align: center;
             padding: 10px;
-            // border-bottom: 2px solid #333333;
             box-sizing: border-box;
-            // border-radius: 5px;
             color: #333333;
+            font-size: 16px;
+            font-weight: 500;
         }
         .tab-menu.nav .nav-link.active {
-            // background-color: #4B709A;
             color: #4B709A;
             border-bottom: 2px solid #4B709A;
             box-sizing: border-box;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        /* スタイルのカスタマイズ */
+        .form-check-input {
+            display: none;
+            /* チェックボックスを非表示にする */
+        }
+        .form-check-label {
+            position: relative;
+            padding-left: 50px;
+            /* ラベルの左にスペースを作成 */
+            cursor: pointer;
+            display: inline-block;
+        }
+        .form-check-label:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 45px;
+            /* トグルの幅 */
+            height: 25px;
+            /* トグルの高さ */
+            background-color: #e9e9eb;
+            /* デフォルトの背景色 */
+            border-radius: 20px;
+            /* トグルの角丸 */
+            transition: background-color 0.3s ease;
+        }
+        .form-check-input:checked+.form-check-label:before {
+            background-color: #35c759;
+            /* チェックされた場合の背景色 */
+        }
+        .toggle-switch {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 25px;
+            height: 25px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .form-check-input:checked+.form-check-label .toggle-switch {
+            transform: translateX(20px);
+        }
+        input[type="checkbox"] {
+            display: none;
         }
         .flex {
             float: left;
@@ -312,22 +360,6 @@
     @media (max-width: 768px) {
         // ? SNS一覧ページの設定
         .list-content {
-            .tab-menu.nav .nav-link {
-                display: block;
-                text-align: center;
-                padding: 10px;
-                // border-bottom: 2px solid #333333;
-                box-sizing: border-box;
-                // border-radius: 5px;
-                color: #333333;
-                font-size: 16px;
-            }
-            .tab-menu.nav .nav-link.active {
-                // background-color: #4B709A;
-                color: #4B709A;
-                border-bottom: 2px solid #4B709A;
-                box-sizing: border-box;
-            }
             padding: 0 3px;
             .flex {
                 width: 50%;

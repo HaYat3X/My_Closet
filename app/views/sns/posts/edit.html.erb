@@ -149,6 +149,9 @@
         const overlay = document.getElementById('overlay');
         const defaultImageURL = '<%= j @social.photograph %>';
 
+        <%# ! 9/25 本番環境で検証して %>
+        console.log(defaultImageURL);
+
         function displayDefaultImage() {
             const defaultImage = new Image();
             defaultImage.src = defaultImageURL;
