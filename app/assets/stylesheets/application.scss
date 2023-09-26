@@ -12,13 +12,6 @@
 @import "./suggestion/suggestions";
 @import "./faq/searchs";
 @import "./faq/answers";
-//  :root {
-//     --primary: #0d6efd;
-//     --dark: #21252f;
-//     --body: #888;
-//     --box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
-//     --bg: #CBC5C1;
-// }
 // ! フォント、背景色の定義
 body {
     font-family: Hiragino Kaku Gothic Pro;
@@ -74,6 +67,23 @@ body {
 .alert {
     padding: 7px;
     margin: 0;
+}
+
+
+/*ページネーション自体のデザイン*/
+
+// ! ページネーションの設定
+.pagination>li>a {
+    border: none;
+    color: #696969;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.pagination>.active>a {
+    background: #333333;
+    color: #FFFFFF;
+    border-radius: 5px;
 }
 
 // ! モバイル
