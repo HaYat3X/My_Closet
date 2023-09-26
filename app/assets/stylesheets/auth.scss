@@ -54,6 +54,7 @@
     @media (max-width: 768px) {
         // ? 認証ページ
         .auth-content {
+            width: 390px;
             padding: 0 40px;
             .shared {
                 a {
@@ -69,7 +70,7 @@
     @media (min-width: 768px) and (max-width: 1280px) {
         // ? 認証ページ
         .auth-content {
-            width: 350px;
+            width: 390px;
             .shared {
                 a {
                     font-size: 16px;
@@ -84,7 +85,7 @@
     @media (min-width: 1280px) {
         // ? 認証ページ
         .auth-content {
-            width: 350px;
+            width: 390px;
             .shared {
                 a {
                     font-size: 15px;

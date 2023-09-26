@@ -176,7 +176,7 @@
                 margin: 0 auto;
             }
             .modal-header-origin {
-                padding: 20px 10px;
+                padding: 15px 10px;
             }
             .modal-body {
                 background-color: #333333;
@@ -191,15 +191,6 @@
                 #scrollContainer {
                     overflow-y: scroll;
                 }
-                // #scrollContainer::-webkit-scrollbar {
-                //     width: 10px;
-                // }
-                // #scrollContainer::-webkit-scrollbar-track {
-                //     background-color: var(--bg);
-                // }
-                // #scrollContainer::-webkit-scrollbar-thumb {
-                //     background-color: #4B709A;
-                // }
                 .image-mark {
                     position: absolute;
                     top: 5px;
@@ -235,12 +226,18 @@
             color: #4B709A;
             border: 2px solid #4B709A;
             border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
         }
         .submit-btn {
             background-color: #4B709A;
             border: 2px solid #4B709A;
             color: #FFFFFF;
             border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
         }
     }
     // * SNS詳細ページ
@@ -371,8 +368,8 @@
         }
         // ? SNS投稿、編集ページの設定
         .new-edit-content {
-            padding: 0 20px;
-            width: 350px;
+            padding: 0 40px;
+            width: 390px;
             label {
                 font-size: 16px;
                 margin-bottom: 15px;

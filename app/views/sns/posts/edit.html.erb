@@ -10,7 +10,7 @@
             <%= render "layouts/error" %>
 
             <div class="new-edit-content mx-auto">
-				<h3 class="fw-bold text-center">投稿したコーディネートを編集</h3>
+				<h3 class="fw-bold text-center">コーディネートを更新</h3>
 
                 <%= form_with(model: @social, url: "/sns/update/#{@social.id}", local: true) do |f| %>
                     <div class="mb-3">
