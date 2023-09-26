@@ -10,7 +10,7 @@
             <%= render "layouts/error" %>
 
             <div class="new-edit-content mx-auto">
-                <h3 class="fw-bold text-center">コーディネート新規投稿</h3>
+                <h3 class="fw-bold text-center">コーディネートを投稿</h3>
 
                 <%= form_with(model: @social, url: "/sns/create", local: true) do |f| %>
                     <div class="mb-3">
@@ -82,11 +82,11 @@
                         </button>
 
                         <div class="modal fade modal-area-origin modal-dialog-scrollable" id="Item1Modal" tabindex="-1" aria-labelledby="exampleModalLabel">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog mt-4">
                                 <div class="modal-content">
                                     <div class="modal-header-origin">
-                                        <h6 class="modal-title fs-6 fw-bold text-center" id="exampleModalLabel">着用した洋服を追加</h6>
-                                        <div id="messageContainer" class="text-danger small text-center"></div>
+                                        <h6 class="modal-title fs-6 fw-bold text-center mb-0" id="exampleModalLabel">着用した洋服を追加</h6>
+                                        <div id="messageContainer" class="text-danger text-center m-0"></div>
                                     </div>
 
                                     <div class="modal-body">
@@ -121,7 +121,7 @@
                             </div>
 
                             <div class="col-6">
-                                <%= f.submit "投稿する", data: { disable_with: "投稿中..." }, class: "btn col-12 submit-btn" %>
+                                <%= f.submit "投稿する", data: { disable_with: "投稿中..." }, class: "col-12 submit-btn" %>
                             </div>
                         </div>
                     </div>
@@ -226,9 +226,9 @@
             }
 
             if (selectedCount <= maxSelection) {
-                $('#selectedCount').text(selectedCount + "件のアイテムを選択しています。");
+                $('#selectedCount').text(selectedCount + "件のアイテムを選択中");
             } else {
-                $('#selectedCount').text(maxSelection + "件のアイテムを選択しています。");
+                $('#selectedCount').text(maxSelection + "件のアイテムを選択中");
             }
         });
 
@@ -247,7 +247,7 @@
             $('.image-mark').remove();
             hideMessage();
 
-            $('#selectedCount').text("0件のアイテムを選択しています。");
+            $('#selectedCount').text("0件のアイテムを選択中");
         });
     });
 </script>
