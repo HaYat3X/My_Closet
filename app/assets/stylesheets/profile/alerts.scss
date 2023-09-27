@@ -102,13 +102,14 @@
             object-fit: cover;
             margin-right: 15px;
         }
-        a {
-            background-color: #4B709A;
-            font-size: 14px;
-            color: #FFFFFF;
-            img {
-                width: 16px;
-                height: 16px;
+        .back-btn {
+            text-align: center;
+            margin-top: 125px;
+            a {
+                background-color: #4B709A;
+                font-size: 14px;
+                color: #FFFFFF;
+                padding: 12px 80px;
             }
         }
     }
