@@ -3,7 +3,7 @@
     // ! 全サイズ共通
     // * クローゼット一覧ページの設定
     .list-content {
-        margin-top: 60px;
+        margin-top: 25px;
         margin-bottom: 150px;
         .tab-menu.nav .nav-item {
             flex: 1;
@@ -84,12 +84,18 @@
             color: #4B709A;
             border: 2px solid #4B709A;
             border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 12px 20px;
         }
         .submit-btn {
             background-color: #4B709A;
             border: 2px solid #4B709A;
             color: #FFFFFF;
             border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 12px 20px;
         }
     }
     // * クローゼット詳細画面
