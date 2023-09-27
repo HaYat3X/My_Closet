@@ -342,6 +342,72 @@
                     </div>
                 <% end %>
 
+                <% if current_page?("/closet/list") || current_page?("/closet/show/#{params[:id]}") || current_page?("/closet/search") || current_page?("/closet/new") || current_page?("/closet/edit/#{params[:id]}") %>
+                    <div class="search-identification">
+                        <label>カラーで検索</label><br>
+                        
+                        <li class="nav-item">
+                            <a href="/closet/search?search=ホワイト系">ホワイト系</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=ブラック系">ブラック系</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=グレー系">グレー系</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=ブラウン系">ブラウン系</a>
+                        </li>  
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=ベージュ系">ベージュ系</a>
+                        </li>  
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=グリーン系">グリーン系</a>
+                        </li>  
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=ブルー系">ブルー系</a>
+                        </li>  
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=パープル系">パープル系</a>
+                        </li>  
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=イエロー系">イエロー系</a>
+                        </li>  
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=ピンク系">ピンク系</a>
+                        </li>  
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=レッド系">レッド系</a>
+                        </li>  
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=オレンジ系">オレンジ系</a>
+                        </li>  
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=シルバー系">シルバー系</a>
+                        </li>  
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=ゴールド系">ゴールド系</a>
+                        </li>  
+
+                        <li class="nav-item">
+                            <a href="/closet/search?search=その他">その他</a>
+                        </li>  
+                    </div>
+                <% end %>
+
                 <hr class="mx-4">
 
                 <label>その他</label>

@@ -25,41 +25,25 @@ class Suggestion::SuggestionsController < ApplicationController
                 @mobile_img_path = "/assets/suggest/mobile_spring.png"
                 @tablet_img_path = "/assets/suggest/tablet_spring.png"
                 
-                if current_user_gender == 1
-                    @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png"]
-                else
-                    @suggest_imgs = ["/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
-                end
+                @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png", "/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
             elsif user_suggest.personal_color === "夏 (Summer)"
                 @pc_img_path = "/assets/suggest/pc_summer.png"
                 @mobile_img_path = "/assets/suggest/mobile_summer.png"
                 @tablet_img_path = "/assets/suggest/tablet_summer.png"
 
-                if current_user_gender == 1
-                    @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png"]
-                else
-                    @suggest_imgs = ["/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
-                end
+                @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png", "/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
             elsif user_suggest.personal_color === "秋 (Autumn)"
                 @pc_img_path = "/assets/suggest/pc_autumn.png"
                 @mobile_img_path = "/assets/suggest/mobile_autumn.png"
                 @tablet_img_path = "/assets/suggest/tablet_autumn.png"
 
-                if current_user_gender == 1
-                    @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png"]
-                else
-                    @suggest_imgs = ["/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
-                end
+                @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png", "/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
             elsif user_suggest.personal_color === "冬 (Winter)" 
                 @pc_img_path = "/assets/suggest/pc_winter.png"
                 @mobile_img_path = "/assets/suggest/mobile_winter.png"
                 @tablet_img_path = "/assets/suggest/tablet_winter.png"
 
-                if current_user_gender == 1
-                    @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png"]
-                else
-                    @suggest_imgs = ["/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
-                end
+                @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png", "/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
             end
 
             # * デバッグ
@@ -156,13 +140,10 @@ class Suggestion::SuggestionsController < ApplicationController
         )
         
         if response['error']
-            # エラーに対する処理を行う
             puts "GPT APIエラー：#{response['error']['message']}"
 
             # ? 提案に失敗したら、好みのデータを消す
-            suggest.delete() 
-
-            # 例：エラーが発生した場合、デフォルトの提案ページにリダイレクトする
+            suggest.delete()
             redirect_to "/suggestion", alert: "AI提案に失敗しました。もう一度お試しください。"
         else
             # * GPTのレスポンスから返答メッセージのみを抽出
@@ -239,7 +220,7 @@ class Suggestion::SuggestionsController < ApplicationController
             user_posts = Social.joins(:user).where(users: { gender: user_gender, id: other_user.user_id }).order("RANDOM()").limit(1)
 
             # ? 4件投稿が集まるまで取得
-            if user_posts.length <= 4
+            if user_posts.length <= 14
                 posts.concat(user_posts)
             end
         end

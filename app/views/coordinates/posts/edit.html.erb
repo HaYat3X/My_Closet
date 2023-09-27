@@ -10,7 +10,7 @@
         <%= render "layouts/error" %>
         
             <div class="new-edit-content mx-auto">
-				<h4 class="fw-bold text-center">アイテム編集</h4>
+				<h4 class="fw-bold text-center">アイテムを更新</h4>
 
                 <%= form_with(model: @closet, url: "/closet/update/#{@closet.id}", local: true) do |f| %>
 					<div class="mb-3">
