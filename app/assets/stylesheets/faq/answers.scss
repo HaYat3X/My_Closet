@@ -8,6 +8,54 @@
             font-size: 28px;
             margin-bottom: 60px;
         }
+        .user-area {
+            .question-user-image {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-right: 10px;
+            }
+            .user-information {
+                h5 {
+                    font-size: 16px;
+                }
+                small {
+                    font-size: 12px;
+                }
+            }
+        }
+        .question-area {
+            background-color: #ffffff7d;
+            .question-content {
+                font-size: 18px;
+                margin-top: 25px;
+                margin-bottom: 40px;
+            }
+            .question-image {
+                height: auto;
+                object-fit: cover;
+                border-radius: 10px;
+                margin-bottom: 30px;
+            }
+        }
+        .delete-btn {
+            color: #4B709A;
+            border: 2px solid #4B709A;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 12px 20px;
+        }
+        .edit-btn {
+            background-color: #4B709A;
+            border: 2px solid #4B709A;
+            color: #FFFFFF;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 12px 20px;
+        }
         form {
             .modal-area {
                 .modal-body {
@@ -76,52 +124,22 @@
         .new-edit-content {
             padding: 0 20px;
             .question-area {
-                background-color: #ffffff7d;
                 padding: 20px 30px;
-                margin: 0 auto;
-                .user-area {
-                    .question-user-image {
-                        width: 45px;
-                        height: 45px;
-                        border-radius: 50%;
-                        object-fit: cover;
-                        margin-right: 10px;
-                    }
-                    .user-information {
-                        h5 {
-                            font-size: 16px;
-                        }
-                        small {
-                            font-size: 12px;
-                        }
-                    }
-                }
-                .delete-btn {
-                    color: #4B709A;
-                    border: 2px solid #4B709A;
-                    border-radius: 10px;
-                }
-                .edit-btn {
-                    background-color: #4B709A;
-                    border: 2px solid #4B709A;
-                    color: #FFFFFF;
-                    border-radius: 10px;
-                }
-                .question-content {
-                    font-size: 18px;
-                    margin-top: 25px;
-                    margin-bottom: 40px;
-                }
                 .question-image {
                     width: 100%;
-                    height: auto;
-                    object-fit: cover;
-                    border-radius: 10px;
-                    margin-bottom: 30px;
+                }
+            }
+            .answer-btn {
+                width: 85%;
+            }
+            .answer-area {
+                padding: 20px 30px;
+                .answer-image {
+                    width: 100%;
                 }
             }
             form {
-                width: 350px;
+                padding: 0 40px;
                 margin: 50px auto 0;
                 label {
                     font-size: 15px;
@@ -137,50 +155,20 @@
     @media (min-width: 768px) and (max-width: 1280px) {
         // ? 質問投稿、編集ページの設定
         .new-edit-content {
+            width: 760px;
             .question-area {
-                background-color: #ffffff7d;
                 padding: 30px 60px;
-                width: 760px;
-                margin: 0 auto;
-                .user-area {
-                    .question-user-image {
-                        width: 45px;
-                        height: 45px;
-                        border-radius: 50%;
-                        object-fit: cover;
-                        margin-right: 10px;
-                    }
-                    .user-information {
-                        h5 {
-                            font-size: 16px;
-                        }
-                        small {
-                            font-size: 12px;
-                        }
-                    }
-                }
-                .delete-btn {
-                    color: #4B709A;
-                    border: 2px solid #4B709A;
-                    border-radius: 10px;
-                }
-                .edit-btn {
-                    background-color: #4B709A;
-                    border: 2px solid #4B709A;
-                    color: #FFFFFF;
-                    border-radius: 10px;
-                }
-                .question-content {
-                    font-size: 18px;
-                    margin-top: 25px;
-                    margin-bottom: 40px;
-                }
                 .question-image {
                     width: 40%;
-                    height: auto;
-                    object-fit: cover;
-                    border-radius: 10px;
-                    margin-bottom: 30px;
+                }
+            }
+            .answer-btn {
+                width: 60%;
+            }
+            .answer-area {
+                padding: 30px 60px;
+                .answer-image {
+                    width: 40%;
                 }
             }
             form {
@@ -200,50 +188,20 @@
     @media (min-width: 1280px) {
         // ? 質問投稿、編集ページの設定
         .new-edit-content {
+            width: 973px;
             .question-area {
-                background-color: #ffffff7d;
                 padding: 40px 100px;
-                width: 973px;
-                margin: 0 auto;
-                .user-area {
-                    .question-user-image {
-                        width: 45px;
-                        height: 45px;
-                        border-radius: 50%;
-                        object-fit: cover;
-                        margin-right: 10px;
-                    }
-                    .user-information {
-                        h5 {
-                            font-size: 16px;
-                        }
-                        small {
-                            font-size: 12px;
-                        }
-                    }
-                }
-                .delete-btn {
-                    color: #4B709A;
-                    border: 2px solid #4B709A;
-                    border-radius: 10px;
-                }
-                .edit-btn {
-                    background-color: #4B709A;
-                    border: 2px solid #4B709A;
-                    color: #FFFFFF;
-                    border-radius: 10px;
-                }
-                .question-content {
-                    font-size: 18px;
-                    margin-top: 25px;
-                    margin-bottom: 40px;
-                }
                 .question-image {
                     width: 35%;
-                    height: auto;
-                    object-fit: cover;
-                    border-radius: 10px;
-                    margin-bottom: 30px;
+                }
+            }
+            .answer-btn {
+                width: 60%;
+            }
+            .answer-area {
+                padding: 40px 100px;
+                .answer-image {
+                    width: 35%;
                 }
             }
             form {

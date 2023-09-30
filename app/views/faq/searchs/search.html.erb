@@ -7,6 +7,8 @@
 
         <%# ! contents %>
         <div class="main-content">
+            <%= render "layouts/error" %>
+
             <div class="search_content mx-auto">
                 <% if @search_result.count == 0 %>
                     <h4 class="fw-bold text-center">検索結果：</h4>
@@ -17,13 +19,17 @@
                     <h4 class="fw-bold text-center">検索結果：</h4>
                     <h4 class="fw-bold text-center">「<%= params[:search] %>」</h4>
                     <p class="text-center fw-bold">（<%= @search_result.count%>件）</p>
-                    <div class="row question-area">
+                    <div class="question-area row g-3">
                         <% @search_result.each do |question| %>
-                            <div class="col-lg-6 mt-4">
+                            <div class="flex">
                                 <div class="d-flex">
-                                    <%= image_tag question.photograph.url, class: "question_image" %>
+                                    <div class="left-content">
+                                        <%= link_to "/faq/question/show/#{question.id}" do %>
+                                            <%= image_tag question.photograph.url(:forced_size) %>
+                                        <% end %>
+                                    </div>
 
-                                    <div class="question-area">
+                                    <div class="right-content">
                                         <div class="d-flex align-items-center user-area">
                                             <%= link_to "/profile/show/#{question.user.id}" do %>
                                                 <% if question.user.avatar.url %>
@@ -34,26 +40,33 @@
                                             <% end %>
 
                                             <div class="user-information">
-                                                <h5 class="mb-0 fw-bold"><%= question.user.user_name %></h5>
-                                                <small><%= question.created_at.strftime('%m月%d日') %></small>
+                                                <h5 class="mb-0 fw-bold">
+                                                    <%= truncate(question.user.user_name, length: 8) %>
+                                                </h5>
+                                                    
+                                                <small>
+                                                    <%= question.created_at.strftime('%m月%d日') %>
+                                                </small>
                                             </div>
                                         </div>
 
                                         <div class="question-information">
-                                            <%= truncate(question.question, length: 44) %>
+                                            <%= link_to "/faq/question/show/#{question.id}" do %>
+                                                <%= truncate(question.question, length: 20) %>
+                                            <% end %>
                                         </div>
 
-                                        <div class="answer d-flex align-items-center justify-content-end">
-                                            <%= link_to "/faq/question/show/#{question.id}", style: "text-decoration: none; display: flex; align-items: center; margin-right: 2px;" do %>
+                                        <div class="answer-area">
+                                            <%= link_to "/faq/question/show/#{question.id}" do %>
                                                 <img src="/assets/icons/icn_message_b.png" alt="">
                                             <% end %>
 
-                                            <small class="m-0">
+                                            <small class="mt-2">
                                                 <%= Answer.where(question_id: question.id).count %>
                                             </small>
                                         </div>
                                     </div>
-                                </div>
+                                </div>    
                             </div>
                         <% end %>
 
