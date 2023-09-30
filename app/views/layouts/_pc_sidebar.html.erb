@@ -135,7 +135,7 @@
                     アイテム追加
                 </a>
             </li>
-        <% elsif current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") %>
+            <% elsif current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") || current_page?("/faq/answer/new/#{params[:id]}") || current_page?("/faq/answer/edit/#{params[:id]}") %>
             <li class="post-btn">
                 <a href="/faq/question/new" class="btn rounded-pill col-12 d-flex align-items-center justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
@@ -231,6 +231,9 @@
         <% end %>
 
         <% if current_page?("/closet/list") || current_page?("/closet/show/#{params[:id]}") || current_page?("/closet/search") || current_page?("/closet/new") || current_page?("/closet/edit/#{params[:id]}") %>
+
+            <hr class="mx-4">
+
             <div class="search-identification">
                 <label>カラーで検索</label><br>
                 
@@ -294,6 +297,26 @@
                     <a href="/closet/search?search=その他">その他</a>
                 </li>  
             </div>
+        <% end %>
+
+        <% if current_page?("/faq/question/list") || current_page?("/faq/question/search") || current_page?("/faq/question/new") || current_page?("/faq/question/show/#{params[:id]}") || current_page?("/faq/question/edit/#{params[:id]}") || current_page?("/faq/answer/new/#{params[:id]}") || current_page?("/faq/answer/edit/#{params[:id]}") %>
+
+            <hr class="mx-4">
+            
+            <div class="search-identification">
+                <label>カテゴリーで検索</label><br>
+                    <li class="nav-item">
+                        <a href="/faq/question/search?search=着回し相談">着回し相談</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/faq/question/search?search=コーディネート相談">コーディネート相談</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/faq/question/search?search=購入相談">購入相談</a>
+                    </li>  
+                </div>        
         <% end %>
 
         <hr class="mx-4">
