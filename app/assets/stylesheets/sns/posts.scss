@@ -18,16 +18,56 @@
             display: block;
             text-align: center;
             padding: 10px;
-            // border-bottom: 2px solid #333333;
             box-sizing: border-box;
-            // border-radius: 5px;
             color: #333333;
+            font-size: 16px;
+            font-weight: bold;
         }
         .tab-menu.nav .nav-link.active {
-            // background-color: #4B709A;
             color: #4B709A;
             border-bottom: 2px solid #4B709A;
             box-sizing: border-box;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .form-check-input {
+            display: none;
+        }
+        .form-check-label {
+            position: relative;
+            padding-left: 50px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .form-check-label:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 45px;
+            height: 25px;
+            background-color: #e9e9eb;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .form-check-input:checked+.form-check-label:before {
+            background-color: #35c759;
+        }
+        .toggle-switch {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 25px;
+            height: 25px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .form-check-input:checked+.form-check-label .toggle-switch {
+            transform: translateX(20px);
+        }
+        input[type="checkbox"] {
+            display: none;
         }
         .flex {
             float: left;
@@ -136,7 +176,7 @@
                 margin: 0 auto;
             }
             .modal-header-origin {
-                padding: 20px 10px;
+                padding: 15px 10px;
             }
             .modal-body {
                 background-color: #333333;
@@ -151,15 +191,6 @@
                 #scrollContainer {
                     overflow-y: scroll;
                 }
-                // #scrollContainer::-webkit-scrollbar {
-                //     width: 10px;
-                // }
-                // #scrollContainer::-webkit-scrollbar-track {
-                //     background-color: var(--bg);
-                // }
-                // #scrollContainer::-webkit-scrollbar-thumb {
-                //     background-color: #4B709A;
-                // }
                 .image-mark {
                     position: absolute;
                     top: 5px;
@@ -195,17 +226,22 @@
             color: #4B709A;
             border: 2px solid #4B709A;
             border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
         }
         .submit-btn {
             background-color: #4B709A;
             border: 2px solid #4B709A;
             color: #FFFFFF;
             border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
         }
     }
     // * SNS詳細ページ
     .show-content {
-        margin-top: 45px;
         margin-bottom: 150px;
         .left-content {
             width: 100%;
@@ -215,7 +251,7 @@
                 object-fit: cover;
             }
             .user-area {
-                margin-top: 15px;
+                margin-top: 25px;
                 .user-img {
                     width: 45px;
                     height: 45px;
@@ -247,20 +283,27 @@
             .title {
                 font-size: 22px;
                 padding: 20px 0;
+                border-bottom: 1px solid #ABA6A2;
             }
             .message {
                 font-size: 14px;
                 padding-top: 20px;
                 padding-bottom: 40px;
             }
-            span {
-                font-size: 12px;
-                color: #333333;
+            .time {
+                span {
+                    font-size: 12px;
+                    color: #333333;
+                }
+                padding-bottom: 5px;
+                border-bottom: 1px solid #ABA6A2;
             }
             .tag {
-                background-color: #222222;
+                background-color: #333333;
                 color: #FFFFFF;
                 font-size: 14px;
+                padding: 10px 15px;
+                cursor: default;
                 margin: 20px 0;
             }
             .item-area {
@@ -286,12 +329,18 @@
                 color: #4B709A;
                 border: 2px solid #4B709A;
                 border-radius: 10px;
+                padding: 12px 20px;
+                font-size: 14px;
+                font-weight: bold;
             }
             .edit-btn {
                 background-color: #4B709A;
                 border: 2px solid #4B709A;
                 color: #FFFFFF;
                 border-radius: 10px;
+                padding: 12px 20px;
+                font-size: 14px;
+                font-weight: bold;
             }
         }
         .back-btn {
@@ -301,10 +350,7 @@
                 background-color: #4B709A;
                 font-size: 14px;
                 color: #FFFFFF;
-                img {
-                    width: 16px;
-                    height: 16px;
-                }
+                padding: 12px 80px;
             }
         }
     }
@@ -312,22 +358,6 @@
     @media (max-width: 768px) {
         // ? SNS一覧ページの設定
         .list-content {
-            .tab-menu.nav .nav-link {
-                display: block;
-                text-align: center;
-                padding: 10px;
-                // border-bottom: 2px solid #333333;
-                box-sizing: border-box;
-                // border-radius: 5px;
-                color: #333333;
-                font-size: 16px;
-            }
-            .tab-menu.nav .nav-link.active {
-                // background-color: #4B709A;
-                color: #4B709A;
-                border-bottom: 2px solid #4B709A;
-                box-sizing: border-box;
-            }
             padding: 0 3px;
             .flex {
                 width: 50%;
@@ -347,8 +377,7 @@
         }
         // ? SNS投稿、編集ページの設定
         .new-edit-content {
-            padding: 0 20px;
-            width: 350px;
+            padding: 0 40px;
             label {
                 font-size: 16px;
                 margin-bottom: 15px;
@@ -390,7 +419,6 @@
                 }
             }
             .himself-area {
-                // width: 100%;
                 padding: 0 20px;
             }
         }
@@ -450,6 +478,7 @@
         }
         // ? SNS詳細ページ
         .show-content {
+            margin-top: 45px;
             width: 760px;
             .d-flex-origin {
                 display: flex;
@@ -521,6 +550,7 @@
         // ? SNS詳細ページ
         .show-content {
             width: 973px;
+            margin-top: 45px;
             .d-flex-origin {
                 display: flex;
             }

@@ -65,8 +65,10 @@
                             <%= simple_format(@sns.message) %>
                         </div>
 
-                        <div>
-                            <span><%= @sns.created_at.strftime('%m月%d日 %H:%M') %></span>
+                        <div class="time">
+                            <span>
+                                <%= @sns.created_at.strftime('%m月%d日 %H:%M') %>
+                            </span>
                         </div>
 
                         <div class="tag btn px-2">
@@ -130,19 +132,28 @@
                     <% if user_signed_in? %>
                         <% if current_user.id == @sns.user.id  %>
                             <div class="col-6">
-                                <%= link_to "削除", "/sns/delete/#{@sns.id}", method: :delete, class: "delete-btn btn col-12" %>
+                                <%= link_to "削除する", "/sns/delete/#{@sns.id}", method: :delete, class: "delete-btn btn col-12" %>
                             </div>
                                     
                             <div class="col-6">
-                                <%= link_to "編集", "/sns/edit/#{@sns.id}", class: "edit-btn btn col-12" %>
+                                <%= link_to "更新する", "/sns/edit/#{@sns.id}", class: "edit-btn btn col-12" %>
                             </div>
                         <% end %>
                     <% end %>
                 </div>
 
                 <div class="back-btn">
-                    <a href="/" class="btn px-5 rounded-pill">
-                        <img src="/assets/icons/icn_back.png" alt="">
+                    <a href="/" class="btn rounded-pill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 17 17" fill="none">
+                            <g clip-path="url(#clip0_1494_9080)">
+                                <path d="M8.28 2.74665L7.1 1.56665L0.5 8.16665L7.1 14.7667L8.28 13.5866L2.86 8.16665L8.28 2.74665Z" fill="white"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_1494_9080">
+                                <rect width="16" height="16" fill="white" transform="translate(0.5 0.166626)"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
                         戻る
                     </a>
                 </div>

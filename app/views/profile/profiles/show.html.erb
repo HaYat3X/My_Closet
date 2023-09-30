@@ -266,21 +266,23 @@
                                             </div>
 
                                             <div class="right-content">
-                                                <div class="question-information">
-                                                    <%= truncate(question.question, length: 44) %>
-                                                </div>
+                                                <%= link_to "/faq/question/show/#{question.id}", style: "text-decoration: none;" do %>
+                                                    <div class="question-information">
+                                                        <%= truncate(question.question, length: 28) %>
+                                                    </div>
 
-                                                <div class="answer-area">
-                                                    <%= link_to "/faq/question/show/#{question.id}" do %>
-                                                        <img src="/assets/icons/icn_message_b.png" alt="">
-                                                    <% end %>
+                                                    <div class="answer-area">
+                                                        <%= link_to "/faq/question/show/#{question.id}" do %>
+                                                            <img src="/assets/icons/icn_message_b.png" alt="">
+                                                        <% end %>
 
-                                                    <small class="mt-2">
-                                                        <%= Answer.where(question_id: question.id).count %>
-                                                    </small>
-                                                </div>
+                                                        <small class="mt-2">
+                                                            <%= Answer.where(question_id: question.id).count %>
+                                                        </small>
+                                                    </div>
+                                                <% end %>
                                             </div>
-                                        </div>    
+                                        </div>
                                     </div>
                                 <% end %>
 
@@ -297,8 +299,7 @@
 </div>
 
 <script>
-  // 実行したいコードをここに記述
-  $(document).ready(function() {
+    $(document).ready(function() {
         <%# ! フォロー中のユーザーの投稿のみに切り替える %>
         const checkbox = document.getElementById('formSwitchCheckDefault');
         const form = document.getElementById('myForm');

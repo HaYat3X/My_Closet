@@ -219,7 +219,21 @@ class Sns::PostsController < ApplicationController
     # ! 特設ページ
     def special
         # * 特定のアカウントの投稿のみを取得する
-        @sns_all = Social.where(user_id: 1).order(created_at: :desc)
+        @sns_all = []
+
+        coordinate1 = Social.find(2)
+        coordinate2 = Social.find(2)
+        coordinate3 = Social.find(2)
+        coordinate4 = Social.find(1)
+        coordinate5 = Social.find(2)
+        coordinate6 = Social.find(3)
+
+        @sns_all << coordinate1
+        @sns_all << coordinate2
+        @sns_all << coordinate3
+        @sns_all << coordinate4
+        @sns_all << coordinate5
+        @sns_all << coordinate6
     end
 
     private
