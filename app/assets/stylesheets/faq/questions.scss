@@ -284,6 +284,7 @@
                         position: absolute;
                         top: 45%;
                         padding: 0 30px;
+                        text-align: center;
                     }
                     .answer-area {
                         position: absolute;
@@ -298,8 +299,7 @@
         }
         // ? 質問投稿、編集画面
         .new-edit-content {
-            padding: 0 20px;
-            width: 350px;
+            padding: 0 40px;
             label {
                 font-size: 16px;
                 margin-bottom: 15px;
@@ -383,17 +383,6 @@
         // ? 質問詳細画面
         .show-content {
             width: 760px;
-            .delete-btn {
-                color: #4B709A;
-                border: 2px solid #4B709A;
-                border-radius: 10px;
-            }
-            .edit-btn {
-                background-color: #4B709A;
-                border: 2px solid #4B709A;
-                color: #FFFFFF;
-                border-radius: 10px;
-            }
             .question-area {
                 padding: 30px 60px;
                 .question-image {

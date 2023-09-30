@@ -4,6 +4,18 @@
     .search_content {
         margin-top: 45px;
         margin-bottom: 150px;
+        h4 {
+            font-size: 28px;
+        }
+        p {
+            font-size: 16px;
+            align-items: center;
+            margin-top: 16px;
+            margin-bottom: 60px;
+        }
+        h5 {
+            font-size: 22px;
+        }
         .question-area {
             width: 100%;
             .left-content {
@@ -86,6 +98,7 @@
                         position: absolute;
                         top: 45%;
                         padding: 0 30px;
+                        text-align: center;
                     }
                     .answer-area {
                         position: absolute;
