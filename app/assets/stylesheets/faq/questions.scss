@@ -43,9 +43,7 @@
                 background-color: #ffffff8b;
                 border-radius: 0 10px 10px 0;
                 padding: 18.5px 0;
-                // position: relative;
                 .user-area {
-                    // position: absolute;
                     padding: 0 14.5px;
                     .question-user-image {
                         width: 45px;
@@ -149,12 +147,115 @@
             color: #4B709A;
             border: 2px solid #4B709A;
             border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 12px 20px;
         }
         .submit-btn {
             background-color: #4B709A;
             border: 2px solid #4B709A;
             color: #FFFFFF;
             border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 12px 20px;
+        }
+    }
+    // * 質問詳細画面
+    .show-content {
+        .number-of-answer {
+            margin-bottom: 7px;
+            margin-left: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            small {
+                font-size: 20px;
+                color: #4B709A;
+                font-weight: bold;
+            }
+        }
+        .user-area {
+            .question-user-image {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-right: 10px;
+            }
+            .user-information {
+                h5 {
+                    font-size: 16px;
+                }
+                small {
+                    font-size: 12px;
+                }
+            }
+        }
+        .question-area {
+            background-color: #ffffff7d;
+            .question-content {
+                font-size: 18px;
+                margin-top: 25px;
+                margin-bottom: 40px;
+            }
+            .question-image {
+                height: auto;
+                object-fit: cover;
+                border-radius: 10px;
+                margin-bottom: 30px;
+            }
+        }
+        .answer-btn {
+            margin: 30px 0;
+            a {
+                color: #FFFFFF;
+                background-color: #4B709A;
+                padding: 12px 20px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+        }
+        .answer-area {
+            background-color: #ffffff7d;
+            .answer-content {
+                font-size: 18px;
+                margin-top: 25px;
+                margin-bottom: 40px;
+            }
+            .answer-image {
+                height: auto;
+                object-fit: cover;
+                border-radius: 10px;
+                margin-bottom: 30px;
+            }
+            .like-area {
+                margin-top: 25px;
+                img {
+                    width: 18px;
+                    height: 18px;
+                }
+                .number-of-like {
+                    font-size: 14px;
+                    margin-left: 10px;
+                }
+            }
+        }
+        .delete-btn {
+            color: #4B709A;
+            border: 2px solid #4B709A;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 12px 20px;
+        }
+        .edit-btn {
+            background-color: #4B709A;
+            border: 2px solid #4B709A;
+            color: #FFFFFF;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 12px 20px;
         }
     }
     // * スマートフォン
@@ -210,95 +311,19 @@
         // ? 質問詳細画面
         .show-content {
             padding: 0 20px;
-            .number-of-answer {
-                margin-bottom: 7px;
-                margin-left: 15px;
-                font-size: 20px;
-                font-weight: bold;
-                small {
-                    font-size: 20px;
-                    color: #4B709A;
-                    font-weight: bold;
-                }
-            }
-            .user-area {
-                .question-user-image {
-                    width: 45px;
-                    height: 45px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    margin-right: 10px;
-                }
-                .user-information {
-                    h5 {
-                        font-size: 16px;
-                    }
-                    small {
-                        font-size: 12px;
-                    }
-                }
-            }
-            .delete-btn {
-                color: #4B709A;
-                border: 2px solid #4B709A;
-                border-radius: 10px;
-            }
-            .edit-btn {
-                background-color: #4B709A;
-                border: 2px solid #4B709A;
-                color: #FFFFFF;
-                border-radius: 10px;
-            }
             .question-area {
-                background-color: #ffffff7d;
                 padding: 20px 30px;
-                .question-content {
-                    font-size: 18px;
-                    margin-top: 25px;
-                    margin-bottom: 40px;
-                }
                 .question-image {
                     width: 100%;
-                    height: auto;
-                    object-fit: cover;
-                    border-radius: 10px;
-                    margin-bottom: 30px;
                 }
             }
             .answer-btn {
-                margin: 30px 0;
-                width: 90%;
-                a {
-                    color: #FFFFFF;
-                    background-color: #4B709A;
-                    padding: 10px 0;
-                }
+                width: 85%;
             }
             .answer-area {
-                background-color: #ffffff7d;
                 padding: 20px 30px;
-                .answer-content {
-                    font-size: 18px;
-                    margin-top: 25px;
-                    margin-bottom: 40px;
-                }
                 .answer-image {
                     width: 100%;
-                    height: auto;
-                    object-fit: cover;
-                    border-radius: 10px;
-                    margin-bottom: 30px;
-                }
-                .like-area {
-                    margin-top: 25px;
-                    img {
-                        width: 18px;
-                        height: 18px;
-                    }
-                    .number-of-like {
-                        font-size: 14px;
-                        margin-left: 10px;
-                    }
                 }
             }
         }
@@ -358,34 +383,6 @@
         // ? 質問詳細画面
         .show-content {
             width: 760px;
-            .number-of-answer {
-                margin-bottom: 7px;
-                margin-left: 15px;
-                font-size: 20px;
-                font-weight: bold;
-                small {
-                    font-size: 20px;
-                    color: #4B709A;
-                    font-weight: bold;
-                }
-            }
-            .user-area {
-                .question-user-image {
-                    width: 45px;
-                    height: 45px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    margin-right: 10px;
-                }
-                .user-information {
-                    h5 {
-                        font-size: 16px;
-                    }
-                    small {
-                        font-size: 12px;
-                    }
-                }
-            }
             .delete-btn {
                 color: #4B709A;
                 border: 2px solid #4B709A;
@@ -398,55 +395,18 @@
                 border-radius: 10px;
             }
             .question-area {
-                background-color: #ffffff7d;
                 padding: 30px 60px;
-                .question-content {
-                    font-size: 18px;
-                    margin-top: 25px;
-                    margin-bottom: 40px;
-                }
                 .question-image {
                     width: 40%;
-                    height: auto;
-                    object-fit: cover;
-                    border-radius: 10px;
-                    margin-bottom: 30px;
                 }
             }
             .answer-btn {
-                margin: 30px 0;
                 width: 60%;
-                a {
-                    color: #FFFFFF;
-                    background-color: #4B709A;
-                    padding: 10px 0;
-                }
             }
             .answer-area {
-                background-color: #ffffff7d;
                 padding: 30px 60px;
-                .answer-content {
-                    font-size: 18px;
-                    margin-top: 25px;
-                    margin-bottom: 40px;
-                }
                 .answer-image {
                     width: 40%;
-                    height: auto;
-                    object-fit: cover;
-                    border-radius: 10px;
-                    margin-bottom: 30px;
-                }
-                .like-area {
-                    margin-top: 25px;
-                    img {
-                        width: 18px;
-                        height: 18px;
-                    }
-                    .number-of-like {
-                        font-size: 14px;
-                        margin-left: 10px;
-                    }
                 }
             }
         }
@@ -506,95 +466,19 @@
         // ? 質問詳細画面
         .show-content {
             width: 973px;
-            .number-of-answer {
-                margin-bottom: 7px;
-                margin-left: 15px;
-                font-size: 20px;
-                font-weight: bold;
-                small {
-                    font-size: 20px;
-                    color: #4B709A;
-                    font-weight: bold;
-                }
-            }
-            .user-area {
-                .question-user-image {
-                    width: 45px;
-                    height: 45px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    margin-right: 10px;
-                }
-                .user-information {
-                    h5 {
-                        font-size: 16px;
-                    }
-                    small {
-                        font-size: 12px;
-                    }
-                }
-            }
-            .delete-btn {
-                color: #4B709A;
-                border: 2px solid #4B709A;
-                border-radius: 10px;
-            }
-            .edit-btn {
-                background-color: #4B709A;
-                border: 2px solid #4B709A;
-                color: #FFFFFF;
-                border-radius: 10px;
-            }
             .question-area {
-                background-color: #ffffff7d;
                 padding: 40px 100px;
-                .question-content {
-                    font-size: 18px;
-                    margin-top: 25px;
-                    margin-bottom: 40px;
-                }
                 .question-image {
                     width: 35%;
-                    height: auto;
-                    object-fit: cover;
-                    border-radius: 10px;
-                    margin-bottom: 30px;
                 }
             }
             .answer-btn {
-                margin: 30px 0;
                 width: 60%;
-                a {
-                    color: #FFFFFF;
-                    background-color: #4B709A;
-                    padding: 10px 0;
-                }
             }
             .answer-area {
-                background-color: #ffffff7d;
                 padding: 40px 100px;
-                .answer-content {
-                    font-size: 18px;
-                    margin-top: 25px;
-                    margin-bottom: 40px;
-                }
                 .answer-image {
                     width: 35%;
-                    height: auto;
-                    object-fit: cover;
-                    border-radius: 10px;
-                    margin-bottom: 30px;
-                }
-                .like-area {
-                    margin-top: 25px;
-                    img {
-                        width: 18px;
-                        height: 18px;
-                    }
-                    .number-of-like {
-                        font-size: 14px;
-                        margin-left: 10px;
-                    }
                 }
             }
         }

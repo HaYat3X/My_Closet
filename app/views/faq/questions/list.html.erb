@@ -6,10 +6,10 @@
         </div>
 
         <%# ! contents %>
-        <div class="main-content" style="margin: 25px 0 150px;">
+        <div class="main-content">
             <%= render "layouts/error" %>
 
-            <div class="list-content mx-auto">
+            <div class="list-content mx-auto" style="margin: 25px 0 150px;">
                 <ul class="tab-menu nav" role="tablist">
                     <li class="nav-item">
                         <a href="?tab=all" class="nav-link <%= params[:tab].nil? || params[:tab] == 'all' ? 'active' : '' %>">ALL</a>
