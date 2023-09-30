@@ -18,16 +18,17 @@
             display: block;
             text-align: center;
             padding: 10px;
-            border: 2px solid #333333;
             box-sizing: border-box;
-            border-radius: 5px;
             color: #333333;
+            font-size: 16px;
+            font-weight: bold;
         }
         .tab-menu.nav .nav-link.active {
-            background-color: #4B709A;
-            color: #FFFFFF;
-            border: 2px solid #4B709A;
+            color: #4B709A;
+            border-bottom: 2px solid #4B709A;
             box-sizing: border-box;
+            font-size: 16px;
+            font-weight: bold;
         }
         .flex {
             float: left;
