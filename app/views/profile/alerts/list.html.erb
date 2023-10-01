@@ -106,23 +106,25 @@
                     <div id="management" class="tab-pane">
                         <% @alerts.each do |a| %>
                             <%= link_to "/alert/show/#{a.id}_management", style: "text-decoration: none;" do %>
-                                <div class="d-flex align-items-center alert-body">
+                            <div class="alert-body">
+                                <div class="d-flex align-items-center">
                                     <%= image_tag "/assets/icons/icn_official.png", class: "alert-image" %>
 
                                     <div class="align-items-center alert-title">    
                                         <h6 class="fw-bold">MY CLOSET運営</h6>
-                                        
+                                                        
                                         <label>
                                             <%= a.title %>
                                         </label>
                                     </div>
 
-                                    <div class="d-flex align-items-center alert-time text-end">
+                                    <div class="align-items-center alert-time text-end">                                                        
                                         <div class="time">
-                                            <%= time_ago_in_words(n.created_at) %>前
+                                            <%= time_ago_in_words(a.created_at) %>前
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             <% end %>
                         <% end %>
 
