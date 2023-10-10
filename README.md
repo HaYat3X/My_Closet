@@ -1,5 +1,6 @@
 # ファッションアプリ「MY CLOSET」
 「MY CLOSET」の機能やサイトは下記の外部リンクで紹介していますので、そちらをご覧ください。
+<br/>
 
 ## インストール方法
 以下のコマンドを使用してプロジェクトをインストールすることができます。
@@ -47,6 +48,7 @@ docker compose exec web rails db:create
 ```
 http://localhost:3000
 ```
+<br/>
 
 ## 外部リンク
 [「MY CLOSET」はこちら](https://frozen-cove-82653-5359138e2ddd.herokuapp.com/)
