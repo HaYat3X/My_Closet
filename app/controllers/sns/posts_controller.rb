@@ -227,6 +227,7 @@ class Sns::PostsController < ApplicationController
         coordinate4 = Social.find(30)
         coordinate5 = Social.find(31)
         coordinate6 = Social.find(32)
+        coordinate7 = Social.find(34)
 
         @sns_all << coordinate1
         @sns_all << coordinate2
@@ -234,6 +235,7 @@ class Sns::PostsController < ApplicationController
         @sns_all << coordinate4
         @sns_all << coordinate5
         @sns_all << coordinate6
+        @sns_all << coordinate7
     end
 
     private
