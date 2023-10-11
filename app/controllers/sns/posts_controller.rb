@@ -221,12 +221,12 @@ class Sns::PostsController < ApplicationController
         # * 特定のアカウントの投稿のみを取得する
         @sns_all = []
 
-        coordinate1 = Social.find(2)
-        coordinate2 = Social.find(2)
-        coordinate3 = Social.find(2)
-        coordinate4 = Social.find(1)
-        coordinate5 = Social.find(2)
-        coordinate6 = Social.find(3)
+        coordinate1 = Social.find(27)
+        coordinate2 = Social.find(28)
+        coordinate3 = Social.find(29)
+        coordinate4 = Social.find(30)
+        coordinate5 = Social.find(31)
+        coordinate6 = Social.find(32)
 
         @sns_all << coordinate1
         @sns_all << coordinate2
