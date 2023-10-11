@@ -17,7 +17,6 @@
                     <div id="all" class="tab-pane active">
                         <div class="row g-1">
                             <% @sns_all.each do |sns| %>
-                                <% if sns.user.gender == 1 %>
                                     <div class="flex mt-1">
                                         <%= link_to "/sns/show/#{sns.id}" do %>
                                             <%= image_tag sns.photograph.url(:forced_size), class: "sns-image" %>
@@ -117,7 +116,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                <% end %>
                             <% end %>
                         </div>
                     </div>
