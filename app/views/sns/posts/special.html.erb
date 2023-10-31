@@ -67,8 +67,9 @@
                                                             <img src="/assets/icons/icn_not_heart.png" alt="">
                                                         <% end %>
                                                     <% end %>
-
+                                                    
                                                     <span class="number-of-likes align-self-center">
+                                                        <%= SocialLike.where(social_id: sns.id).count %>
                                                     </span>
                                                 </div>
                                             </div>

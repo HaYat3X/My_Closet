@@ -10,22 +10,22 @@ class Sns::PostsController < ApplicationController
             @follow = UserRelation.where(follow_id: current_user.id)
 
             # ? フォロー中のユーザーの投稿を全て取得する
-            @sns_all = Social.where(user_id: @follow.pluck(:follower_id)).where.not(id: [34, 28, 29, 30, 31, 32]).order(created_at: :desc).page(params[:page_all])
+            @sns_all = Social.where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page_all])
 
             # ? フォロー中の男性ユーザーの投稿を全て取得する
-            @sns_men = Social.joins(:user).where(users: { gender: 1 }).where(user_id: @follow.pluck(:follower_id)).where.not(id: [34, 28, 29, 30, 31, 32]).order(created_at: :desc).page(params[:page_men])
+            @sns_men = Social.joins(:user).where(users: { gender: 1 }).where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page_men])
 
             # ? フォロー中の女性ユーザーの投稿を全て取得する
-            @sns_women = Social.joins(:user).where(users: { gender: -1 }).where(user_id: @follow.pluck(:follower_id)).where.not(id: [34, 28, 29, 30, 31, 32]).order(created_at: :desc).page(params[:page_women])
+            @sns_women = Social.joins(:user).where(users: { gender: -1 }).where(user_id: @follow.pluck(:follower_id)).order(created_at: :desc).page(params[:page_women])
         else
             # ? ALLタブに表示するデータを取得する
-            @sns_all = Social.order(created_at: :desc).where.not(id: [34, 28, 29, 30, 31, 32]).page(params[:page_all])
+            @sns_all = Social.order(created_at: :desc).page(params[:page_all])
 
             # ? 男性の投稿のみ取得する
-            @sns_men = Social.joins(:user).where(users: { gender: 1 }).where.not(id: [34, 28, 29, 30, 31, 32]).order(created_at: :desc).page(params[:page_men])
+            @sns_men = Social.joins(:user).where(users: { gender: 1 }).order(created_at: :desc).page(params[:page_men])
 
             # ? 女性の投稿のみ取得する
-            @sns_women = Social.joins(:user).where(users: { gender: -1 }).where.not(id: [34, 28, 29, 30, 31, 32]).order(created_at: :desc).page(params[:page_women])
+            @sns_women = Social.joins(:user).where(users: { gender: -1 }).order(created_at: :desc).page(params[:page_women])
         end
     end
 
