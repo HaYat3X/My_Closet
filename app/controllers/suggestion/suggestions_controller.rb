@@ -19,31 +19,126 @@ class Suggestion::SuggestionsController < ApplicationController
             @recommend = recommend(current_user_gender, user_suggest, other_users_suggest)
 
             # * パーソナルカラーと好きなコーデによって表示する画像を返す
-            puts user_suggest.personal_color
             if user_suggest.personal_color === "春 (Spring)"
                 @pc_img_path = "/assets/suggest/pc_spring.png"
                 @mobile_img_path = "/assets/suggest/mobile_spring.png"
                 @tablet_img_path = "/assets/suggest/tablet_spring.png"
-                
-                @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png", "/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
+
+                @suggest_imgs = [
+                    "/assets/suggest/spring/1.png",
+                    "/assets/suggest/spring/2.png",
+                    "/assets/suggest/spring/3.png",
+                    "/assets/suggest/spring/4.png",
+                    "/assets/suggest/spring/5.png",
+                    "/assets/suggest/spring/6.png",
+                    "/assets/suggest/spring/7.png",
+                    "/assets/suggest/spring/8.png",
+                    "/assets/suggest/spring/9.png",
+                    "/assets/suggest/spring/10.png",
+                    "/assets/suggest/spring/11.png",
+                    "/assets/suggest/spring/12.png",
+                    "/assets/suggest/spring/13.png",
+                    "/assets/suggest/spring/14.png",
+                    "/assets/suggest/spring/15.png",
+                    "/assets/suggest/spring/16.png",
+                    "/assets/suggest/spring/17.png",
+                    "/assets/suggest/spring/18.png",
+                    "/assets/suggest/spring/19.png",
+                    "/assets/suggest/spring/20.png",
+                    "/assets/suggest/spring/21.png",
+                    "/assets/suggest/spring/22.png",
+                    "/assets/suggest/spring/23.png",
+                    "/assets/suggest/spring/24.png",
+                    "/assets/suggest/spring/25.png",
+                    "/assets/suggest/spring/26.png",
+                    "/assets/suggest/spring/27.png",
+                    "/assets/suggest/spring/28.png",
+                    "/assets/suggest/spring/29.png",
+                    "/assets/suggest/spring/30.png",                    
+                ]
             elsif user_suggest.personal_color === "夏 (Summer)"
                 @pc_img_path = "/assets/suggest/pc_summer.png"
                 @mobile_img_path = "/assets/suggest/mobile_summer.png"
                 @tablet_img_path = "/assets/suggest/tablet_summer.png"
-
-                @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png", "/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
+                
+                @suggest_imgs = [
+                    "/assets/suggest/summer/1.png",
+                    "/assets/suggest/summer/2.png",
+                    "/assets/suggest/summer/3.png",
+                    "/assets/suggest/summer/4.png",
+                    "/assets/suggest/summer/5.png",
+                    "/assets/suggest/summer/6.png",
+                    "/assets/suggest/summer/7.png",
+                    "/assets/suggest/summer/8.png",
+                    "/assets/suggest/summer/9.png",
+                    "/assets/suggest/summer/10.png",
+                    "/assets/suggest/summer/11.png",
+                    "/assets/suggest/summer/12.png",
+                    "/assets/suggest/summer/13.png",
+                    "/assets/suggest/summer/14.png",
+                    "/assets/suggest/summer/15.png",
+                    "/assets/suggest/summer/16.png",
+                    "/assets/suggest/summer/17.png",
+                    "/assets/suggest/summer/18.png",
+                    "/assets/suggest/summer/19.png",
+                    "/assets/suggest/summer/20.png",
+                    "/assets/suggest/summer/21.png",
+                    "/assets/suggest/summer/22.png",
+                    "/assets/suggest/summer/23.png",
+                    "/assets/suggest/summer/24.png",
+                    "/assets/suggest/summer/25.png",
+                ]
             elsif user_suggest.personal_color === "秋 (Autumn)"
                 @pc_img_path = "/assets/suggest/pc_autumn.png"
                 @mobile_img_path = "/assets/suggest/mobile_autumn.png"
                 @tablet_img_path = "/assets/suggest/tablet_autumn.png"
 
-                @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png", "/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
+                @suggest_imgs = [
+                    "/assets/suggest/autumn/1.png",
+                    "/assets/suggest/autumn/2.png",
+                    "/assets/suggest/autumn/3.png",
+                    "/assets/suggest/autumn/4.png",
+                    "/assets/suggest/autumn/5.png",
+                    "/assets/suggest/autumn/6.png",
+                    "/assets/suggest/autumn/7.png",
+                    "/assets/suggest/autumn/8.png",
+                    "/assets/suggest/autumn/9.png",
+                    "/assets/suggest/autumn/10.png",
+                    "/assets/suggest/autumn/11.png",
+                    "/assets/suggest/autumn/12.png",
+                    "/assets/suggest/autumn/13.png",
+                    "/assets/suggest/autumn/14.png",
+                    "/assets/suggest/autumn/15.png",
+                    "/assets/suggest/autumn/16.png",
+                    "/assets/suggest/autumn/17.png",
+                    "/assets/suggest/autumn/18.png",
+                    "/assets/suggest/autumn/19.png",
+                    "/assets/suggest/autumn/20.png",
+                    "/assets/suggest/autumn/21.png",
+                ]
             elsif user_suggest.personal_color === "冬 (Winter)" 
                 @pc_img_path = "/assets/suggest/pc_winter.png"
                 @mobile_img_path = "/assets/suggest/mobile_winter.png"
                 @tablet_img_path = "/assets/suggest/tablet_winter.png"
 
-                @suggest_imgs = ["/assets/suggest/mode_man.png", "/assets/suggest/casual_man.png", "/assets/suggest/casual_man2.png", "/assets/suggest/street_man2.png", "/assets/suggest/mode_women.png", "/assets/suggest/mode_woman2.png", "/assets/suggest/casual_woman2.png", "/assets/suggest/casual_woman.png"]
+                @suggest_imgs = [
+                    "/assets/suggest/winter/1.png",
+                    "/assets/suggest/winter/2.png",
+                    "/assets/suggest/winter/3.png",
+                    "/assets/suggest/winter/4.png",
+                    "/assets/suggest/winter/5.png",
+                    "/assets/suggest/winter/6.png",
+                    "/assets/suggest/winter/7.png",
+                    "/assets/suggest/winter/8.png",
+                    "/assets/suggest/winter/9.png",
+                    "/assets/suggest/winter/10.png",
+                    "/assets/suggest/winter/11.png",
+                    "/assets/suggest/winter/12.png",
+                    "/assets/suggest/winter/13.png",
+                    "/assets/suggest/winter/14.png",
+                    "/assets/suggest/winter/15.png",
+                    "/assets/suggest/winter/16.png",
+                ]
             end
 
             # * デバッグ
