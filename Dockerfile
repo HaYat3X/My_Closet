@@ -12,9 +12,10 @@ COPY Gemfile Gemfile.lock ${APP_ROOT}/
 
 RUN apk update && apk add --no-cache \
        imagemagick \
-       imagemagick-dev\
+       imagemagick-dev \
        libc6-compat \
        nodejs \
+       npm \
        postgresql-client \
        tzdata \
        yarn \
