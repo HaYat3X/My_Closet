@@ -1,17 +1,21 @@
 {
-  "name": "my-closet",
-  "private": true,
-  "dependencies": {
-    "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "5.4.4",
-    "caniuse-lite": "^1.0.30001561",
-    "jquery": "^3.7.0",
-    "turbolinks": "^5.2.0",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12"
-  },
-  "version": "0.1.0",
-  "devDependencies": {
-    "webpack-dev-server": "^3"
-  }
+    "name": "my-closet",
+    "private": true,
+    "dependencies": {
+        "@rails/ujs": "^6.0.0",
+        "@rails/webpacker": "5.4.4",
+        "caniuse-lite": "^1.0.30001561",
+        "jquery": "^3.7.0",
+        "turbolinks": "^5.2.0",
+        "webpack": "^4.46.0",
+        "webpack-cli": "^3.3.12"
+    },
+    "version": "0.1.0",
+    "engines": {
+        "node": "14.x",
+        "yarn": "1.22.19"
+    },
+    "devDependencies": {
+        "webpack-dev-server": "^3"
+    }
 }
